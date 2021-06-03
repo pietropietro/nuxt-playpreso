@@ -1,0 +1,19 @@
+{
+  "name": "nuxt-playpreso",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@nuxtjs/sitemap": "^2.4.0",
+    "@nuxtjs/vuetify": "^1.11.3",
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3",
+    "vuetify": "^2.4.0"
+  },
+  "devDependencies": {}
+}
