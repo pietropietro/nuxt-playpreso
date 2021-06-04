@@ -37,12 +37,14 @@ import Vue from 'vue'
                 ]
                 let response = await this.call(values);
                 if(response?.user?.username){
-                    this.$cookies.set('pp-auth', response.token, {
-                        path: '/',
-                        maxAge: 60 * 60 * 24 * 7,
-                        secure: true
-                    })
-                    this.$cookies.set('pp-user', response.user.username);
+                    // this.$cookies.set('pp-auth', response.token, {
+                    //     path: '/',
+                    //     maxAge: 60 * 60 * 24 * 7,
+                    //     secure: true
+                    // })
+                    // this.$cookies.set('pp-user', response.user.username);
+                    this.$store.commit('user/updateCurrentUser', { currentUser: response.user});
+                    this.$store.commit('user/updateToken', { currentUser: response.token});
                 }
             }
         }

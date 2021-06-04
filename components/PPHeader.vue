@@ -5,7 +5,7 @@
         </nuxt-link>
         <v-spacer/>
         <!-- <user-menu v-if="isAuthenticated" /> -->
-        <user-menu v-if="false" />
+        <h1 class="secondary--texts" v-if="currentUser">{{currentUser.username}}</h1>
         <template v-else>
             <nuxt-link class="no-decoration" to="login">
                 <h1 class="secondary--text">{{$t('app.login')}}</h1>

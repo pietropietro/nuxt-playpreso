@@ -1,5 +1,5 @@
 <template>
-	<v-row align="center" style="height:100%">
+	<v-row align="center" style="height:100%" class="pa-10" v-if="!currentUser">
 		<v-container>
 			<v-row>
 				<v-text-field
@@ -21,6 +21,7 @@
 			</v-row>
 		</v-container>
 	</v-row>
+	<go-home v-else/>
 </template>
 <script>
 export default {
@@ -36,8 +37,7 @@ export default {
 			this.loading = true;
 			let resp = await this.doLogin(this.username, this.password);
 			this.loading = false;
-			console.log("resp", resp);
-		}
-	}
+		},
+	},
 }
 </script>
