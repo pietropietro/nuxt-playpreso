@@ -34,14 +34,9 @@ export default {
 	methods:{
 		async login(){
 			this.loading = true;
-			let values = [
-				{'action' : "logIn"},
-				{'username': this.username},
-				{'password': this.password}
-			]
-			let response = await this.$api.call(values);
-			console.log("done");
+			let resp = await this.doLogin(this.username, this.password);
 			this.loading = false;
+			console.log("resp", resp);
 		}
 	}
 }

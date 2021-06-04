@@ -29,10 +29,33 @@ export default {
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
 
-	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
-		'@nuxtjs/sitemap'
-	],
+        [
+            'nuxt-i18n', {
+                locales: [
+                    {
+                        name: 'English',
+                        code: 'en',
+                        iso: 'en-EN',
+                        file: 'en-EN.js'
+                    },
+                ],
+                langDir: 'assets/lang/',
+                defaultLocale: 'en',
+                lazy: true,
+                strategy: 'no_prefix',
+            },
+        ],
+		'@nuxtjs/sitemap',
+		'cookie-universal-nuxt'
+    ],
+
+    i18n: {
+        vueI18n: {
+            fallbackLocale: 'en',
+            silentTranslationWarn: true
+        }
+    },
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
@@ -51,5 +74,13 @@ export default {
 	// Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
     vuetify: {
         customVariables: ['~/assets/variables.scss'],
+		theme: {
+            themes: {
+                light: {
+                    primary: '#052aff',
+                    secondary: '#ff4c05',
+				}
+			}
+		}
     },
 }

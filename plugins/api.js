@@ -1,31 +1,49 @@
-export default ({ app, store }, inject) => {
-	inject('api', {
-        async call(values, method = "POST"){
-            let formdata = new FormData();
-
-            values.map((item) => {
-                let key = Object.keys(item)[0];
-                formdata.append(key, item[key]);
-            });
-            // formdata.append('action', "logIn");
-            // formdata.append('username', "mario");
-            // formdata.append('password', "mario");
-            try {
-                await fetch('http://www.playpreso.com/api.php',{
-                    method: method,
-                    mode: 'cors',
-                    body: formdata,
-
-                }).then(response => {
-                    console.log(response,"response");
-                    return response.json()
-                }).then((data) => {
-                    console.log(data,"data");
-                    return data;
+import Vue from 'vue'
+    Vue.mixin({
+        methods:{
+            async call(values, method = "POST"){
+                let formdata = new FormData();
+                values.map((item) => {
+                    let key = Object.keys(item)[0];
+                    formdata.append(key, item[key]);
                 });
-            }catch(e){
-                console.log(e);
+                let resp;
+                try {
+                    await fetch('http://www.playpreso.com/api.php',{
+                        method: method,
+                        mode: 'cors',
+                        body: formdata,
+                    }).then(response => {
+                        return response.json()
+                    }).then((data) => {
+                        if(data.status && data.status == "error"){
+                            this.$notifier.showError();
+                        }
+                        resp = data;
+                        return data;
+                    });
+                }catch(e){
+                    console.log("error", e);
+                }finally{
+                    return resp;
+                }
+            },
+    
+            async doLogin(username, password){
+                let values = [
+                    {'action' : "logIn"},
+                    {'username': username},
+                    {'password': password}
+                ]
+                let response = await this.call(values);
+                if(response?.user?.username){
+                    this.$cookies.set('pp-auth', response.token, {
+                        path: '/',
+                        maxAge: 60 * 60 * 24 * 7,
+                        secure: true
+                    })
+                    this.$cookies.set('pp-user', response.user.username);
+                }
             }
-		}
+        }
 	})
-}
