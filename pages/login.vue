@@ -15,7 +15,7 @@
 				/>
 			</v-row>
 			<v-row justify="center">
-				<v-btn @click="login" :loading="loading" :disabled="!username || !password">
+				<v-btn @click="doLogin" :loading="loading" :disabled="!username || !password">
 					LOGIN
 				</v-btn>
 			</v-row>
@@ -33,9 +33,9 @@ export default {
 		}
 	},
 	methods:{
-		async login(){
+		async doLogin(){
 			this.loading = true;
-			let resp = await this.doLogin(this.username, this.password);
+			let resp = await this.login(this.username, this.password);
 			this.loading = false;
 		},
 	},

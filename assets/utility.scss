@@ -1,0 +1,30 @@
+//Utility Styles
+.pointer {
+    cursor: pointer
+}
+
+.hidden {
+    display: none
+}
+
+.plain-cursor {
+    cursor: default !important;
+}
+
+.no-decoration {
+    text-decoration: none !important;
+}
+
+.white-border {
+    border-style: solid; 
+    border-color: white !important;
+    border-width: 3px;
+}
+
+.rounded-border {
+    border-radius: 30px !important;
+}
+
+.hovered:hover {
+    background-color: lighten($color: lightgrey, $amount: 5) !important;
+}
