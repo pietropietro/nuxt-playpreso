@@ -1,3 +1,9 @@
 <template>
-    <preso-cup-table :id="1"></preso-cup-table>
+    <v-container fill-height style="background-color:blue;">
+        <v-row justify="center">
+            <nuxt-link to="/cup/1">
+                <v-img style="max-width:150px;" contain :src="require('@/assets/img/cup/euro.png')"/>
+            </nuxt-link>
+        </v-row>
+    </v-container>
 </template>
