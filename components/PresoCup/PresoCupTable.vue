@@ -30,7 +30,7 @@ export default {
     async mounted(){
         let values = [
             {'action' : "loadSpecificPC"},
-            {'presoCup_id': 1},
+            {'presoCup_id': this.id},
         ]
         this.presoCup = await this.$api.call(values);
     }
