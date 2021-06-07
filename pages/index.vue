@@ -1,5 +1,3 @@
 <template>
-    <v-container>
-        
-    </v-container>
+    <preso-cup-table :id="1"></preso-cup-table>
 </template>

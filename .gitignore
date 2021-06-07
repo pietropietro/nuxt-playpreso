@@ -90,3 +90,6 @@ sw.*
 *.swp
 
 .editorconfig
+
+assets/img/link_images
+assets/img/icons

@@ -6,5 +6,8 @@ export default {
             created: "Elemento creato con successo.",
             error: "ERROR"
         },
+    },
+    presocup: {
+        group: "group"
     }
 }
