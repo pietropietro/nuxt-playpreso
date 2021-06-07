@@ -1,5 +1,5 @@
 <template>
-    <v-container fill-height style="background-color:blue;">
+    <v-container fluid fill-height style="background-color:blue;">
         <v-row justify="center">
             <nuxt-link to="/cup/1">
                 <v-img style="max-width:150px;" contain :src="require('@/assets/img/cup/euro.png')"/>
