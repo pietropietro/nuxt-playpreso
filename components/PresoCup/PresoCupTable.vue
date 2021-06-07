@@ -1,5 +1,6 @@
 <template>
-    <v-container v-if="presoCup">
+    <loading-page v-if="!presoCup"/>
+    <v-container v-else>
         <v-row justify="center" class="my-2">
             <v-img contain style="max-height: 80px" :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"></v-img>
         </v-row>
