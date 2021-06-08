@@ -1,20 +1,32 @@
 <template>
     <div>
-        <v-row>
+        <v-row justify="space-between" class="mb-2 px-2">
             <h1>{{$t('app.round') + ' ' + selectedRound + '/' +rounds}}</h1>
+            <v-pagination
+                v-model="selectedRound"
+                :length="matchBlocks.length"
+                circle
+                class="pagination-arrows-only"
+            />
         </v-row>
-        <div v-for="(mbi,i) in matchBlocks[selectedRound - 1].matchBlockItems" :key="i">
-            <v-row justify="space-between">
-                <h1>{{mbi.match.hometeam_name}} - {{mbi.match.awayteam_name}}</h1>
-                <h1>{{mbi.match.score_home}} - {{mbi.match.score_away}}</h1>
+        <div class="my-6" v-for="(mbi,i) in matchBlocks[selectedRound - 1].matchBlockItems" :key="i">
+            <v-row justify="space-between" class="px-2">
+                <h3>{{mbi.match.hometeam_name}} - {{mbi.match.awayteam_name}}</h3>
+                <h3>{{mbi.match.score_home}} - {{mbi.match.score_away}}</h3>
+            </v-row>
+            <v-row>
+                <v-simple-table>
+                    <tbody>
+                        <tr>
+                            <td v-for="(guess,index) in mbi.guesses" :key="index">
+                                <guess-card :guess="guess" :users="users"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </v-simple-table>
             </v-row>
         </div>
-        <v-pagination
-            v-model="selectedRound"
-            :length="matchBlocks.length"
-            circle
-            class="pagination-fixed"
-        />
+        
     </div>
 </template>
 <script>
@@ -22,12 +34,22 @@ export default {
     name: "MatchBlocksSlider",
     props:{
         matchBlocks: {type: Array, required: true},
-        rounds: {type: Number, required: true}
+        rounds: {type: Number, required: true},
+        //TODO remove this porcata
+        users: {type: Array, required: true}
     },
     data(){
         return{
             selectedRound: this.matchBlocks.length
         }
-    }
+    },
 }
 </script>
+<style>
+    .pagination-arrows-only .v-pagination__item{
+        display: none !important;
+    }
+    .pagination-arrows-only .v-pagination__more{
+        display: none;
+    }
+</style>
