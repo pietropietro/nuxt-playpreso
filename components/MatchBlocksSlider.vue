@@ -19,7 +19,7 @@
                     <tbody>
                         <tr>
                             <td v-for="(guess,index) in mbi.guesses" :key="index">
-                                <guess-card :guess="guess" :users="users"/>
+                                <guess-card :guess="guess" :username="usernameForId(guess.user_id)"/>
                             </td>
                         </tr>
                     </tbody>
@@ -43,6 +43,19 @@ export default {
             selectedRound: this.matchBlocks.length
         }
     },
+    methods:{
+        //porcata, username deve essere ritornato in oggetto guess
+        usernameForId(userId){
+            let returnVal
+            this.users.map(u => {
+                if(u.user.user_id === userId){
+                    returnVal = u.user.username;
+                }
+                return;
+            });
+            return returnVal;
+        }
+    }
 }
 </script>
 <style>

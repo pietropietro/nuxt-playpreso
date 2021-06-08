@@ -8,7 +8,8 @@ export default {
         },
         users: "users",
         rounds: "Rounds",
-        round: "Round"
+        round: "Round",
+        missed: "missed"
     },
     presocup: {
         group: "group"
