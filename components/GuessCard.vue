@@ -1,16 +1,28 @@
 <template>
-    <v-card :class="preso ? 'white--text pa-4 my-2' : 'pa-4 my-2'" :style="currentUser && currentUser.username === username ? 'border-top-width:6px; border-top-color: orange !important; border-style: solid' : ''"
-        min-width="90px" min-height="90px" :color="colorGuess"
+    <v-card :class="preso ? 'white--text pa-4 my-2' : 'pa-4 my-2'" 
+        :style="currentUser && currentUser.username === username ? 'border-top-width:6px; border-top-color: orange !important; border-style: solid' : ''"
+        min-width="100px" height="90px" :color="colorGuess"
     >
-        <v-row justify="center">
-            <h3>{{username}}</h3>
-        </v-row>
-        <v-row v-if="!preso" justify="center">
-            <h4 v-if="!missed">{{guess.guess_home + '-' + guess.guess_away}}</h4>
-            <h4 v-else class="text-uppercase text-overline">{{$t('app.missed')}}</h4>
-        </v-row>
-        <v-row v-if="!missed" justify="center" style="height: 100%">
-            <h2>{{guess.preso_score !== 0 ? '+' : ''}} {{guess.preso_score}}</h2>
+        <v-row justify="center" class="text-center" no-gutters>
+            <v-col cols="12">
+                <h3>{{username}}</h3>
+            </v-col>
+            <v-col cols="12" v-if="!preso && !missed">
+                <v-row no-gutters align="center" justify="center">
+                    <v-col cols="6" >
+                        <h4>{{guess.guess_home + '-' + guess.guess_away}}</h4>
+                    </v-col>
+                    <v-col cols="6">
+                        <h2>{{guess.preso_score !== 0 ? '+' : ''}}{{guess.preso_score}}</h2>
+                    </v-col>
+                </v-row>
+            </v-col>
+            <v-col v-else-if="missed" cols="12">
+                <h4 class="text-uppercase text-overline">{{$t('app.missed')}}</h4>
+            </v-col>
+            <v-col cols="12" v-if="preso">
+                <h2>+{{guess.preso_score}}</h2>
+            </v-col>
         </v-row>
     </v-card>
 </template>
