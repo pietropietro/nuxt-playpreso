@@ -8,7 +8,8 @@ export default {
     name:"GetRound",
     props: {
         level: {type: Number},
-        groupId: {type: Number}
+        groupId: {type: Number},
+        refresh: {type: Function}
     },
     data(){
         return{
@@ -24,6 +25,7 @@ export default {
                 {'userid': this.currentUser.user_id},
             ]
             let resp = await this.$api.call(values);
+            this.refresh();
             this.loading = false;
         }
     }
