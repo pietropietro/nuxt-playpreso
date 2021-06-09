@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <v-text-field v-model="idModel"/> -->
-        <v-row class="pa-4" align="center" v-if="currentUser">
-            <v-btn text @click="joinEuro" :loading="loading" v-if="canJoinEuro">JOIN</v-btn>
+        <v-row class="pa-4" align="center" v-if="currentUser && canJoinEuro">
+            <v-btn text @click="joinEuro" :loading="loading">JOIN</v-btn>
         </v-row>
         <preso-cup-table v-if="!loading" :id="cupId"/>
     </div>
