@@ -1,0 +1,132 @@
+<template>
+    <v-container v-if="currentUser && currentUser.user_id === 3">
+        <nuxt-link to="/admin">back</nuxt-link>
+        <h1>ADD MATCH</h1>
+        <v-row class="pa-4" justify="center" align="cebter">
+            {{dateModel}}
+            <br>
+            {{timeModel}}
+            <v-col cols="12" sm="6">
+                <v-select
+                    v-model="homeTeam"
+                    :items="teams"
+                    item-text="name"
+                    item-value="id"
+                    label="home team"
+                />
+            </v-col>
+            <v-col cols="12" sm="6">
+                <v-select
+                    v-model="awayTeam"
+                    :items="teams"
+                    item-text="name"
+                    item-value="id"
+                    label="away team"
+                />
+            </v-col>
+            <v-col cols="12" sm="6">
+                <v-select
+                    v-model="round"
+                    :items="rounds"
+                    label="round"
+                />
+            </v-col>
+            <v-col cols="12" sm="6">
+                <v-date-picker
+                    v-model="dateModel"
+                    label="data"
+                />
+                <v-time-picker
+                    v-model="timeModel"
+                    label="ora"
+                />
+            </v-col>
+        </v-row>
+        <v-btn :disabled="!dateModel || !timeModel || !homeTeam || !awayTeam || !round"
+            :loading="loading" class="my-10 py-10" block color="primary">
+            <h1>ADD</h1>
+        </v-btn>
+        <v-simple-table v-if="euroMatches">
+            <tbody>
+                <tr v-for="(match,i) in euroMatches" :key="i">
+                    {{match}}
+                </tr>
+            </tbody>
+        </v-simple-table>
+    </v-container>
+</template>
+<script>
+export default {
+    data(){
+        return{
+            homeTeam: null,
+            awayTeam: null,
+            round: null,
+            dateModel: null,
+            euroMatches: null,
+            timeModel: null,
+            loading:false,
+            rounds: [
+                {text: "gironi", value: "1"},
+                {text: "ottavi", value: "2"},
+                {text: "quarti", value: "3"},
+                {text: "semifinale", value: "4"},
+                {text: "finale", value: "5"}
+            ],
+            teams:[
+                {name:"Turkey",id:"1388"},
+                {name:"Italy",id:"326"},
+                {name:"Wales",id:"1385"},
+                {name:"Switzerland",id:"966"},
+                {name:"Denmark",id:"322"},
+                {name:"Finland",id:""},
+                {name:"Belgium",id:"975"},
+                {name:"Russia",id:"319"},
+                {name:"Netherlands",id:"321"},
+                {name:"Ukraine",id:"331"},
+                {name:"Austria",id:"1389"},
+                {name:"North Macedonia",id:""},
+                {name:"England",id:"330"},
+                {name:"Croatia",id:"328"},
+                {name:"Scotland",id:""},
+                {name:"Czech Republic",id:"320"},
+                {name:"Spain",id:"325"},
+                {name:"Sweden",id:"332"},
+                {name:"Poland",id:"317"},
+                {name:"Slovakia",id:"1386"},
+                {name:"Hungary",id:"1390"},
+                {name:"Portugal",id:"324"},
+                {name:"France",id:"329"},
+                {name:"Germany",id:"323"}
+            ]
+        }
+    },
+    methods:{
+        async add(){
+            this.loading = true;
+            let values = [
+                {'action' : "addMatch"},
+                {'hometeam_xmlid' : this.homeTeam},
+                {'awayteam_xmlid' : this.awayTeam},
+                {"HomeTeam" : this.teams.filter(t=>{
+                    t.id === this.homeTeam
+                })[0].name},
+                {"AwayTeam" : this.teams.filter(t=>{
+                    t.id === this.awayTeam
+                })[0].name},
+                {"Round": this.round},
+                {'League': "Euro 21"},
+                {"dateTimeInput": this.dateModel + " " + this.timeModel}
+            ]
+            this.euroMatches = await this.$api.call(values);
+            this.loading = false;
+        }
+    },
+    async mounted(){
+        // let values = [
+        //     {'action' : "getEuroMatches"},
+        // ]
+        // this.euroMatches = await this.$api.call(values);
+    }
+}
+</script>

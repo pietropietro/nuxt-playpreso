@@ -12,6 +12,7 @@ export default {
         missed: "missed"
     },
     presocup: {
-        group: "group"
+        group: "group",
+        get_round: "get round"
     }
 }
