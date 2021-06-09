@@ -1,4 +1,4 @@
-export default ({},inject) => {
+export default ({app,store},inject) => {
 	inject('api', {
         async call(values, method = "POST"){
             let formdata = new FormData();
@@ -16,13 +16,13 @@ export default ({},inject) => {
                     return response.json()
                 }).then((data) => {
                     if(data.status && data.status == "error"){
-                        this.$notifier.showError();
+                        store.commit('snackbar/showMessage', { content: 'error', color: 'red' });
                     }
                     resp = data;
                     return data;
                 });
             }catch(e){
-                console.log("error", e);
+                store.commit('snackbar/showMessage', { content: 'error', color: 'red' });
             }finally{
                 return resp;
             }
