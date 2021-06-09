@@ -2,7 +2,7 @@
     <v-container v-if="currentUser && currentUser.user_id === 3">
         <nuxt-link to="/admin">back</nuxt-link>
         <h1>ADD MATCH</h1>
-        <v-row class="pa-4" justify="center" align="cebter">
+        <v-row class="pa-4" justify="center" align="center">
             <v-col cols="12" sm="6">
                 <v-select
                     v-model="homeTeam"
