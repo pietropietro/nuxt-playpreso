@@ -7,22 +7,25 @@
             <v-col cols="12">
                 <h3>{{username}}</h3>
             </v-col>
-            <v-col cols="12" v-if="!preso && !missed">
-                <v-row no-gutters align="center" justify="center">
-                    <v-col cols="6" >
-                        <h4>{{guess.guess_home + '-' + guess.guess_away}}</h4>
-                    </v-col>
-                    <v-col cols="6">
-                        <h2>{{guess.preso_score !== 0 ? '+' : ''}}{{guess.preso_score}}</h2>
-                    </v-col>
-                </v-row>
-            </v-col>
-            <v-col v-else-if="missed" cols="12">
-                <h4 class="text-uppercase text-overline">{{$t('app.missed')}}</h4>
-            </v-col>
-            <v-col cols="12" v-if="preso">
-                <h2>+{{guess.preso_score}}</h2>
-            </v-col>
+            <template v-if="guess.verified">
+                <v-col cols="12" v-if="!preso && !missed">
+                    <v-row no-gutters align="center" justify="center">
+                        <v-col cols="6" >
+                            <h4>{{guess.guess_home + '-' + guess.guess_away}}</h4>
+                        </v-col>
+                        <v-col cols="6">
+                            <h2>{{guess.preso_score !== 0 ? '+' : ''}}{{guess.preso_score}}</h2>
+                        </v-col>
+                    </v-row>
+                </v-col>
+                <v-col v-else-if="missed" cols="12">
+                    <h4 class="text-uppercase text-overline">{{$t('app.missed')}}</h4>
+                </v-col>
+                <v-col cols="12" v-if="preso">
+                    <h2>+{{guess.preso_score}}</h2>
+                </v-col>
+            </template>
+            <v-col v-else cols="12"><h1>?</h1></v-col>
         </v-row>
     </v-card>
 </template>
