@@ -1,8 +1,8 @@
 <template>
     <loading-page v-if="!euroMatches"/>
-    <v-container v-else>
+    <v-container v-else-if="euroMatches.length > 0">
         <nuxt-link to="/admin">back</nuxt-link>
-        <admin-update-match class="my-5" v-for="(match,i) in euroMatches" :key="i" :match="match"/>
+        <admin-update-match class="my-5" v-for="(match,i) in euroMatches" :key="i" :match="match" :refresh="refresh"/>
     </v-container>
 </template>
 <script>
@@ -17,10 +17,14 @@ export default {
     },
     methods:{
         async getMatches(){
+            this.euroMatches = null;
             let values = [
                 {'action' : "getEuroMatches"},
             ]
             this.euroMatches = await this.$api.call(values);
+        },
+        refresh(){
+            this.getMatches();
         }
     }
 }

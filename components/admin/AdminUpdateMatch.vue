@@ -19,14 +19,15 @@
                 />
             </v-col>
         </v-row>
-        <v-btn color="primary" block :disabled="!home || !away" :loading="loading">SAVE</v-btn>
+        <v-btn @click="updateMatch" color="primary" block :disabled="!home || !away" :loading="loading">SAVE</v-btn>
     </v-card>
 </template>
 <script>
 export default {
     name: "AdminUpdateMatch",
     props:{
-        match: {type: Object, required: true}
+        match: {type: Object, required: true},
+        refresh: {type: Function}
     },
     data(){
         return {
@@ -38,8 +39,34 @@ export default {
     methods:{
         async updateMatch(){
             this.loading= true;
+            let values = [];
+            values.push(
+                {'action':"updateMatch"},
+            ); 
+            values.push(
+                {'HomeGoals': this.home},
+            ); 
+            values.push(
+                {'AwayGoals': this.away},
+            ); 
+            values.push(
+                {'Id': this.match['xml_id']},
+            ); 
+            values.push(
+                {'Time': 'Finished'},
+            ); 
+            Object.keys(this.match).map(k => {
+                let newObj = {};
+                newObj[k] = this.match[k];
+                console.log("newObj is",newObj);
+                values.push(newObj);
+            }); 
+            console.log("values is ", values);
+            let resp = await this.$api.call(values);
+            
             this.home = this.away = null;
-            this.false= true;
+            this.loading= false;
+            this.refresh();
         }
     }
 }
