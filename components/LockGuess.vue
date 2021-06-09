@@ -74,16 +74,22 @@ export default {
     },
     computed: {
         computed1x2(){
-            if(this.home > this.away) return 1;
-            if(this.away > this.home) return 2;
+            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
+            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
+            if(a > b) return 1;
+            if(b > a) return 2;
             return "X";
         },
         computedUO(){
-            if(this.home + this.away > 2) return "OVER";
+            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
+            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
+            if(a + b > 2) return "OVER";
             return "UNDER";
         },
         computedGGNG(){
-            if(this.home >0 && this.away > 0 )return "GOL";
+            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
+            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
+            if(a >0 && b > 0 )return "GOL";
             return "NOGOL";
         }
     },
