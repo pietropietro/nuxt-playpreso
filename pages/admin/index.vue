@@ -7,7 +7,7 @@
             </v-row>
         <v-row justify="center" align="center" style="height:50%;">
             <nuxt-link to="admin/list" class="no-decoration">
-            <h1>UPDATE</h1>
+                <h1>UPDATE</h1>
             </nuxt-link>
         </v-row>
     </v-container>
