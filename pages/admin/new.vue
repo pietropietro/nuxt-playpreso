@@ -3,9 +3,6 @@
         <nuxt-link to="/admin">back</nuxt-link>
         <h1>ADD MATCH</h1>
         <v-row class="pa-4" justify="center" align="cebter">
-            {{dateModel}}
-            <br>
-            {{timeModel}}
             <v-col cols="12" sm="6">
                 <v-select
                     v-model="homeTeam"
@@ -42,7 +39,7 @@
                 />
             </v-col>
         </v-row>
-        <v-btn :disabled="!dateModel || !timeModel || !homeTeam || !awayTeam || !round"
+        <v-btn @click="add" :disabled="!dateModel || !timeModel || !homeTeam || !awayTeam || !round"
             :loading="loading" class="my-10 py-10" block color="primary">
             <h1>ADD</h1>
         </v-btn>
@@ -74,30 +71,30 @@ export default {
                 {text: "finale", value: "5"}
             ],
             teams:[
-                {name:"Turkey",id:"1388"},
-                {name:"Italy",id:"326"},
-                {name:"Wales",id:"1385"},
-                {name:"Switzerland",id:"966"},
-                {name:"Denmark",id:"322"},
-                {name:"Finland",id:""},
-                {name:"Belgium",id:"975"},
-                {name:"Russia",id:"319"},
-                {name:"Netherlands",id:"321"},
-                {name:"Ukraine",id:"331"},
                 {name:"Austria",id:"1389"},
-                {name:"North Macedonia",id:""},
-                {name:"England",id:"330"},
+                {name:"Belgium",id:"975"},
                 {name:"Croatia",id:"328"},
-                {name:"Scotland",id:""},
                 {name:"Czech Republic",id:"320"},
+                {name:"Denmark",id:"322"},
+                {name:"England",id:"330"},
+                {name:"Finland",id:""},
+                {name:"France",id:"329"},
+                {name:"Germany",id:"323"},
+                {name:"Hungary",id:"1390"},
+                {name:"Italy",id:"326"},
+                {name:"Netherlands",id:"321"},
+                {name:"North Macedonia",id:""},
+                {name:"Portugal",id:"324"},
+                {name:"Poland",id:"317"},
+                {name:"Russia",id:"319"},
+                {name:"Switzerland",id:"966"},
+                {name:"Scotland",id:""},
                 {name:"Spain",id:"325"},
                 {name:"Sweden",id:"332"},
-                {name:"Poland",id:"317"},
                 {name:"Slovakia",id:"1386"},
-                {name:"Hungary",id:"1390"},
-                {name:"Portugal",id:"324"},
-                {name:"France",id:"329"},
-                {name:"Germany",id:"323"}
+                {name:"Turkey",id:"1388"},
+                {name:"Ukraine",id:"331"},
+                {name:"Wales",id:"1385"},
             ]
         }
     },
@@ -106,19 +103,18 @@ export default {
             this.loading = true;
             let values = [
                 {'action' : "addMatch"},
-                {'hometeam_xmlid' : this.homeTeam},
-                {'awayteam_xmlid' : this.awayTeam},
-                {"HomeTeam" : this.teams.filter(t=>{
-                    t.id === this.homeTeam
-                })[0].name},
-                {"AwayTeam" : this.teams.filter(t=>{
-                    t.id === this.awayTeam
-                })[0].name},
+                {'HomeTeam_Id' : this.homeTeam},
+                {'AwayTeam_Id' : this.awayTeam},
+                {"HomeTeam" : this.teams.filter(t=> t.id === this.homeTeam)[0].name},
+                {"AwayTeam" : this.teams.filter(t=> t.id === this.awayTeam)[0].name},
                 {"Round": this.round},
                 {'League': "Euro 21"},
-                {"dateTimeInput": this.dateModel + " " + this.timeModel}
+                {"dateTimeInput": this.dateModel + " " + this.timeModel},
+                // workaround
+                {"Id":  Math.floor(Math.random() * (100000) + 400000)}
             ]
             this.euroMatches = await this.$api.call(values);
+            this.homeTeam= this.awayTeam = this.round = this.timeModel = this.dateModel = null;
             this.loading = false;
         }
     },
