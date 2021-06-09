@@ -14,7 +14,7 @@
                 :matchBlocks="PCGroup.matchBlocks" :rounds="PCGroup.rounds" :users="PCGroup.users"
             />
         </v-container>
-        <lock-guess v-else :guess="selectedMBI.guesses[0]" :match="selectedMBI.match" style="height:100%"/>
+        <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" style="height:100%"/>
         <v-pagination
             v-model="selectedPage"
             :length="!userInGroup || !PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
@@ -44,6 +44,9 @@ export default {
         },
         selectedMBI(){
             return this.lastMatchBlock.matchBlockItems[this.selectedPage -2]
+        },
+        selectedGuess(){
+            return this.selectedMBI.guesses.filter(g => g.user_id === this.currentUser.user_id)[0];
         }
     },
     async mounted(){
