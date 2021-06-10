@@ -25,7 +25,10 @@
                     <h2>+{{guess.preso_score}}</h2>
                 </v-col>
             </template>
-            <v-col v-else cols="12"><h1>?</h1></v-col>
+            <v-col v-else cols="12">
+                <h1 v-if="guess.guess_home === 222">?</h1>
+                <h4 v-else class="text-uppercase text-overline">LOCKED</h4>
+            </v-col>
         </v-row>
     </v-card>
 </template>
