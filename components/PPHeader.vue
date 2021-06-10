@@ -4,12 +4,7 @@
             <h1 class="secondary--text">PLAYPRESO</h1>
         </nuxt-link>
         <v-spacer/>
-        <user-menu v-if="currentUser" />
-        <template v-else>
-            <nuxt-link class="no-decoration" to="login">
-                <h1 class="secondary--text">{{$t('app.login')}}</h1>
-            </nuxt-link>
-        </template>
+        <user-menu />
     </v-app-bar>
 </template>
 <script>
