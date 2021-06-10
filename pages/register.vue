@@ -1,41 +1,39 @@
-<template>
-	<v-row align="center" style="height:100%" class="pa-10" v-if="!currentUser">
-		<v-container>
-			<v-row>
-				<v-text-field
-					label="email"
-					v-model="emailAdd"
-				/>
-			</v-row>
-			<v-row>
-				<v-text-field
-					label="username"
-					v-model="username"
-					@change="change"
-					maxlength="10"
-				/>
-			</v-row>
-			<v-row>
-				<v-text-field
-					type="password"
-					label="password"
-					v-model="password"
-				/>
-			</v-row>
-            <v-row>
-				<v-text-field
-					type="password"
-					label="confirmPassword"
-					v-model="confirmPassword"
-				/>
-			</v-row>
-			<v-row justify="center">
-				<v-btn block color="primary" @click="doRegister" :loading="loading" :disabled="!username || !password || password !== confirmPassword || !emailAdd">
-					REGISTER
-				</v-btn>
-			</v-row>
-		</v-container>
-	</v-row>
+<template>	
+	<v-container v-if="!currentUser" class="pa-5 my-4">
+		<v-row>
+			<v-text-field
+				label="email"
+				v-model="emailAdd"
+			/>
+		</v-row>
+		<v-row>
+			<v-text-field
+				label="username"
+				v-model="username"
+				@change="change"
+				maxlength="10"
+			/>
+		</v-row>
+		<v-row>
+			<v-text-field
+				type="password"
+				label="password"
+				v-model="password"
+			/>
+		</v-row>
+		<v-row>
+			<v-text-field
+				type="password"
+				label="confirmPassword"
+				v-model="confirmPassword"
+			/>
+		</v-row>
+		<v-row justify="center" style="width:95%; position:fixed; bottom:20px;" class="mr-4">
+			<v-btn class="pa-2" block color="primary" @click="doRegister" :loading="loading" :disabled="!username || !password || password !== confirmPassword || !emailAdd">
+				<h1>REGISTER</h1>
+			</v-btn>
+		</v-row>
+	</v-container>
 	<go-home v-else/>
 </template>
 <script>

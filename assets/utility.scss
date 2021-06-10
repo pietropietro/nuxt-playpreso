@@ -28,3 +28,8 @@
 .hovered:hover {
     background-color: lighten($color: lightgrey, $amount: 5) !important;
 }
+
+input[type="text"]
+{
+    font-size:34px;
+}

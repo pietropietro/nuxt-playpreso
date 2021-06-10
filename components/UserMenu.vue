@@ -17,12 +17,12 @@
             <template v-else>
                 <v-list-item>
                     <nuxt-link class="no-decoration" to="/login">
-                        <b>{{$t('app.login')}}</b>
+                        <b class="text-uppercase">{{$t('app.login')}}</b>
                     </nuxt-link>
                 </v-list-item>
                 <v-list-item>
                     <nuxt-link class="no-decoration" to="register">
-                        <b>{{$t('app.register')}}</b>
+                        <b class="text-uppercase">{{$t('app.register')}}</b>
                     </nuxt-link>
                 </v-list-item>
             </template>

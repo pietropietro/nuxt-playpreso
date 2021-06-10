@@ -13,7 +13,6 @@ export default {
             cupId: this.$route.params.cupId,
             canJoinEuro: false,
             loading: false,
-            idModel: 3
         }
     },
     methods:{
@@ -24,22 +23,21 @@ export default {
             this.loading = true;
             let values = [
                 {'action' : "joinPresoCup"},
-                {'userid' : this.idModel},
+                {'userid' : this.currentUser.user_id},
                 {'cuptypeid' : 5}
             ]
             let resp = await this.$api.call(values);
+            await this.checkCanJoinEuro();
             this.loading = false;
-            this.checkCanJoinEuro();
         },
 
         async checkCanJoinEuro(){
+            if(!this.currentUser)return;
             let values = [
                 {'action' : "getHomePresoCups"},
-                {'userid' : this.idModel},
+                {'userid' : this.currentUser.user_id},
             ]
-            console.log("call canjoin");
             let resp = await this.$api.call(values);
-            console.log("resp",resp);
             this.canJoinEuro = resp?.canJoinEuro;
         }
     },

@@ -7,7 +7,7 @@
             </v-row>
             <users-standings class="my-5 pa-2" :users="PCGroup.users"/>
             <get-round
-                v-if="currentUser && userInGroup && (!PCGroup.matchBlocks || (lastMatchBlock.finished && PCGroup.rounds !== PCGroup.matchBlocks.length))"
+                v-if="currentUser && userInGroup && PCGroup.size === PCGroup.users.length && (!PCGroup.matchBlocks || (lastMatchBlock.finished && PCGroup.rounds !== PCGroup.matchBlocks.length))"
                 :level="PCGroup.level" :groupId="PCGroup.id" class="my-5" :refresh="refresh"
             />
             <match-blocks-slider class="pt-5" v-if="PCGroup.matchBlocks"
