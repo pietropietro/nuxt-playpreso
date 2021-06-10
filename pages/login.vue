@@ -13,8 +13,13 @@
 				v-model="password"
 			/>
 		</v-row>
+		<v-row class="my-10" justify="center">
+			<nuxt-link to="resetPsw" class="no-decoration">
+				<h4 class="text-center">RESET PSW</h4>
+			</nuxt-link>
+		</v-row>
 		<v-row justify="center" style="width:95%; position:fixed; bottom:20px;" class="mr-4">
-			<v-btn class="pa-2" @click="doLogin" block :loading="loading" :disabled="!username || !password">
+			<v-btn class="pa-2" color="primary" @click="doLogin" block :loading="loading" :disabled="!username || !password">
 				<h1>LOGIN</h1>
 			</v-btn>
 		</v-row>
