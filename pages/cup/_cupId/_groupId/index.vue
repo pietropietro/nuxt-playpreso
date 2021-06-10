@@ -16,8 +16,9 @@
         </v-container>
         <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" style="height:100%"/>
         <v-pagination
+        v-if="userInGroup"
             v-model="selectedPage"
-            :length="!userInGroup || !PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
+            :length="!PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
             circle
             class="pagination-fixed pagination-dots"
         />
@@ -35,6 +36,7 @@ export default {
     },
     computed:{
         userInGroup(){
+            if(!this.currentUser || !this.PCGroup.users)return false;
             return this.PCGroup.users.filter(u => {
                 return u.user.user_id === this.currentUser.user_id;
             }).length > 0;

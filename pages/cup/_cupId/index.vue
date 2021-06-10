@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-row class="pa-4" align="center" v-if="currentUser && canJoinEuro">
-            <v-btn text @click="joinEuro" :loading="loading">JOIN</v-btn>
+        <v-row class="pa-4" justify="center" align="center" v-if="currentUser && canJoinEuro">
+            <v-btn color="primary" block text @click="joinEuro" :loading="loading"><h1>JOIN</h1></v-btn>
         </v-row>
         <preso-cup-table v-if="!loading" :id="cupId"/>
     </div>
@@ -37,8 +37,10 @@ export default {
                 {'action' : "getHomePresoCups"},
                 {'userid' : this.idModel},
             ]
+            console.log("call canjoin");
             let resp = await this.$api.call(values);
-            this.canJoinEuro = resp.canJoinEuro;
+            console.log("resp",resp);
+            this.canJoinEuro = resp?.canJoinEuro;
         }
     },
     async mounted(){
