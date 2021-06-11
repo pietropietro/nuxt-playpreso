@@ -8,52 +8,10 @@
             </v-row>
             <v-row class="my-0" justify="center"><span class="caption">{{match.date_start}}</span></v-row>
         </div>
-        <v-card style="height:50%">
-            <v-container fill-height>
-                <v-row class="mt-4">
-                    <v-col cols="5">
-                        <h1 v-if="guess.guess_home===222" class="text-center">{{home + (home === 4 ? '+' : '')}}</h1>
-                        <h1 v-else class="text-center">{{guess.guess_home + (guess.guess_home === 4 ? '+' : '')}}</h1>
-                        <v-slider
-                            class="mx-4"
-                            :max="4"
-                            :min="0"
-                            v-model="home"
-                        ></v-slider>
-                    </v-col>
-                    <v-col cols="2"><h1 class="text-center">-</h1></v-col>
-                    <v-col cols="5">
-                        <h1 v-if="guess.guess_away===222" class="text-center">{{away + (away === 4 ? '+' : '')}}</h1>
-                        <h1 v-else class="text-center">{{guess.guess_away + (guess.guess_away === 4 ? '+' : '')}}</h1>
-                        <v-slider
-                            class="mx-4"
-                            :max="4"
-                            :min="0"
-                            v-model="away"
-                        ></v-slider>
-                    </v-col>
-                </v-row>
-                <v-row justify="center" class="text-center">
-                    <v-col cols="4">
-                        <v-chip color="primary">
-                            <h3>{{computed1x2}}</h3>
-                        </v-chip>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-chip color="primary">
-                            <h3>{{computedUO}}</h3>
-                        </v-chip>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-chip color="primary">
-                            <h3>{{computedGGNG}}</h3>
-                        </v-chip>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-card>
-        <v-row justify="center" class="my-1" style="position:fixed; bottom:70px; width:100%;">
-            <v-btn @click="lockGuess" :loading="loading" v-if="guess.guess_home === 222" color="primary" text block><h1>LOCK</h1></v-btn>
+        <lock-guess-card :guess="guess" style="height:50%"/>
+        <v-row justify="center" class="my-10" >
+            <v-btn v-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
+            <h1 v-else>LOCKED</h1>
         </v-row>
     </v-container>
 </template>
@@ -67,31 +25,13 @@ export default {
     },
     data(){
         return{
-            home: 0,
-            away:0,
             loading: false
         }
     },
     computed: {
-        computed1x2(){
-            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
-            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
-            if(a > b) return 1;
-            if(b > a) return 2;
-            return "X";
+        locked(){
+            return this.guess.guess_home !== 222;
         },
-        computedUO(){
-            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
-            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
-            if(a + b > 2) return "OVER";
-            return "UNDER";
-        },
-        computedGGNG(){
-            let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
-            let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
-            if(a >0 && b > 0 )return "GOL";
-            return "NOGOL";
-        }
     },
     methods:{
         async lockGuess(){

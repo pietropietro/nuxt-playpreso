@@ -1,6 +1,6 @@
 <template>
     <v-container fluid fill-height style="background-color:blue;">
-        <v-row justify="center" v-if="currentUser && currentUser.user_id===3">
+        <v-row justify="center" v-if="currentUser && (currentUser.user_id===3 || currentUser.user_id===87)">
             <nuxt-link to="admin">
                 <v-btn>ADMIN</v-btn>
             </nuxt-link>

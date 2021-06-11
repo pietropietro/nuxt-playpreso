@@ -3,7 +3,7 @@
         <nuxt-link to="/admin">back</nuxt-link>
         <h1>ADD MATCH</h1>
         <v-row class="pa-4" justify="center" align="center">
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
                 <v-select
                     v-model="homeTeam"
                     :items="teams"
@@ -12,7 +12,7 @@
                     label="home team"
                 />
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
                 <v-select
                     v-model="awayTeam"
                     :items="teams"
@@ -21,7 +21,7 @@
                     label="away team"
                 />
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
                 <v-select
                     v-model="round"
                     :items="rounds"
@@ -33,6 +33,8 @@
                     v-model="dateModel"
                     label="data"
                 />
+            </v-col>
+            <v-col cols="12" sm="6">
                 <v-time-picker
                     v-model="timeModel"
                     label="ora"

@@ -6,7 +6,8 @@
     </v-container>
 </template>
 <script>
-import {HalfCircleSpinner} from 'epic-spinners'
+import 'epic-spinners/dist/lib/epic-spinners.min.css'
+import {HalfCircleSpinner} from 'epic-spinners/dist/lib/epic-spinners.min.js'
 export default {
     name: "LoadingPage",
     components:{
