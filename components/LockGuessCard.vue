@@ -3,26 +3,26 @@
             <v-container fill-height>
                 <v-row class="mt-4">
                     <v-col cols="5">
-                        <h1 v-if="!locked" class="text-center">{{home + (home === 4 ? '+' : '')}}</h1>
+                        <h1 v-if="!locked" class="text-center">{{homeModel + (homeModel === 4 ? '+' : '')}}</h1>
                         <h1 v-else class="text-center">{{guess.guess_home + (guess.guess_home === 4 ? '+' : '')}}</h1>
                         <v-slider
                             class="mx-4"
                             :max="4"
                             :min="0"
-                            v-model="home"
+                            v-model="homeModel"
                             color="white"
                             :disabled="locked"
                         ></v-slider>
                     </v-col>
                     <v-col cols="2"><h1 class="text-center">-</h1></v-col>
                     <v-col cols="5">
-                        <h1 v-if="!locked" class="text-center">{{away + (away === 4 ? '+' : '')}}</h1>
+                        <h1 v-if="!locked" class="text-center">{{awayModel + (awayModel === 4 ? '+' : '')}}</h1>
                         <h1 v-else class="text-center">{{guess.guess_away + (guess.guess_away === 4 ? '+' : '')}}</h1>
                         <v-slider
                             class="mx-4"
                             :max="4"
                             :min="0"
-                            v-model="away"
+                            v-model="awayModel"
                             color="white"
                             :disabled="locked"
                         ></v-slider>
@@ -48,15 +48,33 @@ export default {
     name: "LockGuessCard",
     props: {
         guess: {type: Object},
+        home: {type: Number},
+        away: {type: Number},
+        setHome: {type: Function},
+        setAway: {type: Function},
     },
     data(){
         return{
-            home: 0,
-            away:0,
             loading: false
         }
     },
     computed: {
+        homeModel:{
+            get(){
+                return this.home
+            },
+            set(val){
+                this.setHome(val);
+            }
+        },
+        awayModel:{
+            get(){
+                return this.away
+            },
+            set(val){
+                this.setAway(val);
+            }
+        },
         locked(){
             return this.guess.guess_home !== 222;
         },
