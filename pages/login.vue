@@ -1,29 +1,39 @@
 <template>
-	<v-container v-if="!currentUser" class="pa-5 my-4">
-		<v-row>
-			<v-text-field
-				label="username"
-				v-model="username"
-			/>
-		</v-row>
-		<v-row>
-			<v-text-field
-				type="password"
-				label="password"
-				v-model="password"
-			/>
-		</v-row>
-		<v-row class="my-10" justify="center">
-			<nuxt-link to="resetPsw" class="no-decoration">
-				<h4 class="text-center">RESET PSW</h4>
-			</nuxt-link>
-		</v-row>
-		<v-row justify="center" style="width:95%; position:fixed; bottom:20px;" class="mr-4">
-			<v-btn class="pa-2" color="primary" @click="doLogin" block :loading="loading" :disabled="!username || !password">
-				<h1>LOGIN</h1>
-			</v-btn>
-		</v-row>
-	</v-container>
+	<v-row align="start" class="pa-4" v-if="!currentUser" style="height:100%" no-gutters>
+		<v-col cols="12">
+			<v-row>
+				<v-col cols="12">
+					<v-text-field
+						height="50"
+						label="USERNAME"
+						v-model="username"
+					/>
+				</v-col>
+				<v-col cols="12">
+					<v-text-field
+						height="50"
+						type="password"
+						label="PASSWORD"
+						v-model="password"
+					/>
+				</v-col>
+			</v-row>
+		</v-col>
+		<v-col align-self="end">
+			<v-row justify="center" class="mb-4">
+				<v-btn color="primary" @click="doLogin" block :loading="loading" :disabled="!username || !password">
+					<h1>LOGIN</h1>
+				</v-btn>
+			</v-row>
+			<v-row justify="center">
+				<nuxt-link to="resetPsw" class="no-decoration">
+					<v-btn block text>
+						<h4 class="text-center">RESET PSW</h4>
+					</v-btn>
+				</nuxt-link>
+			</v-row>
+		</v-col>
+	</v-row>
 	<go-home v-else/>
 </template>
 <script>
@@ -44,3 +54,9 @@ export default {
 	},
 }
 </script>
+<style lang="scss">
+	input[type="password"] {
+       -webkit-text-stroke-width: 0.5em;
+       letter-spacing: 0.5em;
+    }
+</style>

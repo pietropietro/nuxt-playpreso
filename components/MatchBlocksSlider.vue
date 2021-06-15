@@ -3,6 +3,7 @@
         <v-row justify="space-between" class="mb-2 px-2">
             <h1>{{$t('app.round') + ' ' + selectedRound + '/' +rounds}}</h1>
             <v-pagination
+                v-if="matchBlocks.length > 1"
                 v-model="selectedRound"
                 :length="matchBlocks.length"
                 circle
