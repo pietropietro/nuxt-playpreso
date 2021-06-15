@@ -25,7 +25,7 @@ export default {
 	plugins: [
 		{ src: '@/plugins/notifier.js' },
 		{ src: '@/plugins/user-mixin.js' },
-        { src: '@/plugins/version.js', ssr: false },
+        { src: '@/plugins/version.js'},
         { src: '@/plugins/api.js', ssr: false },
 		{ src: '~/plugins/vuex-persist.js', ssr: false }
 	],

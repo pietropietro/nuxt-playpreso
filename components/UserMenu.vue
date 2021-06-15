@@ -26,6 +26,9 @@
                     </nuxt-link>
                 </v-list-item>
             </template>
+            <v-list-item>
+                <v-list-item-title><h5 class="overline">v{{VERSION}}</h5></v-list-item-title>
+            </v-list-item>
         </v-list>
     </v-menu>
 </template>
