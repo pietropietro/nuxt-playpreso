@@ -1,15 +1,17 @@
 <template>
     <v-row>
-        <v-btn :loading="loading" block text class="text-uppercase" @click="getNextRound"><h1>{{$t('presocup.get_round') + ' ' + level}}</h1></v-btn>
+        <v-btn :loading="loading" color="primary" block text class="text-uppercase" @click="getNextRound">
+            <h1>{{$t('presocup.get_round') + ' ' + round}}</h1>
+        </v-btn>
     </v-row>
 </template>
 <script>
 export default {
     name:"GetRound",
     props: {
-        level: {type: Number},
         groupId: {type: Number},
-        refresh: {type: Function}
+        refresh: {type: Function},
+        round: {type: Number}
     },
     data(){
         return{

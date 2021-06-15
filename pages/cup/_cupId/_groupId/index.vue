@@ -7,8 +7,8 @@
             </v-row>
             <users-standings class="my-5 pa-2" :users="PCGroup.users"/>
             <get-round
-                v-if="currentUser && userInGroup && PCGroup.size === PCGroup.users.length && (!PCGroup.matchBlocks || (lastMatchBlock.finished && PCGroup.rounds !== PCGroup.matchBlocks.length))"
-                :level="PCGroup.level" :groupId="PCGroup.id" class="my-5" :refresh="refresh"
+                v-if="canGetRound" :round="PCGroup.matchBlocks.length + 1"
+                :groupId="PCGroup.id" class="my-7" :refresh="refresh"
             />
             <match-blocks-slider class="pt-5" v-if="PCGroup.matchBlocks"
                 :matchBlocks="PCGroup.matchBlocks" :rounds="PCGroup.rounds" :users="PCGroup.users"
@@ -16,7 +16,7 @@
         </v-container>
         <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" style="height:100%"/>
         <v-pagination
-        v-if="userInGroup"
+            v-if="userInGroup"
             v-model="selectedPage"
             :length="!PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
             circle
@@ -44,11 +44,20 @@ export default {
         lastMatchBlock(){
             return this.PCGroup.matchBlocks[this.PCGroup.matchBlocks.length - 1];
         },
+        lastMatchBlockFinished(){
+            return this.lastMatchBlock.matchBlockItems.filter(mbi => mbi.match.score_away === 222).length === 0;
+        },
         selectedMBI(){
             return this.lastMatchBlock.matchBlockItems[this.selectedPage -2]
         },
         selectedGuess(){
             return this.selectedMBI.guesses.filter(g => g.user_id === this.currentUser.user_id)[0];
+        },
+        canGetRound(){
+            return this.userInGroup && this.groupFull && (!this.PCGroup.matchBlocks || (this.lastMatchBlockFinished && this.PCGroup.rounds !== this.PCGroup.matchBlocks.length));
+        },
+        groupFull(){
+            return this.PCGroup.size === this.PCGroup.users.length;
         }
     },
     async mounted(){
