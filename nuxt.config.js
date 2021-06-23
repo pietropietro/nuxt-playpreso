@@ -82,9 +82,10 @@ export default {
 		theme: {
             themes: {
                 light: {
-                    primary: '#052aff',
+                    primary: '#00f',
 					secondary: '#ffffff',
                     accent: '#ff4c05',
+					primary_red: "ff0000"
 				}
 			}
 		}

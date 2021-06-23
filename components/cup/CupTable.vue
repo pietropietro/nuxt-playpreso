@@ -5,7 +5,7 @@
             <v-img contain style="max-height: 80px" :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"></v-img>
         </v-row>
         <template v-if="presoCup.levels && presoCup.levels.length > 0">
-            <cup-level class="mb-10" :level="presoCup.levels[selectedLevel - 1]"/>
+            <cup-level class="mb-10" :level="presoCup.levels[selectedLevel - 1]" :levelInt="selectedLevel" :pointsToPassThird="pointsToPassThird"/>
             <v-pagination
                 v-model="selectedLevel"
                 :length="presoCup.levels.length"
@@ -24,7 +24,8 @@ export default {
     data(){
         return{
             presoCup: null,
-            selectedLevel: 1
+            selectedLevel: 1,
+            pointsToPassThird: null
         }
     },
     async mounted(){
@@ -33,11 +34,15 @@ export default {
             {'presoCup_id': this.id},
         ]
         this.presoCup = await this.$api.call(values);
+
+        //show 3rd best users who pass
+        if(this.presoCup.started && this.presoCup.pcType.participants === 24){
+            let thirdPositionPoints = [];
+            this.presoCup.levels[0].groups.map(group =>{
+                thirdPositionPoints.push(group.users[2].plPoints);
+            })
+            this.pointsToPassThird = parseInt(thirdPositionPoints.sort((a,b) => b-a)[3]);
+        }
     }
 }
 </script>
-<style lang="scss">
-//     .v-pagination__item{
-//         display: none !important;
-//     }
-</style>
