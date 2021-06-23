@@ -6,11 +6,14 @@
                     <h1 class="text-center">{{match.hometeam_name}} - {{match.awayteam_name}}</h1>
                 </v-col>
             </v-row>
-            <v-row class="my-0" justify="center"><span class="caption">{{match.date_start}}</span></v-row>
+            <v-row class="my-0" justify="center"><span class="caption">{{formatDate(match.date_start)}}</span></v-row>
         </div>
         <lock-guess-card :guess="guess" style="height:50%" :home="home" :away="away" :setHome="(val)=>home = val" :setAway="(val)=>away = val"/>
         <v-row justify="center" class="my-10" >
-            <v-btn v-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
+            <h1 v-if="!locked && guess.verified">
+                MISSED
+            </h1>
+            <v-btn v-else-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
             <h1 v-else>LOCKED</h1>
         </v-row>
     </v-container>

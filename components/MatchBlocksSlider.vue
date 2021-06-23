@@ -11,9 +11,10 @@
             />
         </v-row>
         <div class="my-6" v-for="(mbi,i) in matchBlocks[selectedRound - 1].matchBlockItems" :key="i">
-            <v-row justify="space-between" class="px-2">
+            <v-row no-gutters justify="space-between" align="center">
                 <h3>{{mbi.match.hometeam_name}} - {{mbi.match.awayteam_name}}</h3>
                 <h3 v-if="mbi.match.score_home !== 222">{{mbi.match.score_home}} - {{mbi.match.score_away}}</h3>
+                <div v-else class="caption">{{formatDate(mbi.match.date_start)}}</div>
             </v-row>
             <v-row>
                 <v-simple-table>

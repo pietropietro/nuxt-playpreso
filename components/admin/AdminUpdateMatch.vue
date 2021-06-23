@@ -3,6 +3,9 @@
         <v-row>
             <h3>{{match.hometeam_name}}-{{match.awayteam_name}}</h3>
         </v-row>
+        <v-row class="caption">
+            {{formatDate(match.date_start)}}
+        </v-row>
         <v-row>
             <v-col cols="6">
                 <v-text-field
