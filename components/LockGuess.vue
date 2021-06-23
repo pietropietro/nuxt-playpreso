@@ -15,7 +15,7 @@
             </v-container>
         </div>
         <lock-guess-card :guess="guess" style="height:40vh" :home="home" :away="away" :setHome="(val)=>home = val" :setAway="(val)=>away = val"/>
-        <v-row justify="center" class="my-10">
+        <v-row justify="center" class="my-10" style="height:10vh" align="center">
             <h1 v-if="!locked && guess.verified">
                 MISSED
             </h1>
