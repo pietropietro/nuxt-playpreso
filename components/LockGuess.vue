@@ -1,15 +1,21 @@
 <template>
     <v-container fluid>
-        <div style="height:20%">
-            <v-row class="mt-2 mx-2" no-gutters>
-                <v-col>
-                    <h1 class="text-center">{{match.hometeam_name}} - {{match.awayteam_name}}</h1>
-                </v-col>
-            </v-row>
-            <v-row class="my-0" justify="center"><span class="caption">{{formatDate(match.date_start)}}</span></v-row>
+        <div style="height: 25vh" class="mb-2">
+            <v-container fluid fill-height>
+                <v-row justify="center">
+                    <div>
+                        <v-row no-gutters>
+                            <v-col>
+                                <h1 class="text-center">{{match.hometeam_name}} - {{match.awayteam_name}}</h1>
+                            </v-col>
+                        </v-row>
+                        <v-row class="my-0" justify="center"><span class="caption">{{formatDate(match.date_start)}}</span></v-row>
+                    </div>
+                </v-row>
+            </v-container>
         </div>
-        <lock-guess-card :guess="guess" style="height:50%" :home="home" :away="away" :setHome="(val)=>home = val" :setAway="(val)=>away = val"/>
-        <v-row justify="center" class="my-10" >
+        <lock-guess-card :guess="guess" style="height:40vh" :home="home" :away="away" :setHome="(val)=>home = val" :setAway="(val)=>away = val"/>
+        <v-row justify="center" class="my-10">
             <h1 v-if="!locked && guess.verified">
                 MISSED
             </h1>

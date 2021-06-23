@@ -6,14 +6,12 @@
         </v-row>
         <template v-if="presoCup.levels && presoCup.levels.length > 0">
             <preso-cup-level class="mb-10" :level="presoCup.levels[selectedLevel - 1]"/>
-            <div class="text-center">
-                <v-pagination
-                    v-model="selectedLevel"
-                    :length="presoCup.levels.length"
-                    circle
-                    class="pagination-fixed"
-                />
-            </div>
+            <v-pagination
+                v-model="selectedLevel"
+                :length="presoCup.levels.length"
+                circle
+                class="pagination-fixed no-arrows"
+            />
         </template>
     </v-container>
 </template>
@@ -38,3 +36,8 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+//     .v-pagination__item{
+//         display: none !important;
+//     }
+</style>

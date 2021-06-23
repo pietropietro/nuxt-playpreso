@@ -14,16 +14,15 @@
                 :matchBlocks="PCGroup.matchBlocks" :rounds="PCGroup.rounds" :users="PCGroup.users"
             />
         </v-container>
-        <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" style="height:100%"/>
+        <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" class="mb-7"/>
         <v-pagination
             v-if="userInGroup"
             v-model="selectedPage"
             :length="!PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
             circle
-            class="pagination-fixed pagination-dots"
+            class="pagination-fixed no-arrows"
         />
     </div>
-
 </template>
 <script>
 export default {
@@ -79,7 +78,7 @@ export default {
 }
 </script>
 <style>
-    .pagination-dots .v-pagination__navigation{
+    .no-arrows .v-pagination__navigation{
         display: none !important;
     }
 </style>
