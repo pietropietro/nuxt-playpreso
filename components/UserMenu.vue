@@ -6,7 +6,7 @@
         <v-list role="menu">
             <template v-if="currentUser">
                 <v-list-item>
-                    <v-list-item-title><h1 class="accent--text">{{currentUser.username}}</h1></v-list-item-title>
+                    <v-list-item-title><h1 class="primary--text">{{currentUser.username}}</h1></v-list-item-title>
                 </v-list-item>
                 <v-list-item class="hovered pointer"
                     @click="logout()"
