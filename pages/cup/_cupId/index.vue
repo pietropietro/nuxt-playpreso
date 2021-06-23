@@ -3,7 +3,7 @@
         <v-row class="pa-4" justify="center" align="center" v-if="currentUser && canJoinEuro">
             <v-btn color="primary" block text @click="joinEuro" :loading="loading"><h1>JOIN</h1></v-btn>
         </v-row>
-        <preso-cup-table v-if="!loading" :id="cupId"/>
+        <cup-table v-if="!loading" :id="cupId"/>
     </div>
 </template>
 <script>

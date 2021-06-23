@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-    name: "UsersStandings",
+    name: "CupUsersStandings",
     props: {
         users: {type: Array},
         flat: {type: Boolean}
