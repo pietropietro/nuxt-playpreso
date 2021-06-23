@@ -10,7 +10,7 @@
 			<v-text-field
 				label="username"
 				v-model="username"
-				@change="change"
+				@keypress="blockSpace"
 				maxlength="10"
 			/>
 		</v-row>
@@ -53,8 +53,10 @@ export default {
 			let resp = await this.register(this.username, this.password, this.emailAdd);
 			this.loading = false;
 		},
-		change(o,n){
-			console.log(o,n);
+		blockSpace(e){
+			if(e.keyCode === 32){
+				e.preventDefault(); return;
+			}
 		}
 	},
 }
