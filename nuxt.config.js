@@ -19,6 +19,7 @@ export default {
 	css: [
 		{ src: '@/assets/utility.scss' },
 		{ src: '@/assets/preso.scss' },
+		{ src: '@/assets/font/fonts.css' },
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -78,7 +79,8 @@ export default {
 
 	// Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
     vuetify: {
-        customVariables: ['~/assets/variables.scss'],
+        // customVariables: ['~/assets/variables.scss'],
+		// treeShake: true,
 		theme: {
             themes: {
                 light: {

@@ -77,9 +77,9 @@ export default {
             }
         },
         colorRow(){
-            if(this.missed) return'blue-grey lighten-4';
-            if(this.locked) return 'amber accent-2';
-            return 'white--text primary';
+            if(this.missed) return'blue-grey lighten-4 ocrastd';
+            if(this.locked) return 'amber accent-2 ocrastd';
+            return 'white--text primary ocrastd';
         },
         blocked(){
             return this.locked || this.guess.verified;

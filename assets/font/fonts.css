@@ -1,0 +1,5 @@
+@font-face {
+    font-family: "OCR_A_Std";
+    src: local("OCR_A_Std"),
+    url(~assets/font/OCR_A_Std.ttf) format("truetype");
+}

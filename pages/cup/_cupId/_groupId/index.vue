@@ -5,7 +5,7 @@
             <v-row justify="center">
                 <h1>{{PCGroup.groupTag}}</h1>
             </v-row>
-            <cup-users-standings class="my-5" :users="PCGroup.users" :size="PCGroup.size"/>
+            <cup-users-standings class="my-5" :users="PCGroup.users" :size="PCGroup.size" :level="PCGroup.level"/>
             <get-round
                 v-if="canGetRound" :round="PCGroup.matchBlocks ? PCGroup.matchBlocks.length + 1 : 1"
                 :groupId="PCGroup.id" class="my-7" :refresh="refresh"
