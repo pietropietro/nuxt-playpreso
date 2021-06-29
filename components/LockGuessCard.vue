@@ -2,33 +2,9 @@
     <v-row justify="center" :class="colorRow">
         <v-container fill-height>
             <v-row class="mt-4">
-                <v-col cols="5">
-                    <h1 v-if="!blocked" class="text-center">{{homeModel + (homeModel === 4 ? '+' : '')}}</h1>
-                    <h1 v-else-if="missed" class="text-center">x</h1>
-                    <h1 v-else class="text-center">{{guess.guess_home + (guess.guess_home === 4 ? '+' : '')}}</h1>
-                    <v-slider
-                        class="mx-4"
-                        :max="4"
-                        :min="0"
-                        v-model="homeModel"
-                        color="white"
-                        :disabled="blocked"
-                    ></v-slider>
-                </v-col>
+                <lock-score :blocked="blocked" :missed="missed" :guess_score="guess.guess_home" :model="homeModel" :setModel="(val)=>{homeModel = val}"/>
                 <v-col cols="2"><h1 class="text-center">-</h1></v-col>
-                <v-col cols="5">
-                    <h1 v-if="!blocked" class="text-center">{{awayModel + (awayModel === 4 ? '+' : '')}}</h1>
-                    <h1 v-else-if="missed" class="text-center">x</h1>
-                    <h1 v-else class="text-center">{{guess.guess_away + (guess.guess_away === 4 ? '+' : '')}}</h1>
-                    <v-slider
-                        class="mx-4"
-                        :max="4"
-                        :min="0"
-                        v-model="awayModel"
-                        color="white"
-                        :disabled="blocked"
-                    ></v-slider>
-                </v-col>
+                <lock-score :blocked="blocked" :missed="missed" :guess_score="guess.guess_away" :model="awayModel" :setModel="(val)=>{awayModel = val}"/>
             </v-row>
             <v-row justify="center" class="text-center">
                 <v-col cols="4">
