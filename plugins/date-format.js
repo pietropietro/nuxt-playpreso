@@ -36,7 +36,7 @@ Vue.mixin({
         },
         inNextDays(someDate){
             let inFiveDays = new Date().setDate( new Date().getDate() + 5);
-            if(someDate < inFiveDays){
+            if(someDate < inFiveDays && someDate > new Date()){
                 return true;
             }
         }
