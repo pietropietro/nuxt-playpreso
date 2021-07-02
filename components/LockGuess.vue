@@ -9,7 +9,9 @@
                                 <h1 class="text-center">{{match.hometeam_name}} - {{match.awayteam_name}}</h1>
                             </v-col>
                         </v-row>
-                        <v-row class="my-0" justify="center"><span class="caption">{{formatDate(match.date_start)}}</span></v-row>
+                        <v-row class="my-0" justify="center">
+                            <match-date-score :match="match"/>
+                        </v-row>
                     </div>
                 </v-row>
             </v-container>
@@ -19,6 +21,7 @@
             <h1 v-if="!locked && guess.verified">
                 MISSED
             </h1>
+            <h1 v-else-if="guess.verified" class="ocrastd">+{{guess.preso_score}}</h1>
             <v-btn v-else-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
             <h1 v-else>LOCKED</h1>
         </v-row>
