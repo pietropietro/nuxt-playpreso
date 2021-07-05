@@ -24,7 +24,7 @@
 				</v-btn>
 			</v-row>
 			<v-row justify="center">
-				<nuxt-link to="resetPsw" class="no-decoration">
+				<nuxt-link to="/resetPsw" class="no-decoration">
 					<v-btn block text>
 						<h4 class="text-center">RESET PSW</h4>
 					</v-btn>

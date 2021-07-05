@@ -21,7 +21,7 @@
                     </nuxt-link>
                 </v-list-item>
                 <v-list-item>
-                    <nuxt-link class="no-decoration" to="register">
+                    <nuxt-link class="no-decoration" to="/register">
                         <b class="text-uppercase">{{$t('app.register')}}</b>
                     </nuxt-link>
                 </v-list-item>
