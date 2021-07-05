@@ -31,8 +31,17 @@
 
 input[type="text"]
 {
-    font-size:34px;
+    font-size:28px;
+    padding: 0px !important;
 }
+input[type="password"] {
+    stroke-width: 6px;
+    padding-left: 5px;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 6px;
+    stroke-color: black;
+    letter-spacing: 0.4em;
+ }
 
 .primary--bg{
     background-color: #052aff;

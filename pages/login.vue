@@ -4,14 +4,12 @@
 			<v-row>
 				<v-col cols="12">
 					<v-text-field
-						height="50"
 						label="USERNAME"
 						v-model="username"
 					/>
 				</v-col>
 				<v-col cols="12">
 					<v-text-field
-						height="50"
 						type="password"
 						label="PASSWORD"
 						v-model="password"
@@ -54,9 +52,3 @@ export default {
 	},
 }
 </script>
-<style lang="scss">
-	input[type="password"] {
-       -webkit-text-stroke-width: 0.5em;
-       letter-spacing: 0.5em;
-    }
-</style>
