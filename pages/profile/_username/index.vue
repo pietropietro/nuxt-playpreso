@@ -4,8 +4,7 @@
         
         <!-- <chart-guesses :guesses="user.guesses"/> -->
         <user-main-data :guesses="user.guesses" :username="user.username" />
-        <!-- <trophies-list :trophies="user.Trophies"/>
-        <league-top-stats :stats="user.leagueTopStats"/> -->
+        <user-last-guesses :guesses="user.guesses"/>
     </div>
 </template>
 <script>
