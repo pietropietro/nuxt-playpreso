@@ -1,14 +1,12 @@
 <template>
     <loading-page v-if="loading || !user" />
-    <v-container v-else>
-        <v-row justify="center" class="my-4">
-            <h1 class="ocrastd primary--text text-uppercase">{{username}}</h1>
-        </v-row>
-        <chart-guesses :guesses="user.guesses"/>
-        <!-- <user-main-data :user="user" />
-        <trophies-list :trophies="user.Trophies"/>
+    <div v-else>
+        
+        <!-- <chart-guesses :guesses="user.guesses"/> -->
+        <user-main-data :guesses="user.guesses" :username="user.username" />
+        <!-- <trophies-list :trophies="user.Trophies"/>
         <league-top-stats :stats="user.leagueTopStats"/> -->
-    </v-container>
+    </div>
 </template>
 <script>
 export default {
