@@ -4,8 +4,7 @@
             <h1>{{username}}</h1>
         </v-row>
         <v-row align="center">
-            <v-col><span>LAST 3<br> MONTHS</span></v-col>
-            <v-col><span>{{guessesVerified.length}} <br> MATCHES</span></v-col>
+            <v-col><span>LAST 3 MONTHS</span></v-col>
         </v-row>
         <v-row justify="center">
             <v-col cols="6" md="3">
@@ -31,6 +30,10 @@
             <v-col cols="6" md="3">
                 <div class="caption">MISSED</div>
                 <h1>{{missedCount}}</h1>
+            </v-col>
+            <v-col cols="6" md="3">
+                <div class="caption">MATCHES</div>
+                <h1>{{guessesVerified.length}}</h1>
             </v-col>
         </v-row>
     </v-container>
