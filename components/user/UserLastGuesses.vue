@@ -12,27 +12,28 @@
                     <v-col>
                         {{guess.guess_home}} - {{guess.guess_away}}
                     </v-col>
-                     <v-col class="text-right"><b>+{{guess.preso_score}}</b></v-col>
                 </v-row>
-                <v-row no-gutters>
+                <v-row no-gutters >
                     <v-col>
-                        <v-chip small v-if="guess.UNOX2" label color="green">
+                        <v-chip x-small v-if="guess.UNOX2" label color="green">
                             <span class="caption white--text"><b>1X2</b></span>
                         </v-chip>
                     </v-col>
-                    <v-col>
-                        <v-chip v-if="guess.UO25" label color="green">
+                    <v-col class="px-1">
+                        <v-chip x-small v-if="guess.UO25" label color="green">
                             <span class="caption white--text"><b>UO</b></span>
                         </v-chip>
                     </v-col>
                     <v-col>
-                        <v-chip v-if="guess.GGNG" label color="green">
-                            <span class="caption white--text"><b>GGNG</b></span>
+                        <v-chip x-small v-if="guess.GGNG" label color="green">
+                            <span class="caption white--text"><b>GOL</b></span>
                         </v-chip>
                     </v-col>
                 </v-row>
             </v-col>
-            <!-- <v-divider/> -->
+            <v-col cols="1" class="mr-1 mr-md-0">
+                <b>+{{guess.preso_score}}</b>
+            </v-col>
         </v-row>
     </v-container>
 </template>
