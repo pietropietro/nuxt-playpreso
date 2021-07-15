@@ -1,12 +1,7 @@
 <template>
     <v-container class="ocrastd text-uppercase text-center">
         <v-row no-gutters justify="center" align="center">
-            <v-col>
-                <h1 style="font-size: 4em;">{{Math.round(average * 100) / 100}}</h1>
-            </v-col>
-            <v-col>
-                <h1>{{username}}</h1>
-            </v-col>
+            <h1>{{username}}</h1>
         </v-row>
         <v-row align="center">
             <v-col><span>LAST 3<br> MONTHS</span></v-col>
@@ -14,20 +9,28 @@
         </v-row>
         <v-row justify="center">
             <v-col cols="6" md="3">
+                <div class="caption">AVG</div>
+                <h1>{{Math.round(average * 10) / 10}}</h1>
+            </v-col>
+            <v-col cols="6" md="3">
                 <div class="caption">1X2</div>
-                <h1>{{Math.round(unox2 * 100) / 100}}%</h1>
+                <h1>{{Math.round(unox2 * 10) / 10}}%</h1>
             </v-col>
             <v-col cols="6" md="3">
                 <div class="caption">UO2.5</div>
-                <h1>{{Math.round(uo25 * 100) / 100}}%</h1>
+                <h1>{{Math.round(uo25 * 10) / 10}}%</h1>
             </v-col>
             <v-col cols="6" md="3">
                 <div class="caption">GGNG</div>
-                <h1>{{Math.round(ggng* 100) / 100}}%</h1>
+                <h1>{{Math.round(ggng* 10) / 10}}%</h1>
             </v-col>    
             <v-col cols="6" md="3">
                 <div class="caption">PRESO</div>
                 <h1>{{presoCount}}</h1>
+            </v-col>
+            <v-col cols="6" md="3">
+                <div class="caption">MISSED</div>
+                <h1>{{missedCount}}</h1>
             </v-col>
         </v-row>
     </v-container>
@@ -43,11 +46,13 @@ export default {
         return{
             guessesVerified : [],
             presoCount: 0,
+            missedCount: 0,
         }
     },
     mounted(){
         this.guessesVerified = this.guesses.filter(g => g.verified);
         this.presoCount = this.guesses.filter(g => g.PRESO).length;
+        this.missedCount = this.guesses.filter(g => this.isMissed(g)).length;
     },
     computed:{
         average(){

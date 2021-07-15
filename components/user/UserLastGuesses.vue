@@ -1,10 +1,10 @@
 <template>
     <v-container v-if="guesses">
-        <v-row v-for="(guess,i) in guesses" :key="guess.id" :class="guess.PRESO ? 'primary white--text' : i % 2 ? 'blue lighten-4' : 'white'" align="center">
+        <v-row v-for="(guess,i) in guesses" :key="guess.id" :class="guess.PRESO ? 'primary white--text' : i % 2 ? 'white' : 'blue lighten-4'" align="center">
             <v-col>
                 {{guess.match.hometeam_name}} - {{guess.match.awayteam_name}}
             </v-col>
-            <template v-if="!guess.PRESO">
+            <template v-if="!guess.PRESO && !isMissed(guess)">
                 <v-col class="text-center caption">
                     <v-row no-gutters>
                         <v-col>
@@ -32,16 +32,19 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col cols="2" class="mr-1 mr-md-0">
+                <v-col cols="2" class="text-center mr-1 mr-md-0">
                     <b>+{{guess.preso_score}}</b>
                 </v-col>
             </template>
-            <template v-else>
+            <template v-else-if="guess.PRESO">
                 <v-col class="caption text-center">{{guess.match.score_home}} - {{guess.match.score_away}}</v-col>
                 <v-col>
                     <h1 class="ocrastd text-center">PRESO!</h1>
                 </v-col>
             </template>
+            <v-col v-else-if="isMissed(guess)">
+                <h3 class="ocrastd text-center">MISSED</h3>
+            </v-col>
         </v-row>
     </v-container>
 </template>

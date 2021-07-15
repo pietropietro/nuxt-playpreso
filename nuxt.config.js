@@ -26,6 +26,7 @@ export default {
 	plugins: [
 		{ src: '@/plugins/notifier.js' },
 		{ src: '@/plugins/user-mixin.js' },
+		{ src: '@/plugins/playpreso-mixin.js' },
         { src: '@/plugins/version.js'},
         { src: '@/plugins/date-format.js', ssr:false},
         { src: '@/plugins/api.js', ssr: false },

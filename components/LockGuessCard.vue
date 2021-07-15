@@ -3,9 +3,9 @@
         <v-container fill-height>
             <template>
                 <v-row class="mt-4">
-                    <lock-score :blocked="blocked" :missed="missed" :guess_score="guess.guess_home" :model="homeModel" :setModel="(val)=>{homeModel = val}"/>
+                    <lock-score :blocked="blocked" :missed="isMissed(guess)" :guess_score="guess.guess_home" :model="homeModel" :setModel="(val)=>{homeModel = val}"/>
                     <v-col cols="2"><h1 class="text-center">-</h1></v-col>
-                    <lock-score :blocked="blocked" :missed="missed" :guess_score="guess.guess_away" :model="awayModel" :setModel="(val)=>{awayModel = val}"/>
+                    <lock-score :blocked="blocked" :missed="isMissed(guess)" :guess_score="guess.guess_away" :model="awayModel" :setModel="(val)=>{awayModel = val}"/>
                 </v-row>
                 <v-row justify="center" class="text-center">
                     <v-col cols="4">
@@ -71,7 +71,7 @@ export default {
             }
         },
         colorRow(){
-            if(this.missed) return'blue-grey lighten-4 ocrastd';
+            if(this.isMissed(guess)) return'blue-grey lighten-4 ocrastd';
             if(this.guess.verified) return 'green accent-2 ocrastd';
             if(this.locked) return 'amber accent-2 ocrastd';
             return 'white--text primary ocrastd';
@@ -82,11 +82,8 @@ export default {
         locked(){
             return this.guess.guess_home !== 222;
         },
-        missed(){
-            return !this.locked && this.guess.verified;
-        },
         computed1x2(){
-            if(this.missed) return "X";
+            if(this.isMissed(guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a > b) return 1;
@@ -94,14 +91,14 @@ export default {
             return "X";
         },
         computedUO(){
-            if(this.missed) return "X";
+            if(this.isMissed(guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a + b > 2) return "OVER";
             return "UNDER";
         },
         computedGGNG(){
-            if(this.missed) return "X";
+            if(this.isMissed(guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a >0 && b > 0 )return "GOL";

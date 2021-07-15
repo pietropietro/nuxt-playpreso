@@ -1,7 +1,6 @@
 <template>
     <loading-page v-if="loading || !user" />
     <div v-else>
-        
         <!-- <chart-guesses :guesses="user.guesses"/> -->
         <user-main-data :guesses="user.guesses" :username="user.username" />
         <user-last-guesses :guesses="user.guesses"/>

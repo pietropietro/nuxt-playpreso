@@ -5,7 +5,9 @@
         >
             <template v-if="users && users.length >= i">
                 <v-col>
-                    <h1>{{users[i-1].user.username}}</h1>
+                    <nuxt-link :to="'/profile/' + users[i-1].user.username">
+                        <h1>{{users[i-1].user.username}}</h1>
+                    </nuxt-link>
                 </v-col>
                 <v-col class="text-right mr-2" >
                     <v-row justify="end" align="end">
