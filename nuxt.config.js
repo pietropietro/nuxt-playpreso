@@ -1,4 +1,9 @@
 export default {
+
+	publicRuntimeConfig: {
+		API_ENDPOINT: process.env.API_ENDPOINT
+	},
+
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: 'playpreso',
@@ -75,7 +80,7 @@ export default {
     ],
 
 	sitemap: {
-		hostname: 'http://www.playpreso.com',
+		hostname: 'https://www.playpreso.com',
 	},
 
 	// Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

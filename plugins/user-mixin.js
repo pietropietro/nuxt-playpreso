@@ -9,16 +9,18 @@ Vue.mixin({
     methods:{
         async login(username, password){
             let values = [
-                {'action' : "logIn"},
                 {'username': username},
                 {'password': password}
             ]
-            let response = await this.$api.call(values);
+            //TODO use env variable API_LOGIN_ROUTE
+            let response = await this.$api.call('/login', values);
             if(response?.user?.username){
                 this.$store.commit('user/updateCurrentUser', { currentUser: response.user});
                 this.$store.commit('user/updateToken', { token: response.token});
             }
         },
+
+        //TODO UPDATE W/ new APIS
         async register(username, password, emailAdd){
             let values = [
                 {'action' : "signUp"},

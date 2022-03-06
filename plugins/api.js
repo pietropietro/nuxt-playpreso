@@ -1,6 +1,6 @@
-export default ({app,store},inject) => {
+export default ({app,store, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
-        async call(values, method = "POST"){
+        async call(route ,values, method = "POST"){
             let formdata = new FormData();
             values.map((item) => {
                 let key = Object.keys(item)[0];
@@ -8,7 +8,7 @@ export default ({app,store},inject) => {
             });
             let resp;
             try {
-                await fetch('http://www.playpreso.com/api.php',{
+                await fetch(API_ENDPOINT + route,{
                     method: method,
                     mode: 'cors',
                     body: formdata,
@@ -16,7 +16,7 @@ export default ({app,store},inject) => {
                     return response.json()
                 }).then((data) => {
                     if(data.status && data.status == "error"){
-                        store.commit('snackbar/showMessage', { content: 'error', color: 'red' });
+                        store.commit('snackbar/showMessage', { content: data.message, color: 'red' });
                     }
                     resp = data;
                     return data;

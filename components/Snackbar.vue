@@ -18,7 +18,7 @@ export default {
 	created() {
 		this.$store.subscribe((mutation, state) => {
 			if (mutation.type === 'snackbar/showMessage') {
-				this.message = this.$t('app.snackbar.' + state.snackbar.content);
+				this.message = state.snackbar.content;
 				this.color = state.snackbar.color
 				this.show = true
 			}

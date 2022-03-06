@@ -16,9 +16,6 @@ export default {
         }
     },
     methods:{
-        showerror(){
-            this.$notifier.showError();
-        },
         async joinEuro(){
             this.loading = true;
             let values = [
