@@ -1,4 +1,4 @@
-export default ({app,store, $config: { API_ENDPOINT }},inject) => {
+export default ({app,store, $notifier, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
         async call(route ,values, method = "POST"){
             let formdata = new FormData();
@@ -16,13 +16,13 @@ export default ({app,store, $config: { API_ENDPOINT }},inject) => {
                     return response.json()
                 }).then((data) => {
                     if(data.status && data.status == "error"){
-                        store.commit('snackbar/showMessage', { content: data.message, color: 'red' });
+                        $notifier.showError(data.message);
                     }
                     resp = data;
                     return data;
                 });
             }catch(e){
-                store.commit('snackbar/showMessage', { content: 'error', color: 'red' });
+                $notifier.showError();
             }finally{
                 return resp;
             }

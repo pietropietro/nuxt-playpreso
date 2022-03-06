@@ -12,10 +12,11 @@ Vue.mixin({
                 {'username': username},
                 {'password': password}
             ]
-            let response = await this.$api.call('/login', values, 'POST');
-            if(response?.user?.username){
-                this.$store.commit('user/updateCurrentUser', { currentUser: response.user});
-                this.$store.commit('user/updateToken', { token: response.token});
+            let response = await this.$api.call(this.API_ROUTES.LOGIN, values, 'POST');
+            if(response.status === "success"){
+                this.$store.commit('user/updateCurrentUser', { currentUser: response.message.user});
+                this.$store.commit('user/updateToken', { token: response.message.authorization});
+                this.$router.push(this.ROUTES.HOME);          
             }
         },
 
@@ -25,10 +26,13 @@ Vue.mixin({
                 {'password': password},
                 {'email': email}
             ]
-            let response = await this.$api.call('/users', values, 'POST');
-            if(response?.user?.username){
-                this.$router.push();            }
+            let response = await this.$api.call(this.API_ROUTES.REGISTER, values, 'POST');
+            if(response.status === "success"){
+                this.$notifier.showSuccess("creato");
+                this.$router.push(this.ROUTES.LOGIN);          
+            }
         },
+
         logout(){
             this.$store.commit('user/updateCurrentUser', { currentUser: null});
             this.$store.commit('user/updateToken', { token: null});
