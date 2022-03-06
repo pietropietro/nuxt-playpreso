@@ -19,7 +19,7 @@ export default {
         async joinEuro(){
             this.loading = true;
             let values = [
-                {'action' : "joinPresoCup"},
+                {'action' : "joinPPCup"},
                 {'userid' : this.currentUser.user_id},
                 {'cuptypeid' : 5}
             ]
@@ -31,7 +31,7 @@ export default {
         async checkCanJoinEuro(){
             if(!this.currentUser)return;
             let values = [
-                {'action' : "getHomePresoCups"},
+                {'action' : "getHomePPCups"},
                 {'userid' : this.currentUser.user_id},
             ]
             let resp = await this.$api.call(values);

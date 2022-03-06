@@ -28,7 +28,7 @@ Vue.mixin({
             ]
             let response = await this.$api.call(this.API_ROUTES.REGISTER, values, 'POST');
             if(response.status === "success"){
-                this.$notifier.showSuccess("creato");
+                this.$notifier.showSuccess(this.$t('user.created'));
                 this.$router.push(this.ROUTES.LOGIN);          
             }
         },

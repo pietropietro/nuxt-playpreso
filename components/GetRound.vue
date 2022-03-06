@@ -1,7 +1,7 @@
 <template>
     <v-row>
         <v-btn :loading="loading" color="primary" block text class="text-uppercase" @click="getNextRound">
-            <h1>{{$t('presocup.get_round') + ' ' + round}}</h1>
+            <h1>{{$t('ppCup.get_round') + ' ' + round}}</h1>
         </v-btn>
     </v-row>
 </template>
@@ -22,8 +22,8 @@ export default {
         async getNextRound(){
             this.loading = true;
             let values = [
-                {'action' : "nextPresoCupGroupRound"},
-                {'presoCupGroup_id': this.groupId},
+                {'action' : "nextPPCupGroupRound"},
+                {'ppCupGroup_id': this.groupId},
                 {'userid': this.currentUser.user_id},
             ]
             let resp = await this.$api.call(values);

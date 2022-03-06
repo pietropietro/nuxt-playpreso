@@ -65,7 +65,7 @@ export default {
     methods:{
         async getPCGroup(){
             let values = [
-                {'action' : "getPresoCupGroup"},
+                {'action' : "getPPCupGroup"},
                 {'PCGroup_id': this.groupId},
             ]
             this.PCGroup = await this.$api.call(values);
