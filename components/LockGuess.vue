@@ -21,7 +21,7 @@
             <h1 v-if="!locked && guess.verified">
                 MISSED
             </h1>
-            <h1 v-else-if="guess.verified" class="ocrastd">+{{guess.preso_score}}</h1>
+            <h1 v-else-if="guess.verified" class="ocrastd">+{{guess.score}}</h1>
             <v-btn v-else-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
             <h1 v-else>LOCKED</h1>
         </v-row>

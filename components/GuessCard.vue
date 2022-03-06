@@ -14,7 +14,7 @@
                             <h4>{{guess.guess_home + '-' + guess.guess_away}}</h4>
                         </v-col>
                         <v-col cols="6">
-                            <h2>{{guess.preso_score !== 0 ? '+' : ''}}{{guess.preso_score}}</h2>
+                            <h2>{{guess.score !== 0 ? '+' : ''}}{{guess.score}}</h2>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -22,7 +22,7 @@
                     <h4 class="text-uppercase text-overline">{{$t('app.missed')}}</h4>
                 </v-col>
                 <v-col cols="12" v-if="guess.PRESO">
-                    <h2>+{{guess.preso_score}}</h2>
+                    <h2>+{{guess.score}}</h2>
                 </v-col>
             </template>
             <v-col v-else cols="12">

@@ -22,7 +22,7 @@ export default {
     mounted(){
         this.elaboratedData = this.guesses.map((g,i) => {
             return {
-                score: g.preso_score,
+                score: g.score,
                 match: g.match.hometeam_name + "-" + g.match.awayteam_name,
                 opacity: i === 0 ? 1 : 0
             }

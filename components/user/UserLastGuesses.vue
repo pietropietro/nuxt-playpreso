@@ -33,7 +33,7 @@
                     </v-row>
                 </v-col>
                 <v-col cols="2" class="text-center mr-1 mr-md-0">
-                    <b>+{{guess.preso_score}}</b>
+                    <b>+{{guess.score}}</b>
                 </v-col>
             </template>
             <template v-else-if="guess.PRESO">

@@ -62,7 +62,7 @@ export default {
             let tot = 0;
             let count = 0;
             this.guessesVerified.map(g => {
-                tot += g.preso_score;
+                tot += g.score;
                 count ++;
             })
             return tot / count;
