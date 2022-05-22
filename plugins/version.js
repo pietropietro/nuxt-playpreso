@@ -5,4 +5,4 @@ const V = '0.3c'
 
 Vue.mixin({ data() { return { VERSION: V } } });
 
-console.log("%PLAYPRESO v" + V, "color: #e30613");
+console.log('%cPLAYPRESO v' + V ,  'color: #00f');

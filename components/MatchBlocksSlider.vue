@@ -32,6 +32,7 @@
 </template>
 <script>
 export default {
+    //TODO rename to new name
     name: "MatchBlocksSlider",
     props:{
         matchBlocks: {type: Array, required: true},
@@ -45,7 +46,7 @@ export default {
         }
     },
     methods:{
-        //porcata, username deve essere ritornato in oggetto guess
+        //TODO porcata, username deve essere ritornato in oggetto guess
         usernameForId(userId){
             let returnVal
             this.users.map(u => {

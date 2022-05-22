@@ -6,7 +6,9 @@ export default {
         users: "Users",
         rounds: "Rounds",
         round: "Round",
-        missed: "missed"
+        missed: "missed",
+        ppCups: "PRESO CUPS",
+        ppLeagues: "PRESO LEAGUES"
     },
     user:{
         created: "User created!\nYou can now log-in and start playing."
