@@ -24,7 +24,7 @@ export default {
     methods:{
         async getAvailablePPLeagueTypes(){
             //TODO SOLVE CORS problem (again :( )
-            let response = await this.$api.get(this.API_ROUTES.AVAILABLE_PP_LEAGUE_TYPES);
+            let response = await this.$api.call(this.API_ROUTES.AVAILABLE_PP_LEAGUE_TYPES);
             console.log("response: " + response);
             if(response && response.status === "success"){
                 this.ppLeagueTypes = response.message;
