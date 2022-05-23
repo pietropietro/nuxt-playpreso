@@ -3,9 +3,8 @@
         <v-simple-table :loading="loading">
             <tbody>
                 <tr v-if="!loading">
-                    <td v-for="(ppLT,index) in ppLeagueTypes" :key="index">
-                        {{ppLT}}
-                        <!-- <pp-league-type-card :ppLT="ppLT"/> -->
+                    <td class="py-4" v-for="(ppLT,index) in ppLeagueTypes" :key="index">
+                        <p-p-league-type-card :ppLT="ppLT"/>
                     </td>
                 </tr>
             </tbody>
@@ -14,7 +13,7 @@
 </template>
 <script>
 export default {
-    name: "PpLeagueTypeAvailableList",
+    name: "PPLeagueTypeAvailableList",
     data(){
         return {
             loading: true,
@@ -23,7 +22,6 @@ export default {
     },
     methods:{
         async getAvailablePPLeagueTypes(){
-            //TODO SOLVE CORS problem (again :( )
             let response = await this.$api.call(this.API_ROUTES.AVAILABLE_PP_LEAGUE_TYPES);
             console.log("response: " + response);
             if(response && response.status === "success"){

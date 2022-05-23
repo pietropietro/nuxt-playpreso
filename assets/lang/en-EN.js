@@ -13,6 +13,9 @@ export default {
     user:{
         created: "User created!\nYou can now log-in and start playing."
     },
+    ppLeague: {
+        available: "AVAILABLE P-LEAGUES:"
+    },
     ppCup: {
         group: "group",
         get_round: "get round"

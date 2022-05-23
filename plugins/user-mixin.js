@@ -3,7 +3,7 @@ import Vue from 'vue'
 Vue.mixin({
     computed:{
         currentUser(){
-            return  this.$store.state.user.currentUser;
+            return  this.$store.state.user.currentUser ?? null;;
         }
     },
     methods:{

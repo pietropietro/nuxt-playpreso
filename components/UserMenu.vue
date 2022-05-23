@@ -20,6 +20,7 @@
             </template>
             <template v-else>
                 <v-list-item>
+                    <!-- TODO USE CONSTANT VAL instead of /login -->
                     <nuxt-link class="no-decoration" to="/login">
                         <b class="text-uppercase">{{$t('app.login')}}</b>
                     </nuxt-link>
