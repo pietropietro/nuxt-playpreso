@@ -13,7 +13,8 @@ Vue.mixin({
             API_ROUTES: {
                 LOGIN: '/login',
                 REGISTER: '/users',
-                AVAILABLE_PP_LEAGUE_TYPES: '/ppLeagueTypes'
+                AVAILABLE_PPLEAGUE_TYPES: '/ppLeagueTypes',
+                ACTIVE_PPLEAGUES: '/ppLeagues'
             }
         }
     }
