@@ -20,12 +20,12 @@
                 </v-col>
                 <v-col cols="4">
 
-                    <!-- TODO create component -->
+                    <!-- TODO reuse component -->
                     <v-row justify="center">
-                        <h1>?</h1>
+                        <h1>{{participation.ppLeague.round_count}}</h1>
                         <h4>{{participation.ppLeagueType.rounds}}</h4>
                     </v-row>
-                    <v-row justify="center" class="text-overline mt-0">rounds</v-row>
+                    <v-row justify="center" class="text-overline mt-0">round</v-row>
                     
                 </v-col>
             </v-row>
