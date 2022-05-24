@@ -14,7 +14,7 @@ Vue.mixin({
                 LOGIN: '/login',
                 REGISTER: '/users',
                 AVAILABLE_PPLEAGUE_TYPES: '/ppLeagueTypes',
-                ACTIVE_PPLEAGUES: '/ppLeagues'
+                ACTIVE_PPL_PARTICIPATIONS: '/activePPLeaguesParticipations'
             }
         }
     }
