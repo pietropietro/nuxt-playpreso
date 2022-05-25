@@ -5,7 +5,7 @@ Vue.mixin({
         isMissed(guess){
             return guess.verified && guess.guess_home === 222
         },
-        rgbaFromPPLT(ppLT, opacity){
+        ppRGBA(ppLT, opacity){
             if(!ppLT) return null;
             let colorString = 'rgba(' + ppLT.red + ', ' + ppLT.green + ', ' + ppLT.blue + ', ' + (opacity?? '1') + ')';
             return colorString;

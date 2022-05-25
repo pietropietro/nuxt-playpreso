@@ -4,7 +4,9 @@
         <div v-if="!loading" class="mt-5">
             <v-row>
             <v-col cols="12" md="6" v-for="(participation, index) in ppLParticipations" :key="index">
-                <p-p-league-participation-card :participation="participation" class="ma-1"/>
+                <nuxt-link :to="ROUTES.PPLEAGUE.DETAIL + participation.ppLeague_id">
+                    <p-p-league-participation-card :participation="participation" class="ma-1"/>
+                </nuxt-link>
             </v-col>
             </v-row>
         </div>
