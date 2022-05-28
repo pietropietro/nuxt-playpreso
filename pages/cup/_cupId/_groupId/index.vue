@@ -1,28 +1,6 @@
 <template>
     <loading-page v-if="!PCGroup"/>
-    <div v-else style="height:100%">
-        <v-container v-if="selectedPage === 1" class="mb-7">
-            <v-row justify="center">
-                <h1>{{PCGroup.groupTag}}</h1>
-            </v-row>
-            <cup-users-standings class="my-5" :users="PCGroup.users" :size="PCGroup.size" :level="PCGroup.level"/>
-            <get-round
-                v-if="canGetRound" :round="PCGroup.matchBlocks ? PCGroup.matchBlocks.length + 1 : 1"
-                :groupId="PCGroup.id" class="my-7" :refresh="refresh"
-            />
-            <match-blocks-slider class="pt-5" v-if="PCGroup.matchBlocks"
-                :matchBlocks="PCGroup.matchBlocks" :rounds="PCGroup.rounds" :users="PCGroup.users"
-            />
-        </v-container>
-        <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" class="mb-7"/>
-        <v-pagination
-            v-if="userInGroup"
-            v-model="selectedPage"
-            :length="!PCGroup.matchBlocks ? 1 : 1 + lastMatchBlock.matchBlockItems.length"
-            circle
-            class="pagination-fixed no-arrows"
-        />
-    </div>
+    <p-p-tournament-pagination v-else/>
 </template>
 <script>
 export default {
