@@ -10,16 +10,16 @@
                 class="pagination-arrows-only"
             />
         </v-row>
-        <div class="my-6" v-for="(mbi,i) in ppRounds[selectedRound - 1].matchBlockItems" :key="i">
+        <div class="my-6" v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" :key="i">
             <v-row no-gutters justify="space-between" align="center">
-                <h3>{{mbi.match.hometeam_name}} - {{mbi.match.awayteam_name}}</h3>
-                <match-date-score :match="mbi.match"/>
+                <h3>{{ppRM.match.hometeam_name}} - {{ppRM.match.awayteam_name}}</h3>
+                <match-date-score :match="ppRM.match"/>
             </v-row>
             <v-row>
                 <v-simple-table>
                     <tbody>
                         <tr>
-                            <td v-for="(guess,index) in mbi.guesses" :key="index">
+                            <td v-for="(guess,index) in ppRM.guesses" :key="index">
                                 <guess-card :guess="guess"/>
                             </td>
                         </tr>
@@ -42,19 +42,6 @@ export default {
             selectedRound: this.ppRounds.length
         }
     },
-    // methods:{
-    //     //TODO porcata, username deve essere ritornato in oggetto guess
-    //     usernameForId(userId){
-    //         let returnVal
-    //         this.users.map(u => {
-    //             if(u.user.user_id === userId){
-    //                 returnVal = u.user.username;
-    //             }
-    //             return;
-    //         });
-    //         return returnVal;
-    //     }
-    // }
 }
 </script>
 <style>

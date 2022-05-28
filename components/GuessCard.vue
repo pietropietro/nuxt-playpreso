@@ -1,11 +1,11 @@
 <template>
     <v-card :class="guess.PRESO ? 'white--text pa-4 my-2' : 'pa-4 my-2'" 
-        :style="currentUser && currentUser.username === username ? 'border-top-width:6px; border-top-color: yellow !important; border-style: solid' : ''"
+        :style="currentUser && currentUser.user_id === guess.user_id ? 'border-top-width:6px; border-top-color: yellow !important; border-style: solid' : ''"
         min-width="100px" height="90px" :color="colorGuess"
     >
         <v-row justify="center" class="text-center" no-gutters>
             <v-col cols="12">
-                <h3>{{username}}</h3>
+                <h3>{{guess.username}}</h3>
             </v-col>
             <template v-if="guess.verified">
                 <v-col cols="12" v-if="!guess.PRESO && !isMissed(guess)">
@@ -37,12 +37,10 @@ export default {
     name: "GuessCard",
     props:{
         guess: {type: Object, required: true},
-        //TODO remove
-        username: {type: String, required: true},
     },
     computed:{
         colorGuess(){
-            if(this.isMissed(guess)) return 'blue-grey lighten-4';
+            if(this.isMissed(this.guess)) return 'blue-grey lighten-4';
             if(this.preso) return 'primary'
             return '';
         }

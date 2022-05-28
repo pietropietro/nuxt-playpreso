@@ -1,6 +1,7 @@
 <template>
     <loading-page v-if="loading" />
-    <v-container fluid v-else>
+    <p-p-tournament-pagination :tournamentObj="ppLeague" :userInTournament="userInTournament" v-else />
+    <!-- <v-container fluid v-else>
         <v-row :style="'background-color: ' + ppRGBA(ppLeague.ppLeagueType)" class="white--text" justify="center">
             <h1>{{ppLeague.ppLeagueType.type}} {{ppLeague.ppLeagueType.level}}</h1>
         </v-row>
@@ -9,7 +10,7 @@
                <user-participation-standings :ups="ppLeague.userParticipations"/>
             </v-col>
         </v-row>
-    </v-container>
+    </v-container> -->
 </template>
 <script>
 export default {
@@ -18,6 +19,19 @@ export default {
             loading: true,
             ppLeagueId: this.$route.params.ppLeagueId,
             ppLeague: null,
+        }
+    },
+    computed:{
+        userInTournament: {
+            get(){
+                let result = false;
+                this.ppLeague.userParticipations.map(up=>{
+                    if(up.user_id === this.currentUser.id){
+                        result = true;
+                    }
+                });
+                return result;
+            }
         }
     },
     methods:{
