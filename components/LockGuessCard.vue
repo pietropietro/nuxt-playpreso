@@ -71,7 +71,7 @@ export default {
             }
         },
         colorRow(){
-            if(this.isMissed(guess)) return'blue-grey lighten-4 ocrastd';
+            if(this.isMissed(this.guess)) return'blue-grey lighten-4 ocrastd';
             if(this.guess.verified) return 'green accent-2 ocrastd';
             if(this.locked) return 'amber accent-2 ocrastd';
             return 'white--text primary ocrastd';
@@ -83,7 +83,7 @@ export default {
             return this.guess.guess_home !== 222;
         },
         computed1x2(){
-            if(this.isMissed(guess)) return "X";
+            if(this.isMissed(this.guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a > b) return 1;
@@ -91,14 +91,14 @@ export default {
             return "X";
         },
         computedUO(){
-            if(this.isMissed(guess)) return "X";
+            if(this.isMissed(this.guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a + b > 2) return "OVER";
             return "UNDER";
         },
         computedGGNG(){
-            if(this.isMissed(guess)) return "X";
+            if(this.isMissed(this.guess)) return "X";
             let a = this.guess.guess_home === 222 ? this.home : this.guess.guess_home;
             let b = this.guess.guess_away === 222 ? this.away : this.guess.guess_away;
             if(a >0 && b > 0 )return "GOL";

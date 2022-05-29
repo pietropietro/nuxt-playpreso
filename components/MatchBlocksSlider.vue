@@ -1,3 +1,4 @@
+// OUTDATED TO DELETE - replaced by pproundslider
 <template>
     <div>
         <v-row justify="space-between" class="mb-2 px-2">

@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container fluid v-if="guess">
         <div style="height: 25vh" class="mb-2">
             <v-container fluid fill-height>
                 <v-row justify="center">
@@ -31,8 +31,8 @@
 export default {
     name:"LockGuess",
     props:{
-        guess: {type: Object},
-        match: {type: Object},
+        guess: {type: Object, required: true},
+        match: {type: Object, required: true},
         refresh: {type: Function}
     },
     data(){

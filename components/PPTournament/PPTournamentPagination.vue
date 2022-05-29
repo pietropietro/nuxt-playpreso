@@ -14,7 +14,7 @@
                 :ppRounds="tournamentObj.ppRounds" :rounds="tournamentObj.ppLeagueType.rounds"
             />
         </v-container>
-        <!-- <lock-guess v-else :guess="selectedGuess" :match="selectedMBI.match" :refresh="refresh" class="mb-7"/> -->
+        <lock-guess v-else :guess="userGuess" :match="selectedPPRM.match" :refresh="refresh" class="mb-7"/>
         <v-pagination
             v-if="userInTournament"
             v-model="selectedPage"
@@ -34,17 +34,32 @@ export default {
     data(){
         return {
             selectedPage: 1,
+            currentRoundIndex: this.tournamentObj.round_count -1
         }
     },
     computed:{
         paginationLength: {
             get(){
-                if(!this.tournamentObj.ppRounds || this.tournamentObj.ppRounds.length === 0) return 1;
-                let roundIndex = this.tournamentObj.round_count -1;
-                let roundMatches = this.tournamentObj.ppRounds[roundIndex].ppRoundMatches;
-                if(!this.roundMatches || this.roundMatches.length === 0)return 1;
+                if(!this.tournamentObj.ppRounds || this.tournamentObj.ppRounds.length === 0)return 1;                
+                let roundMatches = this.tournamentObj.ppRounds[this.currentRoundIndex].ppRoundMatches;
+                if(!roundMatches || roundMatches.length === 0)return 1;
                 return 1 + roundMatches.length;
             }
+        },
+        selectedPPRM: {
+            get(){
+                return this.tournamentObj.ppRounds[this.currentRoundIndex].ppRoundMatches[this.selectedPage - 2];
+            }
+        },
+        userGuess:{
+            get(){
+                return this.selectedPPRM.guesses.filter(g => g.user_id === this.currentUser.id)[0];
+            }
+        }
+    },
+    methods: {
+        refresh(){
+            console.log("locked guess refresh method -- TODO");
         }
     }
 }
