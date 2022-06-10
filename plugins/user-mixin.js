@@ -32,11 +32,5 @@ Vue.mixin({
                 this.$router.push(this.ROUTES.LOGIN);          
             }
         },
-
-        logout(){
-            this.$store.commit('user/updateCurrentUser', { currentUser: null});
-            this.$store.commit('user/updateToken', { token: null});
-            this.$router.push('/');
-        }
     }
 })

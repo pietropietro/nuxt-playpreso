@@ -35,6 +35,7 @@ export default {
         { src: '@/plugins/version.js'},
         { src: '@/plugins/constants.js'},
         { src: '@/plugins/date-format.js', ssr:false},
+		{ src: '@/plugins/logout.js' },
         { src: '@/plugins/api.js', ssr: false },
 		{ src: '~/plugins/vuex-persist.js', ssr: false }
 	],

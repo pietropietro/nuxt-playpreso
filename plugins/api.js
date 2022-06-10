@@ -1,4 +1,4 @@
-export default ({app,store, $notifier, $config: { API_ENDPOINT }},inject) => {
+export default ({app,store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
        
         async call(route, values, method){
@@ -36,6 +36,9 @@ export default ({app,store, $notifier, $config: { API_ENDPOINT }},inject) => {
             try {
                 await fetch(API_ENDPOINT + route, initOptions
                 ).then(response => {
+                    if(response.status === 403){
+                        $logout.logout();
+                    }
                     return response.json()
                 }).then((data) => {
                     if(data && data.status && data.status == "error"){
