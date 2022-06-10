@@ -13,7 +13,7 @@
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item class="hovered pointer"
-                    @click="logout()"
+                    @click="$logout.logout()"
                 >
                     <v-list-item-title><b>{{$t('app.logout')}}</b></v-list-item-title>
                 </v-list-item>
