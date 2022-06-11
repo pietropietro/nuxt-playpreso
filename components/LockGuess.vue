@@ -26,6 +26,7 @@
             <h1 v-else>LOCKED</h1>
         </v-row>
     </v-container>
+    <error-wall v-else/>
 </template>
 <script>
 export default {

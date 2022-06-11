@@ -20,5 +20,8 @@ export default {
     ppCup: {
         group: "group",
         get_round: "get round"
+    },
+    error: {
+        generic: "Ooops.. something went wrong. \n again."
     }
 }
