@@ -72,12 +72,12 @@ export default {
         },
         colorRow(){
             if(this.isMissed(this.guess)) return'blue-grey lighten-4 ocrastd';
-            if(this.guess.verified) return 'green accent-2 ocrastd';
+            if(this.guess.verified_at) return 'green accent-2 ocrastd';
             if(this.locked) return 'amber accent-2 ocrastd';
             return 'white--text primary ocrastd';
         },
         blocked(){
-            return this.locked || this.guess.verified;
+            return this.locked || this.guess.verified_at;
         },
         locked(){
             return this.guess.guess_home !== 222;

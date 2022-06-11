@@ -18,10 +18,10 @@
         </div>
         <lock-guess-card :guess="guess" style="height:40vh" :home="home" :away="away" :setHome="(val)=>home = val" :setAway="(val)=>away = val"/>
         <v-row justify="center" class="my-10" style="height:10vh" align="center">
-            <h1 v-if="!locked && guess.verified">
+            <h1 v-if="!locked && guess.verified_at">
                 MISSED
             </h1>
-            <h1 v-else-if="guess.verified" class="ocrastd">+{{guess.score}}</h1>
+            <h1 v-else-if="guess.verified_at" class="ocrastd">+{{guess.score}}</h1>
             <v-btn v-else-if="!locked" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
             <h1 v-else>LOCKED</h1>
         </v-row>

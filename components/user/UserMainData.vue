@@ -53,7 +53,7 @@ export default {
         }
     },
     mounted(){
-        this.guessesVerified = this.guesses.filter(g => g.verified);
+        this.guessesVerified = this.guesses.filter(g => g.verified_at);
         this.presoCount = this.guesses.filter(g => g.PRESO).length;
         this.missedCount = this.guesses.filter(g => this.isMissed(g)).length;
     },

@@ -3,11 +3,12 @@
         :style="currentUser && currentUser.user_id === guess.user_id ? 'border-top-width:6px; border-top-color: yellow !important; border-style: solid' : ''"
         min-width="100px" height="90px" :color="colorGuess"
     >
+    {{guess.preso}}
         <v-row justify="center" class="text-center" no-gutters>
             <v-col cols="12">
                 <h3>{{guess.username}}</h3>
             </v-col>
-            <template v-if="guess.verified">
+            <template v-if="guess.verified_at">
                 <v-col cols="12" v-if="!guess.PRESO && !isMissed(guess)">
                     <v-row no-gutters align="center" justify="center">
                         <v-col cols="6" >
@@ -41,7 +42,7 @@ export default {
     computed:{
         colorGuess(){
             if(this.isMissed(this.guess)) return 'blue-grey lighten-4';
-            if(this.preso) return 'primary'
+            if(this.guess.PRESO) return 'primary'
             return '';
         }
     },
