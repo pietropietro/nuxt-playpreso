@@ -15,7 +15,6 @@ Vue.mixin({
             let response = await this.$api.call(this.API_ROUTES.LOGIN, values, 'POST');
             if(response && response.status === "success"){
                 this.$store.commit('user/updateCurrentUser', { currentUser: response.message.user});
-                this.$store.commit('user/updateToken', { token: response.message.authorization});
                 this.$router.push(this.ROUTES.HOME);          
             }
         },

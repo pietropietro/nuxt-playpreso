@@ -1,4 +1,4 @@
-export default ({app,store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
+export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
        
         async call(route, values, method){
@@ -14,7 +14,6 @@ export default ({app,store, $notifier, $logout, $config: { API_ENDPOINT }},injec
                     formdata.append(key, item[key]);
                 });
             }
-
             let includeAuth = store.state.user && store.state.user.token ? true : false;
             let headers = includeAuth ? new Headers({
                 'Content-Type': 'application/json',
@@ -39,6 +38,11 @@ export default ({app,store, $notifier, $logout, $config: { API_ENDPOINT }},injec
                     if(response.status === 403){
                         $logout.logout();
                     }
+                    
+                    if(response.headers.has('Authorization')){
+                        store.commit('user/updateToken', { token: response.headers.get('Authorization')});    
+                    }
+
                     return response.json()
                 }).then((data) => {
                     if(data && data.status && data.status == "error"){
