@@ -6,7 +6,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             let formdata;
             const noBody = ["GET" , "DELETE"];
 
-            let includeBody = !!method && !noBody.includes(method) ? true : false;
+            let includeBody = !!values && !!method && !noBody.includes(method) ? true : false;
             if(includeBody){
                 formdata = new FormData();
                 values.map((item) => {

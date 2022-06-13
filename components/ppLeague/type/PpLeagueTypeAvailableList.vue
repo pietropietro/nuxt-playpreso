@@ -6,7 +6,7 @@
                 <tbody>
                     <tr v-if="!loading">
                         <td class="py-4" v-for="(ppLT,index) in ppLeagueTypes" :key="index">
-                            <p-p-league-type-card :ppLT="ppLT"/>
+                            <p-p-league-type-card :ppLT="ppLT" :join="join"/>
                         </td>
                     </tr>
                 </tbody>
@@ -24,9 +24,14 @@ export default {
         }
     },
     methods:{
-        async getAvailablePPLeagueTypes(){
-            let response = await this.$api.call(this.API_ROUTES.AVAILABLE_PPLEAGUE_TYPES);
-            console.log("response: " + response);
+        async join(id){
+            this.loading = true;
+            await this.$api.call(this.API_ROUTES.PPLEAGUE_TYPE.JOIN + id, null, "POST");
+            this.loading = false;
+
+        },
+        async getAvailable(){
+            let response = await this.$api.call(this.API_ROUTES.PPLEAGUE_TYPE.AVAILABLE);
             if(response && response.status === "success"){
                 this.ppLeagueTypes = response.message;
             }
@@ -34,7 +39,7 @@ export default {
         },
     },
     async mounted(){
-        await this.getAvailablePPLeagueTypes();
+        await this.getAvailable();
     }
 }
 </script>

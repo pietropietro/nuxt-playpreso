@@ -1,17 +1,26 @@
 <template>
-    <v-card class="rounded-xl white--text " :color="ppRGBA(ppLT)">
-        <v-card-title class="text-overline">{{ppLT.type}}</v-card-title>
-        <v-row justify="center" class="pb-3">
-            <div class="text-h6">{{ppLT.level}}</div>
+    <v-card @click="join(ppLT.id)" class="rounded-xl white--text " :color="ppRGBA(ppLT)">
+        <v-row justify="end" align="center">
+            <v-col cols="6" class="mt-2">
+                <p-p-numeric-info small label="cost" :value="ppLT.cost" />
+            </v-col>
         </v-row>
-        <v-row justify="center" class="pb-3">
-            <div class="subtitle-2">{{ppLT.cost}}</div>
-        </v-row>
+        <v-card-title >
+            <h3>{{ppLT.type}} {{ppLT.level}}</h3>
+        </v-card-title>
     </v-card>
 </template>
 <script>
 export default {
     name: "PPLeagueTypeCard",
-    props: {ppLT: {type: Object, required: true}},
+    props: {
+        ppLT: {type: Object, required: true},
+        join: {type: Function, required: true}
+    },
+    data(){
+        return {
+            loading: true
+        }
+    },
 }
 </script>

@@ -10,13 +10,19 @@ Vue.mixin({
                 PPCUPS: '/presoCups',
                 PPLEAGUES: '/presoLeagues',
                 PPLEAGUE:{
+                    // TYPE: {
+                    //     DETAIL: '/p-league-type/'
+                    // },
                     DETAIL: '/p-league/'
                 },
             },
             API_ROUTES: {
                 LOGIN: '/login',
                 REGISTER: '/users',
-                AVAILABLE_PPLEAGUE_TYPES: '/ppLeagueTypes',
+                PPLEAGUE_TYPE: {
+                   AVAILABLE: '/ppLeagueType/available',
+                   JOIN: '/ppLeagueType/join/'
+                },
                 ACTIVE_PPL_PARTICIPATIONS: '/activePPLeaguesParticipations',
                 PPLEAGUE: '/ppLeague/'
             }

@@ -8,7 +8,8 @@ export default {
         round: "Round",
         missed: "missed",
         ppCups: "PRESO CUPS",
-        ppLeagues: "PRESO LEAGUES"
+        ppLeagues: "PRESO LEAGUES",
+        position: "position"
     },
     user:{
         created: "User created!\nYou can now log-in and start playing."

@@ -9,24 +9,10 @@
         <template v-else>
             <v-row class="px-2 black--text" align="center" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.5')">
                 <v-col cols="4">
-
-                    <!-- TODO create component -->
-                    <v-row justify="center">
-                        <h1>{{participation.position}}</h1>
-                        <h4>{{participation.ppLeague.users_count}}</h4>
-                    </v-row>
-                    <v-row justify="center" class="text-overline mt-0">position</v-row>
-
+                    <p-p-numeric-info :label="$t('app.position')" :value="participation.position" :value2="participation.ppLeague.user_count"/>
                 </v-col>
                 <v-col cols="4">
-
-                    <!-- TODO reuse component -->
-                    <v-row justify="center">
-                        <h1>{{participation.ppLeague.round_count}}</h1>
-                        <h4>{{participation.ppLeagueType.rounds}}</h4>
-                    </v-row>
-                    <v-row justify="center" class="text-overline mt-0">round</v-row>
-                    
+                    <p-p-numeric-info label="round" :value="participation.ppLeague.round_count" :value2="participation.ppLeagueType.rounds"/>
                 </v-col>
                 <v-col cols="4">
                      <v-row justify="center">
