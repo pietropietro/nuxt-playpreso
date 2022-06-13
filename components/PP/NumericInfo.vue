@@ -13,8 +13,8 @@ export default {
     name: "NumericInfo",
     props: {
         label: {type: String, required: true},
-        value: {type: String, required: true},
-        value2: {type: String},      
+        value: {type: Number, required: true},
+        value2: {type: Number},      
         small: {type: Boolean}  
     }
 }

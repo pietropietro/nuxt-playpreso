@@ -4,6 +4,9 @@ Vue.mixin({
     computed:{
         currentUser(){
             return  this.$store.state.user.currentUser ?? null;;
+        },
+        currentPoints(){
+            return  this.$store.state.user.points ?? null;;
         }
     },
     methods:{

@@ -1,6 +1,7 @@
 export const state = () => ({
 	currentUser: null,
-	token: null
+	token: null,
+	points: null
 })
 
 export const mutations = {
@@ -10,5 +11,9 @@ export const mutations = {
 
     updateToken (state, payload) {
 		state.token = payload.token
+	},
+
+	updatePoints (state, payload) {
+		state.points = payload.points
 	},
 }

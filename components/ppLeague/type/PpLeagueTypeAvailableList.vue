@@ -4,9 +4,9 @@
         <v-row>
             <v-simple-table :loading="loading">
                 <tbody>
-                    <tr v-if="!loading">
+                    <tr v-if="!loading" align="start" >
                         <td class="py-4" v-for="(ppLT,index) in ppLeagueTypes" :key="index">
-                            <p-p-league-type-card :ppLT="ppLT" :join="join"/>
+                            <p-p-league-type-card :ppLT="ppLT" :join="join" style="height=100%; width:150px; height: 120px;" />
                         </td>
                     </tr>
                 </tbody>

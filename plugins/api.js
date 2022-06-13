@@ -1,3 +1,4 @@
+import jwt_decode from "jwt-decode";
 export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
        
@@ -40,7 +41,9 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                     }
                     
                     if(response.headers.has('Authorization')){
-                        store.commit('user/updateToken', { token: response.headers.get('Authorization')});    
+                        store.commit('user/updateToken', { token: response.headers.get('Authorization')});  
+                        let decoded = jwt_decode(response.headers.get('Authorization'));
+                        store.commit('user/updatePoints', { points: decoded.points});  
                     }
 
                     return response.json()
