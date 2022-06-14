@@ -12,6 +12,9 @@
                         </nuxt-link>
                     </v-list-item-title>
                 </v-list-item>
+                <v-list-item>
+                    <h4>points: {{currentPoints}}</h4>
+                </v-list-item>
                 <v-list-item class="hovered pointer"
                     @click="$logout.logout()"
                 >

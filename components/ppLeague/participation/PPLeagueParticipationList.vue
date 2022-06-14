@@ -24,7 +24,6 @@ export default {
     methods: {
         async getUserPPLeagues(){
             let response = await this.$api.call(this.API_ROUTES.ACTIVE_PPL_PARTICIPATIONS);
-            console.log("response: " + response);
             if(response && response.status === "success"){
                 this.ppLParticipations = response.message;
             }

@@ -1,7 +1,7 @@
 <template>
     <v-card flat class="transparent">
         <v-row class="white--text pa-2" :style="'background-color: ' + ppRGBA(participation.ppLeagueType)" v-if="participation">
-            <h2>{{participation.ppLeagueType.type}} {{participation.ppLeagueType.level}}</h2>
+            <h2>{{ppLeagueTypeTitle(participation.ppLeagueType)}}</h2>
         </v-row>
         <v-row v-if="!participation.ppLeague.started_at" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.6')" justify="center" align="center" >
             <v-col cols="4">

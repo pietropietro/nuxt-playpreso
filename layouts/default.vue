@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <p-p-header />    
+        <!-- <p-p-header />     -->
         <snackbar />
         <v-main>
             <nuxt />

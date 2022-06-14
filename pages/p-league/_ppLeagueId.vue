@@ -1,16 +1,6 @@
 <template>
     <loading-page v-if="loading" />
     <p-p-tournament-pagination :tournamentObj="ppLeague" :userInTournament="userInTournament" v-else />
-    <!-- <v-container fluid v-else>
-        <v-row :style="'background-color: ' + ppRGBA(ppLeague.ppLeagueType)" class="white--text" justify="center">
-            <h1>{{ppLeague.ppLeagueType.type}} {{ppLeague.ppLeagueType.level}}</h1>
-        </v-row>
-        <v-row>
-            <v-col cols="12" md="6">
-               <user-participation-standings :ups="ppLeague.userParticipations"/>
-            </v-col>
-        </v-row>
-    </v-container> -->
 </template>
 <script>
 export default {
@@ -37,15 +27,16 @@ export default {
     methods:{
         async getPPLeague(){
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE + this.ppLeagueId, null, 'GET');
-            console.log("response: " + response);
             if(response && response.status === "success"){
                 this.ppLeague = response.message;
+                this.$store.commit('navigation/setActive', { title: this.ppLeagueTypeTitle(this.ppLeague.ppLeagueType), color: this.ppRGBA(this.ppLeague.ppLeagueType)});
             }
             this.loading = false;
         },
     },
-    mounted(){
-        setTimeout(()=>this.getPPLeague(),200);
+    async mounted(){
+        //await to get jwt
+        setTimeout(async () =>  await this.getPPLeague(), 100);
     }
 }
 </script>

@@ -9,6 +9,9 @@ Vue.mixin({
             if(!ppLT) return null;
             let colorString = 'rgba(' + ppLT.red + ', ' + ppLT.green + ', ' + ppLT.blue + ', ' + (opacity?? '1') + ')';
             return colorString;
+        },
+        ppLeagueTypeTitle(ppLeagueType){
+            return ppLeagueType.type + " " + ppLeagueType.level;
         }
     }
 })
