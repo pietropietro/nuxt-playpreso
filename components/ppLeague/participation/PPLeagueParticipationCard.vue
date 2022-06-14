@@ -1,13 +1,16 @@
 <template>
-    <div>
-        <v-row class="white--text pa-1" :style="'background-color: ' + ppRGBA(participation.ppLeagueType)" v-if="participation">
+    <v-card flat class="transparent">
+        <v-row class="white--text pa-2" :style="'background-color: ' + ppRGBA(participation.ppLeagueType)" v-if="participation">
             <h2>{{participation.ppLeagueType.type}} {{participation.ppLeagueType.level}}</h2>
         </v-row>
-        <v-row :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.5')" class="black--text" justify="center" v-if="!participation.ppLeague.started_at">
-            <h2>NOT STARTED</h2>
+        <v-row v-if="!participation.ppLeague.started_at" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.6')" justify="center" align="center" >
+            <v-col cols="4">
+                <p-p-numeric-info :label="$t('app.users')" :value="participation.ppLeague.user_count"/>
+            </v-col>
+            <v-col><h3 class="ocrastd">NOT STARTED</h3></v-col>
         </v-row>
         <template v-else>
-            <v-row class="px-2 black--text" align="center" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.5')">
+            <v-row class="px-2 black--text" align="center" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.6')">
                 <v-col cols="4">
                     <p-p-numeric-info :label="$t('app.position')" :value="participation.position" :value2="participation.ppLeague.user_count"/>
                 </v-col>
@@ -16,12 +19,12 @@
                 </v-col>
                 <v-col cols="4">
                      <v-row justify="center">
-                        <h3>{{participation.locked ? 'LOCKED' : 'UNLOCKED'}}</h3>
+                        <h3 class="ocrastd">{{participation.locked ? 'LOCKED' : 'UNLOCKED'}}</h3>
                     </v-row>
                 </v-col>
             </v-row>
         </template>
-    </div>
+    </v-card>
 </template>
 <script>
 export default {
@@ -31,3 +34,8 @@ export default {
     },
 }
 </script>
+<style>
+    .transparent{
+        background-color: none !important;
+    }
+</style>
