@@ -4,6 +4,7 @@
 </template>
 <script>
 export default {
+    layout: "authenticated",
     data(){
         return {
             loading: true,
