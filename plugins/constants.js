@@ -10,21 +10,26 @@ Vue.mixin({
                 PPCUPS: '/presoCups',
                 PPLEAGUES: '/presoLeagues',
                 PPLEAGUE:{
-                    // TYPE: {
-                    //     DETAIL: '/p-league-type/'
-                    // },
+                    TYPE: {
+                        DETAIL: '/p-league/type/'
+                    },
                     DETAIL: '/p-league/'
                 },
             },
             API_ROUTES: {
                 LOGIN: '/login',
-                REGISTER: '/users',
-                PPLEAGUE_TYPE: {
-                   AVAILABLE: '/ppLeagueType/available',
-                   JOIN: '/ppLeagueType/join/'
+                REGISTER: '/user',
+                USER_PARTICIPATION: {
+                    PPLEAGUES:  '/userParticipation/ppLeagues'
                 },
-                ACTIVE_PPL_PARTICIPATIONS: '/activePPLeaguesParticipations',
-                PPLEAGUE: '/ppLeague/'
+                PPLEAGUE: {
+                    GET: '/ppLeague/',
+                    TYPE: {
+                        GET: '/ppLeagueType/',
+                        AVAILABLE: '/ppLeagueType/available',
+                        JOIN: '/ppLeagueType/join/'
+                    }
+                } 
             }
         }
     }

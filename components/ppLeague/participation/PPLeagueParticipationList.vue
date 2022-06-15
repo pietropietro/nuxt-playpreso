@@ -22,8 +22,8 @@ export default {
         }
     },
     methods: {
-        async getUserPPLeagues(){
-            let response = await this.$api.call(this.API_ROUTES.ACTIVE_PPL_PARTICIPATIONS);
+        async getParticipations(){
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES);
             if(response && response.status === "success"){
                 this.ppLParticipations = response.message;
             }
@@ -31,7 +31,7 @@ export default {
         },
     },
     async mounted(){
-        await this.getUserPPLeagues();
+        await this.getParticipations();
     }
 }
 </script>

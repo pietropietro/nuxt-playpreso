@@ -15,8 +15,8 @@ export default {
         created: "User created!\nYou can now log-in and start playing."
     },
     ppLeague: {
-        available: "AVAILABLE P-LEAGUES:",
-        yours: "YOUR P-LEAGUES:"
+        available: "AVAILABLE PP-LEAGUES:",
+        yours: "YOUR PP-LEAGUES:"
     },
     ppCup: {
         group: "group",

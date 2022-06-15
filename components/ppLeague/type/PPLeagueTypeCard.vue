@@ -1,5 +1,5 @@
 <template>
-    <v-card @click="join(ppLT.id)" class="rounded-xl white--text " :color="ppRGBA(ppLT)">
+    <v-card class="rounded-xl white--text " :color="ppRGBA(ppLT)">
         <v-row justify="end" align="center">
             <v-col cols="6" class="mt-2">
                 <p-p-numeric-info small label="cost" :value="ppLT.cost" />
@@ -15,7 +15,6 @@ export default {
     name: "PPLeagueTypeCard",
     props: {
         ppLT: {type: Object, required: true},
-        join: {type: Function, required: true}
     },
     data(){
         return {
