@@ -6,8 +6,8 @@
                 <tbody>
                     <tr v-if="!loading" align="start" >
                         <td class="py-4" v-for="(ppLT,index) in ppLeagueTypes" :key="index">
-                            <nuxt-link :to="ROUTES.PPLEAGUE.TYPE.DETAIL + ppLT.id">
-                                <p-p-league-type-card :ppLT="ppLT" :join="join" style="height=100%; width:150px; height: 120px;" />
+                            <nuxt-link class="no-decoration" :to="ROUTES.PPLEAGUE.TYPE.DETAIL + ppLT.id">
+                                <p-p-league-type-card :ppLT="ppLT" style="height=100%; width:150px; height: 120px;" />
                             </nuxt-link>
                         </td>
                     </tr>
@@ -26,12 +26,6 @@ export default {
         }
     },
     methods:{
-        async join(id){
-            this.loading = true;
-            await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.JOIN + id, null, "POST");
-            this.loading = false;
-
-        },
         async getAvailable(){
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.AVAILABLE);
             if(response && response.status === "success"){

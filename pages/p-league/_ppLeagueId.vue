@@ -1,6 +1,8 @@
 <template>
     <loading-page v-if="loading" />
-    <p-p-tournament-pagination :tournamentObj="ppLeague" :userInTournament="userInTournament" v-else />
+    <p-p-tournament-pagination v-else-if="ppLeague" :tournamentObj="ppLeague" :userInTournament="userInTournament"  />
+    <!-- TODO ERROR WALL -->
+    <error-wall v-else/>
 </template>
 <script>
 export default {

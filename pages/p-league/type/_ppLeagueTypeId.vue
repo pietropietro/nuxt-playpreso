@@ -1,9 +1,15 @@
 <template>
-    <loading-page v-if="loading" />
-    <div v-else>
-        {{ppLeagueType}}
-        JOIN
-    </div>
+    <loading-page v-if="loading " />
+    <v-container v-else>
+        <v-row justify="center" class="py-4">
+            <p-p-numeric-info label="cost" :value="ppLeagueType.cost" />
+        </v-row>
+        <v-row justify="center" >
+            <v-btn @click="join" block x-large outlined :color="$store.state.navigation.color" :loading="joinLoading">
+                <h1>JOIN</h1>
+            </v-btn>
+        </v-row>
+    </v-container>
 </template>
 <script>
 export default {
@@ -16,17 +22,28 @@ export default {
         }
     },
     methods:{
+         async join(id){
+            this.joinLoading = true;
+            let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.JOIN + this.ppLeagueTypeId, null, "POST");
+            if(response && response.status === "success"){
+                this.$router.push(this.ROUTES.PPLEAGUE.DETAIL + response.message);
+            }
+            this.joinLoading = false;
+        },
         async get(){
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.GET + this.ppLeagueTypeId, null, 'GET');
             if(response && response.status === "success"){
                 this.ppLeagueType = response.message;
-                this.$store.commit('navigation/setActive', { title: this.ppLeagueTypeTitle(this.ppLeagueType), color: this.ppRGBA(this.ppLeagueType)});
+                this.$store.commit('navigation/setActive', {
+                    title: this.ppLeagueTypeTitle(this.ppLeagueType),
+                    color: this.ppRGBA(this.ppLeagueType)
+                });
             }
             this.loading = false;
         },
     },
     async mounted(){
-        //await to get jwt
         setTimeout(async () =>  await this.get(), 100);
     }
 }
+</script>
