@@ -12,6 +12,10 @@ Vue.mixin({
         },
         ppLeagueTypeTitle(ppLeagueType){
             return ppLeagueType.type + " " + ppLeagueType.level;
+        },
+        getFlag(league){
+            try { return require('@/assets/img/flags/' + league.country.toLowerCase() + '.png') }
+            catch { return require('@/assets/img/flags/italy.png') }
         }
     }
 })

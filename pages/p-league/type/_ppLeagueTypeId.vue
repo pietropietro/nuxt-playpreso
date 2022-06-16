@@ -4,6 +4,7 @@
         <v-row justify="center" class="py-4">
             <p-p-numeric-info label="cost" :value="ppLeagueType.cost" />
         </v-row>
+        <league-scroll :leagues="ppLeagueType.leagues"/>
         <v-row justify="center" >
             <v-btn @click="join" block x-large outlined :color="$store.state.navigation.color" :loading="joinLoading">
                 <h1>JOIN</h1>
@@ -17,6 +18,7 @@ export default {
     data(){
         return {
             loading: true,
+            joinLoading: false,
             ppLeagueTypeId: this.$route.params.ppLeagueTypeId,
             ppLeagueType: null
         }

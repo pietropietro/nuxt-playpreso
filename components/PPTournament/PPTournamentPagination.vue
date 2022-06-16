@@ -4,6 +4,7 @@
             <!-- <v-row justify="center">
                 <h1>{{PCGroup.groupTag}}</h1>
             </v-row> -->
+            <league-scroll :leagues="tournamentObj.ppLeagueType.leagues"/>
             <user-participation-standings :ups="tournamentObj.userParticipations"/>
             <!-- <cup-users-standings class="my-5" :users="PCGroup.users" :size="PCGroup.size" :level="PCGroup.level"/> -->
             <!-- <get-round
