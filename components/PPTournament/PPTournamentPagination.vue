@@ -8,7 +8,7 @@
             :length="paginationLength"
             circle
             color="transparent"
-            class="pagination-fixed ocrastd"
+            class="pagination-fixed no-arrows ocrastd"
         />
     </div>
 </template>
@@ -61,7 +61,7 @@ export default {
         padding: 0px;
         margin: 0;
     }
-    .v-pagination__navigation{
+    .no-arrows .v-pagination__navigation{
         display: none !important;
     }
     .v-pagination__item{
