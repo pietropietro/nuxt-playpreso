@@ -1,27 +1,14 @@
 <template>
     <div  style="height:100%">
-        <v-container v-if="selectedPage === 1" class="mb-7">
-            <!-- <v-row justify="center">
-                <h1>{{PCGroup.groupTag}}</h1>
-            </v-row> -->
-            <league-scroll :leagues="tournamentObj.ppLeagueType.leagues"/>
-            <user-participation-standings :ups="tournamentObj.userParticipations"/>
-            <!-- <cup-users-standings class="my-5" :users="PCGroup.users" :size="PCGroup.size" :level="PCGroup.level"/> -->
-            <!-- <get-round
-                v-if="canGetRound" :round="PCGroup.matchBlocks ? PCGroup.matchBlocks.length + 1 : 1"
-                :groupId="PCGroup.id" class="my-7" :refresh="refresh"
-            /> -->
-            <p-p-round-slider class="pt-5" v-if="tournamentObj.ppRounds.length > 0"
-                :ppRounds="tournamentObj.ppRounds" :rounds="tournamentObj.ppLeagueType.rounds"
-            />
-        </v-container>
+        <p-p-league-detail v-if="selectedPage === 1" class="mb-7" :tournamentObj="tournamentObj"/>
         <lock-guess v-else :guess="userGuess" :match="selectedPPRM.match" :refresh="refresh" class="mb-7"/>
         <v-pagination
             v-if="userInTournament"
             v-model="selectedPage"
             :length="paginationLength"
             circle
-            class="pagination-fixed no-arrows"
+            color="transparent"
+            class="pagination-fixed ocrastd"
         />
     </div>
 </template>
@@ -31,6 +18,10 @@ export default {
     props: {
         tournamentObj: {type: Object, required: true},
         userInTournament: {type: Boolean}
+    },
+    mounted(){
+        let pag = document.querySelector('.pagination-fixed');
+        pag.style.backgroundColor = this.ppRGBA(this.tournamentObj.ppLeagueType);
     },
     data(){
         return {
@@ -65,3 +56,24 @@ export default {
     }
 }
 </script>
+<style>
+    .v-pagination{
+        padding: 0px;
+        margin: 0;
+    }
+    .v-pagination__navigation{
+        display: none !important;
+    }
+    .v-pagination__item{
+        box-shadow: none !important;
+        background-color: transparent !important;
+        color: white !important;
+    }
+    .v-pagination__item--active {
+        font-size: 26px;
+        font-weight: bold;
+        color: white !important;
+        flex-direction: column-reverse;
+    }
+   
+</style>

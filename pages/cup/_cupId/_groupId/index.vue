@@ -56,8 +56,3 @@ export default {
     }
 }
 </script>
-<style>
-    .no-arrows .v-pagination__navigation{
-        display: none !important;
-    }
-</style>
