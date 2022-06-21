@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row justify="space-between" class="mb-2 px-2">
-            <h1>{{$t('app.round') + ' ' + selectedRound + '/' + rounds}}</h1>
+            <h1>{{$t('app.round') + ' ' + selectedRound}}</h1>
             <v-pagination
                 v-if="ppRounds.length > 1"
                 v-model="selectedRound"

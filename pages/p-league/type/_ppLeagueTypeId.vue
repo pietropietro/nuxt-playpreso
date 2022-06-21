@@ -5,10 +5,8 @@
             <p-p-numeric-info label="cost" :value="ppLeagueType.cost" />
         </v-row>
         <league-scroll :leagues="ppLeagueType.leagues"/>
-        <v-row justify="center" >
-            <v-btn @click="join" block x-large outlined :color="$store.state.navigation.color" :loading="joinLoading">
-                <h1>JOIN</h1>
-            </v-btn>
+        <v-row justify="center" align="center"  @click="join" class="pagination-fixed white--text" :style="'height:80px; background-color:' + $store.state.navigation.color" :loading="joinLoading">
+            <h1 v-if="!joinLoading">JOIN</h1>
         </v-row>
     </v-container>
 </template>
@@ -25,6 +23,7 @@ export default {
     },
     methods:{
          async join(id){
+            if(this.joinLoading)return;
             this.joinLoading = true;
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.JOIN + this.ppLeagueTypeId, null, "POST");
             if(response && response.status === "success"){

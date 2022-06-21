@@ -1,20 +1,12 @@
 <template>
-    <div>
-        <v-row><h3 class="ocrastd">{{$t('ppLeague.available')}}</h3></v-row>
-        <v-row>
-            <v-simple-table :loading="loading">
-                <tbody>
-                    <tr v-if="!loading" align="start" >
-                        <td class="py-4" v-for="(ppLT,index) in ppLeagueTypes" :key="index">
-                            <nuxt-link class="no-decoration" :to="ROUTES.PPLEAGUE.TYPE.DETAIL + ppLT.id">
-                                <p-p-league-type-card :ppLT="ppLT" style="height=100%; width:150px; height: 120px;" />
-                            </nuxt-link>
-                        </td>
-                    </tr>
-                </tbody>
-            </v-simple-table>
-        </v-row>
-    </div>
+    <p-p-scroll v-if="ppLeagueTypes.length">
+        <p-p-numeric-info slot="info" label="available" :value="ppLeagueTypes.length"/>
+        <v-slide-item slot="slide-item" v-for="(ppLT,index) in ppLeagueTypes" :key="index" class="px-2">
+            <nuxt-link class="no-decoration" :to="ROUTES.PPLEAGUE.TYPE.DETAIL + ppLT.id">
+                <p-p-league-type-card :ppLT="ppLT" style="height=100%; width:150px; height: 60px;" />
+            </nuxt-link>
+        </v-slide-item>
+    </p-p-scroll>
 </template>
 <script>
 export default {
