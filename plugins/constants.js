@@ -7,6 +7,7 @@ Vue.mixin({
                 HOME: '/',
                 LOGIN: '/login',
                 REGISTER: '/register',
+                RECOVER: '/recover',
                 PPCUPS: '/presoCups',
                 PPLEAGUES: '/presoLeagues',
                 PPLEAGUE:{

@@ -1,39 +1,54 @@
 <template>	
-	<v-container v-if="!currentUser" class="pa-5 my-4">
-		<v-row>
-			<v-text-field
-				label="email"
-				v-model="emailAdd"
-			/>
-		</v-row>
-		<v-row>
-			<v-text-field
-				label="username"
-				v-model="username"
-				@keypress="blockSpace"
-				maxlength="10"
-			/>
-		</v-row>
-		<v-row>
-			<v-text-field
-				type="password"
-				label="password"
-				v-model="password"
-			/>
-		</v-row>
-		<v-row>
-			<v-text-field
-				type="password"
-				label="confirmPassword"
-				v-model="confirmPassword"
-			/>
-		</v-row>
-		<v-row justify="center" style="width:95%; position:fixed; bottom:20px;" class="mr-4">
-			<v-btn class="pa-2" block color="primary" @click="doRegister" :loading="loading" :disabled="!username || !password || password !== confirmPassword || !emailAdd">
-				<h1>REGISTER</h1>
-			</v-btn>
-		</v-row>
-	</v-container>
+	<guest-screen v-if="!currentUser">
+		<template slot="content">
+			<div class="ocrastd">
+				<v-row>
+					<v-col col="12">
+						<v-text-field
+							label="email"
+							v-model="emailAdd"
+						/>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col col="12">
+						<v-text-field
+							label="username"
+							v-model="username"
+							@keypress="blockSpace"
+							maxlength="10"
+						/>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col col="12">
+						<v-text-field
+							type="password"
+							label="password"
+							v-model="password"
+						/>
+					</v-col>
+				</v-row>
+			</div>
+			<v-row justify="center" class="py-5">
+				<v-btn color="primary" block @click="doRegister" :loading="loading" :disabled="!username || !password || !emailAdd">
+					<h1>REGISTER</h1>
+				</v-btn>
+			</v-row>
+			<v-row justify="space-between">
+				<nuxt-link to="/login" class="no-decoration">
+					<v-btn block text>
+						<h4 class="text-center primary--text">LOGIN</h4>
+					</v-btn>
+				</nuxt-link>
+				<nuxt-link :to="ROUTES.RECOVER" class="no-decoration">
+					<v-btn block text>
+						<h4 class="text-center primary--text">RECOVER</h4>
+					</v-btn>
+				</nuxt-link>
+			</v-row>
+		</template>
+	</guest-screen>
 	<go-home v-else/>
 </template>
 <script>
@@ -43,7 +58,6 @@ export default {
 			username: null,
 			password: null,
 			loading: false,
-            confirmPassword: null,
 			emailAdd: null
 		}
 	},
