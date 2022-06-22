@@ -10,23 +10,10 @@
                 class="pagination-arrows-only"
             />
         </v-row>
-        <div class="my-6" v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" :key="i">
-            <v-row no-gutters justify="space-between" align="center">
-                <h3>{{ppRM.match.hometeam_name}} - {{ppRM.match.awayteam_name}}</h3>
-                <match-date-score :match="ppRM.match"/>
-            </v-row>
-            <v-row>
-                <v-simple-table>
-                    <tbody>
-                        <tr>
-                            <td v-for="(guess,index) in ppRM.guesses" :key="index">
-                                <guess-card :guess="guess"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </v-simple-table>
-            </v-row>
-        </div>
+        <p-p-round-match
+            v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
+            :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
+        />
         
     </div>
 </template>
