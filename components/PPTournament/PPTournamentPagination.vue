@@ -21,7 +21,9 @@ export default {
     },
     mounted(){
         let pag = document.querySelector('.pagination-fixed');
-        pag.style.backgroundColor = this.ppRGBA(this.tournamentObj.ppLeagueType);
+        if(pag){
+            pag.style.backgroundColor = this.ppRGBA(this.tournamentObj.ppLeagueType);
+        }
     },
     data(){
         return {

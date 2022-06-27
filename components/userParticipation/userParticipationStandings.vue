@@ -8,7 +8,9 @@
                 <h2>{{up.position}}</h2>
             </v-col>
             <v-col>
-                <h2>{{up.username}}</h2>
+                <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username">
+                    <h2  class="black--text">{{up.username}}</h2>
+                </nuxt-link>
             </v-col>
             <v-col>
                 <v-row justify="end">
