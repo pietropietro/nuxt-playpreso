@@ -1,11 +1,12 @@
 <template>
     <loading-page v-if="loading" />
     <error-wall v-else-if="!loading && !user" />
-    <div v-else>
+    <v-container v-else>
+        <trophy-scroll v-if="user.trophies" :ups="user.trophies"/>
         <!-- <chart-guesses :guesses="user.guesses"/> -->
         <!-- <user-main-data :guesses="user.guesses" :username="user.username" />
         <user-last-guesses :guesses="user.guesses"/> -->
-    </div>
+    </v-container>
 </template>
 <script>
 export default {
