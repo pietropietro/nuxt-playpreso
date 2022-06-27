@@ -16,10 +16,16 @@ Vue.mixin({
                     },
                     DETAIL: '/p-league/'
                 },
+                USER: {
+                    DETAIL: '/user/'
+                }
             },
             API_ROUTES: {
                 LOGIN: '/login',
                 REGISTER: '/user',
+                USER:{
+                    GET: '/user/'
+                },
                 USER_PARTICIPATION: {
                     PPLEAGUES:  '/userParticipation/ppLeagues'
                 },

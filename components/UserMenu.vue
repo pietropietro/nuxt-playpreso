@@ -7,13 +7,13 @@
             <template v-if="currentUser">
                 <v-list-item>
                     <v-list-item-title>
-                        <nuxt-link class="no-decoration" :to="'/profile/' + currentUser.username">
+                        <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
                             <h1 class="primary--text">{{currentUser.username}}</h1>
                         </nuxt-link>
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                    <h4>points: {{currentPoints}}</h4>
+                    <h4>{{currentPoints}}</h4>
                 </v-list-item>
                 <v-list-item class="hovered pointer"
                     @click="$logout.logout()"
