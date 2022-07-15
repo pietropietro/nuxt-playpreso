@@ -1,46 +1,37 @@
 <template>
-    <div>
-        <v-row class="pa-4" justify="center" align="center" v-if="currentUser && canJoinEuro">
-            <v-btn color="primary" block text @click="joinEuro" :loading="loading"><h1>JOIN</h1></v-btn>
-        </v-row>
-        <cup-table v-if="!loading" :id="cupId"/>
-    </div>
+    <loading-page v-if="loading"/>
+    <v-container v-else-if="ppCup && ppCup.levels">
+        <cup-level-switch :length="Object.keys(ppCup.levels).length" :level="selectedLevel" :setLevel="(newLev)=>selectedLevel = newLev"/>
+        <cup-level-groups class="mb-10" :level="ppCup.levels[selectedLevel]"/>
+    </v-container>
+    <error-wall v-else />
 </template>
 <script>
 export default {
     layout: "authenticated",
     data(){
         return{
-            cupId: this.$route.params.cupId,
-            canJoinEuro: false,
-            loading: false,
+            ppCupId: this.$route.params.cupId,
+            loading: true,
+            selectedLevel: 1,
+            ppCup: null
         }
     },
     methods:{
-        async joinEuro(){
-            this.loading = true;
-            let values = [
-                {'action' : "joinPPCup"},
-                {'userid' : this.currentUser.user_id},
-                {'cuptypeid' : 5}
-            ]
-            let resp = await this.$api.call(values);
-            await this.checkCanJoinEuro();
+        async getPPCup(){
+            let response = await this.$api.call(this.API_ROUTES.PPCUP.GET + this.ppCupId, null, 'GET');
+            if(response && response.status === "success"){
+                this.ppCup = response.message;
+                this.$store.commit('navigation/setActive', { 
+                    title: this.ppCup.ppCupType.name, 
+                    color: this.ppRGBA(this.ppCup.ppCupType)
+                });
+            }
             this.loading = false;
         },
-
-        async checkCanJoinEuro(){
-            if(!this.currentUser)return;
-            let values = [
-                {'action' : "getHomePPCups"},
-                {'userid' : this.currentUser.user_id},
-            ]
-            let resp = await this.$api.call(values);
-            this.canJoinEuro = resp?.canJoinEuro;
-        }
     },
     async mounted(){
-        await this.checkCanJoinEuro();
+       await this.getPPCup();
     }
 }
 </script>

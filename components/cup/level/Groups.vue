@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-    name: "PPCupLevel",
+    name: "CupLevelGroups",
     props:{
         level: {type: Array, required: true},
         pointsToPassThird: {type: Number}
