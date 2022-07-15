@@ -1,19 +1,20 @@
 <template>
-    <loading-page v-if="!ppCup"/>
-    <v-container v-else>
+    <loading-page v-if="loading"/>
+    <v-container v-else-if="ppCup && ppCup.levels">
         <v-row justify="center" class="my-2">
-            <v-img contain style="max-height: 80px" :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"></v-img>
-        </v-row>
-        <template v-if="ppCup.levels && ppCup.levels.length > 0">
-            <cup-level class="mb-10" :level="ppCup.levels[selectedLevel - 1]" :pointsToPassThird="pointsToPassThird"/>
-            <v-pagination
-                v-model="selectedLevel"
-                :length="ppCup.levels.length"
-                circle
-                class="pagination-fixed no-arrows"
+            <v-img contain style="max-height: 80px" 
+                :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"
             />
-        </template>
+        </v-row>
+        <cup-level class="mb-10" :level="ppCup.levels[selectedLevel]"/>
+        <v-pagination
+            v-model="selectedLevel"
+            :length="Object.keys(ppCup.levels).length"
+            circle
+            class="pagination-fixed no-arrows"
+        />
     </v-container>
+    <error-wall v-else />
 </template>
 <script>
 export default {
@@ -23,26 +24,27 @@ export default {
     },
     data(){
         return{
-            ppCup: null,
+            loading: true,
             selectedLevel: 1,
-            pointsToPassThird: null
+            ppCup: null
         }
     },
+    methods:{
+        async getPPCup(){
+            let response = await this.$api.call(this.API_ROUTES.PPCUP.GET + this.id, null, 'GET');
+            if(response && response.status === "success"){
+                this.ppCup = response.message;
+                //TODO edit values
+                this.$store.commit('navigation/setActive', { 
+                    title: this.ppCup.ppCupType.name, 
+                    color: this.ppRGBA(this.ppCup.ppCupType)
+                });
+            }
+            this.loading = false;
+        },
+    },
     async mounted(){
-        let values = [
-            {'action' : "loadSpecificPC"},
-            {'ppCup_id': this.id},
-        ]
-        this.ppCup = await this.$api.call(values);
-
-        //show 3rd best users who pass
-        if(this.ppCup.started && this.ppCup.pcType.participants === 24){
-            let thirdPositionPoints = [];
-            this.ppCup.levels[0].groups.map(group =>{
-                thirdPositionPoints.push(group.users[2].plPoints);
-            })
-            this.pointsToPassThird = parseInt(thirdPositionPoints.sort((a,b) => b-a)[3]);
-        }
+       await this.getPPCup();
     }
 }
 </script>

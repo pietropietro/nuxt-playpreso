@@ -38,9 +38,9 @@ export default {
             return this.PCGroup.size === this.PCGroup.users.length;
         }
     },
-    async mounted(){
-        await this.getPCGroup();
-    },
+    // async mounted(){
+    //     await this.getPCGroup();
+    // },
     methods:{
         async getPCGroup(){
             let values = [

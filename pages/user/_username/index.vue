@@ -2,7 +2,7 @@
     <loading-page v-if="loading" />
     <error-wall v-else-if="!loading && !user" />
     <v-container v-else>
-        <trophy-scroll v-if="user.trophies" :ups="user.trophies"/>
+        <trophy-scroll v-if="user.trophies && user.trophies.ppLeagues" :ups="user.trophies.ppLeagues"/>
         <!-- <chart-guesses :guesses="user.guesses"/> -->
         <!-- <user-main-data :guesses="user.guesses" :username="user.username" />
         <user-last-guesses :guesses="user.guesses"/> -->

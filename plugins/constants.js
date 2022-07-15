@@ -36,7 +36,10 @@ Vue.mixin({
                         AVAILABLE: '/ppLeagueType/available',
                         JOIN: '/ppLeagueType/join/'
                     }
-                } 
+                },
+                PPCUP: {
+                    GET: '/ppCup/',
+                }
             }
         }
     }
