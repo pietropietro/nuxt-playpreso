@@ -8,7 +8,9 @@ Vue.mixin({
                 LOGIN: '/login',
                 REGISTER: '/register',
                 RECOVER: '/recover',
-                PPCUPS: '/presoCups',
+                PPCUP: {
+                    DETAIL: '/p-cup/'
+                },
                 PPLEAGUES: '/presoLeagues',
                 PPLEAGUE:{
                     TYPE: {
@@ -39,6 +41,9 @@ Vue.mixin({
                 },
                 PPCUP: {
                     GET: '/ppCup/',
+                    GROUP: {
+                        GET: '/ppCupGroup/'
+                    }
                 }
             }
         }

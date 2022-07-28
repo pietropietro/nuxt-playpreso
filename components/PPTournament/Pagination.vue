@@ -1,6 +1,6 @@
 <template>
-    <div  style="height:100%">
-        <p-p-league-detail v-if="selectedPage === 1" class="mb-7" :tournamentObj="tournamentObj"/>
+    <div style="height:100%">
+        <p-p-tournament-home v-if="selectedPage === 1" class="mb-7" :tournamentObj="tournamentObj"/>
         <lock-guess v-else :guess="userGuess" :match="selectedPPRM.match" :refresh="refresh" class="mb-7"/>
         <v-pagination
             v-if="userInTournament"
@@ -17,13 +17,12 @@ export default {
     name: "PPTournamentPagination",
     props: {
         tournamentObj: {type: Object, required: true},
-        userInTournament: {type: Boolean}
     },
     mounted(){
         let pag = document.querySelector('.pagination-fixed');
-        if(pag){
-            pag.style.backgroundColor = this.ppRGBA(this.tournamentObj.ppLeagueType);
-        }
+        if(pag) pag.style.backgroundColor = !!this.tournamentObj.ppLeagueType ? 
+            this.ppRGBA(this.tournamentObj.ppLeagueType) :
+            this.ppRGBA(this.tournamentObj.ppCupType);
     },
     data(){
         return {
@@ -31,7 +30,7 @@ export default {
             currentRoundIndex: this.tournamentObj.round_count -1
         }
     },
-    computed:{
+    computed: {
         paginationLength: {
             get(){
                 if(!this.tournamentObj.ppRounds || this.tournamentObj.ppRounds.length === 0)return 1;                
@@ -49,6 +48,9 @@ export default {
             get(){
                 return this.selectedPPRM.guesses.filter(g => g.user_id === this.currentUser.id)[0];
             }
+        },
+        userInTournament(){
+            return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
         }
     },
     methods: {

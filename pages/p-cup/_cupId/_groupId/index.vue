@@ -1,58 +1,36 @@
 <template>
-    <loading-page v-if="!PCGroup"/>
-    <p-p-tournament-pagination v-else/>
+    <loading-page v-if="loading"/>
+    <p-p-tournament-pagination v-else-if="ppCupGroup" :tournamentObj="ppCupGroup" />
+    <error-wall v-else />
 </template>
 <script>
 export default {
     layout: "authenticated",
     data(){
         return {
+            loading: false,
             groupId: this.$route.params.groupId,
-            PCGroup: null,
-            selectedPage: 1,
+            ppCupGroup: null,
         }
     },
-    computed:{
-        userInGroup(){
-            if(!this.currentUser || !this.PCGroup.users)return false;
-            return this.PCGroup.users.filter(u => {
-                return u.user.user_id === this.currentUser.user_id;
-            }).length > 0;
-        },
-        lastMatchBlock(){
-            return this.PCGroup.matchBlocks[this.PCGroup.matchBlocks.length - 1];
-        },
-        lastMatchBlockFinished(){
-            return this.lastMatchBlock.matchBlockItems.filter(mbi => mbi.match.score_away === 222).length === 0;
-        },
-        selectedMBI(){
-            return this.lastMatchBlock.matchBlockItems[this.selectedPage -2]
-        },
-        selectedGuess(){
-            return this.selectedMBI.guesses.filter(g => g.user_id === this.currentUser.user_id)[0];
-        },
-        canGetRound(){
-            return this.userInGroup && this.groupFull && (!this.PCGroup.matchBlocks || (this.lastMatchBlockFinished && this.PCGroup.rounds !== this.PCGroup.matchBlocks.length));
-        },
-        groupFull(){
-            return this.PCGroup.size === this.PCGroup.users.length;
-        }
+    async mounted(){
+        await this.getPPCupGroup();
     },
-    // async mounted(){
-    //     await this.getPCGroup();
-    // },
     methods:{
-        async getPCGroup(){
-            let values = [
-                {'action' : "getPPCupGroup"},
-                {'PCGroup_id': this.groupId},
-            ]
-            this.PCGroup = await this.$api.call(values);
+        async getPPCupGroup(){
+            this.loading = true;
+            let response = await this.$api.call(this.API_ROUTES.PPCUP.GROUP.GET + this.groupId, null, 'GET');
+            if(response && response.status === "success"){
+                this.ppCupGroup = response.message;
+
+                this.$store.commit('navigation/setActive', { 
+                    title: this.ppCupGroup.ppCupType.name, 
+                    color: this.ppRGBA(this.ppCupGroup.ppCupType)
+                });
+
+            }
+            this.loading = false;
         },
-        async refresh(){
-            this.PCGroup = null;
-            await this.getPCGroup();
-        }
     }
 }
 </script>

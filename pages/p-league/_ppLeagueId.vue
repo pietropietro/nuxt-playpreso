@@ -1,7 +1,6 @@
 <template>
     <loading-page v-if="loading" />
-    <p-p-tournament-pagination v-else-if="ppLeague" :tournamentObj="ppLeague" :userInTournament="userInTournament"  />
-    <!-- TODO ERROR WALL -->
+    <p-p-tournament-pagination v-else-if="ppLeague" :tournamentObj="ppLeague"  />
     <error-wall v-else/>
 </template>
 <script>
@@ -12,19 +11,6 @@ export default {
             loading: true,
             ppLeagueId: this.$route.params.ppLeagueId,
             ppLeague: null,
-        }
-    },
-    computed:{
-        userInTournament: {
-            get(){
-                let result = false;
-                this.ppLeague.userParticipations.map(up=>{
-                    if(up.user_id === this.currentUser.id){
-                        result = true;
-                    }
-                });
-                return result;
-            }
         }
     },
     methods:{

@@ -1,7 +1,10 @@
 <template>
     <loading-page v-if="loading"/>
     <v-container v-else-if="ppCup && ppCup.levels">
-        <cup-level-switch :length="Object.keys(ppCup.levels).length" :level="selectedLevel" :setLevel="(newLev)=>selectedLevel = newLev"/>
+        <cup-level-switch :length="Object.keys(ppCup.levels).length" 
+            :level="selectedLevel" 
+            :setLevel="(newLev)=>selectedLevel = newLev"
+        />
         <cup-level-groups class="mb-10" :level="ppCup.levels[selectedLevel]"/>
     </v-container>
     <error-wall v-else />
@@ -13,7 +16,7 @@ export default {
         return{
             ppCupId: this.$route.params.cupId,
             loading: true,
-            selectedLevel: 1,
+            selectedLevel:  parseInt(this.$route.query.level) ?? 1,
             ppCup: null
         }
     },
@@ -31,6 +34,7 @@ export default {
         },
     },
     async mounted(){
+    console.log(this.$route.params, "params");
        await this.getPPCup();
     }
 }
