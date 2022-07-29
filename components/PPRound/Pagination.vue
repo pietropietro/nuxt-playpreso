@@ -1,25 +1,22 @@
 <template>
     <div>
-        <v-row justify="space-between" class="mb-2 px-2">
-            <h1>{{$t('app.round') + ' ' + selectedRound}}</h1>
-            <v-pagination
-                v-if="ppRounds.length > 1"
-                v-model="selectedRound"
-                :length="ppRounds.length"
-                circle
-                class="pagination-arrows-only"
-            />
-        </v-row>
-        <p-p-round-match
+        <p-p-simple-pagination 
+            :length="ppRounds.length" 
+            :value="selectedRound" 
+            :setValue="(newVal) => selectedRound = newVal"
+        >
+            <v-row justify="center" align="end" slot="selected-page">
+                <p-p-numeric-info wide :label="$t('app.round')" :value="selectedRound" :value2="rounds"/>
+            </v-row>
+        </p-p-simple-pagination>
+        <p-p-round-display
             v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
         />
-        
     </div>
 </template>
 <script>
 export default {
-    name: "PPRoundSlider",
     props:{
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},

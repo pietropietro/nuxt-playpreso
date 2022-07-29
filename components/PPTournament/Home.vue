@@ -21,7 +21,7 @@
             :participants="tournamentObj.participants" 
             class="my-5"
         />
-        <p-p-round-slider 
+        <p-p-round-pagination
             v-if="tournamentObj.ppRounds.length > 0"
             :ppRounds="tournamentObj.ppRounds" 
             :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppLeagueType.rounds"

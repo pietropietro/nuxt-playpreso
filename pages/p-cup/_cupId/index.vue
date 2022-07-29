@@ -1,10 +1,17 @@
 <template>
     <loading-page v-if="loading"/>
     <v-container v-else-if="ppCup && ppCup.levels">
-        <cup-level-switch :length="Object.keys(ppCup.levels).length" 
-            :level="selectedLevel" 
-            :setLevel="(newLev)=>selectedLevel = newLev"
-        />
+        <p-p-simple-pagination 
+            :length="Object.keys(ppCup.levels).length" 
+            :value="selectedLevel" 
+            :setValue="(newLev)=>selectedLevel = newLev"
+        >
+            <v-img contain 
+                slot="selected-page"
+                style="max-height: 80px"
+                :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"
+            />
+        </p-p-simple-pagination>
         <cup-level-groups class="mb-10" :level="ppCup.levels[selectedLevel]"/>
     </v-container>
     <error-wall v-else />
