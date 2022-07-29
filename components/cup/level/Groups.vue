@@ -5,9 +5,8 @@
             <nuxt-link class="no-decoration"  :to="group.ppCup_id + '/' + group.id">
                 <cup-users-standings 
                     :userParticipations="group.userParticipations" 
-                    :size="group.participants" 
+                    :participants="group.participants" 
                     :pointsToPassThird="pointsToPassThird" 
-                    :level="group.level"
                 />
             </nuxt-link>
         </v-col>

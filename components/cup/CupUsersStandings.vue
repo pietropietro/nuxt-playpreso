@@ -1,6 +1,7 @@
 <template>
     <v-card :flat="flat" :class="flat ? 'white--text' : 'white--text rounded-xl'" >
-        <v-row no-gutters v-for="i in size" :key="i" 
+        <!-- not cycling through ups to give '?' slot for missing players  -->
+        <v-row no-gutters v-for="i in participants" :key="i" 
             justify="space-between" align="center"  
             :class="colorForPosition(i)"
         >
@@ -13,11 +14,14 @@
                 <v-col class="text-right mr-2" >
                     <v-row justify="end" align="end">
                         <h1>{{userParticipations[i-1].score}}</h1>
-                        <div v-if="level && level !== 1" class="caption ml-2 mb-2">{{userParticipations[i-1].pcPointsUntilLevel}}</div>
+                        <div v-if="userParticipations[i-1].score_total != userParticipations[i-1].score" 
+                            class="caption ml-2 mb-2">
+                            {{userParticipations[i-1].score_total}}
+                        </div>
                     </v-row>
                 </v-col>
             </template>
-            <template v-else><h1>?</h1></template>
+            <h1 v-else>?</h1>
         </v-row>
     </v-card>
 </template>
@@ -27,19 +31,19 @@ export default {
     props: {
         userParticipations: {type: Array},
         flat: {type: Boolean},
+        //TODO get value from server
         pointsToPassThird: {type: Number},
-        size: {type: Number},
-        level: {type: Number}
+        participants: {type: Number},
     },
     methods:{
         colorForPosition(i){
             let classes = "px-4" ;
             if(i === 1){classes += " pt-1"}
-            if(i === this.size){classes += " pb-1"}
+            if(i === this.participants){classes += " pb-1"}
             if(this.currentUser && this.userParticipations?.length >= i && this.currentUser.id === this.userParticipations[i-1].id){
                 classes += " yellow--text"
             }
-            if(i-1 < (this.size / 2)){
+            if(i-1 < (this.participants / 2)){
                 classes += " primary"
             }
             else if(i === 3 && this.pointsToPassThird && this.userParticipations?.length >= i && this.userParticipations[i-1].score >= this.pointsToPassThird){

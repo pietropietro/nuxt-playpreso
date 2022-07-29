@@ -16,7 +16,7 @@ export default {
         return{
             ppCupId: this.$route.params.cupId,
             loading: true,
-            selectedLevel:  parseInt(this.$route.query.level) ?? 1,
+            selectedLevel:  this.$route.query.level ? parseInt(this.$route.query.level) : 1,
             ppCup: null
         }
     },
