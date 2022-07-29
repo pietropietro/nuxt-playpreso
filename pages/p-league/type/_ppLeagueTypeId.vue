@@ -2,7 +2,7 @@
     <loading-page v-if="loading " />
     <v-container v-else>
         <v-row justify="center" class="py-4">
-            <p-p-numeric-info label="cost" :value="ppLeagueType.cost" />
+            <p-p-info label="cost" :value="ppLeagueType.cost" />
         </v-row>
         <league-scroll :leagues="ppLeagueType.leagues"/>
         <v-row justify="center" align="center"  @click="join" class="pagination-fixed white--text" 

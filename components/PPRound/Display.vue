@@ -1,5 +1,5 @@
 <template>
-    <p-p-scroll :infoCols="5" class="pa-0">
+    <p-p-scroll :infoCols="5" :infoMd="2" class="pa-0">
         <div slot="info">
             <v-row no-gutters class="text-overline font-weight-bold">
                 {{ppRM.match.hometeam_name}} - {{ppRM.match.awayteam_name}}
@@ -12,7 +12,8 @@
             </v-row>
         </div>           
         <v-slide-item slot="slide-item" v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
-            <guess-card :guess="guess"/>
+            <!-- <guess-card :guess="guess"/> -->
+            <guess-chip :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess"/>
         </v-slide-item>
     </p-p-scroll>
 </template>

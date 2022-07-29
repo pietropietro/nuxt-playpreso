@@ -1,6 +1,6 @@
 <template>
     <p-p-scroll v-if="ppLeagueTypes.length">
-        <p-p-numeric-info slot="info" label="available" :value="ppLeagueTypes.length"/>
+        <p-p-info slot="info" label="available" :value="ppLeagueTypes.length"/>
         <v-slide-item slot="slide-item" v-for="(ppLT,index) in ppLeagueTypes" :key="index" class="px-2">
             <nuxt-link class="no-decoration" :to="ROUTES.PPLEAGUE.TYPE.DETAIL + ppLT.id">
                 <p-p-league-type-card :ppLT="ppLT" style="height=100%; width:150px; height: 60px;" />

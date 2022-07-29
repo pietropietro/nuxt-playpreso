@@ -1,0 +1,35 @@
+<template>
+    <v-container style="width:110px; height:80px;">
+        <v-row style="height:100%" align="end">
+            <p-p-info
+                :small="small"
+                :value="value1"
+                :value2="value2"
+                :label="guess.username"
+            />
+        </v-row>
+    </v-container>
+</template>
+<script>
+export default {
+    props:{
+        guess: {type: Object, required: true},
+    },
+    computed:{
+        small(){
+            return this.guess.score < 9;
+        },
+        value1(){
+            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.score === 0 ? 0 : '+' + this.guess.score;
+            if(this.isMissed(this.guess)) return 'MISSED';
+            if(!this.guess.guessed_at) return '?';
+            return 'LOCKED'
+        },
+        value2(){
+            if(this.guess.PRESO) return 'PRESO';
+            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.guess_home + '-' + this.guess.guess_away;
+            return null;
+        }
+    }
+}
+</script>

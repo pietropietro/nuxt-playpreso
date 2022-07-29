@@ -1,6 +1,6 @@
 <template>
     <p-p-scroll>
-        <p-p-numeric-info slot="info" label="leagues" :value="leagues.length"/>
+        <p-p-info slot="info" label="leagues" :value="leagues.length"/>
         <v-slide-item slot="slide-item" v-for="(league,index) in leagues" :key="index">
             <div>
                 <v-row no-gutters>

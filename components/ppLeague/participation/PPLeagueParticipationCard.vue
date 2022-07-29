@@ -5,17 +5,17 @@
         </v-row>
         <v-row v-if="!participation.ppLeague.started_at" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.6')" justify="center" align="center" >
             <v-col cols="4">
-                <p-p-numeric-info :label="$t('app.users')" :value="participation.ppLeague.user_count"/>
+                <p-p-info :label="$t('app.users')" :value="participation.ppLeague.user_count"/>
             </v-col>
             <v-col><h3 class="ocrastd">NOT STARTED</h3></v-col>
         </v-row>
         <template v-else>
             <v-row class="px-2 black--text" align="center" :style="'background-color: ' + ppRGBA(participation.ppLeagueType,'.6')">
                 <v-col cols="4">
-                    <p-p-numeric-info :label="$t('app.position')" :value="participation.position" :value2="participation.ppLeague.user_count"/>
+                    <p-p-info :label="$t('app.position')" :value="participation.position" :value2="participation.ppLeague.user_count"/>
                 </v-col>
                 <v-col cols="4">
-                    <p-p-numeric-info label="round" :value="participation.ppLeague.round_count" :value2="participation.ppLeagueType.rounds"/>
+                    <p-p-info label="round" :value="participation.ppLeague.round_count" :value2="participation.ppLeagueType.rounds"/>
                 </v-col>
                 <v-col cols="4">
                      <v-row justify="center">

@@ -1,6 +1,6 @@
 <template>
     <p-p-scroll>
-        <p-p-numeric-info slot="info" label="trophies" :value="ups.length"/>
+        <p-p-info slot="info" label="trophies" :value="ups.length"/>
         <v-slide-item slot="slide-item" v-for="(up,index) in ups" :key="index">
             <!-- TODO distinguish cups -->
             <trophy-item :up="up" class="mx-1" />

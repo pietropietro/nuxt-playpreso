@@ -6,7 +6,7 @@
             :setValue="(newVal) => selectedRound = newVal"
         >
             <v-row justify="center" align="end" slot="selected-page">
-                <p-p-numeric-info wide :label="$t('app.round')" :value="selectedRound" :value2="rounds"/>
+                <p-p-info wide :label="$t('app.round')" :value="selectedRound" :value2="rounds"/>
             </v-row>
         </p-p-simple-pagination>
         <p-p-round-display
