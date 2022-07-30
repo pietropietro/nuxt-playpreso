@@ -18,6 +18,7 @@
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.3",
     "nuxt-i18n": "^6.27.0",
+    "vue-template-babel-compiler": "^1.2.0",
     "vuetify": "^2.4.0",
     "vuex-persist": "^3.1.3"
   },
