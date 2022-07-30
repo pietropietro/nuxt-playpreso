@@ -21,7 +21,7 @@ export default {
         },
         label(){
             return {
-                outlined: this.guess.user_id === this.currentUser.id, 
+                color: this.guess.user_id === this.currentUser.id ? this.$store.state.navigation.color : null, 
                 text: this.guess.username
             };
         },

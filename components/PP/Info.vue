@@ -14,7 +14,7 @@
                 <h6 v-else>{{value2}}</h6>
             </template>
         </v-row>
-        <v-row v-if="!wide" justify="center" class="text-overline mt-0">
+        <v-row v-if="!wide" justify="center" class="text-overline mt-0" :style="label.color ? 'color:' + label.color : ''">
             {{label.text ?? label}}
         </v-row>
     </div>
