@@ -5,7 +5,7 @@
                 :small="small"
                 :value="value1"
                 :value2="value2"
-                :label="guess.username"
+                :label="label"
             />
         </v-row>
     </v-container>
@@ -19,6 +19,12 @@ export default {
         small(){
             return this.guess.score < 9;
         },
+        label(){
+            return {
+                outlined: this.guess.user_id === this.currentUser.id, 
+                text: this.guess.username
+            };
+        },
         value1(){
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.score === 0 ? 0 : '+' + this.guess.score;
             if(this.isMissed(this.guess)) return 'MISSED';
@@ -26,7 +32,7 @@ export default {
             return 'LOCKED'
         },
         value2(){
-            if(this.guess.PRESO) return 'PRESO';
+            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", color: this.$store.state.navigation.color};
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.guess_home + '-' + this.guess.guess_away;
             return null;
         }
