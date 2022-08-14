@@ -1,33 +1,16 @@
 <template>
     <v-card :flat="flat" :class="flat ? 'white--text' : 'white--text rounded-xl'" >
         <!-- not cycling through ups to give '?' slot for missing players  -->
-        <v-row no-gutters v-for="i in participants" :key="i" 
-            justify="space-between" align="center"  
+        <user-participation-standing 
+            v-for="i in participants" :key="i" 
             :class="colorForPosition(i)"
-        >
-            <template v-if="userParticipations && userParticipations.length >= i">
-                <v-col>
-                    <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + userParticipations[i-1].username">
-                        <h1 class="white--text">{{userParticipations[i-1].username}}</h1>
-                    </nuxt-link>
-                </v-col>
-                <v-col class="text-right mr-2" >
-                    <v-row justify="end" align="end">
-                        <h1>{{userParticipations[i-1].score}}</h1>
-                        <div v-if="userParticipations[i-1].score_total != userParticipations[i-1].score" 
-                            class="caption ml-2 mb-2">
-                            {{userParticipations[i-1].score_total}}
-                        </div>
-                    </v-row>
-                </v-col>
-            </template>
-            <h1 v-else>?</h1>
-        </v-row>
+            :up="userParticipations.length >= i ? userParticipations[i-1] : null"
+            whiteText
+        />
     </v-card>
 </template>
 <script>
 export default {
-    name: "CupUsersStandings",
     props: {
         userParticipations: {type: Array},
         flat: {type: Boolean},

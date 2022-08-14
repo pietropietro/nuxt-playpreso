@@ -14,7 +14,9 @@
                 <h6 v-else>{{value2}}</h6>
             </template>
         </v-row>
-        <v-row v-if="!wide" justify="center" class="text-overline mt-0" :style="label.color ? 'color:' + label.color : ''">
+        <v-row v-if="!wide" justify="center" 
+            :class="label.class ? 'text-overline mt-0 ' + label.class : 'text-overline mt-0'" 
+            :style="label.color ? 'color:' + label.color : ''">
             {{label.text ?? label}}
         </v-row>
     </div>
@@ -22,7 +24,7 @@
 <script>
 export default {
     props: {
-        label: {type: String, required: true},
+        label: {required: true},
         value: {required: true},
         value2: {required: false},      
         small: {type: Boolean},

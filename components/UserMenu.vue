@@ -1,42 +1,33 @@
 <template>
-    <v-menu offset-y>
+    <v-menu offset-y v-if="currentUser">
         <template v-slot:activator="{ on }">
-            <h1 v-on="on" class="secondary--text pointer ocrastd">$</h1>
+            <h1 v-on="on" class="pointer ocrastd">$</h1>
         </template>
-        <v-list role="menu">
-            <template v-if="currentUser">
+        <v-list role="menu" class="pb-0">
+            <template >
                 <v-list-item>
-                    <v-list-item-title>
-                        <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
-                            <h1 class="primary--text">{{currentUser.username}}</h1>
-                        </nuxt-link>
+                        <v-list-item-title>
+                            <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
+                                <h1 class="currentuser black--text">{{currentUser.username}}</h1>
+                            </nuxt-link>
+                        </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                    <v-list-item-title class="text-right">
+                            <h4>{{currentPoints}}</h4>
                     </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                    <h4>{{currentPoints}}</h4>
+                    <v-list-item-title class="text-right">
+                            <h5 class="text-caption">v{{VERSION}}</h5>
+                    </v-list-item-title>
                 </v-list-item>
-                <v-list-item class="hovered pointer"
-                    @click="$logout.logout()"
-                >
-                    <v-list-item-title><b>{{$t('app.logout')}}</b></v-list-item-title>
-                </v-list-item>
-            </template>
-            <template v-else>
-                <v-list-item>
-                    <!-- TODO USE CONSTANT VAL instead of /login -->
-                    <nuxt-link class="no-decoration" to="/login">
-                        <b class="text-uppercase">{{$t('app.login')}}</b>
-                    </nuxt-link>
-                </v-list-item>
-                <v-list-item>
-                    <nuxt-link class="no-decoration" to="/register">
-                        <b class="text-uppercase">{{$t('app.register')}}</b>
-                    </nuxt-link>
+                <v-list-item class="pointer" style="background-color:blue;" @click="$logout.logout()">
+                    <v-btn block text>
+                        <h3 class="ocrastd white--text">{{$t('app.logout')}}</h3>
+                    </v-btn>
                 </v-list-item>
             </template>
-            <v-list-item>
-                <v-list-item-title><h5 class="overline">v{{VERSION}}</h5></v-list-item-title>
-            </v-list-item>
         </v-list>
     </v-menu>
 </template>

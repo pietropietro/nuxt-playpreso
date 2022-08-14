@@ -12,3 +12,20 @@
 	margin-top: 6px;
 	font-family: "OCR_A_Std";
 }
+
+.currentuser{
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	z-index: 0;
+}
+.currentuser:after{
+	left:0;
+	bottom:5px;
+	height: 25%;
+	position: absolute;
+	content: '';
+	background-color: #1FFF00;
+	width: 100%;
+	z-index: -1;
+}

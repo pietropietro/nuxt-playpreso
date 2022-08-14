@@ -10,13 +10,14 @@
             :leagues="tournamentObj.ppLeagueType.leagues" 
             class="py-5"
         />
-        <user-participation-standings 
+        <p-p-league-standings 
             v-if="!isCupGroup"  
             :ups="tournamentObj.userParticipations" 
             class="py-5"
         />
         <!-- TODO pointstopassthird from server -->
-        <cup-users-standings 
+        <cup-group-standings
+            v-else 
             :userParticipations="tournamentObj.userParticipations" 
             :participants="tournamentObj.participants" 
             class="my-5"
