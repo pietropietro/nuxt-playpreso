@@ -1,6 +1,8 @@
 <template>
 	<v-app>
-        <p-p-header />    
+        <client-only>
+			<p-p-header />    
+		</client-only>
 		<login-guard v-if="!currentUser"/>
 		<template v-else>
             <snackbar />

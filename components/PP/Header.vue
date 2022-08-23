@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar 
+    <v-app-bar
         class="white--text" 
         :color="$store.state.navigation.color ? $store.state.navigation.color : 'primary'" 
         fixed-left dense app
@@ -14,8 +14,3 @@
         <user-menu />
     </v-app-bar>
 </template>
-<script>
-export default {
-    name: "PPHeader"
-}
-</script>
