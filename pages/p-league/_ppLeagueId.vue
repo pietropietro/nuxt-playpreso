@@ -18,7 +18,7 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.GET + this.ppLeagueId, null, 'GET');
             if(response && response.status === "success"){
                 this.ppLeague = response.message;
-                this.$store.commit('navigation/setActive', { title: this.ppLeagueTypeTitle(this.ppLeague.ppLeagueType), color: this.ppRGBA(this.ppLeague.ppLeagueType)});
+                this.$store.commit('navigation/setActive', { title: this.ppTournamentTypeTitle(this.ppLeague.ppTournamentType), color: this.ppRGBA(this.ppLeague.ppTournamentType)});
             }
             this.loading = false;
         },

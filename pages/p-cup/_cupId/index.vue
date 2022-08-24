@@ -33,8 +33,8 @@ export default {
             if(response && response.status === "success"){
                 this.ppCup = response.message;
                 this.$store.commit('navigation/setActive', { 
-                    title: this.ppCup.ppCupType.name, 
-                    color: this.ppRGBA(this.ppCup.ppCupType)
+                    title: this.ppCup.ppTournamentType.name, 
+                    color: this.ppRGBA(this.ppCup.ppTournamentType)
                 });
             }
             this.loading = false;

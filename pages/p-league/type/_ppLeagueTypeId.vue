@@ -2,9 +2,9 @@
     <loading-page v-if="loading " />
     <v-container v-else>
         <v-row justify="center" class="py-4">
-            <p-p-info label="cost" :value="ppLeagueType.cost" />
+            <p-p-info label="cost" :value="ppTournamentType.cost" />
         </v-row>
-        <league-scroll :leagues="ppLeagueType.leagues"/>
+        <league-scroll :leagues="ppTournamentType.leagues"/>
         <v-row justify="center" align="center"  @click="join" class="pagination-fixed white--text" 
             :style="'height:80px; background-color:' + $store.state.navigation.color" 
             :loading="joinLoading"
@@ -20,27 +20,27 @@ export default {
         return {
             loading: true,
             joinLoading: false,
-            ppLeagueTypeId: this.$route.params.ppLeagueTypeId,
-            ppLeagueType: null
+            ppTournamentTypeId: this.$route.params.ppTournamentTypeId,
+            ppTournamentType: null
         }
     },
     methods:{
          async join(id){
             if(this.joinLoading)return;
             this.joinLoading = true;
-            let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.JOIN + this.ppLeagueTypeId, null, "POST");
+            let response = await this.$api.call(this.API_ROUTES.PPTOURNAMENTTYPE.JOIN + this.ppTournamentTypeId, null, "POST");
             if(response && response.status === "success"){
                 this.$router.push(this.ROUTES.PPLEAGUE.DETAIL + response.message);
             }
             this.joinLoading = false;
         },
         async get(){
-            let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.TYPE.GET + this.ppLeagueTypeId, null, 'GET');
+            let response = await this.$api.call(this.API_ROUTES.PPTOURNAMENTTYPE.GET + this.ppTournamentTypeId, null, 'GET');
             if(response && response.status === "success"){
-                this.ppLeagueType = response.message;
+                this.ppTournamentType = response.message;
                 this.$store.commit('navigation/setActive', {
-                    title: this.ppLeagueTypeTitle(this.ppLeagueType),
-                    color: this.ppRGBA(this.ppLeagueType)
+                    title: this.ppTournamentTypeTitle(this.ppTournamentType),
+                    color: this.ppRGBA(this.ppTournamentType)
                 });
             }
             this.loading = false;

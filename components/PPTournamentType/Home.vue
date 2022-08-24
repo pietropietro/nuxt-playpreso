@@ -7,7 +7,7 @@
         />
         <league-scroll 
             v-if="!isCupGroup"
-            :leagues="tournamentObj.ppLeagueType.leagues" 
+            :leagues="tournamentObj.ppTournamentType.leagues" 
             class="py-5"
         />
         <p-p-league-standings 
@@ -25,7 +25,7 @@
         <p-p-round-pagination
             v-if="tournamentObj.ppRounds.length > 0"
             :ppRounds="tournamentObj.ppRounds" 
-            :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppLeagueType.rounds"
+            :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppTournamentType.rounds"
             class="py-5"
         />
     </v-container>

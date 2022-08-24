@@ -3,15 +3,15 @@ import Vue from 'vue'
 Vue.mixin({
     methods:{
         isMissed(guess){
-            return guess.verified_at && guess.guess_home === 222
+            return guess.verified_at && !guess.guessed_at;
         },
-        ppRGBA(ppLT, opacity){
-            if(!ppLT) return null;
-            let colorString = 'rgba(' + ppLT.red + ', ' + ppLT.green + ', ' + ppLT.blue + ', ' + (opacity?? '1') + ')';
+        ppRGBA(ppTT, opacity){
+            if(!ppTT) return null;
+            let colorString = 'rgba(' + ppTT.red + ', ' + ppTT.green + ', ' + ppTT.blue + ', ' + (opacity?? '1') + ')';
             return colorString;
         },
-        ppLeagueTypeTitle(ppLeagueType){
-            return ppLeagueType.type + " " + ppLeagueType.level;
+        ppTournamentTypeTitle(ppTournamentType){
+            return ppTournamentType.name + " " + ppTournamentType.level;
         },
         getFlag(league){
             try { return require('@/assets/img/flags/' + league.country.toLowerCase() + '.png') }

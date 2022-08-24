@@ -24,8 +24,8 @@ export default {
                 this.ppCupGroup = response.message;
 
                 this.$store.commit('navigation/setActive', { 
-                    title: this.ppCupGroup.ppCupType.name, 
-                    color: this.ppRGBA(this.ppCupGroup.ppCupType)
+                    title: this.ppCupGroup.ppTournamentType.name, 
+                    color: this.ppRGBA(this.ppCupGroup.ppTournamentType)
                 });
 
             }

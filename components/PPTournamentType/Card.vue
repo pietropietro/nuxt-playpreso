@@ -1,15 +1,14 @@
 <template>
-    <v-card class="white--text" :color="ppRGBA(ppLT)"> 
+    <v-card class="white--text" :color="ppRGBA(ppTT)"> 
         <v-card-title>
-            <h3>{{ppLeagueTypeTitle(ppLT)}}</h3>
+            <h3>{{ppTournamentTypeTitle(ppTT)}}</h3>
         </v-card-title>
     </v-card>
 </template>
 <script>
 export default {
-    name: "PPLeagueTypeCard",
     props: {
-        ppLT: {type: Object, required: true},
+        ppTT: {type: Object, required: true},
     },
     data(){
         return {
