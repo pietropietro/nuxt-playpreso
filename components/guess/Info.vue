@@ -1,6 +1,6 @@
 <template>
-    <v-container style="width:110px; height:80px;">
-        <v-row style="height:100%" align="end">
+    <v-container :style="small ? 'width:80px; height:80px;' : 'width:110px; height:80px;'">
+        <v-row justify="center" style="height:100%" align="end">
             <p-p-info
                 :small="small"
                 :value="value1"
