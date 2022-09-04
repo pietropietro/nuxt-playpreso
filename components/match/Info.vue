@@ -5,7 +5,7 @@
         </v-row>
         <v-row no-gutters align="center">
             <v-col cols="6">
-                <v-chip label outlined small :color="$store.state.navigation.color">{{match.league.name}}</v-chip>
+                <league-detail small :league="match.league"/>
             </v-col>
             <v-col cols="6">
                 <span class="pl-2 text-overline font-weight-bold">{{match.score_home}} - {{match.score_away}}</span>

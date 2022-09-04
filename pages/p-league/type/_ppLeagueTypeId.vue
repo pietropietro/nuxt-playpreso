@@ -4,7 +4,7 @@
         <v-row justify="center" class="py-4">
             <p-p-info label="cost" :value="ppTournamentType.cost" />
         </v-row>
-        <league-scroll :leagues="ppTournamentType.leagues"/>
+        <league-slider :leagues="ppTournamentType.leagues"/>
         <v-row justify="center" align="center"  @click="join" class="pagination-fixed white--text" 
             :style="'height:80px; background-color:' + $store.state.navigation.color" 
             :loading="joinLoading"

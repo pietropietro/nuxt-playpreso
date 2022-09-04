@@ -5,7 +5,7 @@
             :ppCupGroup="tournamentObj"
             class="py-5"
         />
-        <league-scroll 
+        <league-slider 
             v-if="!isCupGroup"
             :leagues="tournamentObj.ppTournamentType.leagues" 
             class="py-5"
