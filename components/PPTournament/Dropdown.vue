@@ -23,6 +23,7 @@
             <v-row no-gutters justify="center">
                 <v-btn text @click="join" :loading="joinLoading">
                     <h1>JOIN</h1>
+                    
                 </v-btn>
             </v-row>
         </v-card-text>
