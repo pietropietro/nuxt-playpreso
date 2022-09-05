@@ -4,7 +4,7 @@
             <h1>P-LEAGUES</h1>
         </v-row>
         <v-row>
-            <p-p-tournament-type-available-list />
+            <p-p-tournament-available-list />
         </v-row>
         <v-row>
             <p-p-league-participation-list class="mt-5"/>

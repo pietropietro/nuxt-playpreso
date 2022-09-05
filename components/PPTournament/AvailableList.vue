@@ -1,9 +1,19 @@
 <template>
     <p-p-scroll v-if="ppTournamentTypes.length">
         <p-p-info slot="info" label="available" :value="ppTournamentTypes.length"/>
-        <v-slide-item slot="slide-item" v-for="(ppTT,index) in ppTournamentTypes" :key="index" class="mx-1">
+        <v-slide-item 
+            slot="slide-item" 
+            v-for="(ppTT,index) in ppTournamentTypes" 
+            :key="index" 
+            class="mx-1"
+        >
             <div>
-                <p-p-tournament-type-dropdown :ppTT="ppTT" />
+                <p-p-tournament-dropdown 
+                    :ppTT="ppTT" 
+                    :index="index"
+                    :activeIndex="activeIndex"
+                    :setShow="() => activeIndex === index ? activeIndex = null : activeIndex = index"
+                />
             </div>
         </v-slide-item>
     </p-p-scroll>
@@ -13,7 +23,8 @@ export default {
     data(){
         return {
             loading: true,
-            ppTournamentTypes: []
+            activeIndex: null,
+            ppTournamentTypes: [],
         }
     },
     methods:{
@@ -21,9 +32,11 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPTOURNAMENTTYPE.AVAILABLE);
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
+                this.ppTournamentTypes.map((e)=> e.show = false);
             }
             this.loading = false;
         },
+
     },
     async mounted(){
         await this.getAvailable();
