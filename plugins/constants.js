@@ -11,12 +11,8 @@ Vue.mixin({
                 PPCUP: {
                     DETAIL: '/p-cup/'
                 },
-                PPLEAGUES: '/presoLeagues',
                 PPLEAGUE:{
-                    DETAIL: '/p-league/'
-                },
-                PPTOURNAMENTTYPE: {
-                    DETAIL: '/p-tournament/type/'
+                    DETAIL: '/p-league/',
                 },
                 USER: {
                     DETAIL: '/user/'
@@ -35,7 +31,6 @@ Vue.mixin({
                     GET: '/ppLeague/',
                 },
                 PPTOURNAMENTTYPE: {
-                    GET: '/ppTournamentType/',
                     AVAILABLE: '/ppTournamentType/available',
                     JOIN: '/ppTournamentType/join/'
                 },

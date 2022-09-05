@@ -9,7 +9,6 @@
 </template>
 <script>
 export default {
-    name: "PPLeagueParticipationList",
     data(){
         return {
             loading: true,
