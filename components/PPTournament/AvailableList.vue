@@ -32,7 +32,6 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPTOURNAMENTTYPE.AVAILABLE);
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
-                this.ppTournamentTypes.map((e)=> e.show = false);
             }
             this.loading = false;
         },
