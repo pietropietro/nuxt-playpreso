@@ -1,11 +1,24 @@
 <template>
-    <v-row justify="center" :class="colorRow"  v-if="!guess.PRESO">
+    <v-row 
+        v-if="guess.PRESO" 
+        style="height:100%"
+    />
+    <v-row v-else justify="center" class="ocrastd">
         <v-container fill-height>
             <template>
-                <v-row class="mt-4">
-                    <lock-score :blocked="blocked" :missed="isMissed(guess)" :guess_score="guess.guess_home" :model="homeModel" :setModel="(val)=>{homeModel = val}"/>
-                    <v-col cols="2"><h1 class="text-center">-</h1></v-col>
-                    <lock-score :blocked="blocked" :missed="isMissed(guess)" :guess_score="guess.guess_away" :model="awayModel" :setModel="(val)=>{awayModel = val}"/>
+                <v-row class="my-4">
+                    <select-integer 
+                        :model="home"
+                        :setModel="(val)=>{home = val}"
+                    />
+                    <v-col cols="2">
+                        <h1 class="text-center">-</h1>
+                    </v-col>
+                    <select-integer 
+                        :disabled="pickerDisabled" 
+                        :model="away" 
+                        :setModel="(val)=>{away = val}"
+                    />
                 </v-row>
                 <v-row justify="center" class="text-center">
                     <v-col cols="4">
@@ -29,58 +42,28 @@
                 </v-row>
             </template>
         </v-container>
-    </v-row>
-    <v-row class="primary" v-else>
-        <v-container fluid fill-height class="ocrastd white--text" style="font-size:10vw;">
-            <v-row justify="center">
-                <h1>PRESO!</h1>
-            </v-row>
-        </v-container>
+        <v-row justify="center" class="my-10" style="height:10vh" align="center">
+            <h1 v-if="guess.verified_at" class="ocrastd">+{{guess.score}}</h1>
+            <v-btn v-else-if="!guess.guessed_at" @click="lockGuess" :loading="loading"  color="primary" text block><h1>LOCK</h1></v-btn>
+            <h1 v-else>LOCKED</h1>
+        </v-row>
     </v-row>
 </template>
 <script>
 export default {
-    name: "LockGuessCard",
     props: {
         guess: {type: Object},
-        home: {type: Number},
-        away: {type: Number},
-        setHome: {type: Function},
-        setAway: {type: Function},
     },
     data(){
         return{
+            home: 0,
+            away: 0,
             loading: false
         }
     },
     computed: {
-        homeModel:{
-            get(){
-                return this.home
-            },
-            set(val){
-                this.setHome(val);
-            }
-        },
-        awayModel:{
-            get(){
-                return this.away
-            },
-            set(val){
-                this.setAway(val);
-            }
-        },
-        colorRow(){
-            if(this.isMissed(this.guess)) return'blue-grey lighten-4 ocrastd';
-            if(this.guess.verified_at) return 'green accent-2 ocrastd';
-            if(this.locked) return 'amber accent-2 ocrastd';
-            return 'white--text primary ocrastd';
-        },
-        blocked(){
-            return this.locked || this.guess.verified_at;
-        },
-        locked(){
-            return this.guess.guess_home !== 222;
+        pickerDisabled(){
+            return !!this.guess.guessed_at || !!this.guess.verified_at;
         },
         computed1x2(){
             if(this.isMissed(this.guess)) return "X";

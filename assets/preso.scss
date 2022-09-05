@@ -29,3 +29,23 @@
 	width: 100%;
 	z-index: -1;
 }
+
+// used in ppTournamentPagination
+.v-pagination{
+	padding: 0px;
+	margin: 0;
+}
+.no-arrows .v-pagination__navigation{
+	display: none !important;
+}
+.v-pagination__item{
+	box-shadow: none !important;
+	background-color: transparent !important;
+	color: white !important;
+}
+.v-pagination__item--active {
+	font-size: 26px;
+	font-weight: bold;
+	color: white !important;
+	flex-direction: column-reverse;
+}

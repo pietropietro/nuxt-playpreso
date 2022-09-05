@@ -1,7 +1,16 @@
 <template>
     <div style="height:100%">
-        <p-p-tournament-home v-if="selectedPage === 1" class="mb-7" :tournamentObj="tournamentObj"/>
-        <lock-guess v-else :guess="userGuess" :match="selectedPPRM.match" :refresh="refresh" class="mb-7"/>
+        <p-p-tournament-home 
+            v-if="selectedPage === 1" 
+            class="mb-7" 
+            :tournamentObj="tournamentObj
+        "/>
+        <guess-single 
+            v-else 
+            :guess="userGuess" 
+            :match="selectedPPRM.match" 
+            class="mb-7"
+        />
         <v-pagination
             v-if="userInTournament"
             v-model="selectedPage"
@@ -14,7 +23,6 @@
 </template>
 <script>
 export default {
-    name: "PPTournamentPagination",
     props: {
         tournamentObj: {type: Object, required: true},
     },
@@ -53,31 +61,5 @@ export default {
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
         }
     },
-    methods: {
-        refresh(){
-            console.log("locked guess refresh method -- TODO");
-        }
-    }
 }
 </script>
-<style>
-    .v-pagination{
-        padding: 0px;
-        margin: 0;
-    }
-    .no-arrows .v-pagination__navigation{
-        display: none !important;
-    }
-    .v-pagination__item{
-        box-shadow: none !important;
-        background-color: transparent !important;
-        color: white !important;
-    }
-    .v-pagination__item--active {
-        font-size: 26px;
-        font-weight: bold;
-        color: white !important;
-        flex-direction: column-reverse;
-    }
-   
-</style>
