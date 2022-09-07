@@ -63,3 +63,16 @@
 .transparent{
 	background-color: none !important;
 }
+
+
+.v-slide-group__prev .v-icon,
+.v-slide-group__next .v-icon{
+	font-style: normal;
+    font-weight: bold;
+    font-size: 2em;
+	color: black
+}
+
+.theme--light.v-icon{
+	color: black !important;
+}
