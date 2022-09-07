@@ -12,6 +12,7 @@
                     :ppTT="ppTT" 
                     :index="index"
                     :activeIndex="activeIndex"
+                    :onError="getAvailable"
                     :setShow="() => activeIndex === index ? activeIndex = null : activeIndex = index"
                 />
             </div>

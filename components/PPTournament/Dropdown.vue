@@ -35,7 +35,8 @@ export default {
         ppTT: {type: Object, required: true},
         index: {type: Number},
         activeIndex: {type: Number},
-        setShow: {type: Function, required: true}
+        setShow: {type: Function, required: true},
+        onError: {type: Function, required: true},
     },
     data(){
         return{
@@ -52,8 +53,10 @@ export default {
             );
             if(response && response.status === "success"){
                 this.$router.push(this.ROUTES.PPLEAGUE.DETAIL + response.message);
+                this.joinLoading = false;
+                return;
             }
-            this.joinLoading = false;
+            await this.onError();
         },
     }
 }
