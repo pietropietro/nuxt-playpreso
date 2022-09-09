@@ -1,0 +1,39 @@
+<template>
+    <v-row justify="center">
+        <v-col cols="12">
+            <v-row justify="center" align="center" class="ocrastd">
+                <select-integer
+                    :disabled="pickerDisabled"
+                    :model="guess.home"
+                    :setModel="(val)=>{guess.home = val}"
+                />
+                <v-col cols="2">
+                    <h1 class="text-center">-</h1>
+                </v-col>
+                <select-integer
+                    :disabled="pickerDisabled"
+                    :model="guess.away"
+                    :setModel="(val)=>{guess.away = val}"
+                />
+            </v-row>
+        </v-col>
+        <v-col cols="12">
+            <guess-single-values
+                style="height:20vh"
+                :guess="guess"
+            />
+        </v-col>
+    </v-row>
+</template>
+<script>
+export default {
+    props: {
+        guess: {type: Object},
+    },
+    computed: {
+        pickerDisabled(){
+            return !!this.guess.guessed_at || !!this.guess.verified_at;
+        }
+    },
+}
+</script>

@@ -2,24 +2,27 @@ import jwt_decode from "jwt-decode";
 export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
        
-        async call(route, values, method){
+        async call(route, values, method, use_formdata = false){
             let resp;
-            let formdata;
+            let myFormData;
             const noBody = ["GET" , "DELETE"];
 
             let includeBody = !!values && !!method && !noBody.includes(method) ? true : false;
-            if(includeBody){
-                formdata = new FormData();
+            
+            if(includeBody && use_formdata){
+                myFormData = new FormData();                
                 values.map((item) => {
                     let key = Object.keys(item)[0];
-                    formdata.append(key, item[key]);
+                    myFormData.append(key,  item[key]);
                 });
             }
+
+            
             let includeAuth = store.state.user && store.state.user.token ? true : false;
             let headers = includeAuth ? new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': "application/json",
                 'Authorization': store.state.user.token,
-            }) : new Headers({'Content-Type': 'application/json'});
+            }) : new Headers({'Content-Type': "application/json"});
 
             let initOptions = {
                 method: method,
@@ -30,7 +33,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 initOptions.headers = headers;
             }
             if(includeBody){
-                initOptions.body = formdata;
+                initOptions.body = use_formdata ? myFormData : JSON.stringify(values);
             }
 
             try {

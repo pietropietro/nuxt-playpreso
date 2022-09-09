@@ -1,13 +1,7 @@
 <template>
-    <v-btn text
-        class="always-black" 
-        :disabled="disabled" 
-        @click="()=>{computedModel === 3 ? computedModel = 0 : computedModel++}"
-    >
-        <h1 class="text-center">
-            {{computedModel + (computedModel === 3 ? '+' : '')}}
-        </h1>
-    </v-btn>
+    <h1 :class="disabled ? '' : 'pointer'"  @click="onClick">
+        {{computedModel + (computedModel === 3 ? '+' : '')}}
+    </h1>
 </template>
 <script>
 export default {
@@ -19,8 +13,14 @@ export default {
     },
     computed: {
         computedModel:{
-            get(){return this.model},
+            get(){return this.model ?? 0},
             set(val){this.setModel(val)}
+        }
+    },
+    methods: {
+        onClick(){
+            if(this.disabled) return;
+            this.computedModel === 3 ? this.computedModel = 0 : this.computedModel++;
         }
     }
 }

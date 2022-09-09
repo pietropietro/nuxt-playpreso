@@ -11,7 +11,7 @@
                             {{guess.match.score_home}} - {{guess.match.score_away}}
                         </v-col>
                         <v-col>
-                            {{guess.guess_home}} - {{guess.guess_away}}
+                            {{guess.home}} - {{guess.away}}
                         </v-col>
                     </v-row>
                     <v-row no-gutters justify="center">

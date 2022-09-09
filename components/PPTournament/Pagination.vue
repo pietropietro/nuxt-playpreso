@@ -5,7 +5,7 @@
             class="mb-7" 
             :tournamentObj="tournamentObj
         "/>
-        <guess-single 
+        <guess-single-container
             v-else 
             :guess="userGuess" 
             :match="selectedPPRM.match" 

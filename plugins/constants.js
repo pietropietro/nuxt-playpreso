@@ -24,6 +24,9 @@ Vue.mixin({
                 USER:{
                     GET: '/user/'
                 },
+                GUESS:{
+                    LOCK: '/guess/lock/'
+                },
                 USER_PARTICIPATION: {
                     PPLEAGUES:  '/userParticipation/ppLeagues'
                 },

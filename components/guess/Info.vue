@@ -33,7 +33,7 @@ export default {
         },
         value2(){
             if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", color: this.$store.state.navigation.color};
-            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.guess_home + '-' + this.guess.guess_away;
+            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;
         }
     }
