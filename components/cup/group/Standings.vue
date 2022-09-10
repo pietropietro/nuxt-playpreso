@@ -2,7 +2,7 @@
     <v-card :flat="flat" :class="flat ? 'white--text' : 'white--text rounded-xl'" >
         <!-- not cycling through ups to give '?' slot for missing players  -->
         <user-participation-standing 
-            v-for="i in participants" :key="i" 
+            v-for="i in participants" :key="i"
             :class="colorForPosition(i)"
             :up="userParticipations.length >= i ? userParticipations[i-1] : null"
             whiteText
