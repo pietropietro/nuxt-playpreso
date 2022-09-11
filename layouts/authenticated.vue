@@ -1,15 +1,15 @@
 <template>
-	<v-app>
-        <client-only>
+	<client-only>
+		<v-app>
 			<p-p-header />    
-		</client-only>
-		<login-guard v-if="!currentUser"/>
-		<template v-else>
-            <snackbar />
-			<v-main>
-				<nuxt />
-			</v-main>
-		</template>
-  	</v-app>
+			<login-guard v-if="!currentUser"/>
+			<template v-else>
+				<snackbar />
+				<v-main>
+					<nuxt />
+				</v-main>
+			</template>
+		</v-app>
+	</client-only>
 </template>
 
