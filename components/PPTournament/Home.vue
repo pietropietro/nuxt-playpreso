@@ -12,7 +12,7 @@
         />
         <!-- STANDINGS -->
         <template>
-            <p-p-league-standings
+            <p-p-league-standings-list
                 v-if="!isCupGroup"
                 :ups="tournamentObj.userParticipations"
                 class="py-5"
