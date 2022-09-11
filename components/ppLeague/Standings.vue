@@ -3,10 +3,10 @@
         <template v-if="!this.$vuetify.breakpoint.mobile">
             <v-row no-gutters >
                 <v-col cols="6" v-for="(up, index) in ups" :key="up.id">
-                    <v-row v-if="!showAll && index===7 && !userInFirst" no-gutters >
+                    <v-row v-if="!showAll && index===7 && makeRoomForCurrentUser" no-gutters >
                         <h1>...</h1>
                     </v-row>
-                    <user-participation-standing v-else-if="!showAll && index===9 && !userInFirst" 
+                    <user-participation-standing v-else-if="!showAll && index===9 && makeRoomForCurrentUser" 
                         :up="ups.filter((e)=>e.user_id === currentUser.id)[0]" 
                     />
                     <user-participation-standing 
@@ -18,10 +18,10 @@
         </template>
         <template v-else>
             <div v-for="(up, index) in ups" :key="up.id">
-                <v-row v-if="!showAll && index===3 && !userInFirst" no-gutters >
+                <v-row v-if="!showAll && index===3 && makeRoomForCurrentUser" no-gutters >
                     <h1>...</h1>
                 </v-row>
-                <user-participation-standing v-else-if="!showAll && index===4 && !userInFirst" 
+                <user-participation-standing v-else-if="!showAll && index===4 && makeRoomForCurrentUser" 
                     :up="ups.filter((e)=>e.user_id === currentUser.id)[0]" 
                 />
                 <user-participation-standing 
@@ -46,10 +46,14 @@ export default {
         }
     },
     computed:{
-        userInFirst(){
-            return this.ups.filter(
-                (e, i) => { return e.user_id === this.currentUser.id && i < this.firstSize;}
-            ).length > 0;
+        makeRoomForCurrentUser(){
+            let currentUsrPosition = null;
+            return this.ups.filter((e, i) => { 
+                if(e.user_id === this.currentUser.id){
+                    currentUsrPosition = e.position ?? i;
+                    return true;
+                } 
+            }).length > 0 && currentUsrPosition > this.firstSize;
         },
         firstSize(){
             return this.$vuetify.breakpoint.mobile ? 5 : 10
