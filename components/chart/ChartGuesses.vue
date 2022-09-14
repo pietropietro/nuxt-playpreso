@@ -22,7 +22,7 @@ export default {
     mounted(){
         this.elaboratedData = this.guesses.map((g,i) => {
             return {
-                score: g.score,
+                points: g.points,
                 match: g.match.hometeam_name + "-" + g.match.awayteam_name,
                 opacity: i === 0 ? 1 : 0
             }
@@ -59,7 +59,7 @@ export default {
 
 
             let series = chart.series.push(new am4charts.LineSeries());
-            series.dataFields.valueY = "score";
+            series.dataFields.valueY = "points";
             series.dataFields.categoryX = "match";
             series.tensionX = 0.9;
             

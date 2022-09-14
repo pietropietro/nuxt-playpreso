@@ -17,7 +17,7 @@ export default {
     },
     computed:{
         small(){
-            return this.guess.score < 9;
+            return this.guess.points < 9;
         },
         label(){
             return {
@@ -26,7 +26,7 @@ export default {
             };
         },
         value1(){
-            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.score === 0 ? 0 : '+' + this.guess.score;
+            if(this.guess.verified_at && this.guess.guessed_at) return this.guess.points === 0 ? 0 : '+' + this.guess.points;
             if(this.isMissed(this.guess)) return 'MISSED';
             if(!this.guess.guessed_at) return '?';
             return 'LOCKED'

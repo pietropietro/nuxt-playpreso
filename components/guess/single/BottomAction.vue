@@ -14,7 +14,7 @@
             <half-circle-spinner v-else color="white" :size="40"/>
         </template>
         <h1 v-else-if="guess.verified_at && !guess.guessed_at">MISSED</h1>
-        <h1 v-else-if="guess.verified_at">+{{guess.score}}</h1>
+        <h1 v-else-if="guess.verified_at">+{{guess.points}}</h1>
         <h1 v-else>LOCKED</h1>
     </v-row>
 </template>

@@ -12,10 +12,10 @@
                 </v-col>
                 <v-col class="text-right mr-2" >
                     <v-row justify="end" align="end">
-                        <div :class="fontSize">{{up.score}}</div>
-                        <div :class="fontSize" v-if="up.score_total != up.score" 
+                        <div :class="fontSize">{{up.points}}</div>
+                        <div :class="fontSize" v-if="up.points_total != up.points" 
                             class="caption ml-2 mb-2">
-                            {{up.score_total}}
+                            {{up.points_total}}
                         </div>
                     </v-row>
                 </v-col>

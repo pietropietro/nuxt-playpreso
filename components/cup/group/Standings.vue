@@ -29,7 +29,7 @@ export default {
             if(i-1 < (this.participants / 2)){
                 classes += " primary"
             }
-            else if(i === 3 && this.pointsToPassThird && this.userParticipations?.length >= i && this.userParticipations[i-1].score >= this.pointsToPassThird){
+            else if(i === 3 && this.pointsToPassThird && this.userParticipations?.length >= i && this.userParticipations[i-1].points >= this.pointsToPassThird){
                 classes += " deep-purple darken-3"
             }else{
                 classes += " primary_red"
