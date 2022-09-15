@@ -1,24 +1,27 @@
 <template>
     <v-row no-gutters justify="space-between" align="center">
         <template v-if="up">
-                <v-col>
-                    <div :class="fontSize + ' currentuser'" v-if="up.user_id === currentUser.id" >
-                        {{up.username}}
-                    </div>
-                    <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username" v-else>
-                        <div :class="fontSize + ' ' + fontColor" >
-                        {{up.username}}</div>
-                    </nuxt-link>
-                </v-col>
-                <v-col class="text-right mr-2" >
-                    <v-row justify="end" align="end">
-                        <div :class="fontSize">{{up.points}}</div>
-                        <div :class="fontSize" v-if="up.points_total != up.points" 
-                            class="caption ml-2 mb-2">
-                            {{up.points_total}}
+            <v-col>
+                <v-row no-gutters align="center">
+                    <span class="text-overline pr-2" v-if="up.ppLeague_id && up.position">
+                        #{{up.position}}
+                    </span>
+                    <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username">
+                        <div :class="fontSize + ' ' + fontColor + (up.user_id === currentUser.id ? ' currentuser': '')">
+                            {{up.username}}
                         </div>
-                    </v-row>
-                </v-col>
+                    </nuxt-link>
+                </v-row>
+            </v-col>
+            <v-col cols="auto" class="text-right mr-2" >
+                <v-row justify="end" align="end">
+                    <div :class="fontSize">{{up.points}}</div>
+                    <div :class="fontSize" v-if="up.points_total != up.points" 
+                        class="caption ml-2 mb-2">
+                        {{up.points_total}}
+                    </div>
+                </v-row>
+            </v-col>
         </template>
         <div :class="fontSize" v-else>?</div>
     </v-row>

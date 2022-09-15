@@ -1,17 +1,18 @@
 <template >
     <div>
-        <template v-if="!this.$vuetify.breakpoint.mobile">
-            <v-row no-gutters >
-                <v-col cols="6" v-for="(up, index) in ups" :key="up.id">
-                    <p-p-league-standings-item :ups="ups" :index="index" :showAll="showAll" desktop/>
-                </v-col>
-            </v-row>
-        </template>
-        <template v-else>
-            <div v-for="(up, index) in ups" :key="up.id">
-                <p-p-league-standings-item :ups="ups" :index="index" :showAll="showAll"/>
-            </div>
-        </template>
+        <v-row no-gutters>
+            <v-col :cols="$vuetify.breakpoint.mobile ? '12' : '6'" v-for="(up, index) in ups" :key="up.id">
+                <div :class="$vuetify.breakpoint.mobile ? '' : index % 2 ? 'pl-5' : 'pr-5'">
+                    <user-participation-standing v-if="!showAll && index===(firstSize-1) && makeRoomForCurrentUser"
+                        :up="ups.filter((e)=>e.user_id === currentUser.id)[0]"
+                    />
+                    <user-participation-standing
+                        v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
+                        :up="!$vuetify.breakpoint.mobile ? ups[desktopActualIndex(index)] : ups[index]"
+                    />
+                </div>
+            </v-col>
+        </v-row>
         <v-row no-gutters class="pt-10" justify="center" @click="()=>showAll = !showAll">
             <div class="text-overline">{{showAll ? 'SHOW LESS' : 'SHOW ALL'}}</div>
         </v-row>
@@ -25,6 +26,26 @@ export default {
     data(){
         return{
             showAll: false
+        }
+    },
+    computed:{
+        makeRoomForCurrentUser(){
+            let currentUsrPosition = null;
+            return this.ups.filter((e, i) => { 
+                if(e.user_id === this.currentUser.id){
+                    currentUsrPosition = e.position ?? i;
+                    return true;
+                } 
+            }).length > 0 && currentUsrPosition > this.firstSize;
+        },
+        firstSize(){
+            return !this.$vuetify.breakpoint.mobile ? 10 : 5
+        },
+    },
+    methods:{
+        desktopActualIndex(index){
+            let baseVal = this.showAll ? 10 : 5;
+            return (index % 2 === 0) ? index / 2 : baseVal + Math.floor(index/ 2);
         }
     }
 }
