@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" align="center" class="ocrastd">
+    <v-row no-gutters justify="center" align="center" class="ocrastd">
         <select-integer
             :disabled="pickerDisabled"
             :model="guess.home"

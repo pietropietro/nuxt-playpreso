@@ -1,10 +1,10 @@
 <template>
-    <v-row align="center" justify="space-between">
-        <v-col class="pl-0" cols="auto">
+    <v-row align="center" no-gutters justify="space-between" class="pl-2">
+        <v-col>
             <h1>{{teamName}}</h1>
         </v-col>
-        <v-col v-if="teamStandings" cols="auto" class="pr-0">
-            <v-row align="center">
+        <v-col>
+            <v-row v-if="teamStandings && !lockedText" align="center">
                 <v-col>
                     <p-p-info small
                         label="position"
@@ -19,6 +19,9 @@
                     />
                 </v-col>
             </v-row>
+            <v-row v-else justify="center">
+                <h3 class="ocrastd">{{lockedText}}</h3>
+            </v-row>
         </v-col>
     </v-row>
 </template>
@@ -26,7 +29,8 @@
 export default {
     props:{
         teamStandings: {type: Object},
-        teamName: {type: String}
+        teamName: {type: String},
+        lockedText: {type: String}
     }
 }
 </script>

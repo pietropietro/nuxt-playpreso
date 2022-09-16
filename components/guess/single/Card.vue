@@ -1,9 +1,20 @@
 <template>
     <v-card flat class="transparent">
-        <div>
-            <match-info-big :match="match"/>
+        <match-time-row :match="match" :style="'background-color: ' + ppRGBA($store.state.navigation.rgb)"/>
+        <div :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .6)">
+            <team-row 
+                :teamName="match.homeTeam.name" 
+                :teamStandings="homeStandings" 
+                :lockedText="guess.guessed_at ? guess.home + '-' + guess.away : null"
+            />
+            <team-row 
+                :teamName="match.awayTeam.name" 
+                :teamStandings="awayStandings" 
+                :lockedText="guess.guessed_at ? 'LOCKED' : null"
+            />
+        </div>
+        <div v-if="!guess.guessed_at" :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .4)">
             <guess-single-picker
-                class="py-10"
                 :guess="guess"
             />
             <guess-single-bottom-action
@@ -22,6 +33,16 @@ export default {
     data(){
         return{
             lockButtonLoading: false
+        }
+    },
+    computed:{
+        homeStandings(){
+            if(!this.match.league.standings)return;
+            return this.match.league.standings.filter((e)=>e.id == this.match.homeTeam.id)[0];
+        },
+        awayStandings(){
+            if(!this.match.league.standings)return;
+            return this.match.league.standings.filter((e)=>e.id == this.match.awayTeam.id)[0];
         }
     },
     methods:{
