@@ -3,7 +3,12 @@
         <v-row no-gutters>
             <v-col :cols="$vuetify.breakpoint.mobile ? '12' : '6'" v-for="(up, index) in ups" :key="up.id">
                 <div :class="$vuetify.breakpoint.mobile ? '' : index % 2 ? 'pl-5' : 'pr-5'">
-                    <user-participation-standing v-if="!showAll && index===(firstSize-1) && makeRoomForCurrentUser"
+                    <user-participation-standing 
+                        v-if="ups.length < firstSize"
+                        :up="ups[index]"
+                    />
+                    <user-participation-standing 
+                        v-else-if="!showAll && index===firstSize-1 && makeRoomForCurrentUser"
                         :up="ups.filter((e)=>e.user_id === currentUser.id)[0]"
                     />
                     <user-participation-standing
@@ -29,6 +34,9 @@ export default {
         }
     },
     computed:{
+        firstSize(){
+            return !this.$vuetify.breakpoint.mobile ? 10 : 5
+        },
         makeRoomForCurrentUser(){
             let currentUsrPosition = null;
             return this.ups.filter((e, i) => { 
@@ -38,15 +46,12 @@ export default {
                 } 
             }).length > 0 && currentUsrPosition > this.firstSize;
         },
-        firstSize(){
-            return !this.$vuetify.breakpoint.mobile ? 10 : 5
-        },
     },
     methods:{
         desktopActualIndex(index){
             let baseVal = this.showAll ? 10 : 5;
             return (index % 2 === 0) ? index / 2 : baseVal + Math.floor(index/ 2);
-        }
+        },
     }
 }
 </script>
