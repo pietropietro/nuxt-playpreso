@@ -1,21 +1,19 @@
 <template>
-    <v-row 
+    <v-row
+        no-gutters 
+        align="center"
         justify="center"
-        class="ocrastd text-center pb-10" 
+        class="ocrastd" 
     >
         <template v-if="!guess.verified_at && !guess.guessed_at">
             <h1 v-if="!loading"
-                :style="'color: ' + ppRGBA($store.state.navigation.rgb)"
-                class="text-center"
+                class="white--text text-center py-2"
                 @click="onclick"
             >
                 LOCK
             </h1>
             <half-circle-spinner v-else color="white" :size="40"/>
         </template>
-        <h1 v-else-if="guess.verified_at && !guess.guessed_at">MISSED</h1>
-        <h1 v-else-if="guess.verified_at">+{{guess.points}}</h1>
-        <h1 v-else>LOCKED</h1>
     </v-row>
 </template>
 <script>

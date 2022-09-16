@@ -13,15 +13,18 @@
                 :lockedText="guess.guessed_at ? 'LOCKED' : null"
             />
         </div>
-        <div v-if="!guess.guessed_at" :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .4)">
+        <template v-if="!guess.guessed_at">
             <guess-single-picker
+                class="py-5"
                 :guess="guess"
+                :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .2)"
             />
             <guess-single-bottom-action
+                :style="'background-color: ' + ppRGBA($store.state.navigation.rgb)"
                 :guess="guess"
                 :onclick="lockGuess"
             />
-        </div>
+        </template>
     </v-card>
 </template>
 <script>
