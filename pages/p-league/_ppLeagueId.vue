@@ -1,6 +1,6 @@
 <template>
     <loading-page v-if="loading" />
-    <p-p-tournament-pagination v-else-if="ppLeague" :tournamentObj="ppLeague"  />
+    <p-p-tournament-home v-else-if="ppLeague" :tournamentObj="ppLeague"  />
     <error-wall v-else/>
 </template>
 <script>
@@ -18,7 +18,10 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.GET + this.ppLeagueId, null, 'GET');
             if(response && response.status === "success"){
                 this.ppLeague = response.message;
-                this.$store.commit('navigation/setActive', { title: this.ppTournamentTypeTitle(this.ppLeague.ppTournamentType), color: this.ppRGBA(this.ppLeague.ppTournamentType)});
+                this.$store.commit('navigation/setActive', { 
+                    title: this.ppTournamentTypeTitle(this.ppLeague.ppTournamentType), 
+                    rgb: this.ppLeague.ppTournamentType.rgb
+                });
             }
             this.loading = false;
         },

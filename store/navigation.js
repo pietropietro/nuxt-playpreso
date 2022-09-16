@@ -1,8 +1,8 @@
 export const state = () => ({
     title: null,
-    color: null,
+    rgb: null,
 })
 
 export const mutations = {
-    setActive (state, { title, color }) { state.title= title; state.color = color;},
+    setActive (state, { title, rgb }) { state.title= title; state.rgb = rgb;},
 }

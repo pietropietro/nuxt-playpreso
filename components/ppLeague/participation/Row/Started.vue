@@ -1,7 +1,7 @@
 <template>
     <v-row class="px-2 black--text" 
         align="center" 
-        :style="'background-color: ' + ppRGBA(participation.ppTournamentType,'.6')">
+        :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb,'.6')">
         <v-col cols="4">
             <p-p-info :label="$t('app.position')" 
                 :value="participation.position" 

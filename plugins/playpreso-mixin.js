@@ -5,9 +5,8 @@ Vue.mixin({
         isMissed(guess){
             return guess.verified_at && !guess.guessed_at;
         },
-        ppRGBA(ppTT, opacity){
-            if(!ppTT) return null;
-            let colorString = 'rgba(' + ppTT.red + ', ' + ppTT.green + ', ' + ppTT.blue + ', ' + (opacity?? '1') + ')';
+        ppRGBA(rgb, opacity){
+            let colorString = 'rgba(' + rgb + ', ' + (opacity?? '1') + ')';
             return colorString;
         },
         ppTournamentTypeTitle(ppTournamentType){

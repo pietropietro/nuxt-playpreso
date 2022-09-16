@@ -32,7 +32,7 @@ export default {
             return 'LOCKED'
         },
         value2(){
-            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", color: this.$store.state.navigation.color};
+            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", color: this.ppRGBA(this.$store.state.navigation.rgb)};
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;
         }

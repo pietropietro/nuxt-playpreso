@@ -1,6 +1,6 @@
 <template>
     <loading-page v-if="loading"/>
-    <p-p-tournament-pagination v-else-if="ppCupGroup" :tournamentObj="ppCupGroup" />
+    <p-p-tournament-home v-else-if="ppCupGroup" :tournamentObj="ppCupGroup" />
     <error-wall v-else />
 </template>
 <script>
@@ -25,7 +25,7 @@ export default {
 
                 this.$store.commit('navigation/setActive', { 
                     title: this.ppCupGroup.ppTournamentType.name, 
-                    color: this.ppRGBA(this.ppCupGroup.ppTournamentType)
+                    rgb: this.ppCupGroup.ppTournamentType.rgb
                 });
 
             }

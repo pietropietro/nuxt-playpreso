@@ -34,7 +34,7 @@ export default {
                 this.ppCup = response.message;
                 this.$store.commit('navigation/setActive', { 
                     title: this.ppCup.ppTournamentType.name, 
-                    color: this.ppRGBA(this.ppCup.ppTournamentType)
+                    rgb: this.ppCup.ppTournamentType.rgb
                 });
             }
             this.loading = false;

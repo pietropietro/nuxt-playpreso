@@ -25,6 +25,10 @@
                 class="my-5"
             />
         </template>
+        <!-- USER GUESSES -->
+        <template v-if="userCurrentRound">
+            <guess-user-round :ppRMs="userCurrentRound"/>
+        </template>
         <!-- ROUNDS -->
         <template>
             <p-p-round-pagination
@@ -50,7 +54,21 @@ export default {
     computed:{
         isCupGroup(){
             return this.tournamentObj.groupTag;
-        }
+        },
+        userInTournament(){
+            return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
+        },
+        userCurrentRound(){
+            if(!this.userInTournament)return;
+            if(!this.tournamentObj.ppRounds.length>0)return;
+            return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length -1].ppRoundMatches.map((pprm) => {
+                return {
+                    match: pprm.match,
+                    guess: pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0]
+                };
+                
+            });
+        },
     }
 }
 </script>

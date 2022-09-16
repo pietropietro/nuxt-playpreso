@@ -1,19 +1,17 @@
 <template>
-    <v-container v-if="guess && match" 
-        fill-height
-    >
-        <v-row align="center" justify="center">
-            <match-info :match="match"/>
-        </v-row>
-        <guess-single-picker 
-            :guess="guess" 
-        />
-        <guess-single-bottom-action
-            :guess="guess"
-            :onclick="lockGuess"
-        />
-    </v-container>
-    <error-wall v-else/>
+    <v-card flat class="transparent">
+        <div>
+            <match-info-big :match="match"/>
+            <guess-single-picker
+                class="py-10"
+                :guess="guess"
+            />
+            <guess-single-bottom-action
+                :guess="guess"
+                :onclick="lockGuess"
+            />
+        </div>
+    </v-card>
 </template>
 <script>
 export default {

@@ -2,12 +2,12 @@
     <v-card flat class="transparent">
         <v-card-title 
             class="white--text pa-2 pointer" 
-            :style="'background-color: ' + ppRGBA(ppTT)" 
+            :style="'background-color: ' + ppRGBA(ppTT.rgb)" 
             v-on:click="setShow"
         >
             <h2>{{ppTournamentTypeTitle(ppTT)}}</h2>
         </v-card-title>
-        <v-card-text :style="'background-color: ' + ppRGBA(ppTT, 0.6)" v-show="index === activeIndex">
+        <v-card-text :style="'background-color: ' + ppRGBA(ppTT.rgb, 0.6)" v-show="index === activeIndex">
             <v-row class="pa-4">
                 <v-col>
                     <p-p-info label="leagues"

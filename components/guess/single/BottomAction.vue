@@ -5,7 +5,7 @@
     >
         <template v-if="!guess.verified_at && !guess.guessed_at">
             <h1 v-if="!loading"
-                :style="'color: ' + $store.state.navigation.color"
+                :style="'color: ' + ppRGBA($store.state.navigation.rgb)"
                 class="text-center"
                 @click="onclick"
             >

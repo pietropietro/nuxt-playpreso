@@ -1,7 +1,7 @@
 <template>
     <v-app-bar
         class="white--text" 
-        :color="$store.state.navigation.color ? $store.state.navigation.color : 'primary'" 
+        :color="$store.state.navigation.rgb ? ppRGBA($store.state.navigation.rgb) : 'primary'" 
         fixed-left dense app
     >
         <nuxt-link class="no-decoration" to="/">

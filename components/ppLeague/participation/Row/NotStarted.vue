@@ -1,6 +1,6 @@
 <template>
     <v-row v-if="!participation.ppLeague.started_at" 
-        :style="'background-color: ' + ppRGBA(participation.ppTournamentType,'.6')" 
+        :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb,'.6')" 
         justify="center" 
         align="center">
         <v-col cols="4">

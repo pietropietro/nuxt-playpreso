@@ -1,5 +1,5 @@
 <template>
-  <v-card :color="ppRGBA(up.ppTournamentType)" style="height=100%; width:200px; height: 60px;"> 
+  <v-card :color="ppRGBA(up.ppTournamentType.rgb)" style="height=100%; width:200px; height: 60px;"> 
         <nuxt-link class="no-decoration" :to="ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id">
             <v-card-title class="white--text">
                 <v-row no-gutters justify="space-between">

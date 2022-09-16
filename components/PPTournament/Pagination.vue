@@ -29,8 +29,8 @@ export default {
     mounted(){
         let pag = document.querySelector('.pagination-fixed');
         if(pag) pag.style.backgroundColor = !!this.tournamentObj.ppTournamentType ? 
-            this.ppRGBA(this.tournamentObj.ppTournamentType) :
-            this.ppRGBA(this.tournamentObj.ppTournamentType);
+            this.ppRGBA(this.tournamentObj.ppTournamentType.rgb) :
+            null;
     },
     data(){
         return {
