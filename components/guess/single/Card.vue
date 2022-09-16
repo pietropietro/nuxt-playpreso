@@ -10,10 +10,10 @@
             <team-row 
                 :teamName="match.awayTeam.name" 
                 :teamStandings="awayStandings" 
-                :lockedText="guess.guessed_at ? 'LOCKED' : null"
+                :lockedText="guessStatus"
             />
         </div>
-        <template v-if="!guess.guessed_at">
+        <template v-if="!guess.guessed_at && !guess.verified_at">
             <guess-single-picker
                 class="py-5"
                 :guess="guess"
@@ -39,6 +39,12 @@ export default {
         }
     },
     computed:{
+        guessStatus(){
+            if(this.guess.guessed_at && this.guess.verified_at) return (this.guess.points > 0 ? '+' : '') + this.guess.points  ;
+            if(!this.guess.guessed_at && !this.guess.verified_at) return null;
+            if(!this.guess.guessed_at && this.guess.verified_at) return 'MISSED'
+            return 'LOCKED';
+        },
         homeStandings(){
             if(!this.match.league.standings)return;
             return this.match.league.standings.filter((e)=>e.id == this.match.homeTeam.id)[0];
