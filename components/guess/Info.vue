@@ -23,7 +23,7 @@ export default {
         label(){
             if(this.hideUsername)return null;
             return {
-                class: this.guess.user_id === this.currentUser.id ? 'currentuser' : null, 
+                class: this.guess.user_id === this.currentUser.id ? 'font-weight-bold currentuser' : null, 
                 text: this.guess.username
             };
         },

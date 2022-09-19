@@ -15,8 +15,8 @@
             </template>
         </v-row>
         <v-row v-if="!wide" justify="center" 
-            :class="label?.class ? 'text-overline mt-0 ' + label?.class : 'text-overline mt-0'" 
-            :style="label?.color ? 'color:' + label?.color : ''">
+            :class="label?.class ? '' + label.class : 'text-overline mt-0'" 
+            :style="label?.color ? 'color:' + label.color : ''">
             {{label?.text ?? label}}
         </v-row>
     </div>
