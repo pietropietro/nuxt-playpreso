@@ -59,9 +59,8 @@ export default {
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
         },
         userCurrentRound(){
-            if(!this.userInTournament)return;
-            if(!this.tournamentObj.ppRounds.length>0)return;
-            return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length -1].ppRoundMatches.map((pprm) => {
+            if(!this.userInTournament) return null;
+            return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length-1].ppRoundMatches.map((pprm) => {
                 return {
                     match: pprm.match,
                     guess: pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0]

@@ -1,5 +1,5 @@
 <template>
-    <p-p-scroll :infoCols="5" :infoMd="2" class="pa-0">
+    <p-p-scroll :infoCols="3" :infoMd="2" class="pa-0">
         <match-info-short slot="info" :match="ppRM.match"/>          
         <v-slide-item slot="slide-item" v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
             <div>

@@ -1,18 +1,11 @@
 <template>
-    <v-card flat class="transparent">
+    <v-card flat class="transparent" v-if="guess">
         <match-time-row :match="match" :style="'background-color: ' + ppRGBA($store.state.navigation.rgb)"/>
-        <div :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .6)">
-            <team-row 
-                :teamName="match.homeTeam.name" 
-                :teamStandings="homeStandings" 
-                :lockedText="guess.guessed_at ? guess.home + '-' + guess.away : null"
-            />
-            <team-row 
-                :teamName="match.awayTeam.name" 
-                :teamStandings="awayStandings" 
-                :lockedText="guessStatus"
-            />
-        </div>
+        <guess-single-teams
+            :match="match" 
+            :guess="guess" 
+            :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, statusAlpha)"
+        />
         <template v-if="!guess.guessed_at && !guess.verified_at">
             <guess-single-picker
                 class="py-5"
@@ -26,6 +19,7 @@
             />
         </template>
     </v-card>
+    <error-wall v-else/>
 </template>
 <script>
 export default {
@@ -39,19 +33,10 @@ export default {
         }
     },
     computed:{
-        guessStatus(){
-            if(this.guess.guessed_at && this.guess.verified_at) return (this.guess.points > 0 ? '+' : '') + this.guess.points  ;
-            if(!this.guess.guessed_at && !this.guess.verified_at) return null;
-            if(!this.guess.guessed_at && this.guess.verified_at) return 'MISSED'
-            return 'LOCKED';
-        },
-        homeStandings(){
-            if(!this.match.league.standings)return;
-            return this.match.league.standings.filter((e)=>e.id == this.match.homeTeam.id)[0];
-        },
-        awayStandings(){
-            if(!this.match.league.standings)return;
-            return this.match.league.standings.filter((e)=>e.id == this.match.awayTeam.id)[0];
+        statusAlpha(){
+            if(this.match.score_home !== null) return 0.6;
+            if(this.guess.guessed_at) return 0.6;
+            return 0.2;
         }
     },
     methods:{

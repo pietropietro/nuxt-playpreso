@@ -14,12 +14,14 @@
 export default {
     props:{
         guess: {type: Object, required: true},
+        hideUsername: {type: Boolean}
     },
     computed:{
         small(){
             return this.guess.points < 9;
         },
         label(){
+            if(this.hideUsername)return null;
             return {
                 class: this.guess.user_id === this.currentUser.id ? 'currentuser' : null, 
                 text: this.guess.username

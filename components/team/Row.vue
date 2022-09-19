@@ -1,7 +1,7 @@
 <template>
     <v-row align="center" no-gutters justify="space-between" class="pl-2">
         <v-col>
-            <h1>1 {{teamName}}</h1>
+            <h1>{{teamName}}</h1>
         </v-col>
         <v-col>
             <v-row v-if="teamStandings && !lockedText" align="center">

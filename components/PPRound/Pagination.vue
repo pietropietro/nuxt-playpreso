@@ -9,6 +9,7 @@
                 <p-p-info wide :label="$t('app.round')" :value="selectedRound" :value2="rounds"/>
             </v-row>
         </p-p-simple-pagination>
+        <!-- <guess-user-round v-if="cuInTournament" :ppRMs="userCurrentRound"/> -->
         <p-p-round-display
             v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
@@ -20,14 +21,27 @@ export default {
     props:{
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},
+        // cuInTournament: {type: Boolean}
     },
     data(){
         return{
             selectedRound: this.ppRounds.length
         }
     },
+    // computed:{
+        // userCurrentRound(){
+        //     return this.ppRounds[this.selectedRound-1].ppRoundMatches.map((pprm) => {
+        //         return {
+        //             match: pprm.match,
+        //             guess: pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0]
+        //         };
+                
+        //     });
+        // },
+    // }
 }
 </script>
+
 <style>
     .pagination-arrows-only .v-pagination__item{
         display: none !important;
