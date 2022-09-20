@@ -14,6 +14,7 @@
                     <user-participation-standing
                         v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
                         :up="!$vuetify.breakpoint.mobile ? ups[desktopActualIndex(index)] : ups[index]"
+                        :showDetails="showAll"
                     />
                 </div>
             </v-col>

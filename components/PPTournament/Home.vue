@@ -25,25 +25,22 @@
                 class="my-5"
             />
         </template>
-        <!-- USER GUESSES -->
-        <template v-if="userCurrentRound">
-            <guess-user-round :ppRMs="userCurrentRound"/>
-        </template>
         <!-- ROUNDS -->
-        <template>
+        <template  v-if="tournamentObj.ppRounds.length > 0">
+            <guess-user-round :ppRMs="userCurrentRound" v-if="userCurrentRound"/>
             <p-p-round-pagination
                 v-if="tournamentObj.ppRounds.length > 0"
                 :ppRounds="tournamentObj.ppRounds"
                 :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppTournamentType.rounds"
                 class="py-5"
             />
-            <v-row v-else class="mx-2 py-5 ocrastd" justify="center">
-                <h2>waiting for 
-                    {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
-                    more users
-                </h2>
-            </v-row>
         </template>
+        <v-row v-else class="mx-2 py-5 ocrastd" justify="center">
+            <h2>waiting for 
+                {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
+                more users
+            </h2>
+        </v-row>
     </v-container>
 </template>
 <script>

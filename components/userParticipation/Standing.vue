@@ -14,12 +14,18 @@
                 </v-row>
             </v-col>
             <v-col cols="auto" class="text-right mr-2" >
-                <v-row justify="end" align="end">
-                    <div class="user-font">{{up.points}}</div>
-                    <div v-if="up.points_total != up.points" 
-                        class="caption ml-2 mb-2">
-                        {{up.points_total}}
-                    </div>
+                <v-row no-gutters justify="center" align="end">
+                    <v-col>
+                        <div class="user-font">{{up.tot_points}}</div>
+                        <div v-if="up.points_total && up.points_total != up.tot_points" class="caption ml-2 mb-2">
+                            {{up.points_total}}
+                        </div>
+                    </v-col>
+                    <v-col cols="auto" v-if="showDetails">
+                        <v-row no-gutters class="text-overline ml-2 mb-1">
+                            <v-col>{{up.tot_locked}}-{{up.tot_preso ?? 0}}-{{up.tot_unox2 ?? 0}}</v-col>
+                        </v-row>
+                    </v-col>
                 </v-row>
             </v-col>
         </template>
@@ -31,6 +37,7 @@ export default {
     props:{
         up: {type: Object},
         whiteText: {type: Boolean},
+        showDetails: {type: Boolean}
     },
     computed:{
         fontColor(){return this.whiteText ? 'white--text' : 'black--text'}
