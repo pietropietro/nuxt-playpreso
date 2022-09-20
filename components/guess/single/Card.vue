@@ -6,7 +6,7 @@
             :guess="guess" 
             :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, statusAlpha)"
         />
-        <template v-if="!guess.guessed_at && !guess.verified_at">
+        <template v-if="!guess.guessed_at && !guess.verified_at && match.score_home === null">
             <guess-single-picker
                 class="py-5"
                 :guess="guess"

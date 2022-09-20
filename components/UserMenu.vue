@@ -8,7 +8,9 @@
                 <v-list-item>
                         <v-list-item-title>
                             <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
-                                <h1 class="currentuser black--text">{{currentUser.username}}</h1>
+                                <h1 class="black--text" >
+                                    {{currentUser.username}}
+                                </h1>
                             </nuxt-link>
                         </v-list-item-title>
                 </v-list-item>

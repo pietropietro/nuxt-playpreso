@@ -4,7 +4,7 @@
             <v-row no-gutters class="pl-2"><h1>{{match.score_home ?? ''}} {{match.homeTeam.name}}</h1></v-row>
             <v-row no-gutters class="pl-2"><h1>{{match.score_away ?? ''}} {{match.awayTeam.name}}</h1></v-row>
         </v-col>
-        <v-col v-if="!guess.verified_at && !guess.guessed_at">
+        <v-col v-if="!guess.verified_at && !guess.guessed_at && homeStandings">
             <team-standings :standings="homeStandings"/>
             <team-standings :standings="awayStandings"/>
         </v-col>

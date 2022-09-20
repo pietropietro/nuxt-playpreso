@@ -22,7 +22,7 @@
                 </div>
             </v-col>
         </v-row>
-        <v-row no-gutters class="pt-10" justify="center" @click="()=>showAll = !showAll">
+        <v-row v-if="ups.length > firstSize" no-gutters class="pt-10" justify="center" @click="()=>showAll = !showAll">
             <div class="text-overline">{{showAll ? 'SHOW LESS' : 'SHOW ALL'}}</div>
         </v-row>
     </div>

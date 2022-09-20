@@ -35,7 +35,7 @@
 	height: 25%;
 	position: absolute;
 	content: '';
-	background-color: #1FFF00;
+	background-color: var(--my-color-var);
 	width: 100%;
 	z-index: -1;
 }

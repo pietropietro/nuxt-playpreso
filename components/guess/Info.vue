@@ -6,6 +6,7 @@
                 :value="value1"
                 :value2="value2"
                 :label="label"
+                :style="'--my-color-var:' + ppRGBA($store.state.navigation.rgb)"
             />
         </v-row>
     </v-container>
