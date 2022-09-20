@@ -1,17 +1,20 @@
 <template >
     <div>
         <v-row no-gutters>
+            <v-col cols="12" v-if="showAll">
+                <user-participation-standing-labels />
+            </v-col>
             <v-col :cols="$vuetify.breakpoint.mobile ? '12' : '6'" v-for="(up, index) in ups" :key="up.id">
                 <div :class="$vuetify.breakpoint.mobile ? '' : index % 2 ? 'pl-5' : 'pr-5'">
-                    <user-participation-standing 
+                    <user-participation-standing-item 
                         v-if="ups.length < firstSize"
                         :up="ups[index]"
                     />
-                    <user-participation-standing 
+                    <user-participation-standing-item 
                         v-else-if="!showAll && index===firstSize-1 && makeRoomForCurrentUser"
                         :up="ups.filter((e)=>e.user_id === currentUser.id)[0]"
                     />
-                    <user-participation-standing
+                    <user-participation-standing-item
                         v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
                         :up="!$vuetify.breakpoint.mobile ? ups[desktopActualIndex(index)] : ups[index]"
                         :showDetails="showAll"
