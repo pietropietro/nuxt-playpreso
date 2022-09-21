@@ -1,15 +1,16 @@
 <template>
     <v-container>
-        <cup-group-detail 
-            v-if="isCupGroup" 
-            :ppCupGroup="tournamentObj"
-            class="py-5"
-        />
-        <league-slider 
-            v-if="!isCupGroup"
-            :leagues="tournamentObj.ppTournamentType.leagues" 
-            class="py-5"
-        />
+        <template>
+            <cup-group-detail
+                v-if="isCupGroup"
+                :ppCupGroup="tournamentObj"
+                class="py-5"
+            />
+            <p-p-league-intro
+                :ppTournamentType="tournamentObj.ppTournamentType"
+                v-else
+            />
+        </template>
         <!-- STANDINGS -->
         <template>
             <p-p-league-standings-list
