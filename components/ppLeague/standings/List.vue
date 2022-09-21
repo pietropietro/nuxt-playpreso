@@ -4,8 +4,8 @@
             <v-col cols="12" v-if="showAll">
                 <user-participation-standing-labels />
             </v-col>
-            <v-col :cols="$vuetify.breakpoint.mobile ? '12' : '6'" v-for="(up, index) in ups" :key="up.id">
-                <div :class="$vuetify.breakpoint.mobile ? '' : index % 2 ? 'pl-5' : 'pr-5'">
+            <v-col cols="12" md="6" v-for="(up, index) in ups" :key="up.id">
+                <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
                     <user-participation-standing-item 
                         v-if="ups.length < firstSize"
                         :up="ups[index]"
@@ -16,7 +16,7 @@
                     />
                     <user-participation-standing-item
                         v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
-                        :up="!$vuetify.breakpoint.mobile ? ups[desktopActualIndex(index)] : ups[index]"
+                        :up="$vuetify.breakpoint.mdAndUp ? ups[desktopActualIndex(index)] : ups[index]"
                         :showDetails="showAll"
                     />
                 </div>
@@ -39,7 +39,7 @@ export default {
     },
     computed:{
         firstSize(){
-            return !this.$vuetify.breakpoint.mobile ? 10 : 5
+            return this.$vuetify.breakpoint.mdAndUp ? 10 : 5
         },
         makeRoomForCurrentUser(){
             let currentUsrPosition = null;
