@@ -7,8 +7,9 @@
                 class="py-5"
             />
             <p-p-league-intro
-                :ppTournamentType="tournamentObj.ppTournamentType"
                 v-else
+                class="py-5"
+                :ppTournamentType="tournamentObj.ppTournamentType"
             />
         </template>
         <!-- STANDINGS -->
