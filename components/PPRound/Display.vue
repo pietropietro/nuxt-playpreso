@@ -1,12 +1,12 @@
 <template>
-    <p-p-scroll :infoCols="3" :infoMd="2" class="pa-0">
+    <p-p-slider :infoCols="3" :infoMd="2" class="pa-0">
         <match-info-short slot="info" :match="ppRM.match"/>          
         <v-slide-item slot="slide-item" v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
             <div>
                 <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess"/>
             </div>
         </v-slide-item>
-    </p-p-scroll>
+    </p-p-slider>
 </template>
 <script>
 export default {

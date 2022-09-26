@@ -1,5 +1,5 @@
 <template>
-    <v-row class="py-2" :align="infoAlign">
+    <v-row class="py-2 noselection" :align="infoAlign">
         <v-col :md="infoMd" :cols="infoCols">
             <slot name="info"/>
         </v-col>
@@ -16,7 +16,6 @@
 </template>
 <script>
 export default {
-    name: "PPScroll",
     props:{
         infoAlign: {type: String, default: "center"},
         infoCols: {type: Number, default: 3},

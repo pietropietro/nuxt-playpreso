@@ -1,5 +1,5 @@
 <template>
-    <p-p-scroll v-if="ppTournamentTypes.length" infoAlign="start">
+    <p-p-slider v-if="ppTournamentTypes.length" infoAlign="start">
         <p-p-info slot="info" label="available" :value="ppTournamentTypes.length"/>
         <v-slide-item 
             slot="slide-item" 
@@ -17,7 +17,7 @@
                 />
             </div>
         </v-slide-item>
-    </p-p-scroll>
+    </p-p-slider>
 </template>
 <script>
 export default {

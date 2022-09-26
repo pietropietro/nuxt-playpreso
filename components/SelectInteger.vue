@@ -1,5 +1,5 @@
 <template>
-    <h1 :class="disabled ? '' : 'pointer'"  @click="onClick">
+    <h1 :class="'noselection ' + disabled ? '' : 'pointer'"  @click="onClick">
         {{computedModel + (computedModel === 3 ? '+' : '')}}
     </h1>
 </template>

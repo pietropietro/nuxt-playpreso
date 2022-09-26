@@ -1,5 +1,5 @@
 <template>
-    <p-p-scroll>
+    <p-p-slider>
         <p-p-info slot="info" label="trophies" :value="ups.length"/>
         <v-slide-item slot="slide-item" v-for="(up,index) in ups" :key="index">
             <!-- TODO distinguish cups -->
@@ -7,7 +7,7 @@
             <!-- {{up.position}}
             {{up.id}} -->
         </v-slide-item>
-    </p-p-scroll>
+    </p-p-slider>
 </template>
 
 <script>

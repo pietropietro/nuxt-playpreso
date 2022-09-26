@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="space-between" align="center" class="my-2">
+    <v-row justify="space-between" align="center" class="my-2 noselection">
         <v-col cols="2">
             <v-btn text :disabled="value===1" @click="setValue(value - 1)">
                 <h1><</h1>

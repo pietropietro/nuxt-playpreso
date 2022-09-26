@@ -6,7 +6,7 @@
             :setModel="(val)=>{guess.home = val}"
         />
         <v-col cols="2">
-            <h1 class="text-center">-</h1>
+            <h1 class="text-center" style="user-select: none;">-</h1>
         </v-col>
         <select-integer
             :disabled="pickerDisabled"
