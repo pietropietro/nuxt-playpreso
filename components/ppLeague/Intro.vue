@@ -9,7 +9,7 @@
         <v-col cols="6" sm="3">
            <p-p-info 
                 label="qualifies to"
-                :value="ppTournamentTypeTitle(ppTournamentType)"
+                :value="ppTournamentTypeTitle(ppTournamentType.next)"
             />
         </v-col>
         <v-col cols="6" sm="3">
