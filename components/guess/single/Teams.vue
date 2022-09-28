@@ -9,7 +9,11 @@
             <team-standings :standings="awayStandings"/>
         </v-col>
         <v-col cols="auto" v-else>
-            <guess-info :guess="guess" hideUsername/>
+            <div v-if="guess.guessed_at && !guess.verified_at">
+                <guess-single-picker :guess="guess"/>
+                <h4>LOCKED</h4>
+            </div>
+            <guess-info v-else :guess="guess" hideUsername/>
         </v-col>
     </v-row>
 </template>

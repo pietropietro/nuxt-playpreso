@@ -10,6 +10,7 @@
             <guess-single-picker
                 class="py-5"
                 :guess="guess"
+                valueDescription
                 :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .2)"
             />
             <guess-single-bottom-action

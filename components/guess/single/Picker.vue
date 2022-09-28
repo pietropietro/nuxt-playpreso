@@ -1,6 +1,6 @@
 <template>
     <v-row no-gutters align="center">
-        <v-col cols="3">
+        <v-col cols="3" v-if="valueDescription">
             <v-row no-gutters class="ocrastd text-right" style="font-size:12px;">
                 <v-col cols="12">
                     <div>
@@ -42,6 +42,7 @@
 export default {
     props: {
         guess: {type: Object},
+        valueDescription: {type: Boolean}
     },
     computed: {
         pickerDisabled(){
