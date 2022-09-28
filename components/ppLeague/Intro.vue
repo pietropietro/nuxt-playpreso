@@ -20,13 +20,16 @@
         </v-col>
         <v-col cols="6" sm="3">
             <p-p-info 
-                :label="ppTournamentType.leagues.length > 1 ? 'leagues' : 'league'"
+                v-if="ppTournamentType.leagues.length == 1"
+                label="league"
+                :value="ppTournamentType.leagues[0].name"
+            />
+            <p-p-info 
+                v-else
+                label="leagues"
                 :value="ppTournamentType.leagues.length"
             />
         </v-col>
-        <!-- <v-col>
-            <league-slider :leagues="ppTournamentType.leagues" class="py-5" />
-        </v-col> -->
     </v-row>
 </template>
 <script>
