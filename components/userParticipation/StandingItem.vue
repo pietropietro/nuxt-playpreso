@@ -25,7 +25,7 @@
                     </v-col>
                     <v-col cols="auto" v-if="showDetails">
                         <v-row no-gutters class="text-overline ml-2 mb-1">
-                            <v-col>{{up.tot_locked}}-{{up.tot_preso ?? 0}}-{{up.tot_unox2 ?? 0}}</v-col>
+                            <v-col>{{up.tot_locked ?? 0}}-{{up.tot_preso ?? 0}}-{{up.tot_unox2 ?? 0}}</v-col>
                         </v-row>
                     </v-col>
                 </v-row>
