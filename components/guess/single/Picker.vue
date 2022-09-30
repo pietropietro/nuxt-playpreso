@@ -21,19 +21,21 @@
         </v-col>
         <v-col>
             <v-row no-gutters justify="center" align="center" class="ocrastd">
-                <select-integer
-                    :disabled="pickerDisabled"
-                    :model="guess.home"
-                    :setModel="(val)=>{guess.home = val}"
-                />
-                <v-col cols="2">
+                    <select-integer
+                        justify="end"
+                        :disabled="pickerDisabled"
+                        :model="guess.home"
+                        :setModel="(val)=>{guess.home = val}"
+                    />
+                <v-col cols="auto">
                     <h1 class="text-center" style="user-select: none;">-</h1>
                 </v-col>
-                <select-integer
-                    :disabled="pickerDisabled"
-                    :model="guess.away"
-                    :setModel="(val)=>{guess.away = val}"
-                />
+                    <select-integer
+                        justify="start"
+                        :disabled="pickerDisabled"
+                        :model="guess.away"
+                        :setModel="(val)=>{guess.away = val}"
+                    />
             </v-row>
         </v-col>
     </v-row>

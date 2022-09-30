@@ -1,7 +1,10 @@
 <template>
-    <h1 :class="'noselection ' + disabled ? '' : 'pointer'"  @click="onClick">
-        {{computedModel + (computedModel === 3 ? '+' : '')}}
-    </h1>
+    <v-row no-gutters :justify="justify">
+        <h1 :class="'noselection ' + disabled ? '' : 'pointer'"  @click="onClick" style="user-select: none;">
+            {{computedModel}}
+        </h1>
+        <h4 v-if="computedModel === 3">+</h4>
+    </v-row>
 </template>
 <script>
 export default {
@@ -10,6 +13,7 @@ export default {
         disabled: {type: Boolean},
         model: {type: Number},
         setModel: {type: Function},
+        justify: {type: String}
     },
     computed: {
         computedModel:{
