@@ -2,7 +2,7 @@
     <v-row class="px-2 black--text" 
         align="center" 
         :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb,'.6')">
-        <v-col cols="4">
+        <v-col cols="4" v-if="participation.position">
             <p-p-info :label="$t('app.position')" 
                 :value="participation.position" 
                 :value2="participation.ppLeague.user_count"
@@ -16,7 +16,7 @@
         </v-col>
         <v-col cols="4">
                 <v-row justify="center">
-                <h3 class="ocrastd">
+                <h3>
                     {{participation.locked ? 'LOCKED' : 'UNLOCKED'}}
                 </h3>
             </v-row>

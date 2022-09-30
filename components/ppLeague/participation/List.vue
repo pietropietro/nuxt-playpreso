@@ -1,6 +1,8 @@
 <template>
     <v-row v-if="!loading" class="mt-5">
-        <v-col cols="12" md="6" v-for="(participation, index) in ppLParticipations" :key="index">
+        <v-col v-for="(participation, index) in ppLParticipations" :key="index"
+            :cols="participationCols(participation, true)" :md="participationCols(participation, false)" 
+        >
             <nuxt-link :to="ROUTES.PPLEAGUE.DETAIL + participation.ppLeague_id" class="no-decoration">
                 <p-p-league-participation-card :participation="participation" class="ma-1"/>
             </nuxt-link>
@@ -23,6 +25,13 @@ export default {
             }
             this.loading = false;
         },
+        participationCols(participation, mobile){
+            if(!participation.ppLeague.started_at){
+                return mobile ? '6' : '3'
+            }
+            return mobile ? '12' : '6'
+
+        }
     },
     async mounted(){
         await this.getParticipations();

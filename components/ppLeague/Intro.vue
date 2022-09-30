@@ -8,8 +8,13 @@
         </v-col>
         <v-col cols="6" sm="3">
            <p-p-info 
+                v-if="ppTournamentType.next"
                 label="qualifies to"
                 :value="ppTournamentTypeTitle(ppTournamentType.next)"
+            />
+            <p-p-info v-else
+                label="level"
+                value="Last"
             />
         </v-col>
         <v-col cols="6" sm="3">
