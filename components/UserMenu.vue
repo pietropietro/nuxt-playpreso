@@ -1,7 +1,7 @@
 <template>
     <v-menu offset-y v-if="currentUser">
         <template v-slot:activator="{ on }">
-            <h1 v-on="on" class="pointer ocrastd">$</h1>
+            <h1 v-on="on" class="pointer ocrastd">></h1>
         </template>
         <v-list role="menu" class="pb-0">
             <template >

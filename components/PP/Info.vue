@@ -24,7 +24,7 @@
 <script>
 export default {
     props: {
-        label: {required: true},
+        label: {required: false},
         value: {required: true},
         value2: {required: false},      
         small: {type: Boolean},
