@@ -1,8 +1,8 @@
 <template>
-    <v-container :style="small ? 'width:80px; height:80px;' : 'width:110px; height:80px;'">
+    <v-container :style="small && incrementalFont ? 'width:80px; height:80px;' : 'width:110px; height:80px;'">
         <v-row justify="center" style="height:100%" align="end">
             <p-p-info
-                :small="small"
+                :small="small && incrementalFont"
                 :value="value1"
                 :value2="value2"
                 :label="label"
@@ -15,6 +15,7 @@
 export default {
     props:{
         guess: {type: Object, required: true},
+        incrementalFont: {type: Boolean},
         hideUsername: {type: Boolean}
     },
     computed:{

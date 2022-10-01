@@ -3,7 +3,7 @@
         <match-info-short slot="info" :match="ppRM.match"/>          
         <v-slide-item slot="slide-item" v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
             <div>
-                <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess"/>
+                <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess" incrementalFont/>
             </div>
         </v-slide-item>
     </p-p-slider>
