@@ -13,7 +13,7 @@
         <!-- STANDINGS -->
         <div class="py-4">
             <template v-if="!isCupGroup">
-                <v-row no-gutters><div class="text-overline">PLAYERS</div></v-row>
+                <p-p-section-title text="PLAYERS"/>
                 <p-p-league-standings-list
                     :ups="tournamentObj.userParticipations"
                 />
@@ -28,11 +28,11 @@
         <!-- ROUNDS -->
         <template  v-if="tournamentObj.ppRounds.length > 0">
             <div v-if="userCurrentRound" class="py-4">
-                <v-row no-gutters><div class="text-overline">YOUR GUESSES</div></v-row>
+                <p-p-section-title text="YOUR GUESSES" />
                 <guess-user-round class="mt-0" :ppRMs="userCurrentRound" />
             </div>
             <div v-if="tournamentObj.ppRounds.length > 0" class="py-4">
-                <v-row no-gutters><div class="text-overline">ROUNDS</div></v-row>
+                <p-p-section-title text="ROUNDS" />
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds"
                     :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppTournamentType.rounds"

@@ -1,13 +1,7 @@
 <template>
-    <v-container>
-        <v-row>
-            <h1>P-LEAGUES</h1>
-        </v-row>
-        <v-row>
-            <p-p-tournament-available-list />
-        </v-row>
-        <v-row>
-            <p-p-league-participation-list class="mt-5"/>
-        </v-row>
-    </v-container>
+    <div>
+        <p-p-section-title text="P-LEAGUES"/>
+        <p-p-tournament-available-list />
+        <p-p-league-participation-list class="mt-5"/>
+    </div>
 </template>
