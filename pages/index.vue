@@ -1,7 +1,13 @@
 <template>
-    <v-container>
-        <home-p-p-leagues/>
-    </v-container>
+    <div>
+        <!-- <div> -->
+        <mundial-banner />
+        <!-- </div> -->
+        <v-container>
+            <!-- <home-p-p-cups/> -->
+            <home-p-p-leagues class="pt-4"/>
+        </v-container>
+    </div>
 </template>
 <script>
 export default {

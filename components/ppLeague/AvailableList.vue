@@ -30,7 +30,7 @@ export default {
     },
     methods:{
         async getAvailable(){
-            let response = await this.$api.call(this.API_ROUTES.PPTOURNAMENTTYPE.AVAILABLE);
+            let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.AVAILABLE);
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
             }
@@ -39,7 +39,7 @@ export default {
 
     },
     async mounted(){
-        await this.getAvailable();
+        await this.getAvailable(); 
     }
 }
 </script>

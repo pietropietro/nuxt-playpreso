@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="!loading" class="mt-5">
+    <v-row v-if="!loading">
         <v-col v-for="(participation, index) in ppLParticipations" :key="index"
             :cols="participationCols(participation, true)" :md="participationCols(participation, false)" 
         >

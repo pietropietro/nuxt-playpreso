@@ -19,7 +19,7 @@ Vue.mixin({
                 }
             },
             API_ROUTES: {
-                LOGIN: '/login',
+                LOGIN: '/user/login',
                 REGISTER: '/user',
                 USER:{
                     GET: '/user/'
@@ -28,21 +28,23 @@ Vue.mixin({
                     LOCK: '/guess/lock/'
                 },
                 USER_PARTICIPATION: {
-                    PPLEAGUES:  '/userParticipation/ppLeagues'
+                    PPLEAGUES:  '/userParticipation/p-leagues',
+                    PPCUPS:  '/userParticipation/p-cups'
                 },
                 PPLEAGUE: {
-                    GET: '/ppLeague/',
-                },
-                PPTOURNAMENTTYPE: {
-                    AVAILABLE: '/ppTournamentType/available',
-                    JOIN: '/ppTournamentType/join/'
+                    GET: '/p-league/',
+                    AVAILABLE: '/p-league/available'
                 },
                 PPCUP: {
-                    GET: '/ppCup/',
+                    GET: '/p-cup/',
+                    AVAILABLE: '/p-cup/available',
                     GROUP: {
-                        GET: '/ppCupGroup/'
+                        GET: '/p-cupGroup/'
                     }
-                }
+                },
+                PPTOURNAMENTTYPE: {
+                    JOIN: '/p-tournamentType/join/'
+                },
             }
         }
     }

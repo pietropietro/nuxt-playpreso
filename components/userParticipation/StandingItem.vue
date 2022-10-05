@@ -18,10 +18,12 @@
             <v-col cols="auto" class="text-right mr-2" >
                 <v-row no-gutters justify="center" align="end">
                     <v-col>
-                        <div class="user-font">{{up.tot_points}}</div>
-                        <div v-if="up.points_total && up.points_total != up.tot_points" class="caption ml-2 mb-2">
-                            {{up.points_total}}
+                        <div class="user-font">{{up.tot_points}}
+                            <span v-if="up.tot_cup_points && up.tot_cup_points != up.tot_points" class="caption ml-2 mb-2">
+                                {{up.tot_cup_points}}
+                            </span>
                         </div>
+                        
                     </v-col>
                     <v-col cols="auto" v-if="showDetails">
                         <v-row no-gutters class="text-overline ml-2 mb-1">

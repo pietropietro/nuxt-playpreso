@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <div class="py-4">
-            <cup-group-detail
+            <p-p-cup-group-detail
                 v-if="isCupGroup"
                 :ppCupGroup="tournamentObj"
             />
@@ -19,7 +19,7 @@
                 />
             </template>
             <!-- TODO pointstopassthird from server -->
-            <cup-group-standings
+            <p-p-cup-group-standings
                 v-else
                 :userParticipations="tournamentObj.userParticipations"
                 :participants="tournamentObj.participants"
