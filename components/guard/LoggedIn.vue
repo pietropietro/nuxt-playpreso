@@ -6,15 +6,12 @@
 
 <script>
 export default {
-    name: 'LoginGuard',
     computed: { 
         loading: { 
             get() { 
-                return setTimeout(() => !this.currentUser ? this.$router.push('/login') : "", 200);
-               
+                return setTimeout(() => !this.currentUser ? this.$router.push(this.ROUTES.LOGIN) : "", 200);
             }
         } 
     },
-
 }
 </script>

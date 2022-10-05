@@ -3,7 +3,7 @@
 		<v-app>
 			<p-p-header />   
 			<!-- <p-p-logo-row class="my-5"/>  -->
-			<login-guard v-if="!currentUser"/>
+			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
 				<v-main>
