@@ -11,7 +11,7 @@
             </nuxt-link>
         </v-col>
         <v-col cols="6">
-            <h1 class="text-center">{{ppCupGroup.groupTag}}</h1>
+            <h1 class="text-center">{{ppCupGroup.tag}}</h1>
         </v-col>
     </v-row>
 </template>

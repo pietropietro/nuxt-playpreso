@@ -54,7 +54,7 @@ export default {
     },
     computed:{
         isCupGroup(){
-            return this.tournamentObj.groupTag;
+            return this.tournamentObj.tag;
         },
         userInTournament(){
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;

@@ -45,6 +45,23 @@ Vue.mixin({
                 PPTOURNAMENTTYPE: {
                     JOIN: '/p-tournamentType/join/'
                 },
+            },
+            ADMIN_FEATURES: {
+                USERS: {
+                    ROUTE: '/admin/users',
+                    NAME: 'users'
+                },
+                PPCUPS: {
+                    ROUTE: '/admin/p-cups',
+                    NAME: 'p-cups'
+                },
+            },
+            ADMIN_API_ROUTES: {
+                PPTOURNAMENTTYPES: '/admin/p-tournamentTypes',
+                PPCUP:{
+                    GET: '/admin/p-cup',
+                    CREATE: '/admin/p-cup/'
+                }
             }
         }
     }

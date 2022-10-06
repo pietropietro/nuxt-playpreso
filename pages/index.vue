@@ -1,7 +1,9 @@
 <template>
     <div>
         <!-- <div> -->
-        <mundial-banner />
+        <nuxt-link to="/p-cup/world-cup-22" class="no-decoration">
+            <mundial-banner />
+        </nuxt-link>
         <!-- </div> -->
         <v-container>
             <!-- <home-p-p-cups/> -->
