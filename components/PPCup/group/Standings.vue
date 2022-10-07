@@ -1,22 +1,20 @@
 <template>
     <div class="white--text" >
-        <v-row no-gutters :class="colorForPosition(0)" style="border-radius:20px 20px 0 0; border-width:thin;">
+        <v-row no-gutters :class="colorForPosition(0)" style="border-radius:20px 20px 0 0;">
             <template v-if="group.level==1 && cupFormat[0].name=='GROUP_STAGE'">
                 GROUP {{group.tag}}
             </template>    
         </v-row>
-        <div 
-            v-for="i in group.participants" :key="i" 
+        <div v-for="i in group.participants" :key="i" 
+            :class="colorForPosition(i)"
+            :style="i === group.participants ? 'border-radius:0 0 20px 20px;' : ''"
         >
             <user-participation-standing-item
                 v-if="group.userParticipations.length >= i"
-                :class="colorForPosition(i)"
                 :up="group.userParticipations[i-1]"
                 whiteText 
             />
-            <v-row v-else no-gutters :class="colorForPosition(i)" 
-                :style="i === group.participants ? 'border-radius:0 0 20px 20px; border-width:thin;' : ''"
-            >
+            <v-row v-else no-gutters>
                 <h2 v-if="group.level===1">?</h2>
                 <h2 v-else>ciao</h2>
             </v-row>
