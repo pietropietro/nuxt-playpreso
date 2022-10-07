@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- <div> -->
-        <nuxt-link to="/p-cup/world-cup-22" class="no-decoration">
+        <nuxt-link to="/p-cup/mundial-22" class="no-decoration">
             <mundial-banner />
         </nuxt-link>
         <!-- </div> -->

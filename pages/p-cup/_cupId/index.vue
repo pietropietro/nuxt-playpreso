@@ -12,7 +12,10 @@
                 :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"
             />
         </p-p-simple-pagination>
-        <p-p-cup-level-groups class="mb-10" :level="ppCup.levels[selectedLevel]"/>
+        <p-p-cup-level-groups class="mb-10" 
+            :levelGroups="ppCup.levels[selectedLevel]" 
+            :cupFormat="ppCup.ppTournamentType.cup_format"
+        />
     </v-container>
     <error-wall v-else />
 </template>

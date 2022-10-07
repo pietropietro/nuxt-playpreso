@@ -28,8 +28,8 @@ Vue.mixin({
                     LOCK: '/guess/lock/'
                 },
                 USER_PARTICIPATION: {
-                    PPLEAGUES:  '/userParticipation/p-leagues',
-                    PPCUPS:  '/userParticipation/p-cups'
+                    PPLEAGUES:  '/user-participation/p-leagues',
+                    PPCUPS:  '/user-participation/p-cups'
                 },
                 PPLEAGUE: {
                     GET: '/p-league/',
@@ -39,11 +39,11 @@ Vue.mixin({
                     GET: '/p-cup/',
                     AVAILABLE: '/p-cup/available',
                     GROUP: {
-                        GET: '/p-cupGroup/'
+                        GET: '/p-cup-group/'
                     }
                 },
                 PPTOURNAMENTTYPE: {
-                    JOIN: '/p-tournamentType/join/'
+                    JOIN: '/p-tournament-type/join/'
                 },
             },
             ADMIN_FEATURES: {
@@ -57,7 +57,7 @@ Vue.mixin({
                 },
             },
             ADMIN_API_ROUTES: {
-                PPTOURNAMENTTYPES: '/admin/p-tournamentTypes',
+                PPTOURNAMENTTYPES: '/admin/p-tournament-types',
                 PPCUP:{
                     GET: '/admin/p-cup',
                     CREATE: '/admin/p-cup/'

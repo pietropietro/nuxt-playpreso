@@ -18,11 +18,12 @@
                     :ups="tournamentObj.userParticipations"
                 />
             </template>
-            <!-- TODO pointstopassthird from server -->
             <p-p-cup-group-standings
                 v-else
                 :userParticipations="tournamentObj.userParticipations"
                 :participants="tournamentObj.participants"
+                :level="tournamentObj.level"
+                :cupFormat="tournamentObj.ppTournamentType.cup_format"
             />
         </div>
         <!-- ROUNDS -->
@@ -39,8 +40,9 @@
                 />
             </div>
         </template>
-        <v-row v-else class="mx-2 py-5 ocrastd" justify="center">
-            <h2>waiting for 
+        <v-row v-else-if="!isCupGroup" class="mx-2 py-5 ocrastd" justify="center">
+            <h2>
+                waiting for 
                 {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
                 more users
             </h2>
