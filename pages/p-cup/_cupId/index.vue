@@ -44,7 +44,6 @@ export default {
         },
     },
     async mounted(){
-    console.log(this.$route.params, "params");
        await this.getPPCup();
     }
 }

@@ -1,12 +1,14 @@
 <template>
     <div class="white--text" >
         <v-row no-gutters :class="colorForPosition(0)" style="border-radius:20px 20px 0 0;">
-            <template v-if="group.level==1 && cupFormat[0].name=='GROUP_STAGE'">
+            <template v-if="group.level==1 && cupFormat[0].name=='GROUP STAGE'">
                 GROUP {{group.tag}}
             </template>  
             <template v-else>
-                {{cupFormat[group.level - 1].name.replaceAll('_',' ')}} -
-                {{cupFormat[group.level - 1].group_tags.indexOf(group.tag) +1 }}
+                {{cupFormat[group.level - 1].name}}
+                {{cupFormat[group.level - 1].name==='FINAL' ? '' 
+                    : (' - ' + (cupFormat[group.level - 1].group_tags.indexOf(group.tag) + 1))
+                }}
             </template>  
         </v-row>
         <div v-for="i in group.participants" :key="i" 
@@ -19,8 +21,19 @@
                 whiteText 
             />
             <v-row v-else no-gutters>
-                <h2 v-if="group.level===1">?</h2>
-                <h2 v-else>ciao</h2>
+                <h1 v-if="group.level===1">?</h1>
+                <h1 v-else-if="group.level===2">
+                    {{i}}{{group.tag.slice(i-1,i)}}
+                </h1>
+                <h1 v-else class="text-lowercase">
+                    {{cupFormat[group.level - 2].name}} -
+                    {{cupFormat[group.level - 2].group_tags.
+                        indexOf(
+                            i === 1 ? group.tag.slice(0, group.tag.length/2) 
+                                : group.tag.slice(group.tag.length/2, group.tag.length)
+                        ) +1
+                    }} 
+                </h1>
             </v-row>
         </div>
     </div>

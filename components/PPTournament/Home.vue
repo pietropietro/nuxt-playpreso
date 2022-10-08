@@ -20,9 +20,7 @@
             </template>
             <p-p-cup-group-standings
                 v-else
-                :userParticipations="tournamentObj.userParticipations"
-                :participants="tournamentObj.participants"
-                :level="tournamentObj.level"
+                :group="tournamentObj"
                 :cupFormat="tournamentObj.ppTournamentType.cup_format"
             />
         </div>
