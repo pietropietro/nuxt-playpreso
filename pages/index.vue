@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-    layout: "authenticated",
+    layout: "authenticatedHome",
     mounted(){
         this.$store.commit('navigation/setActive', { title: null, color: null});
     }

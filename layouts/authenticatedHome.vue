@@ -1,12 +1,11 @@
 <template>
 	<client-only>
 		<v-app>
-			<p-p-header collapse/>  
-			<mundial-banner class="mb-5"/> 
+			<p-p-header menu/>  
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
-				<v-main style="padding-top:0px;">
+				<v-main>
 					<nuxt />
 				</v-main>
 			</template>

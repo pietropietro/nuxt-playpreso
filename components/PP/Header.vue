@@ -1,7 +1,7 @@
 <template>
     <v-app-bar
         flat dense app
-        :collapse="$store.state.navigation.rgb"
+        :collapse="collapse"
         class="white--text" 
         :color="$store.state.navigation.rgb ? ppRGBA($store.state.navigation.rgb) : 'primary'" 
     >
@@ -9,6 +9,14 @@
             <h1 class="white--text ocrastd">PP</h1>
         </nuxt-link>
         <v-spacer/>
-        <user-menu v-if="!$store.state.navigation.rgb"/>
+        <user-menu v-if="menu"/>
     </v-app-bar>
 </template>
+<script>
+export default {
+    props:{
+        collapse: {type: Boolean},
+        menu: {type: Boolean}
+    }
+}
+</script>

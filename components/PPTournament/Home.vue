@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <div class="py-4">
+        <div class="pb-4">
             <p-p-cup-group-detail
                 v-if="isCupGroup"
                 :ppCupGroup="tournamentObj"
