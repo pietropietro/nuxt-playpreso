@@ -1,13 +1,11 @@
 <template>
     <div>
         <!-- <div> -->
-        <nuxt-link to="/p-cup/mundial-22" class="no-decoration">
-            <mundial-banner />
-        </nuxt-link>
+        <mundial-banner />
         <!-- </div> -->
         <v-container>
             <!-- <home-p-p-cups/> -->
-            <home-p-p-leagues class="pt-4"/>
+            <home-p-p-leagues/>
         </v-container>
     </div>
 </template>
