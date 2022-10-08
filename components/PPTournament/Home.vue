@@ -1,6 +1,6 @@
 <template>
-    <v-container>
-        <div class="pb-4">
+    <div>
+        <v-container class="pb-4">
             <p-p-cup-group-detail
                 v-if="isCupGroup"
                 :ppCupGroup="tournamentObj"
@@ -9,9 +9,9 @@
                 v-else
                 :ppTournamentType="tournamentObj.ppTournamentType"
             />
-        </div>
+        </v-container>
         <!-- STANDINGS -->
-        <div class="py-4">
+        <v-container class="py-4">
             <template v-if="!isCupGroup">
                 <p-p-section-title text="PLAYERS"/>
                 <p-p-league-standings-list
@@ -23,20 +23,20 @@
                 :group="tournamentObj"
                 :cupFormat="tournamentObj.ppTournamentType.cup_format"
             />
-        </div>
-        <!-- ROUNDS -->
+        </v-container>
+        <!-- USER GUESSES -->
         <template  v-if="tournamentObj.ppRounds.length > 0">
-            <div v-if="userCurrentRound" class="py-4">
+            <v-container v-if="userCurrentRound" class="py-4">
                 <p-p-section-title text="YOUR GUESSES" />
                 <guess-user-round class="mt-0" :ppRMs="userCurrentRound" />
-            </div>
-            <div v-if="tournamentObj.ppRounds.length > 0" class="py-4">
+            </v-container>
+            <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds"
                     :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppTournamentType.rounds"
                 />
-            </div>
+            </v-container>
         </template>
         <v-row v-else-if="!isCupGroup" class="mx-2 py-5 ocrastd" justify="center">
             <h2>
@@ -45,7 +45,7 @@
                 more users
             </h2>
         </v-row>
-    </v-container>
+    </div>
 </template>
 <script>
 export default {
@@ -60,7 +60,7 @@ export default {
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
         },
         userCurrentRound(){
-            if(!this.userInTournament) return null;
+            if(!this.userInTournament || !this.tournamentObj.ppRounds) return null;
             return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length-1].ppRoundMatches.map((pprm) => {
                 return {
                     match: pprm.match,

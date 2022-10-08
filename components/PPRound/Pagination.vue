@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-row no-gutters class="my-4">    
+        <v-row no-gutters class="my-4 pr-3 pr-md-0">    
             <v-col v-for="i in 5" :key="i">
                 <h4 v-if="i<=ppRounds.length"
                     class="pointer text-center rounded" 
