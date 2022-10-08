@@ -6,11 +6,7 @@
             :value="selectedLevel" 
             :setValue="(newLev)=>selectedLevel = newLev"
         >
-            <v-img contain 
-                slot="selected-page"
-                style="max-height: 80px"
-                :src="require('@/assets/img/cup/' + (selectedLevel - 1) + '.png')"
-            />
+            <h1 slot="selected-page" class="text-center">{{ppCup.ppTournamentType.cup_format[selectedLevel - 1].name}}</h1>
         </p-p-simple-pagination>
         <p-p-cup-level-groups class="mb-10" 
             :levelGroups="ppCup.levels[selectedLevel]" 
