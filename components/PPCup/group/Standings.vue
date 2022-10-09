@@ -1,15 +1,7 @@
 <template>
     <div class="white--text" >
         <v-row no-gutters :class="colorForPosition(0)" style="border-radius:20px 20px 0 0;">
-            <template v-if="group.level==1 && cupFormat[0].name=='GROUP STAGE'">
-                GROUP {{group.tag}}
-            </template>  
-            <template v-else>
-                {{cupFormat[group.level - 1].name}}
-                {{cupFormat[group.level - 1].name==='FINAL' ? '' 
-                    : (' - ' + (cupFormat[group.level - 1].group_tags.indexOf(group.tag) + 1))
-                }}
-            </template>  
+            {{cupGroupStageString(group, cupFormat)}}
         </v-row>
         <div v-for="i in group.participants" :key="i" 
             :class="colorForPosition(i)"

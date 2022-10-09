@@ -12,6 +12,7 @@
                 :value="ppTournamentType.user_count ?? 0"
             />
         </v-col>
+        <slot name="cup-group" />
     </v-row>
 </template>
 <script>
