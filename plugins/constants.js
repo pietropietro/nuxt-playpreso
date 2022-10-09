@@ -55,13 +55,18 @@ Vue.mixin({
                     ROUTE: '/admin/p-cups',
                     NAME: 'p-cups'
                 },
+                MATCHES: {
+                    ROUTE: '/admin/matches',
+                    NAME: 'matches'
+                },
             },
             ADMIN_API_ROUTES: {
                 PPTOURNAMENTTYPES: '/admin/p-tournament-types',
                 PPCUP:{
                     GET: '/admin/p-cup',
                     CREATE: '/admin/p-cup/'
-                }
+                },
+                MATCHES: '/admin/matches'
             }
         }
     }
