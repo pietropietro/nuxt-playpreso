@@ -3,24 +3,25 @@
         <template v-slot:activator="{ on }">
             <h1 v-on="on" class="pointer ocrastd">></h1>
         </template>
-        <v-list role="menu" class="pb-0">
+        <v-list role="menu" class="pb-0 text-right">
             <template >
                 <v-list-item>
                         <v-list-item-title>
                             <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
-                                <h1 class="black--text" >
-                                    {{currentUser.username}}
-                                </h1>
+                                <h1>{{currentUser.username}}</h1>
                             </nuxt-link>
                         </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                    <v-list-item-title class="text-right">
-                            <h4>{{currentPoints}}</h4>
-                    </v-list-item-title>
+                    <v-row no-gutters justify="space-between">
+                        <nuxt-link v-if="currentUser.admin" :to="ADMIN_FEATURES.USERS.ROUTE" class="no-decoration">
+                            <span class="ocrastd">ADMIN</span>
+                        </nuxt-link>
+                        <p-p-info label="points" :value="currentPoints" small/>
+                    </v-row>
                 </v-list-item>
                 <v-list-item>
-                    <v-list-item-title class="text-right">
+                    <v-list-item-title>
                             <h5 class="text-caption">v{{VERSION}}</h5>
                     </v-list-item-title>
                 </v-list-item>

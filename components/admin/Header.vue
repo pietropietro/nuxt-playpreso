@@ -1,8 +1,8 @@
 <template>
     <v-app-bar
         flat dense app
-        class="white--text noselection" 
-        color="primary" 
+        class="noselection" 
+        color="primary"
     >
         <div @click.stop="()=>setDrawer(!drawer)" class="ocrastd"><h1>ADMIN</h1></div>
         <v-spacer/>

@@ -8,7 +8,7 @@
             <snackbar />
             <v-main>
                 <admin-navigation-drawer :drawer="drawer" :setDrawer="(val)=>drawer=val"/>
-                <nuxt />
+                <nuxt  />
             </v-main>
         </template>
     </v-app>
@@ -18,6 +18,9 @@
 export default {
     data: ()=>({
         drawer: false
-    })
+    }),
+    mounted () {
+        setTimeout(()=>this.$vuetify.theme.dark = true);
+    }
 }
 </script>

@@ -49,7 +49,7 @@ export default {
 	methods:{
 		async doLogin(){
 			this.loading = true;
-			let resp = await this.login(this.username, this.password);
+			let resp = await this.userLogin(this.username, this.password);
 			this.loading = false;
 		},
 	},

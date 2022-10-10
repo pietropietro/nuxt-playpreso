@@ -13,4 +13,10 @@
 		</v-app>
 	</client-only>
 </template>
-
+<script>
+export default {
+    mounted () {
+        this.$vuetify.theme.dark = false
+    }
+}
+</script>

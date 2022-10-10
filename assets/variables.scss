@@ -5,3 +5,13 @@
 
 // src/sass/variables.scss
 
+$material-dark: (
+  'background': #000033,
+  cards:var(--v-primary-base),
+  navigation-drawer:var(--v-primary-base),
+);
+
+$material-light: (
+  icons:(active: black)
+);
+
