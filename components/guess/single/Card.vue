@@ -1,5 +1,5 @@
 <template>
-    <v-card flat class="transparent" v-if="guess">
+    <v-card flat class="transparent" v-if="guess" :class="match.score_home !== null ? 'white--text':''">
         <match-time-row :match="match" :style="'background-color: ' + ppRGBA($store.state.navigation.rgb)"/>
         <guess-single-teams
             :match="match" 
@@ -35,7 +35,7 @@ export default {
     },
     computed:{
         statusAlpha(){
-            if(this.match.score_home !== null) return 0.6;
+            if(this.match.score_home !== null) return 1;
             if(this.guess.guessed_at) return 0.6;
             return 0.2;
         }
