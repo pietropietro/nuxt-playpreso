@@ -6,7 +6,7 @@ Vue.mixin({
             ROUTES: {
                 HOME: '/',
                 LOGIN: '/login',
-                REGISTER: '/register',
+                SIGNUP: '/signup',
                 RECOVER: '/recover',
                 PPCUP: {
                     DETAIL: '/p-cup/'
@@ -19,9 +19,9 @@ Vue.mixin({
                 }
             },
             API_ROUTES: {
-                LOGIN: '/user/login',
-                REGISTER: '/user',
                 USER:{
+                    LOGIN: '/user/login',
+                    SIGNUP: '/user/signup',    
                     GET: '/user/'
                 },
                 GUESS:{

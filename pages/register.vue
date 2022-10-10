@@ -32,11 +32,11 @@
 			</div>
 			<v-row justify="center" class="py-5">
 				<v-btn color="primary" block @click="doRegister" :loading="loading" :disabled="!username || !password || !emailAdd">
-					<h1>REGISTER</h1>
+					<h1>SIGN UP</h1>
 				</v-btn>
 			</v-row>
 			<v-row justify="space-between">
-				<nuxt-link to="/login" class="no-decoration">
+				<nuxt-link :to="ROUTES.LOGIN" class="no-decoration">
 					<v-btn block text>
 						<h4 class="text-center primary--text">LOGIN</h4>
 					</v-btn>
@@ -64,7 +64,7 @@ export default {
 	methods:{
 		async doRegister(){
 			this.loading = true;
-			let resp = await this.register(this.username, this.password, this.emailAdd);
+			let resp = await this.userSignUp(this.username, this.password, this.emailAdd);
 			this.loading = false;
 		},
 		blockSpace(e){

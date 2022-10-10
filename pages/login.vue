@@ -22,9 +22,9 @@
 				</v-btn>
 			</v-row>
 			<v-row justify="space-between">
-				<nuxt-link to="/register" class="no-decoration">
+				<nuxt-link :to="ROUTES.SIGNUP" class="no-decoration">
 					<v-btn block text>
-						<h4 class="text-center primary--text">REGISTER</h4>
+						<h4 class="text-center primary--text">SIGN UP</h4>
 					</v-btn>
 				</nuxt-link>
 				<nuxt-link :to="ROUTES.RECOVER" class="no-decoration">
