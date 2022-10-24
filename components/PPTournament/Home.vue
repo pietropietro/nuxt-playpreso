@@ -39,13 +39,18 @@
                 />
             </v-container>
         </template>
-        <v-row v-else-if="!isCupGroup" class="mx-2 py-5 ocrastd" justify="center">
-            <h2>
-                waiting for 
-                {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
-                more users
-            </h2>
-        </v-row>
+        <template v-else-if="!isCupGroup">
+            <v-container class="py-10 ocrastd">
+                <v-row no-gutters justify="center"><h1>NOT STARTED</h1></v-row>
+                <v-row no-gutters justify="center">
+                    <h2>
+                        waiting for
+                        {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
+                        more users
+                    </h2>
+                </v-row>
+            </v-container>
+        </template>
     </div>
 </template>
 <script>

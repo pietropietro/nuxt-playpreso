@@ -1,0 +1,12 @@
+<template>
+    <v-row justify="center" align="center" :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb,'.6')">
+        <h3>FINISHED</h3>
+    </v-row>
+</template>
+<script>
+export default {
+    props:{
+        participation: {type: Object, required: true}
+    },
+}
+</script>
