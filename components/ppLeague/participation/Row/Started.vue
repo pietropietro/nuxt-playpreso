@@ -3,13 +3,13 @@
         align="center" 
         :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb,'.6')">
         <v-col cols="4" v-if="participation.position">
-            <p-p-info :label="$t('app.position')" 
+            <p-p-info small :label="$t('app.position')" 
                 :value="participation.position" 
                 :value2="participation.ppLeague.user_count"
             />
         </v-col>
         <v-col cols="4">
-            <p-p-info label="round" 
+            <p-p-info small label="round" 
                 :value="participation.ppLeague.round_count" 
                 :value2="participation.ppTournamentType.rounds"
             />

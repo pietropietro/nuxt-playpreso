@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters v-if="!small">
         <v-col cols="12">
-            <league-flag :league="league" />
+            <league-flag :league="league" size="50"/>
         </v-col>
         <v-col cols="12">
             <div class="text-overline" style="text-align:center">{{league.tag}}</div>

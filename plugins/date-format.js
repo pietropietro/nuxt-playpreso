@@ -1,29 +1,35 @@
 import Vue from 'vue'
 
 Vue.mixin({
+    data:()=>({
+        timeFormat : { hour: 'numeric', minute: 'numeric'},
+        dateTimeFormat : {day:'2-digit', month: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric'},
+        dateFormat : {day:'2-digit', month: '2-digit', year: '2-digit'},
+        weekDateTimeFormat  : {weekday:'long', hour: 'numeric', minute: 'numeric'} ,
+        weekDateFormat  : {weekday:'long'} ,
+    }),
     methods:{
-        formatDate(dateString){
+        formatTime(dateString){
+            return Intl.DateTimeFormat('en-GB', this.timeFormat).format(new Date(dateString));
+        },
+        formatDate(dateString, withTime=false){
             //handle SAFARI date error replacing - with /
             let dateObject = new Date(dateString.replace(/-/g, "/"));
-
-            let hourStyle= { hour: 'numeric', minute: 'numeric'};
-            let dateStyle= {day:'2-digit', month: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric'};
-            let weekDateStyle = {weekday:'long', hour: 'numeric', minute: 'numeric'} ;
             
             if(this.isToday(dateObject)){
-                return 'TODAY ' + Intl.DateTimeFormat('en-GB', hourStyle).format(dateObject);
+                return 'TODAY ' + (withTime ? Intl.DateTimeFormat('en-GB', this.timeFormat).format(dateObject) : '');
             }
             if(this.isToday(dateObject, 1)){
-                return 'TOMORROW ' + Intl.DateTimeFormat('en-GB', hourStyle).format(dateObject);
+                return 'TOMORROW ' + (withTime ? Intl.DateTimeFormat('en-GB', this.timeFormat).format(dateObject) : '');
             }
             if(this.isToday(dateObject, -1)){
-                return 'YESTERDAY ' + Intl.DateTimeFormat('en-GB', hourStyle).format(dateObject);
+                return 'YESTERDAY ' + (withTime ? Intl.DateTimeFormat('en-GB', this.timeFormat).format(dateObject) : '');
             }
             if(this.inNextDays(dateObject)){
-                return Intl.DateTimeFormat('en-GB', weekDateStyle).format(dateObject).toString().toUpperCase();
+                return Intl.DateTimeFormat('en-GB', withTime ? this.weekDateTimeFormat : this.weekDateFormat).format(dateObject).toString().toUpperCase();
             }
 
-            return Intl.DateTimeFormat('en-GB', dateStyle).format(dateObject);
+            return Intl.DateTimeFormat('en-GB', withTime ? this.dateTimeFormat : this.dateFormat).format(dateObject);
         },
         isToday(someDate, changeTime) {
             const today = new Date();

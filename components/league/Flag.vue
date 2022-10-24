@@ -2,7 +2,7 @@
     <v-row>
         <v-spacer/>
         <v-col>
-            <v-avatar size="50">
+            <v-avatar :size="size ?? '50'">
                 <v-img
                     :src="getFlag(league)"
                 >
@@ -16,6 +16,7 @@
 export default {
     props:{
         league: {type: Object, required: true},
+        size: {type: String}
     }
 }
 </script>
