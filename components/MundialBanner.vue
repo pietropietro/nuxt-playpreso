@@ -1,6 +1,6 @@
 <template>
     <nuxt-link to="/p-cup/mundial-22" class="no-decoration">
-        <div class="noselection">
+        <div class="no-selection">
             <v-row no-gutters align="center" class="highlight-row marquee">
                 <span :style="$vuetify.breakpoint.mdAndUp ? 'animation-duration: 7s;' : 'animation-duration: 4s;'"
                 class="yellow--text font-weight-bold  ocrastd">{{bannerText}}</span>

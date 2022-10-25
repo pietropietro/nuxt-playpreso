@@ -1,5 +1,5 @@
 <template>
-    <v-row class="noselection" :align="infoAlign">
+    <v-row class="no-selection" :align="infoAlign">
         <v-col :md="infoMd" :cols="infoCols">
             <slot name="info"/>
         </v-col>

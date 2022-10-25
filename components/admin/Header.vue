@@ -1,7 +1,7 @@
 <template>
     <v-app-bar
         flat dense app
-        class="noselection" 
+        class="no-selection" 
         color="primary"
     >
         <div @click.stop="()=>setDrawer(!drawer)" class="ocrastd"><h1>ADMIN</h1></div>
