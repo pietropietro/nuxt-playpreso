@@ -66,7 +66,10 @@ Vue.mixin({
                     GET: '/admin/p-cup',
                     CREATE: '/admin/p-cup/'
                 },
-                MATCHES: '/admin/matches'
+                MATCH: {
+                    GET: '/admin/match',
+                    VERIFY: '/admin/match/'
+                } 
             }
         }
     }

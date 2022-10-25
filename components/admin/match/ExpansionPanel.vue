@@ -24,7 +24,8 @@
             </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content class="pa-2">
-            <v-container class="pa-0 no-selection">
+            <loading-page v-if="loading" />
+            <v-container v-else class="pa-0 no-selection">
                 <v-row no-gutters align="center" >
                     <select-integer justify="end"  @click.stop.native :model="homeModel" :setModel="(val)=>homeModel=val" :max="6"/>
                     <v-col cols="auto" class="px-4">
@@ -33,7 +34,7 @@
                     <select-integer  @click.stop.native :model="awayModel" :setModel="(val)=>awayModel=val" :max="6"/>
                 </v-row>
                 <v-row justify="center" class="pb-10">
-                    <h3 class="pointer" @click="verify(match.id)">VERIFY</h3>
+                    <h3 class="pointer" @click="verify">VERIFY</h3>
                 </v-row>
                 <span class="text-caption">created: {{formatDate(match.created_at, true)}}</span>
                 <span v-if="match.rescheduled_at" class="text-caption">rescheduled: {{formatDate(match.rescheduled_at, true)}}</span>
@@ -45,9 +46,10 @@
 <script>
 export default {
     props:{
-        match: {type: Object, required:true}
+        match: {type: Object, required:true},
+        setMatch: {type: Function}
     },
-    data:()=>({homeModel:0,awayModel:0}),
+    data:()=>({homeModel:0, awayModel:0, loading: false}),
     computed:{
         matchStatusStyle:{
             get(){
@@ -59,8 +61,23 @@ export default {
         }
     },
     methods:{
-        async verify(id){
-            console.log(id);
+        async verify(){
+            this.loading = true;
+            let values = { 
+                "home": this.homeModel,
+                "away": this.awayModel
+            }
+            
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.MATCH.VERIFY + this.match.id, values, 'POST'
+            );
+
+            if(response && response.status === "success"){
+                this.match.score_home = this.homeModel;
+                this.match.score_away = this.awayModel;
+                this.match.verified_at = response.message;
+            }
+            this.loading = false;
         }
     }
 }

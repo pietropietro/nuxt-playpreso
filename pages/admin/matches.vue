@@ -38,7 +38,7 @@ export default {
     methods:{
         async getMatches(){
             this.loading=true;
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.MATCHES + '?days_diff=' + this.days_diff);
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.MATCH.GET + '?days_diff=' + this.days_diff);
             if(response && response.status === "success"){
                 this.week = response.message;
             }
