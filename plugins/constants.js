@@ -59,6 +59,10 @@ Vue.mixin({
                     ROUTE: '/admin/matches',
                     NAME: 'matches'
                 },
+                LEAGUES: {
+                    ROUTE: '/admin/leagues',
+                    NAME: 'leagues'
+                },
             },
             ADMIN_API_ROUTES: {
                 PPTOURNAMENTTYPES: '/admin/p-tournament-types',
@@ -69,6 +73,9 @@ Vue.mixin({
                 MATCH: {
                     GET: '/admin/match',
                     VERIFY: '/admin/match/'
+                },
+                LEAGUE: {
+                    GET: '/admin/league'
                 } 
             }
         }

@@ -13,6 +13,7 @@ Vue.mixin({
             return Intl.DateTimeFormat('en-GB', this.timeFormat).format(new Date(dateString));
         },
         formatDate(dateString, withTime=false){
+            if(!dateString)return null;
             //handle SAFARI date error replacing - with /
             let dateObject = new Date(dateString.replace(/-/g, "/"));
             

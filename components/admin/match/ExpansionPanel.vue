@@ -36,9 +36,9 @@
                 <v-row justify="center" class="pb-10">
                     <h3 class="pointer" @click="verify">VERIFY</h3>
                 </v-row>
-                <span class="text-caption">created: {{formatDate(match.created_at, true)}}</span>
-                <span v-if="match.rescheduled_at" class="text-caption">rescheduled: {{formatDate(match.rescheduled_at, true)}}</span>
-                <span  v-if="match.verified_at" class="text-caption">verified: {{formatDate(match.verified_at, true)}}</span>
+                <span class="text-caption"><b>created:</b> {{formatDate(match.created_at, true)}}</span>
+                <span v-if="match.rescheduled_at" class="text-caption"><b>rescheduled:</b> {{formatDate(match.rescheduled_at, true)}}</span>
+                <span  v-if="match.verified_at" class="text-caption"><b>verified:</b> {{formatDate(match.verified_at, true)}}</span>
             </v-container>
         </v-expansion-panel-content>                       
     </v-expansion-panel>
