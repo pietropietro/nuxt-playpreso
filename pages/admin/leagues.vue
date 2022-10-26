@@ -1,6 +1,6 @@
 <template>
     <loading-page v-if="loading"/>
-    <admin-league-detail v-else-if="selected.length > 0" :id="selected.id"/>
+    <admin-league-detail v-else-if="selected.length > 0" :id="selected[0].id" :close="()=>selected=[]"/>
     <v-container v-else-if="leagues">
         <v-data-table 
             single-select

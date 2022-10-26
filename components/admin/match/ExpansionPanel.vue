@@ -47,7 +47,6 @@
 export default {
     props:{
         match: {type: Object, required:true},
-        setMatch: {type: Function}
     },
     data:()=>({homeModel:0, awayModel:0, loading: false}),
     computed:{
