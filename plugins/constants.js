@@ -76,8 +76,9 @@ Vue.mixin({
                 },
                 LEAGUE: {
                     GET: '/admin/league',
+                    CREATE: '/admin/league',
                     UPDATE: '/admin/league/',
-                    FETCH: '/admin/league/fetch/'
+                    FETCH: '/admin/league/fetch/',
                 } 
             }
         }

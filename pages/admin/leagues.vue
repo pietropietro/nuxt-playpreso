@@ -1,15 +1,18 @@
 <template>
     <loading-page v-if="loading"/>
     <admin-league-detail v-else-if="selected.length > 0" :id="selected[0].id" :close="()=>selected=[]"/>
-    <v-container v-else-if="leagues">
-        <v-data-table 
-            single-select
-            v-model="selected"
-            show-select
-            :items-per-page="-1" :items="leagues"  
-            :headers="headers" hide-default-header hide-default-footer>
-        ></v-data-table>
-    </v-container>
+    <div v-else-if="leagues">
+        <admin-league-create :leagues="leagues" :refresh="getLeagues"/>
+        <v-container >
+            <v-data-table
+                single-select
+                v-model="selected"
+                show-select
+                :items-per-page="-1" :items="leagues"
+                :headers="headers" hide-default-header hide-default-footer>
+            ></v-data-table>
+        </v-container>
+    </div>
     <error-wall v-else/>
 </template>
 <script>
