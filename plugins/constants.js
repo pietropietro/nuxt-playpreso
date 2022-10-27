@@ -75,7 +75,9 @@ Vue.mixin({
                     VERIFY: '/admin/match/'
                 },
                 LEAGUE: {
-                    GET: '/admin/league'
+                    GET: '/admin/league',
+                    UPDATE: '/admin/league/',
+                    FETCH: '/admin/league/fetch/'
                 } 
             }
         }

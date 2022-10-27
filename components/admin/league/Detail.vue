@@ -9,10 +9,8 @@
                 <span class="ocrastd mr-4">#{{league.id}}</span>
                 <h1>{{league.name}}</h1>
             </v-row>
-            <v-row>
-                <v-col><b>ls_suffix:</b> {{league.ls_suffix}}</v-col>
-                <v-col><b>use_match_ls_suffix:</b> {{league.use_match_ls_suffix}}</v-col>
-                <v-col><b>last_updated:</b> {{league.updated_at}}</v-col>
+            <v-row justify="end" no-gutters>
+                <b>last_updated: </b><span> {{league.updated_at}}</span>
             </v-row>
             <v-row class="pa-4">
                 <v-expansion-panels>
@@ -23,6 +21,7 @@
                                 <span>{{formatDate(league.last_next_matches[0].date_start)}}</span>
                                 <admin-match-expansion-panel :match="league.last_next_matches[0]"/>
                             </template>
+                            <div v-else>no data</div>
                         </v-col>
                         <v-col>
                             <h3>NEXT MATCH</h3>
@@ -30,9 +29,30 @@
                                 <span>{{formatDate(league.last_next_matches[1].date_start)}}</span>
                                 <admin-match-expansion-panel :match="league.last_next_matches[1]"/>
                             </template>
+                            <div v-else>no data</div>
                         </v-col>
                     </v-row>
                 </v-expansion-panels>
+            </v-row>
+            <v-row class="pa-4">
+                <p-p-input-text 
+                    label="ls_suffix"
+                    :value="league.ls_suffix" 
+                    :setValue="(val)=>league.ls_suffix=val" 
+                    :enter="async () => await update('ls_suffix', league.ls_suffix)"
+                />
+                <v-col>
+                    <!-- <b>use_match_ls_suffix:</b>  -->
+                    <p-p-input-bool 
+                        label="use_match_ls_suffix"
+                        :value="!!league.use_match_ls_suffix" 
+                        :setValue="(val)=>league.use_match_ls_suffix=val"
+                        :onChange="async () => await update('use_match_ls_suffix', league.use_match_ls_suffix)"
+                    />
+                </v-col>
+            </v-row>
+            <v-row justify="center" class="pa-4">
+                <h1 class="pointer" @click="fetch">FETCH EXTERNAL DATA</h1>
             </v-row>
         </template>
         <error-wall v-else/>
@@ -56,6 +76,37 @@ export default {
             }
             this.loading = false;
         },
+        async update(col, value){
+            this.loading = true;
+      
+            let values = {};
+            values[col] = value;
+
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.id, values, 'POST'
+            );     
+
+            // if(response && response.status === "success"){
+            //     this.league= response.message;
+            // }
+
+            this.loading = false;
+        },
+        async fetch(){
+            this.loading = true;
+            let values = {};
+      
+            // let values = { 
+            //     "home": home,
+            //     "away": away
+            //     }            
+            
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.LEAGUE.FETCH + this.id, values, 'POST'
+            );     
+            await this.getLeague();       
+            this.loading = false;
+        }
     }
 }
 </script>
