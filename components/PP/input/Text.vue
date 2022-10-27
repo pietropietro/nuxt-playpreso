@@ -9,17 +9,18 @@
                 <v-textarea v-if="textArea" ref="textfield" 
                     @keydown.enter="enterAction" 
                     v-model="model" 
-                    @blur="()=>{editingFlag=false; if(enterOnBlur)enterAction();}"
+                    @blur="onBlur"
                 />
                 <v-text-field v-else ref="textfield" 
                     @keydown.enter="enterAction" 
                     v-model="model" 
-                    @blur="()=>{editingFlag=false; if(enterOnBlur)enterAction();}"
+                    @blur="onBlur"
                     :placeholder="placeholder"
                 />
                 <v-btn 
                     :loading="loading" v-if="!plain" 
                     :disabled="!this.value" text 
+                    @click.stop.native
                     @click="enterAction">
                     <h1>></h1>
                 </v-btn>
@@ -85,6 +86,12 @@ export default {
                 this.enter();
             }
         },
+        onBlur(){
+            setTimeout(()=>{
+                this.editingFlag=false; 
+                if(this.enterOnBlur)enterAction();
+            },100);
+        }
     }
 }
 </script>

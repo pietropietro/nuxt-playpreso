@@ -5,7 +5,6 @@
                 <v-container>
                     <template v-if="open">
                         <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
-                        <v-row v-if="match.ls_suffix" no-gutters class="mb-2 text-caption"><i>{{match.ls_suffix}}</i></v-row>
                     </template>
                     <v-row no-gutters>
                         <v-col cols="auto" class="mr-2 pb-2">
@@ -15,10 +14,10 @@
                         <span class="text-caption">{{formatTime(match.date_start)}}</span>
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
-                        {{match.homeTeam.name}}
+                        {{match.homeTeam?.name}}
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
-                        {{match.awayTeam.name}}
+                        {{match.awayTeam?.name}}
                     </v-row>
                     <div v-if="!open" style="line-height:1rem;" class="text-overline">
                         {{match.score_home}} - {{match.score_away}}
