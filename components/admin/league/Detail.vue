@@ -34,25 +34,34 @@
                     </v-row>
                 </v-expansion-panels>
             </v-row>
-            <v-row class="pa-4">
+            <v-row class="pa-4" justify="center">
                 <p-p-input-text 
+                    v-if="!league.use_match_ls_suffix"
                     label="ls_suffix"
                     :value="league.ls_suffix" 
                     :setValue="(val)=>league.ls_suffix=val" 
-                    :enter="async () => await update('ls_suffix', league.ls_suffix)"
+                    :enter="async () => await update({'ls_suffix': league.ls_suffix})"
                 />
-                <v-col>
-                    <!-- <b>use_match_ls_suffix:</b>  -->
+                <v-col cols="auto">
                     <p-p-input-bool 
                         label="use_match_ls_suffix"
                         :value="!!league.use_match_ls_suffix" 
                         :setValue="(val)=>league.use_match_ls_suffix=val"
-                        :onChange="async () => await update('use_match_ls_suffix', league.use_match_ls_suffix)"
+                        :onChange="async () => await update({'use_match_ls_suffix': league.use_match_ls_suffix})"
                     />
                 </v-col>
             </v-row>
-            <v-row justify="center" class="pa-4">
-                <h1 class="pointer" @click="fetch">FETCH EXTERNAL DATA</h1>
+            <v-row align="center" class="pa-4">
+                <v-col v-if="league.use_match_ls_suffix">
+                    <p-p-input-text 
+                        label="match_ls_suffix"
+                        :value="matchSuffixModel" 
+                        :setValue="(val)=>matchSuffixModel=val" 
+                    />
+                </v-col>
+                <v-btn @click="fetch" :disabled="!!league.use_match_ls_suffix && !matchSuffixModel" text>
+                    FETCH EXTERNAL DATA
+                </v-btn>
             </v-row>
         </template>
         <error-wall v-else/>
@@ -64,7 +73,7 @@ export default {
         id: {type: Number},
         close: {type: Function}
     },
-    data:()=>({loading: true, league: null}),
+    data:()=>({loading: true, league: null, matchSuffixModel: null}),
     async mounted(){
         await this.getLeague();
     },
@@ -76,30 +85,23 @@ export default {
             }
             this.loading = false;
         },
-        async update(col, value){
+        async update(values){
             this.loading = true;
-      
-            let values = {};
-            values[col] = value;
-
+    
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.id, values, 'POST'
             );     
 
-            // if(response && response.status === "success"){
-            //     this.league= response.message;
-            // }
 
             this.loading = false;
         },
         async fetch(){
             this.loading = true;
             let values = {};
-      
-            // let values = { 
-            //     "home": home,
-            //     "away": away
-            //     }            
+
+            if(this.league.use_match_ls_suffix){
+                values.match_ls_suffix = this.matchSuffixModel;      
+            }
             
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.LEAGUE.FETCH + this.id, values, 'POST'

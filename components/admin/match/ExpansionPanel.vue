@@ -3,7 +3,10 @@
         <v-expansion-panel-header hide-actions class="pa-0">
             <template v-slot:default="{ open }">
                 <v-container>
-                    <v-row no-gutters v-if="open" class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
+                    <template v-if="open">
+                        <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
+                        <v-row v-if="match.ls_suffix" no-gutters class="mb-2 text-caption"><i>{{match.ls_suffix}}</i></v-row>
+                    </template>
                     <v-row no-gutters>
                         <v-col cols="auto" class="mr-2 pb-2">
                             <league-flag small :league="match.league" size="12"/>
