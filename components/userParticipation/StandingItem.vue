@@ -5,13 +5,13 @@
                 <span class="text-overline pr-2" v-if="up.ppLeague_id && up.position">
                     #{{up.position}}
                 </span>
-                <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username">
+                <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
                     <div :class="'user-font ' + fontColor + (up.user_id === currentUser.id ? ' currentuser': '')" 
                         :style="'--my-color-var:' + ppRGBA($store.state.navigation.rgb)"
                     >
                         {{up.username}}
                     </div>
-                </nuxt-link>
+                <!-- </nuxt-link> -->
             </v-row>
         </v-col>
         <v-col cols="auto" class="text-right mr-2" >

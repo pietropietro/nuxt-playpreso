@@ -7,9 +7,9 @@
             <template >
                 <v-list-item>
                         <v-list-item-title>
-                            <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username">
+                            <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + currentUser.username"> -->
                                 <h1>{{currentUser.username}}</h1>
-                            </nuxt-link>
+                            <!-- </nuxt-link> -->
                         </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
