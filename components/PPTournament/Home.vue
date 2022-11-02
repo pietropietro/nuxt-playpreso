@@ -38,15 +38,11 @@
                 />
             </v-container>
         </template>
-        <template v-else-if="!isCupGroup">
+        <template v-else>
             <v-container class="py-10 ocrastd">
                 <v-row no-gutters justify="center"><h1>NOT STARTED</h1></v-row>
-                <v-row no-gutters justify="center">
-                    <h2>
-                        waiting for
-                        {{tournamentObj.ppTournamentType.participants - tournamentObj.userParticipations.length}}
-                        more users
-                    </h2>
+                <v-row no-gutters justify="center" v-if="missingUsers">
+                    <h2>waiting for {{missingUsers}} more users</h2>
                 </v-row>
             </v-container>
         </template>
@@ -59,7 +55,7 @@ export default {
     },
     computed:{
         isCupGroup(){
-            return this.tournamentObj.tag;
+            return this.tournamentObj.ppTournamentType.cup_format;
         },
         userInTournament(){
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
@@ -74,6 +70,10 @@ export default {
                 
             });
         },
+        missingUsers(){
+            return (this.isCupGroup ? this.tournamentObj.participants : this.tournamentObj.ppTournamentType.participants)
+                - this.tournamentObj.userParticipations.length;
+        }
     }
 }
 </script>
