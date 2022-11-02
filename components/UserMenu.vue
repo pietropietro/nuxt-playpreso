@@ -13,10 +13,12 @@
                         </v-list-item-title>
                 </v-list-item>
                 <v-list-item>
-                    <v-row no-gutters justify="space-between">
-                        <nuxt-link v-if="currentUser.admin" :to="ADMIN_FEATURES.USERS.ROUTE" class="no-decoration">
-                            <span class="ocrastd">ADMIN</span>
-                        </nuxt-link>
+                    <v-row no-gutters justify="end">
+                        <v-col v-if="currentUser.admin">
+                            <nuxt-link :to="ADMIN_FEATURES.USERS.ROUTE" class="no-decoration">
+                                <span class="ocrastd">ADMIN</span>
+                            </nuxt-link>
+                        </v-col>
                         <p-p-info label="points" :value="currentPoints" small/>
                     </v-row>
                 </v-list-item>
