@@ -1,7 +1,7 @@
 <template>
     <loading-page v-if="loading"/>
     <v-container v-else-if="ppCup && ppCup.levels">
-        <p-p-cup-intro :ppTournamentType="ppCup.ppTournamentType"/>
+        <p-p-cup-intro :ppCup="ppCup"/>
         <p-p-simple-pagination 
             :length="Object.keys(ppCup.levels).length" 
             :value="selectedLevel" 

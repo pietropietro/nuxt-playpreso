@@ -20,12 +20,7 @@
                     />
                 </v-col>
             </v-row>
-            <v-row no-gutters justify="center">
-                <v-btn text @click="join" :loading="joinLoading">
-                    <h1>JOIN</h1>
-                    
-                </v-btn>
-            </v-row>
+            <p-p-tournament-join-row :ppTournamentTypeId="ppTT.id" :onError="onError"/>
         </v-card-text>
     </v-card>
 </template>
@@ -38,26 +33,5 @@ export default {
         setShow: {type: Function, required: true},
         onError: {type: Function, required: true},
     },
-    data(){
-        return{
-            joinLoading: false
-        }
-    },
-    methods:{
-        async join(){
-            this.joinLoading = true;
-            let response = await this.$api.call(
-                this.API_ROUTES.PPTOURNAMENTTYPE.JOIN + this.ppTT.id, 
-                null, 
-                "POST"
-            );
-            if(response && response.status === "success"){
-                this.$router.push(this.ROUTES.PPLEAGUE.DETAIL + response.message);
-                this.joinLoading = false;
-                return;
-            }
-            await this.onError();
-        },
-    }
 }
 </script>

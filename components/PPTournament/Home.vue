@@ -3,7 +3,6 @@
         <v-container class="pb-4">
             <p-p-cup-group-intro
                 v-if="isCupGroup"
-                :ppTournamentType="tournamentObj.ppTournamentType"
                 :ppCupGroup="tournamentObj"
             />
             <p-p-league-intro

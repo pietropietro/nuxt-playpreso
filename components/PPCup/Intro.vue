@@ -1,24 +1,33 @@
 <template>
-    <v-row>
-        <v-col>
-            <p-p-info 
-                label="p-cup"
-                :value="ppTournamentType.name"
-            />
-        </v-col>
-        <v-col>
-            <p-p-info 
-                label="participants"
-                :value="ppTournamentType.user_count ?? 0"
-            />
-        </v-col>
-        <slot name="cup-group" />
-    </v-row>
+    <div>
+        <p-p-tournament-join-row v-if="ppCup?.can_join" :ppTournamentTypeId="ppCup?.ppTournamentType.id" isPPCup/>
+        <v-row>
+            <v-col>
+                <p-p-info
+                    label="p-cup"
+                    :value="ppCup.ppTournamentType?.name"
+                />
+            </v-col>
+            <v-col>
+                <p-p-info
+                    label="participants"
+                    :value="ppCup.ppTournamentType?.user_count ?? 0"
+                />
+            </v-col>
+            <v-col>
+                <p-p-info
+                    label="cost"
+                    :value="ppCup.ppTournamentType.cost"
+                />
+            </v-col>
+            <slot name="cup-group" />
+        </v-row>
+    </div>
 </template>
 <script>
 export default {
     props:{
-        ppTournamentType: {type: Object}
-    }
+        ppCup: {type: Object}
+    },
 }
 </script>
