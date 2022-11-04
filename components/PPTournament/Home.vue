@@ -34,7 +34,7 @@
                 <p-p-section-title text="ROUNDS" />
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds"
-                    :rounds="isCupGroup ? tournamentObj.rounds: tournamentObj.ppTournamentType.rounds"
+                    :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
                 />
             </v-container>
         </template>

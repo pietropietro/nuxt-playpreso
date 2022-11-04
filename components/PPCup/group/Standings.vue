@@ -3,30 +3,29 @@
         <v-row no-gutters :class="colorForPosition(0)" style="border-radius:20px 20px 0 0;">
             {{cupGroupStageString(group, cupFormat)}}
         </v-row>
-        <div v-for="i in group.participants" :key="i" 
-            :class="colorForPosition(i)"
-            :style="i === group.participants ? 'border-radius:0 0 20px 20px;' : ''"
-        >
-            <user-participation-standing-item
-                v-if="group.userParticipations.length >= i"
-                :up="group.userParticipations[i-1]"
-                whiteText 
+        <div v-for="position in group.participants" :key="position" 
+            :class="colorForPosition(position)"
+            :style="position === group.participants ? 'border-radius:0 0 20px 20px;' : ''"
+        >            
+            <user-participation-standing-item whiteText
+                v-if="
+                    !placeholderFirst 
+                    && group.userParticipations.length >= position
+                "
+                :up="group.userParticipations[position-1]"
             />
-            <v-row v-else no-gutters>
-                <h1 v-if="group.level===1">?</h1>
-                <h1 v-else-if="group.level===2">
-                    {{i}}{{group.tag.slice(i-1,i)}}
-                </h1>
-                <h1 v-else class="text-lowercase">
-                    {{cupFormat[group.level - 2].name}} -
-                    {{cupFormat[group.level - 2].group_tags.
-                        indexOf(
-                            i === 1 ? group.tag.slice(0, group.tag.length/2) 
-                                : group.tag.slice(group.tag.length/2, group.tag.length)
-                        ) +1
-                    }} 
-                </h1>
-            </v-row>
+            <user-participation-standing-item whiteText
+                v-else-if="
+                    placeholderFirst && 
+                    position===2 && 
+                    group.userParticipations.length >= position-1
+                "
+                :up="group.userParticipations[position-2]"
+            />
+            <p-p-cup-group-standings-placeholder
+                v-else
+                :tag="group.tag" :level="group.level" :cupFormat="cupFormat" :position="position"
+            />
         </div>
     </div>
 </template>
@@ -34,26 +33,33 @@
 export default {
     props: {
         group: {type: Object},
-        cupFormat: {type: Array}
+        cupFormat: {type: Array},
+    },
+    computed: {
+        placeholderFirst(){
+            if(this.group.userParticipations.length === this.group.participants)return false;
+            let fromtag = this.group.userParticipations[0]?.from_tag;
+            if(!fromtag) return false;
+            if(this.group.tag.substr(0,this.group.tag.length/2) === fromtag) return false;
+            return true;
+        }
     },
     methods:{
-        colorForPosition(i){
+        colorForPosition(position){
             let classes = "px-4" ;
-            if(i === 0){classes += " pt-1 font-weight-bold text-caption"}
-            if(i === this.group.participants){classes += " pb-1"}
-            if(this.currentUser && this.currentUser.id === this.group.userParticipations[i-1]?.id){
+            if(position === 0){classes += " pt-1 font-weight-bold text-caption"}
+            if(position === this.group.participants){classes += " pb-1"}
+            if(this.currentUser && this.currentUser.id === this.group.userParticipations[position-1]?.id){
                 classes += " yellow--text"
             }
-            if(i-1 < (this.group.participants / 2)){
+            if( !this.group.started_at || position-1 < (this.group.participants / 2)){
                 classes += " primary"
             }
-            // else if(i === 3 && 
+            // else if(position === 3 && 
             //     this.pointsToPassThird && 
-            //     this.group.userParticipations?.length >= i && 
-            //     this.group.userParticipations[i-1].points >= this.pointsToPassThird
-            // ){
-            //     classes += " deep-purple darken-3"
-            // }
+            //     this.group.userParticipations?.length >= position && 
+            //     this.group.userParticipations[position-1].points >= this.pointsToPassThird
+            // ){classes += " deep-purple darken-3"}
             else{
                 classes += " primary_red"
             }

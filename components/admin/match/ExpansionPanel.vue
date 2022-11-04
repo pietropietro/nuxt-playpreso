@@ -6,11 +6,13 @@
                     <template v-if="open">
                         <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
                     </template>
-                    <v-row no-gutters>
+                    <v-row no-gutters align="center">
                         <v-col cols="auto" class="mr-2 pb-2">
                             <league-flag small :league="match.league" size="12"/>
                         </v-col>
-                        <v-col class="text-overline" style="line-height:1rem;">{{match.league.tag}}</v-col>
+                        <v-col cols="auto" class="text-overline" style="line-height:1rem;">{{match.league.tag}}</v-col>
+                        <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
+                        <v-spacer/>
                         <span class="text-caption">{{formatTime(match.date_start)}}</span>
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
@@ -54,8 +56,7 @@ export default {
     computed:{
         matchStatusStyle:{
             get(){
-                let now = new Date();
-                if(this.match.date_start < now.toISOString() && this.match.score_home === null){
+                if(new Date(this.match.date_start).toISOString() < new Date().toISOString() && (this.match.score_home === null || !this.match.verified_at)){
                     return "background-color:orange;"
                 }
             }
