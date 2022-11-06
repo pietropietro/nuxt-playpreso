@@ -10,16 +10,14 @@
             <user-participation-standing-item whiteText
                 v-if="
                     !placeholderFirst 
-                    && group.userParticipations.length >= position
-                "
+                    && group.userParticipations.length >= position"
                 :up="group.userParticipations[position-1]"
             />
             <user-participation-standing-item whiteText
                 v-else-if="
                     placeholderFirst && 
                     position===2 && 
-                    group.userParticipations.length >= position-1
-                "
+                    group.userParticipations.length >= position-1"
                 :up="group.userParticipations[position-2]"
             />
             <p-p-cup-group-standings-placeholder
@@ -49,10 +47,7 @@ export default {
             let classes = "px-4" ;
             if(position === 0){classes += " pt-1 font-weight-bold text-caption"}
             if(position === this.group.participants){classes += " pb-1"}
-            if(this.currentUser && this.currentUser.id === this.group.userParticipations[position-1]?.id){
-                classes += " yellow--text"
-            }
-            if( !this.group.started_at || position-1 < (this.group.participants / 2)){
+            if( (!this.group.started_at || this.group.userParticipations[0]?.tot_points==null) || position-1 < (this.group.participants / 2)){
                 classes += " primary"
             }
             // else if(position === 3 && 
