@@ -1,20 +1,20 @@
 <template>
-    <v-row no-gutters>
+    <v-row no-gutters class="font-italic">
         <h1 v-if="level===1">?</h1>
 
-        <h1 v-else-if="level===2">
+        <h3 v-else-if="level===2">
             {{position}}{{tag.slice(position-1, position)}}
-        </h1>
+        </h3>
 
-        <h1 v-else class="text-lowercase">
-            {{cupFormat[level - 2].name}} -
+        <h3 v-else class="text-lowercase">
+            winner {{cupFormat[level - 2].name}} -
             {{cupFormat[level - 2].group_tags.
                 indexOf(
                     position === 1 ? tag.slice(0, tag.length/2) 
                         : tag.slice(tag.length/2, tag.length)
                 ) +1
             }} 
-        </h1>
+        </h3>
     </v-row>
 </template>
 <script>

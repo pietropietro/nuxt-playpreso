@@ -14,7 +14,7 @@
                 <!-- </nuxt-link> -->
             </v-row>
         </v-col>
-        <v-col cols="auto" class="text-right mr-2">
+        <v-col cols="auto" class="text-right">
             <v-row no-gutters justify="center" align="end">
                 <v-col>
                     <h1>{{up.tot_points}}</h1>
