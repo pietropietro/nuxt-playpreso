@@ -9,7 +9,7 @@
             <h1 class="white--text ocrastd">PP</h1>
         </nuxt-link>
         <v-spacer/>
-        <user-menu v-if="menu"/>
+        <user-menu/>
     </v-app-bar>
 </template>
 <script>

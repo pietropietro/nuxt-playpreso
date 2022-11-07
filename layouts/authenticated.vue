@@ -2,7 +2,7 @@
 	<client-only>
 		<v-app>
 			<p-p-header collapse/>  
-			<mundial-banner class="mb-5"/> 
+			<p-p-cup-mundial-banner class="mb-5"/> 
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
@@ -16,7 +16,7 @@
 <script>
 export default {
     mounted () {
-        this.$vuetify.theme.dark = false
+        this.$vuetify.theme.dark = true
     }
 }
 </script>

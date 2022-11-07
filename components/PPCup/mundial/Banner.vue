@@ -31,7 +31,6 @@ export default {
 <style scoped>
     .highlight-row{
         min-height: 10px;
-        background-color: rgb(19, 3, 58);
         font-size:10px;
         width: 100%
     }
