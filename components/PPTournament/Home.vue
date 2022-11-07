@@ -22,6 +22,7 @@
                 v-else
                 :group="tournamentObj"
                 :cupFormat="tournamentObj.ppTournamentType.cup_format"
+                isDetailPage
             />
         </v-container>
         <!-- USER GUESSES -->

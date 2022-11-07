@@ -14,19 +14,18 @@
                 <!-- </nuxt-link> -->
             </v-row>
         </v-col>
-        <v-col cols="auto" class="text-right mr-2" >
+        <v-col cols="auto" class="text-right mr-2">
             <v-row no-gutters justify="center" align="end">
                 <v-col>
-                    <div class="user-font">{{up.tot_points}}
-                        <span v-if="up.tot_cup_points && up.tot_cup_points != up.tot_points" class="caption ml-2 mb-2">
-                            {{up.tot_cup_points}}
-                        </span>
-                    </div>
+                    <h1>{{up.tot_points}}</h1>
                 </v-col>
-                <v-col cols="auto" v-if="showDetails">
-                    <v-row no-gutters class="text-overline ml-2 mb-1">
-                        <v-col>{{up.tot_locked ?? 0}}-{{up.tot_preso ?? 0}}-{{up.tot_unox2 ?? 0}}</v-col>
-                    </v-row>
+                <v-col v-if="up.tot_cup_points" class="ml-2" style="line-height:2.3rem">
+                    <h4>
+                        {{up.tot_cup_points}}
+                    </h4>
+                </v-col>
+                <v-col v-if="showDetails" cols="auto" class="overline ml-2"  style="line-height:2.2rem">
+                    {{up.tot_locked ?? 0}}-{{up.tot_preso ?? 0}}-{{up.tot_unox2 ?? 0}}
                 </v-col>
             </v-row>
         </v-col>
