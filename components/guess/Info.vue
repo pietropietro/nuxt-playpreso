@@ -36,7 +36,10 @@ export default {
             return 'LOCKED'
         },
         value2(){
-            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", color: this.ppRGBA(this.$store.state.navigation.rgb)};
+            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", 
+                // color: this.ppRGBA(this.$store.state.navigation.rgb)
+                color: '#ffeb3b'
+            };
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;
         }

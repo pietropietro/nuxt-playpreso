@@ -68,9 +68,9 @@ export default {
             //     this.group.userParticipations?.length >= position && 
             //     this.group.userParticipations[position-1].points >= this.pointsToPassThird
             // ){classes += " deep-purple darken-3"}
-            else{
-                classes += " primary_red"
-            }
+            // else{
+            //     classes += " primary_red"
+            // }
             return classes;
         }
     }

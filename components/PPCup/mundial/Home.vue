@@ -2,7 +2,7 @@
     <nuxt-link to="/p-cup/mundial-22" class="no-decoration no-selection">
         <v-container fluid fill-height  class="background pa-0">
             <v-row no-gutters justify="center">
-                <h2 class="ocrastd" >playpreso<br>world cup</h2>
+                <h2 class="ocrastd primary--text" >playpreso<br>world cup</h2>
             </v-row>
         </v-container>
     </nuxt-link>

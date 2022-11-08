@@ -16,7 +16,7 @@
 <script>
 export default {
     mounted () {
-        this.$vuetify.theme.dark = true
+        setTimeout(()=>this.$vuetify.theme.dark = true);
     }
 }
 </script>
