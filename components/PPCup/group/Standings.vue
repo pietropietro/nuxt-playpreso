@@ -53,7 +53,9 @@ export default {
             return true;
         },
         showDetailedStats(){
-            return this.isDetailPage && this.group.started_at
+            return this.isDetailPage && 
+                this.group.started_at && 
+                this.group.ppRounds[0].ppRoundMatches.filter((e)=>e.match.verified_at).length > 0;
         }
     },
     methods:{
