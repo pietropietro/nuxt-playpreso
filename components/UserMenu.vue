@@ -3,7 +3,7 @@
         <template v-slot:activator="{ on }">
             <h4 v-on="on" class="pointer ocrastd">></h4>
         </template>
-        <v-list role="menu" class="pb-0 text-right">
+        <v-list role="menu" class="pb-0 text-center">
             <template >
                 <v-list-item>
                         <v-list-item-title>
@@ -19,17 +19,18 @@
                                 <span class="ocrastd">ADMIN</span>
                             </nuxt-link>
                         </v-col>
-                        <v-col>
+                        <v-col class="px-4">
                             <p-p-info label="points" :value="currentPoints" small/>
                         </v-col>
+                        <v-col><h5 class="text-caption">v{{VERSION}}</h5></v-col>
                     </v-row>
                 </v-list-item>
-                <v-list-item>
+                <!-- <v-list-item>
                     <v-list-item-title>
                             <h5 class="text-caption">v{{VERSION}}</h5>
                     </v-list-item-title>
-                </v-list-item>
-                <v-list-item class="pointer" style="background-color:blue;" @click="$logout.logout()">
+                </v-list-item> -->
+                <v-list-item class="pointer" style="background-color:var(--v-primary-base);" @click="$logout.logout()">
                     <v-btn block text>
                         <h3 class="ocrastd white--text">{{$t('app.logout')}}</h3>
                     </v-btn>
