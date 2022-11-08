@@ -7,8 +7,7 @@ Vue.mixin({
         },
         ppRGBA(rgb, opacity){
             // let colorString = 'rgba(' + rgb + ', ' + (opacity?? '1') + ')';
-            // let colorString = 'rgba(var(--v-primary-base), ' + (opacity ?? '1') + ')';
-            let colorString = 'var(--v-primary-base)';
+            let colorString = (!opacity || opacity==1) ? 'var(--v-primary-base)' : 'var(--v-primary-lighten1)';
             return colorString;
         },
         ppTournamentTypeTitle(ppTournamentType){
