@@ -2,7 +2,7 @@
     <div class="white--text">
         <v-row no-gutters v-if="showDetailedStats" class="mb-2 pr-2 pr-sm-4">
             <user-participation-standing-labels 
-                :totalCupLabel="group.userParticipations[0].tot_cup_points" 
+                :totalCupLabel="!!group.userParticipations[0].tot_cup_points" 
             />
         </v-row>
         <v-row no-gutters v-else :class="'ml-2 mb-1 font-weight-bold caption'">
