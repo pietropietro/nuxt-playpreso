@@ -28,5 +28,6 @@ export default {
 <style scoped>
 	.background {
 		background-image: url("assets/img/background.jpg");
+        background-size: cover; 
 	}
 </style>
