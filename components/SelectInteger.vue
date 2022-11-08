@@ -3,7 +3,7 @@
         <h1 :class="disabled ? '' : 'pointer'"  @click="onClick">
             {{computedModel}}
         </h1>
-        <h4 v-if="!max && !computedModel === 3">+</h4>
+        <h4 v-if="!max && computedModel === 3">+</h4>
     </v-row>
 </template>
 <script>
