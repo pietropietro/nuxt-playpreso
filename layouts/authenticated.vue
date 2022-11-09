@@ -1,6 +1,6 @@
 <template>
 	<client-only>
-		<v-app>
+		<v-app class="no-selection">
 			<p-p-header collapse/>  
 			<p-p-cup-mundial-banner class="mb-5"/> 
 			<guard-logged-in v-if="!currentUser"/>

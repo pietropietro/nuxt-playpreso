@@ -1,6 +1,6 @@
 <template>
 	<client-only>
-		<v-app>
+		<v-app class="no-selection">
 			<!-- <p-p-header menu/>   -->
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
