@@ -21,9 +21,10 @@
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
                         {{match.awayTeam?.name}}
                     </v-row>
-                    <div v-if="!open" style="line-height:1rem;" class="text-overline">
-                        {{match.score_home}} - {{match.score_away}}
-                    </div>
+                    <v-row no-gutters v-if="!open" style="line-height:1rem;" class="text-overline">
+                        <v-col>{{match.score_home}} - {{match.score_away}}</v-col>
+                        <v-col v-if="match.notes"><h4>{{match.notes}}</h4></v-col>
+                    </v-row>
                 </v-container>
             </template>
         </v-expansion-panel-header>
@@ -41,10 +42,37 @@
                     <h3 class="pointer" @click="verify">VERIFY</h3>
                 </v-row>
                 <span class="text-caption"><b>created:</b> {{formatDate(match.created_at, true)}}</span>
-                <span v-if="match.rescheduled_at" class="text-caption"><b>rescheduled:</b> {{formatDate(match.rescheduled_at, true)}}</span>
                 <span  v-if="match.verified_at" class="text-caption"><b>verified:</b> {{formatDate(match.verified_at, true)}}</span>
             </v-container>
-        </v-expansion-panel-content>                       
+        </v-expansion-panel-content>     
+        <!-- style="var(background-color:--v-primary-lighten1);" -->
+        <v-expansion-panel-footer v-if="match.aggregateGuesses">
+            <v-container class="footer py-1" >
+                <v-row no-gutters>
+                    <v-col align-self="center">
+                        <div style="line-height:1rem" class="overline"><b>{{match.aggregateGuesses}}</b></div>
+                    </v-col>
+                    <template v-if="match.verified_at">
+                        <v-col>
+                            <div style="line-height:1rem" class="overline"><b>{{match.aggregateUNOX2}}%</b></div>
+                            <div class="caption">1X2</div>
+                        </v-col>
+                        <v-col>
+                            <div style="line-height:1rem" class="overline"><b>{{match.aggregateGGNG}}%</b></div>
+                            <div class="caption">GGNG</div>
+                        </v-col>
+                        <v-col>
+                            <div style="line-height:1rem" class="overline"><b>{{match.aggregateUO25}}%</b></div>
+                            <div class="caption">UO25</div>
+                        </v-col>
+                        <v-col>
+                            <div style="line-height:1rem" class="overline"><b>{{match.aggregatePRESO}}%</b></div>
+                            <div class="caption">PRESO</div>
+                        </v-col>
+                    </template>
+                </v-row>
+            </v-container>
+        </v-expansion-panel-footer>                
     </v-expansion-panel>
 </template>
 <script>
@@ -56,8 +84,14 @@ export default {
     computed:{
         matchStatusStyle:{
             get(){
+                if(!!this.match.notes){
+                    return "background-color:red;"
+                }
                 if(new Date(this.match.date_start).toISOString() < new Date().toISOString() && (this.match.score_home === null || !this.match.verified_at)){
                     return "background-color:orange;"
+                }
+                if(!this.match.verified_at){
+                    return "background-color: var(--v-primary-lighten2);"
                 }
             }
         }
@@ -87,5 +121,8 @@ export default {
 <style>
 .admin-match .v-expansion-panel-content__wrap{
     padding:0px !important;
+}
+.footer{
+    background-color: var(--v-primary-darken1);
 }
 </style>
