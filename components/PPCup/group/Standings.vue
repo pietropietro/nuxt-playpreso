@@ -1,9 +1,23 @@
 <template>
     <div class="white--text">
-        <v-row no-gutters v-if="showDetailedStats" class="mb-2 pr-2 pr-sm-4">
-            <user-participation-standing-labels 
-                :totalCupLabel="!!group.userParticipations[0].tot_cup_points" 
-            />
+        <v-row no-gutters v-if="showDetailedStats" class="mb-2" align="end">
+            <v-col cols="auto">
+                <v-avatar
+                    color="primary"
+                    size="14"
+                />
+                <span class="overline" style="line-height:1rem">
+                    {{
+                        cupGroupStageString(group, cupFormat) === 'FINAL' ? 'WINNER' 
+                        : 'QUALIFIES'
+                    }}
+                </span>
+            </v-col>
+            <v-col class="pr-6 pr-sm-4">
+                <user-participation-standing-labels
+                    :totalCupLabel="!!group.userParticipations[0].tot_cup_points"
+                />
+            </v-col>
         </v-row>
         <v-row no-gutters v-else :class="'ml-2 mb-1 font-weight-bold caption'">
                 {{cupGroupStageString(group, cupFormat)}}
@@ -17,7 +31,8 @@
                 <user-participation-standing-item whiteText
                     v-if="
                         !placeholderFirst
-                        && group.userParticipations.length >= position"
+                        && group.userParticipations.length >= position
+                    "
                     :up="group.userParticipations[position-1]"
                     :showDetails="showDetailedStats"
                 />
@@ -25,7 +40,8 @@
                     v-else-if="
                         placeholderFirst &&
                         position===2 &&
-                        group.userParticipations.length >= position-1"
+                        group.userParticipations.length >= position-1
+                    "
                     :up="group.userParticipations[position-2]"
                     :showDetails="showDetailedStats"
                 />
@@ -62,17 +78,11 @@ export default {
         colorForPosition(position){
             let classes = "px-4" ;
             if(position === this.group.participants){classes += " pb-1"}
-            if( (!this.group.started_at || this.group.userParticipations[0]?.tot_points==null) || position-1 < (this.group.participants / 2)){
+            if((!this.group.started_at || this.group.userParticipations[0]?.tot_points==null) 
+                || position-1 < (this.group.participants / 2)
+            ){
                 classes += " primary"
             }
-            // else if(position === 3 && 
-            //     this.pointsToPassThird && 
-            //     this.group.userParticipations?.length >= position && 
-            //     this.group.userParticipations[position-1].points >= this.pointsToPassThird
-            // ){classes += " deep-purple darken-3"}
-            // else{
-            //     classes += " primary_red"
-            // }
             return classes;
         }
     }

@@ -1,9 +1,9 @@
 <template >
     <v-row no-gutters justify="end" align="end">
-        <v-col cols="1" sm="auto" >
+        <v-col cols="1" sm="auto" class="mr-4 mr-sm-0">
             <h3 class="standings-label">POINTS</h3>
         </v-col>
-        <v-col cols="1" sm="auto" class="mr-n2 mr-sm-0" v-if="totalCupLabel" >
+        <v-col cols="1" sm="auto" class="mr-sm-0" v-if="totalCupLabel" >
             <h5 class="standings-label">CUP</h5>
         </v-col>
         <v-col cols="2" sm="auto" 
