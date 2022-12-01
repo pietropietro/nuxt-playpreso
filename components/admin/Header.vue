@@ -5,11 +5,11 @@
         color="primary"
     >
         <div @click.stop="()=>setDrawer(!drawer)" class="ocrastd"><h1>ADMIN</h1></div>
+        <h4 v-if="$config.DEBUG" class="red--text">DEBUG</h4>
         <v-spacer/>
         <span class="ocrastd">{{new Date().toDateString()}}-</span>
         <digital-clock class="ocrastd" :blink="true" />
         <v-spacer/>
-        <user-menu v-if="!$store.state.navigation.rgb"/>
     </v-app-bar>
 </template>
 <script>

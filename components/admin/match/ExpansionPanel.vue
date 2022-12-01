@@ -10,7 +10,7 @@
                         <v-col cols="auto" class="mr-2 pb-2">
                             <league-flag small :league="match.league" size="12"/>
                         </v-col>
-                        <v-col cols="auto" class="text-overline" style="line-height:1rem;">{{match.league.tag}}</v-col>
+                        <v-col cols="auto" class="text-overline" style="line-height:1rem;">{{match.league?.tag}}</v-col>
                         <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
                         <v-spacer/>
                         <span class="text-caption">{{formatTime(match.date_start)}}</span>
@@ -46,7 +46,7 @@
             </v-container>
         </v-expansion-panel-content>     
         <!-- style="var(background-color:--v-primary-lighten1);" -->
-        <v-expansion-panel-footer v-if="match.aggregateGuesses">
+        <div v-if="match.aggregateGuesses">
             <v-container class="footer py-1" >
                 <v-row no-gutters>
                     <v-col align-self="center">
@@ -72,7 +72,7 @@
                     </template>
                 </v-row>
             </v-container>
-        </v-expansion-panel-footer>                
+        </div>                
     </v-expansion-panel>
 </template>
 <script>

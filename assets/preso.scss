@@ -83,6 +83,17 @@
 	color: black
 }
 
-// .theme--light.v-icon{
-// 	color: black !important;
-// }
+.blink {
+	animation: blinking 2s infinite;
+	// animation: blinking 3s linear ;
+}
+  
+  @keyframes blinking {
+	76%, 100% {
+		opacity: 0;
+	}
+	10%, 65%{
+		opacity: 1;
+	}
+
+}

@@ -4,6 +4,7 @@
     <div v-else-if="leagues">
         <admin-league-create :leagues="leagues" :refresh="getLeagues"/>
         <v-container >
+            <h1>LEAGUES</h1>
             <v-data-table
                 single-select
                 v-model="selected"

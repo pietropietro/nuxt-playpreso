@@ -1,5 +1,5 @@
 <template>
-    <div class="white--text">
+    <div>
         <v-row no-gutters v-if="showDetailedStats" class="mb-2" align="end">
             <v-col cols="auto">
                 <v-avatar
@@ -19,14 +19,17 @@
                 />
             </v-col>
         </v-row>
-        <v-row no-gutters v-else :class="'ml-2 mb-1 font-weight-bold caption'">
-                {{cupGroupStageString(group, cupFormat)}}
+        <v-row no-gutters v-else :class="'mx-2 font-weight-bold caption'">
+            <v-col>{{cupGroupStageString(group, cupFormat)}}</v-col>
+            <match-live-blink v-if="group.isLive"/>
         </v-row>
         <div>
             <div v-for="position in group.participants" :key="position"
-                :class="colorForPosition(position)"
-                :style="position === group.participants ? 'border-radius:0 0 20px 20px;' : 
-                position === 1 ? 'border-radius:20px 20px 0 0;' : ''"
+                :class="
+                    colorForPosition(position) + ' ' + (
+                    position === group.participants ? 'rounded-br-xl rounded-bl-xl' : 
+                    position === 1 ? 'rounded-tr-xl rounded-tl-xl' : ''
+                )"
             >
                 <user-participation-standing-item whiteText
                     v-if="
@@ -72,6 +75,9 @@ export default {
             return this.isDetailPage && 
                 this.group.started_at && 
                 this.group.ppRounds[0].ppRoundMatches.filter((e)=>e.match.verified_at).length > 0;
+        },
+        hasMatchLive(){
+            return true;
         }
     },
     methods:{

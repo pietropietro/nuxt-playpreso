@@ -2,6 +2,7 @@ export default {
 
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
+		DEBUG: process.env.DEBUG ?? false
 	},
 
 	// Global page headers: https://go.nuxtjs.dev/config-head

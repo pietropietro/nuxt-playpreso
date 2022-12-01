@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <h1>CREATE LEAGUE</h1>
         <v-row align="center">
             <p-p-input-text placeholder="name" :value="nameModel" :setValue="(val)=>nameModel=val"/>
             <v-col>

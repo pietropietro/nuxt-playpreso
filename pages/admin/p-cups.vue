@@ -2,14 +2,12 @@
     <v-container>
         <v-row><h1>P-CUPS</h1></v-row>
         <v-row align="center">
-            <v-col>
-                <v-select :loading="loading" :items="ppTournamentTypes" v-model="typeModel" item-text="name" item-value="id"/> 
-            </v-col>
+            <admin-select-p-p-tournament-type cupsOnly :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
             <v-col>
                 <v-text-field label="slug" v-model="slugModel"/>
             </v-col>
             <v-col cols="3">
-                <v-btn text @click="create" :disabled="!typeModel || !slugModel">create</v-btn>
+                <v-btn text @click="create" :disabled="!ppTTselected || !slugModel">create</v-btn>
             </v-col>
         </v-row>
         <v-row v-if="ppCups">
@@ -35,19 +33,11 @@ export default {
     data:()=>({
         loading: true,
         createLoading:false,
-        ppTournamentTypes: [],
         ppCups: [],
-        typeModel: null,
+        ppTTselected: null,
         slugModel: null
     }),
     methods:{
-        async getCupTypes(){
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES + '?onlyCups=1');
-            if(response && response.status === "success"){
-                this.ppTournamentTypes = response.message;
-            }
-            this.loading = false;
-        },
         async create(){
             this.createLoading = true;
             let values = { 
@@ -55,7 +45,7 @@ export default {
             }
             
             let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPCUP.CREATE + this.typeModel, values, 'POST'
+                this.ADMIN_API_ROUTES.PPCUP.CREATE + this.ppTTselected, values, 'POST'
             );
 
             if(response && response.status === "success"){
@@ -65,7 +55,7 @@ export default {
         },
         async getCups(){
             let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPCUP.GET + (this.typeModel ? ('?ppTournamentTypeId=' + this.typeModel) : '')
+                this.ADMIN_API_ROUTES.PPCUP.GET + (this.ppTTselected ? ('?ppTournamentTypeId=' + this.ppTTselected) : '')
             );
             if(response && response.status === "success"){
                 this.ppCups = response.message;
@@ -74,7 +64,6 @@ export default {
         }
     },
     async mounted(){
-        await this.getCupTypes();
         await this.getCups();
     }
 }
