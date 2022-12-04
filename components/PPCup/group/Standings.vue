@@ -1,59 +1,40 @@
 <template>
     <div>
-        <v-row no-gutters v-if="showDetailedStats" class="mb-2" align="end">
-            <v-col cols="auto">
-                <v-avatar
-                    color="primary"
-                    size="14"
-                />
-                <span class="overline" style="line-height:1rem">
-                    {{
-                        cupGroupStageString(group, cupFormat) === 'FINAL' ? 'WINNER' 
-                        : 'QUALIFIES'
-                    }}
-                </span>
-            </v-col>
-            <v-col class="pr-6 pr-sm-4">
-                <user-participation-standing-labels
-                    :totalCupLabel="!!group.userParticipations[0].tot_cup_points"
-                />
-            </v-col>
-        </v-row>
-        <v-row no-gutters v-else :class="'mx-2 font-weight-bold caption'">
-            <v-col>{{cupGroupStageString(group, cupFormat)}}</v-col>
-            <match-live-blink v-if="group.isLive"/>
-        </v-row>
-        <div>
-            <div v-for="position in group.participants" :key="position"
-                :class="
-                    colorForPosition(position) + ' ' + (
-                    position === group.participants ? 'rounded-br-xl rounded-bl-xl' : 
-                    position === 1 ? 'rounded-tr-xl rounded-tl-xl' : ''
-                )"
-            >
-                <user-participation-standing-item whiteText
-                    v-if="
-                        !placeholderFirst
-                        && group.userParticipations.length >= position
-                    "
-                    :up="group.userParticipations[position-1]"
-                    :showDetails="showDetailedStats"
-                />
-                <user-participation-standing-item whiteText
-                    v-else-if="
-                        placeholderFirst &&
-                        position===2 &&
-                        group.userParticipations.length >= position-1
-                    "
-                    :up="group.userParticipations[position-2]"
-                    :showDetails="showDetailedStats"
-                />
-                <p-p-cup-group-standings-placeholder
-                    v-else
-                    :tag="group.tag" :level="group.level" :cupFormat="cupFormat" :position="position"
-                />
-            </div>
+        <p-p-cup-group-standings-headers 
+            :totalCupLabel="!!group.userParticipations[0]?.tot_cup_points"
+            :showDetailedStats="showDetailedStats"
+            :group="group" :cupFormat="cupFormat"
+        />
+        <div v-for="position in group.participants" :key="position"
+            :class="
+                colorForPosition(position) + ' ' + (
+                position === group.participants ? 'rounded-br-xl rounded-bl-xl' : 
+                position === 1 ? 'rounded-tr-xl rounded-tl-xl' : ''
+            )"
+        >
+            <user-participation-standing-item whiteText
+                v-if="
+                    !placeholderFirst
+                    && group.userParticipations.length >= position
+                "
+                :up="group.userParticipations[position-1]"
+                :showDetails="showDetailedStats"
+            />
+            <user-participation-standing-item whiteText
+                v-else-if="
+                    placeholderFirst &&
+                    position===2 &&
+                    group.userParticipations.length >= position-1
+                "
+                :up="group.userParticipations[position-2]"
+                :showDetails="showDetailedStats"
+            />
+            <p-p-cup-group-standings-placeholder
+                v-else
+                :tag="group.tag" :level="group.level" :cupFormat="cupFormat" :position="position"
+            />
         </div>
+        <p-p-cup-group-standings-footer class="mx-2" :group="group"/>
     </div>
 </template>
 <script>
