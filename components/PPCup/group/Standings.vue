@@ -34,7 +34,7 @@
                 :tag="group.tag" :level="group.level" :cupFormat="cupFormat" :position="position"
             />
         </div>
-        <p-p-cup-group-standings-footer class="mx-2" :group="group"/>
+        <p-p-cup-group-standings-footer class="mx-2" :group="group" :isDetailPage="isDetailPage"/>
     </div>
 </template>
 <script>
