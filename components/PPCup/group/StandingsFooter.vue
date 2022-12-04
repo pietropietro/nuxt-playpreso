@@ -1,8 +1,8 @@
 <template>
     <v-row class="overline">
-        <v-col v-if="group.finished_at">FINISHED</v-col>
+        <v-col class="pb-0" v-if="group.finished_at">FINISHED</v-col>
         <template v-else-if="group.started_at">
-            <v-col>
+            <v-col class="pb-0">
                 <div>
                     ROUND {{group.currentRound}}/{{group.rounds}} 
                     <template v-if="group.verifiedInCurrentRound">
