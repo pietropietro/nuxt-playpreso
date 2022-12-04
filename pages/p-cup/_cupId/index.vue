@@ -32,6 +32,7 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPCUP.GET + this.ppCupId, null, 'GET');
             if(response && response.status === "success"){
                 this.ppCup = response.message;
+                this.selectedLevel = this.ppCup.currentLevel
                 this.$store.commit('navigation/setActive', { 
                     title: this.ppCup.ppTournamentType.name, 
                     rgb: this.ppCup.ppTournamentType.rgb
@@ -42,6 +43,7 @@ export default {
     },
     async mounted(){
        await this.getPPCup();
+       console.log(this.selectedLevel, "selectedlevel");
     }
 }
 </script>
