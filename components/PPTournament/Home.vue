@@ -27,9 +27,9 @@
         </v-container>
         <!-- USER GUESSES -->
         <template  v-if="tournamentObj.ppRounds.length > 0">
-            <v-container v-if="userCurrentRound" class="py-4">
+            <v-container v-if="tournamentObj.userCurrentRound" class="py-4">
                 <p-p-section-title text="YOUR GUESSES" />
-                <guess-user-round class="mt-0" :ppRMs="userCurrentRound" />
+                <guess-user-round class="mt-0" :ppRMs="tournamentObj.userCurrentRound" />
             </v-container>
             <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
@@ -57,19 +57,6 @@ export default {
     computed:{
         isCupGroup(){
             return this.tournamentObj.ppTournamentType.cup_format;
-        },
-        userInTournament(){
-            return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
-        },
-        userCurrentRound(){
-            if(!this.userInTournament || !this.tournamentObj.ppRounds) return null;
-            return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length-1].ppRoundMatches.map((pprm) => {
-                return {
-                    match: pprm.match,
-                    guess: pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0]
-                };
-                
-            });
         },
         missingUsers(){
             return (this.isCupGroup ? this.tournamentObj.participants : this.tournamentObj.ppTournamentType.participants)
