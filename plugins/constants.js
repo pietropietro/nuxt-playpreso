@@ -42,6 +42,9 @@ Vue.mixin({
                         GET: '/p-cup-group/'
                     }
                 },
+                PPROUND: {
+                    GET: '/p-round/',
+                },
                 PPTOURNAMENTTYPE: {
                     JOIN: '/p-tournament-type/join/'
                 },
