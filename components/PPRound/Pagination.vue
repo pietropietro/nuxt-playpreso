@@ -16,6 +16,7 @@
             class="ma-0"
             v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
+            :onLastLock="fetchRound"
         />
     </div>
 </template>
@@ -24,17 +25,31 @@ export default {
     props:{
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},
+        setPPRounds: {type: Function}
     },
     data(){
         return{
             selectedRound: this.ppRounds.length
         }
     },
+    methods: {
+        async fetchRound(ppRoundId){           
+            let response = await this.$api.call(this.API_ROUTES.PPROUND.GET + ppRoundId);
+            if(response && response.status === "success"){
+                this.ppTournamentTypes = response.message;
+            }
+
+            let copy = JSON.parse(JSON.stringify(this.ppRounds));
+            copy.map((r) => {
+                if(r.id === ppRoundId) r = response.message
+            });
+            this.setPPRounds(copy);
+        }
+    }
 }
 </script>
 
 <style>
-   
     .pagination-arrows-only .v-pagination__item{
         display: none !important;
     }

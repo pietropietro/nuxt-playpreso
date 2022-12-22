@@ -34,7 +34,7 @@
             <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
                 <p-p-round-pagination
-                    :ppRounds="tournamentObj.ppRounds"
+                    :ppRounds="tournamentObj.ppRounds" :setPPRounds="(val)=>tournamentObj.ppRounds = val"
                     :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
                 />
             </v-container>
