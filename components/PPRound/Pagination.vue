@@ -38,10 +38,9 @@ export default {
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
             }
-
-            let copy = JSON.parse(JSON.stringify(this.ppRounds));
-            copy.map((r) => {
-                if(r.id === ppRoundId) r = response.message
+            let copy = this.ppRounds.map((r) => {
+                if(r.id === ppRoundId) return response.message;
+                return r;
             });
             this.setPPRounds(copy);
         }

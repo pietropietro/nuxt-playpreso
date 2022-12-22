@@ -49,8 +49,7 @@ export default {
             let values = { 
                 "home": home,
                 "away": away
-                }
-            
+            }
             
             let response = await this.$api.call(
                 this.API_ROUTES.GUESS.LOCK + this.guess.id, values, 'POST'
@@ -58,6 +57,8 @@ export default {
 
             if(response && response.status === "success"){
                 this.guess.guessed_at = new Date();
+                this.guess.home = home;
+                this.guess.away = away;
             }
             this.lockButtonLoading = false;
         }

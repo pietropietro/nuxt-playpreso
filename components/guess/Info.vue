@@ -33,6 +33,7 @@ export default {
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.points === 0 ? 0 : '+' + this.guess.points;
             if(this.isMissed(this.guess)) return 'MISSED';
             if(!this.guess.guessed_at) return '?';
+            if(this.guess.guessed_at && this.guess.home !== null) return this.guess.home + '-' + this.guess.away;
             return 'LOCKED'
         },
         value2(){
