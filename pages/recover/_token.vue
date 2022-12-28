@@ -21,7 +21,7 @@
                     </v-col>
                 </v-row>
                 <v-row justify="center" class="mt-3">
-                    <v-btn color="primary" block @click="save" :loading="loadingSave" :disabled="!password">
+                    <v-btn color="primary" block @click="updatePassword" :loading="loadingSave" :disabled="!password">
                         <h1>SAVE</h1>
                     </v-btn>
                 </v-row>
@@ -38,11 +38,11 @@ export default {
             loading: true,
             loadingSave: false,
             user: null,
-            token: this.$route.params.token
+            token: this.$route.params.token,
         }
     },
     methods:{
-        async save(){
+        async updatePassword(){
             let values = { 
                 "password": this.password,
                 "token": this.token
@@ -52,8 +52,9 @@ export default {
                 this.API_ROUTES.USER.PASSWORD_RESET + this.user.id, values, 'POST'
             );
 
-            if(response.success){
-                console.log("l");
+            if(response.message){
+                this.$notifier.showSuccess("password changed.");
+                this.$router.push(this.ROUTES.LOGIN);
             }
 
         },
@@ -64,7 +65,7 @@ export default {
             }
             else{
                 this.$notifier.showError('Invalid token');
-                await this.$router.push(this.ROUTES.RECOVER);
+                this.$router.push(this.ROUTES.RECOVER);
             }
             this.loading = false;
         }

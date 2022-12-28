@@ -11,11 +11,12 @@ Vue.mixin({
     },
     methods:{
         async userLogin(username, password){
-            let values = [
-                {'username': username},
-                {'password': password}
-            ]
-            let response = await this.$api.call(this.API_ROUTES.USER.LOGIN, values, 'POST', true);
+            let values = {
+                'username': username,
+                'password': password
+            }
+            
+            let response = await this.$api.call(this.API_ROUTES.USER.LOGIN, values, 'POST');
             if(response && response.status === "success"){
                 this.$store.commit('user/updateCurrentUser', { currentUser: response.message.user});
                 this.$router.push(this.ROUTES.HOME);          
@@ -23,12 +24,12 @@ Vue.mixin({
         },
 
         async userSignUp(username, password, email){
-            let values = [
-                {'username': username},
-                {'password': password},
-                {'email': email}
-            ]
-            let response = await this.$api.call(this.API_ROUTES.USER.SIGNUP, values, 'POST', true);
+            let values = {
+                'username': username,
+                'password': password,
+                'email': email
+            }
+            let response = await this.$api.call(this.API_ROUTES.USER.SIGNUP, values, 'POST');
             if(response.status === "success"){
                 this.$notifier.showSuccess(this.$t('user.created'));
                 this.$router.push(this.ROUTES.LOGIN);          
