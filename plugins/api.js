@@ -23,15 +23,15 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 'Content-Type': "application/json",
                 'Authorization': store.state.user.token,
             }) : new Headers({'Content-Type': "application/json"});
-
+            
             let initOptions = {
                 method: method,
                 mode: 'cors',
                 credentials: 'include'
             };
-            if(includeAuth){
-                initOptions.headers = headers;
-            }
+            
+            initOptions.headers = headers;
+            
             if(includeBody){
                 initOptions.body = use_formdata ? myFormData : JSON.stringify(values);
             }

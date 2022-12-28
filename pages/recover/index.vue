@@ -1,6 +1,6 @@
 <template>
 	<guest-screen v-if="!currentUser">
-		<template slot="content">
+		<template slot="content" v-if="!byebye">
 			<v-row class="ocrastd">
 				<v-col col="12">
 					<v-text-field
@@ -27,6 +27,11 @@
 				</nuxt-link>
 			</v-row>
 		</template>
+		<template slot="content" v-else>
+			<v-row class="ocrastd">
+				<h4>please check your inbox (and spam) for the reset link.</h4>
+			</v-row>
+		</template>
 	</guest-screen>
 	<go-home v-else/>
 </template>
@@ -35,17 +40,17 @@ export default {
 	data(){
 		return{
 			username: null,
-			loading: false
+			loading: false,
+			byebye: false,
 		}
 	},
 	methods:{
 		async recover(){
 			this.loading = true;
-            let values = [
-                {'action' : "resetPsw"},
-                {'username': this.username},
-            ]
-            let resp = await this.$api.call(values);
+            let response = await this.$api.call(
+                this.API_ROUTES.USER.RECOVER + this.username, null,  'POST'
+            );
+			this.byebye = true;
 			this.loading = false;
 		},
 	},

@@ -22,7 +22,10 @@ Vue.mixin({
                 USER:{
                     LOGIN: '/user/login',
                     SIGNUP: '/user/signup',    
-                    GET: '/user/'
+                    GET: '/user/',
+                    RECOVER: '/user/recover/',
+                    VALIDATE_TOKEN: '/user/validate-token/',
+                    PASSWORD_RESET: '/user/reset/'
                 },
                 GUESS:{
                     LOCK: '/guess/lock/'
