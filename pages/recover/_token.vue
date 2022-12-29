@@ -49,7 +49,7 @@ export default {
             };
 
             let response = await this.$api.call(
-                this.API_ROUTES.USER.PASSWORD_RESET + this.user.id, values, 'POST'
+                this.API_ROUTES.USER.PASSWORD_RESET, values, 'POST'
             );
 
             if(response.message){

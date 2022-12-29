@@ -25,7 +25,7 @@ Vue.mixin({
                     GET: '/user/',
                     RECOVER: '/user/recover/',
                     VALIDATE_TOKEN: '/user/validate-token/',
-                    PASSWORD_RESET: '/user/reset/'
+                    PASSWORD_RESET: '/user/reset'
                 },
                 GUESS:{
                     LOCK: '/guess/lock/'
