@@ -27,9 +27,9 @@ export default {
         },
         participationCols(participation, mobile){
             if(!participation.ppLeague.started_at){
-                return mobile ? '6' : '3'
+                return '6';
             }
-            return mobile ? '12' : '6'
+            return '12';
 
         }
     },

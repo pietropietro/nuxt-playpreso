@@ -12,7 +12,7 @@
                 position === 1 ? 'rounded-tr-xl rounded-tl-xl' : ''
             )"
         >
-            <user-participation-standing-item whiteText
+            <user-participation-standing-item 
                 v-if="
                     !placeholderFirst
                     && group.userParticipations.length >= position
@@ -20,7 +20,7 @@
                 :up="group.userParticipations[position-1]"
                 :showDetails="showDetailedStats"
             />
-            <user-participation-standing-item whiteText
+            <user-participation-standing-item 
                 v-else-if="
                     placeholderFirst &&
                     position===2 &&

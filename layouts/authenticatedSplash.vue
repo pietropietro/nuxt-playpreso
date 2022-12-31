@@ -1,7 +1,7 @@
 <template>
 	<client-only>
 		<v-app class="no-selection">
-			<p-p-header collapse/>  
+			<!-- <p-p-header menu/>   -->
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
@@ -15,7 +15,7 @@
 <script>
 export default {
     mounted () {
-        setTimeout(()=>this.$vuetify.theme.dark = false);
+		setTimeout(()=>this.$vuetify.theme.dark = true);
     }
 }
 </script>

@@ -6,7 +6,7 @@
                     #{{up.position}}
                 </span>
                 <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
-                    <div :class="'user-font ' + fontColor + (up.user_id === currentUser.id ? ' currentuser': '')" 
+                    <div :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
                         :style="'--my-color-var:' + ppRGBA($store.state.navigation.rgb)"
                     >
                         {{up.username}}
@@ -35,12 +35,8 @@
 export default {
     props:{
         up: {type: Object},
-        whiteText: {type: Boolean},
         showDetails: {type: Boolean}
     },
-    computed:{
-        fontColor(){return this.whiteText ? 'white--text' : 'black--text'}
-    }
 }
 </script>
 <style>

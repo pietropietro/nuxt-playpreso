@@ -1,16 +1,12 @@
 <template>
-    <v-app-bar
-        flat dense app
-        :collapse="collapse"
-        class="white--text" 
-        :color="$store.state.navigation.rgb ? ppRGBA($store.state.navigation.rgb) : 'primary'" 
-    >
+    <v-app-bar color="white" flat app>
+        <v-spacer/>
         <nuxt-link class="no-decoration" to="/">
-            <h4 v-if="$config.DEBUG" class="red--text">DEBUG</h4>
-            <h1 v-else class="white--text ocrastd">PP</h1>
+            <h1 class=" ocrastd">PLAYPRESO</h1>
         </nuxt-link>
         <v-spacer/>
         <user-menu/>
+        <!-- <v-spacer/> -->
     </v-app-bar>
 </template>
 <script>

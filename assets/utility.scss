@@ -15,11 +15,30 @@
     text-decoration: none !important;
 }
 
-.white-border {
+.black-border {
     border-style: solid; 
-    border-color: white !important;
+    border-color: black !important;
     border-width: 3px;
+
 }
+
+.black-border-t{
+    border-top: 3px solid black;
+}
+
+.black-border-l{
+    border-left: 3px solid black;
+}
+
+.black-border-r{
+    border-right: 3px solid black;
+}
+
+.black-border-b{
+    border-bottom: 3px solid black;
+}
+
+
 
 .rounded-border {
     border-radius: 30px !important;

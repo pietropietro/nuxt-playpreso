@@ -12,6 +12,10 @@ $material-dark: (
 );
 
 $material-light: (
+  // 'background': #ffffed,
+  cards:var(--v-primary-base),
+  navigation-drawer:var(--v-primary-base),
   icons:(active: black)
 );
+
 

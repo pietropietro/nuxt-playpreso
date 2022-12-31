@@ -4,9 +4,9 @@
         <template v-else-if="group.started_at">
             <v-col class="pb-0">
                 <div>
-                    ROUND {{group.currentRound}}/{{group.rounds}} 
+                    R {{group.currentRound}}/{{group.rounds}} 
                     <template v-if="group.verifiedInCurrentRound">
-                        PLAYED {{group.verifiedInCurrentRound[0]}}/{{group.verifiedInCurrentRound[1]}}
+                        P {{group.verifiedInCurrentRound[0]}}/{{group.verifiedInCurrentRound[1]}}
                     </template>
                 </div>
             </v-col>

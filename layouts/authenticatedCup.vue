@@ -2,10 +2,11 @@
 	<client-only>
 		<v-app class="no-selection">
 			<p-p-header collapse/>  
+			<p-p-cup-mundial-banner class="mb-5"/> 
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
-				<v-main>
+				<v-main style="padding-top:0px;">
 					<nuxt />
 				</v-main>
 			</template>
@@ -15,7 +16,7 @@
 <script>
 export default {
     mounted () {
-        setTimeout(()=>this.$vuetify.theme.dark = false);
+        setTimeout(()=>this.$vuetify.theme.dark = true);
     }
 }
 </script>

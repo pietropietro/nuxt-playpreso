@@ -101,7 +101,7 @@ export default {
 			},
             themes: {
                 light: {
-                    primary: '#00f',
+                    primary: '#0000cc',
 					anchor: '#000000',
 					primary_red: "ff0000",
 				},
