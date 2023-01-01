@@ -1,40 +1,30 @@
 <template>
-    <v-row v-if="!loading">
-        <v-col v-for="(participation, index) in ppLParticipations" :key="index"
-            :cols="participationCols(participation, true)" :md="participationCols(participation, false)" 
+    <v-row >
+        <v-col class="pr-0" v-for="(up, index) in userParticipations" :key="index"
+            :cols="participationCols(up, true)" :md="participationCols(up, false)" 
         >
-            <nuxt-link :to="ROUTES.PPLEAGUE.DETAIL + participation.ppLeague_id" class="no-decoration">
-                <p-p-league-participation-card :participation="participation" class="ma-1"/>
-            </nuxt-link>
+            <template v-if="up.ppLeague">
+                <nuxt-link :to="ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id" class="no-decoration">
+                    <p-p-league-participation-card :participation="up" class="ma-1"/>
+                </nuxt-link>
+            </template>
+
         </v-col>
     </v-row>
 </template>
 <script>
 export default {
-    data(){
-        return {
-            loading: true,
-            ppLParticipations: null
-        }
+    props:{
+        userParticipations: {type: Array}
     },
     methods: {
-        async getParticipations(){
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES);
-            if(response && response.status === "success"){
-                this.ppLParticipations = response.message;
-            }
-            this.loading = false;
-        },
         participationCols(participation, mobile){
-            if(!participation.ppLeague.started_at){
-                return '6';
-            }
+            // if(!participation.ppLeague.started_at){
+                // return '6';
+            // }
             return '12';
 
         }
     },
-    async mounted(){
-        await this.getParticipations();
-    }
 }
 </script>

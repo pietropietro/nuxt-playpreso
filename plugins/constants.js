@@ -31,6 +31,7 @@ Vue.mixin({
                     LOCK: '/guess/lock/'
                 },
                 USER_PARTICIPATION: {
+                    GET:  '/user-participation',
                     PPLEAGUES:  '/user-participation/p-leagues',
                     PPCUPS:  '/user-participation/p-cups'
                 },
