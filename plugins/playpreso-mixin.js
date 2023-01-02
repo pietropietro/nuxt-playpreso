@@ -6,12 +6,12 @@ Vue.mixin({
             return guess.verified_at && !guess.guessed_at;
         },
         ppRGBA(rgb, opacity){
-            // let colorString = 'rgba(' + rgb + ', ' + (opacity?? '1') + ')';
-            let colorString = (!opacity || opacity==1) ? 'var(--v-primary-base)' : 'var(--v-primary-lighten1)';
+            let colorString = 'rgba(' + rgb + ', ' + (opacity?? '1') + ')';
+            // let colorString = (!opacity || opacity==1) ? 'var(--v-primary-base)' : 'var(--v-primary-lighten1)';
             return colorString;
         },
         ppTournamentTypeTitle(ppTournamentType){
-            return ppTournamentType.name + " " + ppTournamentType.level;
+            return ppTournamentType.name + " " + (ppTournamentType.level ?? '');
         },
         getFlag(league){
             try { return require('@/assets/img/flags/' + league.country.toLowerCase() + '.png') }

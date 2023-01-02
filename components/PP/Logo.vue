@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" align="center" class="black-border-b" app  v-resize-text>
+    <v-row justify="center" align="center" class="border-b" app  v-resize-text>
         <div class="ocrastd" v-resize-text>
             <b>PLAYPRESO</b>
         </div>

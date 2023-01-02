@@ -1,22 +1,24 @@
 <template>
-    <v-row align="center" class="black-border-t">
-        <v-col cols="4" v-if="participation.position">
+    <v-row align="center">
+        <v-col v-if="participation.position">
             <p-p-info small :label="$t('app.position')" 
                 :value="participation.position" 
-                :value2="participation.ppLeague.user_count"
+                :value2="'gres'"
             />
         </v-col>
-        <v-col cols="4" class="black-border-l black-border-r ">
-            <p-p-info small label="round" 
+        <v-col>
+            <!-- <p-p-info small label="round" 
                 :value="participation.ppLeague.round_count" 
+                :value2="participation.ppTournamentType.rounds"
+            /> -->
+            <p-p-info small label="round" 
+                value="stro" 
                 :value2="participation.ppTournamentType.rounds"
             />
         </v-col>
-        <v-col cols="4">
+        <v-col v-if="participation.unlocked">
             <v-row justify="center" style="height:100%">
-                <h3>
-                    {{participation.locked ? 'LOCKED' : 'UNLOCKED'}}
-                </h3>
+                <h3>{{participation.unlocked}} UNLOCKED</h3>
             </v-row>
         </v-col>
     </v-row>

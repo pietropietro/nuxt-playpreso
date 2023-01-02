@@ -103,11 +103,14 @@ export default {
                 light: {
                     primary: '#0000cc',
 					anchor: '#000000',
-					primary_red: "ff0000",
+					border: '#000000',
+					pleague: '#0066ff',
+					pcup: '#ff0000'
 				},
 				dark: {
                     primary: '#000066',
-					anchor: '#ffffff'
+					anchor: '#ffffff',
+					border: '#ffffff'
 				}
 			}
 		}
