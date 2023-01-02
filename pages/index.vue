@@ -1,12 +1,7 @@
 <template>
     <v-container>
-        <v-row justify="center" align="center" class="border-b" app>
-            <h1 class="ocrastd">
-                <b>PLAYPRESO</b>
-            </h1>
-        </v-row>
         <v-row class="">
-            <v-col cols="12" md="6" :class="$vuetify.breakpoint.mdAndUp ? 'border-r' : 'border-b'">
+            <v-col cols="12" md="6">
                 <h1>AVAILABLE</h1>
                 <p-p-league-available-list class="mb-5"/>
             </v-col>
@@ -19,7 +14,7 @@
 </template>
 <script>
 export default {
-    layout: "authenticatedHome",
+    layout: "authenticated",
     data(){
         return {
             userParticipations: null

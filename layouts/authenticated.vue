@@ -1,7 +1,7 @@
 <template>
 	<client-only>
 		<v-app class="no-selection">
-			<p-p-header collapse/>  
+			<p-p-header/>  
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
