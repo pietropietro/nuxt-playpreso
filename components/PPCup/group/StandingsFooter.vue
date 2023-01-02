@@ -5,8 +5,8 @@
             <v-col class="pb-0">
                 <div>
                     R {{group.currentRound}}/{{group.rounds}} 
-                    <template v-if="group.verifiedInCurrentRound">
-                        P {{group.verifiedInCurrentRound[0]}}/{{group.verifiedInCurrentRound[1]}}
+                    <template v-if="group.playedInCurrentRound">
+                        P {{group.playedInCurrentRound[0]}}/{{group.playedInCurrentRound[1]}}
                     </template>
                 </div>
             </v-col>

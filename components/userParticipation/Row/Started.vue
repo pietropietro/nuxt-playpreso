@@ -3,7 +3,7 @@
         <v-col v-if="participation.position">
             <p-p-info small :label="$t('app.position')" 
                 :value="participation.position" 
-                :value2="'gres'"
+                :value2="participation.user_count"
             />
         </v-col>
         <v-col>
