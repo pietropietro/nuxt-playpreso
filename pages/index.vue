@@ -1,12 +1,12 @@
 <template>
-    <v-container>
-        <v-row class="">
+    <v-container style="background-color: var(--v-background-base);" class="pt-0">
+        <v-row>
             <v-col cols="12" md="6">
                 <h1>AVAILABLE</h1>
-                <p-p-league-available-list class="mb-5"/>
+                <p-p-league-available-list />
             </v-col>
-            <v-col cols="12" md="6" class="ml-n4 mr-0 pr-0">
-                <h1 class="px-4">ENROLLED</h1>
+            <v-col >
+                <h1>ENROLLED</h1>
                 <user-participation-list :userParticipations="userParticipations"/>
             </v-col>
         </v-row>

@@ -6,14 +6,14 @@
 // src/sass/variables.scss
 
 $material-dark: (
-  'background': #000033,
-  cards:var(--v-primary-base),
+  'background': var(--v-background-base),
+  // cards:var(--v-primary-base),
   navigation-drawer:var(--v-primary-base),
 );
 
 $material-light: (
-  // 'background': #ffffed,
-  cards:var(--v-primary-base),
+  // 'background': var(--v-background-base),
+  // cards:var(--v-primary-base),
   navigation-drawer:var(--v-primary-base),
   icons:(active: black)
 );

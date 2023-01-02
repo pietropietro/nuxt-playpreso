@@ -102,6 +102,7 @@ export default {
             themes: {
                 light: {
                     primary: '#0000cc',
+					background: '#ffff66',
 					anchor: '#000000',
 					border: '#000000',
 					pleague: '#0066ff',
@@ -109,6 +110,7 @@ export default {
 				},
 				dark: {
                     primary: '#000066',
+					background: '#000033',
 					anchor: '#ffffff',
 					border: '#ffffff'
 				}
