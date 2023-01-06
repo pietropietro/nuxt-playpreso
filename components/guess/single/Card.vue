@@ -5,33 +5,29 @@
             :style="'height:10px; background-color: var(--v-pcup-base)' "
         />
         <v-row>
-            <v-container class="pa-0">
-                <v-row no-gutters>
+            <v-container>
+                <v-row>
                     <v-col
                         :style="'background-color: var(--v-pcup-lighten5)'"
                     >
-                        <v-container class="pa-2">
-                            <match-info-short :match="match"/>
-                        </v-container>
+                        <match-info-short :match="match"/>
                     </v-col>
+
+
                     <v-col v-if="guess.guessed_at || guess.verified" 
                         class="overline lh-1" 
                     >
-                        <v-container 
-                            fill-height
-                            class="py-0"
-                        >
+                        <v-row no-gutters style="height:100%">
                             <template v-if="guess.guessed_at">
-                                <!-- <v-row
-                                class="mt-0"
-                                 :style="'background-color: var(--v-pcup-lighten2)'"
+                                <v-row
+                                    :style="'background-color: var(--v-pcup-lighten2)'"
                                 >
                                     <v-col>1</v-col>
                                     <v-col>UND</v-col>
                                     <v-col>GOL</v-col>
-                                </v-row> -->
+                                </v-row>
                                 <v-row
-                                 :style="'height:100%; background-color: var(--v-pcup-lighten4)'"
+                                    :style="'background-color: var(--v-pcup-lighten4)'"
                                 >
                                     <v-container fill-height>
                                         <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
@@ -43,7 +39,7 @@
                                 </v-row>
                             </template>
                             <template v-else>MISSED</template>
-                        </v-container>
+                        </v-row>
                     </v-col>
                 </v-row>
 
