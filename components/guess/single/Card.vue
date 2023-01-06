@@ -9,38 +9,35 @@
             </v-col>
 
             <v-col v-if="guess.guessed_at || guess.verified" 
-                class="overline lh-1" 
+                class="overline"  
             >
-                <v-row no-gutters style="height:100%">
+                <div style="height:100%">
                     <template v-if="guess.guessed_at">
-                        <v-row
-                            :style="'background-color: var(--v-pcup-lighten2)'"
-                        >
-                            <v-col>1</v-col>
-                            <v-col>UND</v-col>
-                            <v-col>GOL</v-col>
-                        </v-row>
-                        <v-row
+                        <match-inner-values :home="guess.home" :away="guess.away"
+                            :style="'background-color: var(--v-pcup-lighten2); line-height:0.2rem;'"
+                        />
+                        <v-row align="center" class="lh-1"
                             :style="'background-color: var(--v-pcup-lighten4)'"
                         >
-                            <v-container fill-height>
-                                <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
-                                <v-row class="py-1">MATCH
-                                    <template v-if="match.verified_at">{{match.score_home}} - {{match.score_away}}</template>
-                                    <template v-else>?</template>
-                                </v-row>
-                            </v-container>
+                            <v-col>
+                                <v-container>
+                                    <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
+                                    <v-row class="py-1">MATCH
+                                        <template v-if="match.verified_at">{{match.score_home}} - {{match.score_away}}</template>
+                                        <template v-else>?</template>
+                                    </v-row>
+                                </v-container>
+                            </v-col>
                         </v-row>
                     </template>
                     <template v-else>MISSED</template>
-                </v-row>
+                </div>
             </v-col>
         </v-row>
 
                 
         <template v-if="!guess.guessed_at && !guess.verified_at && match.score_home === null">
             <guess-single-picker
-                class="no-gutters"
                 :guess="guess"
                 :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .2)"
             />

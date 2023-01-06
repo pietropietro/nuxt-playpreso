@@ -103,9 +103,11 @@ export default {
                 light: {
                     primary: '#0000cc',
 					background: '#c6ffb3',
+					background2: '#ffff99',
+					background3: '#9999ff',
 					anchor: '#000000',
 					border: '#000000',
-					pleague: '#0066ff',
+					pleague: '#00e64d',
 					pcup: '#ff0000'
 				},
 				dark: {

@@ -1,25 +1,9 @@
 <template>
-    <v-row no-gutters align="center">
-        <v-col cols="3" v-if="valueDescription">
-            <v-row no-gutters class="ocrastd text-right" style="font-size:12px;">
-                <v-col cols="12">
-                    <div>
-                        {{guess.home + guess.away > 2 ? 'over' : 'under'}}
-                    </div>
-                </v-col>
-                <v-col cols="12">
-                    <div>
-                        {{guess.home === guess.away ? 'X' : guess.home > guess.away ? '1' : '2'}}
-                    </div>
-                </v-col>
-                <v-col cols="12">
-                    <div>
-                        {{guess.home > 0 && guess.away > 0 ? 'gol' : 'no-gol'}}
-                    </div>
-                </v-col>
-            </v-row>
+    <v-row>
+        <v-col cols="12">
+            <match-inner-values :home="guess.home" :away="guess.away" />
         </v-col>
-        <v-col>
+        <v-col cols="12">
             <v-row no-gutters justify="center" align="center" class="ocrastd">
                     <select-integer
                         justify="end"
@@ -44,7 +28,6 @@
 export default {
     props: {
         guess: {type: Object},
-        valueDescription: {type: Boolean}
     },
     computed: {
         pickerDisabled(){

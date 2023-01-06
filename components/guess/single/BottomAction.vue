@@ -1,6 +1,5 @@
 <template>
     <v-row
-        no-gutters 
         align="center"
         justify="center"
         class="ocrastd" 

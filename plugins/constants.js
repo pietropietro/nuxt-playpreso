@@ -28,7 +28,8 @@ Vue.mixin({
                     PASSWORD_RESET: '/user/reset'
                 },
                 GUESS:{
-                    LOCK: '/guess/lock/'
+                    LOCK: '/guess/lock/',
+                    NOT_VERIFIED: '/guess/not-verified'
                 },
                 USER_PARTICIPATION: {
                     GET:  '/user-participation',

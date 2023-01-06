@@ -1,8 +1,12 @@
 <template>
-    <v-row no-gutters class="text-caption font-weight-bold" align="center">
-        <v-col cols="12">{{match.score_home}} {{match.homeTeam?.name}}</v-col>
-        <v-col cols="12">{{match.score_away}} {{match.awayTeam?.name}}</v-col>
-    </v-row>
+    <div class="lh-1">
+        <p-p-emoji :model="match.league?.country" />
+        <span class="overline lh-1">{{match.league.tag}}</span>
+                    
+        <h4>{{match.homeTeam?.name}}</h4>
+        <h4>{{match.awayTeam?.name}}</h4>
+        <div class="overline lh-1">{{formatDate(match.date_start, true)}}</div>
+    </div>
 </template>
 <script>
 export default {
