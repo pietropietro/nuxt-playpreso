@@ -3,12 +3,10 @@
         <v-col class="pb-0" v-if="group.finished_at">FINISHED</v-col>
         <template v-else-if="group.started_at">
             <v-col class="pb-0">
-                <div>
-                    R {{group.currentRound}}/{{group.rounds}} 
-                    <template v-if="group.playedInCurrentRound">
-                        P {{group.playedInCurrentRound[0]}}/{{group.playedInCurrentRound[1]}}
-                    </template>
-                </div>
+                <p-p-round-row-recap 
+                    :currentRound="group.currentRound" :rounds="group.rounds"
+                    :playedInCurrentRound="group.playedInCurrentRound"
+                />
             </v-col>
         </template>
     </v-row>

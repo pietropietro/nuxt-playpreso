@@ -33,11 +33,11 @@
                     </v-row>
                 </template>
             </v-col>
-            <v-col cols="auto" class="overline lh-1">
-                R {{participation.currentRound}}/{{participation.rounds}}
-                <template v-if="participation.playedInCurrentRound">
-                    P {{participation.playedInCurrentRound[0]}}/{{participation.playedInCurrentRound[1]}}
-                </template>
+            <v-col cols="auto">
+                <p-p-round-row-recap 
+                    :currentRound="participation.currentRound" :rounds="participation.rounds"
+                    :playedInCurrentRound="participation.playedInCurrentRound"
+                />
             </v-col>
         </v-row>
     </p-p-card>

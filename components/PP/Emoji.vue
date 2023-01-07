@@ -19,9 +19,7 @@ export default {
     methods:{
         async search(value) {
             if(!value)return;
-            console.log("searchgin " + value);
             let emojis = await SearchIndex.search(value)
-            console.log(emojis, "emojis");
             let results = emojis.map((emoji) => {
                 return emoji.skins[0].native
             });

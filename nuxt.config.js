@@ -114,7 +114,9 @@ export default {
                     primary: '#000066',
 					background: '#000033',
 					anchor: '#ffffff',
-					border: '#ffffff'
+					border: '#ffffff',
+					pleague: '#00e64d',
+					pcup: '#ff0000'
 				}
 			}
 		}

@@ -59,6 +59,10 @@ Vue.mixin({
                     ROUTE: '/admin/users',
                     NAME: 'users'
                 },
+                PPLEAGUES: {
+                    ROUTE: '/admin/p-leagues',
+                    NAME: 'p-leagues'
+                },
                 PPCUPS: {
                     ROUTE: '/admin/p-cups',
                     NAME: 'p-cups'
@@ -74,6 +78,9 @@ Vue.mixin({
             },
             ADMIN_API_ROUTES: {
                 PPTOURNAMENTTYPES: '/admin/p-tournament-types',
+                PPLEAGUE:{
+                    GET: '/admin/p-league',
+                },
                 PPCUP:{
                     GET: '/admin/p-cup',
                     CREATE: '/admin/p-cup/'

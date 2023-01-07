@@ -7,10 +7,8 @@
                         <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
                     </template>
                     <v-row no-gutters align="center">
-                        <v-col cols="auto" class="mr-2 pb-2">
-                            <league-flag small :league="match.league" size="12"/>
-                        </v-col>
-                        <v-col cols="auto" class="text-overline" style="line-height:1rem;">{{match.league?.tag}}</v-col>
+                        <p-p-emoji :model="match.league?.country" />
+                        <span class="overline lh-1">{{match.league.tag}}</span>
                         <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
                         <v-spacer/>
                         <span class="text-caption">{{formatTime(match.date_start)}}</span>
