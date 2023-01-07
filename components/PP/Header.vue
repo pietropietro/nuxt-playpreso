@@ -7,7 +7,10 @@
                     <h1 class=" ocrastd">PLAYPRESO</h1>
                 </nuxt-link>
                 <v-spacer/>
-                <user-menu/>
+                <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
+                    <h1>{{menuScreen ? 'X' : '>'}}</h1>
+                </div>
+                <!-- <user-menu/> -->
             </v-row>
         </v-container>
         <!-- <v-spacer/> -->
@@ -17,7 +20,18 @@
 export default {
     props:{
         collapse: {type: Boolean},
-        menu: {type: Boolean}
+        menuScreen: {type: Boolean},
+        setMenu: {type: Function}
+    },
+    computed: {
+        computedMenu:{
+            get(){
+                return this.menuScreen
+            },
+            set(val){
+                this.setMenu(val);
+            }
+        }
     }
 }
 </script>
