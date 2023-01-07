@@ -4,32 +4,34 @@
         <v-row align="center">
             <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
         </v-row>
-        <v-row v-if="ppLeagues">
+        <v-row v-if="ppLeagues?.length">
             <v-col v-for="(ppLeague,index) in ppLeagues" :key="index">
-                <v-card color="var(--v-pleague-base)">
-                    <v-container>
-                        <v-row>
-                            <v-col>
-                                <div class="ocrastd">
-                                    #{{ppLeague.id}}
-                                </div>
-                                <h2>{{ppTournamentTypeTitle(ppLeague.ppTournamentType)}}</h2>
-                            </v-col>
-                            <v-col class="overline lh-1">
-                                users: {{ppLeague.user_count}}
-                                <p-p-round-row-recap v-if="ppLeague.started_at"
-                                    :currentRound="ppLeague.currentRound" :rounds="ppLeague.ppTournamentType.rounds"
-                                    :playedInCurrentRound="ppLeague.playedInCurrentRound"
-                                />
-                            </v-col>
-                        </v-row>
-                        <v-container class="mx-2 overline lh-1">
-                            <v-row>created_at: {{ppLeague.created_at}}</v-row>
-                            <v-row>started: <p-p-emoji :model="!!ppLeague.started_at ? 'green ok' :'red x'"/></v-row>
-                            <v-row>finished: <p-p-emoji :model="!!ppLeague.finished_at ? 'green ok' :'red x'"/></v-row>
+                <nuxt-link :to="ADMIN_FEATURES.PPLEAGUES.DETAIL.ROUTE + ppLeague.id" class="no-decoration">
+                    <v-card color="var(--v-pleague-base)">
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <div class="ocrastd">
+                                        #{{ppLeague.id}}
+                                    </div>
+                                    <h2>{{ppTournamentTypeTitle(ppLeague.ppTournamentType)}}</h2>
+                                </v-col>
+                                <v-col class="overline lh-1">
+                                    users: {{ppLeague.user_count}}
+                                    <p-p-round-row-recap v-if="ppLeague.started_at"
+                                        :currentRound="ppLeague.currentRound" :rounds="ppLeague.ppTournamentType.rounds"
+                                        :playedInCurrentRound="ppLeague.playedInCurrentRound"
+                                    />
+                                </v-col>
+                            </v-row>
+                            <v-container class="mx-2 overline lh-1">
+                                <v-row>created_at: {{ppLeague.created_at}}</v-row>
+                                <v-row>started: <p-p-emoji :model="!!ppLeague.started_at ? 'green ok' :'red x'"/></v-row>
+                                <v-row>finished: <p-p-emoji :model="!!ppLeague.finished_at ? 'green ok' :'red x'"/></v-row>
+                            </v-container>
                         </v-container>
-                    </v-container>
-                </v-card>
+                    </v-card>
+                </nuxt-link>
                 <v-row v-if="ppLeague.started_at">
                     <v-col class="overline lh-1">
                         last<br>match
@@ -50,6 +52,7 @@
                 </v-row>
             </v-col>
         </v-row>
+        <v-row v-else>no p-leagues found.</v-row>
     </v-container>
 </template>
 <script>
@@ -69,6 +72,11 @@ export default {
                 this.ppLeagues = response.message;
             }
             this.loading = false;
+        }
+    },
+    watch: {
+        ppTTselected: async function () {
+            await this.getPPLeagues();
         }
     },
     async mounted(){

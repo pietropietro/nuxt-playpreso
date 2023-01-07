@@ -19,7 +19,7 @@
                     <v-row>
                         <v-expansion-panels>
                             <v-col cols="12" v-for="match in matches" :key="match.id">
-                                <admin-match-expansion-panel :match="match"/>
+                                <admin-match-expansion-panel timeOnly :match="match"/>
                             </v-col>
                         </v-expansion-panels>
                     </v-row>

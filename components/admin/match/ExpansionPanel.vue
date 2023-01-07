@@ -11,7 +11,8 @@
                         <span class="overline lh-1">{{match.league.tag}}</span>
                         <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
                         <v-spacer/>
-                        <span class="text-caption">{{formatTime(match.date_start)}}</span>
+                        <span class="text-caption" v-if="timeOnly">{{formatTime(match.date_start)}}</span>
+                        <span class="text-caption" v-else>{{formatDate(match.date_start, true)}}</span>
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
                         {{match.homeTeam?.name}}
@@ -77,6 +78,7 @@
 export default {
     props:{
         match: {type: Object, required:true},
+        timeOnly: {type: Boolean}
     },
     data:()=>({homeModel:0, awayModel:0, loading: false}),
     computed:{

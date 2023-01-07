@@ -61,7 +61,10 @@ Vue.mixin({
                 },
                 PPLEAGUES: {
                     ROUTE: '/admin/p-leagues',
-                    NAME: 'p-leagues'
+                    NAME: 'p-leagues',
+                    DETAIL: {
+                        ROUTE: '/admin/p-leagues/'
+                    }
                 },
                 PPCUPS: {
                     ROUTE: '/admin/p-cups',
@@ -89,6 +92,9 @@ Vue.mixin({
                     GET: '/admin/match',
                     VERIFY: '/admin/match/',
                     PICK: '/admin/match/pick/'
+                },
+                PPROUNDMATCH:{
+                    SWAP: '/admin/p-round-match/swap/'
                 },
                 LEAGUE: {
                     GET: '/admin/league',
