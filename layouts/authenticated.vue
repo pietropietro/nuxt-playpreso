@@ -1,15 +1,15 @@
 <template>
 	<client-only>
-		<v-app class="no-selection">
+		<v-app class="no-selection" >
 			<guard-logged-in v-if="!currentUser"/>
 			<template v-else>
 				<snackbar />
-				<p-p-header :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
-				<v-overlay class="content-h100" :value="menuScreen" color="white" opacity="1" dark="false">
+				<p-p-header v-if="!menuScreen" :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
+				<v-overlay class="content-h100" :value="menuScreen" color="white" opacity="1" :dark="false">
 					<p-p-header :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
-					<p-p-menu />
+					<p-p-menu class="pt-14 pt-md-16"/>
 				</v-overlay>
-				<v-main>
+				<v-main :style="menuScreen ? 'position: fixed' : ''" >
 					<nuxt />
 				</v-main>
 			</template>
