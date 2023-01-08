@@ -23,19 +23,19 @@
 }
 
 .border-t{
-    border-top: 3px solid var(--v-border-base);
+    border-top: 3px solid var(--v-text-base);
 }
 
 .border-l{
-    border-left: 3px solid var(--v-border-base);
+    border-left: 3px solid var(--v-text-base);
 }
 
 .border-r{
-    border-right: 3px solid var(--v-border-base);
+    border-right: 3px solid var(--v-text-base);
 }
 
 .border-b{
-    border-bottom: 3px solid var(--v-border-base);
+    border-bottom: 3px solid var(--v-text-base);
 }
 
 
@@ -55,7 +55,7 @@ input[type="text"]
 }
 input[type="password"] {
     padding-left: 5px;
-    -webkit-text-stroke-color: var(--v-border-base);
+    -webkit-text-stroke-color: var(--v-text-base);
     -webkit-text-stroke-width: 2px;
     stroke-color: black;
     letter-spacing: 0.4em;

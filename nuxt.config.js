@@ -106,7 +106,8 @@ export default {
 					background2: '#ffff99',
 					background3: '#9999ff',
 					anchor: '#000000',
-					border: '#000000',
+					opposite: '#ffffff',
+					text: '#000000',
 					pleague: '#00e64d',
 					pcup: '#ff0000'
 				},
@@ -114,7 +115,8 @@ export default {
                     primary: '#000066',
 					background: '#000033',
 					anchor: '#ffffff',
-					border: '#ffffff',
+					opposite: '#000000',
+					text: '#ffffff',
 					pleague: '#00e64d',
 					pcup: '#ff0000'
 				}

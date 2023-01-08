@@ -1,9 +1,9 @@
 <template>
-    <v-row>
-        <v-col cols="12">
-            <match-inner-values :home="guess.home" :away="guess.away" />
-        </v-col>
-        <v-col cols="12">
+    <!-- <v-row> -->
+        <!-- <v-col cols="12">
+            <match-inner-values :guess="guess"  />
+        </v-col> -->
+        <!-- <v-col cols="12"> -->
             <v-row no-gutters justify="center" align="center" class="ocrastd">
                     <select-integer
                         justify="end"
@@ -21,8 +21,8 @@
                         :setModel="(val)=>{guess.away = val}"
                     />
             </v-row>
-        </v-col>
-    </v-row>
+        <!-- </v-col>
+    </v-row> -->
 </template>
 <script>
 export default {

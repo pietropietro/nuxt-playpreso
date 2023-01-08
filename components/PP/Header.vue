@@ -1,6 +1,6 @@
 <template>
     <v-app-bar color="white" class="no-height" style="height:auto;" flat app>
-        <v-container class="border-b">
+        <v-container>
             <v-row class="mx-2">
                 <v-spacer/>
                 <nuxt-link class="no-decoration" to="/">

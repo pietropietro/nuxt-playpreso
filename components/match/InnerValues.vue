@@ -1,21 +1,20 @@
 <template>
     <v-row class="text-center pr-2">
-        <v-col cols="4">
-            {{home + away > 2 ? 'ovr' : 'und'}}
+        <v-col cols="4" :class="guess.UO25 ? 'opposite--text' : ''">
+            {{guess.home + guess.away > 2 ? 'ovr' : 'und'}}
         </v-col>
-        <v-col cols="4">
-            {{home === away ? 'X' : home > away ? '1' : '2'}}
+        <v-col cols="4" :class="guess.UNOX2 ? 'opposite--text' : ''">
+            {{guess.home === guess.away ? 'X' : guess.home > guess.away ? '1' : '2'}}
         </v-col>
-        <v-col cols="4">
-            {{home > 0 && away > 0 ? 'gol' : 'ngl'}}
+        <v-col cols="4" :class="guess.GGNG ? 'opposite--text' : ''">
+            {{guess.home > 0 && guess.away > 0 ? 'gol' : 'ngl'}}
         </v-col>
     </v-row>
 </template>
 <script>
 export default {
     props:{
-        home: {type: Number},
-        away: {type: Number}
+        guess: {type: Object}
     }
 }
 </script>

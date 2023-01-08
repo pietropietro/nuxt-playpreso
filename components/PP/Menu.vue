@@ -13,9 +13,9 @@
             </v-row>
         <v-row justify="center">
             <div class="ocrastd">
-                    <h3>member since </h3>
-                    <h3>{{formatMonthYear(currentUser.created_at).toLowerCase()}}</h3>
-                </div>
+                <h3>member since </h3>
+                <h3>{{formatMonthYear(currentUser.created_at).toLowerCase()}}</h3>
+            </div>
         </v-row>
 
         </v-container>

@@ -8,41 +8,38 @@
                 <match-info-short :match="match"/>
             </v-col>
 
-            <v-col v-if="guess.guessed_at || guess.verified" 
+            <v-col v-if="!(!guess.guessed_at && guess.verified_at)" 
                 class="overline"  
             >
                 <div style="height:100%">
-                    <template v-if="guess.guessed_at">
-                        <match-inner-values :home="guess.home" :away="guess.away"
-                            :style="'background-color: var(--v-pcup-lighten2); line-height:0.2rem;'"
-                        />
-                        <v-row align="center" class="lh-1"
-                            :style="'background-color: var(--v-pcup-lighten4)'"
-                        >
-                            <v-col>
-                                <v-container>
-                                    <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
-                                    <v-row class="py-1">MATCH
-                                        <template v-if="match.verified_at">{{match.score_home}} - {{match.score_away}}</template>
-                                        <template v-else>?</template>
-                                    </v-row>
-                                </v-container>
-                            </v-col>
-                        </v-row>
-                    </template>
-                    <template v-else>MISSED</template>
+                    <match-inner-values :guess="guess"
+                        :style="'background-color: var(--v-pcup-lighten2); line-height:0.2rem;'"
+                    />
+                    <v-row align="center" class="lh-1"
+                        :style="'background-color: var(--v-pcup-lighten4)'"
+                    >
+                        <v-col v-if="guess.guessed_at">
+                            <v-container>
+                                <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
+                                <v-row class="py-1">MATCH
+                                    <template v-if="match.verified_at">{{match.score_home}} - {{match.score_away}}</template>
+                                    <template v-else>?</template>
+                                </v-row>
+                            </v-container>
+                        </v-col>
+                        <v-col v-else>
+                            <v-container>
+                                <guess-single-picker :guess="guess"/>
+                            </v-container>
+                        </v-col>
+                    </v-row>
                 </div>
             </v-col>
+            <v-col v-else>MISSED</v-col>
         </v-row>
-
-                
-        <template v-if="!guess.guessed_at && !guess.verified_at && match.score_home === null">
-            <guess-single-picker
-                :guess="guess"
-                :style="'background-color: ' + ppRGBA($store.state.navigation.rgb, .2)"
-            />
+        <template v-if="!guess.guessed_at && !guess.verified_at && !match.verified_at">
             <guess-single-bottom-action
-                :style="'background-color: ' + ppRGBA($store.state.navigation.rgb)"
+                style='background-color: var(--v-pcup-base)'
                 :guess="guess"
                 :onclick="lockGuess"
             />
