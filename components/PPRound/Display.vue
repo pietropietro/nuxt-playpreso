@@ -1,12 +1,24 @@
 <template>
-    <p-p-slider :infoCols="3" :infoMd="2" class="pa-0">
-        <match-info-short slot="info" :match="ppRM.match"/>
-        <v-slide-item slot="slide-item" v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
-            <div>
-                <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess" incrementalFont/>
-            </div>
-        </v-slide-item>
-    </p-p-slider>
+    <v-row align="center" class="flex-nowrap">
+        <v-col cols="auto" class="pa-0">
+            <match-info-short :match="ppRM.match" :withTime="false"/>
+        </v-col>
+        <v-col style="overflow:auto;" class="pr-0">
+                <v-container class="pa-0">
+                    <v-slide-group
+                        :show-arrows="!$vuetify.breakpoint.xs"
+                        prev-icon="<"
+                        next-icon=">"
+                    >
+                        <v-slide-item v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
+                            <div>
+                                <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess" incrementalFont/>
+                            </div>
+                        </v-slide-item>
+                    </v-slide-group>
+                </v-container>
+        </v-col>
+    </v-row>
 </template>
 <script>
 export default {
