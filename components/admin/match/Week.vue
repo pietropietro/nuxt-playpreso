@@ -2,17 +2,12 @@
     <v-container fluid class="px-4">
         <loading-page v-if="loading"/>
          <template v-if="!loading">
-            <v-row no-gutters justify="space-between">
-                <v-col cols="1">
+            <v-row class="flex-nowrap">
+                 <v-col cols="auto">
                     <h1 class="pointer px-2" @click="changeDates(-7)">
                         <
                     </h1>
                 </v-col>
-                    <v-col cols="1">
-                    <h1 class="px-2 pointer text-right" @click="changeDates(+7)">></h1>
-                </v-col>
-            </v-row>
-            <v-row>
                 <v-col v-for="(matches, day) in week" :key="day">
                     <h2 class="text-center">{{formatDate(day, false)}}</h2>
                     <h2 class="my-3 text-center">{{matches.length}}</h2>
@@ -23,6 +18,9 @@
                             </v-col>
                         </v-expansion-panels>
                     </v-row>
+                </v-col>
+                <v-col cols="auto">
+                    <h1 class="px-2 pointer text-right" @click="changeDates(+7)">></h1>
                 </v-col>
             </v-row>
          </template>

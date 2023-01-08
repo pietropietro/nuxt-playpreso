@@ -1,9 +1,9 @@
 <template>
     <loading-page v-if="loading"/>
-    <v-container class="mt-4 rounded" v-else style="background-color: var(--v-primary-base)">
-        <v-row no-gutters>
+    <v-container class="mt-4 rounded" v-else >
+        <!-- <v-row no-gutters>
             <h2 class="pointer" @click="close">X</h2>
-        </v-row>
+        </v-row> -->
         <template v-if="league">
             <v-row align="center" no-gutters>
                 <span class="ocrastd mr-4">#{{league.id}}</span>
@@ -55,7 +55,7 @@
 export default {
     props:{
         id: {type: Number},
-        close: {type: Function}
+        // close: {type: Function}
     },
     data:()=>({loading: true, league: null, matchSuffixModel: null}),
     async mounted(){
