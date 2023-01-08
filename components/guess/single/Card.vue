@@ -1,35 +1,36 @@
 <template>
-    <!-- <v-card flat v-if="guess" :class="match.score_home !== null ? 'white--text':''"> -->
     <p-p-card color="var(--v-pcup-base)" v-if="guess">
         <v-row>
             <v-col
-                :style="'background-color: var(--v-pcup-lighten5)'"
+                :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
             >
                 <match-info-short :match="match"/>
             </v-col>
 
-            <v-col v-if="!(!guess.guessed_at && guess.verified_at)" 
-                class="overline"  
-            >
+            <v-col v-if="!(!guess.guessed_at && guess.verified_at)" class="overline">
                 <div style="height:100%">
-                    <match-inner-values :guess="guess"
-                        :style="'background-color: var(--v-pcup-lighten2); line-height:0.2rem;'"
+                    <match-inner-values 
+                        :guess="guess" class="lh-02"
+                        :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     />
-                    <v-row align="center" class="lh-1"
-                        :style="'background-color: var(--v-pcup-lighten4)'"
-                    >
-                        <v-col v-if="guess.guessed_at">
+                    <v-row align="center" class="lh-1">
+                        <v-col v-if="guess.guessed_at" 
+                            :style="{ backgroundColor: guess.verified_at ?  shades.verified : shades.locked}"
+                        >
                             <v-container>
                                 <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
-                                <v-row class="py-1">MATCH
-                                    <template v-if="match.verified_at">{{match.score_home}} - {{match.score_away}}</template>
-                                    <template v-else>?</template>
-                                </v-row>
                             </v-container>
                         </v-col>
-                        <v-col v-else>
+                        <v-col v-else class="pa-0">
                             <v-container>
-                                <guess-single-picker :guess="guess"/>
+                                <guess-single-picker :guess="guess" 
+                                    :style="{ backgroundColor: shades.unlocked}"
+                                />
+                                <guess-single-bottom-action
+                                    :style="{ backgroundColor: shades.verified}"
+                                    :guess="guess"
+                                    :onclick="lockGuess"
+                                />
                             </v-container>
                         </v-col>
                     </v-row>
@@ -37,13 +38,6 @@
             </v-col>
             <v-col v-else>MISSED</v-col>
         </v-row>
-        <template v-if="!guess.guessed_at && !guess.verified_at && !match.verified_at">
-            <guess-single-bottom-action
-                style='background-color: var(--v-pcup-base)'
-                :guess="guess"
-                :onclick="lockGuess"
-            />
-        </template>
     </p-p-card>
     <error-wall v-else/>
 </template>
@@ -55,14 +49,8 @@ export default {
     },
     data(){
         return{
-            lockButtonLoading: false
-        }
-    },
-    computed:{
-        statusAlpha(){
-            if(this.match.score_home !== null) return 1;
-            if(this.guess.guessed_at) return 0.6;
-            return 0.2;
+            lockButtonLoading: false,
+            shades:{locked: 'var(--v-pcup-lighten3)', verified: 'var(--v-pcup-base)', unlocked: 'var(--v-pcup-lighten5)' }
         }
     },
     methods:{
