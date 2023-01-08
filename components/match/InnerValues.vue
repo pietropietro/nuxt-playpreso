@@ -1,5 +1,5 @@
 <template>
-    <v-row class="text-center pr-2">
+    <v-row class="overline text-center pr-2">
         <v-col cols="4" :class="guess.UO25 ? 'opposite--text' : ''">
             {{guess.home + guess.away > 2 ? 'ovr' : 'und'}}
         </v-col>

@@ -7,34 +7,38 @@
                 <match-info-short :match="match"/>
             </v-col>
 
-            <v-col v-if="!(!guess.guessed_at && guess.verified_at)" class="overline">
-                <div style="height:100%">
-                    <match-inner-values 
-                        :guess="guess" class="lh-02"
+            <v-col v-if="!(!guess.guessed_at && guess.verified_at)" class="pa-0">
+                <v-container fill-height>
+                    <match-inner-values
+                        v-if="guess.verified_at"
+                        :guess="guess"
                         :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     />
-                    <v-row align="center" class="lh-1">
-                        <v-col v-if="guess.guessed_at" 
+                    <v-row class="lh-1" v-if="guess.guessed_at">
+                        <v-col 
                             :style="{ backgroundColor: guess.verified_at ?  shades.verified : shades.locked}"
                         >
                             <v-container>
-                                <v-row>LOCKED {{guess.home}} - {{guess.away}}</v-row>
+                                <v-row class="overline">LOCKED {{guess.home}} - {{guess.away}}</v-row>
                             </v-container>
                         </v-col>
-                        <v-col v-else class="pa-0">
-                            <v-container>
-                                <guess-single-picker :guess="guess" 
+                        
+                    </v-row>
+                    <v-row v-else>
+                        <v-container>
+                            <!-- <v-row> -->
+                                <guess-single-picker :guess="guess"
                                     :style="{ backgroundColor: shades.unlocked}"
                                 />
-                                <guess-single-bottom-action
-                                    :style="{ backgroundColor: shades.verified}"
-                                    :guess="guess"
-                                    :onclick="lockGuess"
-                                />
-                            </v-container>
-                        </v-col>
+                            <!-- </v-row> -->
+                            <guess-single-bottom-action
+                                :style="{ backgroundColor: shades.verified}"
+                                :guess="guess"
+                                :onclick="lockGuess"
+                            />
+                        </v-container>
                     </v-row>
-                </div>
+                </v-container>
             </v-col>
             <v-col v-else>MISSED</v-col>
         </v-row>

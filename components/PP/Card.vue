@@ -4,7 +4,7 @@
             :style="'height:10px; background-color: ' + color "
         />
         <v-row>
-            <v-container>
+            <v-container >
                 <slot></slot>
             </v-container>
         </v-row>
