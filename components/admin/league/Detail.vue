@@ -1,17 +1,7 @@
 <template>
     <loading-page v-if="loading"/>
     <v-container class="mt-4 rounded" v-else >
-        <!-- <v-row no-gutters>
-            <h2 class="pointer" @click="close">X</h2>
-        </v-row> -->
         <template v-if="league">
-            <v-row align="center" no-gutters>
-                <span class="ocrastd mr-4">#{{league.id}}</span>
-                <h1>{{league.name}}</h1>
-            </v-row>
-            <v-row justify="end" no-gutters>
-                <b>last_updated: </b><span> {{league.updated_at}}</span>
-            </v-row>
             <v-row class="pa-4">
                 <v-expansion-panels>
                     <v-row>

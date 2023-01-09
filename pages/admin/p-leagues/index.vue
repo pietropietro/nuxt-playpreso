@@ -32,7 +32,7 @@
                         </v-container>
                     </v-card>
                 </nuxt-link>
-                <v-row v-if="ppLeague.started_at">
+                <v-row v-if="ppLeague.started_at" class="flex-nowrap">
                     <v-col class="overline lh-1">
                         last<br>match
                         <v-expansion-panels v-if="ppLeague.lastMatch">
