@@ -6,7 +6,7 @@
                 :model="guess.home"
                 :setModel="(val)=>{guess.home = val}"
             />
-        <v-col cols="auto">
+        <v-col cols="auto" class="pa-1">
             <h1 class="text-center" style="user-select: none;">-</h1>
         </v-col>
             <select-integer
