@@ -4,13 +4,15 @@
         justify="center"
         class="ocrastd" 
     >
-        <h2 v-if="!loading"
-            class="white--text text-center py-1"
-            @click="onclick"
-        >
-            LOCK
-        </h2>
-        <half-circle-spinner v-else color="white" :size="40"/>
+        <half-circle-spinner v-if="loading" color="white" :size="40"/>
+        <!-- <v-col v-else class="pa-0"> -->
+            <h4 
+                class="white--text text-center py-1"
+                @click="onclick"
+            >
+                LOCK
+            </h4>
+        <!-- </v-col> -->
     </v-row>
 </template>
 <script>

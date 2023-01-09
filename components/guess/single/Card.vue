@@ -34,20 +34,25 @@
                         </v-container>
                                     
                     </v-row>
-                    <v-row v-else no-gutters class="h-100">
-                        <v-container>
+                    <v-row v-else no-gutters class="h-100"
+                        justify="center" align="center"
+                        :style="{ backgroundColor: shades.unlocked}"
+                    >
+                        <v-container fill-height >
                             <!-- <v-row> -->
                                 <guess-single-picker :guess="guess"
-                                class="px-2"
-                                    :style="{ backgroundColor: shades.unlocked}"
+                                    
                                 />
                             <!-- </v-row> -->
+                            
+                       
                             <guess-single-bottom-action
-                                :style="{ backgroundColor: shades.verified}"
-                                :guess="guess"
-                                :onclick="lockGuess"
-                            />
-                        </v-container>
+                                    :style="{ backgroundColor: shades.verified}"
+                                    :guess="guess"
+                                
+                                    :onclick="lockGuess"
+                                />
+                            </v-container >
                     </v-row>
                 <!-- </v-container> -->
             </v-col>
