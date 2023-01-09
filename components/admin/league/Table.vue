@@ -14,13 +14,13 @@
             >
                 <template v-slot:item.area="{ item }">
                     <v-row align="end">
-                    <h1><p-p-emoji :model="'flag ' + item.area " /></h1>
+                    <h1><p-p-emoji flag :model="item.area" /></h1>
                         <h2>{{item.area_level}}</h2>
                     </v-row>
                 </template>
                 <template v-slot:item.country="{ item }">
                         <v-row align="end">
-                            <h1><p-p-emoji :model="'flag ' + item.country " /></h1>
+                            <h1><p-p-emoji flag :model="item.country" /></h1>
                             <h2>{{item.country_level}}</h2>
                         </v-row>
                 </template>

@@ -1,7 +1,7 @@
 <template>
     <v-container fluid class="px-4">
         <loading-page v-if="loading"/>
-         <template v-if="!loading">
+        <template v-if="!loading">
             <v-row class="flex-nowrap">
                  <v-col cols="auto">
                     <h1 class="pointer px-2" @click="changeDates(-7)">
@@ -14,7 +14,7 @@
                     <v-row>
                         <v-expansion-panels>
                             <v-col cols="12" v-for="match in matches" :key="match.id">
-                                <admin-match-expansion-panel timeOnly :match="match"/>
+                                <admin-match-expansion-panel timeOnly :match="match" :onDelete="getMatches"/>
                             </v-col>
                         </v-expansion-panels>
                     </v-row>
@@ -23,7 +23,7 @@
                     <h1 class="px-2 pointer text-right" @click="changeDates(+7)">></h1>
                 </v-col>
             </v-row>
-         </template>
+        </template>
     </v-container>
 </template>
 <script>

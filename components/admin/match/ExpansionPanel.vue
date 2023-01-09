@@ -7,8 +7,7 @@
                         <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
                     </template>
                     <v-row no-gutters align="center">
-                        <p-p-emoji :model="match.league?.country" />
-                        <span class="overline lh-1">{{match.league.tag}}</span>
+                        <league-detail :league="match.league"/>
                         <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
                         <v-spacer/>
                         <span class="text-caption" v-if="timeOnly">{{formatTime(match.date_start)}}</span>
@@ -43,6 +42,11 @@
                 <span class="text-caption"><b>created:</b> {{formatDate(match.created_at, true)}}</span>
                 <span  v-if="match.verified_at" class="text-caption"><b>verified:</b> {{formatDate(match.verified_at, true)}}</span>
             </v-container>
+            <h3 class="red--text pointer mt-5 text-center"  v-if="!match.aggregateGuesses && !match.verified_at && !!onDelete"
+                @click="deleteMatch"
+            >
+                DELETE
+            </h3>
         </v-expansion-panel-content>     
         <!-- style="var(background-color:--v-primary-lighten1);" -->
         <div v-if="match.aggregateGuesses">
@@ -71,14 +75,15 @@
                     </template>
                 </v-row>
             </v-container>
-        </div>                
+        </div>  
     </v-expansion-panel>
 </template>
 <script>
 export default {
     props:{
         match: {type: Object, required:true},
-        timeOnly: {type: Boolean}
+        timeOnly: {type: Boolean},
+        onDelete:{type: Function}
     },
     data:()=>({homeModel:0, awayModel:0, loading: false}),
     computed:{
@@ -114,6 +119,16 @@ export default {
                 this.match.verified_at = response.message;
             }
             this.loading = false;
+        },
+        async deleteMatch(){
+            this.loading = true;
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.MATCH.DELETE + this.match.id, null, 'DELETE'
+            );
+            if(response && response.status === "success"){
+                this.onDelete();
+            }
+            this.loading=false;
         }
     }
 }

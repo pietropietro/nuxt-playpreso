@@ -90,6 +90,7 @@ Vue.mixin({
                 },
                 MATCH: {
                     GET: '/admin/match',
+                    DELETE: '/admin/match/',
                     VERIFY: '/admin/match/',
                     PICK: '/admin/match/pick/'
                 },

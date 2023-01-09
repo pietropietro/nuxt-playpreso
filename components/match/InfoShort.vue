@@ -1,7 +1,6 @@
 <template>
     <v-container class="pa-0 lh-1">
-        <p-p-emoji :model="match.league?.country" />
-        <span class="overline lh-1">{{match.league.tag}}</span>
+        <league-detail :league="match.league" />
         <v-row>
             <v-col cols="auto">
                 <h4>{{match.homeTeam?.name}}</h4>
