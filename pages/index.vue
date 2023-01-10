@@ -2,7 +2,10 @@
     <v-container  class="pt-0">
         <v-row v-if="currentGuesses"
         >
-            <v-container fluid>
+            <v-container class="px-0"
+                        style="background-color: var(--v-background4-base);"
+            >
+                
                 <h1>YOUR LOCKS</h1>
                 <v-slide-group 
                     :show-arrows="!$vuetify.breakpoint.xs"
@@ -23,14 +26,14 @@
                 class="pa-0"
             >
                 <v-container fluid
-                style="background-color: var(--v-background2-base);"
                 >
                     <h1>AVAILABLE</h1>
                     <p-p-league-available-list />
                 </v-container>
             </v-col>
             <v-col 
-            style="background-color: var(--v-background-base);">
+            style="background-color: var(--v-background-base);"
+            >
                 <h1>ENROLLED</h1>
                 <user-participation-list :userParticipations="userParticipations"/>
             </v-col>
