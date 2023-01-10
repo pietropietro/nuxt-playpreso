@@ -34,9 +34,9 @@
             </v-row>
         </v-container>
         <v-container style='align-self:end'>
-            <!-- <v-row justify="center" @click="$logout.logout()">
+            <v-row justify="center" @click="$logout.logout()">
                 <h1 class="ocrastd">LOGOUT</h1>
-            </v-row> -->
+            </v-row>
             <v-row justify="center" class="overline lh-1">made with love in barona, milano</v-row>
             <v-row justify="center"><div class="overline lh-1">v{{VERSION}}</div></v-row>
         </v-container>

@@ -1,26 +1,26 @@
 <template>
     <v-container  class="pt-0">
-        <v-row v-if="currentGuesses"
-        >
-            <v-container class="px-0"
-                        style="background-color: var(--v-background4-base);"
-            >
-                
-                <h1>YOUR LOCKS</h1>
-                <v-slide-group 
-                    :show-arrows="!$vuetify.breakpoint.xs"
-                    prev-icon="<"
-                    next-icon=">"
-                >
-                    <v-slide-item v-for="guess in currentGuesses" :key="guess.id" class="mx-2">
-                        <div>
-                            <guess-single-card :guess="guess"  :match="guess.match"/>
-                        </div>
-                    </v-slide-item>
-                </v-slide-group>                    
-                <!-- </p-p-slider> -->
-            </v-container>
-        </v-row>
+        
+        <template v-if="currentGuesses">
+            <h1>YOUR LOCKS</h1>
+            <v-row >
+                <v-container class="px-0">
+            
+                    <v-slide-group
+                        :show-arrows="!$vuetify.breakpoint.xs"
+                        prev-icon="<"
+                        next-icon=">"
+                    >
+                        <v-slide-item v-for="guess in currentGuesses" :key="guess.id" class="mx-2">
+                            <!-- width is necessary for slider to work on page landing :( -->
+                            <div style="width:250px;">
+                                <guess-single-card :guess="guess"  :match="guess.match"/>
+                            </div>
+                        </v-slide-item>
+                    </v-slide-group>
+                </v-container>
+            </v-row>
+        </template>
         <v-row>
             <v-col cols="12" md="6" 
                 class="pa-0"
