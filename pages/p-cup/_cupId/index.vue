@@ -33,10 +33,6 @@ export default {
             if(response && response.status === "success"){
                 this.ppCup = response.message;
                 this.selectedLevel = this.ppCup.currentLevel
-                this.$store.commit('navigation/setActive', { 
-                    title: this.ppCup.ppTournamentType.name, 
-                    rgb: this.ppCup.ppTournamentType.rgb
-                });
             }
             this.loading = false;
         },

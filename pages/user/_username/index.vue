@@ -25,11 +25,6 @@ export default {
                 this.user = response.message;
             }
 
-            this.$store.commit('navigation/setActive', {
-                title: this.user ? this.username : null,
-                color: null
-            });
-
             this.loading = false;
         },
     }, 

@@ -103,13 +103,14 @@ export default {
                 light: {
                     primary: '#0000cc',
 					background: '#c6ffb3',
-					background2: '#ffff99',
-					background3: '#9999ff',
+					// all links
 					anchor: '#000000',
 					opposite: '#ffffff',
 					text: '#000000',
 					pleague: '#9900cc',
-					pcup: '#9900cc'
+					pcup: '#9900cc',
+					// i.e. PRESO!
+					accent: '#9900cc'
 				},
 				dark: {
                     primary: '#000066',

@@ -41,7 +41,11 @@ body {
 	height: 25%;
 	position: absolute;
 	content: '';
-	background-color: var(--my-color-var);
+	// you can pass this value as
+	//:style="'--currentuser-color-var: var(--v-pcup-base)'"
+	//or
+	// :style="'--currentuser-color-var: rgba(255,0,0)'"
+	background-color: var(--currentuser-color-var);
 	width: 100%;
 	z-index: -1;
 }

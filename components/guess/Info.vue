@@ -6,7 +6,7 @@
                 :value="value1"
                 :value2="value2"
                 :label="label"
-                :style="'--my-color-var:' + ppRGBA($store.state.navigation.rgb)"
+                :style="'--currentuser-color-var: var(--v-'+ color + '-base)'"
             />
         </v-row>
     </v-container>
@@ -14,6 +14,7 @@
 <script>
 export default {
     props:{
+        color: {tyep: String},
         guess: {type: Object, required: true},
         incrementalFont: {type: Boolean},
         hideUsername: {type: Boolean}
@@ -38,8 +39,7 @@ export default {
         },
         value2(){
             if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", 
-                // color: this.ppRGBA(this.$store.state.navigation.rgb)
-                color: '#ffeb3b'
+                color: 'var(--v-accent-base)'
             };
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;

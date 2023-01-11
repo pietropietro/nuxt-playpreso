@@ -4,7 +4,7 @@
             <v-col v-for="i in rounds" :key="i" :cols="ppRounds.length === 1 ? '4' : ''">
                 <h4 v-if="i<=ppRounds.length"
                     :class="'pointer text-center rounded ' + (selectedRound===i ? ' white--text' : '')" 
-                    :style="selectedRound===i ? 'background-color:' + ppRGBA($store.state.navigation.rgb) : ''" 
+                    :style="selectedRound===i ? 'background-color: var(--v-'+ color + '-base)' : ''" 
                     @click="()=>selectedRound = i" 
                 > 
                     {{i}}
@@ -25,7 +25,8 @@ export default {
     props:{
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},
-        setPPRounds: {type: Function}
+        setPPRounds: {type: Function},
+        color: {type: String}
     },
     data(){
         return{

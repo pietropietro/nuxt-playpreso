@@ -15,6 +15,7 @@
             <template v-if="!isCupGroup">
                 <p-p-section-title text="PLAYERS"/>
                 <p-p-league-standings-list
+                    :color="isCupGroup ? 'pcup' : 'pleague'"
                     :ups="tournamentObj.userParticipations"
                 />
             </template>
@@ -36,6 +37,7 @@
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds" :setPPRounds="(val)=>tournamentObj.ppRounds = val"
                     :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
+                    :color="isCupGroup ? 'pcup' : 'pleague'"
                 />
             </v-container>
         </template>

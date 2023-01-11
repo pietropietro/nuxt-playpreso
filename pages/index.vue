@@ -32,7 +32,7 @@
                 </v-container>
             </v-col>
             <v-col>
-                <v-template v-if="userParticipations?.length > 0">
+                <template v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
                         <h1>ENROLLED</h1>
                         <h4>({{userParticipations.length}})</h4>
@@ -46,7 +46,7 @@
                         <user-participation-card 
                         :participation="up" />
                     </nuxt-link>
-                </v-template>
+                </template>
             </v-col>
         </v-row>
     </v-container>
@@ -79,9 +79,9 @@ export default {
         },
     },
     async mounted(){
+        // this.$store.commit('navigation/setActive', { title: null, color: null});
         await this.getParticipations();
         await this.getCurrentGuesses();
-        this.$store.commit('navigation/setActive', { title: null, color: null});
     },
 
 

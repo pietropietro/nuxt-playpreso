@@ -22,12 +22,6 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPCUP.GROUP.GET + this.groupId, null, 'GET');
             if(response && response.status === "success"){
                 this.ppCupGroup = response.message;
-
-                this.$store.commit('navigation/setActive', { 
-                    title: this.ppCupGroup.ppTournamentType.name, 
-                    rgb: this.ppCupGroup.ppTournamentType.rgb
-                });
-
             }
             this.loading = false;
         },
