@@ -1,7 +1,7 @@
 <template>
-    <v-row no-gutters justify="center">
+    <v-row no-gutters justify="end">
         <v-btn text @click="join" :loading="loading">
-            <h1>JOIN</h1>
+            <h2>JOIN</h2>
         </v-btn>
     </v-row>
 </template>

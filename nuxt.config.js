@@ -108,8 +108,8 @@ export default {
 					anchor: '#000000',
 					opposite: '#ffffff',
 					text: '#000000',
-					pleague: '#00e64d',
-					pcup: '#ff0000'
+					pleague: '#9900cc',
+					pcup: '#9900cc'
 				},
 				dark: {
                     primary: '#000066',

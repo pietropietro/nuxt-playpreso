@@ -1,23 +1,41 @@
 <template>
-    <p-p-slider v-if="ppTournamentTypes.length" infoAlign="start">
-        <p-p-info slot="info" label="available" :value="ppTournamentTypes.length"/>
-        <v-slide-item 
-            slot="slide-item" 
-            v-for="(ppTT,index) in ppTournamentTypes" 
-            :key="index" 
-            class="mx-1"
+    <div>      
+        <v-row no-gutters 
+            :class="ppTournamentTypes.length > 0 ? 'mb-n10 mt-2' : ''" 
+            align="end"
         >
-            <div>
-                <p-p-tournament-dropdown 
-                    :ppTT="ppTT" 
-                    :index="index"
-                    :activeIndex="activeIndex"
-                    :onError="getAvailable"
-                    :setShow="() => activeIndex === index ? activeIndex = null : activeIndex = index"
-                />
-            </div>
-        </v-slide-item>
-    </p-p-slider>
+            <v-col>
+                <div class="overline lh-1">{{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}</div>
+            </v-col> 
+            <v-col 
+                cols="auto" 
+                class="mb-n2"
+            >
+                <h1>{{currentPoints}} <p-p-emoji model="blue-p"/></h1>
+            </v-col>
+        </v-row>   
+        <v-data-table
+            v-if="ppTournamentTypes.length > 0"
+            class="transparent"
+            mobile-breakpoint="0"
+            item-text="value"
+            :items-per-page="-1" :items="ppTournamentTypes"
+            :headers="headers"
+            hide-default-footer
+        >
+            <template v-slot:item.name="{ item }">
+                <v-row align="end">
+                    <h2>{{ppTournamentTypeTitle(item)}}</h2>
+                </v-row>
+            </template>
+                <template v-slot:item.cost="{ item }">
+                <div class="overline lh-1">{{item.cost}}</div>
+            </template>
+            <template v-slot:item.id="{ item }">
+                <p-p-tournament-join-row :ppTournamentTypeId="item.id" />
+            </template>
+        </v-data-table>
+    </div>
 </template>
 <script>
 export default {
@@ -26,6 +44,12 @@ export default {
             loading: true,
             activeIndex: null,
             ppTournamentTypes: [],
+            headers: [
+                // { value: 'level' , sortable:false}, 
+                { value: 'name' , sortable:false}, 
+                { value: 'cost'},
+                { value: 'id' , sortable:false}, 
+            ]
         }
     },
     methods:{

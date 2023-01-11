@@ -2,7 +2,7 @@
     <v-container fill-height class="pa-5">
         <v-container style='align-self:start'>
             <v-row justify="center">
-                <h2>{{currentUser.username}} | {{currentPoints}} pp</h2>
+                <h2>{{currentUser.username}}</h2>
             </v-row>
             <!-- <v-row justify="center">
                

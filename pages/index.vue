@@ -2,10 +2,12 @@
     <v-container  class="pt-0">
         
         <template v-if="currentGuesses">
-            <h1>YOUR LOCKS</h1>
-            <v-row >
-                <v-container class="px-0">
-            
+            <v-row no-gutters>
+                    <h1>YOUR LOCKS</h1>
+                <h4>({{currentGuesses.length}})</h4>
+            </v-row>
+            <v-row class="mt-0">
+                <v-container class="pa-0">
                     <v-slide-group
                         :show-arrows="!$vuetify.breakpoint.xs"
                         prev-icon="<"
@@ -25,17 +27,20 @@
             <v-col cols="12" md="6" 
                 class="pa-0"
             >
-                <v-container fluid
-                >
-                    <h1>AVAILABLE</h1>
+                <v-container fluid>
                     <p-p-league-available-list />
                 </v-container>
             </v-col>
-            <v-col 
-            style="background-color: var(--v-background-base);"
-            >
-                <h1>ENROLLED</h1>
-                <user-participation-list :userParticipations="userParticipations"/>
+            <v-col>
+                <!-- style="background-color: var(--v-background-base);" -->
+                <v-template v-if="userParticipations?.length > 0">
+                    <v-row no-gutters>
+                        <h1>ENROLLED</h1>
+                        <h4>({{userParticipations.length}})</h4>
+                    </v-row>
+                    <user-participation-list :userParticipations="userParticipations"
+                    />
+                </v-template>
             </v-col>
         </v-row>
     </v-container>
