@@ -17,6 +17,7 @@
             v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
             :onLastLock="fetchRound"
+            :color="color"
         />
     </div>
 </template>

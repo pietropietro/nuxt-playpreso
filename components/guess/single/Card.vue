@@ -7,45 +7,53 @@
                 <match-info-short :match="match"/>
             </v-col>
 
-            <v-col class="pa-0" v-if="!(!guess.guessed_at && guess.verified_at)">
-                <!-- <v-container fill-height> -->
-                    <match-inner-values
+            <v-col class="pa-0" >
+                    <!-- VERIFIED -->
+                    <v-row no-gutters class="h-100"
                         v-if="guess.verified_at"
-                        :guess="guess"
-                        :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
-                    />
-
-                    <v-row no-gutters
-                        class="h-100"
                         justify="center" align="center"
-                        v-if="guess.guessed_at"
-                        :style="{ backgroundColor: guess.verified_at ?  shades.verified : shades.locked}"
+                        :style="{ backgroundColor:  shades.verified}"
                     >
-                        
-                        <v-container class="px-6" style="line-height:1.5rem;">
-                                <v-row justify="center">
-                                    <h2 >
-                                        <p-p-emoji model="lock" />
-                                    </h2>
-                                </v-row>
-                                <v-row justify="center">
-                                    <h2 class="ocrastd"> {{guess.home}}-{{guess.away}}</h2>
-                                </v-row>
+                        <v-container class="pa-0">
+                            <match-inner-values class="no-gutters mt-n2 mb-2"
+                                v-if="guess.verified_at && !guess.PRESO"
+                                :guess="guess" :match="match"
+                            />
+                            <v-row no-gutters>
+                                <v-col cols="auto" v-if="!guess.PRESO"><div class="overline lh-1">points</div></v-col>
+                                <v-col>
+                                    <guess-info :guess="guess" hideUsername incrementalFont presoColor="opposite"/>
+                                </v-col>
+                            </v-row>
                         </v-container>
-                                    
+                        
                     </v-row>
+                    <!-- LOCKED -->
+                     <v-row no-gutters class="h-100"
+                        v-else-if="guess.guessed_at"
+                        justify="center" align="center"
+                        :style="{ backgroundColor:  shades.locked}"
+                    >
+                        <v-container class="px-6" style="line-height:1.5rem;"
+                            v-if="guess.guessed_at"
+                        >
+                            <v-row justify="center">
+                                <h2>
+                                    <p-p-emoji model="lock" />
+                                </h2>
+                            </v-row>
+                            <v-row justify="center">
+                                <h2 class="ocrastd"> {{guess.home}}-{{guess.away}}</h2>
+                            </v-row>
+                        </v-container>
+                    </v-row>
+                    <!-- UNLOCKED -->
                     <v-row v-else no-gutters class="h-100"
                         justify="center" align="center"
                         :style="{ backgroundColor: shades.unlocked}"
                     >
                         <v-container fill-height >
-                            <!-- <v-row> -->
-                                <guess-single-picker :guess="guess"
-                                    
-                                />
-                            <!-- </v-row> -->
-                            
-                       
+                            <guess-single-picker :guess="guess"/>
                             <guess-single-bottom-action
                                     :style="{ backgroundColor: shades.verified}"
                                     :guess="guess"
@@ -54,9 +62,7 @@
                                 />
                             </v-container >
                     </v-row>
-                <!-- </v-container> -->
             </v-col>
-            <v-col v-else>MISSED</v-col>
         </v-row>
     </p-p-card>
     <error-wall v-else/>

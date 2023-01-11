@@ -1,20 +1,17 @@
 <template>
-    <v-container :style="small && incrementalFont ? 'width:80px; height:80px;' : 'width:110px; height:80px;'">
-        <v-row justify="center" style="height:100%" align="end">
-            <p-p-info
-                :small="small && incrementalFont"
-                :value="value1"
-                :value2="value2"
-                :label="label"
-                :style="'--currentuser-color-var: var(--v-'+ color + '-base)'"
-            />
-        </v-row>
-    </v-container>
+    <p-p-info
+        :small="small && incrementalFont"
+        :value="value1"
+        :value2="value2"
+        :label="label"
+        :style="'--currentuser-color-var: var(--v-'+ color + '-base);'"
+    />
 </template>
 <script>
 export default {
     props:{
         color: {tyep: String},
+        presoColor: {tyep: String},
         guess: {type: Object, required: true},
         incrementalFont: {type: Boolean},
         hideUsername: {type: Boolean}
@@ -38,8 +35,8 @@ export default {
             return 'LOCKED'
         },
         value2(){
-            if(this.guess.PRESO) return {text: 'PRESO', class: "ocrastd", 
-                color: 'var(--v-accent-base)'
+            if(this.guess.PRESO) return {text: 'PRESO!', class: "ocrastd", 
+                color: 'var(--v-'+ this.presoColor + '-base)'
             };
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;

@@ -11,9 +11,13 @@
                         next-icon=">"
                     >
                         <v-slide-item v-for="(guess,index) in ppRM.guesses" :key="index" class="mx-1">
-                            <div>
-                                <guess-info :class="index === 0 ? 'ml-4' : 'mx-1'" :guess="guess" incrementalFont/>
-                            </div>
+                            <v-container>
+                                <guess-info 
+                                    :style="'width:140px; height:80px;'"
+                                    :class="index === 0 ? 'ml-4' : 'mx-1'" 
+                                    :presoColor="color"
+                                    :guess="guess" incrementalFont/>
+                            </v-container>
                         </v-slide-item>
                     </v-slide-group>
                 </v-container>
@@ -24,7 +28,8 @@
 export default {
     props:{
         ppRM: {type: Object, required: true},
-        onLastLock: {type: Function}
+        onLastLock: {type: Function},
+        color: {type: String}
     },
     computed:{
         allLocked(){

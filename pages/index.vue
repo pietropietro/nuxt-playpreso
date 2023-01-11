@@ -1,7 +1,7 @@
 <template>
     <v-container  class="pt-0">
         
-        <template v-if="currentGuesses">
+        <template v-if="currentGuesses?.length>0">
             <v-row no-gutters>
                     <h1>YOUR LOCKS</h1>
                 <h4>({{currentGuesses.length}})</h4>
