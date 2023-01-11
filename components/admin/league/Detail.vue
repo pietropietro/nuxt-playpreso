@@ -32,9 +32,7 @@
                     :enter="async () => await update({'ls_suffix': league.ls_suffix})"
                 />
                 <v-col>
-                    <v-btn @click="fetch" :disabled="!league.ls_suffix" text>
-                        FETCH EXTERNAL DATA
-                    </v-btn>
+                    <admin-league-fetch-button :id="id" :ls_suffix="league.ls_suffix" :onSuccess="getLeague"/>
                 </v-col>
             </v-row>
         </template>
@@ -68,16 +66,6 @@ export default {
 
             this.loading = false;
         },
-        async fetch(){
-            this.loading = true;
-            let values = {};
-            
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.LEAGUE.FETCH + this.id, values, 'POST'
-            );     
-            await this.getLeague();       
-            this.loading = false;
-        }
     }
 }
 </script>

@@ -8,6 +8,11 @@
                     </template>
                     <v-row no-gutters align="center">
                         <league-detail :league="match.league"/>
+                        <admin-league-fetch-button v-if="open" 
+                            :onSuccess="onChange"
+                            :id="match.league.id"
+                            :ls_suffix="match.league.ls_suffix" 
+                        />
                         <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>
                         <v-spacer/>
                         <span class="text-caption" v-if="timeOnly">{{formatTime(match.date_start)}}</span>
@@ -42,7 +47,7 @@
                 <span class="text-caption"><b>created:</b> {{formatDate(match.created_at, true)}}</span>
                 <span  v-if="match.verified_at" class="text-caption"><b>verified:</b> {{formatDate(match.verified_at, true)}}</span>
             </v-container>
-            <h3 class="red--text pointer mt-5 text-center"  v-if="!match.aggregateGuesses && !match.verified_at && !!onDelete"
+            <h3 class="red--text pointer mt-5 text-center"  v-if="!match.aggregateGuesses && !match.verified_at && !!onChange"
                 @click="deleteMatch"
             >
                 DELETE
@@ -83,7 +88,7 @@ export default {
     props:{
         match: {type: Object, required:true},
         timeOnly: {type: Boolean},
-        onDelete:{type: Function}
+        onChange:{type: Function}
     },
     data:()=>({homeModel:0, awayModel:0, loading: false}),
     computed:{
@@ -126,7 +131,7 @@ export default {
                 this.ADMIN_API_ROUTES.MATCH.DELETE + this.match.id, null, 'DELETE'
             );
             if(response && response.status === "success"){
-                this.onDelete();
+                this.onChange();
             }
             this.loading=false;
         }
