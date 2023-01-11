@@ -32,14 +32,20 @@
                 </v-container>
             </v-col>
             <v-col>
-                <!-- style="background-color: var(--v-background-base);" -->
                 <v-template v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
                         <h1>ENROLLED</h1>
                         <h4>({{userParticipations.length}})</h4>
                     </v-row>
-                    <user-participation-list :userParticipations="userParticipations"
-                    />
+                    <nuxt-link class="no-decoration"
+                        v-for="(up, index) in userParticipations" :key="index"
+                        :to="up.ppLeague_id ? ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
+                            : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
+                        " 
+                    >
+                        <user-participation-card 
+                        :participation="up" />
+                    </nuxt-link>
                 </v-template>
             </v-col>
         </v-row>

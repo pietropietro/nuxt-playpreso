@@ -1,6 +1,7 @@
 <template>
-    <p-p-card :color="participation.ppLeague_id ? ' var(--v-pleague-base)' : 'var(--v-pcup-base)'">
-        <v-row align="center"
+    <v-container>
+        <v-row class="rounded-lg"
+            align="center"
             :style="'background-color: ' + (participation.ppLeague_id ? ' var(--v-pleague-lighten2)' : 'var(--v-pcup-lighten2)') "
         >
             <v-col class="py-1">
@@ -40,7 +41,7 @@
                 />
             </v-col>
         </v-row>
-    </p-p-card>
+    </v-container>
 </template>
 <script>
 export default {
