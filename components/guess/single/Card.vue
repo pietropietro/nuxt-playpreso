@@ -28,14 +28,14 @@
                     :style="{ backgroundColor:  shades.verified}"
                 >
                     <v-container class="pa-0">
-                        <match-inner-values class="no-gutters mt-n2 mb-2"
+                        <match-inner-values class="no-gutters mt-n3 mb-4"
                             v-if="guess.verified_at && !guess.PRESO"
                             :guess="guess" :match="match"
                         />
                         <v-row no-gutters>
-                            <v-col cols="auto" v-if="!guess.PRESO"><div class="overline lh-1">points</div></v-col>
+                            <!-- <v-col cols="auto" v-if="!guess.PRESO"><div class="overline lh-1">points</div></v-col> -->
                             <v-col>
-                                <guess-info :guess="guess" hideUsername incrementalFont presoColor="opposite"/>
+                                <guess-info :guess="guess" hideUsername presoColor="opposite"/>
                             </v-col>
                         </v-row>
                     </v-container>

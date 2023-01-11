@@ -1,21 +1,14 @@
 <template>
-    <div>      
+    <div  v-if="ppTournamentTypes.length > 0">      
         <v-row no-gutters 
-            :class="ppTournamentTypes.length > 0 ? 'mb-n10 mt-2' : ''" 
+            class="mb-n10 mt-2" 
             align="end"
         >
             <v-col>
                 <div class="overline lh-1">{{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}</div>
             </v-col> 
-            <v-col 
-                cols="auto" 
-                class="mb-n2"
-            >
-                <h1>{{currentPoints}} <p-p-emoji model="blue-p"/></h1>
-            </v-col>
         </v-row>   
         <v-data-table
-            v-if="ppTournamentTypes.length > 0"
             class="transparent"
             mobile-breakpoint="0"
             item-text="value"

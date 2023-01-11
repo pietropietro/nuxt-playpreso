@@ -1,10 +1,7 @@
 <template>
-    <v-row>
-        <v-col cols="6" sm="3">
-            <p-p-info 
-                label="P-LEAGUE"
-                :value="ppTournamentTypeTitle(ppTournamentType)"
-            />
+    <v-row align="end">
+        <v-col cols="auto">
+                <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
         </v-col>
         <v-col cols="6" sm="3">
            <p-p-info 

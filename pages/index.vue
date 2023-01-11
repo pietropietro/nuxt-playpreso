@@ -28,7 +28,8 @@
                 class="pa-0"
             >
                 <v-container fluid>
-                    <p-p-league-available-list />
+                    <v-row style="height:200px; width:100%" justify="center" align="center"><span class="text-h2 font-weight-bold">{{currentPoints}} <p-p-emoji model="blue-p"/></span></v-row>
+                <p-p-league-available-list />
                 </v-container>
             </v-col>
             <v-col>
