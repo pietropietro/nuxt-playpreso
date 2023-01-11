@@ -10,10 +10,8 @@
                 <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
                     <h1>{{menuScreen ? 'X' : '>'}}</h1>
                 </div>
-                <!-- <user-menu/> -->
             </v-row>
         </v-container>
-        <!-- <v-spacer/> -->
     </v-app-bar>
 </template>
 <script>

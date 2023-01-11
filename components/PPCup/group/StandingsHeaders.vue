@@ -2,7 +2,7 @@
     <v-row no-gutters v-if="showDetailedStats" class="mb-2" align="end">
         <v-col cols="auto" class="ml-2">
             <v-avatar
-                color="primary"
+                color="pcup"
                 size="10"
             />
             <span class="overline" style="line-height:1rem">
