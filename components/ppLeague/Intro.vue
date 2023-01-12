@@ -1,7 +1,8 @@
 <template>
     <v-row align="end">
         <v-col cols="auto">
-                <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
+            <div class="overline lh-1">P-LEAGUE</div>
+            <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
         </v-col>
         <v-col cols="6" sm="3">
            <p-p-info 
