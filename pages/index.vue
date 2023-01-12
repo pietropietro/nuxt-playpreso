@@ -27,7 +27,7 @@
             <v-col cols="12" md="6" 
                 class="pa-0"
             >
-                <v-container fluid>
+                <v-container class="pa-0">
                     <v-row no-gutters
                         style="height:160px; width:100%" 
                         justify="center" align="center"
@@ -36,7 +36,7 @@
                             {{currentPoints}} <p-p-emoji model="blue-p"/>
                         </span>
                     </v-row>
-                <p-p-league-available-list />
+                <p-p-league-available-list class="px-2" />
                 </v-container>
             </v-col>
             <v-col>
