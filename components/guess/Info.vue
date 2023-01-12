@@ -1,11 +1,27 @@
 <template>
-    <p-p-info
-        :small="small && incrementalFont"
-        :value="value1"
-        :value2="value2"
-        :label="label"
-        :style="'--currentuser-color-var: var(--v-'+ color + '-base);'"
-    />
+    <v-row class="h-100" align="end">
+        <v-col>
+            <v-row justify="center">
+                <h1 v-if="!small">{{value1}}</h1>
+                <h3 v-else>{{value1}}</h3>
+                <template v-if="!!value2">
+                    <h4 v-if="!small"
+                        :class="value2.class ?? ''"
+                        :style="value2.color ? 'color:' + value2.color : ''"
+                    >
+                        {{value2?.text ?? value2}}
+                    </h4>
+                    <h6 v-else>{{value2}}</h6>
+                </template>
+            </v-row>
+            <v-row
+                justify="center"
+                :style="'--currentuser-color-var: var(--v-'+ color + '-base);'"
+                :class="'text-overline mt-0 ' + label?.class ?? ''" >
+                {{label?.text}}
+            </v-row>
+        </v-col>
+    </v-row>
 </template>
 <script>
 export default {
@@ -18,7 +34,7 @@ export default {
     },
     computed:{
         small(){
-            return this.guess.points < 9;
+            return this.guess.points < 9 && this.incrementalFont;
         },
         label(){
             if(this.hideUsername)return null;
