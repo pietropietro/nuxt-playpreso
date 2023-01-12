@@ -3,6 +3,8 @@
         <v-col>
             <v-row justify="center">
                 <h1 v-if="!small">{{value1}}</h1>
+                <h3 v-else-if="isMissed(guess)"><p-p-emoji model="red-x"/></h3>
+                <h3 v-else-if="guess.guessed_at && !guess.verified_at"><p-p-emoji model="lock"/></h3>
                 <h3 v-else>{{value1}}</h3>
                 <template v-if="!!value2">
                     <h4 v-if="!small"
@@ -15,8 +17,9 @@
                 </template>
             </v-row>
             <v-row
+                v-if="!hideUsername"
+                :style="'--currentuser-color-var: var(--v-'+ color + '-base)'"
                 justify="center"
-                :style="'--currentuser-color-var: var(--v-'+ color + '-base);'"
                 :class="'text-overline mt-0 ' + label?.class ?? ''" >
                 {{label?.text}}
             </v-row>
@@ -45,10 +48,8 @@ export default {
         },
         value1(){
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.points === 0 ? 0 : '+' + this.guess.points;
-            if(this.isMissed(this.guess)) return 'MISSED';
             if(!this.guess.guessed_at) return '?';
             if(this.guess.guessed_at && this.guess.home !== null) return this.guess.home + '-' + this.guess.away;
-            return 'LOCKED'
         },
         value2(){
             if(this.guess.PRESO) return {text: 'PRESO!', class: "ocrastd", 

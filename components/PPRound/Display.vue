@@ -13,16 +13,13 @@
                   
                 >
                     <v-slide-item v-for="(guess,index) in ppRM.guesses" :key="index">
-                        <!-- <v-row class="h-100 mb-n10 py-2 mx-1" align="end" justify="end"> -->
-                            <!-- <v-col align-self="end"> -->
-                                <div class="h-100 mx-4">
-                                    <guess-info
-                                        :presoColor="color"
-                                        :guess="guess" incrementalFont
-                                    />
-                                </div>
-                            <!-- </v-col> -->
-                        <!-- </v-row> -->
+                        <div class="h-100 mx-4">
+                            <guess-info
+                                :presoColor="color"
+                                :color="color"
+                                :guess="guess" incrementalFont
+                            />
+                        </div>
                     </v-slide-item>
                 </v-slide-group>
             </v-container>
