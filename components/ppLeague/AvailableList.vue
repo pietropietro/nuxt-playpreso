@@ -9,7 +9,7 @@
             </v-col> 
         </v-row>   
         <v-data-table
-            class="transparent"
+            class="transparent no-select"
             mobile-breakpoint="0"
             item-text="value"
             :items-per-page="-1" :items="ppTournamentTypes"
@@ -50,6 +50,7 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.AVAILABLE);
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
+                this.ppTournamentTypes.map((e)=>{e.isSelectable=false})
             }
             this.loading = false;
         },
@@ -60,3 +61,10 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+    .no-select tbody {
+        tr:hover {
+            background-color: transparent !important;
+        }
+    }
+</style>

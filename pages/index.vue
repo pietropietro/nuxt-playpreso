@@ -28,7 +28,14 @@
                 class="pa-0"
             >
                 <v-container fluid>
-                    <v-row style="height:200px; width:100%" justify="center" align="center"><span class="text-h2 font-weight-bold">{{currentPoints}} <p-p-emoji model="blue-p"/></span></v-row>
+                    <v-row no-gutters
+                        style="height:160px; width:100%" 
+                        justify="center" align="center"
+                    >
+                        <span class="text-h2 font-weight-bold">
+                            {{currentPoints}} <p-p-emoji model="blue-p"/>
+                        </span>
+                    </v-row>
                 <p-p-league-available-list />
                 </v-container>
             </v-col>
@@ -44,8 +51,9 @@
                             : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
                         " 
                     >
-                        <user-participation-card 
-                        :participation="up" />
+                        <user-participation-card :class="!up.started ? 'mb-4' : ''"
+                            :participation="up" 
+                        />
                     </nuxt-link>
                 </template>
             </v-col>
