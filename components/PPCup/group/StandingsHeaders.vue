@@ -12,7 +12,7 @@
                 }}
             </span>
         </v-col>
-        <v-col class="pr-8 pr-sm-0 mb-1">
+        <v-col class="pr-0 mb-1">
             <user-participation-standing-labels
                 :totalCupLabel="totalCupLabel"
             />

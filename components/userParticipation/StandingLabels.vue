@@ -1,17 +1,13 @@
 <template >
     <v-row justify="end" align="end">
-        <v-col cols="auto" sm="auto" class="" >
-            <h3 class="standings-label lh-1">POINTS</h3>
-        </v-col>
-        <v-col cols="auto" sm="auto" class=""  v-if="totalCupLabel" >
-            <h5 class="standings-label lh-1">CUP</h5>
-        </v-col>
-        <v-col cols="2" sm="auto" 
-            class="standings-label lh-1 overline text-right " 
+        <v-col cols="auto" 
+            class="standings-label text-right " 
         >
-            <div>locked</div>
-            <div>preso</div>
-            <div>1x2</div>
+            <h3>POINTS</h3>
+            <h5 v-if="totalCupLabel">CUP</h5>
+            <div class="overline lh-1">locked</div>
+            <div class="overline lh-1">preso</div>
+            <div class="overline lh-1">1x2</div>
         </v-col>
     </v-row>
 </template>
