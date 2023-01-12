@@ -1,13 +1,12 @@
 <template>
-    <p-p-card color="var(--v-pcup-base)" v-if="guess">
+    <p-p-card color="var(--v-pcup-base)" v-if="guess" style="max-width:300px">
         <v-row>
-            <v-col
+            <v-col cols="auto"
                 :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
             >
                 <match-info-short :match="match"/>
             </v-col>
-
-            <v-col class="pa-0" >
+            <v-col  class="pa-0" >
                 <!-- MISSED -->
                 <v-row no-gutters class="h-100"
                     v-if="guess.verified_at && !guess.guessed_at"

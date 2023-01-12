@@ -11,7 +11,9 @@
                 <h4>{{match.score_away}}</h4>
             </v-col>
         </v-row>
-        <v-row no-gutters class="overline lh-1">{{formatDate(match.date_start, withTime)}}</v-row>
+        <v-row class="overline lh-1 flex-nowrap" no-gutters>
+            {{formatDate(match.date_start, withTime)}}
+        </v-row>
     </v-container>
 </template>
 <script>
