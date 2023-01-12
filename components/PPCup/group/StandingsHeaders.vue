@@ -1,5 +1,5 @@
 <template>
-    <v-row no-gutters v-if="showDetailedStats" class="mb-2" align="end">
+    <v-row v-if="showDetailedStats" justify="end" align="end" style="width:100%">
         <v-col cols="auto" class="ml-2">
             <v-avatar
                 color="pcup"
@@ -12,7 +12,7 @@
                 }}
             </span>
         </v-col>
-        <v-col class="pr-6 pr-sm-4">
+        <v-col class="pr-8 pr-sm-0 mb-1">
             <user-participation-standing-labels
                 :totalCupLabel="totalCupLabel"
             />
