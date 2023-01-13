@@ -50,7 +50,7 @@ export default {
                 this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.UPDATE + this.ppTournamentType.id, values, 'POST'
             );     
             if(response.status=='success'){
-                this.ppTournamentType.rgb = this.newColor;
+                this.ppTournamentType.rgb = values.rgb;
             }
             this.loading = false;
         },
