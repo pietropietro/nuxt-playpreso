@@ -28,7 +28,7 @@ export default {
     },
     methods:{
         async getPPtts(){
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES + (!!this.cupsOnly ? '?onlyCups=1' : ''));
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.GET + (!!this.cupsOnly ? '?onlyCups=1' : ''));
             if(response && response.status === "success"){
                 this.ppTournamentTypes = response.message;
             }

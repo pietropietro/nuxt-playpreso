@@ -78,9 +78,16 @@ Vue.mixin({
                     ROUTE: '/admin/leagues',
                     NAME: 'leagues'
                 },
+                PPTOURNAMENTTYPES: {
+                    ROUTE: '/admin/p-tournament-types',
+                    NAME: 'p-tournament-types'
+                },
             },
             ADMIN_API_ROUTES: {
-                PPTOURNAMENTTYPES: '/admin/p-tournament-types',
+                PPTOURNAMENTTYPES:{ 
+                    GET: '/admin/p-tournament-types',
+                    UPDATE: '/admin/p-tournament-types/'
+                },
                 PPLEAGUE:{
                     GET: '/admin/p-league',
                 },

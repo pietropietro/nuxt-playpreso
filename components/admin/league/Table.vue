@@ -52,7 +52,6 @@
 </template>
 <script>
 export default {
-    layout: "admin",
     data:()=>({
         leagues: null,
         loading: true,
