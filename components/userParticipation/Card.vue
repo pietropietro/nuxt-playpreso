@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="rounded-lg"
             align="center"
-            :style="'background-color: ' + (participation.ppLeague_id ? ' var(--v-pleague-lighten2)' : 'var(--v-pcup-lighten2)') "
+            :style="'background-color: ' + (participation.ppLeague_id ? ' var(--v-pleague-lighten3)' : 'var(--v-pcup-lighten2)') "
         >
             <v-col class="py-1">
                 <div class="overline" style="line-height:1rem;">

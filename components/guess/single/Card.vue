@@ -1,5 +1,5 @@
 <template>
-    <p-p-card color="var(--v-pcup-base)" v-if="guess" style="max-width:300px">
+    <p-p-card :color="'var(--v-' + color +'-base)'" v-if="guess" style="max-width:300px">
         <v-row>
             <v-col cols="auto"
                 :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
@@ -82,11 +82,12 @@ export default {
     props:{
         guess: {type: Object, required: true},
         match: {type: Object, required: true},
+        color: {type: String}
     },
     data(){
         return{
             lockButtonLoading: false,
-            shades:{locked: 'var(--v-pcup-lighten3)', verified: 'var(--v-pcup-base)', unlocked: 'var(--v-pcup-lighten5)' }
+            shades:{locked: 'var(--v-'+ this.color + '-lighten3)', verified: 'var(--v-'+ this.color + '-base)', unlocked: 'var(--v-'+ this.color + '-lighten5)' }
         }
     },
     methods:{

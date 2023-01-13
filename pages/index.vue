@@ -13,10 +13,10 @@
                         prev-icon="<"
                         next-icon=">"
                     >
-                        <v-slide-item v-for="guess in currentGuesses" :key="guess.id" class="mx-2">
+                        <v-slide-item v-for="(guess, index) in currentGuesses" :key="guess.id" class="mx-2">
                             <!-- width is necessary for slider to work on page landing :( -->
                             <div style="width:250px;">
-                                <guess-single-card :guess="guess"  :match="guess.match"/>
+                                <guess-single-card :guess="guess"  :match="guess.match" :color="colors[index]"/>
                             </div>
                         </v-slide-item>
                     </v-slide-group>
@@ -69,6 +69,7 @@ export default {
             currentGuesses: null,
             loadingParticipations: true,
             loadingGuesses: true,
+            colors:['pleague', 'pleague2','pleague3','pleague4',]
         }
     },
     methods:{
