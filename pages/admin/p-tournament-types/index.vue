@@ -29,6 +29,11 @@
                         {{ !!item.cup_format ? 'P-CUP' : 'P-LEAGUE' }}
                     </div>
                 </template>
+                <template v-slot:item.emoji="{ item }">
+                    <h2>
+                        {{ item.emoji }}
+                    </h2>
+                </template>
                 <template v-slot:item.name="{ item }">
                     <h2>
                         {{ item.name }}
@@ -60,6 +65,7 @@
     <error-wall v-else/>
 </template>
 <script>
+
 export default {
     layout: "admin",
      data:()=>({
@@ -70,6 +76,7 @@ export default {
             { value: 'id' }, 
             { value: 'cup_format' },
             { value: 'rgb' },
+            { value: 'emoji' },
             { value: 'name'},
             { value: 'level', align:'start'},
             { value: 'leagues' }, 

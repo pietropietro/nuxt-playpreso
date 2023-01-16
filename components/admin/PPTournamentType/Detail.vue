@@ -1,5 +1,25 @@
 <template>
     <v-container>
+        <v-container>
+            <v-row>
+                <div class="overline lh-1">EMOJI</div>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <em-emoji v-if="ppTournamentType.emoji" size="5em" :native="ppTournamentType.emoji"></em-emoji>
+                </v-col>
+                <v-col><div :id="'picker' + ppTournamentType.id"> </div></v-col>
+                <v-col>
+                <v-btn 
+                    :loading="loadingUpdate"
+                    @click="update(
+                        {'emoji': ppTournamentType.emoji}
+                    )">
+                    UPDATE EMOJI
+                </v-btn>
+            </v-col>
+            </v-row>
+        </v-container>
         <v-row>
             <v-col><div class="overline lh-1">COLOR</div></v-col>
             <v-col>
@@ -12,7 +32,7 @@
             </v-col>
             <v-col>
                 <v-btn 
-                    :loading="loading"
+                    :loading="loadingUpdate"
                     @click="update(
                         {'rgb': newColor.r + ',' + newColor.g + ',' + newColor.b}
                     )">
@@ -29,12 +49,15 @@
     </v-container>
 </template>
 <script>
+import {Picker } from 'emoji-mart'
+
 export default {
     props:{
         ppTournamentType: {type: Object}
     },
     data(){
         return{
+            loadingUpdate: false,
             newColor: {
                 'r': this.ppTournamentType.rgb.split(',')[0],
                 'g': this.ppTournamentType.rgb.split(',')[1],
@@ -44,7 +67,7 @@ export default {
     },
     methods:{
         async update(values){
-            this.loading = true;
+            this.loadingUpdate = true;
     
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.UPDATE + this.ppTournamentType.id, values, 'POST'
@@ -52,8 +75,18 @@ export default {
             if(response.status=='success'){
                 this.ppTournamentType.rgb = values.rgb;
             }
-            this.loading = false;
+            this.loadingUpdate = false;
         },
+        selectEmoji(emObj){
+            this.ppTournamentType.emoji=emObj.native;
+        }
+    },
+    mounted(){
+        const pickerOptions = { 
+            onEmojiSelect: this.selectEmoji,
+            parent: document.querySelector('#picker' + this.ppTournamentType.id),
+        }
+        new Picker(pickerOptions);
     }
 }
 </script>

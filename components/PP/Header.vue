@@ -4,7 +4,8 @@
             <v-row class="mx-2">
                 <v-spacer/>
                 <nuxt-link class="no-decoration" to="/">
-                    <h1 class=" ocrastd">PLAYPRESO</h1>
+                    <!-- <div class="text-h3 font-weight-bold">PLAYPRESO</div> -->
+                    <h1 class="ocrastd">PLAYPRESO</h1>
                 </nuxt-link>
                 <v-spacer/>
                 <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
