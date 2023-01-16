@@ -39,7 +39,7 @@
                 <p-p-league-available-list class="px-2" />
                 </v-container>
             </v-col>
-            <v-col>
+            <v-col class="mt-10">
                 <template v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
                         <h1>ENROLLED</h1>

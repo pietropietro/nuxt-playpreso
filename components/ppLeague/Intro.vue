@@ -1,7 +1,7 @@
 <template>
     <v-row align="end" :class="$vuetify.breakpoint.mdAndUp ? 'flex-nowrap' : ''">
         <v-col cols="auto">
-            <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="3em"/>
+            <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="2.5em"/>
         </v-col>
         <v-col cols="auto">
             <div class="overline lh-1">P-LEAGUE</div>
