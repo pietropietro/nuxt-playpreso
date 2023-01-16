@@ -16,6 +16,11 @@
             :headers="headers"
             hide-default-footer
         >
+            <template v-slot:item.emoji="{ item }">
+            <em-emoji v-if="item.emoji"
+                :native="item.emoji" size="2em"
+            />
+            </template>
             <template v-slot:item.name="{ item }">
                 <v-row align="end">
                     <h2>{{ppTournamentTypeTitle(item)}}</h2>
@@ -38,7 +43,7 @@ export default {
             activeIndex: null,
             ppTournamentTypes: [],
             headers: [
-                // { value: 'level' , sortable:false}, 
+                { value: 'emoji' , sortable:false}, 
                 { value: 'name' , sortable:false}, 
                 { value: 'cost'},
                 { value: 'id' , sortable:false}, 

@@ -8,7 +8,10 @@
                 <div class="overline" style="line-height:1rem;">
                     {{participation.ppLeague_id ? 'P-LEAGUE' : 'P-CUP'}}
                 </div>
-                <h2>{{ppTournamentTypeTitle(participation.ppTournamentType)}}</h2>
+                <h2>
+                    <em-emoji v-if="participation.ppTournamentType.emoji" :native="participation.ppTournamentType.emoji" />
+                    {{ppTournamentTypeTitle(participation.ppTournamentType)}}
+                </h2>
             </v-col>
             <v-col class="py-1" cols="auto">
                 <div v-if="!participation.started"  class="text-overline">NOT STARTED</div>
