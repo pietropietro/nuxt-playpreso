@@ -1,6 +1,39 @@
 <template>
     <v-container>
-        <v-container>
+        <v-row>
+            <v-col>
+                <div class="ocrastd">
+                    #{{ ppTournamentType.id }}
+                </div>
+            </v-col>
+        </v-row>
+        <v-row>
+            <p-p-input-number
+                label="cost" 
+                :value="ppTournamentType.cost" 
+                :setValue="(val)=>{ ppTournamentType.cost = parseInt(val)}"
+                :enter="async () => await update(
+                    {'cost': ppTournamentType.cost}
+                )"
+            />
+            <p-p-input-number
+                label="rounds" 
+                :value="ppTournamentType.rounds" 
+                :setValue="(val)=>{ ppTournamentType.rounds = parseInt(val)}"
+                :enter="async () => await update(
+                    {'rounds': ppTournamentType.rounds}
+                )"
+            />
+            <p-p-input-number
+                label="participants" 
+                :value="ppTournamentType.participants" 
+                :setValue="(val)=>{ ppTournamentType.participants = parseInt(val)}"
+                :enter="async () => await update(
+                    {'participants': ppTournamentType.participants}
+                )"
+            />
+        </v-row>
+        <v-container class="my-5">
             <v-row>
                 <div class="overline lh-1">EMOJI</div>
             </v-row>
@@ -59,9 +92,9 @@ export default {
         return{
             loadingUpdate: false,
             newColor: {
-                'r': this.ppTournamentType.rgb.split(',')[0],
-                'g': this.ppTournamentType.rgb.split(',')[1],
-                'b': this.ppTournamentType.rgb.split(',')[2]
+                'r': this.ppTournamentType.rgb?.split(',')[0],
+                'g': this.ppTournamentType.rgb?.split(',')[1],
+                'b': this.ppTournamentType.rgb?.split(',')[2]
             }
         }
     },
@@ -73,7 +106,7 @@ export default {
                 this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.UPDATE + this.ppTournamentType.id, values, 'POST'
             );     
             if(response.status=='success'){
-                this.ppTournamentType.rgb = values.rgb;
+                if(values.rgb)this.ppTournamentType.rgb = values.rgb;
             }
             this.loadingUpdate = false;
         },

@@ -12,12 +12,6 @@
                 hide-default-footer
                 @click:row="(item)=>expandRow(item)"
             >
-                <template v-slot:item.id="{ item }">
-                    <div class="ocrastd"
-                    >
-                        #{{ item.id }}
-                    </div>
-                </template>
                 <template v-slot:item.rgb="{ item }">
                     <v-sheet width="20" height="20" :color="ppRGBA(item.rgb)" rounded/>
                     <!-- <div class="overline lh-1">
@@ -30,9 +24,9 @@
                     </div>
                 </template>
                 <template v-slot:item.emoji="{ item }">
-                    <h2>
+                    <h1>
                         {{ item.emoji }}
-                    </h2>
+                    </h1>
                 </template>
                 <template v-slot:item.name="{ item }">
                     <h2>
@@ -73,12 +67,14 @@ export default {
         loading: true,
         expanded: [],
         headers: [
-            { value: 'id' }, 
             { value: 'cup_format' },
             { value: 'rgb' },
             { value: 'emoji' },
             { value: 'name'},
             { value: 'level', align:'start'},
+            { value: 'cost' }, 
+            { value: 'rounds' }, 
+            { value: 'participants' }, 
             { value: 'leagues' }, 
         ]
     }),
