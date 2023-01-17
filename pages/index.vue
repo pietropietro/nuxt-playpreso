@@ -1,6 +1,5 @@
 <template>
     <v-container  class="pt-0">
-        
         <template v-if="currentGuesses?.length>0">
             <v-row no-gutters>
                     <h1>YOUR LOCKS</h1>
@@ -15,7 +14,7 @@
                     >
                         <v-slide-item v-for="(guess, index) in currentGuesses" :key="guess.id" class="mx-2">
                             <!-- width is necessary for slider to work on page landing :( -->
-                            <div style="width:250px;">
+                            <div style="min-width:250px; max-width:300px;">
                                 <guess-single-card :guess="guess"  :match="guess.match" :color="colors[index]"/>
                             </div>
                         </v-slide-item>
