@@ -1,7 +1,8 @@
 export const state = () => ({
 	currentUser: null,
 	token: null,
-	points: null
+	points: null,
+	darkMode: false
 })
 
 export const mutations = {
@@ -15,5 +16,9 @@ export const mutations = {
 
 	updatePoints (state, payload) {
 		state.points = payload.points
+	},
+
+	updateDarkMode (state, payload) {
+		state.darkMode = payload.darkMode
 	},
 }

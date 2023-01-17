@@ -4,13 +4,19 @@
             <v-row justify="center">
                 <h2>{{currentUser.username}}</h2>
             </v-row>
-            <!-- <v-row justify="center">
-               
-            </v-row> -->
             <v-row justify="center">
                 <div class="overline lh-1">
                     <div>member since </div>
                     <div>{{formatMonthYear(currentUser.created_at).toLowerCase()}}</div>
+                </div>
+            </v-row>
+            <v-row justify="center">
+                <div>
+                    <v-switch inset
+                        v-model="$vuetify.theme.dark"
+                        @change="$store.commit('user/updateDarkMode', {darkMode: $vuetify.theme.dark})"
+                    />
+                    <div class="overline lh-1">{{$vuetify.theme.dark ? 'DARK' : 'LIGHT'}}</div>
                 </div>
             </v-row>
         </v-container>

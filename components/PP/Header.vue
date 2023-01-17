@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="white" class="no-height" style="height:auto;" flat app>
+    <v-app-bar color="var(--v-background-base)" class="no-height" style="height:auto;" flat app>
         <v-container>
             <v-row class="mx-2">
                 <v-spacer/>

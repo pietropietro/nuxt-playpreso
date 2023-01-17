@@ -102,16 +102,11 @@ export default {
             themes: {
                 light: {
                     primary: '#0000cc',
-					background: '#c6ffb3',
+					background: '#ffffff',
 					// all links
 					anchor: '#000000',
 					opposite: '#ffffff',
 					text: '#000000',
-					// pleague: '#0000ff',
-					// pleague2: '#ff0000',
-					// pleague3: '#ffff00',
-					// pleague4: '#006622',
-					// pcup: '#9900cc',
 					// i.e. PRESO!
 					accent: '#9900cc'
 				},
@@ -121,8 +116,6 @@ export default {
 					anchor: '#ffffff',
 					opposite: '#000000',
 					text: '#ffffff',
-					pleague: '#00e64d',
-					pcup: '#ff0000'
 				}
 			}
 		}
