@@ -7,7 +7,7 @@
                 </span>
                 <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
                     <div :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
-                        :style="'--currentuser-color-var: var(--v-'+ color + '-base)'"
+                        :style="'--currentuser-color-var: '+ color"
                     >
                         {{up.username}}
                     </div>

@@ -15,7 +15,7 @@
             <template v-if="!isCupGroup">
                 <p-p-section-title text="PLAYERS"/>
                 <p-p-league-standings-list
-                    :color="isCupGroup ? 'pcup' : 'pleague'"
+                    :rgb="tournamentObj.ppTournamentType.rgb"
                     :ups="tournamentObj.userParticipations"
                 />
             </template>
@@ -30,14 +30,14 @@
         <template  v-if="tournamentObj.ppRounds.length > 0">
             <v-container v-if="userCurrentRound" class="py-4">
                 <p-p-section-title text="YOUR LOCKS" />
-                <guess-user-round class="mt-0" :ppRMs="userCurrentRound" :color="isCupGroup ? 'pcup' : 'pleague'" />
+                <guess-user-round class="mt-0" :ppRMs="userCurrentRound" :rgb="tournamentObj.ppTournamentType.rgb" />
             </v-container>
             <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds" :setPPRounds="(val)=>tournamentObj.ppRounds = val"
                     :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
-                    :color="isCupGroup ? 'pcup' : 'pleague'"
+                    :rgb="tournamentObj.ppTournamentType.rgb"
                 />
             </v-container>
         </template>

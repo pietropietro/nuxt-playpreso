@@ -8,17 +8,17 @@
                 <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
                     <user-participation-standing-item 
                         v-if="ups.length < firstSize"
-                        :color="color"
+                        :color="ppRGBA(rgb)"
                         :up="ups[index]"
                     />
                     <user-participation-standing-item 
                         v-else-if="!showAll && index===firstSize-1 && makeRoomForCurrentUser"
-                        :color="color"
+                        :color="ppRGBA(rgb)"
                         :up="ups.filter((e)=>e.user_id === currentUser.id)[0]"
                     />
                     <user-participation-standing-item
                         v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
-                        :color="color"
+                        :color="ppRGBA(rgb)"
                         :up="$vuetify.breakpoint.mdAndUp ? ups[desktopActualIndex(index)] : ups[index]"
                         :showDetails="showAll"
                     />
@@ -34,7 +34,7 @@
 export default {
     props: {
         ups: {type: Array},
-        color: {type: String}
+        rgb: {type: String}
     },
     data(){
         return{

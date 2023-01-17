@@ -15,7 +15,7 @@
                         <v-slide-item v-for="(guess, index) in currentGuesses" :key="guess.id" class="mx-2">
                             <!-- width is necessary for slider to work on page landing :( -->
                             <div style="min-width:250px; max-width:300px;">
-                                <guess-single-card :guess="guess"  :match="guess.match" :color="colors[index]"/>
+                                <guess-single-card :guess="guess"  :match="guess.match" :rgb="guess.ppTournamentType.rgb"/>
                             </div>
                         </v-slide-item>
                     </v-slide-group>
@@ -68,7 +68,6 @@ export default {
             currentGuesses: null,
             loadingParticipations: true,
             loadingGuesses: true,
-            colors:['pleague', 'pleague2','pleague3','pleague4',]
         }
     },
     methods:{

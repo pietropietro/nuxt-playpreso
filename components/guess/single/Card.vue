@@ -1,6 +1,6 @@
 <template>
     <div v-if="guess">
-        <p-p-card :color="'var(--v-' + color +'-base)'"  style="max-width:300px">
+        <p-p-card :color="shades.verified"  style="max-width:300px">
             <v-row>
                 <v-col cols="auto"
                     :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
@@ -33,7 +33,6 @@
                                 :guess="guess" :match="match"
                             />
                             <v-row no-gutters>
-                                <!-- <v-col cols="auto" v-if="!guess.PRESO"><div class="overline lh-1">points</div></v-col> -->
                                 <v-col>
                                     <guess-info :guess="guess" hideUsername presoColor="opposite"/>
                                 </v-col>
@@ -76,12 +75,9 @@
                 </v-col>
             </v-row>
         </p-p-card>
-        <div class="ml-2">
-            <!-- <div class="overline" style="line-height:1rem;">
-                {{!guess.ppTournamentType.cup_format ? 'P-LEAGUE' : 'P-CUP'}}
-            </div> -->
+        <div class="ml-2" v-if="guess.ppTournamentType?.emoji">
             <h4>
-                <em-emoji v-if="guess.ppTournamentType.emoji" :native="guess.ppTournamentType.emoji" />
+                <em-emoji :native="guess.ppTournamentType.emoji" />
                 {{ppTournamentTypeTitle(guess.ppTournamentType)}}
             </h4>
         </div>
@@ -93,12 +89,16 @@ export default {
     props:{
         guess: {type: Object, required: true},
         match: {type: Object, required: true},
-        color: {type: String}
+        rgb: {type: String}
     },
     data(){
         return{
             lockButtonLoading: false,
-            shades:{locked: 'var(--v-'+ this.color + '-lighten3)', verified: 'var(--v-'+ this.color + '-base)', unlocked: 'var(--v-'+ this.color + '-lighten5)' }
+            shades:{
+                verified: this.ppRGBA(this.rgb),
+                locked:  this.ppRGBA(this.rgb, 0.6),
+                unlocked:  this.ppRGBA(this.rgb, 0.4) 
+            }
         }
     },
     methods:{

@@ -4,7 +4,7 @@
             <v-col v-for="i in rounds" :key="i" :cols="ppRounds.length === 1 ? '4' : ''">
                 <h4 v-if="i<=ppRounds.length"
                     :class="'pointer text-center rounded ' + (selectedRound===i ? ' white--text' : '')" 
-                    :style="selectedRound===i ? 'background-color: var(--v-'+ color + '-base)' : ''" 
+                    :style="selectedRound===i ? 'background-color:' + ppRGBA(rgb) : ''" 
                     @click="()=>selectedRound = i" 
                 > 
                     {{i}}
@@ -17,7 +17,7 @@
             v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
             :onLastLock="fetchRound"
-            :color="color"
+            :color="ppRGBA(rgb)"
         />
     </div>
 </template>
@@ -27,7 +27,7 @@ export default {
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},
         setPPRounds: {type: Function},
-        color: {type: String}
+        rgb: {type: String}
     },
     data(){
         return{

@@ -107,11 +107,11 @@ export default {
 					anchor: '#000000',
 					opposite: '#ffffff',
 					text: '#000000',
-					pleague: '#0000ff',
-					pleague2: '#ff0000',
-					pleague3: '#ffff00',
-					pleague4: '#006622',
-					pcup: '#9900cc',
+					// pleague: '#0000ff',
+					// pleague2: '#ff0000',
+					// pleague3: '#ffff00',
+					// pleague4: '#006622',
+					// pcup: '#9900cc',
 					// i.e. PRESO!
 					accent: '#9900cc'
 				},

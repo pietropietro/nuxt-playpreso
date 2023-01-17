@@ -20,7 +20,7 @@
                 :value="ppTournamentType.leagues.length"
             />
         </v-col>
-        <v-col cols="6" sm="auto">
+        <v-col cols="6" sm="auto" class="mx-md-4">
            <p-p-info 
                 v-if="ppTournamentType.next"
                 label="qualifies to"

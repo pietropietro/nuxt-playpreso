@@ -18,7 +18,7 @@
             </v-row>
             <v-row
                 v-if="!hideUsername"
-                :style="'--currentuser-color-var: var(--v-'+ color + '-base)'"
+                :style="'--currentuser-color-var:' + color"
                 justify="center"
                 :class="'text-overline mt-0 ' + label?.class ?? ''" >
                 {{label?.text}}
@@ -53,7 +53,7 @@ export default {
         },
         value2(){
             if(this.guess.PRESO) return {text: 'PRESO!', class: "ocrastd", 
-                color: 'var(--v-'+ this.presoColor + '-base)'
+                color: this.presoColor
             };
             if(this.guess.verified_at && this.guess.guessed_at) return this.guess.home + '-' + this.guess.away;
             return null;
