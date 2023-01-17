@@ -1,5 +1,9 @@
 import Vue from 'vue'
 
+// EM-EMOJI COMPONENT GLOBAL REGISTRATION
+import {EmEmoji} from 'emoji-mart'
+Vue.component('em-emoji', EmEmoji);
+
 Vue.mixin({
     methods:{
         isMissed(guess){

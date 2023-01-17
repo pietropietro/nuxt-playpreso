@@ -10,6 +10,11 @@
                         :style="'--currentuser-color-var: '+ color"
                     >
                         {{up.username}}
+                        <nuxt-link v-if="up.username=='giaigi'" 
+                            class="no-decoration"
+                            :to="ROUTES.PPCUP.DETAIL + 'mundial-22'">
+                            <em-emoji class="pointer" id="globe_with_meridians" />
+                        </nuxt-link>
                     </div>
                 <!-- </nuxt-link> -->
             </v-row>
