@@ -7,7 +7,7 @@
             <div class="overline lh-1">P-LEAGUE</div>
             <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
         </v-col>
-        <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
+        <v-spacer v-if="$vuetify.breakpoint.smAndUp" />
         <v-col sm="auto" cols="6">
             <p-p-info 
                 v-if="ppTournamentType.leagues.length == 1"
@@ -20,7 +20,7 @@
                 :value="ppTournamentType.leagues.length"
             />
         </v-col>
-        <v-col cols="6" sm="auto" class="mx-md-4">
+        <v-col cols="6" sm="auto" class="mx-sm-4">
            <p-p-info 
                 v-if="ppTournamentType.next"
                 label="qualifies to"

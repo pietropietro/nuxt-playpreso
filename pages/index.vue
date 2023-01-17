@@ -2,7 +2,7 @@
     <v-container  class="pt-0">
         <template v-if="currentGuesses?.length>0">
             <v-row no-gutters>
-                    <h1>YOUR LOCKS</h1>
+                    <h1>NEXT MATCHES</h1>
                 <h4>({{currentGuesses.length}})</h4>
             </v-row>
             <v-row class="mt-0">
@@ -35,10 +35,10 @@
                             {{currentPoints}} <p-p-emoji model="blue-p"/>
                         </span>
                     </v-row>
-                <p-p-league-available-list class="px-2" />
+                <p-p-league-available-list class="px-2 mb-10"/>
                 </v-container>
             </v-col>
-            <v-col class="mt-10">
+            <v-col class="mt-md-10">
                 <template v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
                         <h1>ENROLLED</h1>

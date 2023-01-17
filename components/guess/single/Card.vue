@@ -1,80 +1,83 @@
 <template>
     <div v-if="guess">
-        <p-p-card :color="shades.verified"  style="max-width:300px">
-            <v-row>
-                <v-col cols="auto"
-                    :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
-                >
-                    <match-info-short :match="match"/>
-                </v-col>
-                <v-col  class="pa-0" >
-                    <!-- MISSED -->
-                    <v-row no-gutters class="h-100"
-                        v-if="guess.verified_at && !guess.guessed_at"
-                        justify="center" align="center"
-                        :style="{ backgroundColor:  shades.verified}"
+        <!-- <p-p-card :color="shades.verified"  style="max-width:300px"> -->
+            <v-container style="max-width:300px">
+                <v-row>
+                    <v-col cols="auto"
+                        class="rounded-tl rounded-bl"
+                        :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     >
-                     <v-container>
-                        <v-row justify="center">
-                            <p-p-emoji model="red-x" />
-                        </v-row>
-                        <v-row justify="center"><h4>MISSED</h4></v-row>
-                     </v-container>
-                    </v-row>
-                    <!-- VERIFIED -->
-                    <v-row no-gutters class="h-100"
-                        v-else-if="guess.verified_at"
-                        justify="center" align="center"
-                        :style="{ backgroundColor:  shades.verified}"
-                    >
-                        <v-container class="pa-0">
-                            <match-inner-values class="no-gutters mt-n3 mb-4"
-                                v-if="guess.verified_at && !guess.PRESO"
-                                :guess="guess" :match="match"
-                            />
-                            <v-row no-gutters>
-                                <v-col>
-                                    <guess-info :guess="guess" hideUsername presoColor="opposite"/>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-row>
-                    <!-- LOCKED -->
-                        <v-row no-gutters class="h-100"
-                        v-else-if="guess.guessed_at"
-                        justify="center" align="center"
-                        :style="{ backgroundColor:  shades.locked}"
-                    >
-                        <v-container class="px-6" style="line-height:1.5rem;"
-                            v-if="guess.guessed_at"
+                        <match-info-short :match="match"/>
+                    </v-col>
+                    <v-col  class="pa-0" >
+                        <!-- MISSED -->
+                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
+                            v-if="guess.verified_at && !guess.guessed_at"
+                            justify="center" align="center"
+                            :style="{ backgroundColor:  shades.verified}"
                         >
+                         <v-container>
                             <v-row justify="center">
-                                <h2>
-                                    <p-p-emoji model="lock" />
-                                </h2>
+                                <p-p-emoji model="red-x" />
                             </v-row>
-                            <v-row justify="center">
-                                <h2 class="ocrastd"> {{guess.home}}-{{guess.away}}</h2>
-                            </v-row>
-                        </v-container>
-                    </v-row>
-                    <!-- UNLOCKED -->
-                    <v-row v-else no-gutters class="h-100"
-                        justify="center" align="center"
-                        :style="{ backgroundColor: shades.unlocked}"
-                    >
-                        <v-container fill-height >
-                            <guess-single-picker :guess="guess"/>
-                            <guess-single-bottom-action
-                                    :style="{ backgroundColor: shades.verified}"
-                                    :guess="guess"
-                                    :onclick="lockGuess"
+                            <v-row justify="center"><h4>MISSED</h4></v-row>
+                         </v-container>
+                        </v-row>
+                        <!-- VERIFIED -->
+                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
+                            v-else-if="guess.verified_at"
+                            justify="center" align="center"
+                            :style="{ backgroundColor:  shades.verified}"
+                        >
+                            <v-container class="pa-0">
+                                <match-inner-values class="no-gutters mt-n3 mb-4"
+                                    v-if="guess.verified_at && !guess.PRESO"
+                                    :guess="guess" :match="match"
                                 />
-                            </v-container >
-                    </v-row>
-                </v-col>
-            </v-row>
-        </p-p-card>
+                                <v-row no-gutters>
+                                    <v-col>
+                                        <guess-info :guess="guess" hideUsername presoColor="opposite"/>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-row>
+                        <!-- LOCKED -->
+                            <v-row no-gutters class="h-100 rounded-tr rounded-br"
+                            v-else-if="guess.guessed_at"
+                            justify="center" align="center"
+                            :style="{ backgroundColor:  shades.locked}"
+                        >
+                            <v-container class="px-6" style="line-height:1.5rem;"
+                                v-if="guess.guessed_at"
+                            >
+                                <v-row justify="center">
+                                    <h2>
+                                        <p-p-emoji model="lock" />
+                                    </h2>
+                                </v-row>
+                                <v-row justify="center">
+                                    <h2 class="ocrastd"> {{guess.home}}-{{guess.away}}</h2>
+                                </v-row>
+                            </v-container>
+                        </v-row>
+                        <!-- UNLOCKED -->
+                        <v-row v-else no-gutters class="h-100 rounded-tr rounded-br" 
+                            justify="center" align="center"
+                            :style="{ backgroundColor: shades.unlocked}"
+                        >
+                            <v-container fill-height >
+                                <guess-single-picker :guess="guess"/>
+                                <guess-single-bottom-action
+                                        :style="{ backgroundColor: shades.verified}"
+                                        :guess="guess"
+                                        :onclick="lockGuess"
+                                    />
+                                </v-container >
+                        </v-row>
+                    </v-col>
+                </v-row>
+            </v-container>
+        <!-- </p-p-card> -->
         <div class="ml-2" v-if="guess.ppTournamentType?.emoji">
             <h4>
                 <em-emoji :native="guess.ppTournamentType.emoji" />
@@ -96,8 +99,8 @@ export default {
             lockButtonLoading: false,
             shades:{
                 verified: this.ppRGBA(this.rgb),
-                locked:  this.ppRGBA(this.rgb, 0.6),
-                unlocked:  this.ppRGBA(this.rgb, 0.4) 
+                locked:  this.ppRGBA(this.rgb, 0.8),
+                unlocked:  this.ppRGBA(this.rgb, 0.6) 
             }
         }
     },
