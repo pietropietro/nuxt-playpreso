@@ -1,11 +1,15 @@
 <template>
     <v-row align="end" :class="$vuetify.breakpoint.mdAndUp ? 'flex-nowrap' : ''">
         <v-col cols="auto">
-            <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="2.5em"/>
-        </v-col>
-        <v-col cols="auto">
-            <div class="overline lh-1">P-LEAGUE</div>
-            <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
+            <v-row class="flex-nowrap">
+                <v-col cols="auto">
+                    <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="2.5em"/>
+                </v-col>
+                <v-col>
+                    <div class="overline lh-1">P-LEAGUE</div>
+                    <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
+                </v-col>
+            </v-row>
         </v-col>
         <v-spacer v-if="$vuetify.breakpoint.smAndUp" />
         <v-col sm="auto" cols="6">
@@ -31,7 +35,7 @@
                 value="Last"
             />
         </v-col>
-        <v-col cols="6" sm="auto">
+        <v-col cols="6" sm="auto" v-if="$vuetify.breakpoint.mdAndUp">
             <p-p-info 
                 label="participants"
                 :value="ppTournamentType.participants"

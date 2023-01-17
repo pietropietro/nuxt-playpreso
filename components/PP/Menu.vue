@@ -37,7 +37,7 @@
             <v-row justify="center" @click="$logout.logout()">
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
-            <v-row justify="center" class="overline lh-1">made with love in barona, milano</v-row>
+            <v-row justify="center" class="overline lh-1">barona, milano</v-row>
             <v-row justify="center"><div class="overline lh-1">v{{VERSION}}</div></v-row>
         </v-container>
     </v-container>
@@ -55,7 +55,7 @@ export default {
         return{
             selectedMenu: null,
             menus:[
-                {title: '<h1 class="ocrastd">POINTS</h1><h2>(pp)</h2>', key:'points'},
+                {title: '<h1 class="ocrastd">POINTS</h1><em-emoji id="parking"/>', key:'points'},
                 {title: '<h1 class="ocrastd">CONTACT</h1>', key:'contact'},
             ],
             pointsList:[

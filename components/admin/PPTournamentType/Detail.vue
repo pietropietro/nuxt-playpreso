@@ -111,6 +111,7 @@ export default {
             this.loadingUpdate = false;
         },
         selectEmoji(emObj){
+            console.log(emObj);
             this.ppTournamentType.emoji=emObj.native;
         }
     },
