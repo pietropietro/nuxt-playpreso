@@ -1,5 +1,5 @@
 <template>
-    <v-row no-gutters justify="space-between" align="center">
+    <v-row no-gutters justify="space-between" align="center" v-if="up">
         <v-col>
             <v-row no-gutters align="center">
                 <span class="text-overline pr-2" v-if="up.ppLeague_id && up.position">

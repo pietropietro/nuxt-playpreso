@@ -57,7 +57,7 @@ export default {
     },
     methods:{
         desktopActualIndex(index){
-            let baseVal = this.showAll ? 10 : 5;
+            let baseVal = this.showAll ? Math.floor(this.ups.length / 2) : 5;
             return (index % 2 === 0) ? index / 2 : baseVal + Math.floor(index/ 2);
         },
     }
