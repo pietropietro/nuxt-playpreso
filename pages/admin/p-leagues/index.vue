@@ -4,10 +4,10 @@
         <v-row align="center">
             <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
         </v-row>
-        <v-row v-if="ppLeagues?.length">
-            <v-col v-for="(ppLeague,index) in ppLeagues" :key="index">
-                <nuxt-link :to="ADMIN_FEATURES.PPLEAGUES.DETAIL.ROUTE + ppLeague.id" class="no-decoration">
-                    <v-card color="var(--v-pleague-base)">
+        <v-row v-if="ppLeagues?.length" class="mt-10">
+            <v-col v-for="(ppLeague,index) in ppLeagues" :key="index" cols="12" sm="4">
+                <v-card color="primary" class="">
+                    <nuxt-link :to="ADMIN_FEATURES.PPLEAGUES.DETAIL.ROUTE + ppLeague.id" class="no-decoration">
                         <v-container>
                             <v-row>
                                 <v-col>
@@ -30,26 +30,26 @@
                                 <v-row>finished: <p-p-emoji :model="!!ppLeague.finished_at ? 'green ok' :'red x'"/></v-row>
                             </v-container>
                         </v-container>
-                    </v-card>
-                </nuxt-link>
-                <v-row v-if="ppLeague.started_at" class="flex-nowrap">
-                    <v-col class="overline lh-1">
-                        last<br>match
-                        <v-expansion-panels v-if="ppLeague.lastMatch">
-                            <v-col>
-                                <admin-match-expansion-panel :match="ppLeague.lastMatch"/>
-                            </v-col>
-                        </v-expansion-panels>
-                    </v-col>
-                    <v-col class="overline lh-1">
-                        next<br>match
-                        <v-expansion-panels>
-                            <v-col>
-                                <admin-match-expansion-panel :match="ppLeague.nextMatch"/>
-                            </v-col>
-                        </v-expansion-panels>
-                    </v-col>
-                </v-row>
+                    </nuxt-link>
+                    <v-row v-if="ppLeague.started_at" class="flex-nowrap" no-gutters>
+                        <v-col class="overline lh-1">
+                            last<br>match
+                            <v-expansion-panels v-if="ppLeague.lastMatch">
+                                <v-col>
+                                    <admin-match-expansion-panel :match="ppLeague.lastMatch"/>
+                                </v-col>
+                            </v-expansion-panels>
+                        </v-col>
+                        <v-col class="overline lh-1">
+                            next<br>match
+                            <v-expansion-panels>
+                                <v-col>
+                                    <admin-match-expansion-panel :match="ppLeague.nextMatch"/>
+                                </v-col>
+                            </v-expansion-panels>
+                        </v-col>
+                    </v-row>
+                </v-card>
             </v-col>
         </v-row>
         <v-row v-else>no p-leagues found.</v-row>

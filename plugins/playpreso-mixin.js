@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
-// EM-EMOJI COMPONENT GLOBAL REGISTRATION
-import {EmEmoji} from 'emoji-mart'
-Vue.component('em-emoji', EmEmoji);
+import data from '@emoji-mart/data'
+import { init, SearchIndex } from 'emoji-mart'
+init({ data })
 
 Vue.mixin({
     methods:{

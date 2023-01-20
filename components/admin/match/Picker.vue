@@ -2,7 +2,6 @@
     <v-container>
         <v-row align="center">
             <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
-            <div @click="testPick" :disabled="!ppTTselected">TEST PICK</div>
         </v-row>
         <loading-page v-if="loading"/>
         <template v-else>
@@ -46,8 +45,14 @@
 <script>
 export default {
     data:()=>({ppTTselected:null, loading:false, picked:[], leagues: [], all:[], called: false}),
+    watch: {
+        ppTTselected: async function () {
+            await this.testPick();
+        }
+    },    
     methods:{
         async testPick(){
+            if(!this.ppTTselected)return;
             this.loading=true;
             let response = await this.$api.call(this.ADMIN_API_ROUTES.MATCH.PICK + this.ppTTselected);
             if(response && response.status === "success"){

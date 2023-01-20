@@ -4,6 +4,7 @@
         <div>
             <h1>P-TOURNAMENT-TYPES</h1>
             <v-data-table
+                class="primary"
                 item-text="value"
                 :items-per-page="-1" :items="ppTournamentTypes"
                 :headers="headers"
@@ -39,14 +40,16 @@
                     </h2>
                 </template>
                 <template v-slot:item.leagues="{ item }">
-                    <template v-if="item.leagues.length < 4">
-                        <div v-for="league in item.leagues" :key="league.id">
-                            <league-detail :league="league" sizeClass="text-h5"/>
+                    <template v-if="item.leagues?.length">
+                        <template v-if="item.leagues?.length < 4">
+                            <div v-for="league in item.leagues" :key="league.id">
+                                <league-detail :league="league" sizeClass="text-h5"/>
+                            </div>
+                        </template>
+                        <div class="overline lh-1" v-else>
+                            {{item.leagues.length}} leagues
                         </div>
                     </template>
-                    <div class="overline lh-1" v-else>
-                        {{item.leagues.length}} leagues
-                    </div>
                 </template>
                 <template v-slot:expanded-item="{ headers, item }">
                     <td :colspan="headers.length">

@@ -2,9 +2,7 @@
     <span>{{flagEmoji}}</span>
 </template>
 <script>
-import data from '@emoji-mart/data'
-import { init, SearchIndex } from 'emoji-mart'
-init({ data })
+import { SearchIndex } from 'emoji-mart'
 
 export default {
     props:{

@@ -4,6 +4,7 @@
         <div>
             <h1>USERS ({{users.length}})</h1>
             <v-data-table
+                class="primary"
                 item-text="value"
                 :items-per-page="-1" :items="users"
                 :headers="headers"
@@ -22,14 +23,50 @@
                         {{ item.username }}
                     </h2>
                 </template>
-                <template v-slot:item.created_at="{ item }">
-                    <div class="overline lh-1">
-                        <div>{{formatMonthYear(item.created_at).toLowerCase()}}</div>
-                    </div>
+                <template v-slot:item.points="{ item }">
+                    <h3>
+                        {{ item.points }}
+                    </h3>
                 </template>
+                <template v-slot:item.activeUserParticipations="{ item }">
+                    <v-row dense v-if="item.activeUserParticipations?.length">
+                        <v-col cols="auto">
+                            <h4>({{item.activeUserParticipations.length}})</h4>
+                        </v-col>
+                        <v-col cols="auto" v-for="(up, i) in item.activeUserParticipations" :key="up.id">
+                            <em-emoji :native="up.ppTournamentType.emoji" v-if="i<3" />
+                        </v-col>
+                    </v-row>
+                </template>
+                <template v-slot:item.lastVerifiedGuesses="{ item }">
+                   <v-row dense>
+                        <v-col cols="auto" v-for="g in item.lastVerifiedGuesses" :key="g.id">
+                            <em-emoji id="x" v-if="!g.guessed_at"/>
+                            <h4 v-else>{{g.points}}</h4>
+                        </v-col>
+                   </v-row>
+                </template>
+               
                 <template v-slot:expanded-item="{ headers, item }">
                     <td :colspan="headers.length">
-                        <!-- <admin-p-p-tournament-type-detail :ppTournamentType="item" /> -->
+                        <v-row align="center">
+                            <v-col>{{item.email}}</v-col>
+                            <v-col>
+                                 <div class="overline lh-1">
+                                    <div>member since </div>
+                                    <div>{{formatDate(item.created_at).toLowerCase()}}</div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-row v-if="item.activeUserParticipations.length" align="center">
+                            <v-col cols="auto">
+                                <div class="overline lh-1">active participations</div>
+                            </v-col>
+                            <v-col cols="auto" v-for="up in item.activeUserParticipations" :key="up.id">
+                                <div class="ocrastd"># {{up.ppLeague_id}}</div>
+                                <em-emoji :native="up.ppTournamentType.emoji"/>
+                            </v-col>
+                        </v-row>
                     </td>
                 </template>
             </v-data-table>
@@ -47,10 +84,10 @@ export default {
         expanded: [],
         headers: [
             { value: 'id'},
-            { value: 'username'},
             { value: 'points'},
-            { value: 'email'},
-            { value: 'created_at'}
+            { value: 'username'},
+            { value: 'activeUserParticipations'},
+            { value: 'lastVerifiedGuesses'},
         ]
     }),
     async mounted(){
