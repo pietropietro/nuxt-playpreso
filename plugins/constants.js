@@ -88,6 +88,9 @@ Vue.mixin({
                     GET: '/admin/p-tournament-types',
                     UPDATE: '/admin/p-tournament-types/'
                 },
+                USER:{
+                    GET: '/admin/user',
+                },
                 PPLEAGUE:{
                     GET: '/admin/p-league',
                 },

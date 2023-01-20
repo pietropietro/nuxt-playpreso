@@ -6,5 +6,8 @@
 <script>
 export default {
     layout: "admin",
+    created(){
+        this.$router.push(this.ADMIN_FEATURES.USERS.ROUTE);
+    }
 }
 </script>
