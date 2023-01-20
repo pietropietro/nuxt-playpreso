@@ -105,8 +105,9 @@ export default {
 					background: '#ffffff',
 					// all links
 					anchor: '#000000',
-					opposite: '#ffffff',
+					oppositeText: '#ffffff',
 					text: '#000000',
+					contrastOnDark: '#ffffff',
 					// i.e. PRESO!
 					accent: '#9900cc'
 				},
@@ -114,7 +115,8 @@ export default {
                     primary: '#000066',
 					background: '#000033',
 					anchor: '#ffffff',
-					opposite: '#000000',
+					oppositeText: '#000000',
+					contrastOnDark: '#ffffff',
 					text: '#ffffff',
 				}
 			}
