@@ -2,7 +2,7 @@
     <div v-if="guess">
         <!-- <p-p-card :color="shades.verified"  style="max-width:300px"> -->
             <v-container style="max-width:300px">
-                <v-row>
+                <v-row :class="guess.verified_at ? 'constrastOnDark--text' : ''">
                     <v-col cols="auto"
                         class="rounded-tl rounded-bl"
                         :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
@@ -36,7 +36,7 @@
                                 />
                                 <v-row no-gutters>
                                     <v-col>
-                                        <guess-info :guess="guess" hideUsername presoColor="opposite"/>
+                                        <guess-info :guess="guess" hideUsername presoColor="oppositeText"/>
                                     </v-col>
                                 </v-row>
                             </v-container>

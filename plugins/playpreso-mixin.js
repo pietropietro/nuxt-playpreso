@@ -17,10 +17,6 @@ Vue.mixin({
         ppTournamentTypeTitle(ppTournamentType){
             return ppTournamentType.name + " " + (ppTournamentType.level ?? '');
         },
-        getFlag(league){
-            try { return require('@/assets/img/flags/' + league.country.toLowerCase() + '.png') }
-            catch { return require('@/assets/img/flags/italy.png') }
-        },
         cupGroupStageString(ppCupGroup, cupFormat){
             if(ppCupGroup.level==1 && cupFormat[0].name=='GROUP STAGE'){
                 return 'GROUP ' + ppCupGroup.tag;
