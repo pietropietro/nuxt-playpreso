@@ -4,6 +4,7 @@
         <admin-league-create :leagues="leagues" :refresh="getLeagues"/>
             <h1>LEAGUES</h1>
             <v-data-table
+                class="primary"
                 item-text="value"
                 :items-per-page="-1" :items="leagues"
                 :headers="headers"

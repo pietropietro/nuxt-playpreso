@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container >
         <v-tabs
             v-model="selectedTab"
             fixed-tabs
