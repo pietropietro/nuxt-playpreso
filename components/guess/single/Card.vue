@@ -94,9 +94,9 @@
                                 <v-spacer />
                             </v-row>
                             <v-row no-gutters 
-                                v-for="i in 2" :key="i"
+                                v-for="(s,i) in standings" :key="i"
                             >
-                                <v-col cols="12" class="lh-1 text-center"><h4>{{standings[i - 1].position}}°</h4></v-col>
+                                <v-col cols="12" class="lh-1 text-center"><h4>{{s.position}}°</h4></v-col>
                             </v-row>
                         </v-col>
                     </v-row>
@@ -107,7 +107,7 @@
                         class="h-100 rounded-tr rounded-br"
                         :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     >
-                        <v-col cols="12" class="mt-n4" >
+                        <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.last5">
                            <v-row no-gutters class="overline lh-1 mt-1">
                                 <v-spacer />
                                 <div>last 3</div>
@@ -117,11 +117,12 @@
                                 class="overline lh-1 text-center"
                                 v-for="i in 2" :key="i"
                             >
-                                <v-col cols="4" v-for="m in i === 1 ? match.homeTeam.last5 : match.awayTeam.last5"  :key="m">
+                                <v-col cols="4" v-for="(m,ind) in i === 1 ? match.homeTeam?.last5 : match.awayTeam.last5"  :key="ind">
                                     <em-emoji :id="emojiForWDL(m.wdl)" />
                                 </v-col>
                             </v-row>
                         </v-col>
+                        <v-col v-else>error</v-col>
                     </v-row>
                     <v-row v-else
                         @click="flip" 
@@ -137,10 +138,10 @@
                                 <v-spacer />
                             </v-row>
                             <v-row no-gutters 
-                                v-for="i in 2" :key="i"
+                                v-for="(s,i) in standings" :key="i"
                             >
-                                <v-col cols="6" class="lh-1 text-center overline">+{{standings[i - 1].gf}}</v-col>
-                                <v-col cols="6" class="lh-1 text-center overline">-{{standings[i - 1].ga}}</v-col>
+                                <v-col cols="6" class="lh-1 text-center overline">+{{s.gf}}</v-col>
+                                <v-col cols="6" class="lh-1 text-center overline">-{{s.ga}}</v-col>
                             </v-row>
                         </v-col>
                     </v-row>
@@ -178,14 +179,15 @@ export default {
     },
     computed:{
         standings(){
+            if(!this.homeStandings) return []
             return [this.homeStandings, this.awayStandings];
         },
         homeStandings(){
-            if(!this.match.league.standings)return;
+            if(!this.match.league?.standings)return;
             return this.match.league.standings.filter((e)=>e.id == this.match.homeTeam.id)[0];
         },
         awayStandings(){
-            if(!this.match.league.standings)return;
+            if(!this.match.league?.standings)return;
             return this.match.league.standings.filter((e)=>e.id == this.match.awayTeam.id)[0];
         }
     },
