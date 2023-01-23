@@ -107,14 +107,14 @@
                         class="h-100 rounded-tr rounded-br"
                         :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     >
-                        <v-col cols="12" class="mt-n4 pr-1" >
+                        <v-col cols="12" class="mt-n4" >
                            <v-row no-gutters class="overline lh-1 mt-1">
                                 <v-spacer />
                                 <div>last 3</div>
                                 <v-spacer />
                             </v-row>
                             <v-row no-gutters 
-                                class="overline lh-1"
+                                class="overline lh-1 text-center"
                                 v-for="i in 2" :key="i"
                             >
                                 <v-col cols="4" v-for="m in i === 1 ? match.homeTeam.last5 : match.awayTeam.last5"  :key="m">
