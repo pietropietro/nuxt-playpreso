@@ -35,13 +35,18 @@ export default {
     },
     computed:{
         allLocked(){
+            //avoids http call
+            if(!this.onLastLock)return null;
             let val = this.ppRM.guesses.filter((g) => !g.guessed_at).length === 0;
             return val;
         }
     },
     watch: {
-        allLocked: function() {
-            this.onLastLock(this.ppRM.ppRound_id);
+        allLocked: async function(val, oldVal) {
+            if(!this.onLastLock)return;
+            if(oldVal != val){
+                await this.onLastLock(this.ppRM.ppRound_id);
+            }
         }
     }
 }

@@ -17,9 +17,9 @@
         </v-row>
         <p-p-round-display
             class="ma-0"
-            v-for="(ppRM,i) in ppRounds[selectedRound - 1].ppRoundMatches" 
-            :ppRM="ppRounds[selectedRound - 1].ppRoundMatches[i]" :key="i"
-            :onLastLock="fetchRound"
+            v-for="(ppRM, i) in ppRounds[selectedRound - 1].ppRoundMatches" 
+            :ppRM="ppRM" :key="i"
+            :onLastLock="selectedRound == ppRounds.length ? fetchRound : null"
             :color="ppRGBA(rgb)"
         />
     </div>

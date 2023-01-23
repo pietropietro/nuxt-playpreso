@@ -1,6 +1,7 @@
 <template>
     <v-row justify="center" align="center" class="ocrastd">
             <select-integer
+                @click.native.stop
                 justify="end"
                 :disabled="pickerDisabled"
                 :model="guess.home"
@@ -10,6 +11,7 @@
             <h1 class="text-center" style="user-select: none;">-</h1>
         </v-col>
             <select-integer
+                @click.native.stop
                 justify="start"
                 :disabled="pickerDisabled"
                 :model="guess.away"

@@ -5,15 +5,17 @@
         >
             <v-row :style="'heihgt: ' + cardHeight"
                 :class="guess.verified_at ? 'constrastOnDark--text' : ''"
+                @click="flip" 
             >
                 <v-col cols="auto"
-                @click="flip"
                     class="rounded-tl rounded-bl"
                     :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                 >
                     <match-info-short :match="match"/>
                 </v-col>
+
                 <v-col class="pa-0" >
+
                     <template v-if="selectedView === 0">
                         <!-- MISSED -->
                         <v-row no-gutters class="h-100 rounded-tr rounded-br"
@@ -70,9 +72,10 @@
                             justify="center" align="center"
                             :style="{ backgroundColor: shades.unlocked}"
                         >
-                            <v-container fill-height >
+                            <v-container fill-height>
                                 <guess-single-picker :guess="guess"/>
                                 <guess-single-bottom-action
+                                        @click.native.stop
                                         :style="{ backgroundColor: shades.verified}"
                                         :guess="guess"
                                         :onclick="lockGuess"
@@ -80,8 +83,8 @@
                                 </v-container >
                         </v-row>
                     </template>
+
                     <v-row v-else-if="selectedView === 1"
-                        @click="flip" 
                         align="center"
                         no-gutters
                         class="h-100 rounded-tr rounded-br"
@@ -100,36 +103,55 @@
                             </v-row>
                         </v-col>
                     </v-row>
+
+
                     <v-row v-else-if="selectedView === 2"
-                        @click="flip" 
                         align="center"
                         no-gutters
                         class="h-100 rounded-tr rounded-br"
                         :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
                     >
-                        <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.last5">
+                        <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.lastMatches">
                            <v-row no-gutters class="overline lh-1 mt-1">
                                 <v-spacer />
                                 <div>last 3</div>
                                 <v-spacer />
                             </v-row>
+
+                            <!-- NESTED LOOPING DOES NOT WORK :( em-emoji issue -->
                             <v-row no-gutters 
                                 class="overline lh-1 text-center"
-                                v-for="i in 2" :key="i"
                             >
-                                <v-col cols="4" v-for="(m,ind) in i === 1 ? match.homeTeam?.last5 : match.awayTeam.last5"  :key="ind">
-                                    <em-emoji :id="emojiForWDL(m.wdl)" />
+                                <v-col cols="4" 
+                                    v-for="(m,ind) in match.homeTeam.lastMatches"  
+                                    :key="ind"
+                                >
+                                    <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
                                 </v-col>
                             </v-row>
+                            <v-row no-gutters 
+                                class="overline lh-1 text-center"
+                            >
+                                <v-col cols="4" 
+                                    v-for="(m,ind) in match.awayTeam.lastMatches"  
+                                    :key="ind"
+                                >
+                                    <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
+                                </v-col>
+                            </v-row>
+
                         </v-col>
                         <v-col v-else>error</v-col>
                     </v-row>
+
+
                     <v-row v-else
-                        @click="flip" 
                         align="center"
                         no-gutters
                         class="h-100 rounded-tr rounded-br"
-                        :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
+                        :style="{ height: cardHeight, 
+                                backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
+                        }"
                     >
                         <v-col cols="12" class="mt-n4 pr-1" >
                             <v-row no-gutters class="overline lh-1 mt-1">
