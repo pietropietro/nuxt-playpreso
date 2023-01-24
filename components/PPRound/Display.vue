@@ -17,7 +17,9 @@
                             <guess-info
                                 :presoColor="color"
                                 :color="color"
-                                :guess="guess" incrementalFont
+                                :guess="guess"
+                                :flipped="flipped"
+                                :flip="()=>flipped=!flipped"
                             />
                         </div>
                     </v-slide-item>
@@ -33,6 +35,7 @@ export default {
         onLastLock: {type: Function},
         color: {type: String}
     },
+    data:()=>({flipped: false}),
     computed:{
         allLocked(){
             //avoids http call

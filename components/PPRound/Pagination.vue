@@ -2,7 +2,7 @@
     <div>
         <v-row no-gutters class="my-4 pr-3 pr-md-0">    
             <v-col v-for="i in rounds" :key="i" 
-                :cols="ppRounds.length === 1 ? '4' : ''"
+                :cols="rounds.length === 1 ? '4' : ''"
             >
                 
                 <h4 v-if="i<=ppRounds.length"
