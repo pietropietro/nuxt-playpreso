@@ -39,7 +39,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             try {
                 await fetch(API_ENDPOINT + route, initOptions
                 ).then(response => {
-                    if(response.status === 403){
+                    if(response.status === 401){
                         $logout.logout();
                     }
                     
