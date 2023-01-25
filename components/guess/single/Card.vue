@@ -16,7 +16,7 @@
 
                 <v-col class="pa-0" >
 
-                    <template v-if="selectedView === 0">
+                    <template v-if="availableViews[selectedIndex] === 'points'">
                         <!-- MISSED -->
                         <v-row no-gutters class="h-100 rounded-tr rounded-br"
                             v-if="guess.verified_at && !guess.guessed_at"
@@ -48,12 +48,14 @@
                                 </v-row>
                             </v-container>
                         </v-row>
+                    </template>
+                    <template v-else-if="availableViews[selectedIndex] === 'locked'">
                         <!-- LOCKED -->
-                            <v-row no-gutters class="h-100 rounded-tr rounded-br"
-                            v-else-if="guess.guessed_at"
-                            justify="center" align="center"
-                            :style="{ backgroundColor:  shades.locked}"
-                        >
+                            <v-row no-gutters 
+                                class="h-100 rounded-tr rounded-br"
+                                justify="center" align="center"
+                                :style="{ backgroundColor:  shades.locked}"
+                            >
                             <v-container class="px-6" style="line-height:1.5rem;"
                                 v-if="guess.guessed_at"
                             >
@@ -67,8 +69,10 @@
                                 </v-row>
                             </v-container>
                         </v-row>
+                    </template>
+                    <template v-else-if="availableViews[selectedIndex] === 'lock'">
                         <!-- UNLOCKED -->
-                        <v-row v-else no-gutters class="h-100 rounded-tr rounded-br"
+                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
                             justify="center" align="center"
                             :style="{ backgroundColor: shades.unlocked}"
                         >
@@ -83,90 +87,93 @@
                                 </v-container >
                         </v-row>
                     </template>
-
-                    <v-row v-else-if="selectedView === 1"
-                        align="center"
-                        no-gutters
-                        class="h-100 rounded-tr rounded-br"
-                        :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
-                    >
-                        <v-col cols="12" class="mt-n4 pr-1" >
-                           <v-row no-gutters>
-                                <v-spacer />
-                                <div class="overline lh-1 mt-1">position</div>
-                                <v-spacer />
-                            </v-row>
-                            <v-row no-gutters 
-                                v-for="(s,i) in standings" :key="i"
-                            >
-                                <v-col cols="12" class="lh-1 text-center"><h4>{{s.position}}°</h4></v-col>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-
-
-                    <v-row v-else-if="selectedView === 2"
-                        align="center"
-                        no-gutters
-                        class="h-100 rounded-tr rounded-br"
-                        :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
-                    >
-                        <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.lastMatches">
-                           <v-row no-gutters class="overline lh-1 mt-1">
-                                <v-spacer />
-                                <div>last 3</div>
-                                <v-spacer />
-                            </v-row>
-
-                            <!-- NESTED LOOPING DOES NOT WORK :( em-emoji issue -->
-                            <v-row no-gutters justify="center"
-                                class="lh-1"
-                            >
-                                <v-col cols="auto" class="mx-2" 
-                                    v-for="(m,ind) in match.homeTeam.lastMatches"  
-                                    :key="ind"
+                    <template v-else-if="availableViews[selectedIndex] === 'stats_position'">
+                        <v-row
+                            align="center"
+                            no-gutters
+                            class="h-100 rounded-tr rounded-br"
+                            :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
+                        >
+                            <v-col cols="12" class="mt-n4 pr-1" >
+                            <v-row no-gutters>
+                                    <v-spacer />
+                                    <div class="overline lh-1 mt-1">position</div>
+                                    <v-spacer />
+                                </v-row>
+                                <v-row no-gutters 
+                                    v-for="(s,i) in standings" :key="i"
                                 >
-                                    <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
-                                </v-col>
-                            </v-row>
-                            <v-row no-gutters justify="center"
-                                class="lh-1"
-                            >
-                                <v-col cols="auto" class="mx-2" 
-                                    v-for="(m,ind) in match.awayTeam.lastMatches"  
-                                    :key="ind"
+                                    <v-col cols="12" class="lh-1 text-center"><h4>{{s.position}}°</h4></v-col>
+                                </v-row>
+                            </v-col>
+                        </v-row>
+                    </template>
+
+                    <template v-else-if="availableViews[selectedIndex] === 'stats_last_matches'">
+                        <v-row 
+                            align="center"
+                            no-gutters
+                            class="h-100 rounded-tr rounded-br"
+                            :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
+                        >
+                            <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.lastMatches">
+                                <v-row no-gutters class="overline lh-1 mt-1">
+                                    <v-spacer />
+                                    <div>last 3</div>
+                                    <v-spacer />
+                                </v-row>
+
+                                <!-- NESTED LOOPING DOES NOT WORK :( em-emoji issue -->
+                                <v-row no-gutters justify="center"
+                                    class="lh-1"
                                 >
-                                    <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
-                                </v-col>
-                            </v-row>
+                                    <v-col cols="auto" class="mx-2" 
+                                        v-for="(m,ind) in match.homeTeam.lastMatches"  
+                                        :key="ind"
+                                    >
+                                        <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
+                                    </v-col>
+                                </v-row>
+                                <v-row no-gutters justify="center"
+                                    class="lh-1"
+                                >
+                                    <v-col cols="auto" class="mx-2" 
+                                        v-for="(m,ind) in match.awayTeam.lastMatches"  
+                                        :key="ind"
+                                    >
+                                        <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
+                                    </v-col>
+                                </v-row>
 
-                        </v-col>
-                        <v-col v-else>error</v-col>
-                    </v-row>
+                            </v-col>
+                            <v-col v-else>error</v-col>
+                        </v-row>
+                    </template>
 
-
-                    <v-row v-else
-                        align="center"
-                        no-gutters
-                        class="h-100 rounded-tr rounded-br"
-                        :style="{ height: cardHeight, 
-                                backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
-                        }"
-                    >
-                        <v-col cols="12" class="mt-n4 pr-1" >
-                            <v-row no-gutters class="overline lh-1 mt-1">
-                                <v-spacer />
-                                <em-emoji size="1.5em" id="soccer"/>
-                                <v-spacer />
-                            </v-row>
-                            <v-row no-gutters  justify="center"
-                                v-for="(s,i) in standings" :key="i"
-                            >
-                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">+{{s.gf}}</v-col>
-                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">-{{s.ga}}</v-col>
-                            </v-row>
-                        </v-col>
-                    </v-row>
+                    <template v-else-if="availableViews[selectedIndex] === 'stats_gol'">
+                        <v-row
+                            align="center"
+                            no-gutters
+                            class="h-100 rounded-tr rounded-br"
+                            :style="{ height: cardHeight, 
+                                    backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
+                            }"
+                        >
+                            <v-col cols="12" class="mt-n4 pr-1" >
+                                <v-row no-gutters class="overline lh-1 mt-1">
+                                    <v-spacer />
+                                    <em-emoji size="1.5em" id="soccer"/>
+                                    <v-spacer />
+                                </v-row>
+                                <v-row no-gutters  justify="center"
+                                    v-for="(s,i) in standings" :key="i"
+                                >
+                                    <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">+{{s.gf}}</v-col>
+                                    <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">-{{s.ga}}</v-col>
+                                </v-row>
+                            </v-col>
+                        </v-row>
+                    </template>
                 </v-col>
             </v-row>
         </v-container>
@@ -188,18 +195,25 @@ export default {
     },
     data(){
         return{
-            selectedView: 0,
+            selectedIndex: 0,
             cardHeight: '90px',
             lockButtonLoading: false,
+            unlockedViews: ['lock', 'stats_position', 'stats_last_matches', 'stats_gol'],
+            lockedViews: ['locked'],
+            verifiedViews: ['points', 'locked'],
             shades:{
                 verified: this.ppRGBA(this.rgb),
                 locked:  this.ppRGBA(this.rgb, 0.8),
                 unlocked:  this.ppRGBA(this.rgb, 0.6) 
             },
-            
         }
     },
     computed:{
+        availableViews(){
+            if(this.guess.verified_at) return this.verifiedViews;
+            if(this.guess.guessed_at) return this.lockedViews;
+            return this.unlockedViews;
+        },
         standings(){
             if(!this.homeStandings) return []
             return [this.homeStandings, this.awayStandings];
@@ -215,8 +229,8 @@ export default {
     },
     methods:{
         flip(){
-            if(this.selectedView<3)return this.selectedView++;
-            this.selectedView=0;
+            if((this.selectedIndex + 1) < this.availableViews.length) return this.selectedIndex++;
+            this.selectedIndex=0;
         },
         async lockGuess(){
             this.lockButtonLoading = true;
