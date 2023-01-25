@@ -119,20 +119,20 @@
                             </v-row>
 
                             <!-- NESTED LOOPING DOES NOT WORK :( em-emoji issue -->
-                            <v-row no-gutters 
-                                class="overline lh-1 text-center"
+                            <v-row no-gutters justify="center"
+                                class="lh-1"
                             >
-                                <v-col cols="4" 
+                                <v-col cols="auto" class="mx-2" 
                                     v-for="(m,ind) in match.homeTeam.lastMatches"  
                                     :key="ind"
                                 >
                                     <em-emoji class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
                                 </v-col>
                             </v-row>
-                            <v-row no-gutters 
-                                class="overline lh-1 text-center"
+                            <v-row no-gutters justify="center"
+                                class="lh-1"
                             >
-                                <v-col cols="4" 
+                                <v-col cols="auto" class="mx-2" 
                                     v-for="(m,ind) in match.awayTeam.lastMatches"  
                                     :key="ind"
                                 >
@@ -159,11 +159,11 @@
                                 <em-emoji size="1.5em" id="soccer"/>
                                 <v-spacer />
                             </v-row>
-                            <v-row no-gutters 
+                            <v-row no-gutters  justify="center"
                                 v-for="(s,i) in standings" :key="i"
                             >
-                                <v-col cols="6" class="lh-1 text-center overline">+{{s.gf}}</v-col>
-                                <v-col cols="6" class="lh-1 text-center overline">-{{s.ga}}</v-col>
+                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">+{{s.gf}}</v-col>
+                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">-{{s.ga}}</v-col>
                             </v-row>
                         </v-col>
                     </v-row>
