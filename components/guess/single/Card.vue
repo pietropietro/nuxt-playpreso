@@ -3,58 +3,40 @@
         <v-container 
             style="max-width:300px"
         >
-            <v-row :style="'heihgt: ' + cardHeight"
-                :class="guess.verified_at ? 'constrastOnDark--text' : ''"
+            <v-row 
+                :class="'rounded '"
                 @click="flip" 
+                :style="{ 
+                    height: cardHeight,
+                    backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
+                }"
             >
-                <v-col cols="auto"
-                    class="rounded-tl rounded-bl"
-                    :style="{ backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
-                >
+                <v-col cols="auto">
                     <match-info-short :match="match"/>
                 </v-col>
 
                 <v-col class="pa-0" >
 
                     <template v-if="availableViews[selectedIndex] === 'points'">
-                        <!-- MISSED -->
-                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
-                            v-if="guess.verified_at && !guess.guessed_at"
+                        <v-row no-gutters class="h-100"
+                            v-if="guess.verified_at"
                             justify="center" align="center"
-                            :style="{ backgroundColor:  shades.verified}"
                         >
-                            <v-container>
-                                <v-row justify="center">
-                                    <p-p-emoji model="red-x" />
-                                </v-row>
-                                <v-row justify="center"><h4>MISSED</h4></v-row>
-                            </v-container>
-                        </v-row>
-                        <!-- VERIFIED -->
-                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
-                            v-else-if="guess.verified_at"
-                            justify="center" align="center"
-                            :style="{ backgroundColor:  shades.verified}"
-                        >
-                            <v-container class="pa-0">
-                                <match-inner-values class="no-gutters mt-n3 mb-4"
-                                    v-if="guess.verified_at && !guess.PRESO"
-                                    :guess="guess" :match="match"
-                                />
-                                <v-row no-gutters>
-                                    <v-col>
-                                        <guess-info :guess="guess" hideUsername presoColor="oppositeText"/>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
+                            <em-emoji v-if="isMissed(guess)" id="x" size="2em"/>
+                            <template v-else>
+                                <h2 class="ocrastd" v-if="guess.PRESO">PRESO!</h2>
+                                <h1 v-else>
+                                    {{guess.points}}
+                                    <em-emoji id="parking"/>
+                                </h1>
+                            </template>
                         </v-row>
                     </template>
                     <template v-else-if="availableViews[selectedIndex] === 'locked'">
                         <!-- LOCKED -->
                             <v-row no-gutters 
-                                class="h-100 rounded-tr rounded-br"
+                                class="h-100"
                                 justify="center" align="center"
-                                :style="{ backgroundColor:  shades.locked}"
                             >
                             <v-container class="px-6" style="line-height:1.5rem;"
                                 v-if="guess.guessed_at"
@@ -72,9 +54,8 @@
                     </template>
                     <template v-else-if="availableViews[selectedIndex] === 'lock'">
                         <!-- UNLOCKED -->
-                        <v-row no-gutters class="h-100 rounded-tr rounded-br"
+                        <v-row no-gutters class="h-100"
                             justify="center" align="center"
-                            :style="{ backgroundColor: shades.unlocked}"
                         >
                             <v-container fill-height>
                                 <guess-single-picker :guess="guess"/>
@@ -83,6 +64,7 @@
                                         :style="{ backgroundColor: shades.verified}"
                                         :guess="guess"
                                         :onclick="lockGuess"
+                                        class="rounded-br"
                                     />
                                 </v-container >
                         </v-row>
@@ -91,8 +73,8 @@
                         <v-row
                             align="center"
                             no-gutters
-                            class="h-100 rounded-tr rounded-br"
-                            :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
+                            class="h-100"
+                            :style="{ height: cardHeight}"
                         >
                             <v-col cols="12" class="mt-n4 pr-1" >
                             <v-row no-gutters>
@@ -113,8 +95,8 @@
                         <v-row 
                             align="center"
                             no-gutters
-                            class="h-100 rounded-tr rounded-br"
-                            :style="{ height: cardHeight, backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) }"
+                            class="h-100"
+                            :style="{ height: cardHeight}"
                         >
                             <v-col cols="12" class="mt-n4" v-if="match.homeTeam?.lastMatches">
                                 <v-row no-gutters class="overline lh-1 mt-1">
@@ -154,10 +136,8 @@
                         <v-row
                             align="center"
                             no-gutters
-                            class="h-100 rounded-tr rounded-br"
-                            :style="{ height: cardHeight, 
-                                    backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
-                            }"
+                            class="h-100"
+                            :style="{ height: cardHeight}"
                         >
                             <v-col cols="12" class="mt-n4 pr-1" >
                                 <v-row no-gutters class="overline lh-1 mt-1">
@@ -201,6 +181,7 @@ export default {
             unlockedViews: ['lock', 'stats_position', 'stats_last_matches', 'stats_gol'],
             lockedViews: ['locked'],
             verifiedViews: ['points', 'locked'],
+            missedViews: ['points'],
             shades:{
                 verified: this.ppRGBA(this.rgb),
                 locked:  this.ppRGBA(this.rgb, 0.8),
@@ -210,6 +191,7 @@ export default {
     },
     computed:{
         availableViews(){
+            if(this.isMissed(this.guess))return this.missedViews;
             if(this.guess.verified_at) return this.verifiedViews;
             if(this.guess.guessed_at) return this.lockedViews;
             return this.unlockedViews;
