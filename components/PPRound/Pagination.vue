@@ -19,9 +19,9 @@
             class="ma-0"
             v-for="(ppRM, i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRM" :key="i"
-            :onLastLock="selectedRound == ppRounds.length ? fetchRound : null"
             :color="ppRGBA(rgb)"
         />
+        <!--  :onLastLock="selectedRound == ppRounds.length ? fetchRound : null" -->
     </div>
 </template>
 <script>
