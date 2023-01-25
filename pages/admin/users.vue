@@ -28,6 +28,14 @@
                         {{ item.points }}
                     </h3>
                 </template>
+                <template v-slot:item.lastLock="{ item }">
+                    <v-row no-gutters align="center">
+                        <em-emoji id="lock"/>
+                        <div class="lh-1 overline">
+                            {{ formatDate(item.lastLock) }}
+                        </div>
+                    </v-row>
+                </template>
                 <template v-slot:item.activeUserParticipations="{ item }">
                     <v-row dense v-if="item.activeUserParticipations?.length">
                         <v-col cols="auto">
@@ -86,6 +94,7 @@ export default {
             { value: 'id'},
             { value: 'points'},
             { value: 'username'},
+            { value: 'lastLock'},
             { value: 'activeUserParticipations'},
             { value: 'lastVerifiedGuesses'},
         ]
