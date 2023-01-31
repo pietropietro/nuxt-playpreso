@@ -7,7 +7,7 @@
 				<p-p-header v-if="!menuScreen" :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
 				<v-overlay class="content-h100" :value="menuScreen" color="var(--v-background-base)" opacity="1" :dark="false">
 					<p-p-header :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
-					<p-p-menu class="pt-14 pt-md-16"/>
+					<p-p-menu-brain class="pt-14 pt-md-16"/>
 				</v-overlay>
 				<v-main :style="menuScreen ? 'position: fixed' : ''" >
 					<nuxt />

@@ -38,6 +38,7 @@
             <v-row v-if="selectedMenu==='contact'" justify="center" class="overline lh-1">
                 pietro(at)playpreso.com
             </v-row>
+            <p-p-menu-email-preferences v-if="selectedMenu==='email_reminders'" />
         </v-container>
         <v-container style='align-self:end'>
             <v-row justify="center" @click="$logout.logout()">
@@ -61,6 +62,7 @@ export default {
         return{
             selectedMenu: null,
             menus:[
+                {title: '<h1 class="ocrastd">EMAIL PREF.</h1>', key:'email_reminders'},
                 {title: '<h1 class="ocrastd">POINTS</h1><em-emoji id="parking"/>', key:'points'},
                 {title: '<h1 class="ocrastd">CONTACT</h1>', key:'contact'},
             ],
@@ -87,6 +89,6 @@ export default {
                 },
             ],
         }
-    }
+    },
 }
 </script>

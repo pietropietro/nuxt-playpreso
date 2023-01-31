@@ -19,6 +19,9 @@ Vue.mixin({
                 }
             },
             API_ROUTES: {
+                EMAIL_PREFERENCES:{
+                    UPDATE: '/email-preferences'
+                },
                 USER:{
                     LOGIN: '/user/login',
                     SIGNUP: '/user/signup',    
