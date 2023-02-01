@@ -22,7 +22,7 @@ export default {
             loading: false,
             emailPreferencesList:[
                 {
-                    description: 'daily reminder in case you have unlocked matches',
+                    description: 'daily email in case you have unlocked matches',
                     key: 'lock_reminder',
                 },
             ],

@@ -10,15 +10,6 @@
                     <div>{{formatMonthYear(currentUser.created_at).toLowerCase()}}</div>
                 </div>
             </v-row>
-            <v-row justify="center">
-                <div>
-                    <v-switch inset
-                        v-model="$vuetify.theme.dark"
-                        @change="$store.commit('user/updateDarkMode', {darkMode: $vuetify.theme.dark})"
-                    />
-                    <div class="overline lh-1">{{$vuetify.theme.dark ? 'DARK' : 'LIGHT'}}</div>
-                </div>
-            </v-row>
         </v-container>
         <v-container>
             <v-row justify="center" 
@@ -26,6 +17,16 @@
                 v-html="m.title" 
                 @click="()=>selectedMenu=selectedMenu ? null : m.key" 
             />
+            <v-row justify="center" align="center" v-if="selectedMenu==='theme'">
+                <v-spacer/>
+                <v-switch inset
+                    v-model="$vuetify.theme.dark"
+                    @change="$store.commit('user/updateDarkMode', {darkMode: $vuetify.theme.dark})"
+                />
+                <div class="overline lh-1">{{$vuetify.theme.dark ? 'DARK' : 'LIGHT'}}</div>
+                                <v-spacer/>
+
+            </v-row>
             <v-row justify="center" v-if="selectedMenu==='points'">
                 <table>
                     <tr v-for="(item,i) in pointsList" :key="i">
@@ -62,9 +63,10 @@ export default {
         return{
             selectedMenu: null,
             menus:[
-                {title: '<h1 class="ocrastd">EMAIL PREF.</h1>', key:'email_reminders'},
-                {title: '<h1 class="ocrastd">POINTS</h1><em-emoji id="parking"/>', key:'points'},
-                {title: '<h1 class="ocrastd">CONTACT</h1>', key:'contact'},
+                {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
+                {title: '<h3 class="ocrastd">REMINDERS</h3>', key:'email_reminders'},
+                {title: '<h3 class="ocrastd">POINTS</h3><em-emoji id="parking"/>', key:'points'},
+                {title: '<h3 class="ocrastd">CONTACT</h3>', key:'contact'},
             ],
             pointsList:[
                 {
