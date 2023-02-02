@@ -39,6 +39,7 @@
             <v-row v-if="selectedMenu==='contact'" justify="center" class="overline lh-1">
                 pietro(at)playpreso.com
             </v-row>
+            <p-p-menu-3plus v-if="selectedMenu==='3+'" />
             <p-p-menu-email-preferences v-if="selectedMenu==='email_reminders'" />
         </v-container>
         <v-container style='align-self:end'>
@@ -65,6 +66,7 @@ export default {
             menus:[
                 {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
                 {title: '<h3 class="ocrastd">REMINDERS</h3>', key:'email_reminders'},
+                {title: '<h3 class="ocrastd">3+</h3>', key:'3+'},
                 {title: '<h3 class="ocrastd">POINTS</h3><em-emoji id="parking"/>', key:'points'},
                 {title: '<h3 class="ocrastd">CONTACT</h3>', key:'contact'},
             ],
