@@ -40,7 +40,6 @@ export default {
     data(){
         return {
             loading: true,
-            activeIndex: null,
             ppTournamentTypes: [],
             headers: [
                 { value: 'emoji' , sortable:false}, 
