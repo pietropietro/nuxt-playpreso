@@ -34,7 +34,7 @@
         </v-row>
         <v-row justify="center">
             <div class="caption">
-                from 13.906 matches, 11 leagues (2017-2020)
+                from 13.409 matches, 11 leagues (2017-2020)
             </div>
         </v-row>
     </v-container>
