@@ -14,9 +14,12 @@
             </template> -->
             <template v-slot:header="{ props }">
                 <th class="text-left">
-                    <h1>
-                        BEST USERS
-                    </h1>
+                    <v-row no-gutters>
+                        <h1>
+                            BEST USERS
+                        </h1>
+                        <h4>*</h4>
+                    </v-row>
                 </th>
                 <th>
                     <em-emoji size="1.3rem" id="lock" />
@@ -32,7 +35,7 @@
                 <div class="overline lh-1 text-center">{{item.cnt_locked}}/{{item.cnt}}</div>
             </template>
             <template v-slot:item.avg="{ item }">
-                <h2 class="text-right">{{item.avg}}</h2>
+                <h1 class="text-right">{{item.avg}}</h1>
             </template>
         </v-data-table>
         <v-row justify="end">
