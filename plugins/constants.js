@@ -112,7 +112,8 @@ Vue.mixin({
                 },
                 PPROUNDMATCH:{
                     CREATE: '/admin/p-round-match/',
-                    SWAP: '/admin/p-round-match/swap/'
+                    SWAP: '/admin/p-round-match/swap/',
+                    DELETE: '/admin/p-round-match/'
                 },
                 LEAGUE: {
                     GET: '/admin/league',

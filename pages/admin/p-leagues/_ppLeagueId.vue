@@ -44,6 +44,9 @@
                                                                 <v-btn :disabled="!swapIds[index]" @click="change(index)">SWAP</v-btn>
                                                             </v-col>
                                                         <v-spacer />
+                                                        <v-col>
+                                                            <v-btn :disabled="swapIds[index] != '123'" @click="deletePPRM(pprm.id)">DELETE</v-btn>
+                                                        </v-col>
                                                     </v-row>
                                                 </template>
                                             </v-container>
@@ -135,6 +138,15 @@ export default {
                 this.ADMIN_API_ROUTES.PPROUNDMATCH.CREATE + this.lastPPRound.id, values, 'POST'
             );
 
+            if(response && response.status === "success"){
+                await this.getPPLeague();
+            }
+        },
+        async deletePPRM(ppRoundMatchId){
+            this.loading = true;
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.PPROUNDMATCH.DELETE + ppRoundMatchId, null, 'DELETE'
+            );
             if(response && response.status === "success"){
                 await this.getPPLeague();
             }
