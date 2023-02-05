@@ -1,5 +1,5 @@
 <template>
-    <v-containter>
+    <div>
         <v-data-table
             class="transparent no-select"
             mobile-breakpoint="0"
@@ -9,9 +9,6 @@
             hide-default-footer
             hide-default-header
         >
-            <!-- <template v-slot:header.username="{ header }">
-                ciao
-            </template> -->
             <template v-slot:header="{ props }">
                 <th class="text-left">
                     <v-row no-gutters>
@@ -40,10 +37,10 @@
         </v-data-table>
         <v-row justify="end">
             <v-col cols="auto">
-                <div class="caption lh-1">*last 30 days, only users who have played 10+ matches</div>
+                <div class="caption lh-1">*last 30 days, who has played 10+ matches</div>
             </v-col>
         </v-row>
-    </v-containter>
+    </div>
 </template>
 <script>
 export default {

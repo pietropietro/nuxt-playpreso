@@ -34,19 +34,38 @@
                                                         <v-col>
                                                             <v-text-field
                                                                 placeholder="new match id"
-                                                                v-model="newIds[index]"
+                                                                v-model="swapIds[index]"
                                                             />
                                                         </v-col>
                                                     </v-row>
                                                     <v-row>
                                                         <v-spacer />
                                                             <v-col>
-                                                                <v-btn :disabled="!newIds[index]" @click="change(index)">SWAP</v-btn>
+                                                                <v-btn :disabled="!swapIds[index]" @click="change(index)">SWAP</v-btn>
                                                             </v-col>
                                                         <v-spacer />
                                                     </v-row>
                                                 </template>
                                             </v-container>
+                                        </v-card>
+                                    </v-col>
+                                    <v-col cols="auto">
+                                        <v-card>
+                                            <v-row>
+                                                <v-col>
+                                                    <v-text-field
+                                                        placeholder="new match id"
+                                                        v-model="newId"
+                                                    />
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-spacer />
+                                                    <v-col>
+                                                        <v-btn :disabled="!newId" @click="createPPRM">CREATE PPRM</v-btn>
+                                                    </v-col>
+                                                <v-spacer />
+                                            </v-row>
                                         </v-card>
                                     </v-col>
                                 </v-row>
@@ -78,7 +97,8 @@ export default {
             ppLeague: null,
             ppLeagueId: this.$route.params.ppLeagueId,
             lastPPRound: null,
-            newIds: []
+            swapIds: [],
+            newId: null
         }
     },
     methods:{
@@ -94,11 +114,25 @@ export default {
             console.log(index);
             this.loading = true;
             let values = { 
-                "newMatchId": this.newIds[index],
+                "newMatchId": this.swapIds[index],
             }
             
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.PPROUNDMATCH.SWAP + this.lastPPRound.ppRoundMatches[index].id, values, 'POST'
+            );
+
+            if(response && response.status === "success"){
+                await this.getPPLeague();
+            }
+        },
+        async createPPRM(){
+            this.loading = true;
+            let values = { 
+                "newMatchId": this.newId,
+            }
+            
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.PPROUNDMATCH.CREATE + this.lastPPRound.id, values, 'POST'
             );
 
             if(response && response.status === "success"){

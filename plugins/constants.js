@@ -111,6 +111,7 @@ Vue.mixin({
                     PICK: '/admin/match/pick/'
                 },
                 PPROUNDMATCH:{
+                    CREATE: '/admin/p-round-match/',
                     SWAP: '/admin/p-round-match/swap/'
                 },
                 LEAGUE: {
