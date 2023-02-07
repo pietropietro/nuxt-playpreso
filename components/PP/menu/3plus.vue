@@ -1,7 +1,7 @@
 <template>
     <v-container class="mt-10">
-        <v-row justify="center" class="overline lh-1">
-           3+ is still the least likeble choice.
+        <v-row justify="center" class="caption lh-1">
+           stats behind the 3+ limit
         </v-row>
         <v-row justify="center" class="text-center">
             <v-col cols="auto">

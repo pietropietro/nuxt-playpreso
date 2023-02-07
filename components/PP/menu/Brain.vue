@@ -1,6 +1,6 @@
 <template>
     <v-container fill-height class="pa-5">
-        <v-container style='align-self:start'>
+        <v-container style='align-self:start' v-if="!selectedMenu">
             <v-row justify="center">
                 <h2>{{currentUser.username}}</h2>
             </v-row>
@@ -46,7 +46,7 @@
             <v-row justify="center" @click="$logout.logout()">
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
-            <v-row justify="center" class="overline lh-1">barona, milano</v-row>
+            <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
             <v-row justify="center"><div class="overline lh-1">v{{VERSION}}</div></v-row>
         </v-container>
     </v-container>
