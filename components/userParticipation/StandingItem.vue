@@ -1,23 +1,18 @@
 <template>
     <v-row no-gutters justify="space-between" align="center" v-if="up">
         <v-col>
-            <v-row no-gutters align="center">
-                <span class="text-overline pr-2" v-if="up.ppLeague_id && up.position">
-                    #{{up.position}}
-                </span>
-                <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
-                    <div :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
-                        :style="'--currentuser-color-var: '+ color"
-                    >
-                        {{up.username}}
-                        <nuxt-link v-if="up.username=='giaigi'" 
-                            class="no-decoration"
-                            :to="ROUTES.PPCUP.DETAIL + 'mundial-22'">
-                            <em-emoji class="pointer" id="globe_with_meridians" />
-                        </nuxt-link>
-                    </div>
-                <!-- </nuxt-link> -->
-            </v-row>
+            <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
+                <div :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
+                    :style="'--currentuser-color-var: '+ color"
+                >
+                    {{up.username}}
+                    <nuxt-link v-if="up.username=='giaigi'" 
+                        class="no-decoration"
+                        :to="ROUTES.PPCUP.DETAIL + 'mundial-22'">
+                        <em-emoji class="pointer" id="globe_with_meridians" />
+                    </nuxt-link>
+                </div>
+            <!-- </nuxt-link> -->
         </v-col>
         <v-col cols="auto" class="text-right">
             <v-row no-gutters justify="center" align="end">

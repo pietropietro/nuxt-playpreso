@@ -15,6 +15,7 @@
             <template v-if="!isCupGroup">
                 <p-p-section-title text="PLAYERS"/>
                 <p-p-league-standings-list
+                    :promote="tournamentObj.ppTournamentType.promote"
                     :rgb="tournamentObj.ppTournamentType.rgb"
                     :ups="tournamentObj.userParticipations"
                 />

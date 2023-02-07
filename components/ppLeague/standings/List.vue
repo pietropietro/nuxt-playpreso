@@ -5,24 +5,29 @@
                 <user-participation-standing-labels />
             </v-col>
             <v-col cols="12" md="6" v-for="(up, index) in ups" :key="up.id">
-                <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
-                    <user-participation-standing-item 
-                        v-if="ups.length < firstSize"
-                        :color="ppRGBA(rgb)"
-                        :up="ups[index]"
-                    />
-                    <user-participation-standing-item 
-                        v-else-if="!showAll && index===firstSize-1 && makeRoomForCurrentUser"
-                        :color="ppRGBA(rgb)"
-                        :up="ups.filter((e)=>e.user_id === currentUser.id)[0]"
-                    />
-                    <user-participation-standing-item
-                        v-else-if="showAll || Array.from(Array(firstSize).keys()).includes(index)"
-                        :color="ppRGBA(rgb)"
-                        :up="$vuetify.breakpoint.mdAndUp ? ups[desktopActualIndex(index)] : ups[index]"
-                        :showDetails="showAll"
-                    />
-                </div>
+                <v-row align="center" no-gutters>
+                    <v-col cols="auto" 
+                        v-if="upForIndex(index) && upForIndex(index).ppLeague_id && upForIndex(index).position"
+                    >
+                        <span class="text-overline pr-2">
+                            <v-chip  v-if="upForIndex(index).position<=promote"
+                                x-small label :color="ppRGBA(rgb)" class="font-weight-bold"
+                            >
+                                #{{up.position}}
+                            </v-chip>
+                            <template v-else>#{{up.position}}</template>
+                        </span>
+                    </v-col>
+                    <v-col>
+                        <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
+                            <user-participation-standing-item
+                                :showDetails="showAll"
+                                :color="ppRGBA(rgb)"
+                                :up="upForIndex(index)"
+                            />
+                        </div>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
         <v-row v-if="ups.length > firstSize" no-gutters class="pt-10" justify="center" @click="()=>showAll = !showAll">
@@ -34,7 +39,8 @@
 export default {
     props: {
         ups: {type: Array},
-        rgb: {type: String}
+        rgb: {type: String},
+        promote: {type: Number}
     },
     data(){
         return{
@@ -56,6 +62,17 @@ export default {
         },
     },
     methods:{
+        upForIndex(index){
+            if(this.ups.length < this.firstSize){
+                return this.ups[index];
+            }
+            if(!this.showAll && index===this.firstSize-1 && this.makeRoomForCurrentUser){
+                return  this.ups.filter((e)=>e.user_id === this.currentUser.id)[0];
+            }
+            if(this.showAll || Array.from(Array(this.firstSize).keys()).includes(index)){
+                return this.$vuetify.breakpoint.mdAndUp ? this.ups[this.desktopActualIndex(index)] : this.ups[index];
+            }
+        },
         desktopActualIndex(index){
             let baseVal = this.showAll ? Math.ceil(this.ups.length / 2) : 5;
             return (index % 2 === 0) ? index / 2 : baseVal + Math.floor(index/ 2);
