@@ -2,16 +2,31 @@
     <div>
         <v-row no-gutters>
             <v-col cols="12" v-if="showAll">
-                <user-participation-standing-labels />
+                <v-row no-gutters align="end">
+                    <v-col cols="auto" class="ma-3">
+                        <v-row align="center">
+                            <v-chip x-small label :color="ppRGBA(ppTournamentType.rgb)" style="height:12px;"/>                            
+                            <div class="ml-2 overline">{{ups[0].finished ? 'qualified' : 'qualify'}} to {{ppTournamentTypeTitle(ppTournamentType.next)}}</div>
+                        </v-row>
+                    </v-col>
+                    <user-participation-standing-labels />
+                </v-row>
             </v-col>
             <v-col cols="12" md="6" v-for="(up, index) in ups" :key="up.id">
                 <v-row align="center" no-gutters>
+                    <v-col cols="auto"
+                        v-if=" upForIndex(index) && upForIndex(index).finished && upForIndex(index).position <= 3"
+                    >
+                        <em-emoji v-if="upForIndex(index).position==1" size="2em" id="first_place_medal"/>
+                        <em-emoji v-if="upForIndex(index).position==2" size="2em" id="second_place_medal"/>
+                        <em-emoji v-if="upForIndex(index).position==3" size="2em" id="third_place_medal"/>
+                    </v-col>
                     <v-col cols="auto" 
-                        v-if="upForIndex(index) && upForIndex(index).ppLeague_id && upForIndex(index).position"
+                        v-else-if="upForIndex(index) && upForIndex(index).ppLeague_id && upForIndex(index).position"
                     >
                         <span class="text-overline pr-2">
-                            <v-chip  v-if="upForIndex(index).position<=promote"
-                                x-small label :color="ppRGBA(rgb)" class="font-weight-bold"
+                            <v-chip  v-if="upForIndex(index).position <= ppTournamentType.promote"
+                                x-small label :color="ppRGBA(ppTournamentType.rgb)" class="font-weight-bold contrastOnDark--text"
                             >
                                 #{{up.position}}
                             </v-chip>
@@ -22,7 +37,7 @@
                         <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
                             <user-participation-standing-item
                                 :showDetails="showAll"
-                                :color="ppRGBA(rgb)"
+                                :color="ppRGBA(ppTournamentType.rgb)"
                                 :up="upForIndex(index)"
                             />
                         </div>
@@ -39,8 +54,7 @@
 export default {
     props: {
         ups: {type: Array},
-        rgb: {type: String},
-        promote: {type: Number}
+        ppTournamentType: {type: Object}
     },
     data(){
         return{
