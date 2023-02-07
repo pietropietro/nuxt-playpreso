@@ -1,5 +1,5 @@
 <template>
-    <v-expansion-panel :style="matchStatusStyle" class="admin-match">
+    <v-expansion-panel :style="matchStatusStyle" class="admin-match" v-if="match">
         <v-expansion-panel-header hide-actions class="pa-0">
             <template v-slot:default="{ open }">
                 <v-container>
