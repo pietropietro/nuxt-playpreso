@@ -28,9 +28,9 @@
                             <v-chip  v-if="upForIndex(index).position <= ppTournamentType.promote"
                                 x-small label :color="ppRGBA(ppTournamentType.rgb)" class="font-weight-bold contrastOnDark--text"
                             >
-                                #{{up.position}}
+                                #{{upForIndex(index).position}}
                             </v-chip>
-                            <template v-else>#{{up.position}}</template>
+                            <template v-else>#{{upForIndex(index).position}}</template>
                         </span>
                     </v-col>
                     <v-col>
