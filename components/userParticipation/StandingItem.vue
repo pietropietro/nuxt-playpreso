@@ -4,7 +4,7 @@
             <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
             <user-name 
                 :user="up.user"
-                :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
+                :class="up.user_id === currentUser.id ? ' currentuser': ''" 
                 :style="'--currentuser-color-var: '+ color"
             />
             <!-- </nuxt-link> -->
@@ -36,8 +36,8 @@ export default {
 }
 </script>
 <style>
-    .user-font{
+    /* .user-font{
         font-size: 32px !important;
         font-weight: bold;
-    }
+    } */
 </style>

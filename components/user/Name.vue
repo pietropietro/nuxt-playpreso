@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <h1>
         {{user.username}}
         <nuxt-link v-for="trophy in user.trophies"
             :key="trophy.id"
@@ -8,7 +8,7 @@
         >
             <em-emoji v-if="trophy.ppTournamentType?.emoji" size="1.5rem" class="pointer" :native="trophy.ppTournamentType.emoji" />
         </nuxt-link>
-    </div>
+    </h1>
 </template>
 <script>
 export default {

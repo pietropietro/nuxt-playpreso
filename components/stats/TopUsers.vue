@@ -26,7 +26,7 @@
                 </th>
             </template>
             <template v-slot:item.username="{ item }">
-                <h1>{{item.username}}</h1>
+                <user-name :user="item.user" />
             </template>
             <template v-slot:item.cnt="{ item }">
                 <div class="overline lh-1 text-center">{{item.cnt_locked}}/{{item.cnt}}</div>
