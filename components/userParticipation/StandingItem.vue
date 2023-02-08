@@ -2,16 +2,11 @@
     <v-row no-gutters justify="space-between" align="center" v-if="up">
         <v-col>
             <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
-                <div :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
-                    :style="'--currentuser-color-var: '+ color"
-                >
-                    {{up.username}}
-                    <nuxt-link v-if="up.username=='giaigi'"
-                        class="no-decoration"
-                        :to="ROUTES.PPCUP.DETAIL + 'mundial-22'">
-                        <em-emoji size="1.5rem" class="pointer" id="globe_with_meridians" />
-                    </nuxt-link>
-                </div>
+            <user-name 
+                :user="up.user"
+                :class="'user-font ' + (up.user_id === currentUser.id ? ' currentuser': '')" 
+                :style="'--currentuser-color-var: '+ color"
+            />
             <!-- </nuxt-link> -->
         </v-col>
         <v-col cols="auto" class="text-right">
