@@ -1,21 +1,13 @@
 <template>
     <div>
-        <v-data-table
-            class="transparent no-select"
-            mobile-breakpoint="0"
-            item-text="value"
-            :items-per-page="-1" :items="best"
-            :headers="headers"
-            hide-default-footer
-            hide-default-header
-        >
-            <template v-slot:header="{ props }">
+        <stats-best-list :items="best" :headers="headers" >
+            <template slot="headers">
                 <th class="text-left">
-                    <v-row no-gutters>
-                        <h1>
-                            BEST USERS
-                        </h1>
-                        <h4>*</h4>
+                <v-row no-gutters>
+                    <h1>
+                        BEST USERS
+                    </h1>
+                    <h4>*</h4>
                     </v-row>
                 </th>
                 <th>
@@ -25,21 +17,18 @@
                     <em-emoji size="1.3rem" id="parking" />
                 </th>
             </template>
-            <template v-slot:item.username="{ item }">
-                <user-name :user="item.user" />
+        </stats-best-list>
+        <stats-best-list :items="userBest" :headers="headers">
+            <template slot="headers">
+                <h1 class="ml-4 mt-n4 mb-n2">...</h1>
             </template>
-            <template v-slot:item.cnt="{ item }">
-                <div class="overline lh-1 text-center">{{item.cnt_locked}}/{{item.cnt}}</div>
-            </template>
-            <template v-slot:item.avg="{ item }">
-                <h1 class="text-right">{{item.avg}}</h1>
-            </template>
-        </v-data-table>
+        </stats-best-list>
         <v-row justify="end">
             <v-col cols="auto">
                 <div class="caption lh-1">*last 30 days, at least 10 matches</div>
             </v-col>
         </v-row>
+        
     </div>
 </template>
 <script>
@@ -52,7 +41,8 @@ export default {
                 { value: 'username', sortable:false}, 
                 { value: 'cnt', text:'a', sortable:false}, 
                 { value: 'avg',  text:'a', sortable:false},
-            ]
+            ],
+            userBest: []
         }
     },
     methods:{
@@ -60,10 +50,11 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.STATS.BEST_USERS);
             if(response && response.status === "success"){
                 this.best = response.message;
+                this.userBest = [this.best.pop()];
             }
             this.loading = false;
+            console.log(this.best,this.userBest);
         },
-
     },
     async mounted(){
         await this.getBest(); 

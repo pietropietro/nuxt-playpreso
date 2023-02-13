@@ -1,5 +1,5 @@
 <template>
-    <h1>
+    <h1 v-if="user">
         {{user.username}}
         <nuxt-link v-for="trophy in user.trophies"
             :key="trophy.id"
