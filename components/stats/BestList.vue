@@ -20,12 +20,25 @@
         <template v-slot:item.avg="{ item }">
             <h1 class="text-right">{{item?.avg}}</h1>
         </template>
+        <template v-slot:body.append v-if="currentUserStat">
+            <h1 class="px-4 lh-1">...</h1>
+            <tr>
+                <td><user-name :user="currentUserStat?.user" /></td>
+                <td>
+                    <div class="overline lh-1 text-center">{{currentUserStat?.cnt_locked}}/{{currentUserStat?.cnt}}</div>
+                </td>
+                <td>
+                    <h1 class="text-right">{{currentUserStat?.avg}}</h1>
+                </td>
+            </tr>
+      </template>
     </v-data-table>
 </template>
 <script>
 export default {
     props:{
         items:{type: Array, required: true}, 
+        currentUserStat:{type: Object}, 
         headers: {type: Array}
     }
 }
