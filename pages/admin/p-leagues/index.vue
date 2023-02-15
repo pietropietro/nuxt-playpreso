@@ -4,7 +4,17 @@
         <v-row align="center">
             <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
         </v-row>
-        <v-row v-if="ppLeagues?.length" class="mt-10">
+        <v-row>
+            <v-chip-group 
+                active-class="primary" 
+                v-model="finishedModel"
+                v-for="ft in finishedTypes" :key="ft"
+            >
+                <v-chip small :value="ft">{{ft}}</v-chip>
+            </v-chip-group>
+        </v-row>
+        <loading-page v-if="loading" />
+        <v-row v-else-if="ppLeagues?.length" class="mt-10">
             <v-col v-for="(ppLeague,index) in ppLeagues" :key="index" cols="12" sm="4">
                 <v-card color="primary" class="">
                     <nuxt-link :to="ADMIN_FEATURES.PPLEAGUES.DETAIL.ROUTE + ppLeague.id" class="no-decoration">
@@ -42,7 +52,7 @@
                         </v-col>
                         <v-col class="overline lh-1">
                             next<br>match
-                            <v-expansion-panels>
+                            <v-expansion-panels v-if="ppLeague.nextMatch">
                                 <v-col>
                                     <admin-match-expansion-panel :match="ppLeague.nextMatch"/>
                                 </v-col>
@@ -62,11 +72,16 @@ export default {
         loading: true,
         ppLeagues: [],
         ppTTselected: null,
+        finishedModel: 'all',
+        finishedTypes: ['all', 'finished', 'not-finished']
     }),
     methods:{
         async getPPLeagues(){
+            this.loading= true;
             let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPLEAGUE.GET + (this.ppTTselected ? ('?ppTournamentTypeId=' + this.ppTTselected) : '')
+                this.ADMIN_API_ROUTES.PPLEAGUE.GET 
+                + '?ft=' + this.finishedModel
+                + (this.ppTTselected ? ('&ppTournamentTypeId=' + this.ppTTselected) : '')
             );
             if(response && response.status === "success"){
                 this.ppLeagues = response.message;
@@ -76,6 +91,9 @@ export default {
     },
     watch: {
         ppTTselected: async function () {
+            await this.getPPLeagues();
+        },
+        finishedModel: async function () {
             await this.getPPLeagues();
         }
     },
