@@ -1,5 +1,10 @@
 <template>
-    <v-btn @click="fetch" :disabled="!ls_suffix" text :loading="loading">
+    <v-btn @click="fetch" 
+        :disabled="!ls_suffix" 
+        text 
+        :loading="loading"
+        @click.stop.native
+    >
         FETCH EXTERNAL DATA
     </v-btn>
 </template>
@@ -18,7 +23,8 @@ export default {
             
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.LEAGUE.FETCH + this.id, values, 'POST'
-            );     
+            );  
+               
             await this.onSuccess();
             this.loading = false;
         }

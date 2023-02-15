@@ -2,6 +2,18 @@
     <v-container fluid class="px-4">
         <loading-page v-if="loading"/>
         <template v-if="!loading">
+            <v-row justify="center">
+                <v-chip-group
+                    active-class="primary"
+                    v-model="selectedLeague"
+                    v-for="la in leaguesAggregate" :key="la.league.id"
+                >
+                    <v-chip small :value="la.league.id"><league-detail :league="la.league"/>
+                        <div class="ml-2">{{la.count}}</div>
+                    </v-chip>
+                    
+                </v-chip-group>
+            </v-row>
             <v-row class="flex-nowrap">
                  <v-col cols="auto">
                     <h1 class="pointer px-2" @click="changeDates(-7)">
@@ -13,7 +25,7 @@
                     <h2 class="my-3 text-center">{{matches.length}}</h2>
                     <v-row>
                         <v-expansion-panels>
-                            <v-col cols="12" v-for="match in matches" :key="match.id">
+                            <v-col cols="12" v-for="match in selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches" :key="match.id">
                                 <admin-match-expansion-panel timeOnly :match="match" :onChange="getMatches"/>
                             </v-col>
                         </v-expansion-panels>
@@ -31,8 +43,25 @@ export default {
     data:()=>({
         week: null,
         loading: true,
-        days_diff: 0
+        days_diff: 0,
+        selectedLeague: null,
     }),
+    computed:{
+        leaguesAggregate(){
+            let uniqueLeagues = {};
+
+            Object.values(this.week).forEach(dateEntry => {
+                dateEntry.forEach(match => {
+                if (!uniqueLeagues.hasOwnProperty(match.league_id)) {
+                    uniqueLeagues[match.league_id] = {'league': match.league, 'count': 1};
+                } else {
+                    uniqueLeagues[match.league_id].count += 1;
+                }
+                });
+            });
+            return Object.values(uniqueLeagues).sort((a, b) => b.count - a.count);
+        }
+    },
     async mounted(){
         await this.getMatches();
     },
