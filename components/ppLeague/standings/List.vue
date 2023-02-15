@@ -4,9 +4,13 @@
             <v-col cols="12" v-if="showAll">
                 <v-row no-gutters align="end">
                     <v-col cols="auto" class="ma-3">
-                        <v-row align="center">
+                        <v-row align="center" v-if="ppTournamentType.promote">
                             <v-chip x-small label :color="ppRGBA(ppTournamentType.rgb)" style="height:12px;"/>                            
-                            <div class="ml-2 overline">{{ups[0].finished ? 'qualified' : 'qualify'}} to {{ppTournamentTypeTitle(ppTournamentType.next)}}</div>
+                            <div class="lh-1 ml-2 overline">{{ups[0].finished ? 'qualified' : 'qualify'}} to {{ppTournamentTypeTitle(ppTournamentType.next)}}</div>
+                        </v-row>
+                        <v-row align="center" v-if="ppTournamentType.rejoin">
+                            <em-emoji id="repeat" />
+                            <div class="lh-1 ml-2 overline">{{ups[0].finished ? 're-joined' : 're-join'}} {{ppTournamentTypeTitle(ppTournamentType)}}</div>
                         </v-row>
                     </v-col>
                     <user-participation-standing-labels />
@@ -30,6 +34,9 @@
                             >
                                 #{{upForIndex(index).position}}
                             </v-chip>
+                            <em-emoji id="repeat" size="1.5em"
+                                v-else-if="upForIndex(index).position <= (ppTournamentType.promote + ppTournamentType.rejoin)"
+                            />
                             <template v-else>#{{upForIndex(index).position}}</template>
                         </span>
                     </v-col>
