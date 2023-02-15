@@ -80,9 +80,11 @@
                             UPS
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                            <p-p-league-standings-list
-                                :ups="ppLeague.userParticipations"
-                            />
+                            <v-row>
+                                <v-col v-for="up in ppLeague.userParticipations" :key="up.id">
+                                    #{{up.position}} {{up.username}}: {{up.points}}
+                                </v-col>
+                            </v-row>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
