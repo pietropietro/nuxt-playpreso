@@ -57,7 +57,8 @@ Vue.mixin({
                     JOIN: '/p-tournament-type/join/'
                 },
                 STATS:{
-                    BEST_USERS: '/stats/best-users'
+                    BEST_USERS: '/stats/best-users',
+                    LAST_PRESO: '/stats/last-preso'
                 }
             },
             ADMIN_FEATURES: {

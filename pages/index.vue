@@ -56,8 +56,9 @@
                     </template>
                 </v-container>
             </v-col>
-            <v-col class="mt-md-10" cols="12" md="6">
-                <stats-top-users />
+            <v-col cols="12" md="6">
+                <stats-last-preso class="mt-md-10"/>
+                <stats-top-users class="mt-10"/>
             </v-col>
         </v-row>
     </v-container>
