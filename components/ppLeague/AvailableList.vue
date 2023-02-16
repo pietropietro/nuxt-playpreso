@@ -1,12 +1,10 @@
 <template>
-    <div  v-if="ppTournamentTypes.length > 0">      
-        <v-row no-gutters 
-            class="mb-n10 mt-2" 
-            align="end"
-        >
-            <v-col>
-                <div class="overline lh-1">{{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}</div>
-            </v-col> 
+    <div v-if="ppTournamentTypes.length > 0">      
+        <v-row class="mx-2 mb-2">
+            <!-- <div class="overline lh-1">
+                {{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}
+            </div> -->
+            <h1>P-LEAGUES</h1>
         </v-row>   
         <v-data-table
             class="transparent no-select"
@@ -15,6 +13,7 @@
             :items-per-page="-1" :items="ppTournamentTypes"
             :headers="headers"
             hide-default-footer
+            hide-default-header
         >
             <template v-slot:item.emoji="{ item }">
             <em-emoji v-if="item.emoji"
@@ -22,9 +21,14 @@
             />
             </template>
             <template v-slot:item.name="{ item }">
-                <v-row align="end">
-                    <h2>{{ppTournamentTypeTitle(item)}}</h2>
-                </v-row>
+                <div class="my-5">
+                    <v-row align="end">
+                        <h2>{{ppTournamentTypeTitle(item)}}</h2>
+                    </v-row>
+                    <v-row class="overline lh-1">
+                        {{item.user_cnt ? (item.participants - item.user_cnt) : item.participants}} more players to start
+                    </v-row>
+                </div>
             </template>
                 <template v-slot:item.cost="{ item }">
                 <div class="overline lh-1">{{item.cost}}</div>
