@@ -22,6 +22,7 @@
     "nuxt": "^2.15.3",
     "nuxt-i18n": "^6.27.0",
     "vue-digital-clock": "^2.0.0",
+    "vue-social-sharing": "^3.0.9",
     "vue-template-babel-compiler": "^1.2.0",
     "vuetify": "^2.4.0",
     "vuex-persist": "^3.1.3"

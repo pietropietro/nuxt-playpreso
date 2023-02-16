@@ -28,7 +28,7 @@ export default {
     },
 }
 </script>
-<style scoped>
+<style>
     .highlight-row{
         min-height: 10px;
         font-size:10px;

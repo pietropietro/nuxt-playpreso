@@ -53,7 +53,6 @@ export default {
                 this.userStat = response.message?.currentUserStat;
             }
             this.loading = false;
-            console.log(this.best,this.userStat);
         },
     },
     async mounted(){

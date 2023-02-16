@@ -37,23 +37,21 @@
                     </v-row>
                     <p-p-league-available-list class="px-2 mb-10"/>
                 </v-container>
-                <v-container>
-                    <template v-if="userParticipations?.length > 0">
-                        <v-row no-gutters>
-                            <h1>ENROLLED</h1>
-                            <h4>({{userParticipations.length}})</h4>
-                        </v-row>
-                        <nuxt-link class="no-decoration"
-                            v-for="(up, index) in userParticipations" :key="index"
-                            :to="up.ppLeague_id ? ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
-                                : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
-                            "
-                        >
-                            <user-participation-card :class="!up.started ? 'mb-4' : ''"
-                                :participation="up"
-                            />
-                        </nuxt-link>
-                    </template>
+                <v-container v-if="userParticipations?.length > 0">
+                    <v-row no-gutters>
+                        <h1>ENROLLED</h1>
+                        <h4>({{userParticipations.length}})</h4>
+                    </v-row>
+                    <nuxt-link class="no-decoration"
+                        v-for="(up, index) in userParticipations" :key="index"
+                        :to="up.ppLeague_id ? ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
+                            : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
+                        "
+                    >
+                        <user-participation-card :class="!up.started ? 'mb-4' : ''"
+                            :participation="up"
+                        />
+                    </nuxt-link>
                 </v-container>
             </v-col>
             <v-col cols="12" md="6">

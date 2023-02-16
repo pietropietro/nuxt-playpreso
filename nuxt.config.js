@@ -62,7 +62,7 @@ export default {
             },
         ],
 		'@nuxtjs/sitemap',
-		// 'cookie-universal-nuxt'
+		'vue-social-sharing/nuxt'
     ],
 
     i18n: {
