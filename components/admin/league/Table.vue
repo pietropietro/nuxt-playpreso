@@ -2,52 +2,52 @@
     <loading-page v-if="loading"/>
     <div v-else-if="leagues">
         <admin-league-create :leagues="leagues" :refresh="getLeagues"/>
-            <h1>LEAGUES</h1>
-            <v-data-table
-                class="primary"
-                item-text="value"
-                :items-per-page="-1" :items="leagues"
-                :headers="headers"
-                :expanded.sync="expanded"
-                singleExpand
-                hide-default-footer
-                @click:row="(item)=>expandRow(item)"
-            >
-                <template v-slot:item.area="{ item }">
+        <h1>LEAGUES</h1>
+        <v-data-table
+            class="primary"
+            item-text="value"
+            :items-per-page="-1" :items="leagues"
+            :headers="headers"
+            :expanded.sync="expanded"
+            singleExpand
+            hide-default-footer
+            @click:row="(item)=>expandRow(item)"
+        >
+            <template v-slot:item.area="{ item }">
+                <v-row align="end">
+                <h1><p-p-emoji flag :model="item.area" /></h1>
+                    <h2>{{item.area_level}}</h2>
+                </v-row>
+            </template>
+            <template v-slot:item.country="{ item }">
                     <v-row align="end">
-                    <h1><p-p-emoji flag :model="item.area" /></h1>
-                        <h2>{{item.area_level}}</h2>
+                        <h1><p-p-emoji flag :model="item.country" /></h1>
+                        <h2>{{item.country_level}}</h2>
                     </v-row>
-                </template>
-                <template v-slot:item.country="{ item }">
-                        <v-row align="end">
-                            <h1><p-p-emoji flag :model="item.country" /></h1>
-                            <h2>{{item.country_level}}</h2>
-                        </v-row>
-                </template>
-                <template v-slot:item.id="{ item }">
-                    <div class="ocrastd"
-                    >
-                        #{{ item.id }}
-                    </div>
-                </template>
-                <template v-slot:item.name="{ item }">
-                    <h2>
-                        {{ item.name }}
-                    </h2>
-                </template>
-                <template v-slot:item.updated_at="{ item }">
-                    <div class="overline"
-                    >
-                        {{ formatDate(item.updated_at, true) }}
-                    </div>
-                </template>
-                <template v-slot:expanded-item="{ headers, item }">
-                    <td :colspan="headers.length">
-                        <admin-league-detail  :id="item.id"/>
-                    </td>
-                </template>
-            </v-data-table>
+            </template>
+            <template v-slot:item.id="{ item }">
+                <div class="ocrastd"
+                >
+                    #{{ item.id }}
+                </div>
+            </template>
+            <template v-slot:item.name="{ item }">
+                <h2>
+                    {{ item.name }}
+                </h2>
+            </template>
+            <template v-slot:item.updated_at="{ item }">
+                <div class="overline"
+                >
+                    {{ formatDate(item.updated_at, true) }}
+                </div>
+            </template>
+            <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                    <admin-league-detail  :id="item.id"/>
+                </td>
+            </template>
+        </v-data-table>
     </div>
     <error-wall v-else/>
 </template>

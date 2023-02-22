@@ -1,5 +1,5 @@
 <template>
-    <span>{{flagEmoji}}</span>
+    <em-emoji v-if="flagEmoji" :native="flagEmoji" :size="size"/>
 </template>
 <script>
 import { SearchIndex } from 'emoji-mart'
@@ -7,7 +7,8 @@ import { SearchIndex } from 'emoji-mart'
 export default {
     props:{
         model: {type: String},
-        flag: {type: Boolean}
+        flag: {type: Boolean},
+        size: {type: String, default: '1em'}
     },
     data(){
         return{

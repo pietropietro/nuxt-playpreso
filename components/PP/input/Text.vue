@@ -27,9 +27,9 @@
             </v-row>
         </template>
         <template v-else>
-            <v-card flat @click="showField">
+            <v-card class="transparent" flat @click="showField">
                 <h2 v-if="!html">
-                    {{model ? model : 'INSERT'}}
+                    {{model ? model : placeholder}}
                 </h2>
                 <span v-else v-html="model ? model : 'INSERT'"/>
             </v-card>
