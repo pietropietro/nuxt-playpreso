@@ -2,6 +2,7 @@
     <loading-page v-if="loading"/>
     <v-container class="mt-4 rounded" v-else >
         <template v-if="league">
+            <admin-league-edit class="my-5" :league="league" :onSuccess="onEdit"/>
             <v-row class="pa-4">
                 <v-expansion-panels>
                     <v-row>
@@ -24,16 +25,8 @@
                     </v-row>
                 </v-expansion-panels>
             </v-row>
-            <v-row class="pa-4" align="center">
-                <p-p-input-text 
-                    label="ls_suffix"
-                    :value="league.ls_suffix" 
-                    :setValue="(val)=>league.ls_suffix=val" 
-                    :enter="async () => await update({'ls_suffix': league.ls_suffix})"
-                />
-                <v-col>
-                    <admin-league-fetch-button :id="id" :ls_suffix="league.ls_suffix" :onSuccess="getLeague"/>
-                </v-col>
+            <v-row class="my-5 text-center" align="center" justify="center">
+                <admin-league-fetch-button :id="id" :ls_suffix="league.ls_suffix" :onSuccess="getLeague"/>
             </v-row>
         </template>
         <error-wall v-else/>
@@ -43,7 +36,7 @@
 export default {
     props:{
         id: {type: Number},
-        // close: {type: Function}
+        onEdit: {type: Function}
     },
     data:()=>({loading: true, league: null, matchSuffixModel: null}),
     async mounted(){
@@ -55,15 +48,6 @@ export default {
             if(response && response.status === "success"){
                 this.league = response.message;
             }
-            this.loading = false;
-        },
-        async update(values){
-            this.loading = true;
-    
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.id, values, 'POST'
-            );     
-
             this.loading = false;
         },
     }

@@ -1,7 +1,5 @@
 <template>
-    <loading-page v-if="loading"/>
-    <div v-else-if="leagues">
-        <admin-league-create :leagues="leagues" :refresh="getLeagues"/>
+    <div v-if="leagues">
         <h1>LEAGUES</h1>
         <v-data-table
             class="primary"
@@ -44,7 +42,7 @@
             </template>
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
-                    <admin-league-detail  :id="item.id"/>
+                    <admin-league-detail  :id="item.id" :onEdit="refresh"/>
                 </td>
             </template>
         </v-data-table>
@@ -53,9 +51,11 @@
 </template>
 <script>
 export default {
+    props:{
+        leagues: {type: Array},
+        refresh: {type: Function}
+    },
     data:()=>({
-        leagues: null,
-        loading: true,
         expanded: [],
         headers: [
             { value: 'id' }, 
@@ -66,17 +66,7 @@ export default {
             { value: 'updated_at' },
         ]
     }),
-    async mounted(){
-        await this.getLeagues();
-    },
     methods:{
-        async getLeagues(){
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET);
-            if(response && response.status === "success"){
-                this.leagues = response.message;
-            }
-            this.loading = false;
-        },
         expandRow(item){
             if(this.expanded.length>0 && this.expanded[0].id==item.id){
                 this.expanded = [];
