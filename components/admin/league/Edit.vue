@@ -15,10 +15,10 @@
         <v-col cols="3">
             <v-select label="country" v-model="countryModel" :items="countryList">
                 <template slot="item" slot-scope="data">
-                    <p-p-emoji :model="data.item" flag size="2em"/><div class="overline ml-2">{{ data.item }}</div>
+                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
                 </template>
                 <template slot="selection" slot-scope="data">
-                    <p-p-emoji :model="data.item" flag size="2em"/><div class="overline ml-2">{{ data.item }}</div>
+                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
                 </template>
             </v-select>
         </v-col>
@@ -26,10 +26,10 @@
         <v-col cols="3">
             <v-select label="area" v-model="areaModel" :items="areaList">
                 <template slot="item" slot-scope="data">
-                    <p-p-emoji :model="data.item" flag size="2em"/><div class="overline ml-2">{{ data.item }}</div>
+                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
                 </template>
                 <template slot="selection" slot-scope="data">
-                    <p-p-emoji :model="data.item" flag size="2em"/><div class="overline ml-2">{{ data.item }}</div>
+                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
                 </template>
             </v-select>
         </v-col>

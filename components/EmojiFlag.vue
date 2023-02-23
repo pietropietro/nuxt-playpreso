@@ -6,8 +6,7 @@ import { SearchIndex } from 'emoji-mart'
 
 export default {
     props:{
-        model: {type: String},
-        flag: {type: Boolean},
+        model: {type: String, required: true},
         size: {type: String, default: '1em'}
     },
     data(){
@@ -15,15 +14,6 @@ export default {
             flagEmoji: null
         }
     },
-    watch: {
-        model: async function () {
-            if(this.flag){
-                await this.searchFlag();
-                return;
-            }
-            await this.search(this.model);
-        }
-    },    
     methods:{
         async search(val) {
             if(!val)return;
@@ -40,11 +30,7 @@ export default {
         }
     },
     async mounted(){
-        if(this.flag){
-            await this.searchFlag();
-            return;
-        }
-        await this.search(this.model);
+        await this.searchFlag();
     },
 }
 </script>

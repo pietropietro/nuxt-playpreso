@@ -42,9 +42,7 @@
                             v-if="guess.guessed_at"
                         >
                             <v-row justify="center" v-if="!guess.verified_at">
-                                <h2>
-                                    <p-p-emoji model="lock" />
-                                </h2>
+                                <em-emoji id="lock" size="1.5em" />
                             </v-row>
                             <match-inner-values v-else :match="match" :guess="guess" />
                             <v-row justify="center">

@@ -1,7 +1,7 @@
 <template>
     <div v-if="league">
         
-        <p-p-emoji flag :model="league?.country" 
+        <emoji-flag  :model="league?.country ?? league?.area" 
             :class="sizeClass ?? ''"
         />
         <span class="overline lh-1">{{league.tag}}</span>

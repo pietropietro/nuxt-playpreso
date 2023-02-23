@@ -51,8 +51,8 @@
                             </v-row>
                             <v-container class="mx-2 overline lh-1">
                                 <v-row>created_at: {{ppLeague.created_at}}</v-row>
-                                <v-row>started: <p-p-emoji :model="!!ppLeague.started_at ? 'green ok' :'red x'"/></v-row>
-                                <v-row>finished: <p-p-emoji :model="!!ppLeague.finished_at ? 'green ok' :'red x'"/></v-row>
+                                <v-row>started: <emoji-flag :model="!!ppLeague.started_at ? 'green ok' :'red x'"/></v-row>
+                                <v-row>finished: <emoji-flag :model="!!ppLeague.finished_at ? 'green ok' :'red x'"/></v-row>
                             </v-container>
                         </v-container>
                     </nuxt-link>

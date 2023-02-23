@@ -21,7 +21,7 @@
                                 :value="a"
                             >
                                 {{a}}
-                                <p-p-emoji flag :model="a"/>
+                                <emoji-flag  :model="a"/>
                             </v-chip>
                         </div>
                     </v-row>
@@ -45,7 +45,7 @@
                                 :value="c"
                             >
                                 {{c}}
-                                <p-p-emoji flag :model="c"/>
+                                <emoji-flag  :model="c"/>
                             </v-chip>
                         </div>
                     </v-row>
@@ -77,13 +77,13 @@
             </template>
             <template v-slot:item.area="{ item }">
                 <v-row align="end">
-                <h1><p-p-emoji flag :model="item.area" /></h1>
+                <h1><emoji-flag  :model="item.area" /></h1>
                     <h2>{{item.area_level}}</h2>
                 </v-row>
             </template>
             <template v-slot:item.country="{ item }">
                     <v-row align="end">
-                        <h1><p-p-emoji flag :model="item.country" /></h1>
+                        <h1><emoji-flag  :model="item.country" /></h1>
                         <h2>{{item.country_level}}</h2>
                     </v-row>
             </template>
