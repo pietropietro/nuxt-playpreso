@@ -25,7 +25,7 @@
         </stats-best-list> -->
         <v-row justify="end">
             <v-col cols="auto">
-                <div class="caption lh-1">*last 30 days, at least 10 matches</div>
+                <div class="caption lh-1">*last 30 days, at least 15 matches</div>
             </v-col>
         </v-row>
         
