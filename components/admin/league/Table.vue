@@ -1,10 +1,32 @@
 <template>
     <div v-if="leagues">
         <h1>LEAGUES</h1>
+        <v-row align="center" class="overline">
+            <v-col>
+                <v-chip-group
+                    column
+                    v-model="countryModel"
+                    value="id"
+                    active-class="opacity-100"
+                >
+                    <h4 class="pointer mx-4" @click="()=>countryModel=null">x</h4>
+                    <div v-for="c in countries" :key="c">
+                        <v-chip
+                            v-if="c"
+                            x-small
+                            :value="c"
+                        >
+                            {{c}}
+                            <p-p-emoji flag :model="c"/>
+                        </v-chip>
+                    </div>
+                </v-chip-group>
+            </v-col>
+        </v-row>
         <v-data-table
             class="primary"
             item-text="value"
-            :items-per-page="-1" :items="leagues"
+            :items-per-page="-1" :items="leaguesFiltered"
             :headers="headers"
             :expanded.sync="expanded"
             singleExpand
@@ -42,7 +64,7 @@
             </template>
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
-                    <admin-league-detail  :id="item.id" :onEdit="refresh"/>
+                    <admin-league-detail  :id="item.id" :onEdit="refresh" :leagues="leagues"/>
                 </td>
             </template>
         </v-data-table>
@@ -56,6 +78,7 @@ export default {
         refresh: {type: Function}
     },
     data:()=>({
+        countryModel: null,
         expanded: [],
         headers: [
             { value: 'id' }, 
@@ -66,6 +89,23 @@ export default {
             { value: 'updated_at' },
         ]
     }),
+    computed:{
+        leaguesFiltered(){
+            if(!this.countryModel) return this.leagues;
+            return this.leagues.filter(l =>{
+                return l.country === this.countryModel;
+            });
+        },
+        countries(){ 
+            let uniques = [];
+            this.leagues.map(l => {
+                if(!uniques.includes(l.country)){
+                    uniques.push(l.country);
+                }
+            });
+            return uniques;
+        }
+    },
     methods:{
         expandRow(item){
             if(this.expanded.length>0 && this.expanded[0].id==item.id){
