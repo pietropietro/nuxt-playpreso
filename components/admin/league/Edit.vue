@@ -36,7 +36,7 @@
         <v-col cols="3"><v-select label="a-lvl" v-model="areaLevelModel" :items="[1,2,3,4]"/></v-col>
         <v-col cols="12" class="text-center">
             <v-btn text 
-                :disabled="!nameModel || !tagModel || !countryModel || !areaModel" 
+                :disabled="!nameModel" 
                 :loading="loading" 
                 @click="create"
             >
@@ -173,14 +173,14 @@ export default {
     data:()=>({
         name: null, 
         tag: null, 
-        lsSuffix: null, 
-        parent:null, 
+        ls_suffix: null, 
+        parent_id:null, 
         country: null,
         countryList: getNames(),
-        countryLevel: null,
+        country_level: null,
         area: null,
         areaList: ['europe', 'america', 'asia', 'africa', 'world'],
-        areaLevel: null,
+        area_level: null,
         loading:false
     }),
     methods:{
@@ -203,8 +203,8 @@ export default {
                 'POST'
             );
             if(response && response.status === "success"){
-                this.name = this.tag = this.parent = this.lsSuffix = this.country
-                = this.countryLevel = this.area = this.areaLevel = null;
+                this.name = this.tag = this.parent_id = this.ls_suffix = this.country
+                = this.country_level = this.area = this.area_level = null;
             }
             if(!!this.onSuccess)await this.onSuccess();
             this.loading = false;
