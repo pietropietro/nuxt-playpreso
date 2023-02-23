@@ -53,15 +53,28 @@
             </v-col>
         </v-row>
         <v-data-table
-            class="primary"
+            class="primary l-t"
             item-text="value"
             :items-per-page="-1" :items="leaguesFiltered"
             :headers="headers"
             :expanded.sync="expanded"
+            group-by="parent_id"
             singleExpand
             hide-default-footer
             @click:row="(item)=>expandRow(item)"
         >
+            <template v-slot:group.header="{ items, toggle }" >
+                <td v-if="items[0].parent_id" :colspan="headers.length">
+                    <v-row @click="toggle">
+                        <v-col cols="auto"><div class="ocrastd">#{{items[0].id}}+</div></v-col>
+                        <v-col>
+                            <h2>
+                                {{ items[0].name }}
+                            </h2>
+                        </v-col>
+                    </v-row>
+                </td>
+            </template>
             <template v-slot:item.area="{ item }">
                 <v-row align="end">
                 <h1><p-p-emoji flag :model="item.area" /></h1>
@@ -158,3 +171,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+ .l-t >>> .v-row-group__header,   .l-t >>> tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+  background: var(--v-primary-darken2)!important; 
+}
+</style>

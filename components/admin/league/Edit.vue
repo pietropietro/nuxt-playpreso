@@ -62,7 +62,7 @@ import { getNames,getNameList, overwrite } from 'country-list';
         },
         {
             code: 'US',
-            name: 'USA'
+            name: 'US'
         }
     ]);
 
