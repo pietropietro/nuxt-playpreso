@@ -1,25 +1,54 @@
 <template>
     <div v-if="leagues">
-        <h1>LEAGUES</h1>
+        <v-row class="mt-2 ml-2">
+            <h1>LEAGUES</h1>
+            <h4>({{leaguesFiltered.length}})</h4>
+        </v-row>
         <v-row align="center" class="overline">
             <v-col>
+                <v-chip-group
+                    column
+                    v-model="areaModel"
+                    value="id"
+                    active-class="opacity-100"
+                >
+                    <v-row no-gutters align="center">
+                        <div class="lh-1 mr-2">AREA</div>
+                        <div v-for="a in areas" :key="a">
+                            <v-chip
+                                v-if="a"
+                                x-small
+                                :value="a"
+                            >
+                                {{a}}
+                                <p-p-emoji flag :model="a"/>
+                            </v-chip>
+                        </div>
+                    </v-row>
+                </v-chip-group>
+            </v-col>
+        </v-row>
+        <v-row align="center" class="overline">
+            <v-col class="pt-0">
                 <v-chip-group
                     column
                     v-model="countryModel"
                     value="id"
                     active-class="opacity-100"
                 >
-                    <h4 class="pointer mx-4" @click="()=>countryModel=null">x</h4>
-                    <div v-for="c in countries" :key="c">
-                        <v-chip
-                            v-if="c"
-                            x-small
-                            :value="c"
-                        >
-                            {{c}}
-                            <p-p-emoji flag :model="c"/>
-                        </v-chip>
-                    </div>
+                    <v-row no-gutters align="center">
+                        <div class="lh-1 mr-2">COUNTRY</div>                    
+                        <div v-for="c in countriesFiltered" :key="c">
+                            <v-chip
+                                v-if="c"
+                                x-small
+                                :value="c"
+                            >
+                                {{c}}
+                                <p-p-emoji flag :model="c"/>
+                            </v-chip>
+                        </div>
+                    </v-row>
                 </v-chip-group>
             </v-col>
         </v-row>
@@ -79,6 +108,8 @@ export default {
     },
     data:()=>({
         countryModel: null,
+        areaModel: null,
+        areas: ['europe', 'america', 'asia', 'africa', 'world'],
         expanded: [],
         headers: [
             { value: 'id' }, 
@@ -91,14 +122,23 @@ export default {
     }),
     computed:{
         leaguesFiltered(){
-            if(!this.countryModel) return this.leagues;
-            return this.leagues.filter(l =>{
+            if(!this.countryModel && !this.areaModel) return this.leagues;
+            let areaFiltered = this.leagues.filter(l =>{
+                if(!this.areaModel) return l;
+                return l.area === this.areaModel;
+            });
+            return areaFiltered.filter(l =>{
+                if(!this.countryModel) return l;
                 return l.country === this.countryModel;
             });
         },
-        countries(){ 
+        countriesFiltered(){ 
             let uniques = [];
-            this.leagues.map(l => {
+            let areaFiltered = this.leagues.filter(l => {
+                if(!this.areaModel) return l;
+                return l.area == this.areaModel;
+            });
+            areaFiltered.map(l => {
                 if(!uniques.includes(l.country)){
                     uniques.push(l.country);
                 }
