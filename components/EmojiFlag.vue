@@ -14,6 +14,12 @@ export default {
             flagEmoji: null
         }
     },
+    // watch needed for round display. otherwise flag does not change
+    watch: {
+        model: async function () {
+            await this.searchFlag();
+        }
+    },  
     methods:{
         async search(val) {
             if(!val)return;
