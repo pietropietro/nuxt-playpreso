@@ -63,6 +63,10 @@ import { getNames,getNameList, overwrite } from 'country-list';
         {
             code: 'US',
             name: 'US'
+        },
+        {
+            code: 'KR',
+            name: 'South Korea'
         }
     ]);
 

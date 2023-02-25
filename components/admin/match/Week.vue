@@ -14,6 +14,7 @@
                     
                 </v-chip-group>
             </v-row>
+            <v-row justify="center"><v-switch v-model="hasGuessModel" label="has guess"/></v-row>
             <v-row class="flex-nowrap">
                  <v-col cols="auto">
                     <h1 class="pointer px-2" @click="changeDates(-7)">
@@ -22,11 +23,17 @@
                 </v-col>
                 <v-col v-for="(matches, day) in week" :key="day">
                     <h2 class="text-center">{{formatDate(day, false)}}</h2>
-                    <h2 class="my-3 text-center">{{matches.length}}</h2>
+                    <h2 class="my-3 text-center">{{filterMatches(matches).length}}</h2>
                     <v-row>
                         <v-expansion-panels>
-                            <v-col cols="12" v-for="match in selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches" :key="match.id">
-                                <admin-match-expansion-panel timeOnly :match="match" :onChange="getMatches"/>
+                            <v-col cols="12" 
+                                v-for="match in filterMatches(matches)" 
+                                :key="match.id"
+                            >
+                                <admin-match-expansion-panel 
+                                    timeOnly :match="match" 
+                                    :onChange="getMatches"
+                                />
                             </v-col>
                         </v-expansion-panels>
                     </v-row>
@@ -43,6 +50,7 @@ export default {
     data:()=>({
         week: null,
         loading: true,
+        hasGuessModel: false,
         days_diff: 0,
         selectedLeague: null,
     }),
@@ -73,6 +81,11 @@ export default {
                 this.week = response.message;
             }
             this.loading = false;
+        },
+        filterMatches(matches){
+            let leagueMatches =this.selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches;
+            if(!this.hasGuessModel) return leagueMatches;
+            return leagueMatches.filter(m => m.aggregateGuesses);
         },
         async changeDates(change){
             this.days_diff += change;

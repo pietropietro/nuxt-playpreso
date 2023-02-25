@@ -6,7 +6,7 @@ import { SearchIndex } from 'emoji-mart'
 
 export default {
     props:{
-        model: {type: String, required: true},
+        model: {type: String},
         size: {type: String, default: '1em'}
     },
     data(){
