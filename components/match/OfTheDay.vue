@@ -1,8 +1,8 @@
 <template>
     <loading-page v-if="loading"/>
-    <v-container v-else-if="ppRoundMatch">
+    <v-container v-else-if="ppRoundMatch" >
         <v-row align="center">
-            <v-col cols="auto">
+            <v-col cols="auto" class="px-0">
                 <em-emoji id="alarm_clock" size="2.5em" class="mr-2"/>
             </v-col>
             <v-col>
@@ -24,7 +24,7 @@
                         :match="ppRoundMatch.match"
                         :guess="guess"
                         :setGuess="onLock"
-                        rgb="217, 217, 217"
+                        rgb="224, 224, 235"
                     />
                 </div>
             </v-col>
