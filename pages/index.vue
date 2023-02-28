@@ -59,9 +59,9 @@
                 </v-container>
             </v-col>
             <v-col cols="12" md="6">
-                <match-of-the-day class="mt-md-10"/>
-                <stats-last-preso class="mt-10"/>
-                <stats-top-users class="mt-10"/>
+                <match-of-the-day class="mt-2"/>
+                <stats-last-preso class="mt-5"/>
+                <stats-top-users class="mt-8"/>
             </v-col>
         </v-row>
     </v-container>
