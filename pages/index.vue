@@ -15,7 +15,11 @@
                         <v-slide-item v-for="(guess, index) in currentGuesses" :key="guess.id" class="mx-2">
                             <!-- width is necessary for slider to work on page landing :( -->
                             <div style="min-width:250px; max-width:300px;">
-                                <guess-single-card :guess="guess"  :match="guess.match" :rgb="guess.ppTournamentType.rgb"/>
+                                <guess-single-card 
+                                    :guess="guess"  
+                                    :match="guess.match" 
+                                    :rgb="guess.ppTournamentType?.rgb"
+                                />
                             </div>
                         </v-slide-item>
                     </v-slide-group>
@@ -55,7 +59,8 @@
                 </v-container>
             </v-col>
             <v-col cols="12" md="6">
-                <stats-last-preso class="mt-md-10"/>
+                <match-of-the-day class="mt-md-10"/>
+                <stats-last-preso class="mt-10"/>
                 <stats-top-users class="mt-10"/>
             </v-col>
         </v-row>

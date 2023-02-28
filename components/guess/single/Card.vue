@@ -169,6 +169,7 @@
 export default {
     props:{
         guess: {type: Object, required: true},
+        setGuess: {type: Function},
         match: {type: Object, required: true},
         rgb: {type: String}
     },
@@ -223,14 +224,23 @@ export default {
                 "away": away
             }
             
+            let route = this.guess.id ? this.API_ROUTES.GUESS.LOCK + this.guess.id : this.API_ROUTES.MOTD.LOCK;
             let response = await this.$api.call(
-                this.API_ROUTES.GUESS.LOCK + this.guess.id, values, 'POST'
+                route, values, 'POST'
             );
 
             if(response && response.status === "success"){
                 this.guess.guessed_at = new Date();
                 this.guess.home = home;
                 this.guess.away = away;
+
+                if(this.setGuess){
+                    let copy = JSON.parse(JSON.stringify(this.guess));
+                    copy.guessed_at = new Date();
+                    copy.home = home;
+                    copy.away = away;
+                    this.setGuess(copy);
+                }
             }
             this.lockButtonLoading = false;
         },

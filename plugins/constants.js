@@ -59,7 +59,11 @@ Vue.mixin({
                 STATS:{
                     BEST_USERS: '/stats/best-users',
                     LAST_PRESO: '/stats/last-preso'
-                }
+                },
+                MOTD: {
+                    GET: '/motd',
+                    LOCK: '/motd/lock'
+                },
             },
             ADMIN_FEATURES: {
                 USERS: {

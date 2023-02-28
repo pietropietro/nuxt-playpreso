@@ -4,7 +4,11 @@
             v-for="pprm, index in ppRMs" :key="index"
             cols="12" md="4"
         >
-            <guess-single-card :guess="pprm.guess"  :match="pprm.match" :rgb="rgb"/>
+            <guess-single-card 
+                :guess="pprm.guess" 
+                :match="pprm.match" 
+                :rgb="rgb"
+            />
         </v-col>
     </v-row>
 </template>
