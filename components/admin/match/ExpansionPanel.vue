@@ -1,10 +1,16 @@
 <template>
-    <v-expansion-panel :style="matchStatusStyle" class="admin-match" v-if="match">
+    <v-expansion-panel :style="matchStatusStyle" class="admin-match red--border" v-if="match">
         <v-expansion-panel-header hide-actions class="pa-0">
             <template v-slot:default="{ open }">
                 <v-container>
+                    <v-row v-if="match.motd" class="overline lh-1 mb-3" justify="center" style="background-color:green">MOTD</v-row>
                     <template v-if="open">
-                        <v-row no-gutters class="ocrastd mb-2">#{{match.id}}-{{match.ls_id}}</v-row>
+                        <v-row no-gutters class="mb-2">
+                            <v-col class="ocrastd" cols="auto">#{{match.id}}-{{match.ls_id}}</v-col>
+                        </v-row>
+                        <v-row class="mb-2" v-if="!match.verified_at" justify="center">
+                            <v-btn x-small text @click="setMotd">SET MOTD</v-btn>
+                        </v-row>
                     </template>
                     <v-row no-gutters align="center">
                         <league-detail :league="match.league"/>
@@ -59,6 +65,9 @@
                 <v-row no-gutters>
                     <v-col align-self="center">
                         <div style="line-height:1rem" class="overline"><b>{{match.aggregateGuesses}}</b></div>
+                    </v-col>
+                    <v-col align-self="center">
+                        <div style="line-height:1rem" class="overline"><b>{{match.aggregatePPRM}}</b></div>
                     </v-col>
                     <template v-if="match.verified_at">
                         <v-col>
@@ -134,6 +143,15 @@ export default {
                 this.onChange();
             }
             this.loading=false;
+        },
+        async setMotd(){
+            this.loading = true;
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.MOTD.SET + this.match.id, null, 'POST'
+            );
+            if(response && response.status === "success"){
+                this.onChange();
+            }
         }
     }
 }

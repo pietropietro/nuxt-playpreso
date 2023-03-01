@@ -126,7 +126,10 @@ Vue.mixin({
                     CREATE: '/admin/league',
                     UPDATE: '/admin/league/',
                     FETCH: '/admin/league/fetch/',
-                } 
+                },
+                MOTD: {
+                    SET: '/admin/motd/',
+                }
             }
         }
     }
