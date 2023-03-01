@@ -11,10 +11,18 @@
                     <v-chip small :value="la.league.id"><league-detail :league="la.league"/>
                         <div class="ml-2">{{la.count}}</div>
                     </v-chip>
-                    
                 </v-chip-group>
             </v-row>
-            <v-row justify="center"><v-switch v-model="hasGuessModel" label="has guess"/></v-row>
+            <v-row justify="center">
+                <v-spacer />
+                <v-col cols="auto">
+                    <v-switch inset v-model="hasGuessModel" label="w/guess"/>
+                </v-col>
+                <v-col cols="auto">
+                    <v-switch inset v-model="motdModel" label="motd"/>
+                </v-col>
+                <v-spacer />
+            </v-row>
             <v-row class="flex-nowrap">
                  <v-col cols="auto">
                     <h1 class="pointer px-2" @click="changeDates(-7)">
@@ -51,6 +59,7 @@ export default {
         week: null,
         loading: true,
         hasGuessModel: false,
+        motdModel: false,
         days_diff: 0,
         selectedLeague: null,
     }),
@@ -83,9 +92,14 @@ export default {
             this.loading = false;
         },
         filterMatches(matches){
-            let leagueMatches =this.selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches;
-            if(!this.hasGuessModel) return leagueMatches;
-            return leagueMatches.filter(m => m.aggregateGuesses);
+            let filtered =this.selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches;
+            if(this.hasGuessModel){
+                filtered = filtered.filter(m => m.aggregateGuesses);
+            }
+            if(this.motdModel){
+                filtered = filtered.filter(m => m.motd);
+            }
+            return filtered;
         },
         async changeDates(change){
             this.days_diff += change;
