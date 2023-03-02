@@ -16,40 +16,36 @@
                     </div>
                 </v-row>
             </v-col>
+            <v-col cols="auto" >
+                <div class="overline lh-1" 
+                    v-html="matchView == true ? 'weekly <br> chart' : 'match'"
+                    @click="()=>matchView=!matchView"
+                />
+            </v-col>
         </v-row>
-        <div>
-            <v-row justify="center" align="center">
-                <v-col>
-                    <div style="min-width:250px; max-width:300px;">
-                        <guess-single-card
-                            :match="ppRoundMatch.match"
-                            :guess="guess"
-                            :setGuess="onLock"
-                            rgb="224, 224, 235"
-                        />
-                    </div>
-                </v-col>
-                <v-col class="text-center">
-                    <h1 >{{ppRoundMatch.aggr_count}}</h1>
-                    <div class="overline lh-1">locks</div>
-                </v-col>
-            </v-row>
-            <!-- <v-row>
-                <v-col v-for="(st, i) in standings" :key="st.user_id">
-                    <div class="overline lh-1"> {{st.username}} {{st.tot_points}}</div>
-                </v-col>
-            </v-row> -->
-            <v-row no-gutters class="mt-2" align="center">
-                <v-col cols="auto">
-                    <div class="overline lh-1">this <br>week</div>
-                </v-col>
-                <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="3"> 
-                    <!-- <div class="overline lh-1">{{st.username}}</div> -->
-                    <h4>{{st.username}}</h4>
-                    <h1>{{st.tot_points}}</h1>
-                </v-col>
-            </v-row>
-        </div>
+        <v-row justify="center" align="center" v-if="matchView">
+            <v-col>
+                <div style="min-width:250px; max-width:300px;">
+                    <guess-single-card
+                        :match="ppRoundMatch.match"
+                        :guess="guess"
+                        :setGuess="onLock"
+                        rgb="224, 224, 235"
+                    />
+                </div>
+            </v-col>
+            <v-col class="text-center">
+                <h1 >{{ppRoundMatch.aggr_count}}</h1>
+                <div class="overline lh-1">locks</div>
+            </v-col>
+        </v-row>
+        <v-row no-gutters class="mt-2" align="center" style="height:100px;" v-else>
+            <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="4"> 
+                <!-- <div class="overline lh-1">{{st.username}}</div> -->
+                <h1>{{st.tot_points}}</h1>
+                <h4 class="mt-n2">{{st.username}}</h4>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 <script>
@@ -59,7 +55,8 @@ export default {
             loading: true,
             ppRoundMatch: null,
             standings: null,
-            guess: null
+            guess: null,
+            matchView: true
         }
     },
     methods:{
