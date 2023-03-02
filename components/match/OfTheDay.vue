@@ -17,22 +17,39 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row justify="center" align="center" class="mt-2">
-            <v-col>
-                <div style="min-width:250px; max-width:300px;">
-                    <guess-single-card
-                        :match="ppRoundMatch.match"
-                        :guess="guess"
-                        :setGuess="onLock"
-                        rgb="224, 224, 235"
-                    />
-                </div>
-            </v-col>
-            <v-col class="text-center">
-                <h1 >{{ppRoundMatch.aggr_count}}</h1>
-                <div class="overline lh-1">locks</div>
-            </v-col>
-        </v-row>
+        <div>
+            <v-row justify="center" align="center">
+                <v-col>
+                    <div style="min-width:250px; max-width:300px;">
+                        <guess-single-card
+                            :match="ppRoundMatch.match"
+                            :guess="guess"
+                            :setGuess="onLock"
+                            rgb="224, 224, 235"
+                        />
+                    </div>
+                </v-col>
+                <v-col class="text-center">
+                    <h1 >{{ppRoundMatch.aggr_count}}</h1>
+                    <div class="overline lh-1">locks</div>
+                </v-col>
+            </v-row>
+            <!-- <v-row>
+                <v-col v-for="(st, i) in standings" :key="st.user_id">
+                    <div class="overline lh-1"> {{st.username}} {{st.tot_points}}</div>
+                </v-col>
+            </v-row> -->
+            <v-row no-gutters class="mt-2" align="center">
+                <v-col cols="auto">
+                    <div class="overline lh-1">this <br>week</div>
+                </v-col>
+                <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="3"> 
+                    <!-- <div class="overline lh-1">{{st.username}}</div> -->
+                    <h4>{{st.username}}</h4>
+                    <h1>{{st.tot_points}}</h1>
+                </v-col>
+            </v-row>
+        </div>
     </v-container>
 </template>
 <script>
@@ -41,6 +58,7 @@ export default {
         return {
             loading: true,
             ppRoundMatch: null,
+            standings: null,
             guess: null
         }
     },
@@ -48,8 +66,9 @@ export default {
         async getMotd(){
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
-                this.ppRoundMatch = response.message;
-                this.guess = this.ppRoundMatch.guess ?? {home: null, away: null, verified_at: !response.message.can_lock};
+                this.ppRoundMatch = response.message?.motd;
+                this.standings = response.message?.standings;
+                this.guess = this.ppRoundMatch.guess ?? {home: null, away: null, verified_at: !this.ppRoundMatch.can_lock};
             }
             this.loading = false;
         },
