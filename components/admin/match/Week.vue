@@ -92,7 +92,7 @@ export default {
             this.loading = false;
         },
         filterMatches(matches){
-            let filtered =this.selectedLeague ? (matches.filter((m)=>m.league_id==selectedLeague)) : matches;
+            let filtered = this.selectedLeague ? (matches.filter((m)=>m.league_id == this.selectedLeague)) : matches;
             if(this.hasGuessModel){
                 filtered = filtered.filter(m => m.aggregateGuesses);
             }
