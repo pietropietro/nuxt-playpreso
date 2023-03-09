@@ -4,7 +4,7 @@
             <!-- <nuxt-link class="no-decoration" :to="ROUTES.USER.DETAIL + up.username"> -->
             <user-name 
                 :user="up.user"
-                :class="up.user_id === currentUser.id ? ' currentuser': ''" 
+                :current="up.user_id === currentUser.id" 
                 :style="'--currentuser-color-var: '+ color"
             />
             <!-- </nuxt-link> -->

@@ -30,7 +30,7 @@
                         :match="ppRoundMatch.match"
                         :guess="guess"
                         :setGuess="onLock"
-                        rgb="224, 224, 235"
+                        rgb="194, 214, 214"
                     />
                 </div>
             </v-col>
