@@ -39,7 +39,7 @@
                             {{currentPoints}} <em-emoji id="parking"/>
                         </span>
                     </v-row>
-                    <p-p-league-available-list class="px-2 mb-10"/>
+                    <p-p-league-available-list class="px-2 mb-5"/>
                 </v-container>
                 <v-container v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
