@@ -1,17 +1,13 @@
 <template>
     <div v-if="guesses && match">
-        <v-row no-gutters class="mt-4 flex-nowrap"
+        <v-row no-gutters>
+            <h1>LAST PRESO</h1>
+        </v-row>
+        <v-row no-gutters class="flex-nowrap" align="center"
             @click="()=>(guessIndex < guesses.length -1) ? guessIndex ++ : guessIndex=0"
         >
-            <v-col cols="auto">
-                <h1 style="line-height:1em;">LAST<br v-if="$vuetify.breakpoint.mobile"> PRESO</h1>
-                <user-name class="pl-2"
-                    :user="guesses[guessIndex].user"
-                />
-                <div class="overline lh-1" v-if="guesses.length>1"> and {{guesses.length - 1}} others</div>
-            </v-col>    
-            <v-spacer/> 
-            <v-col cols="auto" class="pt-4">
+            <v-col cols="auto" class="pa-4">
+                <v-spacer/>
                 <v-row>
                     <v-card flat class="rounded" :color="ppRGBA(guesses[guessIndex].ppTournamentType?.rgb ?? ('194, 214, 214'))">
                         <v-container>
@@ -30,6 +26,14 @@
                     </h4>
                 </v-row>
             </v-col>                
+            <v-spacer/>
+            <v-col cols="auto">
+                <user-name class="pl-2"
+                    :user="guesses[guessIndex].user"
+                    :small="guesses[guessIndex].user.username.length > 9 && $vuetify.breakpoint.mobile"
+                />
+                <div class="text-center overline lh-1" v-if="guesses.length>1"> and {{guesses.length - 1}} others</div>
+            </v-col>    
             <v-spacer/>
         </v-row>
     </div>
