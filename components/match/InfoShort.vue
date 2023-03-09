@@ -1,12 +1,12 @@
 <template>
     <v-container class="pa-0 lh-1">
         <league-detail :league="match.league" />
-        <v-row>
+        <v-row class="flex-nowrap">
             <v-col cols="auto">
                 <h4>{{match.homeTeam?.name}}</h4>
                 <h4>{{match.awayTeam?.name}}</h4>
             </v-col>
-            <v-col v-if="match.verified_at" >
+            <v-col class="pl-0" v-if="match.verified_at" >
                 <h4>{{match.score_home}}</h4>
                 <h4>{{match.score_away}}</h4>
             </v-col>

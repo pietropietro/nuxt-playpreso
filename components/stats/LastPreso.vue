@@ -5,9 +5,8 @@
             <v-col>
                 <match-info-short :match="match"/>
             </v-col>
-            <v-col>
+            <v-col cols="auto">
                 <user-name 
-                    
                     :user="guesses[guessIndex].user" 
                 />
                 <div class="overline lh-1" v-if="guesses.length>1"> and {{guesses.length - 1}} others</div>
