@@ -6,7 +6,7 @@
                 <h4>{{match.homeTeam?.name}}</h4>
                 <h4>{{match.awayTeam?.name}}</h4>
             </v-col>
-            <v-col class="pl-0" v-if="match.verified_at" >
+            <v-col cols="auto" class="pl-0" v-if="match.verified_at" >
                 <h4>{{match.score_home}}</h4>
                 <h4>{{match.score_away}}</h4>
             </v-col>

@@ -18,7 +18,7 @@
             </v-col>
             <v-col cols="auto" >
                 <div class="overline lh-1" 
-                    v-html="matchView == true ? 'weekly <br> chart' : 'match'"
+                    v-html="matchView == true ? 'chart' : 'match'"
                     @click="()=>matchView=!matchView"
                 />
             </v-col>
@@ -39,13 +39,18 @@
                 <div class="overline lh-1">locks</div>
             </v-col>
         </v-row>
-        <v-row no-gutters class="mt-2" align="center" style="height:100px;" v-else>
-            <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="4"> 
-                <!-- <div class="overline lh-1">{{st.username}}</div> -->
-                <h1>{{st.tot_points}}</h1>
-                <h4 class="mt-n2">{{st.username}}</h4>
-            </v-col>
-        </v-row>
+        <div v-else>
+            <v-row no-gutters class="mt-2" align="center" style="height:100px;" >
+                <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="4">
+                    <!-- <div class="overline lh-1">{{st.username}}</div> -->
+                    <h1>{{st.tot_points}}</h1>
+                    <h4 class="mt-n2">{{st.username}}</h4>
+                </v-col>
+            </v-row>
+            <v-row no-gutters justify="end">
+                <div class="caption text-end">*last 7 MOTDs</div>
+            </v-row>
+        </div>
     </v-container>
 </template>
 <script>

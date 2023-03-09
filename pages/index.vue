@@ -60,8 +60,8 @@
             </v-col>
             <v-col cols="12" md="6">
                 <match-of-the-day class=""/>
-                <stats-last-preso class="mt-5"/>
-                <stats-top-users class="mt-8"/>
+                <stats-top-users class="mt-5"/>
+                <stats-last-preso class="mt-8 pb-5"/>
             </v-col>
         </v-row>
     </v-container>
