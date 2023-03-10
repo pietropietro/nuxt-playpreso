@@ -24,3 +24,13 @@ export default {
     }
 }
 </script>
+
+<style>
+/* TODO check proper way to override vuetify values */
+.theme--dark.v-tabs > .v-tabs-bar {
+  background-color: transparent !important;
+}
+.theme--dark.v-tabs-items {
+  background-color: transparent !important;
+}
+</style>

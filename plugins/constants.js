@@ -97,6 +97,7 @@ Vue.mixin({
             ADMIN_API_ROUTES: {
                 PPTOURNAMENTTYPES:{ 
                     GET: '/admin/p-tournament-types',
+                    CREATE: '/admin/p-tournament-types',
                     UPDATE: '/admin/p-tournament-types/'
                 },
                 USER:{

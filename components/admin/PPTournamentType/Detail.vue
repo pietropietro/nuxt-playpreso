@@ -1,83 +1,87 @@
 <template>
-    <v-container>
+    <loading-page v-if="loading"/>
+    <v-container v-else-if="objModel">
+        {{objModel}}
         <v-row>
             <v-col>
                 <div class="ocrastd">
-                    #{{ ppTournamentType.id }}
+                    #{{ objModel.id }}
                 </div>
+            </v-col>
+            <v-col>
+                <p-p-input-text placeholder="name" :value="objModel.name" :setValue="(val)=>setModel(val, 'name')"/>
+            </v-col>
+            <v-col>
+                <p-p-input-number
+                    label="level" 
+                    :value="objModel.level" 
+                    :setValue="(val)=>setModel(parseInt(val), 'level')"
+                    :enter="null"
+                />
             </v-col>
         </v-row>
         <v-row>
             <p-p-input-number
                 label="cost" 
-                :value="ppTournamentType.cost" 
-                :setValue="(val)=>{ ppTournamentType.cost = parseInt(val)}"
-                :enter="async () => await update(
-                    {'cost': ppTournamentType.cost}
-                )"
+                :value="objModel.cost" 
+                :setValue="(val)=>setModel(parseInt(val), 'cost')"
+                :enter="null"
             />
             <p-p-input-number
                 label="rounds" 
-                :value="ppTournamentType.rounds" 
-                :setValue="(val)=>{ ppTournamentType.rounds = parseInt(val)}"
-                :enter="async () => await update(
-                    {'rounds': ppTournamentType.rounds}
-                )"
+                :value="objModel.rounds" 
+                :setValue="(val)=>setModel(parseInt(val), 'rounds')"
+                :enter="null"
             />
             <p-p-input-number
                 label="participants" 
-                :value="ppTournamentType.participants" 
-                :setValue="(val)=>{ ppTournamentType.participants = parseInt(val)}"
-                :enter="async () => await update(
-                    {'participants': ppTournamentType.participants}
-                )"
+                :value="objModel.participants" 
+                :setValue="(val)=>setModel(parseInt(val), 'participants')"
+                :enter="null"
             />
         </v-row>
-        <v-container class="my-5">
-            <v-row>
-                <div class="overline lh-1">EMOJI</div>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <em-emoji v-if="ppTournamentType.emoji" size="5em" :native="ppTournamentType.emoji"></em-emoji>
-                </v-col>
-                <v-col><div :id="'picker' + ppTournamentType.id"> </div></v-col>
-                <v-col>
-                <v-btn 
-                    :loading="loadingUpdate"
-                    @click="update(
-                        {'emoji': ppTournamentType.emoji}
-                    )">
-                    UPDATE EMOJI
-                </v-btn>
-            </v-col>
-            </v-row>
-        </v-container>
         <v-row>
-            <v-col><div class="overline lh-1">COLOR</div></v-col>
             <v-col>
-                <div class="overline lh-1">
-                    {{ ppTournamentType.rgb }}
-                </div>
+                <v-row>
+                    <div class="overline lh-1">EMOJI</div>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <em-emoji v-if="objModel.emoji" size="5em" :native="objModel.emoji"></em-emoji>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col><div :id="'picker' + objModel.id"> </div></v-col>
+                </v-row>
             </v-col>
             <v-col>
-                <v-color-picker v-model="newColor" show-swatches/>
-            </v-col>
-            <v-col>
-                <v-btn 
-                    :loading="loadingUpdate"
-                    @click="update(
-                        {'rgb': newColor.r + ',' + newColor.g + ',' + newColor.b}
-                    )">
-                    UPDATE COLOR
-                </v-btn>
+                <v-row>
+                    <v-col>
+                        <div class="overline lh-1">COLOR</div>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-sheet width="20" height="20" 
+                            :color="ppRGBA(newColorString)" 
+                            rounded
+                        />
+                    </v-col>
+                    <v-col>
+                        <div class="overline lh-1">
+                            {{ objModel.rgb }}
+                        </div>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-color-picker v-model="newColorObj" show-swatches/>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
-        <v-row align="center">
-            <v-col><div class="overline lh-1">LEAGUES</div></v-col>
-            <v-col v-for="league in ppTournamentType.leagues" :key="league.id">
-                <league-detail :league="league" sizeClass="text-h3"/>
-            </v-col>
+        <v-row class="py-4" justify="center">
+            <v-btn @click="()=>{!!ppTournamentType ? update() : create()}">{{!!ppTournamentType ? 'UPDATE' : 'CREATE'}}</v-btn>
         </v-row>
     </v-container>
 </template>
@@ -88,37 +92,72 @@ export default {
     props:{
         ppTournamentType: {type: Object}
     },
+    computed:{
+        objModel:{
+            get(){
+                if(this.ppTournamentType) return this.ppTournamentType;
+                return this.newPPTT;
+            },
+            set(val){
+                if(this.ppTournamentType){
+                    this.ppTournamentType = val;
+                    return;
+                }
+                this.newPPTT = val;                
+            }
+        },
+        newColorString(){
+            return this.newColorObj.r + ', ' + this.newColorObj.g + ',' + this.newColorObj.b
+        }
+    },
     data(){
         return{
-            loadingUpdate: false,
-            newColor: {
-                'r': this.ppTournamentType.rgb?.split(',')[0],
-                'g': this.ppTournamentType.rgb?.split(',')[1],
-                'b': this.ppTournamentType.rgb?.split(',')[2]
+            newPPTT: {},
+            loading: false,
+            newColorObj: {
+                'r': this.ppTournamentType?.rgb?.split(',')[0],
+                'g': this.ppTournamentType?.rgb?.split(',')[1],
+                'b': this.ppTournamentType?.rgb?.split(',')[2]
             }
         }
     },
     methods:{
-        async update(values){
-            this.loadingUpdate = true;
-    
+        async create(){
+            this.loading = true;
+            
+            //hardtype
+            this.objModel.rgb = this.newColorString;
+
             let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.UPDATE + this.ppTournamentType.id, values, 'POST'
+                this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.CREATE, this.objModel, 'POST'
             );     
-            if(response.status=='success'){
-                if(values.rgb)this.ppTournamentType.rgb = values.rgb;
-            }
-            this.loadingUpdate = false;
+            this.loading = false;
+        },
+        async update(){
+            this.loading = true;
+    
+            //hardtype
+            this.objModel.rgb = this.newColorString;
+
+            let response = await this.$api.call(
+                this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.UPDATE + this.objModel.id, this.objModel, 'POST'
+            );     
+            this.loading = false;
         },
         selectEmoji(emObj){
             console.log(emObj);
-            this.ppTournamentType.emoji=emObj.native;
+            this.setModel(emObj.native, 'emoji');
+        },
+        setModel(val, key){
+            let copy = JSON.parse(JSON.stringify(this.objModel));
+            copy[key] = val;
+            this.objModel = copy;
         }
     },
     mounted(){
         const pickerOptions = { 
             onEmojiSelect: this.selectEmoji,
-            parent: document.querySelector('#picker' + this.ppTournamentType.id),
+            parent: document.querySelector('#picker' + this.objModel.id),
         }
         new Picker(pickerOptions);
     }
