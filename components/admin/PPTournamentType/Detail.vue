@@ -90,7 +90,8 @@ import {Picker } from 'emoji-mart'
 
 export default {
     props:{
-        ppTournamentType: {type: Object}
+        ppTournamentType: {type: Object},
+        onCreate: {type: Function}
     },
     computed:{
         objModel:{
@@ -131,6 +132,7 @@ export default {
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.PPTOURNAMENTTYPES.CREATE, this.objModel, 'POST'
             );     
+            await this.onCreate();
             this.loading = false;
         },
         async update(){

@@ -19,7 +19,7 @@
                 <h1>CREATE P-TOURNAMENT-TYPE</h1>
                 <v-card>
                     <v-container>
-                        <admin-p-p-tournament-type-detail />
+                        <admin-p-p-tournament-type-detail :onCreate="getPPTTournamentTypes"/>
                     </v-container>
                 </v-card>
             </v-tab-item>
