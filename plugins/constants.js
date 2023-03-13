@@ -32,7 +32,7 @@ Vue.mixin({
                 },
                 GUESS:{
                     LOCK: '/guess/lock/',
-                    NOT_VERIFIED: '/guess/not-verified'
+                    USER_CURRENT: '/guess'
                 },
                 USER_PARTICIPATION: {
                     GET:  '/user-participation',

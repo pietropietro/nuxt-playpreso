@@ -1,31 +1,6 @@
 <template>
     <v-container  class="pt-0">
-        <template v-if="currentGuesses?.length>0">
-            <v-row no-gutters>
-                    <h1>NEXT MATCHES</h1>
-                <h4>({{currentGuesses.length}})</h4>
-            </v-row>
-            <v-row class="mt-0">
-                <v-container class="pa-0">
-                    <v-slide-group
-                        :show-arrows="!$vuetify.breakpoint.xs"
-                        prev-icon="<"
-                        next-icon=">"
-                    >
-                        <v-slide-item v-for="(guess, index) in currentGuesses" :key="guess.id" class="mx-2">
-                            <!-- width is necessary for slider to work on page landing :( -->
-                            <div style="min-width:250px; max-width:300px;">
-                                <guess-single-card 
-                                    :guess="guess"  
-                                    :match="guess.match" 
-                                    :rgb="guess.ppTournamentType?.rgb"
-                                />
-                            </div>
-                        </v-slide-item>
-                    </v-slide-group>
-                </v-container>
-            </v-row>
-        </template>
+        <guess-home-scroll />
         <v-row>
             <v-col cols="12" md="6" 
                 class="pa-0"
@@ -72,9 +47,7 @@ export default {
     data(){
         return {
             userParticipations: null,
-            currentGuesses: null,
             loadingParticipations: true,
-            loadingGuesses: true,
         }
     },
     methods:{
@@ -85,20 +58,11 @@ export default {
             }
             this.loadingParticipations = false;
         },
-        async getCurrentGuesses(){
-            let response = await this.$api.call(this.API_ROUTES.GUESS.NOT_VERIFIED);
-            if(response && response.status === "success"){
-                this.currentGuesses = response.message;
-            }
-            this.loadingGuesses = false;
-        },
     },
     async mounted(){
         // this.$store.commit('navigation/setActive', { title: null, color: null});
         await this.getParticipations();
-        await this.getCurrentGuesses();
     },
-
 
 }
 </script>
