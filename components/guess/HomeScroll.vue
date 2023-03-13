@@ -1,5 +1,5 @@
 <template >
-    <div v-if="!loading && currentGuesses">
+    <div v-if="!loading && (currentGuesses.next.length || currentGuesses.last.length)">
         <v-row no-gutters align="center" class="flex-nowrap">
                 <h1>MATCHES</h1>
                 <v-chip-group
