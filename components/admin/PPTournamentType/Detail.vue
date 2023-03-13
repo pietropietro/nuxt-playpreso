@@ -1,7 +1,6 @@
 <template>
     <loading-page v-if="loading"/>
     <v-container v-else-if="objModel">
-        {{objModel}}
         <v-row>
             <v-col>
                 <div class="ocrastd">
