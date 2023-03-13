@@ -19,7 +19,7 @@
             </template>
             <template v-slot:item.cup_format="{ item }">
                 <div class="overline lh-1">
-                    {{ !!item.cup_format ? 'P-CUP' : 'P-LEAGUE' }}
+                    {{ !!item.cup_format ? 'P-CUP' : item.cost ? 'P-LEAGUE' : 'OTHER'}}
                 </div>
             </template>
             <template v-slot:item.emoji="{ item }">

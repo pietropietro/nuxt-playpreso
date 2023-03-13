@@ -9,7 +9,7 @@
             <v-col cols="auto" class="pa-4">
                 <v-spacer/>
                 <v-row>
-                    <v-card flat class="rounded" :color="ppRGBA(guesses[guessIndex].ppTournamentType?.rgb ?? ('194, 214, 214'))">
+                    <v-card flat class="rounded" :color="ppRGBA(guesses[guessIndex].ppTournamentType?.rgb)">
                         <v-container>
                             <match-info-short :match="match"/>
                         </v-container>
@@ -19,10 +19,6 @@
                     <h4 v-if="guesses[guessIndex].ppTournamentType">
                         <em-emoji :native="guesses[guessIndex].ppTournamentType.emoji" />
                         {{ppTournamentTypeTitle(guesses[guessIndex].ppTournamentType)}}
-                    </h4>
-                    <h4 v-else>
-                        <em-emoji id="alarm_clock" />
-                        Motd
                     </h4>
                 </v-row>
             </v-col>                
