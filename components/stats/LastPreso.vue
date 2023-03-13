@@ -15,12 +15,7 @@
                         </v-container>
                     </v-card>
                 </v-row>
-                <v-row>
-                    <h4 v-if="guesses[guessIndex].ppTournamentType">
-                        <em-emoji :native="guesses[guessIndex].ppTournamentType.emoji" />
-                        {{ppTournamentTypeTitle(guesses[guessIndex].ppTournamentType)}}
-                    </h4>
-                </v-row>
+                <guess-tournament-subtitle :ppTournamentType="guesses[guessIndex].ppTournamentType" />
             </v-col>                
             <v-spacer/>
             <v-col cols="auto">

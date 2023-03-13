@@ -12,13 +12,13 @@
                         <div class="overline lh-1">
                             {{s}}
                             <span v-if="s=='next' && currentGuesses[s].length">
-                                <template v-if="currentGuesses[s].filter((g) => g.guessed_at).length">
-                                    <em-emoji id="unlock" class="mr-n1"/>
-                                    {{currentGuesses[s].filter((g) => g.guessed_at).length}}
-                                </template>
                                 <template v-if="currentGuesses[s].filter((g) => !g.guessed_at).length">
-                                    <em-emoji id="lock" class="mr-n1"/>
+                                    <em-emoji id="unlock" class="mr-n1"/>
                                     {{currentGuesses[s].filter((g) => !g.guessed_at).length}}
+                                </template>
+                                <template v-if="currentGuesses[s].filter((g) => g.guessed_at).length">
+                                    <em-emoji id="lock" class="mr-n1"/>
+                                    {{currentGuesses[s].filter((g) => g.guessed_at).length}}
                                 </template>
                             </span>
                         </div>

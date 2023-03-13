@@ -156,12 +156,10 @@
             </v-col>
         </v-row>
         </v-container>
-        <div class="ml-2" v-if="guess.ppTournamentType?.emoji">
-            <h4>
-                <em-emoji :native="guess.ppTournamentType.emoji" />
-                {{ppTournamentTypeTitle(guess.ppTournamentType)}}
-            </h4>
-        </div>
+        <guess-tournament-subtitle v-if="guess.ppTournamentType" 
+            class="no-gutters"
+            :ppTournamentType="guess.ppTournamentType" 
+        />
     </div>
     <error-wall v-else/>
 </template>
