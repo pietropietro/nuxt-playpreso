@@ -1,10 +1,10 @@
 <template >
     <div v-if="!loading && (currentGuesses.next.length || currentGuesses.last.length)">
-        <v-row no-gutters align="center" class="flex-nowrap">
-                <h1>MATCHES</h1>
+        <v-row no-gutters align="center">
+                <div class="overline font-weight-bold lh-1 mr-2">MATCHES</div>
                 <v-chip-group
                     mandatory
-                    class="ml-3 h-100"
+                    class="h-100"
                     active-class="primary"
                     v-model="selected"
                 >
