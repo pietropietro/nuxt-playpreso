@@ -3,8 +3,10 @@
         <league-detail :league="match.league" />
         <v-row class="flex-nowrap">
             <v-col cols="auto">
-                <h4>{{match.homeTeam?.name}}</h4>
-                <h4>{{match.awayTeam?.name}}</h4>
+                <h4 v-if="match.homeTeam?.name.length < 19">{{match.homeTeam?.name}}</h4>
+                <h6 v-else>{{match.homeTeam?.name}}</h6>
+                <h4 v-if="match.awayTeam?.name.length < 19">{{match.awayTeam?.name}}</h4>
+                <h6 v-else>{{match.awayTeam?.name}}</h6>
             </v-col>
             <v-col cols="auto" class="pl-0" v-if="match.verified_at" >
                 <h4>{{match.score_home}}</h4>
