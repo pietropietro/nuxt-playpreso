@@ -15,6 +15,7 @@ Vue.mixin({
             return colorString;
         },
         ppTournamentTypeTitle(ppTournamentType){
+            if(!ppTournamentType)return null;
             return ppTournamentType.name + " " + (ppTournamentType.level ?? '');
         },
         cupGroupStageString(ppCupGroup, cupFormat){
