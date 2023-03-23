@@ -2,9 +2,8 @@
     <v-container  class="pt-0">
         <guess-home-scroll />
         <v-row>
-            <v-col cols="12" md="6" 
-                class="pa-0"
-            >
+            
+            <v-col cols="12" md="6" >
                 <v-container class="pa-0">
                     <v-row no-gutters
                         style="height:160px; width:100%" 
@@ -14,8 +13,17 @@
                             {{currentPoints}} <em-emoji id="parking"/>
                         </span>
                     </v-row>
-                    <p-p-league-available-list class="px-2 mb-5"/>
                 </v-container>
+            </v-col>
+            <v-col class="pt-0 pt-md-3" cols="12" md="6" >
+                <match-of-the-day class="mt-n6 mt-md-5"/>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12" md="6" 
+                class="pa-0"
+            >
+                <p-p-league-available-list class="px-2 mb-5"/>
                 <v-container v-if="userParticipations?.length > 0">
                     <v-row no-gutters>
                         <h1>ENROLLED</h1>
@@ -34,7 +42,6 @@
                 </v-container>
             </v-col>
             <v-col cols="12" md="6">
-                <match-of-the-day class="mt-md-5"/>
                 <stats-top-users class="mt-5"/>
                 <stats-last-preso class="mt-8 pb-5"/>
             </v-col>

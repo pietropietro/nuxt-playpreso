@@ -39,7 +39,6 @@ export default {
     },
     async mounted(){
        await this.getPPCup();
-       console.log(this.selectedLevel, "selectedlevel");
     }
 }
 </script>

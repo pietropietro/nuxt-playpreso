@@ -1,6 +1,6 @@
 <template>
-    <loading-page v-if="loading"/>
-    <v-container v-else-if="ppRoundMatch" >
+    <!-- <loading-page v-if="loading"/> -->
+    <v-container v-if="ppRoundMatch" >
         <v-row align="center">
             <v-col cols="auto" class="px-0">
                 <em-emoji :id="ppTournamentType.emoji" size="2.5em" class="mr-2"/>
@@ -29,7 +29,7 @@
                     <guess-single-card
                         :match="ppRoundMatch.match"
                         :guess="guess"
-                        :setGuess="onLock"
+                        :afterLock="afterLock"
                         :rgb="ppTournamentType.rgb"
                     />
                 </div>
@@ -76,7 +76,7 @@ export default {
             }
             this.loading = false;
         },
-        onLock(val){
+        afterLock(val){
             this.guess=val;
             this.ppRoundMatch.aggr_count ++;
         }

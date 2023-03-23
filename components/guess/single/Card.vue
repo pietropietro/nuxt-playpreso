@@ -167,7 +167,7 @@
 export default {
     props:{
         guess: {type: Object, required: true},
-        setGuess: {type: Function},
+        afterLock: {type: Function},
         match: {type: Object, required: true},
         rgb: {type: String}
     },
@@ -232,12 +232,12 @@ export default {
                 this.guess.home = home;
                 this.guess.away = away;
 
-                if(this.setGuess){
+                if(this.afterLock){
                     let copy = JSON.parse(JSON.stringify(this.guess));
                     copy.guessed_at = new Date();
                     copy.home = home;
                     copy.away = away;
-                    this.setGuess(copy);
+                    this.afterLock(copy);
                 }
             }
             this.lockButtonLoading = false;
