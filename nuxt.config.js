@@ -41,6 +41,10 @@ export default {
 		{ src: '~/plugins/vuex-persist.js', ssr: false }
 	],
 
+	router: {
+		base: '/',
+	},
+
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
 
@@ -79,6 +83,8 @@ export default {
 			  compiler: require('vue-template-babel-compiler')
 			}
 		},
+		// so that admin.playpreso.com looks in playpreso.com/_nuxt
+		// publicPath: process.env.DEBUG ? '/_nuxt/' : 'https://playpreso.com/_nuxt/',
 	},
 
 	// Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
