@@ -17,7 +17,7 @@
 
             <v-col class="pa-0" >
 
-                <template v-if="availableViews[selectedIndex] === 'points'">
+                <template v-if="selectedView === 'points'">
                     <v-row no-gutters class="h-100"
                         v-if="guess.verified_at"
                         justify="center" align="center"
@@ -34,7 +34,7 @@
                         </template>
                     </v-row>
                 </template>
-                <template v-else-if="availableViews[selectedIndex] === 'locked'">
+                <template v-else-if="selectedView === 'locked'">
                     <!-- LOCKED -->
                         <v-row no-gutters 
                             class="h-100"
@@ -51,7 +51,7 @@
                         </v-container>
                     </v-row>
                 </template>
-                <template v-else-if="availableViews[selectedIndex] === 'lock'">
+                <template v-else-if="selectedView === 'lock'">
                     <!-- UNLOCKED -->
                     <v-row no-gutters class="h-100"
                         justify="center" align="center"
@@ -68,7 +68,7 @@
                             </v-container >
                     </v-row>
                 </template>
-                <template v-else-if="availableViews[selectedIndex] === 'stats_position'">
+                <template v-else-if="selectedView === 'stats_position'">
                     <v-row
                         align="center"
                         no-gutters
@@ -90,7 +90,7 @@
                     </v-row>
                 </template>
 
-                <template v-else-if="availableViews[selectedIndex] === 'stats_last_matches'">
+                <template v-else-if="selectedView === 'stats_last_matches'">
                     <v-row 
                         align="center"
                         no-gutters
@@ -131,7 +131,7 @@
                     </v-row>
                 </template>
 
-                <template v-else-if="availableViews[selectedIndex] === 'stats_gol'">
+                <template v-else-if="selectedView === 'stats_gol'">
                     <v-row
                         align="center"
                         no-gutters
@@ -193,6 +193,9 @@ export default {
             if(this.guess.verified_at) return this.verifiedViews;
             if(this.guess.guessed_at) return this.lockedViews;
             return this.unlockedViews;
+        },
+        selectedView(){
+            return this.availableViews[this.selectedIndex] ?? this.availableViews[0];
         },
         standings(){
             if(!this.homeStandings) return []
