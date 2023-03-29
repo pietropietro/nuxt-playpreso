@@ -25,7 +25,7 @@ export default {
     },
     methods:{
         teamNameToHtml(name) {
-            if(this.$vuetify.breakpoint.mdAndUp) return name;
+            // if(this.$vuetify.breakpoint.mdAndUp) return name;
             
             let limitOneWord = 18;
             if (name.length <= limitOneWord) {

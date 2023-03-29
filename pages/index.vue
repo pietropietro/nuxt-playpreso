@@ -2,7 +2,6 @@
     <v-container  class="pt-0">
         <guess-home-scroll />
         <v-row>
-            
             <v-col cols="12" md="6" >
                 <v-container class="pa-0">
                     <v-row no-gutters
@@ -16,7 +15,7 @@
                 </v-container>
             </v-col>
             <v-col class="pt-0 pt-md-3" cols="12" md="6" >
-                <match-of-the-day class="mt-n6 mt-md-5"/>
+                <motd-home class="mt-n6 mt-md-5"/>
             </v-col>
         </v-row>
         <v-row>

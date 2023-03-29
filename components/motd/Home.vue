@@ -1,18 +1,24 @@
 <template>
     <!-- <loading-page v-if="loading"/> -->
-    <v-container v-if="ppRoundMatch" >
+    <v-container v-if="motds" >
         <v-row align="center">
+            <v-col cols="auto">
+                <h2 
+                    @click="next" 
+                    class="font-weight-bold">
+                    <
+                </h2>
+            </v-col>
             <v-col cols="auto" class="px-0">
-                <em-emoji :id="ppTournamentType.emoji" size="2.5em" class="mr-2"/>
+                <em-emoji :id="motdPPTT.emoji" size="2.5em" class="mr-2"/>
             </v-col>
             <v-col>
                 <v-row>
                     <h1>MOTD</h1>
-                    <h4>(match of the day)</h4>
                 </v-row>
                 <v-row>
-                    <div class="caption mt-n2">
-                        picked each morning at 7am.
+                    <div class="font-weight-bold caption mt-n4">
+                        match of the day
                     </div>
                 </v-row>
             </v-col>
@@ -23,22 +29,13 @@
                 />
             </v-col>
         </v-row>
-        <v-row justify="center" align="center" v-if="matchView" class="mt-0">
-            <v-col>
-                <div style="min-width:250px; max-width:300px;">
-                    <guess-single-card
-                        :match="ppRoundMatch.match"
-                        :guess="guess"
-                        :afterLock="afterLock"
-                        :rgb="ppTournamentType.rgb"
-                    />
-                </div>
-            </v-col>
-            <v-col class="text-center">
-                <h1 >{{ppRoundMatch.aggr_count}}</h1>
-                <div class="overline lh-1">locks</div>
-            </v-col>
-        </v-row>
+        <!-- <v-row class="caption mt-n6">picked each morning at 7am.</v-row> -->
+        <motd-single 
+            :motd="motds[selectedIndex]" 
+            :motdPPTT="motdPPTT"
+            v-if="matchView" 
+            class="mt-0"
+        />
         <div v-else>
             <v-row no-gutters align="center" style="height:100px;" >
                 <v-col class="text-center" v-for="(st, i) in standings" :key="st.user_id" cols="4">
@@ -57,11 +54,11 @@
 export default {
     data(){
         return {
+            selectedIndex: 0,
             loading: true,
-            ppRoundMatch: null,
-            ppTournamentType: null,
+            motds: null,
+            motdPPTT: null,
             standings: null,
-            guess: null,
             matchView: true
         }
     },
@@ -69,16 +66,17 @@ export default {
         async getMotd(){
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
-                this.ppRoundMatch = response.message?.motd;
+                this.motds = response.message?.motds;
+                this.motds.map((m)=>{
+                    m.guess = m.guess ?? {home: null, away: null, verified_at: !m.can_lock};
+                });
                 this.standings = response.message?.standings;
-                this.ppTournamentType = response.message?.ppTournamentType;
-                this.guess = this.ppRoundMatch.guess ?? {home: null, away: null, verified_at: !this.ppRoundMatch.can_lock};
+                this.motdPPTT = response.message?.ppTournamentType;
             }
             this.loading = false;
         },
-        afterLock(val){
-            this.guess=val;
-            this.ppRoundMatch.aggr_count ++;
+        next(){
+            this.selectedIndex = this.selectedIndex == (this.motds.length -1) ? 0 : this.selectedIndex + 1;
         }
     },
     async mounted(){
