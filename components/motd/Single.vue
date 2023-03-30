@@ -41,8 +41,8 @@ export default {
         motdPPTT: {type: Object}
     },
     methods:{
-        afterLock(val){
-            this.guess=val;
+        afterLock(lockedGuess){
+            this.motd.guess=lockedGuess;
             this.motd.aggr_count ++;
         }
     },
