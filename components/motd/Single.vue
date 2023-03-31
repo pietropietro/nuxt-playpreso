@@ -18,7 +18,10 @@
         </v-row>
         <v-row v-if="motd.stats" class="py-5 text-center">
             <v-col cols="4">
-                <h3>{{motd.stats.most_locked.result}}</h3>
+                <v-row no-gutters justify="center">
+                    <h3>{{motd.stats.most_locked.result}}</h3>
+                    <h6>({{motd.stats.most_locked.occurrances}})</h6>
+                </v-row>
                 <div class="overline lh-1">most <em-emoji id="lock"/></div>
             </v-col>
             <v-col cols="4">
@@ -32,16 +35,17 @@
 
             </v-col>
         </v-row>
-        <div v-else>
-            <v-sparkline
-                class="pa-4 ocrastd"
-                :value="userLast.points"
-                :labels="userLast.points"
-                :color="'rgba('+motdPPTT.rgb+')'"
-                height="60"
-                stroke-linecap="round"
-                smooth
-            />
+        <div v-else class="my-6 mb-md-0">
+                <v-sparkline
+                    class="ocrastd"
+                    padding="12"
+                    :value="userLast.points"
+                    :labels="userLast.points"
+                    :color="'rgba('+motdPPTT.rgb+')'"
+                    height="60"
+                    stroke-linecap="round"
+                    smooth
+                />
             <!-- <v-row no-gutters>
                 <v-col cols="2" v-for="(e,i) in userLast.teams" :key="i">
                     <div v-html="e" 
