@@ -4,6 +4,12 @@
             align="center"
             :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb, 0.8)"
         >
+            <v-col cols="auto" class="pr-2">
+                <em-emoji v-if="participation.ppTournamentType.emoji" 
+                    :native="participation.ppTournamentType.emoji" 
+                    size="2rem"
+                />
+            </v-col>
             <v-col class="py-1">
                 <v-chip label x-small class="oppositeText--text" :color="ppRGBA(participation.ppTournamentType.rgb)">
                     <div class="overline" style="line-height:1rem;">
@@ -11,7 +17,6 @@
                     </div>
                 </v-chip>
                 <h2>
-                    <em-emoji v-if="participation.ppTournamentType.emoji" :native="participation.ppTournamentType.emoji" />
                     {{ppTournamentTypeTitle(participation.ppTournamentType)}}
                 </h2>
             </v-col>
