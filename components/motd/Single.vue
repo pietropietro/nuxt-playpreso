@@ -16,7 +16,7 @@
                 <div class="overline lh-1">locks</div>
             </v-col>
         </v-row>
-        <v-row v-if="motd.stats" class="text-center">
+        <v-row v-if="motd.stats" class="py-5 text-center">
             <v-col cols="4">
                 <h3>{{motd.stats.most_locked.result}}</h3>
                 <div class="overline lh-1">most <em-emoji id="lock"/></div>
@@ -32,13 +32,36 @@
 
             </v-col>
         </v-row>
+        <div v-else>
+            <v-sparkline
+                class="pa-4 ocrastd"
+                :value="userLast.points"
+                :labels="userLast.points"
+                :color="'rgba('+motdPPTT.rgb+')'"
+                height="60"
+                stroke-linecap="round"
+                smooth
+            />
+            <!-- <v-row no-gutters>
+                <v-col cols="2" v-for="(e,i) in userLast.teams" :key="i">
+                    <div v-html="e" 
+                        class="text-center text-uppercase ocrastd"
+                        :style="{
+                            lineHeight:1,
+                            fontSize:'10px'
+                        }"
+                    />
+                </v-col>
+            </v-row> -->
+        </div>
     </div>
 </template>
 <script>
 export default {
     props:{
         motd: {type: Object},
-        motdPPTT: {type: Object}
+        motdPPTT: {type: Object},
+        userLast: {type: Object}
     },
     methods:{
         afterLock(lockedGuess){
