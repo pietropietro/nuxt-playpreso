@@ -16,146 +16,14 @@
             </v-col>
 
             <v-col class="pa-0" >
-
-                <template v-if="selectedView === 'points'">
-                    <v-row no-gutters class="h-100"
-                        v-if="guess.verified_at"
-                        justify="center" align="center"
-                    >
-                        <!-- MOTD -->
-                        <em-emoji v-if="isMissed(guess) && !guess.id" id="dash" size="2em"/>
-                        <em-emoji v-else-if="isMissed(guess)" id="x" size="2em"/>
-                        <template v-else>
-                            <h2 class="ocrastd" style="line-height:1em;" v-if="guess.PRESO">
-                                PRE<br>SO!
-                            </h2>
-                            <h1 v-else>
-                                {{guess.points}}
-                                <em-emoji id="parking"/>
-                            </h1>
-                        </template>
-                    </v-row>
-                </template>
-                <template v-else-if="selectedView === 'locked'">
-                    <!-- LOCKED -->
-                        <v-row no-gutters 
-                            class="h-100"
-                            justify="center" align="center"
-                        >
-                        <v-container class="px-6" style="line-height:1.5rem;">
-                            <v-row justify="center" v-if="!guess.verified_at">
-                                <em-emoji id="lock" size="1.5em" />
-                            </v-row>
-                            <!-- <match-inner-values v-else :match="match" :guess="guess" /> -->
-                            <v-row justify="center">
-                                <h2 class="ocrastd"> {{guess.home}}-{{guess.away}}</h2>
-                            </v-row>
-                        </v-container>
-                    </v-row>
-                </template>
-                <template v-else-if="selectedView === 'lock'">
-                    <!-- UNLOCKED -->
-                    <v-row no-gutters class="h-100"
-                        justify="center" align="center"
-                    >
-                        <v-container fill-height>
-                            <guess-single-picker :guess="guess"/>
-                            <guess-single-bottom-action
-                                    @click.native.stop
-                                    :style="{ backgroundColor: ppRGBA(rgb)}"
-                                    :guess="guess"
-                                    :onclick="lockGuess"
-                                    class="rounded-br"
-                                />
-                            </v-container >
-                    </v-row>
-                </template>
-                <template v-else-if="selectedView === 'stats_position'">
-                    <v-row
-                        align="center"
-                        no-gutters
-                        class="h-100"
-                        :style="{ height: cardHeight}"
-                    >
-                        <v-col cols="12" class="mt-n4 pr-1" >
-                        <v-row no-gutters>
-                                <v-spacer />
-                                <div class="overline lh-1 mt-1">position</div>
-                                <v-spacer />
-                            </v-row>
-                            <v-row no-gutters 
-                                v-for="(s,i) in standings" :key="i"
-                            >
-                                <v-col cols="12" class="lh-1 text-center"><h4>{{s.position}}°</h4></v-col>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </template>
-
-                <template v-else-if="selectedView === 'stats_last_matches'">
-                    <v-row 
-                        align="center"
-                        no-gutters
-                        class="h-100"
-                        :style="{ height: cardHeight}"
-                    >
-                        <v-col cols="12" class="" v-if="match.homeTeam?.lastMatches">
-                            <!-- <v-row no-gutters class="overline lh-1 mt-1">
-                                <v-spacer />
-                                <div>last 3</div>
-                                <v-spacer />
-                            </v-row> -->
-
-                            <!-- NESTED LOOPING DOES NOT WORK :( em-emoji issue -->
-                            <v-row no-gutters justify="center"
-                                class=""
-                            >
-                                <v-col cols="auto" class="mx-1" 
-                                    v-for="(m,ind) in match.homeTeam.lastMatches"  
-                                    :key="ind"
-                                >
-                                    <em-emoji size="1.3em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
-                                </v-col>
-                            </v-row>
-                            <v-row no-gutters justify="center"
-                                class=""
-                            >
-                                <v-col cols="auto" class="mx-1" 
-                                    v-for="(m,ind) in match.awayTeam.lastMatches"  
-                                    :key="ind"
-                                >
-                                    <em-emoji size="1.3em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
-                                </v-col>
-                            </v-row>
-
-                        </v-col>
-                        <v-col v-else>error</v-col>
-                    </v-row>
-                </template>
-
-                <template v-else-if="selectedView === 'stats_gol'">
-                    <v-row
-                        align="center"
-                        no-gutters
-                        class="h-100"
-                        :style="{ height: cardHeight}"
-                    >
-                        <v-col cols="12" class="mt-n4 pr-1" >
-                            <v-row no-gutters class="overline lh-1 mt-1">
-                                <v-spacer />
-                                <em-emoji size="1.5em" id="soccer"/>
-                                <v-spacer />
-                            </v-row>
-                            <v-row no-gutters  justify="center"
-                                v-for="(s,i) in standings" :key="i"
-                            >
-                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">+{{s.gf}}</v-col>
-                                <v-col cols="auto" class="lh-1 text-center overline font-weight-bold mx-2">-{{s.ga}}</v-col>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </template>
+                <guess-single-view-points v-if="selectedView === 'points'" :guess="guess"/>
+                <guess-single-view-locked v-else-if="selectedView === 'locked'" :guess="guess"/>
+                <guess-single-view-unlocked v-else-if="selectedView === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
+                <guess-single-view-stats-position v-else-if="selectedView === 'stats_position'" :standings="standings" :height="cardHeight"/>
+                <guess-single-view-stats-last1x2 v-else-if="selectedView === 'stats_last_matches'" :match="match" :height="cardHeight"/>
+                <guess-single-view-stats-gf-ga v-else-if="selectedView === 'stats_gol'" :standings="standings" :height="cardHeight"/>
             </v-col>
+
         </v-row>
         </v-container>
         <guess-tournament-subtitle v-if="guess.ppTournamentType" 
@@ -177,7 +45,6 @@ export default {
         return{
             selectedIndex: 0,
             cardHeight: '90px',
-            lockButtonLoading: false,
             unlockedViews: ['lock', 'stats_position', 'stats_last_matches', 'stats_gol'],
             lockedViews: ['locked'],
             verifiedViews: ['points', 'locked'],
@@ -217,41 +84,6 @@ export default {
             if((this.selectedIndex + 1) < this.availableViews.length) return this.selectedIndex++;
             this.selectedIndex=0;
         },
-        async lockGuess(){
-            this.lockButtonLoading = true;
-            let home = this.guess.home ?? 0;
-            let away = this.guess.away ?? 0;
-      
-            let values = { 
-                "home": home,
-                "away": away
-            }
-            
-            let route = this.guess.id ? this.API_ROUTES.GUESS.LOCK + this.guess.id : this.API_ROUTES.MOTD.LOCK;
-            let response = await this.$api.call(
-                route, values, 'POST'
-            );
-
-            if(response && response.status === "success"){
-                this.guess.guessed_at = new Date();
-                this.guess.home = home;
-                this.guess.away = away;
-
-                if(this.afterLock){
-                    let copy = JSON.parse(JSON.stringify(this.guess));
-                    copy.guessed_at = new Date();
-                    copy.home = home;
-                    copy.away = away;
-                    this.afterLock(copy);
-                }
-            }
-            this.lockButtonLoading = false;
-        },
-        emojiForWDL(wdl){
-            if(wdl === 'W') return 'white_check_mark';
-            if(wdl === 'L') return 'x';
-            return 'heavy_minus_sign';
-        }
     }
 }
 </script>
