@@ -13,34 +13,54 @@
         </v-col>
         <v-spacer v-if="$vuetify.breakpoint.smAndUp" />
         <v-col sm="auto" cols="6">
-            <p-p-info 
+            <p-p-info
+                 
                 v-if="ppTournamentType.leagues.length == 1"
                 label="league"
                 :value="ppTournamentType.leagues[0].name"
             />
-            <p-p-info 
+            <p-p-info
+                 
                 v-else
                 label="leagues"
                 :value="ppTournamentType.leagues.length"
             />
         </v-col>
         <v-col cols="6" sm="auto" class="mx-sm-4">
-           <p-p-info 
+           <p-p-info
+                 
                 v-if="ppTournamentType.next"
                 label="qualifies to"
                 :value="ppTournamentTypeTitle(ppTournamentType.next)"
             />
-            <p-p-info v-else
+            <p-p-info
+                 v-else
                 label="level"
                 value="Last"
             />
         </v-col>
-        <v-col cols="6" sm="auto" v-if="$vuetify.breakpoint.mdAndUp">
-            <p-p-info 
-                label="participants"
-                :value="ppTournamentType.participants"
-            />
-        </v-col>
+        <template v-if="ppTournamentType.top_score">
+            <v-col cols="6" sm="auto">
+                <p-p-info
+                    label="record"
+                    :value="ppTournamentType.top_score.total_points"
+                />
+            </v-col>
+            <v-col cols="6" sm="auto">
+                <div>
+                    <v-row justify="center">
+                        <user-name
+                            :user="ppTournamentType.top_score.user"
+                            center
+                            small
+                        />
+                    </v-row>
+                    <v-row justify="center" class="mt-0">
+                        <div class="overline">record</div>
+                    </v-row>
+                </div>
+            </v-col>
+        </template>
         
     </v-row>
 </template>

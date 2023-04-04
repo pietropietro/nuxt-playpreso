@@ -1,5 +1,9 @@
 <template>
-    <v-row no-gutters class="flex-nowrap" align="center">
+    <v-row no-gutters 
+        class="flex-nowrap" 
+        :justify="center ? 'center' : ''" 
+        align="center"
+    >
             <v-col cols="auto" :class="current ? 'currentuser': ''">
                 <h1 v-if="!small">
                         <!-- <div class="text-h4 font-weight-bold" v-if="user"> -->
@@ -28,6 +32,7 @@ export default {
     props:{
         user:{type:Object},
         current: {type: Boolean},
+        center: {type: Boolean},
         small:{type: Boolean, default: false}
     }
 }
