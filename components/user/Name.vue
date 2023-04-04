@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters 
         class="flex-nowrap" 
-        :justify="center ? 'center' : ''" 
+        :justify="center ? 'center' : 'start'" 
         align="center"
     >
             <v-col cols="auto" :class="current ? 'currentuser': ''">
@@ -18,7 +18,7 @@
                     :to="trophy.ppCup_id ? (ROUTES.PPCUP.DETAIL + trophy.ppCup_id) : (ROUTES.PPLEAGUE.DETAIL + trophy.ppLeague_id)"
                 >
                     <em-emoji v-if="trophy.ppTournamentType?.emoji"
-                        size="1.5rem"
+                        :size="small ? '1em' : '1.5rem'"
                         class="ml-1 pointer"
                         :native="trophy.ppTournamentType.emoji"
                     />

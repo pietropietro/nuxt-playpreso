@@ -42,7 +42,7 @@
             </v-container>
         </template>
         <template v-else>
-            <v-container class="py-10 ocrastd">
+            <v-container class="pt-2 pt-sm-10 pb-10 ocrastd">
                 <v-row no-gutters justify="center"><h1>NOT STARTED</h1></v-row>
                 <v-row no-gutters justify="center" v-if="missingUsers">
                     <h2>waiting for {{missingUsers}} more users</h2>
