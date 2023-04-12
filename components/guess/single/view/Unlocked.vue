@@ -7,8 +7,10 @@
             <guess-single-bottom-action
                     @click.native.stop
                     :style="{ backgroundColor: ppRGBA(rgb)}"
+                    :color="ppRGBA(rgb)"
                     :guess="guess"
                     :onclick="lockGuess"
+                    :loading="loading"
                     class="rounded-br"
                 />
             </v-container >
@@ -23,12 +25,12 @@ export default {
     },
     data(){
         return{
-            lockButtonLoading: false,
+            loading: false,
         }
     },
     methods:{
         async lockGuess(){
-            this.lockButtonLoading = true;
+            this.loading = true;
             let home = this.guess.home ?? 0;
             let away = this.guess.away ?? 0;
       
@@ -55,7 +57,7 @@ export default {
                     this.afterLock(copy);
                 }
             }
-            this.lockButtonLoading = false;
+            this.loading = false;
         },
     }
 }
