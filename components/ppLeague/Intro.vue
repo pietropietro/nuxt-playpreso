@@ -45,7 +45,7 @@
                             <v-col cols="auto" >
                                 <em-emoji size="2em" id="medal"/>
                             </v-col>
-                            <v-col class="px-0" cols="auto">
+                            <v-col class="px-0" cols="auto" v-if="ppTournamentType.top_up?.updated_at">
                                 <div class="overline lh-1">
                                     {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(ppTournamentType.top_up.updated_at))}}
                                     <br>

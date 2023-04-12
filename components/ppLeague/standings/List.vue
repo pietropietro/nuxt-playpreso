@@ -10,7 +10,11 @@
                         </v-row>
                         <v-row align="center" v-if="ppTournamentType.rejoin">
                             <em-emoji id="repeat" />
-                            <div class="lh-1 ml-2 overline">{{ups[0].finished ? 're-joined' : 're-join'}} {{ppTournamentTypeTitle(ppTournamentType)}}</div>
+                            <div class="lh-1 ml-2 overline">{{ups[0].finished ? 're-joined' : 're-join'}}</div>
+                        </v-row>
+                        <v-row align="center" v-if="ppTournamentType.relegate">
+                            <em-emoji id="-1" />
+                            <div class="lh-1 ml-2 overline">{{ups[0].finished ? 'relegated' : 'relegate'}}</div>
                         </v-row>
                     </v-col>
                     <user-participation-standing-labels />
@@ -35,7 +39,14 @@
                                 #{{upForIndex(index).position}}
                             </v-chip>
                             <em-emoji id="repeat" size="1.5em"
-                                v-else-if="upForIndex(index).position <= (ppTournamentType.promote + ppTournamentType.rejoin)"
+                                v-else-if="ppTournamentType.rejoin && 
+                                    upForIndex(index).position <= (ppTournamentType.promote + ppTournamentType.rejoin)
+                                "
+                            />
+                            <em-emoji id="-1" size="1.5em"
+                                v-else-if="ppTournamentType.relegate && 
+                                    upForIndex(index).position >  ppTournamentType.participants - ppTournamentType.relegate
+                                "
                             />
                             <template v-else>#{{upForIndex(index).position}}</template>
                         </span>
