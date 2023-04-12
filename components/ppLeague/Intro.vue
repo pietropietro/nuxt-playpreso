@@ -43,11 +43,18 @@
             </v-col>
             <template v-if="ppTournamentType.top_up">
                 <v-col cols="12" sm="6" lg="auto">
-                    <v-row justify="center">
-                        <v-col cols="auto" class="mt-1">
+                    <v-row align="center">
+                        <v-col cols="auto" >
                             <em-emoji size="2em" id="medal"/>
                         </v-col>
-                        <v-col class="pl-0">
+                        <v-col class="px-0" cols="auto">
+                            <div class="overline lh-1">
+                                {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(ppTournamentType.top_up.updated_at))}}
+                                <br>
+                                 '{{Intl.DateTimeFormat('en-GB', {year:'2-digit'}).format(new Date(ppTournamentType.top_up.updated_at))}}
+                            </div>
+                        </v-col>
+                        <v-col>
                             <user-participation-standing-item :up="ppTournamentType.top_up"/>
                         </v-col>
                     </v-row>
