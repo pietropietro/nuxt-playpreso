@@ -4,12 +4,12 @@
             align="center"
             :style="'background-color: ' + ppRGBA(participation.ppTournamentType.rgb, 0.8)"
         >
-            <v-col cols="auto" class="pr-2">
+            <!-- <v-col cols="auto" class="pr-2">
                 <em-emoji v-if="participation.ppTournamentType.emoji" 
                     :native="participation.ppTournamentType.emoji" 
                     size="2rem"
                 />
-            </v-col>
+            </v-col> -->
             <v-col class="py-1">
                 <v-chip label x-small class="oppositeText--text" :color="ppRGBA(participation.ppTournamentType.rgb)">
                     <div class="overline" style="line-height:1rem;">
@@ -22,13 +22,13 @@
             </v-col>
             <v-col class="py-1" cols="auto">
                 <div v-if="!participation.started"  class="text-overline">NOT STARTED</div>
-                <template v-else>
+                <div v-else class="mr-2">
                     <span class="overline">POS.</span>
                     <v-row>
                         <h1>{{participation.position ? participation.position + '°' : '?'}}</h1>
                         <span class="overline" style="line-height:4rem" >/{{participation.user_count}}</span>
                     </v-row>
-                </template>
+                </div>
             </v-col>
         </v-row>
         <v-row v-if="participation.started">

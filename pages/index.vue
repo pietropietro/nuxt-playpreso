@@ -15,22 +15,7 @@
             >
                 <p-p-counter v-if="$vuetify.breakpoint.mdAndUp"/>
                 <p-p-league-available-list class="px-2 mb-5"/>
-                <v-container v-if="userParticipations?.length > 0">
-                    <v-row no-gutters>
-                        <h1>ENROLLED</h1>
-                        <h4>({{userParticipations.length}})</h4>
-                    </v-row>
-                    <nuxt-link class="no-decoration"
-                        v-for="(up, index) in userParticipations" :key="index"
-                        :to="up.ppLeague_id ? ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
-                            : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
-                        "
-                    >
-                        <user-participation-card :class="!up.started ? 'mb-4' : ''"
-                            :participation="up"
-                        />
-                    </nuxt-link>
-                </v-container>
+                <user-participation-enrolled-list />
             </v-col>
             <v-col cols="12" md="6">
                 <motd-home v-if="$vuetify.breakpoint.mdAndUp" class="mt-n6 mt-md-5"/>
@@ -42,26 +27,6 @@
 </template>
 <script>
 export default {
-    layout: "authenticated",
-    data(){
-        return {
-            userParticipations: null,
-            loadingParticipations: true,
-        }
-    },
-    methods:{
-        async getParticipations(){
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.GET);
-            if(response && response.status === "success"){
-                this.userParticipations = response.message;
-            }
-            this.loadingParticipations = false;
-        },
-    },
-    async mounted(){
-        // this.$store.commit('navigation/setActive', { title: null, color: null});
-        await this.getParticipations();
-    },
-
+    layout: "authenticated"
 }
 </script>
