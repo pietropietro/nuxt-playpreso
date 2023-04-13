@@ -58,6 +58,24 @@
                         </v-row>
                     </v-col>
                 </template>
+                <!-- <template v-if="ppTournamentType.userUps">
+                    <v-col cols="12" sm="6" lg="4"
+                        v-for="up in ppTournamentType.userUps" :key="up.id"
+                    >
+                        <v-row align="center" v-if="up.ppLeague_id != ppLeagueId">
+                            <v-col class="px-0" cols="auto" v-if="up?.updated_at">
+                                <div class="overline lh-1">
+                                    {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(up.updated_at))}}
+                                    <br>
+                                     '{{Intl.DateTimeFormat('en-GB', {year:'2-digit'}).format(new Date(up.updated_at))}}
+                                </div>
+                            </v-col>
+                            <v-col>
+                                <user-participation-standing-item :up="up"/>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                </template> -->
                 <v-col v-if="!$vuetify.breakpoint.smAndUp" cols="12" class="pa-0">
                     <div class="text-center overline" @click="moreInfo=false">less info</div>
                 </v-col>
@@ -68,7 +86,8 @@
 <script>
 export default {
     props:{
-        ppTournamentType: {type: Object}
+        ppTournamentType: {type: Object},
+        ppLeagueId: {type: Number}
     },
     data(){
         return{

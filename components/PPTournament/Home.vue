@@ -8,6 +8,7 @@
             <p-p-league-intro
                 v-else
                 :ppTournamentType="tournamentObj.ppTournamentType"
+                :ppLeagueId="tournamentObj.id"
             />
         </v-container>
         <!-- STANDINGS -->

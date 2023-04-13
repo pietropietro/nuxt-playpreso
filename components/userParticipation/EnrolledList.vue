@@ -18,7 +18,7 @@
                                 waiting ({{userParticipations.notStarted.length}})
                             </template>
                             <template v-else-if="status==='finished'">
-                                last
+                                finished
                             </template>
                             <template v-else>
                                 {{status}} ({{userParticipations.active.length}})
@@ -76,9 +76,9 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.GET);
             if(response && response.status === "success"){
                 this.userParticipations = response.message;
-                if(this.userParticipations.active) this.statusList.push('active');
-                if(this.userParticipations.notStarted) this.statusList.push('notStarted');
-                if(this.userParticipations.finished) this.statusList.push('finished');
+                if(this.userParticipations.active.length) this.statusList.push('active');
+                if(this.userParticipations.notStarted.length) this.statusList.push('notStarted');
+                if(this.userParticipations.finished.length) this.statusList.push('finished');
                 this.selectedStatus = this.statusList[0];
             }
             this.loading = false;
