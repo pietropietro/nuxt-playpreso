@@ -4,7 +4,7 @@
             <!-- <div class="overline lh-1">
                 {{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}
             </div> -->
-            <h1>P-LEAGUES</h1>
+            <h1>AVAILABLE</h1>
         </v-row>   
         <v-data-table
             class="transparent no-select"

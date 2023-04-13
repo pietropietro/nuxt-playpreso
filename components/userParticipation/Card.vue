@@ -21,12 +21,15 @@
                 </h2>
             </v-col>
             <v-col class="py-1" cols="auto">
-                <div v-if="!participation.started"  class="text-overline">NOT STARTED</div>
+                <div v-if="!participation.started"  class="text-overline lh-1">
+                    - {{(participation.ppTournamentType.participants - participation.user_count)}} users <br>
+                    NOT STARTED
+                </div>
                 <div v-else class="mr-2">
                     <span class="overline">POS.</span>
                     <v-row>
                         <h1>{{participation.position ? participation.position + '°' : '?'}}</h1>
-                        <span class="overline" style="line-height:4rem" >/{{participation.user_count}}</span>
+                        <span class="overline" style="line-height:4rem" >/{{participation.ppTournamentType.participants}}</span>
                     </v-row>
                 </div>
             </v-col>
