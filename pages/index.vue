@@ -27,6 +27,6 @@
 </template>
 <script>
 export default {
-    layout: "authenticated"
+    layout: "authenticated",
 }
 </script>

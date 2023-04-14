@@ -63,6 +63,39 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             }finally{
                 return resp;
             }
+        },
+
+        
+        async getImage(route){
+            let resp;
+            let headers =  new Headers({
+                'Content-Type': "application/json",
+                'Authorization': store.state.user.token,
+            });
+            let initOptions = {
+                method: 'GET',
+                mode: 'cors',
+                credentials: 'include'
+            };
+            initOptions.headers = headers;
+            
+            try {
+                await fetch(API_ENDPOINT + route, initOptions
+                ).then(response => {
+                    if(response.status === 401){
+                        $logout.logout();
+                    }
+                    return response
+                }).then((data) => {
+                    resp = data;
+                    return data;
+                });
+            }catch(e){
+                console.log("error: " + e);
+                $notifier.showError();
+            }finally{
+                return resp;
+            }
         }
     })
 }
