@@ -19,8 +19,8 @@
         <v-row v-if="motd.stats" class="py-5 text-center">
             <v-col cols="4">
                 <v-row no-gutters justify="center">
-                    <h3>{{motd.stats.most_locked.result}}</h3>
-                    <h6>({{motd.stats.most_locked.occurrances}})</h6>
+                    <h3>{{motd.stats.most_locked?.result}}</h3>
+                    <h6>({{motd.stats.most_locked?.occurrances}})</h6>
                 </v-row>
                 <div class="overline lh-1">most <em-emoji id="lock"/></div>
             </v-col>
