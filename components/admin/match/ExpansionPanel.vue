@@ -25,9 +25,15 @@
                         <span class="text-caption" v-else>{{formatDate(match.date_start, true)}}</span>
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
+                        <template v-if="match.league?.standings">
+                            {{match.league?.standings.filter((e)=>e.id == match.homeTeam.id)[0].position}}°
+                        </template>
                         {{match.homeTeam?.name}}
                     </v-row>
                     <v-row no-gutters style="line-height:1rem;" class="text-overline">
+                        <template v-if="match.league?.standings">
+                            {{match.league?.standings.filter((e)=>e.id == match.awayTeam.id)[0].position}}°
+                        </template>
                         {{match.awayTeam?.name}}
                     </v-row>
                     <v-row no-gutters v-if="!open" style="line-height:1rem;" class="text-overline">
