@@ -3,28 +3,40 @@
         <v-container 
             style="max-width:300px"
         >   
-        <v-row 
-            :class="'rounded '"
-            @click="flip" 
-            :style="{ 
-                height: cardHeight,
-                backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
-            }"
-        >
-            <v-col cols="auto">
-                <match-info-short :match="match"/>
-            </v-col>
-
-            <v-col class="pa-0" >
-                <guess-single-view-points v-if="selectedView === 'points'" :guess="guess"/>
-                <guess-single-view-locked v-else-if="selectedView === 'locked'" :guess="guess"/>
-                <guess-single-view-unlocked v-else-if="selectedView === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
-                <guess-single-view-stats-position v-else-if="selectedView === 'stats_position'" :standings="standings" :height="cardHeight"/>
-                <guess-single-view-stats-last1x2 v-else-if="selectedView === 'stats_last_matches'" :match="match" :height="cardHeight"/>
-                <guess-single-view-stats-gf-ga v-else-if="selectedView === 'stats_gol'" :standings="standings" :height="cardHeight"/>
-            </v-col>
-
-        </v-row>
+            <v-row 
+                no-gutters
+                v-if="!open"
+                class="rounded"
+                align="center"
+                @click="onTouch"
+                :style="{ 
+                    height: cardHeight,
+                }"
+            >
+                <v-col style="z-index:1" class="mr-n6"><team-logo :id="match.homeTeam.id"/></v-col>
+                <v-col><team-logo :id="match.awayTeam.id"/></v-col>
+            </v-row>
+            <v-row 
+                v-else
+                class="rounded"
+                @click="onTouch" 
+                :style="{ 
+                    height: cardHeight,
+                    backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked) 
+                }"
+            >
+                <v-col cols="auto">
+                    <match-info-short :match="match"/>
+                </v-col>
+                <v-col class="pa-0" >
+                    <guess-single-view-points v-if="selectedView === 'points'" :guess="guess"/>
+                    <guess-single-view-locked v-else-if="selectedView === 'locked'" :guess="guess"/>
+                    <guess-single-view-unlocked v-else-if="selectedView === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
+                    <guess-single-view-stats-position v-else-if="selectedView === 'stats_position'" :standings="standings" :height="cardHeight"/>
+                    <guess-single-view-stats-last1x2 v-else-if="selectedView === 'stats_last_matches'" :match="match" :height="cardHeight"/>
+                    <guess-single-view-stats-gf-ga v-else-if="selectedView === 'stats_gol'" :standings="standings" :height="cardHeight"/>
+                </v-col>
+            </v-row>
         </v-container>
         <guess-tournament-subtitle v-if="guess.ppTournamentType" 
             class="no-gutters"
@@ -44,6 +56,7 @@ export default {
     data(){
         return{
             selectedIndex: 0,
+            open: false,
             cardHeight: '90px',
             unlockedViews: ['lock', 'stats_position', 'stats_last_matches', 'stats_gol'],
             lockedViews: ['locked'],
@@ -80,7 +93,11 @@ export default {
         }
     },
     methods:{
-        flip(){
+        onTouch(){
+            if(!this.open){
+                this.open = true;
+                return;
+            }
             if((this.selectedIndex + 1) < this.availableViews.length) return this.selectedIndex++;
             this.selectedIndex=0;
         },
