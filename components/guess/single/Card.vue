@@ -8,13 +8,17 @@
                 v-if="!open"
                 class="rounded"
                 align="center"
-                @click="onTouch"
                 :style="{ 
                     height: cardHeight,
+                    borderWidth:'2px',
+                    borderColor: ppRGBA(guess.ppTournamentType?.rgb)
                 }"
             >
-                <v-col style="z-index:1" class="mr-n6"><team-logo :id="match.homeTeam.id"/></v-col>
-                <v-col><team-logo :id="match.awayTeam.id"/></v-col>
+                <v-col style="z-index:2" class="mr-n6"><team-example :id="match.homeTeam?.id"/></v-col>
+                <v-col style="z-index:2" ><team-example :id="match.awayTeam.id"/></v-col>
+                <!-- <v-col style="z-index:2" class="mr-n6"><team-logo :id="match.homeTeam.id"/></v-col> -->
+                <!-- <v-col  style="z-index:1"><em-emoji class="mr-n6" :native="guess.ppTournamentType?.emoji" size="3.5em" /></v-col> -->
+                <!-- <v-col style="z-index:1"><team-logo :id="match.awayTeam.id"/></v-col> -->
             </v-row>
             <v-row 
                 v-else
@@ -38,10 +42,17 @@
                 </v-col>
             </v-row>
         </v-container>
-        <guess-tournament-subtitle v-if="guess.ppTournamentType" 
+        <!-- <v-row justify="center" no-gutters class="rounded-br" :style="{backgroundColor: ppRGBA(guess.ppTournamentType?.rgb)}"> -->
+            <!-- <v-chip v-if="guess.ppTournamentType" 
+                small  > -->
+                    <!-- <h2 class="ocrastd ">touch</h2> -->
+            <!-- </v-chip> -->
+            <!-- <em-emoji :native="guess.ppTournamentType.emoji" size="1.7em" /> -->
+        <!-- </v-row> -->
+        <!-- <guess-tournament-subtitle v-if="guess.ppTournamentType" 
             class="no-gutters"
             :ppTournamentType="guess.ppTournamentType" 
-        />
+        /> -->
     </div>
     <error-wall v-else/>
 </template>
@@ -57,7 +68,7 @@ export default {
         return{
             selectedIndex: 0,
             open: false,
-            cardHeight: '90px',
+            cardHeight: '70px',
             unlockedViews: ['lock', 'stats_position', 'stats_last_matches', 'stats_gol'],
             lockedViews: ['locked'],
             verifiedViews: ['points', 'locked'],

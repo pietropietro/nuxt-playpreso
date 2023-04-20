@@ -55,7 +55,8 @@
                             class="mx-2"
                         >
                             <!-- width is necessary for slider to work on page landing :( -->
-                            <div style="min-width:250px; max-width:300px;">
+                            <div >
+                            <!-- style="min-width:250px; max-width:300px;" -->
                                 <guess-single-card
                                     :guess="guess"
                                     :match="guess.match"
