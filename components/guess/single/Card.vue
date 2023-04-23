@@ -14,11 +14,11 @@
                     borderColor: ppRGBA(guess.ppTournamentType?.rgb)
                 }"
             >
-                <v-col style="z-index:2" class="mr-n6"><team-example :id="match.homeTeam?.id"/></v-col>
-                <v-col style="z-index:2" ><team-example :id="match.awayTeam.id"/></v-col>
-                <!-- <v-col style="z-index:2" class="mr-n6"><team-logo :id="match.homeTeam.id"/></v-col> -->
+                <v-col style="z-index:2" class="mr-n6"><team-example :matchId="match.id" :id="match.homeTeam?.id"/></v-col>
+                <v-col style="z-index:2" ><team-example :matchId="match.id" :id="match.awayTeam.id"/></v-col>
+                <v-col style="z-index:2" class=""><team-logo :id="match.homeTeam.id"/></v-col>
                 <!-- <v-col  style="z-index:1"><em-emoji class="mr-n6" :native="guess.ppTournamentType?.emoji" size="3.5em" /></v-col> -->
-                <!-- <v-col style="z-index:1"><team-logo :id="match.awayTeam.id"/></v-col> -->
+                <v-col style="z-index:1"><team-logo :id="match.awayTeam.id"/></v-col>
             </v-row>
             <v-row 
                 v-else
