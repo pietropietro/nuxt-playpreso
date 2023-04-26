@@ -8,6 +8,8 @@
                         :guess="motd.guess"
                         :afterLock="afterLock"
                         :rgb="motdPPTT.rgb"
+                        :selectedGuessId="selectedGuessId"
+                        :setSelectedGuessId="(val)=>selectedGuessId = val"
                         showLogos
                     />
                 </div>
@@ -67,6 +69,11 @@ export default {
         motd: {type: Object},
         motdPPTT: {type: Object},
         userLast: {type: Object}
+    },
+    data(){
+        return{
+            selectedGuessId: (this.motd.guess?.id ?? 1)
+        }
     },
     methods:{
         afterLock(lockedGuess){
