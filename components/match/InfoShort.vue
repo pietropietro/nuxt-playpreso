@@ -11,6 +11,7 @@
                 <h4>{{match.score_away}}</h4>
             </v-col>
         </v-row>
+        <!-- TODO ADD LIVE -->
         <v-row v-if="showDateTime" class="overline lh-1 flex-nowrap" no-gutters>
             {{formatDate(match.date_start, withTime)}}
         </v-row>
