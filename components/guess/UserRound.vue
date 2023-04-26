@@ -8,6 +8,9 @@
                 :guess="pprm.guess" 
                 :match="pprm.match" 
                 :rgb="rgb"
+                :selectedGuessId="selectedGuessId"
+                :setSelectedGuessId="(val)=>selectedGuessId = val"
+                showLogos
             />
         </v-col>
     </v-row>
@@ -17,6 +20,11 @@ export default {
     props:{
         rgb: {tyep: String},
         ppRMs: {type: Array}
+    },
+    data(){
+        return {
+            selectedGuessId: null
+        }
     }
 }
 </script>

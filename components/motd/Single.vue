@@ -8,6 +8,7 @@
                         :guess="motd.guess"
                         :afterLock="afterLock"
                         :rgb="motdPPTT.rgb"
+                        showLogos
                     />
                 </div>
             </v-col>

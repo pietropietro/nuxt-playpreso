@@ -1,7 +1,7 @@
 <template>
     <div v-if="guess">
         <v-container 
-            style="max-width:350px"
+            style="max-width:300px"
         >   
             <v-row
                 class="rounded"
@@ -21,12 +21,22 @@
                     <match-info-short v-if="selectedView[0] ===  'match_info'" :match="match"/>
                     <guess-single-view-points v-else-if="selectedView[0] === 'points'" :guess="guess"/>
                 </v-col>
-                <v-col class="pa-0" v-if="selectedView.length > 1">
+                <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
                     <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
                     <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
                     <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :height="cardHeight"/>
                     <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
                     <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
+                    <template v-else-if="selectedView[1] === 'logos'">
+                        <v-row :style="'max-height:' + cardHeight">
+                            <v-col style="z-index: 2;" cols="12">
+                                <team-logo :id="match.homeTeam.id" :size="65" class="mr-n6"  />
+                            </v-col>
+                            <v-col cols="12">
+                                <team-logo :id="match.awayTeam.id" :size="65" class="mt-n5 ml-n6" />
+                            </v-col>
+                        </v-row>
+                    </template>
                 </v-col>
             </v-row>
         </v-container>
@@ -41,14 +51,15 @@ export default {
         match: {type: Object, required: true},
         rgb: {type: String},
         setSelectedGuessId: {type: Function},
-        selectedGuessId: {type: Number}
+        selectedGuessId: {type: Number},
+        showLogos: {type: Boolean}
     },
     data(){
         return{
             selectedIndex: 0,
             cardHeight: '90px',
             unlockedViews: [
-                ['match_info'], 
+                (this.showLogos ? ['match_info', 'logos'] : ['match_info']), 
                 ['match_info','lock'], 
                 ['match_info','stats_position'], 
                 ['match_info','stats_last_matches'], 
