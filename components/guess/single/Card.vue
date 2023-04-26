@@ -1,8 +1,6 @@
 <template>
     <div v-if="guess">
-        <v-container 
-            style="max-width:300px"
-        >   
+        <v-container style="max-width:300px">   
             <v-row
                 class="rounded"
                 @click="select"
