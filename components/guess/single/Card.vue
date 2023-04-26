@@ -5,7 +5,7 @@
         >   
             <v-row
                 class="rounded"
-                @click="onTouch"
+                @click="select"
                 :style="{
                     height: cardHeight,
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
@@ -13,7 +13,8 @@
             >
                 <v-col cols="auto" 
                     :style="{backgroundColor: ppRGBA(rgb)}"
-                    :class="open ? 'pa-0' : 'rounded-tl rounded-bl pa-1'"
+                    class="rounded-tl rounded-bl pa-1"
+                    v-if="selectedIndex === 0"
                 >
                 </v-col>
                 <v-col cols="auto" v-if="selectedView && selectedView.length">
@@ -38,12 +39,13 @@ export default {
         guess: {type: Object, required: true},
         afterLock: {type: Function},
         match: {type: Object, required: true},
-        rgb: {type: String}
+        rgb: {type: String},
+        setSelectedGuessId: {type: Function},
+        selectedGuessId: {type: Number}
     },
     data(){
         return{
             selectedIndex: 0,
-            open: false,
             cardHeight: '90px',
             unlockedViews: [
                 ['match_info'], 
@@ -88,14 +90,17 @@ export default {
         }
     },
     methods:{
-        onTouch(){
-            if(!this.open && this.availableViews.length > 1){
-                this.open = true;
-            }
+        select(){
+            this.setSelectedGuessId(this.guess.id);
             if((this.selectedIndex + 1) < this.availableViews.length) return this.selectedIndex++;
-            this.selectedIndex=0;
-            this.open = false;
+            this.setSelectedGuessId(null);
         },
-    }
+    },
+    //close guess if other guess has been selected
+    watch: {
+        selectedGuessId (newId, oldId) {
+           if(newId !== this.guess.id)this.selectedIndex=0;
+        }
+    },
 }
 </script>

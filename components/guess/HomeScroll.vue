@@ -1,40 +1,49 @@
 <template >
-    <div v-if="!loading && (currentGuesses.next.length || currentGuesses.last.length)">
+    <div v-if="!loading && (currentGuesses.notVerified.length || currentGuesses.last.length)">
         <v-row no-gutters align="center">
-                <div class="overline font-weight-bold lh-1 mr-2">MATCHES</div>
-                <v-chip-group
-                    mandatory
-                    class="h-100"
-                    active-class="primary"
-                    v-model="selected"
-                    @change="chipChange"
-                >
-                    <div v-for="(s,i) in list" :key="i">
-                        <v-chip
-                            v-if="s.text =='last' && currentGuesses.last || 
-                                s.text === 'unlock' && unlockedList?.length
-                                || s.text=== 'lock' &&  lockedList?.length"
-                            small :value="s"
-                        >
-                            <div class="overline lh-1">
-                                <template
-                                    v-if="s.text=='unlock' &&
-                                    unlockedList.length"
-                                >
-                                    <em-emoji id="unlock" size="1.3m" class="mr-n1"/>
-                                    {{unlockedList.length}}
-                                </template>
-                                <template v-else-if="s.text==='lock' && lockedList.length">
-                                    <em-emoji id="lock" size="1.3m" class="mr-n1"/>
-                                    {{lockedList.length}}
-                                </template>
-                                <template v-else>
-                                    {{s.text}}
-                                </template>
-                            </div>
-                        </v-chip>
-                    </div>
-                </v-chip-group>
+            <div class="overline font-weight-bold lh-1 mr-2">MATCHES</div>
+            <v-chip-group
+                mandatory
+                class="h-100"
+                active-class="primary"
+                v-model="selected"
+                @change="chipChange"
+            >
+                <div v-for="(s,i) in list" :key="i">
+                    <v-chip
+                        v-if="s.text =='last' && currentGuesses.verified 
+                            || s.text === 'unlock' && unlockedList?.length
+                            || s.text=== 'lock' &&  lockedList?.length
+                        "
+                        small 
+                        :value="s"
+                    >
+                        <div class="overline lh-1">
+                            <template
+                                v-if="s.text=='unlock' && unlockedList.length"
+                            >
+                                <em-emoji 
+                                    id="unlock" 
+                                    size="1.3m" 
+                                    class="mr-n1"
+                                />
+                                {{unlockedList.length}}
+                            </template>
+                            <template v-else-if="s.text==='lock' && lockedList.length">
+                                <em-emoji 
+                                    id="lock" 
+                                    size="1.3m" 
+                                    class="mr-n1"
+                                />
+                                {{lockedList.length}}
+                            </template>
+                            <template v-else>
+                                {{s.text}}
+                            </template>
+                        </div>
+                    </v-chip>
+                </div>
+            </v-chip-group>
         </v-row>
         <v-row class="mt-0" v-if="currentGuesses[selected.value]?.length>0">
             <v-container class="pa-0">
@@ -47,7 +56,7 @@
                         v-if="e.text==selected.text"
                     >
                         <v-slide-item
-                            v-for="guess in selected.text === 'last' ? currentGuesses.last
+                            v-for="guess in selected.text === 'last' ? currentGuesses.verified
                                 : (selected.text === 'unlock' ? unlockedList
                                     : lockedList
                                 )"
@@ -62,6 +71,8 @@
                                     :match="guess.match"
                                     :rgb="guess.ppTournamentType?.rgb"
                                     :afterLock="afterLock"
+                                    :selectedGuessId="selectedGuessId"
+                                    :setSelectedGuessId="(val)=>selectedGuessId = val"
                                 />
                             </div>
                         </v-slide-item>
@@ -77,20 +88,21 @@
             return {
                 loading: true,
                 list: [ 
-                    {text: 'unlock',value: 'next'},
-                    {text: 'lock',value: 'next'},
-                    {text: 'last',value: 'last'}
+                    {text: 'unlock',value: 'notVerified'},
+                    {text: 'lock',value: 'notVerified'},
+                    {text: 'last',value: 'verified'}
                 ],
-                selected: 'next',
+                selected: 'notVerified',
                 currentGuesses: null,
+                selectedGuessId: null
             }
         },
         computed:{
             lockedList(){
-                return this.currentGuesses['next'].filter((g) => g.guessed_at);
+                return this.currentGuesses['notVerified'].filter((g) => g.guessed_at);
             },
             unlockedList(){
-                return this.currentGuesses['next'].filter((g) => !g.guessed_at);
+                return this.currentGuesses['notVerified'].filter((g) => !g.guessed_at);
             }
         },
         methods:{
@@ -103,12 +115,13 @@
                 this.loading = false;
             },
             afterLock(guess){
-                this.currentGuesses.next = this.currentGuesses.next?.map((g) => {
+                this.currentGuesses.notVerified = this.currentGuesses.notVerified?.map((g) => {
                     return g.id == guess.id ? guess : g
                 });                
             },
             chipChange(){
                 setTimeout(()=>{
+                    //scrolls to 0 in x axis
                     document.getElementsByClassName("v-slide-group__content")[1].style.transform = 'translateX(0)';
                 });
             }
