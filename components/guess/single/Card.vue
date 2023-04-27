@@ -25,13 +25,14 @@
                     <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :height="cardHeight"/>
                     <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
                     <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
+                    <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
                     <template v-else-if="selectedView[1] === 'logos'">
                         <v-row :style="'max-height:' + cardHeight">
                             <v-col style="z-index: 2;" cols="12">
-                                <team-logo :id="match.homeTeam.id" :size="65" class="mr-n6"  />
+                                <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6"  />
                             </v-col>
                             <v-col cols="12">
-                                <team-logo :id="match.awayTeam.id" :size="65" class="mt-n5 ml-n6" />
+                                <team-logo :id="match.awayTeam.id" :size="60" class="mt-n6 ml-n6" />
                             </v-col>
                         </v-row>
                     </template>
@@ -50,24 +51,25 @@ export default {
         rgb: {type: String},
         setSelectedGuessId: {type: Function},
         selectedGuessId: {type: Number},
-        showLogos: {type: Boolean}
+        extended: {type: Boolean}
     },
     data(){
+        let unlckd =  [];
+        unlckd.push(this.extended ? ['match_info', 'logos'] : ['match_info']);
+        unlckd.push(['match_info','lock']);
+        if(this.match.league?.standings) unlckd.push(['match_info','stats_position']);
+        if(this.match.homeTeam?.lastMatches) unlckd.push(['match_info','stats_last_matches']);
+        if(this.match.league?.standings) unlckd.push(['match_info','stats_gol']);
         return{
             selectedIndex: 0,
             cardHeight: '90px',
-            unlockedViews: [
-                (this.showLogos ? ['match_info', 'logos'] : ['match_info']), 
-                ['match_info','lock'], 
-                ['match_info','stats_position'], 
-                ['match_info','stats_last_matches'], 
-                ['match_info','stats_gol']
-            ],
+            unlockedViews: unlckd,
             lockedViews: [
                 ['match_info', 'locked']
             ],
             verifiedViews: [
-                ['points'],['match_info','locked']
+                (this.extended ? ['match_info', 'points'] : ['points']), 
+                ['match_info','locked']
             ],
             shades:{
                 verified: this.ppRGBA(this.rgb, 0.2),

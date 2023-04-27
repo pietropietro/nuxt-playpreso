@@ -10,7 +10,7 @@
                         :rgb="motdPPTT.rgb"
                         :selectedGuessId="selectedGuessId"
                         :setSelectedGuessId="(val)=>selectedGuessId = val"
-                        showLogos
+                        extended
                     />
                 </div>
             </v-col>

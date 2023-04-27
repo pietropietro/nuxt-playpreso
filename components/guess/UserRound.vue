@@ -10,7 +10,7 @@
                 :rgb="rgb"
                 :selectedGuessId="selectedGuessId"
                 :setSelectedGuessId="(val)=>selectedGuessId = val"
-                showLogos
+                extended
             />
         </v-col>
     </v-row>
