@@ -11,7 +11,6 @@ export default {
         }
     },
     async mounted(){
-        console.log("get need data");
        await this.getNeedData();
     },
     methods:{

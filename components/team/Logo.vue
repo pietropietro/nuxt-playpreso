@@ -1,10 +1,11 @@
 <template>
-    <!-- <v-row v-if="id && imageSrc" :align="align" justify="center">
+    <v-row v-if="id && imageSrc" :align="align" justify="center">
     	<v-img :src="imageSrc" :width="size" :height="size" contain />
-    </v-row> -->
-	<v-row justify="center">
+    </v-row>
+	<v-row v-else justify="center">
 		<v-col
-		style="line-height:0.5em" class="text-center ocrastd font-weight-bold" :style="{fontSize:size/1.2 + 'px'}"
+			class="text-center ocrastd font-weight-bold" 
+			:style="{fontSize:size/1.2 + 'px', lineHeight:'0.5em'}"
 		>
 			P
 		</v-col>
