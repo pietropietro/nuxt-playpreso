@@ -8,35 +8,82 @@
                     height: cardHeight,
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
-            >
-                <v-col cols="auto" 
-                    :style="{backgroundColor: ppRGBA(rgb)}"
-                    class="rounded-tl rounded-bl pa-1"
-                    v-if="selectedIndex === 0"
-                >
-                </v-col>
-                <v-col cols="auto" v-if="selectedView && selectedView.length">
-                    <match-info-short v-if="selectedView[0] ===  'match_info'" :match="match"/>
-                    <guess-single-view-points v-else-if="selectedView[0] === 'points'" :guess="guess"/>
-                </v-col>
-                <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
-                    <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
-                    <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
-                    <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :height="cardHeight"/>
-                    <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
-                    <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
-                    <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
-                    <template v-else-if="selectedView[1] === 'logos'">
-                        <v-row :style="'max-height:' + cardHeight">
-                            <v-col style="z-index: 2;" cols="12">
-                                <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6" />
-                            </v-col>
-                            <v-col cols="12">
-                                <team-logo :id="match.awayTeam.id" :size="60" class="mt-n6 ml-n6" />
-                            </v-col>
+            >   
+                <template v-if="selectedView[0]==='preview'">
+                    <v-col cols="auto"
+                        :style="{
+                            backgroundColor: ppRGBA(rgb),
+                            width: '30px',
+                            overflow: 'hidden'
+                        }"
+                        class="rounded-tl rounded-bl pa-1"
+                        v-if="selectedIndex === 0"
+                    >
+                        <em-emoji
+                            :native="guess?.ppTournamentType?.emoji"
+                            size="50"
+                        />
+                    </v-col>
+                    <v-col>
+                        <v-row class="flex-column" style="height:100%" no-gutters  >
+                            <v-row align="center" >
+                                <v-col cols="auto" class="ml-2" style="z-index:2">
+                                    <team-logo :id="match.homeTeam.id" :size="26"  />
+                                </v-col>
+                                <v-col>
+                                    <div class="overline lh-1 ml-n2"
+                                        :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
+                                    >
+                                        {{match.homeTeam.name.substr(0,3)}}
+                                    </div>
+                                </v-col>
+                            </v-row>
+                            <v-row align="center"
+                                :style="{backgroundColor: shades.locked}"
+                            >
+                                <v-col cols="auto" class="ml-2">
+                                    <team-logo :id="match.awayTeam.id" :size="26" />
+                                </v-col>
+                                <v-col>
+                                    <div class="overline lh-1 ml-n2"
+                                        :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
+                                    >
+                                        {{match.awayTeam.name.substr(0,3)}}
+                                    </div>
+                                </v-col>
+                            </v-row>
                         </v-row>
-                    </template>
-                </v-col>
+                    </v-col>
+                </template>
+                <template v-else>
+                    <v-col cols="auto"
+                        :style="{backgroundColor: ppRGBA(rgb)}"
+                        class="rounded-tl rounded-bl pa-1"
+                        v-if="selectedIndex === 0"
+                    />
+                    <v-col cols="auto" v-if="selectedView && selectedView.length">
+                        <match-info-short v-if="selectedView[0] ===  'match_info'" :match="match"/>
+                        <guess-single-view-points v-else-if="selectedView[0] === 'points'" :guess="guess"/>
+                    </v-col>
+                    <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
+                        <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
+                        <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
+                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :height="cardHeight"/>
+                        <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
+                        <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
+                        <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
+                        <template v-else-if="selectedView[1] === 'logos'">
+                            <v-row :style="'max-height:' + cardHeight">
+                                <v-col style="z-index: 2;" cols="12">
+                                    <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6" />
+                                </v-col>
+                                <v-col cols="12">
+                                    <team-logo :id="match.awayTeam.id" :size="60" class="mt-n6 ml-n6" />
+                                </v-col>
+                            </v-row>
+                        </template>
+                    </v-col>
+                </template>
             </v-row>
         </v-container>
     </div>
@@ -54,8 +101,7 @@ export default {
         extended: {type: Boolean}
     },
     data(){
-        let unlckd =  [];
-        unlckd.push(this.extended ? ['match_info', 'logos'] : ['match_info']);
+        let unlckd =  [['preview']];
         unlckd.push(['match_info','lock']);
         if(this.match.league?.standings) unlckd.push(['match_info','stats_position']);
         if(this.match.homeTeam?.lastMatches) unlckd.push(['match_info','stats_last_matches']);
