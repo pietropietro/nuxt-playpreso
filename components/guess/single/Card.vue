@@ -29,7 +29,7 @@
                     <template v-else-if="selectedView[1] === 'logos'">
                         <v-row :style="'max-height:' + cardHeight">
                             <v-col style="z-index: 2;" cols="12">
-                                <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6"  />
+                                <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6" />
                             </v-col>
                             <v-col cols="12">
                                 <team-logo :id="match.awayTeam.id" :size="60" class="mt-n6 ml-n6" />

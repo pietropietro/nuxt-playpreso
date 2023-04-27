@@ -65,36 +65,53 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             }
         },
 
-        
-        async getImage(route){
-            let resp;
-            let headers =  new Headers({
-                'Content-Type': "application/json",
-                'Authorization': store.state.user.token,
-            });
-            let initOptions = {
-                method: 'GET',
-                mode: 'cors',
-                credentials: 'include'
-            };
-            initOptions.headers = headers;
-            
+        async getImage(route) {
             try {
-                await fetch(API_ENDPOINT + route, initOptions
-                ).then(response => {
-                    if(response.status === 401){
-                        $logout.logout();
-                    }
-                    return response
-                }).then((data) => {
-                    resp = data;
-                    return data;
+                const cache = await caches.open('my-cache');
+                const cachedResponse = await cache.match(route);
+            
+                if (cachedResponse) {
+                    console.log('return CACHED', route);
+
+                    // Return the cached response if it exists
+                    return cachedResponse;
+                }
+            
+                // Otherwise, fetch the image from the server
+                const headers = new Headers({
+                    'Content-Type': 'application/json',
+                    Authorization: store.state.user.token,
                 });
-            }catch(e){
-                console.log("error: " + e);
+                const initOptions = {
+                    method: 'GET',
+                    headers: headers,
+                    mode: 'cors',
+                    credentials: 'include',
+                };
+            
+                const response = await fetch(API_ENDPOINT + route, initOptions);
+                const cloneResponse = response.clone();
+                if (response.status === 401) {
+                    $logout.logout();
+                }
+            
+                // Add a cache-control header to the response
+                const cacheHeaders = new Headers({
+                    'Cache-Control': 'max-age=30',
+                });
+                const fetchedResponse = new Response(await response.blob(), {
+                    headers: cacheHeaders,
+                });
+            
+                // Store the cached response in the cache
+                await cache.put(route, fetchedResponse);
+                // Return the response
+                console.log('return FETCH', route);
+                return cloneResponse;
+
+            } catch (e) {
+                console.log('error: ' + e);
                 $notifier.showError();
-            }finally{
-                return resp;
             }
         }
     })
