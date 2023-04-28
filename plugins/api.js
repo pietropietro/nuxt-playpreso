@@ -67,11 +67,10 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 
         async getImage(route) {
             try {
-                const cache = await caches.open('my-cache');
+                const cache = await caches.open('static/image');
                 const cachedResponse = await cache.match(route);
             
                 if (cachedResponse) {
-                    console.log('return CACHED', route);
 
                     // Return the cached response if it exists
                     return cachedResponse;
@@ -94,19 +93,9 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 if (response.status === 401) {
                     $logout.logout();
                 }
-            
-                // Add a cache-control header to the response
-                const cacheHeaders = new Headers({
-                    'Cache-Control': 'max-age=30',
-                });
-                const fetchedResponse = new Response(await response.blob(), {
-                    headers: cacheHeaders,
-                });
-            
-                // Store the cached response in the cache
-                await cache.put(route, fetchedResponse);
+        
+                await cache.put(route, response);
                 // Return the response
-                console.log('return FETCH', route);
                 return cloneResponse;
 
             } catch (e) {

@@ -1,14 +1,9 @@
 <template>
-    <v-row v-if="id && imageSrc" :align="align" justify="center">
+    <v-row v-if="id && !!imageSrc" :align="align" justify="center">
     	<v-img :src="imageSrc" :width="size" :height="size" contain />
     </v-row>
-	<v-row v-else justify="center">
-		<v-col
-			class="text-center ocrastd font-weight-bold" 
-			:style="{fontSize:size/1.2 + 'px', lineHeight:'0.5em'}"
-		>
-			P
-		</v-col>
+	<v-row v-else justify="center" class="text-center ocrastd font-weight-bold">
+		<h2>P</h2>
 	</v-row>
 </template>
 <script>
@@ -30,7 +25,7 @@ export default {
 		if (response.status == 200) {
 			let blob = await response.blob();
 			this.imageSrc = URL.createObjectURL(blob);
-		}
+		} 
 	},
 };
 </script>

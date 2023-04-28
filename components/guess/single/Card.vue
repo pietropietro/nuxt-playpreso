@@ -13,25 +13,28 @@
                     <v-col cols="auto"
                         :style="{
                             backgroundColor: ppRGBA(rgb),
-                            width: '30px',
+                            width: '20px',
+                            height: cardHeight,
                             overflow: 'hidden'
                         }"
                         class="rounded-tl rounded-bl pa-1"
-                        v-if="selectedIndex === 0"
                     >
                         <em-emoji
+                            style="display:flex"
+                            class="ml-n9 mt-n9"
                             :native="guess?.ppTournamentType?.emoji"
-                            size="50"
+                            size="110"
                         />
                     </v-col>
+
                     <v-col>
                         <v-row class="flex-column" style="height:100%" no-gutters  >
                             <v-row align="center" >
                                 <v-col cols="auto" class="ml-2" style="z-index:2">
-                                    <team-logo :id="match.homeTeam.id" :size="26"  />
+                                    <team-logo :id="match.homeTeam.id" :size="24"  />
                                 </v-col>
                                 <v-col>
-                                    <div class="overline lh-1 ml-n2"
+                                    <div class=" lh-1 text-uppercase ml-n2 "
                                         :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
                                     >
                                         {{match.homeTeam.name.substr(0,3)}}
@@ -39,13 +42,13 @@
                                 </v-col>
                             </v-row>
                             <v-row align="center"
-                                :style="{backgroundColor: shades.locked}"
+                                :style="{backgroundColor: ppRGBA(rgb)}"
                             >
                                 <v-col cols="auto" class="ml-2">
-                                    <team-logo :id="match.awayTeam.id" :size="26" />
+                                    <team-logo :id="match.awayTeam.id" :size="24" />
                                 </v-col>
                                 <v-col>
-                                    <div class="overline lh-1 ml-n2"
+                                    <div class="lh-1 text-uppercase ml-n2 "
                                         :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
                                     >
                                         {{match.awayTeam.name.substr(0,3)}}
@@ -68,20 +71,10 @@
                     <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
                         <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
                         <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
-                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :height="cardHeight"/>
+                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :rgb="rgb" :style="{ height: cardHeight, width: '100px'}"/>
                         <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
                         <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
                         <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
-                        <template v-else-if="selectedView[1] === 'logos'">
-                            <v-row :style="'max-height:' + cardHeight">
-                                <v-col style="z-index: 2;" cols="12">
-                                    <team-logo :id="match.homeTeam.id" :size="60" class="mr-n6" />
-                                </v-col>
-                                <v-col cols="12">
-                                    <team-logo :id="match.awayTeam.id" :size="60" class="mt-n6 ml-n6" />
-                                </v-col>
-                            </v-row>
-                        </template>
                     </v-col>
                 </template>
             </v-row>
