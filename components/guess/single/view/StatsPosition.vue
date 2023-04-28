@@ -2,7 +2,7 @@
     <div >
             <v-row justify="center"
                 no-gutters
-                
+                :style="{height: rowHeight}"
             >
                     <h1>
                         {{standings[0].position}}°
@@ -12,7 +12,10 @@
 
             <v-row 
                 justify="center" no-gutters class="rounded-br"
-                :style="{backgroundColor: 'rgb('+rgb+')'}"
+                :style="{
+                    backgroundColor: 'rgb('+rgb+')',
+                    height: rowHeight
+                }"
             >
                 <h1>
                     {{standings[1].position}}°
@@ -24,7 +27,8 @@
 export default {
     props: {
         standings: {type: Array},
-        rgb: {type: String}
+        rgb: {type: String},
+        rowHeight: {type: String}
     }
 }
 </script>

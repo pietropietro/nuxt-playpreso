@@ -6,6 +6,7 @@
                 @click="select"
                 :style="{
                     height: cardHeight,
+                    overflow: 'hidden',
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
@@ -71,9 +72,23 @@
                     <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
                         <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
                         <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
-                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" :standings="standings" :rgb="rgb" :style="{ height: cardHeight, width: '100px'}"/>
-                        <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" :match="match" :height="cardHeight"/>
-                        <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" :standings="standings" :height="cardHeight"/>
+                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" 
+                            :standings="standings" 
+                            :rgb="rgb" 
+                            :style="{ height: cardHeight, width: '100px'}"
+                            rowHeight="45px"
+                        />
+                        <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" 
+                            :match="match" 
+                            :style="{ height: cardHeight, width: '100px'}"
+                            :rgb="rgb" 
+                            rowHeight="45px"
+                        />
+                        <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" 
+                            :standings="standings" 
+                            :style="{ height: cardHeight, width: '100px'}"
+                            :rgb="rgb" 
+                            rowHeight="45px"                        />
                         <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
                     </v-col>
                 </template>
