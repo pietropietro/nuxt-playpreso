@@ -10,88 +10,64 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <template v-if="selectedView[0]==='preview'">
-                    <v-col cols="auto"
-                        :style="{
-                            backgroundColor: ppRGBA(rgb),
-                            width: '20px',
-                            height: cardHeight,
-                            overflow: 'hidden'
-                        }"
-                        class="rounded-tl rounded-bl pa-1"
-                    >
-                        <em-emoji
-                            style="display:flex"
-                            class="ml-n9 mt-n9"
-                            :native="guess?.ppTournamentType?.emoji"
-                            size="110"
-                        />
-                    </v-col>
-
-                    <v-col>
-                        <v-row class="flex-column" style="height:100%" no-gutters  >
-                            <v-row align="center" >
-                                <v-col cols="auto" class="ml-2" style="z-index:2">
-                                    <team-logo :id="match.homeTeam.id" :size="24"  />
-                                </v-col>
-                                <v-col>
-                                    <div class=" lh-1 text-uppercase ml-n2 "
-                                        :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
-                                    >
-                                        {{match.homeTeam.name.substr(0,3)}}
-                                    </div>
-                                </v-col>
-                            </v-row>
-                            <v-row align="center"
-                                :style="{backgroundColor: ppRGBA(rgb)}"
-                            >
-                                <v-col cols="auto" class="ml-2">
-                                    <team-logo :id="match.awayTeam.id" :size="24" />
-                                </v-col>
-                                <v-col>
-                                    <div class="lh-1 text-uppercase ml-n2 "
-                                        :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
-                                    >
-                                        {{match.awayTeam.name.substr(0,3)}}
-                                    </div>
-                                </v-col>
-                            </v-row>
-                        </v-row>
-                    </v-col>
-                </template>
-                <template v-else>
-                    <v-col cols="auto"
-                        :style="{backgroundColor: ppRGBA(rgb)}"
-                        class="rounded-tl rounded-bl pa-1"
-                        v-if="selectedIndex === 0"
+                <v-col cols="auto"
+                    :style="{
+                        backgroundColor: ppRGBA(rgb),
+                        width: '20px',
+                        height: cardHeight,
+                        overflow: 'hidden'
+                    }"
+                    class="rounded-tl rounded-bl pa-1"
+                >
+                    <em-emoji
+                        style="display:flex"
+                        class="ml-n6 mt-n3"
+                        :native="guess?.ppTournamentType?.emoji"
+                        size="70"
                     />
-                    <v-col cols="auto" v-if="selectedView && selectedView.length">
-                        <match-info-short v-if="selectedView[0] ===  'match_info'" :match="match"/>
-                        <guess-single-view-points v-else-if="selectedView[0] === 'points'" :guess="guess"/>
-                    </v-col>
-                    <v-col class="pa-0" v-if="selectedView.length > 1" style="overflow:hidden">
-                        <guess-single-view-locked v-if="selectedView[1] === 'locked'" :guess="guess"/>
-                        <guess-single-view-unlocked v-else-if="selectedView[1] === 'lock'" :guess="guess" :rgb="rgb" :afterLock="afterLock"/>
-                        <guess-single-view-stats-position v-else-if="selectedView[1] === 'stats_position'" 
-                            :standings="standings" 
-                            :rgb="rgb" 
-                            :style="{ height: cardHeight, width: '100px'}"
-                            rowHeight="45px"
-                        />
-                        <guess-single-view-stats-last1x2 v-else-if="selectedView[1] === 'stats_last_matches'" 
-                            :match="match" 
-                            :style="{ height: cardHeight, width: '100px'}"
-                            :rgb="rgb" 
-                            rowHeight="45px"
-                        />
-                        <guess-single-view-stats-gf-ga v-else-if="selectedView[1] === 'stats_gol'" 
-                            :standings="standings" 
-                            :style="{ height: cardHeight, width: '100px'}"
-                            :rgb="rgb" 
-                            rowHeight="45px"                        />
-                        <guess-single-view-points v-else-if="selectedView[1] === 'points'" :guess="guess"/>
-                    </v-col>
-                </template>
+                </v-col>
+                
+                <v-col 
+                    cols="auto"  
+                    style="overflow:hidden"
+                    :class="item !== 'graphic' && index == (selectedView.length - 1) ? 'pa-0' : ''"
+                    v-for="(item, index) in selectedView"
+                    :key="index"
+                >
+                    <match-info-short v-if="item ===  'match_info'" :match="match"/>
+                    <match-graphic-preview 
+                        v-else-if="item==='graphic'"
+                        :rgb="rgb" 
+                        :match="match" 
+                    />
+                    <guess-single-view-locked v-else-if="item === 'locked'" 
+                        :guess="guess"
+                    />
+                    <guess-single-view-unlocked v-else-if="item === 'lock'" 
+                        :guess="guess" 
+                        :rgb="rgb" 
+                        :afterLock="afterLock"
+                    />
+                    <guess-single-view-stats-position v-else-if="item === 'stats_position'" 
+                        :standings="standings" 
+                        :rgb="rgb" 
+                        :style="{ height: cardHeight, width: '100px'}"
+                        rowHeight="45px"
+                    />
+                    <guess-single-view-stats-last1x2 v-else-if="item === 'stats_last_matches'" 
+                        :match="match" 
+                        :style="{ height: cardHeight, width: '100px'}"
+                        :rgb="rgb" 
+                        rowHeight="45px"
+                    />
+                    <guess-single-view-stats-gf-ga v-else-if="item === 'stats_gol'" 
+                        :standings="standings" 
+                        :style="{ height: cardHeight, width: '100px'}"
+                        :rgb="rgb" 
+                        rowHeight="45px"                        
+                    />
+                    <guess-single-view-points v-else-if="item === 'points'" :guess="guess"/>
+                </v-col>
             </v-row>
         </v-container>
     </div>
@@ -109,11 +85,11 @@ export default {
         extended: {type: Boolean}
     },
     data(){
-        let unlckd =  [['preview']];
+        let unlckd =  [['graphic']];
         unlckd.push(['match_info','lock']);
-        if(this.match.league?.standings) unlckd.push(['match_info','stats_position']);
-        if(this.match.homeTeam?.lastMatches) unlckd.push(['match_info','stats_last_matches']);
-        if(this.match.league?.standings) unlckd.push(['match_info','stats_gol']);
+        if(this.match.league?.standings) unlckd.push(['graphic','stats_position']);
+        if(this.match.homeTeam?.lastMatches) unlckd.push(['graphic','stats_last_matches']);
+        if(this.match.league?.standings) unlckd.push(['graphic','stats_gol']);
         return{
             selectedIndex: 0,
             cardHeight: '90px',
