@@ -29,10 +29,14 @@
                 
                 <v-col 
                     cols="auto"  
-                    style="overflow:hidden"
+                    :style="{
+                        overflow: 'hidden',
+                        height:  ['graphic', 'lock'].includes(item) ? '100%' : ''
+                    }"
                     :class="item !== 'graphic' && index == (selectedView.length - 1) ? 'pa-0' : ''"
                     v-for="(item, index) in selectedView"
                     :key="index"
+                    align-self="center"
                 >   
                     <template v-if="item === 'league_position'">
                         <league-detail big :league="match.league" />

@@ -1,8 +1,8 @@
 <template>
-    <v-row no-gutters class="h-100"
+    <!-- <v-row no-gutters class="h-100"
         justify="center" align="center"
-    >
-        <v-container fill-height>
+    > -->
+        <v-container fill-height class="mb-0">
             <guess-single-picker :guess="guess"/>
             <guess-single-bottom-action
                     @click.native.stop
@@ -14,7 +14,7 @@
                     class="rounded-br"
                 />
             </v-container >
-    </v-row>
+    <!-- </v-row> -->
 </template>
 <script>
 export default {

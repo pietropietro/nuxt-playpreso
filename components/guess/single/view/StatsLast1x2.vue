@@ -9,7 +9,7 @@
                     v-for="(m,ind) in match.homeTeam.lastMatches"
                     :key="ind"
                 >
-                    <em-emoji size="1.4em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
+                    <em-emoji size="1.2em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
                 </v-col>
             </v-row>
             <v-row no-gutters align="center" justify="center"
@@ -23,7 +23,7 @@
                     v-for="(m,ind) in match.awayTeam.lastMatches"
                     :key="ind"
                 >
-                    <em-emoji size="1.4em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
+                    <em-emoji size="1.2em" class="emoji-mart-emoji" :id="emojiForWDL(m.wdl)" />
                 </v-col>
             </v-row>
         </div>
