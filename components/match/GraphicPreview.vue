@@ -4,7 +4,7 @@
             <v-col cols="auto" class="ml-2" style="z-index:2">
                 <team-logo :id="match.homeTeam.id" :size="24"  />
             </v-col>
-            <v-col>
+            <v-col v-if="!logoOnly">
                 <div class=" lh-1 overline text-uppercase ml-n2 "
                     :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
                 >
@@ -18,7 +18,7 @@
             <v-col cols="auto" class="ml-2">
                 <team-logo :id="match.awayTeam.id" :size="24" />
             </v-col>
-            <v-col>
+            <v-col  v-if="!logoOnly">
                 <div class="lh-1 text-uppercase ml-n2 "
                     :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
                 >
@@ -33,6 +33,7 @@ export default {
     props:{
         match: {type: Object},
         rgb: {type: String},
+        logoOnly: {type: Boolean}
     }
 }
 </script>

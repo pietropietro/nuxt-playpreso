@@ -1,17 +1,22 @@
 <template>
-    <div v-if="league">
-        
+    <v-row no-gutters v-if="league">
         <emoji-flag  :model="league?.country ?? league?.area" 
-            :class="sizeClass ?? ''"
+            :size="big ? '1.5em' : sizeClass ?? ''" class="mr-1"
         />
-        <span class="overline lh-1">{{league.tag}}</span>
-    </div>
+        <h2 v-if="big">
+            {{league.name}}
+        </h2>
+        <span v-else class="overline lh-1">
+            {{league.tag}}
+        </span>
+    </v-row>
 </template>
 <script>
 export default {
     props: {
         league: {type: Object, required: true},
-        sizeClass: {type: String}
+        sizeClass: {type: String},
+        big: {type: Boolean}
     } 
 }
 </script>

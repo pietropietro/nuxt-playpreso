@@ -15,12 +15,13 @@
             <v-col cols="auto" 
                 class="mx-1"
             >
-                <h2>+{{s.gf}}</h2>
+                <h2>{{s.gf}}</h2>
             </v-col>
             <v-col cols="auto" 
-                class="mx-1"
+                class="mx-1 mb-1"
+                align-self="end"
             >
-                <h2>-{{s.ga}}</h2>
+                <h3>{{s.ga}}</h3>
             </v-col>
         </v-row>
     </div>

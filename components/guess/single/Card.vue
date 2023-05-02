@@ -1,6 +1,6 @@
 <template>
     <div v-if="guess">
-        <v-container style="max-width:300px">   
+        <v-container style="max-width:360px">   
             <v-row
                 class="rounded"
                 @click="select"
@@ -33,12 +33,34 @@
                     :class="item !== 'graphic' && index == (selectedView.length - 1) ? 'pa-0' : ''"
                     v-for="(item, index) in selectedView"
                     :key="index"
-                >
-                    <match-info-short v-if="item ===  'match_info'" :match="match"/>
+                >   
+                    <template v-if="item === 'league_position'">
+                        <league-detail big :league="match.league" />
+                        <div class="overline lh-1 text-center">position</div>
+                    </template>
+                    <template v-else-if="item === 'league_gol'">
+                        <league-detail big :league="match.league" />
+                        <v-row no-gutters>
+                            <v-spacer/>
+                            <v-col>
+                                <em-emoji size="1.2em" id="soccer" />
+                            </v-col>
+                            <v-spacer/>
+                            <v-col>
+                                <em-emoji size="1.2em" id="goal_net" />
+                            </v-col>
+                            <v-spacer/>
+                        </v-row>
+                    </template>
+                    <template v-else-if="item === 'last_matches_intro'">
+                        <div class="overline lh-1 text-center">last 3 <br> matches</div>
+                    </template>
+                    <match-info-short v-else-if="item ===  'match_info'" :match="match"/>
                     <match-graphic-preview 
                         v-else-if="item==='graphic'"
                         :rgb="rgb" 
                         :match="match" 
+                        :logoOnly="index < (selectedView.length - 1)"
                     />
                     <guess-single-view-locked v-else-if="item === 'locked'" 
                         :guess="guess"
@@ -87,9 +109,9 @@ export default {
     data(){
         let unlckd =  [['graphic']];
         unlckd.push(['match_info','lock']);
-        if(this.match.league?.standings) unlckd.push(['graphic','stats_position']);
-        if(this.match.homeTeam?.lastMatches) unlckd.push(['graphic','stats_last_matches']);
-        if(this.match.league?.standings) unlckd.push(['graphic','stats_gol']);
+        if(this.match.league?.standings) unlckd.push([ 'league_position' ,'graphic','stats_position']);
+        if(this.match.league?.standings) unlckd.push(['league_gol', 'graphic','stats_gol']);
+        if(this.match.homeTeam?.lastMatches) unlckd.push(['last_matches_intro', 'graphic','stats_last_matches']);
         return{
             selectedIndex: 0,
             cardHeight: '90px',
