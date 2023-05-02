@@ -1,7 +1,14 @@
 <template>
     <v-container class="pa-0 lh-1">
-        <league-detail :league="match.league" />
-        <v-row >
+        <v-row>
+            <v-col>
+                <league-detail :league="match.league" />
+            </v-col>
+            <v-col v-if="match.round">
+                <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>            
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
             <v-col>
                 <div  v-html="teamNameToHtml(this.match.homeTeam?.name)" />
                 <div  v-html="teamNameToHtml(this.match.awayTeam?.name)" />
