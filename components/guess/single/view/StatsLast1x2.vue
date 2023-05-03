@@ -5,7 +5,7 @@
             <v-row no-gutters align="center" justify="center"
                 :style="{height: rowHeight}"
             >
-                <v-col cols="auto" class="mx-1"
+                <v-col cols="auto" :class=" ind==1 ? 'mx-1' : '' "
                     v-for="(m,ind) in match.homeTeam.lastMatches"
                     :key="ind"
                 >
@@ -19,7 +19,7 @@
                 }"
                 
             >
-                <v-col cols="auto" class="mx-1"
+                <v-col cols="auto" :class=" ind==1 ? 'mx-1' : '' "
                     v-for="(m,ind) in match.awayTeam.lastMatches"
                     :key="ind"
                 >

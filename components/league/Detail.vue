@@ -1,11 +1,12 @@
 <template>
-    <v-row no-gutters v-if="league">
+    <v-row no-gutters v-if="league" align="center">
         <emoji-flag  :model="league?.country ?? league?.area" 
             :size="big ? '1.5em' : sizeClass ?? ''" class="mr-1"
         />
-        <h2 v-if="big">
-            {{league.name}}
-        </h2>
+        <div v-if="big" 
+            style="line-height:1; display: contents"
+            v-html="nameToCompactHtml(league.name, 'h4', 'h2', 9, true)" 
+        />
         <span v-else class="overline lh-1">
             {{league.tag}}
         </span>

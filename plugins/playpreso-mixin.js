@@ -25,6 +25,27 @@ Vue.mixin({
             return cupFormat[ppCupGroup.level - 1].name +
                     (cupFormat[ppCupGroup.level - 1].name==='FINAL' ? '' 
                     : (' - ' + (cupFormat[ppCupGroup.level - 1].group_tags.indexOf(ppCupGroup.tag) + 1)));
+        },
+        nameToCompactHtml(name, smallTag='h6', bigTag='h4', limitOneWord=18, breaks=false){
+            if (name.length <= limitOneWord) {
+                return `<${bigTag}>${name}</${bigTag}>`;
+            }
+
+            let moreWordsLimit = 9;
+            const words = name.split(' ');
+            let bigText = '';
+            let smallText = '';
+
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                if (bigText.length + word.length > moreWordsLimit || smallText.length) {
+                    smallText += ` ${word}`;
+                } else {
+                    bigText += ` ${word}`;
+                }
+            }
+
+            return `<${bigTag} style="display:inline">${bigText.trim()} ${breaks && bigText.length ? '<br>' : ''}<${smallTag} style="display:inline">${smallText.trim()}</${smallTag}></${bigTag}>`;
         }
     }
 })

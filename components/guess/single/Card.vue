@@ -10,7 +10,8 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <v-col cols="auto"
+                <v-col v-if="guess?.ppTournamentType"
+                    cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
                         width: '20px',
@@ -39,27 +40,41 @@
                     align-self="center"
                 >   
                     <template v-if="item === 'league_position'">
-                        <league-detail big :league="match.league" />
-                        <div class="overline lh-1 text-center">position</div>
+                        <div
+                            :style="{ width: widthCentral}"
+                        >
+                            <league-detail big :league="match.league" />
+                            <div class="mt-2 overline lh-1 text-center">position</div>
+                        </div>
                     </template>
                     <template v-else-if="item === 'league_gol'">
-                        <league-detail big :league="match.league" />
-                        <v-row no-gutters>
-                            <v-spacer/>
-                            <v-col>
-                                <em-emoji size="1.2em" id="soccer" />
-                            </v-col>
-                            <v-spacer/>
-                            <v-col>
-                                <em-emoji size="1.2em" id="goal_net" />
-                            </v-col>
-                            <v-spacer/>
-                        </v-row>
+                        <div
+                            :style="{ width: widthCentral}"
+                        >
+                            <league-detail big :league="match.league" />
+                            <v-row no-gutters>
+                                <v-spacer/>
+                                <v-col>
+                                    <em-emoji size="1.2em" id="soccer" />
+                                </v-col>
+                                <v-spacer/>
+                                <v-col>
+                                    <em-emoji size="1.2em" id="goal_net" />
+                                </v-col>
+                                <v-spacer/>
+                            </v-row>
+                        </div>
                     </template>
                     <template v-else-if="item === 'last_matches_intro'">
-                        <div class="overline lh-1 text-center">last 3 <br> matches</div>
+                        <div class="overline lh-1 text-center"
+                            :style="{ width: widthCentral}"
+                        >
+                            last 3 <br> matches
+                        </div>
                     </template>
-                    <match-info-short v-else-if="item ===  'match_info'" :match="match"/>
+                    <match-info-short v-else-if="item ===  'match_info'" :match="match"
+                        :style="{ width: widthCentral}"
+                    />
                     <match-graphic-preview 
                         v-else-if="item==='graphic'"
                         :rgb="rgb" 
@@ -73,26 +88,27 @@
                         :guess="guess" 
                         :rgb="rgb" 
                         :afterLock="afterLock"
+                        :style="{ width: '112px'}"
                     />
                     <guess-single-view-stats-position v-else-if="item === 'stats_position'" 
                         :standings="standings" 
                         :rgb="rgb" 
-                        :style="{ height: cardHeight, width: '100px'}"
+                        :style="{ height: cardHeight, width: widthFinal}"
                         rowHeight="45px"
                     />
                     <guess-single-view-stats-last1x2 v-else-if="item === 'stats_last_matches'" 
                         :match="match" 
-                        :style="{ height: cardHeight, width: '100px'}"
+                        :style="{ height: cardHeight, width: widthFinal}"
                         :rgb="rgb" 
                         rowHeight="45px"
                     />
                     <guess-single-view-stats-gf-ga v-else-if="item === 'stats_gol'" 
                         :standings="standings" 
-                        :style="{ height: cardHeight, width: '100px'}"
+                        :style="{ height: cardHeight, width: widthFinal}"
                         :rgb="rgb" 
                         rowHeight="45px"                        
                     />
-                    <guess-single-view-points v-else-if="item === 'points'" :guess="guess"/>
+                    <guess-single-view-points class="px-2" v-else-if="item === 'points'" :guess="guess"/>
                 </v-col>
             </v-row>
         </v-container>
@@ -119,6 +135,8 @@ export default {
         return{
             selectedIndex: 0,
             cardHeight: '90px',
+            widthCentral: '120px',
+            widthFinal: '80px',
             unlockedViews: unlckd,
             lockedViews: [
                 ['match_info', 'locked']
