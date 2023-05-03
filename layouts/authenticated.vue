@@ -36,7 +36,8 @@
 
 export default {
     mounted () {
-        setTimeout(()=>this.$vuetify.theme.dark = this.$store.state.user.darkMode ? true : false);
+        // setTimeout(()=>this.$vuetify.theme.dark = this.$store.state.user.darkMode ? true : false);
+        setTimeout(()=>this.$vuetify.theme.dark =  true );
     },
 	data(){
 		return{

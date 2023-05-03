@@ -17,7 +17,7 @@
                 v-html="m.title" 
                 @click="()=>selectedMenu=selectedMenu ? null : m.key" 
             />
-            <v-row justify="center" align="center" v-if="selectedMenu==='theme'">
+            <!-- <v-row justify="center" align="center" v-if="selectedMenu==='theme'">
                 <v-spacer/>
                 <v-switch inset
                     v-model="$vuetify.theme.dark"
@@ -26,7 +26,7 @@
                 <div class="overline lh-1">{{$vuetify.theme.dark ? 'DARK' : 'LIGHT'}}</div>
                                 <v-spacer/>
 
-            </v-row>
+            </v-row> -->
             <v-row justify="center" v-if="selectedMenu==='points'">
                 <table>
                     <tr v-for="(item,i) in pointsList" :key="i">
@@ -64,7 +64,7 @@ export default {
         return{
             selectedMenu: null,
             menus:[
-                {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
+                // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
                 {title: '<h3 class="ocrastd">REMINDERS</h3>', key:'email_reminders'},
                 {title: '<h3 class="ocrastd">3+</h3>', key:'3+'},
                 {title: '<h3 class="ocrastd">POINTS</h3><em-emoji id="parking"/>', key:'points'},
