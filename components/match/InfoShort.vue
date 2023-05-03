@@ -15,12 +15,12 @@
             </v-col>
             <v-col cols="auto" class="pl-0" v-if="match.verified_at" >
                 <h4>{{match.score_home}}</h4>
-                <h4>{{match.score_away}}</h4>
+                <h4 class="flex-nowrap">{{match.score_away}}</h4>
             </v-col>
         </v-row>
         <!-- TODO ADD LIVE -->
-        <v-row v-if="showDateTime" class="overline lh-1 flex-nowrap" no-gutters>
-            {{formatDate(match.date_start, withTime)}}
+        <v-row v-if="showDateTime" class="overline lh-1 " no-gutters>
+            <div>{{formatDate(match.date_start, showTime)}}</div>
         </v-row>
     </v-container>
 </template>
@@ -30,6 +30,12 @@ export default {
         match: {type: Object, required: true},
         showDateTime: {type:Boolean, default: true},
         withTime: {type: Boolean, default: true}
+    },
+    computed:{
+        showTime(){
+            if(!this.withTime)return false;
+            return new Date(this.match.date_start).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0); 
+        }
     }
 }
 </script>

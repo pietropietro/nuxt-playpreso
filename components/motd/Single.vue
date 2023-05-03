@@ -1,8 +1,8 @@
 <template>
     <div>
         <v-row justify="center" align="center">
-            <v-col>
-                <div style="min-width:250px; max-width:300px;">
+            <v-spacer/>
+            <v-col cols="auto">
                     <guess-single-card
                         :match="motd.match"
                         :guess="motd.guess"
@@ -10,11 +10,10 @@
                         :rgb="motdPPTT.rgb"
                         :selectedGuessId="selectedGuessId"
                         :setSelectedGuessId="(val)=>selectedGuessId = val"
-                        extended
                     />
-                </div>
             </v-col>
-            <v-col class="text-center">
+            <v-spacer/>
+            <v-col class="text-center px-0">
                 <h1>{{motd.aggr_count}}</h1>
                 <div class="overline lh-1">locks</div>
             </v-col>

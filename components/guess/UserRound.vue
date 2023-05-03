@@ -4,14 +4,16 @@
             v-for="pprm, index in ppRMs" :key="index"
             cols="12" md="4"
         >
-            <guess-single-card 
-                :guess="pprm.guess" 
-                :match="pprm.match" 
-                :rgb="rgb"
-                :selectedGuessId="selectedGuessId"
-                :setSelectedGuessId="(val)=>selectedGuessId = val"
-                extended
-            />
+            <v-row justify="center" :class="index === 1 ? 'my-1' : ''">
+                <guess-single-card
+                    :guess="pprm.guess"
+                    :match="pprm.match"
+                    :rgb="rgb"
+                    :selectedGuessId="selectedGuessId"
+                    :setSelectedGuessId="(val)=>selectedGuessId = val"
+                    extended
+                />
+            </v-row>
         </v-col>
     </v-row>
 </template>

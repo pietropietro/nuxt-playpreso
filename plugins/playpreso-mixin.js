@@ -26,19 +26,23 @@ Vue.mixin({
                     (cupFormat[ppCupGroup.level - 1].name==='FINAL' ? '' 
                     : (' - ' + (cupFormat[ppCupGroup.level - 1].group_tags.indexOf(ppCupGroup.tag) + 1)));
         },
-        nameToCompactHtml(name, smallTag='h6', bigTag='h4', limitOneWord=18, breaks=false){
+        nameToCompactHtml(name, smallTag='h6', bigTag='h4', limitOneWord=12, limitBigMoreWords = 8, limitTotalSmall = 16,  breaks=false){
             if (name.length <= limitOneWord) {
                 return `<${bigTag}>${name}</${bigTag}>`;
             }
 
-            let moreWordsLimit = 9;
+            if (name.length > limitTotalSmall) {
+                return `<${smallTag}>${name}</${smallTag}>`;
+            }
+
+
             const words = name.split(' ');
             let bigText = '';
             let smallText = '';
 
             for (let i = 0; i < words.length; i++) {
                 const word = words[i];
-                if (bigText.length + word.length > moreWordsLimit || smallText.length) {
+                if ( (bigText.length + word.length) > limitBigMoreWords || smallText.length) {
                     smallText += ` ${word}`;
                 } else {
                     bigText += ` ${word}`;

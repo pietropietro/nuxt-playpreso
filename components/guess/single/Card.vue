@@ -88,7 +88,7 @@
                         :guess="guess" 
                         :rgb="rgb" 
                         :afterLock="afterLock"
-                        :style="{ width: '112px'}"
+                        :style="{ width: '115px'}"
                     />
                     <guess-single-view-stats-position v-else-if="item === 'stats_position'" 
                         :standings="standings" 
@@ -135,7 +135,7 @@ export default {
         return{
             selectedIndex: 0,
             cardHeight: '90px',
-            widthCentral: '120px',
+            widthCentral: '125px',
             widthFinal: '80px',
             unlockedViews: unlckd,
             lockedViews: [

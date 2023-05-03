@@ -4,15 +4,12 @@
         <v-row align="center">
             <v-col cols="auto">
                 <v-row align="center" @click="selectedIndex=0">
-                    <v-col cols="auto" class="px-0">
-                        <em-emoji :id="motdPPTT.emoji" size="2.5em" class="mr-2"/>
-                    </v-col>
                     <v-col>
                         <v-row>
                             <h1>MOTD</h1>
                         </v-row>
                         <v-row>
-                            <div class="font-weight-bold caption mt-n4">
+                            <div class="lh-1 overline mt-n2">
                                 match of the day
                             </div>
                         </v-row>
@@ -39,7 +36,7 @@
             :motdPPTT="motdPPTT"
             :userLast="userLast"
             v-if="matchView" 
-            class="mt-0"
+            class="mt-4"
         />
         <div v-else class="py-8">
             <v-row align="center" class="text-center" >
@@ -94,11 +91,17 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
                 this.motds = response.message?.motds;
-                this.motds.map((m)=>{
-                    m.guess = m.guess ?? {home: null, away: null, verified_at: !m.can_lock};
-                });
                 this.standings = response.message?.standings;
                 this.motdPPTT = response.message?.ppTournamentType;
+                this.motds.map((m)=>{
+                    m.guess = m.guess ?? 
+                        {
+                            home: null, 
+                            away: null, 
+                            verified_at: !m.can_lock,
+                        };
+                    m.guess.ppTournamentType= this.motdPPTT;
+                });
             }
             this.loading = false;
         },
