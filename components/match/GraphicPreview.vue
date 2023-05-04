@@ -1,28 +1,32 @@
 <template>
     <v-row class="flex-column" style="height:100%" no-gutters  >
-        <v-row align="center" >
-            <v-col cols="auto" class="ml-2" style="z-index:2">
-                <team-logo :id="match.homeTeam.id" :size="24"  />
-            </v-col>
-            <v-col v-if="!logoOnly">
-                <div class=" lh-1 overline text-uppercase ml-n2 "
-                    :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
-                >
-                    {{match.homeTeam.name.substr(0,3)}}
-                </div>
-            </v-col>
-        </v-row>
-        <v-row align="center"
-            :style="{backgroundColor: ppRGBA(rgb)}"
+        <v-row v-for="i in 2" :key="i"
+            align="center" 
+            :style="{
+                backgroundColor: i== 2 ? ppRGBA(rgb) : ''
+            }"
         >
             <v-col cols="auto" class="ml-2">
-                <team-logo :id="match.awayTeam.id" :size="24" />
+                <team-logo 
+                    :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
+                    :size="24"  
+                />
             </v-col>
-            <v-col  v-if="!logoOnly">
-                <div class="lh-1 text-uppercase ml-n2 "
-                    :style="{fontWeight:'bold', fontSize:'1.2rem !important'}"
+            <v-col v-if="!logoOnly">
+                <div class=" ocrastd text-uppercase ml-n2 "
+                    :style="{
+                        fontWeight:'bold', 
+                        fontSize:'1.2rem !important', 
+                        lineHeight: '0.6em'
+                    }"
                 >
-                    {{match.awayTeam.name.substr(0,3)}}
+                <!-- <div class=" overline lh-1 text-uppercase ml-n2 "
+                    :style="{
+                        fontWeight:'bold', 
+                        fontSize:'1.2rem !important', 
+                    }"
+                > -->
+                    {{ i==1 ? match.homeTeam.name.substr(0,3) : match.awayTeam.name.substr(0,3)}}
                 </div>
             </v-col>
         </v-row>

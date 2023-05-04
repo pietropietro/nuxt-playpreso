@@ -22,7 +22,7 @@ export default {
 	},
 	async mounted() {
 		let response = await this.$api.getImage('/static/teams/' + this.id);
-		if (response.status == 200) {
+		if (response && response.status == 200) {
 			let blob = await response.blob();
 			this.imageSrc = URL.createObjectURL(blob);
 		} 
