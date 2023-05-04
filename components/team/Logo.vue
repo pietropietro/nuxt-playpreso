@@ -7,7 +7,6 @@
 	</v-row>
 </template>
 <script>
-import ColorThief from 'colorthief';
 
 export default {
 	props: {

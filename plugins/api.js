@@ -67,11 +67,10 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 
         async getImage(route) {
             try {
-                if ('caches' in window) {
-                    const cache = await caches.open('static/image');
-                    const cachedResponse = await cache.match(route);
+                if ('caches' in self) {
+                    let myCache = await caches.open('static/image');
+                    let cachedResponse = await myCache.match(route);
                     if (cachedResponse) {
-
                         // Return the cached response if it exists
                         return cachedResponse;
                     }
@@ -94,16 +93,17 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 if (response.status === 401) {
                     $logout.logout();
                 }
-        
-                if ('caches' in window) {
-                    await cache.put(route, response);
+                
+                if ('caches' in self) {
+                    let myCache = await caches.open('static/image');
+                    await myCache.put(route, response);
                 }
                 // Return the response
                 return cloneResponse;
 
             } catch (e) {
                 console.log('error: ' + e);
-                $notifier.showError();
+                // $notifier.showError();
             }
         }
     })

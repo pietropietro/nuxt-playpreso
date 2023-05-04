@@ -24,8 +24,5 @@ export default {
     props:{
         guess: {type:Object}
     },
-    mounted(){
-        console.log('mounted');
-    }
 }
 </script>
