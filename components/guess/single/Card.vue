@@ -10,7 +10,7 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <v-col v-if="guess?.ppTournamentType && selectedIndex>0"
+                <v-col v-if="guess?.ppTournamentType && (selectedIndex>0 || guess?.guessed_at || guess?.verified_at)"
                     cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
