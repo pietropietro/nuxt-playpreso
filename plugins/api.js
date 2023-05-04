@@ -67,13 +67,14 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 
         async getImage(route) {
             try {
-                const cache = await caches.open('static/image');
-                const cachedResponse = await cache.match(route);
-            
-                if (cachedResponse) {
+                if ('caches' in window) {
+                    const cache = await caches.open('static/image');
+                    const cachedResponse = await cache.match(route);
+                    if (cachedResponse) {
 
-                    // Return the cached response if it exists
-                    return cachedResponse;
+                        // Return the cached response if it exists
+                        return cachedResponse;
+                    }
                 }
             
                 // Otherwise, fetch the image from the server
@@ -94,7 +95,9 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                     $logout.logout();
                 }
         
-                await cache.put(route, response);
+                if ('caches' in window) {
+                    await cache.put(route, response);
+                }
                 // Return the response
                 return cloneResponse;
 
