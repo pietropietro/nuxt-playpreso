@@ -10,7 +10,7 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <v-col v-if="guess?.ppTournamentType"
+                <v-col v-if="guess?.ppTournamentType && selectedIndex>0"
                     cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
@@ -20,6 +20,8 @@
                     }"
                     class="rounded-tl rounded-bl pa-1"
                 >
+                                        <!-- width: (selectedIndex == 0) ? '18px' : '35px', -->
+
                     <em-emoji
                         style="display:flex"
                         class="ml-n6 mt-n3"
@@ -27,7 +29,12 @@
                         size="70"
                     />
                 </v-col>
-                
+                                        <!-- class="ml-n6 mt-n3" -->
+
+                                        <!-- :class="'ml-n' + (9 - selectedIndex * 2) + ' mt-n3'" -->
+
+                                        <!-- :class="(selectedIndex == 0) ? 'ml-n6 mt-n3' : 'ml-n3 mt-n3'" -->
+
                 <v-col 
                     cols="auto"  
                     :style="{

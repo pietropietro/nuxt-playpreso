@@ -12,7 +12,9 @@
             </h2>
             <h1 v-else>
                 {{guess.points}}
-                <em-emoji id="parking"/>
+                <client-only>
+                    <em-emoji id="parking" />
+                </client-only>
             </h1>
         </template>
     </v-row>
@@ -21,6 +23,9 @@
 export default {
     props:{
         guess: {type:Object}
+    },
+    mounted(){
+        console.log('mounted');
     }
 }
 </script>
