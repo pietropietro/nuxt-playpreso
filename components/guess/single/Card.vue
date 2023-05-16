@@ -27,6 +27,27 @@
                         size="70"
                     />
                 </v-col>
+                <!-- START ALARM IF LESS THAN 1 day not motd -->
+                <v-col
+                    v-if="selectedIndex == 0 && guess?.ppTournamentType?.name != 'MOTD' &&
+                        isWithinNext24Hours"
+                    cols="auto"
+                    :style="{
+                        backgroundColor: ppRGBA(rgb),
+                        width: '20px',
+                        height: cardHeight,
+                        overflow: 'hidden'
+                    }"
+                    class="rounded-tl rounded-bl pa-1"
+                >
+                    <em-emoji
+                        style="display:flex"
+                        class="ml-n6 mt-n3"
+                        native="alarm_clock"
+                        size="70"
+                    />
+                </v-col>
+                <!-- END ALARM -->
                 <v-col 
                     cols="auto"  
                     :style="{
@@ -52,7 +73,7 @@
                     </template>
                     <template v-else-if="item === 'league_gol'">
                         <div
-                            :style="{ width: widthCentral}"
+                            :style="{width: '149px'}"
                         >
                             <league-detail big :league="match.league"  
                             :style="{ width: '149px', height: '45px'}"
@@ -182,6 +203,20 @@ export default {
         awayStandings(){
             if(!this.match.league?.standings)return;
             return this.match.league.standings.filter((e)=>e.id == this.match.awayTeam.id)[0];
+        },
+        isWithinNext24Hours() {
+            if(!this.guess || !this.match)return false;
+            // Get the current timestamp
+            let currentTime = new Date().getTime();
+
+            // Calculate the timestamp for the current time plus 24 hours
+            let next24Hours = currentTime + (24 * 60 * 60 * 1000);
+
+            // Parse the given match's start date
+            let matchDate = new Date(this.match?.date_start).getTime();
+
+            // Compare the match's start date with the current time plus 24 hours
+            return matchDate <= next24Hours;
         }
     },
     methods:{
@@ -195,7 +230,7 @@ export default {
     watch: {
         selectedGuessId (newId, oldId) {
            if(newId !== this.guess.id)this.selectedIndex=0;
-        }
+        },
     },
 }
 </script>
