@@ -21,7 +21,7 @@
                     </template>
                     <template v-else>
                         <user-trophy 
-                            :trophy="user.trophies[0]"
+                            :trophy="user.trophies[Math.floor(Math.random() * user.trophies.length)]"
                         />
                         <v-chip class="ml-1" 
                             label small color="primary" 
@@ -48,6 +48,9 @@ export default {
         dothis(){
             this.$store.commit('navigation/setOpenUserLabelId', this.user.id);
         }
+    },
+    mounted(){
+        this.$store.commit('navigation/setOpenUserLabelId', null);
     }
 }
 </script>

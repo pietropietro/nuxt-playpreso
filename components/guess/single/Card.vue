@@ -115,7 +115,12 @@
                         :rgb="rgb" 
                         rowHeight="45px"                        
                     />
-                    <guess-single-view-points class="px-2" v-else-if="item === 'points'" :guess="guess"/>
+                    <guess-single-view-points 
+                        class="px-2" 
+                        v-else-if="item === 'points'" 
+                        :guess="guess" 
+                        :style="{ height: cardHeight, width: widthFinal}"
+                    />
                 </v-col>
             </v-row>
         </v-container>
