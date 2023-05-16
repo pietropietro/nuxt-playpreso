@@ -1,15 +1,23 @@
 <template>
-    <v-row no-gutters v-if="league" align="center">
+    <v-row no-gutters v-if="league && !big" align="center">
         <emoji-flag  :model="league?.country ?? league?.area" 
-            :size="big ? '1.5em' : sizeClass ?? ''" class="mr-1"
+            :size="sizeClass" class="mr-1"
         />
-        <div v-if="big" 
-            style="line-height:1; display: contents"
-            v-html="nameToCompactHtml(league.name, 'h4', 'h2', 7, 8,true)" 
-        />
-        <span v-else class="overline lh-1">
+        <span class="overline lh-1">
             {{league.tag}}
         </span>
+    </v-row>
+    <v-row no-gutters v-else align="center" justify="center">
+        <v-spacer />
+        <v-col cols="auto" class="mr-2">
+            <emoji-flag size="1.5rem" :model="league?.country ?? league?.area"/>
+        </v-col>
+        <v-col> 
+            <div class="overline lh-1 text-wrap font-weight-bold">
+                {{league.name}}
+            </div>
+        </v-col>
+        <v-spacer />
     </v-row>
 </template>
 <script>

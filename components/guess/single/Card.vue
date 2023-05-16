@@ -20,8 +20,6 @@
                     }"
                     class="rounded-tl rounded-bl pa-1"
                 >
-                                        <!-- width: (selectedIndex == 0) ? '18px' : '35px', -->
-
                     <em-emoji
                         style="display:flex"
                         class="ml-n6 mt-n3"
@@ -29,36 +27,36 @@
                         size="70"
                     />
                 </v-col>
-                                        <!-- class="ml-n6 mt-n3" -->
-
-                                        <!-- :class="'ml-n' + (9 - selectedIndex * 2) + ' mt-n3'" -->
-
-                                        <!-- :class="(selectedIndex == 0) ? 'ml-n6 mt-n3' : 'ml-n3 mt-n3'" -->
-
                 <v-col 
                     cols="auto"  
                     :style="{
                         overflow: 'hidden',
-                        height:  ['graphic', 'lock'].includes(item) ? '100%' : ''
+                        height:  ['graphic', 'lock', 'league_position', 'league_gol'].includes(item) ? '100%' : ''
                     }"
-                    :class="item !== 'graphic' && index == (selectedView.length - 1) ? 'pa-0' : ''"
+                    :class="(item !== 'graphic' && index == (selectedView.length - 1) )
+                        || ['league_gol', 'league_position'].includes(item) 
+                     ? 'pa-0' : ''"
                     v-for="(item, index) in selectedView"
                     :key="index"
                     align-self="center"
                 >   
                     <template v-if="item === 'league_position'">
-                        <div
-                            :style="{ width: widthCentral}"
-                        >
-                            <league-detail big :league="match.league" />
+                            
+                        <league-detail big :league="match.league" 
+                            :style="{ width: '149px', height: '45px'}"
+                        />
+                        <v-row no-gutters justify="center"
+                            :style="{ width: '149px', height: '45px'}">
                             <div class="mt-2 overline lh-1 text-center">position</div>
-                        </div>
+                        </v-row>
                     </template>
                     <template v-else-if="item === 'league_gol'">
                         <div
                             :style="{ width: widthCentral}"
                         >
-                            <league-detail big :league="match.league" />
+                            <league-detail big :league="match.league"  
+                            :style="{ width: '149px', height: '45px'}"
+                        />
                             <v-row no-gutters>
                                 <v-spacer/>
                                 <v-col>
@@ -143,7 +141,7 @@ export default {
         unlckd.push(['match_info','lock']);
         if(this.match.league?.standings) unlckd.push([ 'league_position' ,'graphic','stats_position']);
         if(this.match.league?.standings) unlckd.push(['league_gol', 'graphic','stats_gol']);
-        if(this.match.homeTeam?.lastMatches) unlckd.push(['last_matches_intro', 'graphic','stats_last_matches']);
+        if(this.match.homeTeam?.lastMatches?.length) unlckd.push(['last_matches_intro', 'graphic','stats_last_matches']);
         return{
             selectedIndex: 0,
             cardHeight: '90px',
