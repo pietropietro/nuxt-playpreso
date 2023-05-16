@@ -4,7 +4,7 @@
             v-for="pprm, index in ppRMs" :key="index"
             cols="12" md="4"
         >
-            <v-row justify="center" :class="index === 1 ? 'my-1' : ''">
+            <v-row justify="center" >
                 <guess-single-card
                     :guess="pprm.guess"
                     :match="pprm.match"

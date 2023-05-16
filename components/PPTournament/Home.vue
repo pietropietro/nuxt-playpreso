@@ -31,7 +31,7 @@
         <template  v-if="tournamentObj.ppRounds.length > 0">
             <v-container v-if="userCurrentRound" class="py-4">
                 <p-p-section-title text="YOUR LOCKS" />
-                <guess-user-round class="mt-0" :ppRMs="userCurrentRound" :rgb="tournamentObj.ppTournamentType.rgb" />
+                <guess-user-round :ppRMs="userCurrentRound" :rgb="tournamentObj.ppTournamentType.rgb" />
             </v-container>
             <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
