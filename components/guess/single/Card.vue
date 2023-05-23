@@ -30,7 +30,7 @@
                 <!-- START ALARM IF LESS THAN 1 day not motd -->
                 <v-col
                     v-if="selectedIndex == 0 && guess?.ppTournamentType?.name != 'MOTD' &&
-                        isWithinNext24Hours"
+                        isWithinNext24Hours && !guess.verified_at && !guess.guessed_at"
                     cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
