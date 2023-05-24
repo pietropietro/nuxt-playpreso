@@ -2,7 +2,7 @@
     <loading-page v-if="loading"/>
     <v-container class="mt-4 rounded" v-else >
         <template v-if="league">
-            <admin-league-edit class="my-5" :league="league" :onSuccess="onEdit" :leagues="leagues"/>
+            <admin-league-edit class="my-5" :league="league" :onSuccess="onEdit"/>
             <v-row class="pa-4">
                 <v-expansion-panels>
                     <v-row>
@@ -35,7 +35,6 @@
 <script>
 export default {
     props:{
-        leagues: {type: Array},
         id: {type: Number},
         onEdit: {type: Function}
     },

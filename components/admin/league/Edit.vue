@@ -10,30 +10,12 @@
             <p-p-input-text placeholder="ls-suffix" :value="lsSuffixModel" :setValue="(val)=>lsSuffixModel=val"/>
         </v-col>
         <v-col cols="3">
-            <v-select label="parent" v-model="parentModel" :items="leagues" item-text="name" item-value="id"/>
+            <admin-select-tournament label="parent" :modelId="parentModel" :setModelId="(val)=>parentModel = val" />
         </v-col>
         <v-col cols="3">
-            <v-select label="country" v-model="countryModel" :items="countryList">
-                <template slot="item" slot-scope="data">
-                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
-                </template>
-                <template slot="selection" slot-scope="data">
-                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
-                </template>
-            </v-select>
+            <admin-select-country :model="countryModel" :setModel="(val)=>countryModel=val" />
         </v-col>
-        <v-col cols="3"><v-select label="c-lvl" v-model="countryLevelModel" :items="[1,2,3,4]"/></v-col>
-        <v-col cols="3">
-            <v-select label="area" v-model="areaModel" :items="areaList">
-                <template slot="item" slot-scope="data">
-                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
-                </template>
-                <template slot="selection" slot-scope="data">
-                    <emoji-flag :model="data.item" size="2em"/><div class="overline ml-2">{{ data.item }}</div>
-                </template>
-            </v-select>
-        </v-col>
-        <v-col cols="3"><v-select label="a-lvl" v-model="areaLevelModel" :items="[1,2,3,4]"/></v-col>
+        <v-col cols="3"><v-select label="c-lvl" v-model="levelModel" :items="[1,2,3,4]"/></v-col>
         <v-col cols="12" class="text-center">
             <v-btn text 
                 :disabled="!nameModel" 
@@ -46,33 +28,8 @@
     </v-row>
 </template>
 <script>
-import { getNames,getNameList, overwrite } from 'country-list';
-    overwrite([
-        {
-            code: 'AW',
-            name: 'England'
-        },
-        {
-            code: 'AX',
-            name: 'Scotland'
-        },
-        {
-            code: 'TR',
-            name: 'Turkey'
-        },
-        {
-            code: 'US',
-            name: 'US'
-        },
-        {
-            code: 'KR',
-            name: 'South Korea'
-        }
-    ]);
-
 export default {
     props: {
-        leagues: {type: Array}, 
         onSuccess: {type: Function},
         league: {type: Object}
     },
@@ -137,40 +94,16 @@ export default {
                 this.country = val;
             }
         },
-        countryLevelModel:{
+        levelModel:{
             get(){
-                return !!this.league ? this.league.country_level : this.country_level; 
+                return !!this.league ? this.league.level : this.level; 
             },
             set(val){
                 if(!!this.league){
-                    this.league.country_level = val;
+                    this.league.level = val;
                     return;
                 }
-                this.country_level = val;
-            }
-        },
-        areaModel:{
-            get(){
-                return !!this.league ? this.league.area : this.area; 
-            },
-            set(val){
-                if(!!this.league){
-                    this.league.area = val;
-                    return;
-                }
-                this.area = val;
-            }
-        },
-        areaLevelModel:{
-            get(){
-                return !!this.league ? this.league.area_level : this.area_level; 
-            },
-            set(val){
-                if(!!this.league){
-                    this.league.area_level = val;
-                    return;
-                }
-                this.area_level = val;
+                this.level = val;
             }
         },
     },
@@ -180,11 +113,7 @@ export default {
         ls_suffix: null, 
         parent_id:null, 
         country: null,
-        countryList: getNames(),
-        country_level: null,
-        area: null,
-        areaList: ['europe', 'america', 'asia', 'africa', 'world'],
-        area_level: null,
+        level: null,
         loading:false
     }),
     methods:{
@@ -195,9 +124,7 @@ export default {
                 "tag" : this.tagModel,
                 "ls_suffix" : this.lsSuffixModel,
                 "country" : this.countryModel,
-                "country_level" : this.countryLevelModel,
-                "area" : this.areaModel,
-                "area_level" : this.areaLevelModel,
+                "level" : this.levelModel,
                 "parent_id" : this.parentModel,
             };
             let route = !!this.league ? (this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.league.id) : this.ADMIN_API_ROUTES.LEAGUE.CREATE;
@@ -208,14 +135,12 @@ export default {
             );
             if(response && response.status === "success"){
                 this.name = this.tag = this.parent_id = this.ls_suffix = this.country
-                = this.country_level = this.area = this.area_level = null;
+                = this.level = null;
             }
             if(!!this.onSuccess)await this.onSuccess();
             this.loading = false;
         }
     },
-    mounted(){
-        console.log(getNameList());
-    }
+
 }
 </script>

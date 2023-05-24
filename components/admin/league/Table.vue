@@ -106,7 +106,7 @@
             </template>
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
-                    <admin-league-detail  :id="item.id" :onEdit="refresh" :leagues="leagues"/>
+                    <admin-league-detail  :id="item.id" :onEdit="refresh"/>
                 </td>
             </template>
         </v-data-table>

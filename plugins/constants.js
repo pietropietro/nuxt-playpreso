@@ -93,12 +93,23 @@ Vue.mixin({
                     ROUTE: '/admin/p-tournament-types',
                     NAME: 'p-tournament-types'
                 },
+                PPAREAS: {
+                    ROUTE: '/admin/p-areas',
+                    NAME: 'p-areas'
+                },
             },
             ADMIN_API_ROUTES: {
                 PPTOURNAMENTTYPES:{ 
                     GET: '/admin/p-tournament-types',
                     CREATE: '/admin/p-tournament-types',
                     UPDATE: '/admin/p-tournament-types/'
+                },
+                PPAREA:{ 
+                    GET: '/admin/p-area',
+                    CREATE: '/admin/p-area',
+                    UPDATE: '/admin/p-area/',
+                    COUNTRY: '/admin/p-area/country/',
+                    TOURNAMENT: '/admin/p-area/tournament/',
                 },
                 USER:{
                     GET: '/admin/user',
