@@ -39,6 +39,41 @@
                 :enter="null"
             />
         </v-row>
+        <!-- PICK FROM -->
+        <template>
+            <v-row class="mt-10">
+                <div class="overline lh-1">pick matches from</div>
+            </v-row>
+            <v-row class="mb-10" align="center">
+                <v-col>
+                    <v-select
+                        v-model="pickComputedModel"
+                        :items="['tournament_id', 'country', 'ppArea_id']"
+                    />
+                </v-col>
+                <v-col>
+                    <template v-if="pickComputedModel === 'country' ">
+                        <admin-select-country
+                            :model="objModel.pick_country"
+                            :setModel="(val)=>setModel(val, 'pick_country')"
+                        />
+                    </template>
+                    <template v-else-if="pickComputedModel === 'tournament_id' ">
+                        <admin-select-tournament
+                            :modelId="objModel.pick_tournament"
+                            :setModelId="(val)=>setModel(parseInt(val), 'pick_tournament')"
+                        />
+                    </template>
+                    <template v-else-if="pickComputedModel === 'ppArea_id' ">
+                       <admin-select-p-p-area
+                            :modelId="objModel.pick_area"
+                            :setModelId="(val)=>setModel(parseInt(val), 'pick_area')"
+                        />
+                    </template>
+                </v-col>
+            </v-row>
+        </template>
+        <!-- END PICK FROM -->
         <v-row>
             <v-col>
                 <v-row>
@@ -90,7 +125,18 @@ import {Picker } from 'emoji-mart'
 export default {
     props:{
         ppTournamentType: {type: Object},
-        onCreate: {type: Function}
+        onCreate: {type: Function},
+    },
+    data(){
+        return{
+            newPPTT: {},
+            loading: false,
+            newColorObj: {
+                'r': this.ppTournamentType?.rgb?.split(',')[0],
+                'g': this.ppTournamentType?.rgb?.split(',')[1],
+                'b': this.ppTournamentType?.rgb?.split(',')[2]
+            }
+        }
     },
     computed:{
         objModel:{
@@ -106,19 +152,33 @@ export default {
                 this.newPPTT = val;                
             }
         },
+        pickComputedModel:{
+            get(){
+                if(!!this.objModel.pick_tournament) return 'tournament_id';
+                if(!!this.objModel.pick_area) return 'ppArea_id';
+                if(!!this.objModel.pick_country) return 'country';
+                return null
+            },
+            set(val){
+                if(val == 'tournament_id'){
+                    this.setModel(1, 'pick_tournament');
+                    this.setModel(null, 'pick_area');
+                    this.setModel(null, 'pick_country');
+                }
+                if(val == 'ppArea_id'){
+                    this.setModel(null, 'pick_tournament');
+                    this.setModel(1, 'pick_area');
+                    this.setModel(null, 'pick_country');
+                }
+                if(val == 'country'){
+                    this.setModel(null, 'pick_tournament');
+                    this.setModel(null, 'pick_area');
+                    this.setModel('a', 'pick_country');
+                }
+            }
+        },
         newColorString(){
             return this.newColorObj.r + ', ' + this.newColorObj.g + ',' + this.newColorObj.b
-        }
-    },
-    data(){
-        return{
-            newPPTT: {},
-            loading: false,
-            newColorObj: {
-                'r': this.ppTournamentType?.rgb?.split(',')[0],
-                'g': this.ppTournamentType?.rgb?.split(',')[1],
-                'b': this.ppTournamentType?.rgb?.split(',')[2]
-            }
         }
     },
     methods:{

@@ -1,5 +1,16 @@
 <template>
-    <v-select :label="label" v-model="computedModel" :items="tournaments" item-text="name" item-value="id"/>
+    <v-select :label="label" v-model="computedModel" :items="tournaments" item-text="name" item-value="id">
+        <template slot="item" slot-scope="data">
+            <emoji-flag :model="data.item.country" size="2em"/>
+            <div class="overline ml-2 font-weight-bold ">{{ data.item.country?.substr(0,3) }}</div>
+            <div class="overline ml-2">{{ data.item.name }}</div>
+        </template>
+        <template slot="selection" slot-scope="data">
+            <emoji-flag :model="data.item.country" size="2em"/>
+            <div class="overline ml-2 font-weight-bold ">{{ data.item.country?.substr(0,3) }}</div>
+            <div class="overline ml-2">{{ data.item.name }}</div>
+        </template>
+    </v-select>
 </template>
 <script>
 export default {
