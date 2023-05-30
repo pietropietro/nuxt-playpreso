@@ -31,10 +31,10 @@
                     </div>
                 </template>
             </template>
-            <template v-slot:item.extra_tournaments="{ item }">
-                <template v-if="item.extra_tournaments?.length">
+            <template v-slot:item.extra_leagues="{ item }">
+                <template v-if="item.extra_leagues?.length">
                     <div class="overline lh-1">
-                        {{item.extra_tournaments.length}} extra
+                        {{item.extra_leagues.length}} extra
                     </div>
                 </template>
             </template>
@@ -60,7 +60,7 @@ export default {
                 { value: 'id' },
                 { value: 'name' },
                 { value: 'countries' },
-                { value: 'extra_tournaments' },
+                { value: 'extra_leagues' },
             ]
         }
     },

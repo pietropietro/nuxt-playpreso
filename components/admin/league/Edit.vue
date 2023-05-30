@@ -10,7 +10,7 @@
             <p-p-input-text placeholder="ls-suffix" :value="lsSuffixModel" :setValue="(val)=>lsSuffixModel=val"/>
         </v-col>
         <v-col cols="3">
-            <admin-select-tournament label="parent" :modelId="parentModel" :setModelId="(val)=>parentModel = val" />
+            <admin-select-league label="parent" :modelId="parentModel" :setModelId="(val)=>parentModel = val" />
         </v-col>
         <v-col cols="3">
             <admin-select-country :model="countryModel" :setModel="(val)=>countryModel=val" />

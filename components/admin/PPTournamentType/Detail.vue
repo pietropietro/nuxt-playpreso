@@ -48,7 +48,7 @@
                 <v-col>
                     <v-select
                         v-model="pickComputedModel"
-                        :items="['tournament_id', 'country', 'ppArea_id']"
+                        :items="['league_id', 'country', 'ppArea_id']"
                     />
                 </v-col>
                 <v-col>
@@ -58,10 +58,10 @@
                             :setModel="(val)=>setModel(val, 'pick_country')"
                         />
                     </template>
-                    <template v-else-if="pickComputedModel === 'tournament_id' ">
-                        <admin-select-tournament
-                            :modelId="objModel.pick_tournament"
-                            :setModelId="(val)=>setModel(parseInt(val), 'pick_tournament')"
+                    <template v-else-if="pickComputedModel === 'league_id' ">
+                        <admin-select-league
+                            :modelId="objModel.pick_league"
+                            :setModelId="(val)=>setModel(parseInt(val), 'pick_league')"
                         />
                     </template>
                     <template v-else-if="pickComputedModel === 'ppArea_id' ">
@@ -154,24 +154,24 @@ export default {
         },
         pickComputedModel:{
             get(){
-                if(!!this.objModel.pick_tournament) return 'tournament_id';
+                if(!!this.objModel.pick_league) return 'league_id';
                 if(!!this.objModel.pick_area) return 'ppArea_id';
                 if(!!this.objModel.pick_country) return 'country';
                 return null
             },
             set(val){
-                if(val == 'tournament_id'){
-                    this.setModel(1, 'pick_tournament');
+                if(val == 'league_id'){
+                    this.setModel(1, 'pick_league');
                     this.setModel(null, 'pick_area');
                     this.setModel(null, 'pick_country');
                 }
                 if(val == 'ppArea_id'){
-                    this.setModel(null, 'pick_tournament');
+                    this.setModel(null, 'pick_league');
                     this.setModel(1, 'pick_area');
                     this.setModel(null, 'pick_country');
                 }
                 if(val == 'country'){
-                    this.setModel(null, 'pick_tournament');
+                    this.setModel(null, 'pick_league');
                     this.setModel(null, 'pick_area');
                     this.setModel('a', 'pick_country');
                 }

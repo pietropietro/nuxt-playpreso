@@ -14,7 +14,7 @@
             <v-row align="center">
                     <v-col>
                         <v-row no-gutters align="center">
-                            <div v-for="a in ppArea.countries" :key="a" class="ma-1">
+                            <div v-for="a in ppArea?.countries" :key="a" class="ma-1">
                                 <v-chip
                                     v-if="a"
                                     small
@@ -38,19 +38,19 @@
                     </v-col>
             </v-row>
         </template>
-        <!-- EXTRA TOURNAMENTS -->
+        <!-- EXTRA LEAGUES -->
         <template>
             <v-row>
-                <div class="overline font-weight-bold lh-1 mr-2">EXTRA TOURNAMENTS</div>
+                <div class="overline font-weight-bold lh-1 mr-2">EXTRA LEAGUES</div>
             </v-row>
             <v-row align="center">
                 <v-col>
                     <v-row no-gutters align="center">
-                        <div v-for="t in ppArea.extra_tournaments" :key="t?.id ?? t" class="ma-1">
+                        <div v-for="t in ppArea?.extra_leagues" :key="t?.id ?? t" class="ma-1">
                             <v-chip
                                 v-if="t"
                                 close
-                                @click:close="removeTournament(t?.id ?? t)"
+                                @click:close="removeLeague(t?.id ?? t)"
                             >
                                 <league-detail big :league="t" v-if="t?.id"/>
                                 <span v-else>{{t}}</span>
@@ -59,10 +59,10 @@
                     </v-row>
                 </v-col>
                 <v-col cols="4" >
-                    <admin-select-tournament :modelId="tournamentIdModel" :setModelId="(val)=>tournamentIdModel=val" label="extra" />
+                    <admin-select-league :modelId="leagueIdModel" :setModelId="(val)=>leagueIdModel=val" label="extra" />
                 </v-col>
                 <v-col cols="1">
-                    <v-btn text :disabled="!tournamentIdModel" @click="addTournament">
+                    <v-btn text :disabled="!leagueIdModel" @click="addLeague">
                         add
                     </v-btn>
                 </v-col>
@@ -103,7 +103,7 @@ export default {
             newPPTT: {},
             loading: false,
             countryModel: null,
-            tournamentIdModel: null
+            leagueIdModel: null
         }
     },
     methods:{
@@ -165,35 +165,35 @@ export default {
             }
             this.loading = false;
         },
-        async removeTournament(id){
+        async removeLeague(id){
             this.loading = true;
             
-            let route = this.ADMIN_API_ROUTES.PPAREA.TOURNAMENT + this.ppArea.id + '/' + id;
+            let route = this.ADMIN_API_ROUTES.PPAREA.LEAGUE + this.ppArea.id + '/' + id;
             let response = await this.$api.call(
                 route, null, 'DELETE'
             );
 
             if(response && response.status === "success"){
-                this.ppArea.extra_tournaments = this.ppArea.extra_tournaments?.filter((tournament) =>
-                    tournament.id !== id
+                this.ppArea.extra_leagues = this.ppArea.extra_leagues?.filter((league) =>
+                    league.id !== id
                 );
             }
             this.loading = false;
         },
-        async addTournament(){
+        async addLeague(){
             this.loading = true;
             let values = { 
-                "tournamentId": this.tournamentIdModel
+                "leagueId": this.leagueIdModel
             }
             
-            let route = this.ADMIN_API_ROUTES.PPAREA.TOURNAMENT + this.ppArea.id ;
+            let route = this.ADMIN_API_ROUTES.PPAREA.LEAGUE + this.ppArea.id ;
             let response = await this.$api.call(
                 route, values, 'POST'
             );
 
             if(response && response.status === "success"){
-                this.ppArea.extra_tournaments.push(this.tournamentIdModel);
-                this.tournamentIdModel = null
+                this.ppArea.extra_leagues.push(this.leagueIdModel);
+                this.leagueIdModel = null
             }
             this.loading = false;
         }

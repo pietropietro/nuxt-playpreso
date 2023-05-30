@@ -1,5 +1,5 @@
 <template>
-    <v-select :label="label" v-model="computedModel" :items="tournaments" item-text="name" item-value="id">
+    <v-select :label="label" v-model="computedModel" :items="leagues" item-text="name" item-value="id">
         <template slot="item" slot-scope="data">
             <emoji-flag :model="data.item.country" size="2em"/>
             <div class="overline ml-2 font-weight-bold ">{{ data.item.country?.substr(0,3) }}</div>
@@ -21,7 +21,7 @@ export default {
     },
     data(){
         return{
-            tournaments: []
+            leagues: []
         }
     },
     computed:{
@@ -35,17 +35,17 @@ export default {
         }
     },
     methods:{
-        async getTournaments(){
+        async getLeagues(){
             this.loading=true;
             let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET);
             if(response && response.status === "success"){
-                this.tournaments = response.message;
+                this.leagues = response.message;
             }
             this.loading = false;
         },
     },
     async mounted(){
-        await this.getTournaments();
+        await this.getLeagues();
     }
 }
 </script>

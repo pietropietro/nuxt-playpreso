@@ -109,7 +109,7 @@ Vue.mixin({
                     CREATE: '/admin/p-area',
                     UPDATE: '/admin/p-area/',
                     COUNTRY: '/admin/p-area/country/',
-                    TOURNAMENT: '/admin/p-area/tournament/',
+                    LEAGUE: '/admin/p-area/league/',
                 },
                 USER:{
                     GET: '/admin/user',
