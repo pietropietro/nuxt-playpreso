@@ -5,30 +5,6 @@
             <h4>({{leaguesFiltered.length}})</h4>
         </v-row>
         <v-row align="center" class="overline">
-            <v-col>
-                <v-chip-group
-                    column
-                    v-model="areaModel"
-                    value="id"
-                    active-class="opacity-100"
-                >
-                    <v-row no-gutters align="center">
-                        <div class="lh-1 mr-2">AREA</div>
-                        <div v-for="a in areas" :key="a">
-                            <v-chip
-                                v-if="a"
-                                x-small
-                                :value="a"
-                            >
-                                {{a}}
-                                <emoji-flag  :model="a"/>
-                            </v-chip>
-                        </div>
-                    </v-row>
-                </v-chip-group>
-            </v-col>
-        </v-row>
-        <v-row align="center" class="overline">
             <v-col class="pt-0">
                 <v-chip-group
                     column
@@ -75,16 +51,10 @@
                     </v-row>
                 </td>
             </template>
-            <template v-slot:item.area="{ item }">
-                <v-row align="end">
-                <h1><emoji-flag  :model="item.area" /></h1>
-                    <h2>{{item.area_level}}</h2>
-                </v-row>
-            </template>
             <template v-slot:item.country="{ item }">
                     <v-row align="end">
                         <h1><emoji-flag  :model="item.country" /></h1>
-                        <h2>{{item.country_level}}</h2>
+                        <h2>{{item.level}}</h2>
                     </v-row>
             </template>
             <template v-slot:item.id="{ item }">
@@ -121,12 +91,9 @@ export default {
     },
     data:()=>({
         countryModel: null,
-        areaModel: null,
-        areas: ['europe', 'america', 'asia', 'africa', 'world'],
         expanded: [],
         headers: [
             { value: 'id' }, 
-            { value: 'area'},
             { value: 'country' }, 
             { value: 'tag' },
             { value: 'name' },
@@ -135,10 +102,9 @@ export default {
     }),
     computed:{
         leaguesFiltered(){
-            if(!this.countryModel && !this.areaModel) return this.leagues;
+            if(!this.countryModel) return this.leagues;
             let areaFiltered = this.leagues.filter(l =>{
-                if(!this.areaModel) return l;
-                return l.area === this.areaModel;
+                return l;
             });
             return areaFiltered.filter(l =>{
                 if(!this.countryModel) return l;
@@ -148,8 +114,7 @@ export default {
         countriesFiltered(){ 
             let uniques = [];
             let areaFiltered = this.leagues.filter(l => {
-                if(!this.areaModel) return l;
-                return l.area == this.areaModel;
+                return l;
             });
             areaFiltered.map(l => {
                 if(!uniques.includes(l.country)){
