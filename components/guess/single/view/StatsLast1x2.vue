@@ -38,8 +38,8 @@ export default {
     },
     methods:{
         emojiForWDL(wdl){
-            if(wdl === 'W') return 'white_check_mark';
-            if(wdl === 'L') return 'x';
+            if(wdl === 'W') return 'large_green_circle';
+            if(wdl === 'L') return 'red_circle';
             return 'heavy_minus_sign';
         }
     }

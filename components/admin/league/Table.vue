@@ -68,6 +68,13 @@
                     {{ item.name }}
                 </h2>
             </template>
+            <template v-slot:item.nextWeeks="{ item }">
+                <em-emoji 
+                    v-for="(n,i) in item.nextWeeks"
+                    :key="i"
+                    :native="n ? 'large_green_circle' : 'red_circle'" 
+                />
+            </template>
             <template v-slot:item.updated_at="{ item }">
                 <div class="overline"
                 >
@@ -97,6 +104,7 @@ export default {
             { value: 'country' }, 
             { value: 'tag' },
             { value: 'name' },
+            { value: 'nextWeeks' },
             { value: 'updated_at' },
         ]
     }),
