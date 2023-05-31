@@ -10,7 +10,8 @@
             class="transparent no-select"
             mobile-breakpoint="0"
             item-text="value"
-            :items-per-page="-1" :items="ppTournamentTypes"
+            :items-per-page="-1" 
+            :items="ppTournamentTypes.length > 3 && !showAllFlag ? ppTournamentTypes.slice(0,3) : ppTournamentTypes"
             :headers="headers"
             hide-default-footer
             hide-default-header
@@ -37,6 +38,12 @@
                 <p-p-tournament-join-row :ppTournamentTypeId="item.id" />
             </template>
         </v-data-table>
+        <div v-if="ppTournamentTypes.length > 3" 
+            class="text-center lh-1 overline" 
+            @click="showAllFlag = !showAllFlag"
+        >
+            {{showAllFlag ? 'show less' : 'show more'}}
+        </div>
     </div>
 </template>
 <script>
@@ -45,6 +52,7 @@ export default {
         return {
             loading: true,
             ppTournamentTypes: [],
+            showAllFlag: false,
             headers: [
                 { value: 'emoji' , sortable:false}, 
                 { value: 'name' , sortable:false}, 
