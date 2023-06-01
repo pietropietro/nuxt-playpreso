@@ -4,26 +4,33 @@
         <v-row align="center">
             <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
         </v-row>
-        <v-row justify="space-between">
+        <v-row justify="space-between" align="center">
             <v-col>
-                <v-row>
-                    <v-chip-group
-                        active-class="primary"
-                        v-model="finishedModel"
-                        v-for="ft in finishedTypes" :key="ft"
-                    >
-                        <v-chip small :value="ft">{{ft}}</v-chip>
-                    </v-chip-group>
-                </v-row>
-            </v-col>
-            <v-col>
-                <v-row justify="end">
+                <v-row justify="start">
                     <v-chip-group
                         active-class="primary"
                         v-model="startedModel"
                         v-for="st in startedTypes" :key="st"
                     >
                         <v-chip small :value="st">{{st}}</v-chip>
+                    </v-chip-group>
+                </v-row>
+            </v-col>
+             <v-col cols="auto">
+                <v-chip 
+                    @click="pausedModel = !pausedModel"
+                    :class="pausedModel ? 'primary' : ''"
+                    small
+                >paused</v-chip>
+            </v-col>
+            <v-col>
+                <v-row justify="end">
+                    <v-chip-group
+                        active-class="primary"
+                        v-model="finishedModel"
+                        v-for="ft in finishedTypes" :key="ft"
+                    >
+                        <v-chip small :value="ft">{{ft}}</v-chip>
                     </v-chip-group>
                 </v-row>
             </v-col>
@@ -84,21 +91,24 @@
 export default {
     layout: "admin",
     data:()=>({
-        loading: true,
+        loading: false,
         ppLeagues: [],
         ppTTselected: null,
         finishedModel: 'all',
         finishedTypes: ['all', 'finished', 'not-finished'],
         startedModel: 'all',
-        startedTypes: ['all', 'started', 'not-started']
+        startedTypes: ['all', 'started', 'not-started'],
+        pausedModel: false,
     }),
     methods:{
         async getPPLeagues(){
+            if(this.loading)return;
             this.loading= true;
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.PPLEAGUE.GET 
                 + '?ft=' + this.finishedModel
                 + '&st=' + this.startedModel
+                + '&paused=' + Number(this.pausedModel)
                 + (this.ppTTselected ? ('&ppTournamentTypeId=' + this.ppTTselected) : '')
             );
             if(response && response.status === "success"){
@@ -111,10 +121,19 @@ export default {
         ppTTselected: async function () {
             await this.getPPLeagues();
         },
-        finishedModel: async function () {
+        finishedModel: async function (newVal) {
+            if(['finished', 'all'].includes(newVal)) this.pausedModel = false;
             await this.getPPLeagues();
         },
-        startedModel: async function () {
+        startedModel: async function (newVal) {
+            if(['not-started', 'all'].includes(newVal)) this.pausedModel = false;
+            await this.getPPLeagues();
+        },
+        pausedModel: async function (newVal,oldVal) {
+            if(newVal === true){
+                this.finishedModel = 'not-finished'
+                this.startedModel = 'started'
+            }
             await this.getPPLeagues();
         }
     },
