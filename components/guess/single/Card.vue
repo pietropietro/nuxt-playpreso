@@ -10,7 +10,7 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <v-col v-if="guess?.ppTournamentType && (selectedIndex>0 || guess?.guessed_at || guess?.verified_at)"
+                <v-col v-if="guess?.ppTournamentType && (selectedIndex>0 || (guess?.guessed_at && extended) || guess?.verified_at)"
                     cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
@@ -105,7 +105,7 @@
                         v-else-if="item==='graphic'"
                         :rgb="rgb" 
                         :match="match" 
-                        :logoOnly="index < (selectedView.length - 1)"
+                        :logoOnly="index != 0"
                     />
                     <guess-single-view-locked v-else-if="item === 'locked'" 
                         :guess="guess"
@@ -170,6 +170,7 @@ export default {
             widthFinal: '80px',
             unlockedViews: unlckd,
             lockedViews: [
+                ['graphic', 'locked'],
                 ['match_info', 'locked']
             ],
             verifiedViews: [
