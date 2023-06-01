@@ -14,8 +14,8 @@
                 <div v-for="(status, i) in statusList" :key="i">
                     <v-chip small :value="status">
                         <div class="overline lh-1">
-                            <template v-if="status==='notStarted'">
-                                waiting ({{userParticipations.notStarted.length}})
+                            <template v-if="status==='waiting'">
+                                waiting ({{userParticipations.waiting.length}})
                             </template>
                             <template v-else-if="status==='finished'">
                                 finished
@@ -77,7 +77,7 @@ export default {
             if(response && response.status === "success"){
                 this.userParticipations = response.message;
                 if(this.userParticipations.active.length) this.statusList.push('active');
-                if(this.userParticipations.notStarted.length) this.statusList.push('notStarted');
+                if(this.userParticipations.waiting.length) this.statusList.push('waiting');
                 if(this.userParticipations.finished.length) this.statusList.push('finished');
                 this.selectedStatus = this.statusList[0];
             }
