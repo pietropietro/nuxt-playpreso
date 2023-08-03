@@ -127,6 +127,9 @@ Vue.mixin({
                     VERIFY: '/admin/match/',
                     PICK: '/admin/match/pick/'
                 },
+                PPROUND:{
+                    CREATE: '/admin/p-round/',
+                },
                 PPROUNDMATCH:{
                     CREATE: '/admin/p-round-match/',
                     SWAP: '/admin/p-round-match/swap/',
