@@ -137,7 +137,8 @@ Vue.mixin({
                 },
                 LEAGUE: {
                     GET: '/admin/league',
-                    GET_NEED_DATA: '/admin/league/need-data',
+                    GET_NEED_PAST_DATA: '/admin/league/need-past-data',
+                    GET_NEED_FUTURE_DATA: '/admin/league/need-future-data',
                     CREATE: '/admin/league',
                     UPDATE: '/admin/league/',
                     FETCH: '/admin/league/fetch/',
