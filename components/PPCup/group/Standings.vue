@@ -68,7 +68,7 @@ export default {
             if((!this.group.started_at || this.group.userParticipations[0]?.tot_points==null) 
                 || position-1 < (this.group.participants / 2)
             ){
-                classes += " pcup"
+                classes += " primary pcup"
             }
             return classes;
         }

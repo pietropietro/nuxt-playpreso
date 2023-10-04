@@ -4,31 +4,24 @@
         <v-row align="center">
             <v-col cols="auto">
                 <v-row align="center" @click="selectedIndex=0">
-                    <v-col>
-                        <v-row>
-                            <h1>MOTD</h1>
-                        </v-row>
-                        <v-row>
-                            <div class="lh-1 overline mt-n2">
-                                match of the day
-                            </div>
-                        </v-row>
-                    </v-col>
+                    <em-emoji :native="motdPPTT.emoji" size="4em"/>
+                    <!-- <v-row> -->
+                        <div class="text-h2 font-weight-bold">MOTD</div>
+                    <!-- </v-row> -->
                 </v-row>
             </v-col>
-            <v-spacer/>
-            <v-col v-if="matchView">
-                <div class="ocrastd" @click="next">
-                    <<<
-                </div>
-            </v-col>
-            <v-spacer/>
-            <v-col cols="auto" >
-                <div class="overline lh-1" 
-                    v-html="matchView == true ? 'chart' : 'match'"
-                    @click="()=>matchView=!matchView"
-                />
-            </v-col>
+        </v-row>
+        <v-row>
+            <v-chip-group
+                mandatory
+                class="h-100"
+                active-class="primary"
+                v-model="selectedStat"
+            >
+                <v-chip small :value="s.value" v-for="(s,i) in ['today','last results', 'chart']" :key="i">
+                    <div class="overline lh-1">{{s.text}}</div>
+                </v-chip>
+            </v-chip-group>
         </v-row>
         <!-- <v-row class="caption mt-n6">picked each morning at 7am.</v-row> -->
         <motd-single 
@@ -37,6 +30,7 @@
             :userLast="userLast"
             v-if="matchView" 
             class="mt-4"
+            matchOnly
         />
         <div v-else class="py-8">
             <v-row align="center" class="text-center" >

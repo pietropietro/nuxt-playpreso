@@ -12,8 +12,8 @@
                 @change="chipChange"
             >
                 <div v-for="(status, i) in statusList" :key="i">
-                    <v-chip small :value="status">
-                        <div class="overline lh-1">
+                    <v-chip style="width:100%" :value="status">
+                        <!-- <div class="overline lh-1">
                             <template v-if="status==='waiting'">
                                 waiting ({{userParticipations.waiting.length}})
                             </template>
@@ -23,7 +23,7 @@
                             <template v-else>
                                 {{status}} ({{userParticipations.active.length}})
                             </template>
-                        </div>
+                        </div> -->
                     </v-chip>
                 </div>
             </v-chip-group>

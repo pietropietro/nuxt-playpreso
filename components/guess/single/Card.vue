@@ -10,7 +10,11 @@
                     backgroundColor: guess.verified_at ?  shades.verified : (guess.guessed_at ? shades.locked : shades.unlocked)
                 }"
             >   
-                <v-col v-if="guess?.ppTournamentType && (selectedIndex>0 || (guess?.guessed_at && extended) || guess?.verified_at)"
+                <!-- <v-col v-if="guess?.ppTournamentType &&
+                    (selectedIndex>0 
+                        || (guess?.guessed_at && extended) 
+                        || guess?.verified_at
+                    )"
                     cols="auto"
                     :style="{
                         backgroundColor: ppRGBA(rgb),
@@ -26,7 +30,7 @@
                         :native="guess?.ppTournamentType?.emoji"
                         size="70"
                     />
-                </v-col>
+                </v-col> -->
                 <!-- START ALARM IF LESS THAN 1 day not motd -->
                 <v-col
                     v-if="selectedIndex == 0 && guess?.ppTournamentType?.name != 'MOTD' &&

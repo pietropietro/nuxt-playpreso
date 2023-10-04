@@ -5,12 +5,12 @@
 			<template v-else>
 				<snackbar />
 				<p-p-header v-if="!menuScreen" :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
-				<v-overlay class="content-h100" :value="menuScreen" color="var(--v-background-base)" opacity="1" :dark="false">
+				<!-- <v-overlay class="content-h100" :value="menuScreen" color="var(--v-background-base)" opacity="1" :dark="false">
 					<p-p-header :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>  
 					<p-p-menu-brain class="pt-14 pt-md-16"/>
-				</v-overlay>
+				</v-overlay> -->
 				<v-main :style="menuScreen ? 'position: fixed' : ''" >
-					<v-row no-gutters align="center" style="width:100%" class="marquee">
+					<!-- <v-row no-gutters align="center" style="width:100%" class="marquee">
 						<span 
 							:style="$vuetify.breakpoint.mdAndUp ? 'animation-duration: 10s;' : 'animation-duration: 7s;'"
 							class="font-weight-bold ocrastd"
@@ -25,7 +25,7 @@
 								<b>tell a friend</b>
 							</share-network>
 						</span>
-					</v-row>
+					</v-row> -->
 					<nuxt />
 				</v-main>
 			</template>

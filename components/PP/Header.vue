@@ -8,9 +8,9 @@
                     <h1 class="ocrastd">PLAYPRESO</h1>
                 </nuxt-link>
                 <v-spacer/>
-                <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
+                <!-- <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
                     <h1>{{menuScreen ? 'X' : '>'}}</h1>
-                </div>
+                </div> -->
             </v-row>
         </v-container>
     </v-app-bar>

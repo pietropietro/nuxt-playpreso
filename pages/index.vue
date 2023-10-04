@@ -2,9 +2,9 @@
     <v-container  class="pt-0">
         <guess-home-scroll />
         <v-row v-if="!$vuetify.breakpoint.mdAndUp">
-            <v-col cols="12" md="6" >
+            <!-- <v-col cols="12" md="6" >
                 <p-p-counter />
-            </v-col>
+            </v-col> -->
             <v-col class="pt-0 pt-md-3" cols="12" md="6" >
                 <motd-home class="mt-n6 mt-md-5"/>
             </v-col>
@@ -13,7 +13,7 @@
             <v-col cols="12" md="6" 
                 class="pa-0"
             >
-                <p-p-counter v-if="$vuetify.breakpoint.mdAndUp"/>
+                <!-- <p-p-counter v-if="$vuetify.breakpoint.mdAndUp"/> -->
                 <p-p-league-available-list class="px-2 mb-5"/>
                 <user-participation-enrolled-list />
             </v-col>
@@ -27,6 +27,6 @@
 </template>
 <script>
 export default {
-    layout: "authenticated",
+    layout: "authenticatedHome",
 }
 </script>
