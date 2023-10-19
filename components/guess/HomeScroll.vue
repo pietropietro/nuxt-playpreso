@@ -11,6 +11,7 @@
             >
                 <div v-for="(s,i) in list" :key="i">
                     <v-chip
+                        color="var(--v-background-lighten1)"
                         v-if="s.text =='last' && currentGuesses.verified 
                             || s.text === 'unlock' && unlockedList?.length
                             || s.text=== 'lock' &&  lockedList?.length

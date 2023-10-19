@@ -15,7 +15,13 @@
                             active-class="primary"
                             v-model="selectedStat"
                         >
-                            <v-chip small :value="s.value" v-for="(s,i) in statsList" :key="i">
+                            <v-chip 
+                                small 
+                                :value="s.value" 
+                                v-for="(s,i) in statsList" 
+                                :key="i"
+                                color="var(--v-background-lighten1)"
+                            >
                                 <div class="overline lh-1">{{s.text}}</div>
                             </v-chip>
                         </v-chip-group>

@@ -12,7 +12,10 @@
                 @change="chipChange"
             >
                 <div v-for="(status, i) in statusList" :key="i">
-                    <v-chip small :value="status">
+                    <v-chip 
+                        small 
+                        :value="status" 
+                        color="var(--v-background-lighten1)">
                         <div class="overline lh-1">
                             <template v-if="status==='waiting'">
                                 waiting ({{userParticipations.waiting.length}})
