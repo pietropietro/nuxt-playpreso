@@ -2,7 +2,12 @@
     <v-container>
         <v-row><h1>P-LEAGUES</h1></v-row>
         <v-row align="center">
-            <admin-select-p-p-tournament-type :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
+            <admin-select-p-p-tournament-type-name-level
+                :name="ppttNameModel" 
+                :setName="(val)=>ppttNameModel=val"
+                :level="ppttLevelModel" 
+                :setLevel="(val)=>ppttLevelModel=val"
+            />
         </v-row>
         <v-row justify="space-between" align="center">
             <v-col>
@@ -93,7 +98,8 @@ export default {
     data:()=>({
         loading: false,
         ppLeagues: [],
-        ppTTselected: null,
+        ppttNameModel: null,
+        ppttLevelModel: null,
         finishedModel: 'all',
         finishedTypes: ['all', 'finished', 'not-finished'],
         startedModel: 'all',
@@ -102,6 +108,7 @@ export default {
     }),
     methods:{
         async getPPLeagues(){
+            console.log("name",this.ppttNameModel,"lev", this.ppttLevelModel);
             if(this.loading)return;
             this.loading= true;
             let response = await this.$api.call(
@@ -109,7 +116,8 @@ export default {
                 + '?ft=' + this.finishedModel
                 + '&st=' + this.startedModel
                 + '&paused=' + Number(this.pausedModel)
-                + (this.ppTTselected ? ('&ppTournamentTypeId=' + this.ppTTselected) : '')
+                + (!!this.ppttNameModel ? '&ppTournamentTypeName='  + this.ppttNameModel : '')
+                + (this.ppttLevelModel > 0 ? '&ppTournamentTypeLevel='  + this.ppttLevelModel : '')
             );
             if(response && response.status === "success"){
                 this.ppLeagues = response.message;
@@ -118,7 +126,10 @@ export default {
         }
     },
     watch: {
-        ppTTselected: async function () {
+        ppttNameModel: async function () {
+            await this.getPPLeagues();
+        },
+        ppttLevelModel: async function () {
             await this.getPPLeagues();
         },
         finishedModel: async function (newVal) {

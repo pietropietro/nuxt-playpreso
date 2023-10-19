@@ -27,7 +27,7 @@ export default {
         setPPtt: {type: Function},
         cupsOnly: {type: Boolean}
     },
-    data:()=>({ppTournamentTypes: [], loading: true, lala: []}),
+    data:()=>({ppTournamentTypes: [], loading: true }),
     computed:{
         typeModel:{
             get(){return this.model;},
