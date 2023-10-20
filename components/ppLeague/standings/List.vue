@@ -43,9 +43,12 @@
                                     upForIndex(index).position <= (ppTournamentType.promote + ppTournamentType.rejoin)
                                 "
                             />
+                            <!-- using ups.length instead of ppTournamentType.participants 
+                                to correctly show relegation postions in
+                                old p-leagues with more participants. -->
                             <em-emoji id="-1" size="1.5em"
                                 v-else-if="ppTournamentType.relegate && 
-                                    upForIndex(index).position >  ppTournamentType.participants - ppTournamentType.relegate
+                                    upForIndex(index).position >  (ups.length - ppTournamentType.relegate)
                                 "
                             />
                             <template v-else>#{{upForIndex(index).position}}</template>
