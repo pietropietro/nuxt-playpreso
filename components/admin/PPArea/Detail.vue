@@ -118,7 +118,6 @@ export default {
         },
         async update(){
             this.loading = true;
-            console.log('ob name bef', this.objModel.name);
             let response = await this.$api.call(
                 this.ADMIN_API_ROUTES.PPAREA.UPDATE + this.ppArea.id, this.objModel, 'POST'
             );     

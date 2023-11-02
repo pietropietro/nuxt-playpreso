@@ -1,5 +1,5 @@
 <template>
-        <v-row align="center" class="overline">
+        <v-row align="center" class="overline" v-if="!ppttloading">
             <v-col>
                 <v-chip-group
                     column
@@ -7,6 +7,7 @@
                     active-class=""
                 >
                     <v-chip
+                        :disabled="loading"
                         small
                         :value="el.name"
                         v-for="(el,i) in compactList" :key="i"
@@ -23,6 +24,7 @@
                 >
                     <v-chip
                         large
+                        :disabled="loading"
                         v-for="el in (nameModel ? compactList.filter(e=>e.name == nameModel)[0].level : [1,2,3,4])" 
                         :key="el"
                         :value="el"
@@ -34,7 +36,8 @@
             <v-col cols="auto">
                 <v-chip
                     small
-                    @click="()=>nameModel = levelModel = null"
+                    :disabled="loading"
+                    @click="clear"
                 >
                         x
                 </v-chip>
@@ -51,10 +54,12 @@ export default {
         level: {type: Number},
         setName: {type: Function},
         setLevel: {type: Function},
+        loading: {type: Boolean},
+        onClear: {type: Function}
     },
     data:()=>({
         ppttList: [], 
-        loading: true,
+        ppttloading: true,
     }),
     computed:{
         nameModel:{
@@ -80,8 +85,12 @@ export default {
             if(response && response.status === "success"){
                 this.ppttList = response.message;
             }
-            this.loading = false;
+            this.ppttloading = false;
         },
+        clear(){
+            this.nameModel = this.levelModel = null;
+            if(!!this.onClear)this.onClear();
+        }
     },
     async mounted(){
         await this.getPPtts();

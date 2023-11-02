@@ -7,6 +7,8 @@
                 :setName="(val)=>ppttNameModel=val"
                 :level="ppttLevelModel" 
                 :setLevel="(val)=>ppttLevelModel=val"
+                :loading="loading"
+                :onClear="clear"
             />
         </v-row>
         <v-row justify="space-between" align="center">
@@ -17,7 +19,12 @@
                         v-model="startedModel"
                         v-for="st in startedTypes" :key="st"
                     >
-                        <v-chip small :value="st">{{st}}</v-chip>
+                        <v-chip :disabled="loading" 
+                            small 
+                            :value="st"
+                        >
+                            {{st}}
+                        </v-chip>
                     </v-chip-group>
                 </v-row>
             </v-col>
@@ -25,8 +32,11 @@
                 <v-chip 
                     @click="pausedModel = !pausedModel"
                     :class="pausedModel ? 'primary' : ''"
+                    :disabled="loading"
                     small
-                >paused</v-chip>
+                >
+                    paused
+                </v-chip>
             </v-col>
             <v-col>
                 <v-row justify="end">
@@ -35,7 +45,13 @@
                         v-model="finishedModel"
                         v-for="ft in finishedTypes" :key="ft"
                     >
-                        <v-chip small :value="ft">{{ft}}</v-chip>
+                        <v-chip 
+                            small 
+                            :value="ft"
+                            :disabled="loading"
+                        >
+                            {{ft}}
+                        </v-chip>
                     </v-chip-group>
                 </v-row>
             </v-col>
@@ -100,15 +116,14 @@ export default {
         ppLeagues: [],
         ppttNameModel: null,
         ppttLevelModel: null,
-        finishedModel: 'all',
+        finishedModel: 'not-finished',
         finishedTypes: ['all', 'finished', 'not-finished'],
-        startedModel: 'all',
+        startedModel: 'started',
         startedTypes: ['all', 'started', 'not-started'],
         pausedModel: false,
     }),
     methods:{
         async getPPLeagues(){
-            console.log("name",this.ppttNameModel,"lev", this.ppttLevelModel);
             if(this.loading)return;
             this.loading= true;
             let response = await this.$api.call(
@@ -123,6 +138,10 @@ export default {
                 this.ppLeagues = response.message;
             }
             this.loading = false;
+        },
+        clear(){
+            this.finishedModel="all";
+            this.startedModel="all"
         }
     },
     watch: {
