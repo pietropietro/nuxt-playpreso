@@ -1,0 +1,48 @@
+<template>
+    <v-row justify="center" align="center" class="pt-1">
+        <v-col
+            cols="auto"
+            class="d-flex justify-center align-center rounded-sm py-0"
+        >
+            <em-emoji native="🅿️" size="1.5em" />
+        </v-col>
+        <v-col class="font-weight-bold white--text custom-font-class px-0">
+            {{ label }}
+        </v-col>
+        <v-spacer />
+        <v-col cols="auto">
+            <v-btn class="custom-font-class mr-n4" 
+                style="font-size:20px;"
+                text icon 
+                @touchend.stop="doSome"            
+            >
+                X
+            </v-btn>
+        </v-col>
+    </v-row>
+</template>
+<script>
+export default {
+    name: "Story Header",
+    props: {
+        label: {
+            type: String,
+            default: "wrapped23",
+        },
+        exit: {type: Function}
+    },
+    methods:{
+        doSome(){
+            setTimeout(() => {
+                this.exit()
+            }, 20);
+        }
+    }
+};
+
+</script>
+<style scoped>
+.custom-font-class {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+</style>

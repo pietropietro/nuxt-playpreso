@@ -58,7 +58,8 @@ Vue.mixin({
                 },
                 STATS:{
                     BEST_USERS: '/stats/best-users',
-                    LAST_PRESO: '/stats/last-preso'
+                    LAST_PRESO: '/stats/last-preso',
+                    WRAPPED: '/stats/wrapped'
                 },
                 MOTD: {
                     GET: '/motd',

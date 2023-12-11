@@ -1823,6 +1823,11 @@
   optionalDependencies:
     prettier "^1.18.2"
 
+"@vue/composition-api@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@vue/composition-api/-/composition-api-1.7.2.tgz#0b656f3ec39fefc2cf40aaa8c12426bcfeae1b44"
+  integrity sha512-M8jm9J/laYrYT02665HkZ5l2fWTK4dcVg3BsDHm/pfz+MjDYwX+9FUaZyGwEyXEDonQYRCo0H7aLgdklcIELjw==
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -9470,6 +9475,11 @@ vue-client-only@^2.0.0:
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.1.0.tgz#1a67a47b8ecacfa86d75830173fffee3bf8a4ee3"
   integrity sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==
 
+vue-demi@^0.7.4:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.7.5.tgz#88dee7492fc99a0f911ff03fc02c658fa2a79af8"
+  integrity sha512-eFSQSvbQdY7C9ujOzvM6tn7XxwLjn0VQDXQsiYBLBwf28Na+2nTQR4BBBcomhmdP6mmHlBKAwarq6a0BPG87hQ==
+
 vue-digital-clock@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/vue-digital-clock/-/vue-digital-clock-2.0.0.tgz#894c9a1f852d5bb0ea51039cedb0bca50237bcd5"
@@ -9484,6 +9494,13 @@ vue-i18n@^8.24.4:
   version "8.24.4"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.24.4.tgz#b158614c1df7db183d9cadddbb73e1d540269492"
   integrity sha512-RZE94WUAGxEiBAANxQ0pptbRwDkNKNSXl3fnJslpFOxVMF6UkUtMDSuYGuW2blDrVgweIXVpethOVkYoNNT9xw==
+
+vue-insta-stories@^0.9.8:
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/vue-insta-stories/-/vue-insta-stories-0.9.8.tgz#becf891e369745d9f9d99a0085400f9d50f58ca4"
+  integrity sha512-dA3e+4YbJ69/l994Lz8QywXbkiQRm/TpqgdMRyLRe/A0jyj83o2BHh/KFc4RXAFeuHb5J1i1zmadJYBVQ2MjhQ==
+  dependencies:
+    vue-demi "^0.7.4"
 
 vue-loader@^15.9.7:
   version "15.9.7"
