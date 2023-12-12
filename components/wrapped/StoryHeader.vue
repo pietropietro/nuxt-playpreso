@@ -1,12 +1,12 @@
 <template>
-    <v-row justify="center" align="center" class="pt-1">
+    <v-row justify="center" align="center" class="">
         <v-col
             cols="auto"
             class="d-flex justify-center align-center rounded-sm py-0"
         >
-            <em-emoji native="🅿️" size="1.5em" />
+            <em-emoji native="🅿️" size="1.2em" />
         </v-col>
-        <v-col class="font-weight-bold white--text custom-font-class px-0">
+        <v-col class="font-weight-bold white--text custom-font-class ml-n1 px-0 py-0">
             {{ label }}
         </v-col>
         <v-spacer />
@@ -14,7 +14,7 @@
             <v-btn class="custom-font-class mr-n4" 
                 style="font-size:20px;"
                 text icon 
-                @touchend.stop="doSome"            
+                @touchend.stop="doExit"            
             >
                 X
             </v-btn>
@@ -32,7 +32,7 @@ export default {
         exit: {type: Function}
     },
     methods:{
-        doSome(){
+        doExit(){
             setTimeout(() => {
                 this.exit()
             }, 20);
@@ -43,6 +43,8 @@ export default {
 </script>
 <style scoped>
 .custom-font-class {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 
+        "Segoe UI Symbol", "Noto Color Emoji";
 }
 </style>

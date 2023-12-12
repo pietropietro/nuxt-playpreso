@@ -52,6 +52,9 @@ export default {
             }
             this.loading = false;
         }
+    },
+    async mounted(){
+        await this.getWrappedData();
     }
 }
 
