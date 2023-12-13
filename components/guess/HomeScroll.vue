@@ -1,5 +1,5 @@
 <template >
-    <div v-if="!loading && (currentGuesses.notVerified?.length || currentGuesses.last?.length)">
+    <div v-if="!loading && (currentGuesses?.notVerified?.length || currentGuesses?.last?.length)">
         <v-row no-gutters align="center">
             <div class="overline font-weight-bold lh-1 mr-2">MATCHES</div>
             <v-chip-group

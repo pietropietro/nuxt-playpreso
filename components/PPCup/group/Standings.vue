@@ -46,6 +46,7 @@ export default {
     },
     computed: {
         placeholderFirst(){
+            if(!this.cupFormat[this.group.level - 1].tier_one_tier_two_draw) return false;
             if(this.group.userParticipations.length === this.group.participants)return false;
             let fromtag = this.group.userParticipations[0]?.from_tag;
             if(!fromtag) return false;
@@ -55,7 +56,7 @@ export default {
         showDetailedStats(){
             return this.isDetailPage && 
                 this.group.started_at && 
-                this.group.ppRounds[0].ppRoundMatches.filter((e)=>e.match.verified_at).length > 0;
+                this.group.ppRounds[0]?.ppRoundMatches.filter((e)=>e.match.verified_at).length > 0;
         },
         hasMatchLive(){
             return true;
