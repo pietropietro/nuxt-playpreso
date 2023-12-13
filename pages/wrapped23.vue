@@ -12,7 +12,10 @@
         </template>
 
         <template #intro>
-            <wrapped-intro-slide />
+            <wrapped-intro-slide :storyData="wrappedData" />
+        </template>
+        <template #ciccio>
+            <wrapped-ciccio-slide />
         </template>
     </Stories>
     <go-home v-else />
@@ -32,7 +35,7 @@ export default {
         wrappedData: [],
         stories: [ 
             {template: "intro"},
-            {template: "intro"},
+            {template: "ciccio"},
             {template: "intro"},
             {template: "intro"},
             {template: "intro"},
@@ -51,7 +54,7 @@ export default {
                 this.wrappedData = response.message;
             }
             this.loading = false;
-        }
+        },
     },
     async mounted(){
         await this.getWrappedData();
@@ -81,4 +84,5 @@ export default {
 .vue-insta-stories {
   background: var(--v-primary); /* or 'inherit' if you want to explicitly inherit from the parent */
 }
+
 </style>
