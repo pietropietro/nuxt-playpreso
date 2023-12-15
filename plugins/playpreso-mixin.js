@@ -22,9 +22,10 @@ Vue.mixin({
             if(ppCupGroup.level==1 && cupFormat[0].name=='GROUP STAGE'){
                 return 'GROUP ' + ppCupGroup.tag;
             }
-            return cupFormat[ppCupGroup.level - 1].name +
-                    (cupFormat[ppCupGroup.level - 1].name==='FINAL' ? '' 
-                    : (' - ' + (cupFormat[ppCupGroup.level - 1].group_tags.indexOf(ppCupGroup.tag) + 1)));
+            let indexFromLevel = ppCupGroup.level - 1;
+            let currentLevelName = cupFormat[indexFromLevel].name;
+            return currentLevelName + (currentLevelName ==='FINAL' ? '' 
+                    : (' - ' + (cupFormat[indexFromLevel].group_tags.indexOf(ppCupGroup.tag) + 1)));
         },
         nameToCompactHtml(name, smallTag='h6', bigTag='h4', limitOneWord=12, limitBigMoreWords = 8, limitTotalSmall = 16,  breaks=false){
             if (name.length <= limitOneWord) {

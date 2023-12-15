@@ -1,7 +1,8 @@
 <template>
     <v-row no-gutters class="font-italic">
-        <h1 v-if="level===1">?</h1>
+        <h1 v-if="level===1 || cupFormat[level - 1].random_draw">?</h1>
 
+        
         <h3 v-else-if="level===2">
             {{position}}{{tag.slice(position-1, position)}}
         </h3>
