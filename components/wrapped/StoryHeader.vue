@@ -41,7 +41,7 @@ export default {
 };
 
 </script>
-<style scoped>
+<style>
 .custom-font-class {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
         Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 

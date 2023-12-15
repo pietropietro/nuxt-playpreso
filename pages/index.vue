@@ -1,18 +1,18 @@
 <template>
     <v-container  class="pt-0">
         <guess-home-scroll />
-        <nuxt-link to="/p-cup/champions-league-23-24" class="no-decoration">
+        <!-- <nuxt-link to="/p-cup/champions-league-23-24" class="no-decoration">
             <v-row class="pt-10" justify="center">
                 <h1>CHAMPIONS</h1>
                 <em-emoji id="dizzy" size="2em" class="mx-2"/>
                 <h1>CUP</h1>
             </v-row>
-        </nuxt-link>
-        <!-- <nuxt-link to="/wrapped23" class="no-decoration">
+        </nuxt-link> -->
+        <nuxt-link to="/wrapped23" class="no-decoration">
             <v-row class="pt-10" justify="center">
                 <h1>2023 WRAPPED</h1>
             </v-row>
-        </nuxt-link> -->
+        </nuxt-link>
         <v-row v-if="!$vuetify.breakpoint.mdAndUp">
             <v-col cols="12" md="6" >
                 <p-p-counter />

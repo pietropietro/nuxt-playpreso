@@ -12,10 +12,10 @@
         </template>
 
         <template #intro>
-            <wrapped-intro-slide :storyData="wrappedData" />
+            <wrapped-intro-slide  />
         </template>
         <template #ciccio>
-            <wrapped-ciccio-slide />
+            <wrapped-ciccio-slide :storyData="wrappedData"/>
         </template>
     </Stories>
     <go-home v-else />
@@ -36,11 +36,11 @@ export default {
         stories: [ 
             {template: "intro"},
             {template: "ciccio"},
-            {template: "intro"},
-            {template: "intro"},
-            {template: "intro"},
-            {template: "intro"},
-            {template: "intro"},
+            {template: "ciccio"},
+            {template: "ciccio"},
+            {template: "ciccio"},
+            {template: "ciccio"},
+            {template: "ciccio"},
         ]
     }),
     methods:{

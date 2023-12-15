@@ -1,6 +1,8 @@
 <template>
 	<div class="intro-slide">
-		<v-row no-gutters><wrapped-snowflake v-for="n in 30" :key="n" :style="getSnowflakeStyle(n)" /></v-row>
+		<v-row no-gutters>
+			<wrapped-snowflake v-for="n in 200" :key="n" :style="getSnowflakeStyle(n)" :size="Math.random() * 15 + 10" />
+		</v-row>
 		<v-container fluid fill-height  style="overflow:hidden; white-space: nowrap;">
 			<v-row justify="center" class="ocrastd font-weight-bold" style="font-size:30px">
 				PLAYPRESO <br> WRAPPED <br> 2023
@@ -13,20 +15,17 @@
 export default {
 	props: {
 		index: {type: Number},
-		storyData: {
-			type: Object,
-		}
 	},
 	methods:{
 		getSnowflakeStyle(index) {
-				const duration = 5 + Math.random() * 10; // Duration between 5 and 15 seconds
-				const delay = Math.random() * -20; // Start with a delay to stagger the snowflakes
-				const xPos = Math.random() * 100; // Random horizontal position
+			const duration = 5 + Math.random() * 10; // Duration between 5 and 15 seconds
+			const delay = Math.random() * -20; // Start with a delay to stagger the snowflakes
+			const xPos = Math.random() * 100; // Random horizontal position
 
-				return {
-						animation: `fall ${duration}s linear ${delay}s infinite`,
-						left: `${xPos}vw`
-				};
+			return {
+					animation: `fall ${duration}s linear ${delay}s infinite`,
+					left: `${xPos}vw`
+			};
 		}
 	}
 };
