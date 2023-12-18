@@ -24,7 +24,8 @@ export default {
     height: 0;
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 40px solid green;
+    border-bottom: 40px solid  #003300
+;
     position: relative;
     top: -30px;
 }
@@ -36,7 +37,8 @@ export default {
     height: 0;
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 40px solid green;
+    border-bottom: 40px solid  #003300
+;
 }
 
 .layer::before {

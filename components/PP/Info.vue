@@ -5,13 +5,15 @@
             <h1 v-if="!small">{{value}}</h1>
             <h3 v-else>{{value}}</h3>
             <template v-if="!!value2">
-                <h4 v-if="!small" 
-                    :class="value2.class ?? ''" 
-                    :style="value2.color ? 'color:' + value2.color : ''"
-                >
-                    {{value2.text ?? value2}}
-                </h4>
-                <h6 v-else>{{value2}}</h6>
+                <div class="ml-2">
+                    <h4 v-if="!small"
+                        :class="value2.class ?? ''"
+                        :style="value2.color ? 'color:' + value2.color : ''"
+                    >
+                        {{value2.text ?? value2}}
+                    </h4>
+                    <h6 v-else>{{value2}}</h6>
+                </div>
             </template>
         </v-row>
         <v-row v-if="!wide" justify="center" 

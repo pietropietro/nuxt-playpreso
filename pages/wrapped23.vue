@@ -12,11 +12,21 @@
         </template>
 
         <template #intro>
-            <wrapped-intro-slide  />
+            <wrapped-slide-intro  />
         </template>
-        <template #ciccio>
-            <wrapped-ciccio-slide :storyData="wrappedData"/>
+        <template #thanks>
+            <wrapped-slide-thank-you :storyData="wrappedData"/>
         </template>
+        <template #summary>
+            <wrapped-slide-summary :storyData="wrappedData"/>
+        </template>
+        <template #summaryTwo>
+            <wrapped-slide-summary-two :storyData="wrappedData"/>
+        </template>
+        <template #teams>
+            <wrapped-slide-teams :storyData="wrappedData"/>
+        </template>
+
     </Stories>
     <go-home v-else />
 </template>
@@ -35,12 +45,12 @@ export default {
         wrappedData: [],
         stories: [ 
             {template: "intro"},
-            {template: "ciccio"},
-            {template: "ciccio"},
-            {template: "ciccio"},
-            {template: "ciccio"},
-            {template: "ciccio"},
-            {template: "ciccio"},
+            {template: "thanks"},
+            {template: "summary"},
+            {template: "summaryTwo"},
+            {template: "teams"},
+            {template: "summary"},
+            {template: "summary"},
         ]
     }),
     methods:{
