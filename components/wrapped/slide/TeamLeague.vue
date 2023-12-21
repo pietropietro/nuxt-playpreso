@@ -1,23 +1,24 @@
 <template>
     <v-container fluid fill-height style="background:   #330000;  overflow:hidden; white-space: nowrap;"  class="py-0">
-        <v-row style="height:10vh; background:  #ff1a1a;"></v-row>
-        <v-row >
+        <v-row align="end" style="height:20vh; background:  #ff1a1a;  overflow:hidden; white-space: nowrap;">
+            	<v-img :src="require('@/assets/img/golfer.png')" height="100" width="100" contain />
+        </v-row>
+        <v-row justify="center">
             <v-col cols="12" class="pb-5" >
-                <v-row align="center">
-                    <v-col>
+                <v-row justify="center" align="center" class="mx-2">
+                    <v-col cols="5">
                         <p-p-info
                             small
-                            class="px-0"
+                            
                             label="common team"
                             :value="storyData.most_team_name"
                         />
                     </v-col>
-                    <v-col cols="auto">
-                        <team-logo :id="storyData.most_team_id" size="50" />
+                    <v-col cols="3">
+                        <team-logo :id="storyData.most_team_id" :size="40" />
                     </v-col>
-                    <v-col cols="auto" class="mx-2">
+                    <v-col cols="4" >
                         <p-p-info
-                            class="px-0"
                             label="avg🅿️"
                             :value="storyData.most_team_avg_points"
                             :value2="'(' +storyData.most_team_tot_locks + ')'"
@@ -26,21 +27,19 @@
                 </v-row>
             </v-col>
             <v-col cols="12">
-                <v-row align="center">
-                    <v-col>
+                <v-row align="center" justify="center" class="mx-2">
+                    <v-col cols="5">
                         <p-p-info
                             small
-                            class="px-0"
                             label="best team"
                             :value="storyData.high_team_name"
                         />
                     </v-col>
-                    <v-col cols="auto">
-                        <team-logo :id="storyData.high_team_id" size="50" />
+                    <v-col cols="3">
+                        <team-logo :id="storyData.high_team_id" :size="40" />
                     </v-col>
-                     <v-col cols="auto" class="mx-2">
+                     <v-col cols="4">
                         <p-p-info
-                            class="px-0"
                             label="avg🅿️"
                             :value="storyData.high_team_avg_points"
                             :value2="'(' +storyData.high_team_tot_locks + ')'"
@@ -50,7 +49,7 @@
             </v-col>
         </v-row>
 
-        <v-row style="height:25vh; background:  #ff1a1a;">
+        <v-row style="height:15vh; background:  #ff1a1a;">
             <div class="golf-course">
                 <div class="putter">
                     <div class="putter-handle"></div>
@@ -67,8 +66,8 @@
 
         <v-row>
             <v-col cols="12">
-                <v-row  align="center">
-                    <v-col>
+                <v-row align="center" justify="center">
+                    <v-col cols="5">
                         <p-p-info
                             small
                             class="px-0"
@@ -76,14 +75,13 @@
                             :value="storyData.most_league_name"
                         />
                     </v-col>
-                    <v-col cols="auto" >
-                        <!-- <v-row justify="center"> -->
-                            <emoji-flag size="3em" :model="storyData.most_league_country"/>
-                        <!-- </v-row> -->
+                    <v-col cols="3" >
+                        <v-row justify="center">
+                            <emoji-flag size="2em" :model="storyData.most_league_country"/>
+                        </v-row>
                     </v-col>
-                     <v-col cols="auto" class="mx-2">
+                     <v-col cols="4" >
                         <p-p-info
-                            small
                             class="px-0"
                             label="avg🅿️"
                             :value="storyData.most_league_avg_points"
@@ -93,9 +91,9 @@
                 </v-row>
             </v-col>
             <v-col cols="12">
-                <v-row align="center">
+                <v-row align="center" justify="center">
                 
-                    <v-col>
+                    <v-col cols="5">
                         <p-p-info
                             small
                             class="px-0"
@@ -103,12 +101,12 @@
                             :value="storyData.high_league_name"
                         />
                     </v-col>
-                     <v-col cols="auto">
-                        <!-- <v-row justify="center"> -->
-                            <emoji-flag size="3em" :model="storyData.high_league_country"/>
-                        <!-- </v-row> -->
+                     <v-col cols="3">
+                        <v-row justify="center">
+                            <emoji-flag size="2em" :model="storyData.high_league_country"/>
+                        </v-row>
                     </v-col>
-                     <v-col cols="auto" class="mx-2">
+                     <v-col cols="4" >
                         <p-p-info
                             class="px-0"
                             label="avg🅿️"
@@ -119,7 +117,9 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="height:10vh; background:  #ff1a1a;"></v-row>
+        <v-row style="height:20vh; background:  #ff1a1a;" align="start">
+            <v-img v-for="n in 3" :key="n" :src="require('@/assets/img/crowd.png')" height="100" width="100" contain />
+        </v-row>
     </v-container>
 </template>
 <script>

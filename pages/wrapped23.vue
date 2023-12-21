@@ -23,8 +23,14 @@
         <template #summaryTwo>
             <wrapped-slide-summary-two :storyData="wrappedData"/>
         </template>
-        <template #teams>
-            <wrapped-slide-teams :storyData="wrappedData"/>
+        <template #teamLeague>
+            <wrapped-slide-team-league :storyData="wrappedData"/>
+        </template>
+        <template #months>
+            <wrapped-slide-months :storyData="wrappedData"/>
+        </template>
+        <template #ppl>
+            <wrapped-slide-ppl :storyData="wrappedData"/>
         </template>
 
     </Stories>
@@ -48,9 +54,11 @@ export default {
             {template: "thanks"},
             {template: "summary"},
             {template: "summaryTwo"},
-            {template: "teams"},
-            {template: "summary"},
-            {template: "summary"},
+            {template: "teamLeague"},
+            {template: "months"},
+            {template: "ppl"},
+            {template: "ppl"},
+            {template: "ppl"},
         ]
     }),
     methods:{
