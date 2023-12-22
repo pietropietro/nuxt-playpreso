@@ -27,7 +27,7 @@
                         </h4>
                     </v-col>
                     <v-col cols="12" class="text-center">
-                        <h5>you have already done it {{storyData.most_lock_combination_tot}} times ...</h5>
+                        <h5>you have done it {{storyData.most_lock_combination_tot}} times ...</h5>
                     </v-col>
                 </v-row>
             <em-emoji id="t-rex" size="3em" class="fox t-rex"/>

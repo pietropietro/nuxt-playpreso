@@ -7,7 +7,7 @@
     >
         <v-row class="mt-10" align="center" justify="center">
                 <div class="lh-1">
-                    <span class="overline">YOU HAVE JOINED </span>
+                    <span class="overline">YOU JOINED </span>
                     <span style="font-size:30px !important;"><b>{{storyData.ppl_joined_tot}}</b></span>
                     <span class="overline"> P-LEAGUES</span>
                 </div>

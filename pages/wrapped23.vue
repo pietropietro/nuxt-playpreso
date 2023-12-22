@@ -32,6 +32,12 @@
         <template #ppl>
             <wrapped-slide-ppl :storyData="wrappedData"/>
         </template>
+        <template #enemy>
+            <wrapped-slide-enemy :storyData="wrappedData"/>
+        </template>
+         <template #outro>
+            <wrapped-slide-outro :storyData="wrappedData"/>
+        </template>
 
     </Stories>
     <go-home v-else />
@@ -57,8 +63,8 @@ export default {
             {template: "teamLeague"},
             {template: "months"},
             {template: "ppl"},
-            {template: "ppl"},
-            {template: "ppl"},
+            {template: "enemy"},
+            {template: "outro"},
         ]
     }),
     methods:{

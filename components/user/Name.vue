@@ -3,6 +3,7 @@
         class="flex-nowrap" 
         :justify="center ? 'center' : 'start'" 
         align="center"
+        v-if="user"
     >
             <v-col cols="auto" :class="current ? 'currentuser': ''">
                 <h1 v-if="!small">
@@ -10,7 +11,7 @@
                 </h1>
                 <h3 v-else>{{user.username}}</h3>
             </v-col>
-            <v-col cols="auto" v-if="user.trophies.length">
+            <v-col cols="auto" v-if="user.trophies?.length">
                 <v-row no-gutters align="center">
                     <template v-if="$store.state.navigation.openUserLabelId === user.id">
                         <user-trophy 
@@ -25,7 +26,7 @@
                         />
                         <v-chip class="ml-1" 
                             label small color="primary" 
-                            v-if="user.trophies.length > 1"
+                            v-if="user.trophies?.length > 1"
                             @click="dothis"
                         >
                             <span class="overline lh-1 font-weight-bold">{{user.trophies.length}}</span>

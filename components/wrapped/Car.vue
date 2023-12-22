@@ -2,15 +2,15 @@
     <div class="police-car-container">
         <div class="police-car"  :style="carAnimationStyle">
         <div class="lightbar">
-            <div class="light red"></div>
-            <div class="light blue"></div>
+            <div class="light police-red"></div>
+            <div class="light police-blue"></div>
         </div>
         <div class="car-body">
             <div class="car-top"></div>
         </div>
-        <div class="wheels">
-            <div class="wheel"></div>
-            <div class="wheel"></div>
+        <div class="police-wheels">
+            <div class="police-wheel"></div>
+            <div class="police-wheel"></div>
         </div>
         </div>
     </div>
@@ -79,12 +79,12 @@ export default {
   opacity: 0.7;
 }
 
-.red {
+.police-red {
   background-color: red;
   animation: flashing 0.5s linear infinite;
 }
 
-.blue {
+.police-blue {
   background-color: blue;
   animation: flashing 0.5s linear infinite 0.25s; /* Adjusted timing for alternate flashing */
 }
@@ -115,7 +115,7 @@ export default {
   transform: translateX(-50%);
 }
 
-.wheels {
+.police-wheels {
   position: absolute;
   width: 100%;
   bottom: -15px;
@@ -123,7 +123,7 @@ export default {
   justify-content: space-around;
 }
 
-.wheel {
+.police-wheel {
   width: 30px;
   height: 30px;
   background-color: #6600cc;
