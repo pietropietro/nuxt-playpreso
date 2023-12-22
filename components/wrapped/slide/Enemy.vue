@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid >
+  <v-container fluid fill-height style="background: #ffaa00; " >
    
     <v-row no-gutters class="mt-8">
         <v-col cols="12">
@@ -17,7 +17,7 @@
     <v-row class="my-8">
         <v-col cols="6" v-for="up in storyData.most_adjacent_ups" :key="up.id" >
             <v-row no-gutters justify="space-between" class="caption">
-                <v-col><span>{{ppTournamentTypeTitle(up.ppTournamentType)}}</span></v-col>
+                <v-col><span><b>{{ppTournamentTypeTitle(up.ppTournamentType)}}</b></span></v-col>
                 <v-col cols="auto">
                     <span class="text-right">
                         {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(up.updated_at))}}

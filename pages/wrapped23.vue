@@ -23,9 +23,62 @@
         <template #summaryTwo>
             <wrapped-slide-summary-two :storyData="wrappedData"/>
         </template>
-        <template #teamLeague>
-            <wrapped-slide-team-league :storyData="wrappedData"/>
+
+        <template #highTeam>
+            <wrapped-slide-team-league 
+                label="best team"
+                :name="wrappedData.high_team_name"
+                color="#ff471a"
+                :points="wrappedData.high_team_avg_points"
+                :locks="wrappedData.high_team_tot_locks"
+                :guesses="highTeamGuesses"
+            >
+                <team-logo :id="wrappedData.high_team_id" :size="40" slot="icon"/>
+            </wrapped-slide-team-league>
         </template>
+        <template #lowTeam>
+            <wrapped-slide-team-league 
+                label="worst team"
+                :name="wrappedData.low_team_name"
+                color="#00994d"
+                :points="wrappedData.low_team_avg_points"
+                :locks="wrappedData.low_team_tot_locks"
+                :guesses="lowTeamGuesses"
+            >
+                <team-logo :id="wrappedData.low_team_id" :size="40" slot="icon"/>
+            </wrapped-slide-team-league>
+        </template>
+        <template #highLeague>
+            <wrapped-slide-team-league 
+                label="best league"
+                :name="wrappedData.high_league_name"
+                color="#002db3"
+                :points="wrappedData.high_league_avg_points"
+                :locks="wrappedData.high_league_tot_locks"
+                :guesses="highLeagueGuesses"
+            >
+                <v-row justify="center" slot="icon">
+                    <emoji-flag size="2em" :model="wrappedData.high_league_country"/>
+                </v-row>
+            </wrapped-slide-team-league>
+        </template>
+        <template #lowLeague>
+            <wrapped-slide-team-league 
+                label="worst league"
+                :name="wrappedData.low_league_name"
+                color="#ff00bf"
+                :points="wrappedData.low_league_avg_points"
+                :locks="wrappedData.low_league_tot_locks"
+                :guesses="lowLeagueGuesses"
+            >
+                <v-row justify="center" slot="icon">
+                    <emoji-flag size="2em" :model="wrappedData.low_league_country"/>
+                </v-row>
+            </wrapped-slide-team-league>
+        </template>
+
+       
+
         <template #months>
             <wrapped-slide-months :storyData="wrappedData"/>
         </template>
@@ -60,12 +113,19 @@ export default {
             {template: "thanks"},
             {template: "summary"},
             {template: "summaryTwo"},
-            {template: "teamLeague"},
+            {template: "highTeam"},
+            {template: "lowTeam"},
+            {template: "highLeague"},
+            {template: "lowLeague"},
             {template: "months"},
             {template: "ppl"},
             {template: "enemy"},
             {template: "outro"},
-        ]
+        ],
+        highTeamGuesses: [],
+        lowTeamGuesses: [],
+        highLeagueGuesses: [],
+        lowLeagueGuesses: [],
     }),
     methods:{
         allStoriesEnd() {
@@ -79,9 +139,33 @@ export default {
             }
             this.loading = false;
         },
+        async getGuesses(url){
+            let response = await this.$api.call(
+               url
+            );
+            if(response && response.status === "success"){
+                return response.message;
+            }
+        },
     },
     async mounted(){
         await this.getWrappedData();
+        this.highTeamGuesses = await this.getGuesses(
+            this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.high_team_id
+                + '?before=2023-12-31&after=2023-01-01'
+        );
+        this.lowTeamGuesses = await this.getGuesses(
+            this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.low_team_id
+                + '?before=2023-12-31&after=2023-01-01'
+        );
+        this.highLeagueGuesses = await this.getGuesses(
+            this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.high_league_id
+                + '?before=2023-12-31&after=2023-01-01'
+        );
+        this.lowLeagueGuesses = await this.getGuesses(
+            this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.low_league_id
+                + '?before=2023-12-31&after=2023-01-01'
+        );
     }
 }
 

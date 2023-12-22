@@ -20,11 +20,22 @@ export default {
 		};
 	},
 	async mounted() {
-		let response = await this.$api.getImage('/static/teams/' + this.id);
-		if (response && response.status == 200) {
-			let blob = await response.blob();
-			this.imageSrc = URL.createObjectURL(blob);
-		} 
+		await this.getLogo();
 	},
+	methods:{
+		async getLogo(){
+			let response = await this.$api.getImage('/static/teams/' + this.id);
+			if (response && response.status == 200) {
+				let blob = await response.blob();
+				this.imageSrc = URL.createObjectURL(blob);
+			} 
+		}
+	},
+	//needed when used in slot (i.e. wrapped slide team/league)
+	watch: {
+        async id (newId, oldId) {
+           await this.getLogo();
+        },
+    },
 };
 </script>

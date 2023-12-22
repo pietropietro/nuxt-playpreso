@@ -1,6 +1,6 @@
 <template>
-    <v-container fluid fill-height style="background:  #00cccc;  position: relative; overflow:hidden; white-space: nowrap;" >
-        <v-row style="background:  #008080; height: 30px; position: relative; overflow:hidden; white-space: nowrap;">
+    <v-container fluid fill-height style="background:  #4da6ff;  position: relative; overflow:hidden; white-space: nowrap;" >
+        <v-row style="background:  #003366; height: 30px; position: relative; overflow:hidden; white-space: nowrap;">
             <wrapped-rat class="rat-slow"/>
         </v-row>
         <v-row align="center" justify="center">
@@ -19,7 +19,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="background:  #008080; height:30px;">
+        <v-row style="background:  #003366; height:30px;">
             <wrapped-rat class="rat-fast"/>
         </v-row>
         <v-row align="center" justify="center">
@@ -37,7 +37,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="background:  #008080; height:30px;">
+        <v-row style="background:  #003366; height:30px;">
             <wrapped-rat class="rat-medium"/>
         </v-row>
         <v-row align="center" justify="center">
@@ -55,7 +55,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="background:  #008080; height:30px;">
+        <v-row style="background:  #003366; height:30px;">
             <wrapped-rat class="rat-slow"/>
         </v-row>
         <v-row align="center" justify="center">
@@ -73,7 +73,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="background:  #008080; height:30px;">
+        <v-row style="background:  #003366; height:30px;">
             <wrapped-rat class="rat-medium"/>
         </v-row>
     </v-container>
