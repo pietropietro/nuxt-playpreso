@@ -8,13 +8,13 @@
                 <h1>CUP</h1>
             </v-row>
         </nuxt-link> -->
-        <nuxt-link to="/wrapped23" class="no-decoration" >
-            <v-row class="pt-10" justify="center" style="position: relative; white-space:nowrap; overflow: hidden">
+        
+        <v-row class="pt-10" justify="center" style="position: relative; white-space:nowrap; overflow: hidden">
             <wrapped-snowflake v-for="n in 50" :key="n" :style="getSnowflakeStyle(n)" :size="Math.random() * 15 + 10"  />
-
+            <nuxt-link to="/wrapped23" class="no-decoration" >
                 <h1>2023 WRAPPED</h1>
-            </v-row>
-        </nuxt-link>
+            </nuxt-link>
+        </v-row>
         <v-row v-if="!$vuetify.breakpoint.mdAndUp">
             <v-col cols="12" md="6" >
                 <p-p-counter />
