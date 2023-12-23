@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" align="center" class="">
+    <v-row justify="center" align="center" >
         <v-col
             cols="auto"
             class="d-flex justify-center align-center rounded-sm py-0"
@@ -14,7 +14,8 @@
             <v-btn class="custom-font-class mr-n4" 
                 style="font-size:20px;"
                 text icon 
-                @touchend.stop="doExit"            
+                @touchend.stop="doExit"        
+                @click="doExit"            
             >
                 X
             </v-btn>

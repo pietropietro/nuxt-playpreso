@@ -8,7 +8,10 @@
         class="custom-story-container"
     >
         <template #header>
-            <wrapped-story-header style="width:90vw;" :exit="allStoriesEnd"/>
+            <wrapped-story-header 
+                :style="$vuetify.breakpoint.smAndUp ? 'width:400px;' : 'width: 90vw'" 
+                :exit="allStoriesEnd"
+            />
         </template>
 
         <template #intro>
