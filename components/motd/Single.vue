@@ -22,7 +22,7 @@
             <v-col cols="4">
                 <v-row no-gutters justify="center">
                     <h3>{{motd.stats.most_lock_combination}}</h3>
-                    <h6>({{motd.stats.most_lock_tot}})</h6>
+                    <h6>({{motd.stats.most_lock_combination_tot}})</h6>
                 </v-row>
                 <div class="overline lh-1">most <em-emoji id="lock"/></div>
             </v-col>

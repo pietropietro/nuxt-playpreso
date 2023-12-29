@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col cols="12" md="6" class="mb-5" 
+        <v-col cols="12" class="mb-5" 
             v-for="(group,index) in levelGroups" :key="index"
         >
             <nuxt-link class="no-decoration"  

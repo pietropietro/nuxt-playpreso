@@ -14,7 +14,7 @@
                 <div class="text-center overline" @click="moreInfo=true">more info</div>
             </v-col>
             <template v-else>
-                <v-col lg="4" cols="6" >
+                <v-col cols="6" >
                     <p-p-info
                         v-if="ppTournamentType.leagues.length == 1"
                         label="league"
@@ -26,7 +26,7 @@
                         :value="ppTournamentType.leagues.length"
                     />
                 </v-col>
-                <v-col cols="6" lg="4" >
+                <v-col cols="6" >
                    <p-p-info
         
                         v-if="ppTournamentType.next"
@@ -40,7 +40,7 @@
                     />
                 </v-col>
                 <template v-if="ppTournamentType.top_up">
-                    <v-col cols="12" sm="6" lg="4">
+                    <v-col cols="12" >
                         <v-row align="center">
                             <v-col cols="auto" >
                                 <em-emoji size="2em" id="medal"/>
@@ -59,7 +59,7 @@
                     </v-col>
                 </template>
                 <!-- <template v-if="ppTournamentType.userUps">
-                    <v-col cols="12" sm="6" lg="4"
+                    <v-col cols="12" 
                         v-for="up in ppTournamentType.userUps" :key="up.id"
                     >
                         <v-row align="center" v-if="up.ppLeague_id != ppLeagueId">

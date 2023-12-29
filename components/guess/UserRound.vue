@@ -2,7 +2,7 @@
     <v-row>
         <v-col 
             v-for="pprm, index in ppRMs" :key="index"
-            cols="12" md="4"
+            cols="12"
             :class="index == 1 && !$vuetify.breakpoint.mdAndUp ? 'my-2' : ''"
         >
             <v-row justify="center" >

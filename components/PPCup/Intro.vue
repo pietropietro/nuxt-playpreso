@@ -13,13 +13,13 @@
                     :value="ppCup.user_count ?? 0"
                 />
             </v-col>
-            <v-col cols="6" md="3" v-if="ppCup?.can_join">
+            <v-col cols="6" v-if="ppCup?.can_join">
                 <p-p-info
                     label="cost"
                     :value="ppCup.ppTournamentType.cost"
                 />
             </v-col>
-            <v-col cols="6" md="3" v-if="ppCup?.can_join">
+            <v-col cols="6" v-if="ppCup?.can_join">
                 <p-p-tournament-join-row :ppTournamentTypeId="ppCup?.ppTournamentType.id" isPPCup/>
             </v-col>
         </v-row>

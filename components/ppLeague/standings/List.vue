@@ -20,7 +20,7 @@
                     <user-participation-standing-labels />
                 </v-row>
             </v-col>
-            <v-col cols="12" md="6" v-for="(up, index) in ups" :key="up.id">
+            <v-col cols="12" v-for="(up, index) in ups" :key="up.id">
                 <v-row align="center" no-gutters>
                     <v-col cols="auto"
                         v-if=" upForIndex(index) && upForIndex(index).finished && upForIndex(index).position <= 3"
