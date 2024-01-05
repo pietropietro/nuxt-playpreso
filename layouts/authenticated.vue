@@ -6,9 +6,9 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar />
-                    <div class="app-bar-container">
-                        <p-p-header v-if="!menuScreen" :menuScreen="menuScreen" :setMenu="(val)=>menuScreen=val"/>
-                    </div>
+                    <v-app-bar color="var(--v-background-base)" flat :app="!$vuetify.breakpoint.smAndUp">
+                        <h1 class="ocrastd">PLAYPRESO</h1>
+                    </v-app-bar>
                     <p-p-menu :value="menuScreen" :setValue="(val)=>menuScreen=val" />
                     <v-main :style="menuScreen ? 'position: fixed' : ''" >
                         <p-p-share-marquee />
@@ -55,23 +55,19 @@ export default {
 	}
 	
     .app-rectangle-wrapper {
+        position: relative; // Ensure this div is positioned relative
         overflow-x: hidden;
         overflow-y: auto;
         
-        @media (min-width: 768px) {
+        @media (min-width: 600px) {
             width: $pp-mobile-width;
             height: $pp-mobile-height;
-			border: solid white 3px; // Add border for desktop
-
-            
-            .app-bar-container {
-                position: fixed; // Ensures it stays at the top
-                top: 0;
-                left: 0;
-                width: 100%;
-                z-index: 1000; // High z-index to keep it above other content
-            }
+			border: solid white 3px;
+            border-radius: 50px; // Add border for desktop
         }
     }
+
+
+   
 
 </style>
