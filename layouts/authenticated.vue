@@ -6,11 +6,11 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar />
-                    <v-app-bar color="var(--v-background-base)" flat :app="!$vuetify.breakpoint.smAndUp">
-                        <h1 class="ocrastd">PLAYPRESO</h1>
-                    </v-app-bar>
+                    <p-p-app-bar :appBarStyle="appBarStyle" />
                     <p-p-menu :value="menuScreen" :setValue="(val)=>menuScreen=val" />
-                    <v-main :style="menuScreen ? 'position: fixed' : ''" >
+                    <v-main :style="$vuetify.breakpoint.smAndUp ?  
+                        { marginTop: '64px'} : {}" 
+                    >
                         <p-p-share-marquee />
                         <nuxt />
                     </v-main>
@@ -29,7 +29,27 @@ export default {
 		return{
 			menuScreen: false
 		}
-	}
+	},
+    computed: {
+        appBarStyle() {
+            if (this.$vuetify.breakpoint.smAndUp) {
+                    const ppMobileWidth = 420; // Replace with the actual value or import it
+                    const leftPosition = `calc((100vw - ${ppMobileWidth}px) / 2 )`;
+                return {
+                    borderRadius: '50px 50px 0 0', 
+                    borderTop: '3px solid white', // Border on top
+                    borderRight: '3px solid white', // Border on right
+                    borderLeft: '3px solid white', // Border on left
+                    borderBottom: 'none', // No border at the bottom
+                    zIndex: 1000,
+                    position: 'fixed',
+                    width: `calc(${ppMobileWidth}px )`,
+                    left: leftPosition
+                };
+            }
+            return {};
+        }
+    }
 }
 </script>
 
@@ -62,12 +82,13 @@ export default {
         @media (min-width: 600px) {
             width: $pp-mobile-width;
             height: $pp-mobile-height;
-			border: solid white 3px;
-            border-radius: 50px; // Add border for desktop
+            border-top:none; // Border on top
+            border-right: 3px solid white; // Border on right
+            border-left: 3px solid white; // Border on left
+            border-bottom:  3px solid white; // No border at the bottom
+            border-radius: 50px;
         }
     }
 
-
-   
 
 </style>
