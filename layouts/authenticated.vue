@@ -11,15 +11,14 @@
                     <!-- MENU -->
                     <v-overlay class="menu-overlay app-desktop-body" 
                         :value="menu"  opacity="1" 
-                        :dark="false" color="var(--v-background-base)"
+                        color="var(--v-background-base)"
                     >
                         <p-p-menu-brain />
                     </v-overlay>
 
                     <!-- APP -->
-                    <v-main 
-                        :style="$vuetify.breakpoint.smAndUp ?  
-                        { marginTop: '64px'} : {}" 
+                    <v-main class="pt-sm-16" 
+                        :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
                     >
                         <p-p-share-marquee />
                         <nuxt />
@@ -44,6 +43,12 @@ export default {
 </script>
 
 <style lang="scss">
+
+    .pt-sm-16{
+        @media (min-width: 600px) {
+            padding-top: 64px;
+        }
+    }
 
 	.outer-container {
 		display: flex;
