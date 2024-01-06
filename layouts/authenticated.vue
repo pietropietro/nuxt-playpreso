@@ -20,7 +20,7 @@
                     <v-main class="pt-sm-16" 
                         :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
                     >
-                        <p-p-share-marquee />
+                        <!-- <p-p-share-marquee /> -->
                         <nuxt />
                     </v-main>
                 </template>
@@ -70,6 +70,7 @@ export default {
 	}
 
     .pp-app-bar {
+        padding-top: env(safe-area-inset-top);
         z-index: 6 !important;
         position: fixed !important;
 
@@ -87,7 +88,11 @@ export default {
     .app-rectangle-wrapper {
         position: relative; // Ensure this div is positioned relative
         overflow-x: hidden;
-        overflow-y: auto;        
+        overflow-y: auto;
+        
+        .v-main__wrap{
+            padding-top: env(safe-area-inset-top);
+        }
     }
 
     .menu-overlay {
@@ -99,7 +104,7 @@ export default {
 
         .v-overlay__content{
             height: 100%;
-            padding-top: 64px;
+            padding-top: calc(64px + env(safe-area-inset-top));
         }
     }
 

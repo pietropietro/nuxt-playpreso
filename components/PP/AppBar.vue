@@ -3,13 +3,11 @@
         flat 
         :app="!$vuetify.breakpoint.smAndUp"
         class="no-height"
-        :style="appBarStyle"
+        style="font-size: 1.25rem;"
     >
-        <v-container>
-            <v-row class="mx-2">
-                <v-spacer/>
+        <v-container class="px-0">
+            <v-row class="mx-2 mx-sm-6">
                 <nuxt-link class="no-decoration" to="/">
-                    <!-- <div class="text-h3 font-weight-bold">PLAYPRESO</div> -->
                     <h1 class="ocrastd">PLAYPRESO</h1>
                 </nuxt-link>
                 <v-spacer/>
@@ -26,7 +24,6 @@ export default {
         collapse: {type: Boolean},
         menu: {type: Boolean},
         setMenu: {type: Function},
-        appBarStyle: {type: Object}
     },
     computed: {
         computedMenu:{
