@@ -5,8 +5,7 @@
             justify="center" align="center"
         >
             <span class="text-h2 font-weight-bold">
-                <!-- {{currentPoints}} <em-emoji id="parking"/> -->
-                {{currentPoints}} <em-emoji id="gift"/>
+                {{currentPoints}} <em-emoji id="parking"/>
             </span>
         </v-row>
     </v-container>    
