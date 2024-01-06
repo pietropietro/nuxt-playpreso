@@ -80,6 +80,7 @@ export default {
         overflow-y: auto;
         
         @media (min-width: 600px) {
+            position: fixed;
             width: $pp-mobile-width;
             height: $pp-mobile-height;
             border-top:none; // Border on top
