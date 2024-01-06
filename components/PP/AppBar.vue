@@ -5,7 +5,6 @@
         class="no-height"
         :style="appBarStyle"
     >
-    <!-- <v-app-bar color="var(--v-background-base)" class="no-height" style="height:auto;" flat app> -->
         <v-container>
             <v-row class="mx-2">
                 <v-spacer/>
@@ -15,7 +14,7 @@
                 </nuxt-link>
                 <v-spacer/>
                 <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
-                    <h1>{{menuScreen ? 'X' : '>'}}</h1>
+                    <h1>{{menu ? 'X' : '>'}}</h1>
                 </div>
             </v-row>
         </v-container>
@@ -25,14 +24,14 @@
 export default {
     props:{
         collapse: {type: Boolean},
-        menuScreen: {type: Boolean},
+        menu: {type: Boolean},
         setMenu: {type: Function},
         appBarStyle: {type: Object}
     },
     computed: {
         computedMenu:{
             get(){
-                return this.menuScreen
+                return this.menu
             },
             set(val){
                 this.setMenu(val);
