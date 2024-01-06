@@ -6,7 +6,7 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar />
-                    <p-p-app-bar :appBarStyle="appBarStyle" :menu="menu" :setMenu="(val)=>menu=val"/>
+                    <p-p-app-bar class="pp-app-bar" :menu="menu" :setMenu="(val)=>menu=val"/>
                     
                     <!-- MENU -->
                     <v-overlay class="menu-overlay app-desktop-body" 
@@ -40,26 +40,6 @@ export default {
 			menu: false
 		}
 	},
-    computed: {
-        appBarStyle() {
-            if (this.$vuetify.breakpoint.smAndUp) {
-                    const ppMobileWidth = 420; // Replace with the actual value or import it
-                    const leftPosition = `calc((100vw - ${ppMobileWidth}px) / 2 )`;
-                return {
-                    borderRadius: '50px 50px 0 0', 
-                    borderTop: '3px solid white', // Border on top
-                    borderRight: '3px solid white', // Border on right
-                    borderLeft: '3px solid white', // Border on left
-                    borderBottom: 'none', // No border at the bottom
-                    zIndex: 1000,
-                    position: 'fixed',
-                    width: `calc(${ppMobileWidth}px )`,
-                    left: leftPosition
-                };
-            }
-            return {};
-        }
-    }
 }
 </script>
 
@@ -83,6 +63,21 @@ export default {
 		z-index: -1; /* Ensure it stays behind the content */
 		background-color: #00001a;
 	}
+
+    .pp-app-bar {
+        z-index: 6 !important;
+        position: fixed !important;
+
+        @media (min-width: 600px) {
+            border-radius: 50px 50px 0 0 !important;
+            border-top: 3px solid white !important;
+            border-right: 3px solid white !important;
+            border-left: 3px solid white !important;
+            border-bottom: none;
+            width: $pp-mobile-width;
+            left: calc(50% - #{$pp-mobile-width / 2}) !important;
+        }
+    }
 	
     .app-rectangle-wrapper {
         position: relative; // Ensure this div is positioned relative
