@@ -76,8 +76,10 @@
                 />
             </template>
             <template v-slot:item.updated_at="{ item }">
-                <div class="overline"
-                >
+                <div v-if="item.ls_410" style="color:red">
+                    <b>410</b>
+                </div>
+                <div class="overline" v-else>
                     {{ formatDate(item.updated_at, true) }}
                 </div>
             </template>

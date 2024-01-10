@@ -123,6 +123,7 @@ export default {
                 "name" : this.nameModel,
                 "tag" : this.tagModel,
                 "ls_suffix" : this.lsSuffixModel,
+                "ls_410" : false,
                 "country" : this.countryModel,
                 "level" : this.levelModel,
                 "parent_id" : this.parentModel,
