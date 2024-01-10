@@ -1,8 +1,8 @@
 <template>
     <v-row>
-        <v-col cols="12">
+        <!-- <v-col cols="12">
             <div class="chart" ref="chartGuesses" :style="'height: 10vh'"/>
-        </v-col>
+        </v-col> -->
     </v-row>
 </template>
 <script>
