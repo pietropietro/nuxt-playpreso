@@ -1,0 +1,10 @@
+{
+  "appId": "com.playpreso.app",
+  "appName": "playpreso",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": ["localhost:8080"]
+  }
+}
+
