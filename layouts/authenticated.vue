@@ -43,8 +43,9 @@ export default {
 </script>
 
 <style lang="scss">
-
     .pt-sm-16{
+        padding-top: 60px !important;
+
         @media (min-width: 600px) {
             padding-top: 64px;
         }
