@@ -1,10 +1,12 @@
 <template>
     <v-row>
         <v-col>
-            <p-p-info
-                label="p-cup"
-                :value="ppCupGroup.ppTournamentType?.name"
-            />
+            <nuxt-link :to="ROUTES.PPCUP.DETAIL + ppCupGroup.ppCup_id" class="no-decoration">
+                <p-p-info
+                    label="p-cup"
+                    :value="ppCupGroup.ppTournamentType?.name"
+                />
+            </nuxt-link>
         </v-col>
         <v-col>
             <p-p-info 

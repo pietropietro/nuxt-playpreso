@@ -39,7 +39,7 @@
             </template>
         </v-data-table>
         <div v-if="ppTournamentTypes.length > 3" 
-            class="text-center lh-1 overline" 
+            class="text-center lh-1 overline font-weight-bold" 
             @click="showAllFlag = !showAllFlag"
         >
             {{showAllFlag ? 'show less' : 'show more'}}

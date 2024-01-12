@@ -10,9 +10,9 @@
             />
         </v-col> -->
         <v-col class="py-1">
-            <v-chip label x-small class="oppositeText--text" :color="ppRGBA(participation.ppTournamentType.rgb)">
+            <v-chip label x-small class="" :color="ppRGBA(participation.ppTournamentType.rgb)">
                 <div class="overline" style="line-height:1rem;">
-                    {{participation.ppLeague_id ? 'P-LEAGUE' : 'P-CUP'}}
+                    {{participation.ppLeague_id ? '' : participation.levelFormat.name}}
                 </div>
             </v-chip>
             <h2>
@@ -30,7 +30,10 @@
             </template>
             <template v-else-if="participation.paused" >
                 <v-row no-gutters justify="end" class="text-overline lh-1" v-if="participation.position">
-                    POS. {{participation.position}}°/{{participation.ppTournamentType.participants}}
+                    POS. {{participation.position}}°/
+                    {{participation.ppTournamentType.participants ??
+                        participation.levelFormat.group_participants
+                    }}
                 </v-row>
                 <v-row no-gutters class="text-overline lh-1">waiting matches</v-row>
             </template>
@@ -38,7 +41,11 @@
                 <span class="overline">POS.</span>
                 <v-row>
                     <h1>{{participation.position ? participation.position + '°' : '?'}}</h1>
-                    <span class="overline" style="line-height:4rem" >/{{participation.ppTournamentType.participants}}</span>
+                    <span class="overline" style="line-height:4rem" >/
+                        {{participation.ppTournamentType.participants ??
+                            participation.levelFormat.group_participants
+                        }}
+                    </span>
                 </v-row>
             </div>
         </v-col>
@@ -50,6 +57,12 @@ export default {
     props:{
         participation: {type: Object, required: true}
     },
+    mounted(){
+        if(this.participation.levelFormat){
+            console.log(this.participation.ppTournamentType.participants,"1");
+            console.log(this.participation.levelFormat,"2");
+        }
+    }
 }
 </script>
 

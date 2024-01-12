@@ -1,58 +1,34 @@
 <template>
-    <v-container v-if="ups?.length">
-        <v-row no-gutters>
-            <h1>P-LEAGUES</h1>
-        </v-row>
-        <v-row no-gutters align="center">
-            <v-chip-group
-                mandatory
-                class="h-100"
-                active-class="primary"
-                v-model="selectedStatus"
-                @change="chipChange"
-            >
-                <div v-for="(status, i) in statusList" :key="i">
-                    <v-chip 
-                        small 
-                        :value="status" 
-                        color="var(--v-background-lighten1)">
-                        <div class="overline lh-1">
-                            <template v-if="status==='waiting'">
-                                waiting ({{userParticipations.waiting.length}})
-                            </template>
-                            <template v-else-if="status==='finished'">
-                                finished
-                            </template>
-                            <template v-else>
-                                {{status}} ({{userParticipations.active.length}})
-                            </template>
-                        </div>
-                    </v-chip>
-                </div>
-            </v-chip-group>
-        </v-row>
-        <v-row no-gutters class="mb-4" align="end" justify="center">
-            <v-col 
-                v-for="(up, index) in ups" :key="index"
-                class="text-center"
-            >
-                <div @click="selectedIndex = index" :class="selectedIndex == index ? 'mx-2' : ''">
-                    <em-emoji
-                        :native="up.ppTournamentType.emoji" 
-                        :size="selectedIndex == index ? '2.5em' : '1.5em'" 
-                    />
-                </div>
+    <v-container 
+        v-if="(!loading.leagues || !loading.cups) && 
+            (Object.keys(pplUpsByStatus)?.length > 0 || Object.keys(ppcUpsByStatus)?.length > 0)
+        "
+    >
+        <v-row no-gutters align="end">
+            <v-col cols="auto">
+                <h1 v-if="!leagueCupFlag && Object.keys(pplUpsByStatus)?.length > 0">P-LEAGUES</h1>
+                <div v-else class="overline font-weight-bold" @click="()=>leagueCupFlag = !leagueCupFlag">P-LEAGUES</div>
+            </v-col>
+            <v-spacer/>
+            <v-col cols="auto" v-if="!loading.cups && Object.keys(ppcUpsByStatus)?.length > 0">
+                <div v-if="!leagueCupFlag" class="overline font-weight-bold" @click="()=>leagueCupFlag = !leagueCupFlag">P-CUPS</div>
+                <h1 v-else>P-CUPS</h1>
             </v-col>
         </v-row>
-        <nuxt-link class="no-decoration"
-            :to="ups[selectedIndex].ppLeague_id ? 
-                    ROUTES.PPLEAGUE.DETAIL + ups[selectedIndex].ppLeague_id
-                    : ROUTES.PPCUP.DETAIL + ups[selectedIndex].ppCup_id + '/' + ups[selectedIndex].ppCupGroup_id
+        <user-participation-selection 
+           :statusUserParticipations="leagueCupFlag ? ppcUpsByStatus : pplUpsByStatus"
+           :selected="selectedUp" :setSelected="(val)=>selectedUp = val"
+           :inverted="leagueCupFlag"
+        />
+        <nuxt-link class="no-decoration" v-if="selectedUp"
+            :to="selectedUp.ppLeague_id ? 
+                    ROUTES.PPLEAGUE.DETAIL + selectedUp.ppLeague_id
+                    : ROUTES.PPCUP.DETAIL + selectedUp.ppCup_id + '/' + selectedUp.ppCupGroup_id
             "
         >
             <user-participation-card 
-                :class="!ups[selectedIndex].started ? 'mb-4' : ''"
-                :participation="ups[selectedIndex]"
+                :class="!selectedUp.started ? 'mb-4' : ''"
+                :participation="selectedUp"
             />
         </nuxt-link>
     </v-container>
@@ -61,37 +37,38 @@
 export default {
     data(){
         return {
-            userParticipations: null,
-            selectedIndex: 0,
-            selectedStatus: null,
-            statusList: [],
-            loading: true,
-        }
-    },
-    computed: {
-        ups(){
-            if(!this.statusList.length) return null;
-            return this.userParticipations[this.selectedStatus];
+            leagueCupFlag:false,
+            pplUpsByStatus: null,
+            ppcUpsByStatus: null,
+            selectedUp: null,
+            loading: {
+                leagues: true,
+                cups: true
+            },
         }
     },
     methods:{
-        async getParticipations(){
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.GET);
+        async getPPLeaguesParticipations(){
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES);
             if(response && response.status === "success"){
-                this.userParticipations = response.message;
-                if(this.userParticipations.active.length) this.statusList.push('active');
-                if(this.userParticipations.waiting.length) this.statusList.push('waiting');
-                if(this.userParticipations.finished.length) this.statusList.push('finished');
-                this.selectedStatus = this.statusList[0];
+                this.pplUpsByStatus = response.message;
             }
-            this.loading = false;
+            this.loading.leagues = false;
         },
-        chipChange(){
-            this.selectedIndex=0;
+        async getPPCupsParticipations(){
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS);
+            if(response && response.status === "success"){
+                this.ppcUpsByStatus = response.message;
+            }
+            this.loading.cups = false;
+        },
+        select(){
+            console.log('la');
         }
     },
     async mounted(){
-        await this.getParticipations();
+        await this.getPPLeaguesParticipations();
+        await this.getPPCupsParticipations();
     },
 }
 </script>

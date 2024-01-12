@@ -16,7 +16,8 @@
             </v-col>
             <v-col cols="auto">
                 <p-p-round-row-recap 
-                    :currentRound="participation.currentRound" :rounds="participation.rounds"
+                    :currentRound="participation.currentRound" 
+                    :rounds="participation.rounds ?? participation.levelFormat.rounds"
                     :playedInCurrentRound="participation.playedInCurrentRound"
                 />
             </v-col>
