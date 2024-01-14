@@ -55,7 +55,8 @@
                         </span>
                     </v-col>
                     <v-col>
-                        <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'">
+                        <!-- <div :class="!$vuetify.breakpoint.mdAndUp ? '' : index % 2 ? 'pl-5' : 'pr-5'"> -->
+                        <div>
                             <user-participation-standing-item
                                 :showDetails="showAll"
                                 :color="ppRGBA(ppTournamentType.rgb)"
@@ -84,7 +85,8 @@ export default {
     },
     computed:{
         firstSize(){
-            return this.$vuetify.breakpoint.mdAndUp ? 10 : 5
+            // return this.$vuetify.breakpoint.mdAndUp ? 10 : 5
+            return 5
         },
         makeRoomForCurrentUser(){
             let currentUsrPosition = null;
@@ -105,7 +107,8 @@ export default {
                 return  this.ups.filter((e)=>e.user_id === this.currentUser.id)[0];
             }
             if(this.showAll || Array.from(Array(this.firstSize).keys()).includes(index)){
-                return this.$vuetify.breakpoint.mdAndUp ? this.ups[this.desktopActualIndex(index)] : this.ups[index];
+                // return this.$vuetify.breakpoint.mdAndUp ? this.ups[this.desktopActualIndex(index)] : this.ups[index];
+                return this.ups[index];
             }
         },
         desktopActualIndex(index){
