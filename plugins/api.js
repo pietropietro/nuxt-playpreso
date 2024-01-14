@@ -67,15 +67,17 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 
         async getImage(route) {
             try {
+                let fullUrl = API_ENDPOINT + route;
+
                 if ('caches' in self) {
                     let myCache = await caches.open('static/image');
-                    let cachedResponse = await myCache.match(route);
+                    let cachedResponse = await myCache.match(fullUrl);
                     if (cachedResponse) {
                         // Return the cached response if it exists
                         return cachedResponse;
                     }
                 }
-            
+
                 // Otherwise, fetch the image from the server
                 const headers = new Headers({
                     'Content-Type': 'application/json',
@@ -87,22 +89,25 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                     mode: 'cors',
                     credentials: 'include',
                 };
-            
-                const response = await fetch(API_ENDPOINT + route, initOptions);
+                
+                const response = await fetch(fullUrl, initOptions);
                 const cloneResponse = response.clone();
                 if (response.status === 401) {
                     $logout.logout();
                 }
+                if (response.status === 404) {
+                    return;
+                }
                 
                 if ('caches' in self) {
                     let myCache = await caches.open('static/image');
-                    await myCache.put(route, response);
+                    await myCache.put(fullUrl, response);
                 }
                 // Return the response
                 return cloneResponse;
 
             } catch (e) {
-                console.log('error: ' + e);
+                console.log('error: ' + e, fullUrl);
                 // $notifier.showError();
             }
         }
