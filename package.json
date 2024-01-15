@@ -24,6 +24,7 @@
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.3",
     "nuxt-i18n": "^6.27.0",
+    "pp-capacitor-nuxt-swipe": "file:./capacitor-plugins/pp-capacitor-nuxt-swipe",
     "vue-digital-clock": "^2.0.0",
     "vue-insta-stories": "^0.9.8",
     "vue-social-sharing": "^3.0.9",

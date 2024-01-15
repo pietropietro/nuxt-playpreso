@@ -2,21 +2,27 @@ PODS:
   - Capacitor (5.6.0):
     - CapacitorCordova
   - CapacitorCordova (5.6.0)
+  - PpCapacitorNuxtSwipe (0.0.2):
+    - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - PpCapacitorNuxtSwipe (from `../../node_modules/pp-capacitor-nuxt-swipe`)
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  PpCapacitorNuxtSwipe:
+    :path: "../../node_modules/pp-capacitor-nuxt-swipe"
 
 SPEC CHECKSUMS:
   Capacitor: ebfc16cdb8116d04c101686b080342872da42d43
   CapacitorCordova: 931b48fcdbc9bc985fc2f16cec9f77c794a27729
+  PpCapacitorNuxtSwipe: a88aabc2333c129d2a101df7cf474a044d18a66e
 
-PODFILE CHECKSUM: 8ab55909c5de2b217f9841e5e5b329f5ec901553
+PODFILE CHECKSUM: b40daa64ffe486dea285138c975d3ee08a93831a
 
 COCOAPODS: 1.12.1
