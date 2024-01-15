@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "start": "nuxt start",
     "dev:host": "API_ENDPOINT='http://192.168.1.75:8080' nuxt --hostname '0'",
-    "build-ios": "yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
+    "build-ios-dev": "API_ENDPOINT='http://192.168.1.75:8080' yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.1.1",

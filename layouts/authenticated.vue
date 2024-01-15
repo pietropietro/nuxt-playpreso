@@ -29,16 +29,29 @@
     </div>
 </template>
 <script>
+import { SwipeBackNavigationHandler } from '~/capacitor-plugins/pp-capacitor-nuxt-swipe';
 
 export default {
     mounted () {
         setTimeout(()=>this.$vuetify.theme.dark =  true );
+
+        //add swip back in mobile (ios only right now)
+        SwipeBackNavigationHandler.addSwipeGesture();
+        SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
+
     },
 	data(){
 		return{
 			menu: false
 		}
 	},
+    methods: {
+        handleSwipeRight() {
+            if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path
+                this.$router.go(-1);
+            }        
+        }
+    }
 }
 </script>
 

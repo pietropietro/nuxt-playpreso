@@ -1,4 +1,8 @@
 export default {
+	
+	// test for capacitor iOS app
+	// ssr: false,
+	// target: 'static',
 
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
@@ -13,7 +17,7 @@ export default {
 		},
 		meta: [
 			{ charset: 'utf-8' },
-			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
 			{ hid: 'description', name: 'description', content: '' }
 		],
 		link: [
@@ -119,7 +123,7 @@ export default {
 				},
 				dark: {
                     primary: '#000066',
-					background: '#000033',
+					background: '#00001a',
 					anchor: '#ffffff',
 					oppositeText: '#000000',
 					contrastOnDark: '#ffffff',
