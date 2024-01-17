@@ -29,15 +29,24 @@
     </div>
 </template>
 <script>
-import { SwipeBackNavigationHandler } from '~/capacitor-plugins/pp-capacitor-nuxt-swipe';
+import { Capacitor } from '@capacitor/core';
 
 export default {
     mounted () {
         setTimeout(()=>this.$vuetify.theme.dark =  true );
+        
+        if (Capacitor.isNativePlatform()) {
+            // Dynamically import the plugin
+            import('~/capacitor-plugins/pp-capacitor-nuxt-swipe').then((module) => {
+                const SwipeBackNavigationHandler = module.SwipeBackNavigationHandler;
 
-        //add swip back in mobile (ios only right now)
-        SwipeBackNavigationHandler.addSwipeGesture();
-        SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
+                // Use the plugin here
+                SwipeBackNavigationHandler.addSwipeGesture();
+                SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
+            }).catch(error => {
+                console.error('Error loading the SwipeBackNavigationHandler plugin', error);
+            });
+        }
 
     },
 	data(){
