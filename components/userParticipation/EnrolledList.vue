@@ -7,11 +7,11 @@
         <v-row no-gutters align="end">
             <v-col cols="auto">
                 <h1 v-if="!leagueCupFlag && Object.keys(pplUpsByStatus)?.length > 0">P-LEAGUES</h1>
-                <div v-else class="overline font-weight-bold" @click="()=>leagueCupFlag = !leagueCupFlag">P-LEAGUES</div>
+                <div v-else class="overline font-weight-bold" @click="changeFlag">P-LEAGUES</div>
             </v-col>
             <v-spacer/>
             <v-col cols="auto" v-if="!loading.cups && Object.keys(ppcUpsByStatus)?.length > 0">
-                <div v-if="!leagueCupFlag" class="overline font-weight-bold" @click="()=>leagueCupFlag = !leagueCupFlag">P-CUPS</div>
+                <div v-if="!leagueCupFlag" class="overline font-weight-bold" @click="changeFlag">P-CUPS</div>
                 <h1 v-else>P-CUPS</h1>
             </v-col>
         </v-row>
@@ -62,8 +62,9 @@ export default {
             }
             this.loading.cups = false;
         },
-        select(){
-            console.log('la');
+        async changeFlag(){
+            await this.triggerHapticFeedback();
+            this.leagueCupFlag = !this.leagueCupFlag;
         }
     },
     async mounted(){

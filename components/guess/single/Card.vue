@@ -221,9 +221,14 @@ export default {
         }
     },
     methods:{
-        select(){
+        async select(){
             this.setSelectedGuessId(this.guess.id);
-            if((this.selectedIndex + 1) < this.availableViews.length) return this.selectedIndex++;
+            if((this.selectedIndex + 1) < this.availableViews.length){
+                if(this.selectedIndex == 0){
+                    await this.triggerHapticFeedback();
+                }
+                return this.selectedIndex++;
+            }
             this.setSelectedGuessId(null);
         },
     },

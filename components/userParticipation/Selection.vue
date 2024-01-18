@@ -67,7 +67,8 @@ export default {
         }
     },
     methods:{
-        select(index){
+        async select(index){
+            if(index!=this.selectedIndex)await this.triggerHapticFeedback();
             this.selectedIndex=index;
         },
         statusChange(){

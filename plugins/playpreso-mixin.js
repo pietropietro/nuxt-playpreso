@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import data from '@emoji-mart/data'
 import { init, SearchIndex } from 'emoji-mart'
+import { Capacitor } from '@capacitor/core';
+
 init({ data })
 
 Vue.mixin({
@@ -51,6 +53,23 @@ Vue.mixin({
             }
 
             return `<${bigTag} style="display:inline">${bigText.trim()} ${breaks && bigText.length ? '<br>' : ''}<${smallTag} style="display:inline">${smallText.trim()}</${smallTag}></${bigTag}>`;
+        },
+        async triggerHapticFeedback() {
+            if (Capacitor.getPlatform() === 'ios') {
+                // Use custom plugin for iOS
+                try {
+                    await Capacitor.Plugins.PPHapticsPlugin.triggerHaptic();
+                    console.log('Haptic feedback triggered on iOS');
+                } catch (e) {
+                    console.error('Error triggering haptic feedback on iOS', e);
+                }
+            } else if (Capacitor.getPlatform() === 'android' && 'vibrate' in navigator) {
+                // Use Vibration API for Android
+                navigator.vibrate(50); // Vibrate for 50 milliseconds
+                console.log('Haptic feedback triggered on Android');
+            } else {
+                console.log('Haptic feedback not supported on this platform');
+            }
         }
     }
 })

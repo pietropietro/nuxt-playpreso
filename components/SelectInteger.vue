@@ -26,8 +26,9 @@ export default {
         }
     },
     methods: {
-        onClick(){
+        async onClick(){
             if(this.disabled) return;
+            await this.triggerHapticFeedback();
             this.computedModel === this.computedMax ? this.computedModel = 0 : this.computedModel++;
         }
     }

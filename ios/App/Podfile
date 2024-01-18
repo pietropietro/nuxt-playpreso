@@ -12,6 +12,7 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   pod 'PpCapacitorNuxtSwipe', :path => '../../node_modules/pp-capacitor-nuxt-swipe'
+  pod 'PpCapacitorHaptics', :path => '../../node_modules/pp-capacitor-haptics'
 end
 
 target 'App' do
