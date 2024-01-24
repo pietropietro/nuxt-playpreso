@@ -11,6 +11,7 @@
     "build-ios-dev": "API_ENDPOINT='http://192.168.1.75:8080' yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
   },
   "dependencies": {
+    "@capacitor/push-notifications": "^5.1.0",
     "@emoji-mart/data": "^1.1.1",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/vuetify": "^1.12.3",
@@ -24,8 +25,8 @@
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.3",
     "nuxt-i18n": "^6.27.0",
-    "pp-capacitor-nuxt-swipe": "file:./capacitor-plugins/pp-capacitor-nuxt-swipe",
     "pp-capacitor-haptics": "file:./capacitor-plugins/pp-capacitor-haptics",
+    "pp-capacitor-nuxt-swipe": "file:./capacitor-plugins/pp-capacitor-nuxt-swipe",
     "vue-digital-clock": "^2.0.0",
     "vue-insta-stories": "^0.9.8",
     "vue-social-sharing": "^3.0.9",

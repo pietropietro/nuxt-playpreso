@@ -22,6 +22,9 @@ Vue.mixin({
                 EMAIL_PREFERENCES:{
                     UPDATE: '/email-preferences'
                 },
+                PUSH_NOTIFICATIONS:{
+                    SAVE: '/save-device-token'
+                },
                 USER:{
                     LOGIN: '/user/login',
                     SIGNUP: '/user/signup',    
