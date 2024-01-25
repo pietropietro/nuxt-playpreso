@@ -43,7 +43,7 @@ export default {
 		{ src: '@/plugins/logout.js' },
         { src: '@/plugins/api.js', ssr: false },
 		{ src: '@/plugins/vuex-persist.js', ssr: false },
-		{ src: '@/plugins/push-notifications.client.js', ssr: false, injectAs: 'pushNotifications'},
+		{ src: '@/plugins/push-notifications.client.js', ssr: false},
 
 	],
 

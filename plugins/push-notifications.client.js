@@ -1,47 +1,70 @@
-// plugins/push-notifications.client.js
+import Vue from 'vue';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
 
-export default ({ app }) => {
-    if (Capacitor.isNativePlatform()) {
-        // Request permission to use push notifications
-        PushNotifications.requestPermissions().then(result => {
-            if (result.receive === 'granted') {
-                // Register with APNs or FCM
-                PushNotifications.register();
-            } else {
-                // Handle user rejection
+Vue.mixin({
+    data() {
+        return {
+            pushListenersAdded: false,
+        };
+    },
+    methods: {
+        async requestPushNotifications() {
+            if (Capacitor.isNativePlatform()) {
+                console.log('try to request permissions');
+                const result = await PushNotifications.requestPermissions();
+                console.log('result is', result);
+                if (result.receive === 'granted') {
+                    console.log('inside granted');
+                    PushNotifications.register();
+                    console.log('after granted');
+                } else {
+                    console.log('Push notifications permission was denied');
+                }
             }
-        });
+        },
 
-        // On successful registration, handle the registration token
-        PushNotifications.addListener('registration', async token => {
-            console.log('Push registration success, token:', token.value);
-
+        async sendTokenToServer(token, platform) {
+            console.log('send token to server', token);
             try {
-                let platform = Capacitor.getPlatform();
-                console.log(platform, "platform");
-                console.log(this.API_ROUTES.PUSH_NOTIFICATIONS.SAVE, "path");
-                let resp = await app.$api.call(this.API_ROUTES.PUSH_NOTIFICATIONS.SAVE, { token: token.value, platform: platform }, 'POST');
+                const resp = await this.$api.call(this.API_ROUTES.PUSH_NOTIFICATIONS.SAVE, { token, platform }, 'POST');
                 console.log(resp, "pn resp");
             } catch (error) {
                 console.error('Error sending token to server:', error);
             }
-        });
+        },
 
-        // Handle errors
-        PushNotifications.addListener('registrationError', error => {
-            console.error('Error on registration:', error);
-        });
+        setupPushNotificationListeners() {
+            if (this.pushListenersAdded) {
+                return;
+            }
+            console.log('setup listeners');
 
-        // Handle incoming notifications
-        PushNotifications.addListener('pushNotificationReceived', notification => {
-            console.log('Push received:', notification);
-        });
+            const vueInstance = this;
 
-        // Handle notification action
-        PushNotifications.addListener('pushNotificationActionPerformed', notification => {
-            console.log('Push action performed:', notification);
-        });
+            PushNotifications.addListener('registration', async token => {
+                console.log('Push registration success, token:', token.value);
+                const platform = Capacitor.getPlatform();
+                vueInstance.sendTokenToServer(token.value, platform);
+            });
+
+            PushNotifications.addListener('registrationError', error => {
+                console.error('Error on registration:', error);
+            });
+
+            PushNotifications.addListener('pushNotificationReceived', notification => {
+                console.log('Push received:', notification);
+            });
+
+            PushNotifications.addListener('pushNotificationActionPerformed', notification => {
+                console.log('Push action performed:', notification);
+            });
+            this.pushListenersAdded = true;
+        }
+    },
+    mounted() {
+        if (Capacitor.isNativePlatform()) {
+            this.setupPushNotificationListeners();
+        }
     }
-};
+});

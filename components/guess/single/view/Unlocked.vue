@@ -31,6 +31,8 @@ export default {
     methods:{
         async lockGuess(){
             await this.triggerHapticFeedback();
+            //TEST NOTIFICATION REQUEST
+            await this.requestPushNotifications();
             this.loading = true;
             let home = this.guess.home ?? 0;
             let away = this.guess.away ?? 0;
