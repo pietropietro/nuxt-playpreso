@@ -20,10 +20,8 @@ Vue.mixin({
         },
 
         async sendTokenToServer(token, platform) {
-            console.log('send token to server', token);
             try {
                 const resp = await this.$api.call(this.API_ROUTES.PUSH_NOTIFICATIONS.SAVE, { token, platform }, 'POST');
-                console.log(resp, "pn resp");
             } catch (error) {
                 console.error('Error sending token to server:', error);
             }
