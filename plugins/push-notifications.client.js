@@ -2,25 +2,20 @@ import Vue from 'vue';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
 
+let pushListenersAdded = false;
+
 Vue.mixin({
-    data() {
-        return {
-            pushListenersAdded: false,
-        };
-    },
     methods: {
         async requestPushNotifications() {
-            if (Capacitor.isNativePlatform()) {
-                console.log('try to request permissions');
-                const result = await PushNotifications.requestPermissions();
-                console.log('result is', result);
-                if (result.receive === 'granted') {
-                    console.log('inside granted');
-                    PushNotifications.register();
-                    console.log('after granted');
-                } else {
-                    console.log('Push notifications permission was denied');
-                }
+            if (!Capacitor.isNativePlatform() || pushListenersAdded) {
+                return;
+            }
+
+            this.setupPushNotificationListeners(); // Ensure listeners are set up before registering
+
+            const result = await PushNotifications.requestPermissions();
+            if (result.receive === 'granted') {
+                await PushNotifications.register();
             }
         },
 
@@ -35,17 +30,14 @@ Vue.mixin({
         },
 
         setupPushNotificationListeners() {
-            if (this.pushListenersAdded) {
+            if (pushListenersAdded) {
                 return;
             }
-            console.log('setup listeners');
+            console.log('Setting up push notification listeners');
 
-            const vueInstance = this;
-
-            PushNotifications.addListener('registration', async token => {
+            PushNotifications.addListener('registration', token => {
                 console.log('Push registration success, token:', token.value);
-                const platform = Capacitor.getPlatform();
-                vueInstance.sendTokenToServer(token.value, platform);
+                this.sendTokenToServer(token.value, Capacitor.getPlatform());
             });
 
             PushNotifications.addListener('registrationError', error => {
@@ -62,9 +54,4 @@ Vue.mixin({
             this.pushListenersAdded = true;
         }
     },
-    mounted() {
-        if (Capacitor.isNativePlatform()) {
-            this.setupPushNotificationListeners();
-        }
-    }
 });
