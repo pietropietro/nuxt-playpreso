@@ -2,20 +2,29 @@ import Vue from 'vue';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
 
-let pushListenersAdded = false;
 
 Vue.mixin({
     methods: {
         async requestPushNotifications() {
-            if (!Capacitor.isNativePlatform() || pushListenersAdded) {
+            if (!Capacitor.isNativePlatform()) {
                 return;
             }
 
-            this.setupPushNotificationListeners(); // Ensure listeners are set up before registering
-
-            const result = await PushNotifications.requestPermissions();
-            if (result.receive === 'granted') {
+            // Check the current permission status
+            const status = await PushNotifications.checkPermissions();
+            if (status.receive === 'prompt') {
+                // Request permissions only if the status is 'prompt'
+                const result = await PushNotifications.requestPermissions();
+                if (result.receive === 'granted') {
+                    await PushNotifications.register();
+                } else {
+                    console.log('Push notifications permission was denied');
+                }
+            } else if (status.receive === 'granted') {
+                // If already granted, you might want to ensure the device is registered
                 await PushNotifications.register();
+            } else {
+                console.log('Push notifications permission was previously denied');
             }
         },
 
@@ -28,7 +37,9 @@ Vue.mixin({
         },
 
         setupPushNotificationListeners() {
-            if (pushListenersAdded) {
+            const listenersSetUp = sessionStorage.getItem('pushListenersAdded');
+
+            if (listenersSetUp) {
                 return;
             }
             console.log('Setting up push notification listeners');
@@ -37,19 +48,23 @@ Vue.mixin({
                 console.log('Push registration success, token:', token.value);
                 this.sendTokenToServer(token.value, Capacitor.getPlatform());
             });
-
             PushNotifications.addListener('registrationError', error => {
                 console.error('Error on registration:', error);
             });
-
             PushNotifications.addListener('pushNotificationReceived', notification => {
                 console.log('Push received:', notification);
             });
-
             PushNotifications.addListener('pushNotificationActionPerformed', notification => {
                 console.log('Push action performed:', notification);
             });
-            this.pushListenersAdded = true;
+
+            sessionStorage.setItem('pushListenersAdded', 'true');
         }
     },
+    mounted(){
+        // Ensure listeners are set up before registering
+        if (Capacitor.isNativePlatform()) {
+            this.setupPushNotificationListeners(); 
+        }
+    }
 });
