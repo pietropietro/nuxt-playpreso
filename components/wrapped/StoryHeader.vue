@@ -24,7 +24,6 @@
 </template>
 <script>
 export default {
-    name: "Story Header",
     props: {
         label: {
             type: String,
