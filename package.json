@@ -7,8 +7,8 @@
     "dev": "nuxt",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "dev:host": "API_ENDPOINT='http://192.168.1.75:8080' nuxt --hostname '0'",
-    "build-ios-dev": "API_ENDPOINT='http://192.168.1.75:8080' yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
+    "dev:host": "API_ENDPOINT='http://0.0.0.0:8080' nuxt --hostname ''0.0.0.0''",
+    "build-ios-dev": "./set_api_endpoint.sh yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
   },
   "dependencies": {
     "@capacitor/push-notifications": "^5.1.0",

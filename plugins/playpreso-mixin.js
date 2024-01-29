@@ -7,6 +7,17 @@ import { Capacitor } from '@capacitor/core';
 init({ data })
 
 Vue.mixin({
+    computed: {
+        navigationTitle(){
+            return  this.$store.state.navigation.title ?? null;;
+        },
+        navigationEmoji(){
+            return  this.$store.state.navigation.emoji ?? null;;
+        },
+        navigationOverline(){
+            return  this.$store.state.navigation.overline ?? null;;
+        }
+    },
     methods:{
         isMissed(guess){
             return guess.verified_at && !guess.guessed_at;

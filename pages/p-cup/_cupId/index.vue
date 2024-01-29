@@ -33,9 +33,20 @@ export default {
             if(response && response.status === "success"){
                 this.ppCup = response.message;
                 this.selectedLevel = this.ppCup.currentLevel
+                this.updateAppBarTitle();
             }
             this.loading = false;
         },
+        updateAppBarTitle(){
+            this.$store.dispatch(
+                'navigation/updateTitle', 
+                {
+                    newTitle: this.ppTournamentTypeTitle(this.ppCup.ppTournamentType),
+                    newEmoji: this.ppCup.ppTournamentType.emoji,
+                    newOverline: 'P-CUP'
+                }
+            );
+        }
     },
     async mounted(){
        await this.getPPCup();
