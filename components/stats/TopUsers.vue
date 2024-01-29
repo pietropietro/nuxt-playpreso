@@ -20,7 +20,7 @@
                                 :value="s.value" 
                                 v-for="(s,i) in statsList" 
                                 :key="i"
-                                color="var(--v-background-lighten1)"
+                                color="transparent"
                             >
                                 <div class="overline lh-1">{{s.text}}</div>
                             </v-chip>

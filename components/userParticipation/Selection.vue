@@ -12,7 +12,7 @@
                 <v-chip
                     small
                     :value="status"
-                    color="var(--v-background-lighten1)">
+                    color="transparent">
                     <div class="overline lh-1">
                         <template v-if="status==='waiting'">
                             waiting ({{statusUserParticipations.waiting.length}})
