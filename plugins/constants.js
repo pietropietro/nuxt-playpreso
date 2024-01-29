@@ -19,6 +19,10 @@ Vue.mixin({
                 }
             },
             API_ROUTES: {
+                NOTIFICATIONS: {
+                    GET: '/notification',
+                    READ: '/notification/read'
+                },
                 EMAIL_PREFERENCES:{
                     UPDATE: '/email-preferences'
                 },
