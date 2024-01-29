@@ -1,21 +1,23 @@
 <template>
-    <v-app-bar color="var(--v-background-base)"
+    <v-app-bar 
+        color="var(--v-background-base)"
         flat 
-        :app="!$vuetify.breakpoint.smAndUp"
-        class="no-height"
-        style="font-size: 1.25rem;"
+        app
+        :hide-on-scroll="shouldHideOnScroll"
+        scroll-threshold="150"
+        ref="appBar"
     >
-        <v-container class="px-0">
-            <v-row class="mx-2 mx-sm-6">
-                <nuxt-link class="no-decoration" to="/">
-                    <h1 class="ocrastd">PLAYPRESO</h1>
-                </nuxt-link>
-                <v-spacer/>
-                <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
-                    <h1>{{menu ? 'X' : '>'}}</h1>
-                </div>
-            </v-row>
-        </v-container>
+        <v-spacer v-if="$route.path === '/'" />
+        <div v-else class="px-2" @click="$router.go(-1)">
+            <h2><</h2>
+        </div>
+        <transition name="fade">
+            <p-p-navigation-title v-show="!appBarHidden"/>
+        </transition>
+        <v-spacer />
+            <!-- <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
+                <h1>{{menu ? 'X' : '>'}}</h1>
+            </div> -->
     </v-app-bar>
 </template>
 <script>
@@ -25,6 +27,13 @@ export default {
         menu: {type: Boolean},
         setMenu: {type: Function},
     },
+    data(){
+        return{
+            currentSection: "PLAYPRESO",
+            justNavigatedBack: false,
+            appBarHidden: false,
+        }
+    },
     computed: {
         computedMenu:{
             get(){
@@ -33,15 +42,59 @@ export default {
             set(val){
                 this.setMenu(val);
             }
+        },
+        shouldHideOnScroll() {
+            return this.$route.path === '/' && !this.justNavigatedBack;
+        },
+    },
+    watch: {
+        //there was an issue
+        //when going to previous page from a scrolled page the app bar would not show.
+        $route(to, from) {
+            if (from.path !== '/' && to.path === '/') {
+                console.log('just navigating baack')
+                this.justNavigatedBack = true;
+                setTimeout(() => {
+                    this.justNavigatedBack = false;
+                }, 500); // Reset after 300ms or a suitable delay
+            }
+        },
+    },
+    methods:{
+        //
+        updateToolbarContentStyle() {
+            const toolbarContent = this.$el.querySelector('.v-toolbar__content');
+            if (toolbarContent) {
+                toolbarContent.style.backgroundColor = this.appBarHidden ? 'transparent' : 'var(--v-background-base)';
+            }
         }
+    },
+    mounted(){
+        //Set up a MutationObserver in the mounted hook to watch for changes in the class list of the app bar.
+        this.$nextTick(() => {
+            const appBarElement = this.$refs.appBar.$el;
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                        const isScrolled = appBarElement.classList.contains('v-app-bar--is-scrolled');
+                        const hideShadow = appBarElement.classList.contains('v-app-bar--hide-shadow');
+                        this.appBarHidden = isScrolled && hideShadow;
+                        this.updateToolbarContentStyle(); // Update the style
+                    }
+                });
+            });
+            
+            observer.observe(appBarElement, { attributes: true });
+        });
     }
 }
 </script>
 
 <style>
-
-.no-height, .v-toolbar__content{
-    height: auto !important;
-}
-
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+        opacity: 0;
+    }
 </style>
