@@ -7,10 +7,10 @@
         scroll-threshold="150"
         ref="appBar"
     >
-        <v-spacer v-if="$route.path === '/'" />
-        <div v-else class="px-2" @click="$router.go(-1)">
+        <div v-if="$route.path !== '/'"  class="px-2" @click="$router.go(-1)">
             <h2><</h2>
         </div>
+        <v-spacer/>
         <transition name="fade">
             <p-p-navigation-title v-show="!appBarHidden"/>
         </transition>
