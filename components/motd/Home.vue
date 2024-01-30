@@ -1,36 +1,5 @@
 <template>
-    <!-- <loading-page v-if="loading"/> -->
-    <v-container v-if="motds" >
-        <v-row align="center">
-            <v-col cols="auto">
-                <v-row align="center" @click="selectedIndex=0">
-                    <v-col>
-                        <v-row>
-                            <h1>MOTD</h1>
-                        </v-row>
-                        <v-row>
-                            <div class="lh-1 overline mt-n2">
-                                match of the day
-                            </div>
-                        </v-row>
-                    </v-col>
-                </v-row>
-            </v-col>
-            <v-spacer/>
-            <v-col v-if="matchView">
-                <div class="ocrastd" @click="next">
-                    <<<
-                </div>
-            </v-col>
-            <v-spacer/>
-            <v-col cols="auto" >
-                <div class="overline lh-1" 
-                    v-html="matchView == true ? 'chart' : 'match'"
-                    @click="()=>matchView=!matchView"
-                />
-            </v-col>
-        </v-row>
-        <!-- <v-row class="caption mt-n6">picked each morning at 7am.</v-row> -->
+    <v-container v-if="motds">
         <motd-single 
             :motd="motds[selectedIndex]" 
             :motdPPTT="motdPPTT"

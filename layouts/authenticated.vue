@@ -5,16 +5,16 @@
             <v-app class="no-selection">
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
-                    <snackbar />
-                    <p-p-app-bar class="pp-app-bar" :menu="menu" :setMenu="(val)=>menu=val"/>
+                    <snackbar class="safe-area"/>
+                    <p-p-app-bar class="pp-app-bar safe-area" :menu="menu" :setMenu="(val)=>menu=val"/>
                     
                     <!-- MENU -->
-                    <v-overlay class="menu-overlay app-desktop-body" 
+                    <!-- <v-overlay class="menu-overlay app-desktop-body" 
                         :value="menu"  opacity="1" 
                         color="var(--v-background-base)"
                     >
                         <p-p-menu-brain />
-                    </v-overlay>
+                    </v-overlay> -->
 
                     <!-- APP -->
                     <v-main class="pt-sm-16" 
@@ -92,17 +92,15 @@ export default {
 		background-color: #00001a;
 	}
 
-    .pp-app-bar {
+    .safe-area{
         padding-top: env(safe-area-inset-top);
+    }
+
+    .pp-app-bar {
         z-index: 6 !important;
         position: fixed !important;
 
         @media (min-width: 600px) {
-            border-radius: 50px 50px 0 0 !important;
-            border-top: 3px solid white !important;
-            border-right: 3px solid white !important;
-            border-left: 3px solid white !important;
-            border-bottom: none;
             width: $pp-mobile-width;
             left: calc(50% - #{$pp-mobile-width / 2}) !important;
         }
@@ -132,15 +130,11 @@ export default {
     }
 
     .app-desktop-body {
+        width: 100%;
          @media (min-width: 600px) {
             position: fixed;
             width: $pp-mobile-width;
-            height: $pp-mobile-height;
-            border-top:none; // Border on top
-            border-right: 3px solid white; // Border on right
-            border-left: 3px solid white; // Border on left
-            border-bottom:  3px solid white; // No border at the bottom
-            border-radius: 50px;
+            height: 100%;
         }
     }
 

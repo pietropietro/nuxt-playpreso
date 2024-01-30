@@ -1,20 +1,18 @@
 <template>
     <div>
         <v-row class="flex-nowrap my-2">
-            <v-col cols="auto">
-                <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="2.5em"/>
-            </v-col>
-            <v-col class="pa-0" cols="auto">
-                <div class="overline lh-1">P-LEAGUE</div>
-                <div class="text-h2 font-weight-bold">{{ppTournamentTypeTitle(ppTournamentType)}}</div>
-            </v-col>
+            <!-- <v-col cols="auto"> -->
+                <v-spacer/>
+                <em-emoji v-if="ppTournamentType.emoji" :native="ppTournamentType.emoji" size="5em"/>
+                <v-spacer/>
+            <!-- </v-col> -->
         </v-row>
         <v-row>
-            <v-col cols="12" class="pa-0" v-if="!moreInfo && !$vuetify.breakpoint.smAndUp">
+            <!-- <v-col cols="12" class="pa-0" v-if="!moreInfo && !$vuetify.breakpoint.smAndUp">
                 <div class="text-center overline" @click="moreInfo=true">more info</div>
-            </v-col>
-            <template v-else>
-                <v-col cols="6" >
+            </v-col> -->
+            <template>
+                <!-- <v-col cols="6" >
                     <p-p-info
                         v-if="ppTournamentType.leagues.length == 1"
                         label="league"
@@ -57,7 +55,7 @@
                             </v-col>
                         </v-row>
                     </v-col>
-                </template>
+                </template> -->
                 <!-- <template v-if="ppTournamentType.userUps">
                     <v-col cols="12" 
                         v-for="up in ppTournamentType.userUps" :key="up.id"
@@ -76,9 +74,9 @@
                         </v-row>
                     </v-col>
                 </template> -->
-                <v-col v-if="!$vuetify.breakpoint.smAndUp" cols="12" class="pa-0">
+                <!-- <v-col v-if="!$vuetify.breakpoint.smAndUp" cols="12" class="pa-0">
                     <div class="text-center overline" @click="moreInfo=false">less info</div>
-                </v-col>
+                </v-col> -->
             </template>
         </v-row>
     </div>
@@ -89,10 +87,10 @@ export default {
         ppTournamentType: {type: Object},
         ppLeagueId: {type: Number}
     },
-    data(){
-        return{
-            moreInfo: false
-        }
-    }
+    // data(){
+    //     return{
+    //         moreInfo: true
+    //     }
+    // }
 }
 </script>
