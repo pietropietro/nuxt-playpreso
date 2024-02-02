@@ -12,11 +12,8 @@
             <p-p-league-available-list class="px-2 mb-5"/>
             <user-participation-enrolled-list />
         </v-row>
-        <v-row  class="" 
-        >
-            <stats-top-users class="mt-5"/>
-            <stats-last-preso class="mt-8 pb-5"/>
-        </v-row>
+        <stats-top-users class="mt-5"/>
+        <stats-last-preso class="mt-8 pb-5"/>
     </v-container>
 </template>
 <script>
