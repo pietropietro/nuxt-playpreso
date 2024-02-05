@@ -26,4 +26,4 @@ export const actions = {
         commit('setEmoji', payload?.newEmoji ?? null);
         commit('setOverline', payload?.newOverline ?? null);
     },
-  };
+};

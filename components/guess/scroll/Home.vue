@@ -1,6 +1,6 @@
 <template >
     <v-row 
-        v-if="!loading && guesses[state]?.length > 0 && !selectedGuess"
+        v-if="!loading && guesses[state]?.length > 0"
         class="mt-0"
     >
         <v-container class="pa-0">
@@ -35,15 +35,6 @@
             </v-slide-group>
         </v-container>
     </v-row>
-    <div v-else-if="selectedGuess">
-        <guess-open-boxed
-            :guess="selectedGuess"
-            :match="selectedGuess.match"
-            :ppTournamentType="selectedGuess.ppTournamentType"
-            :afterLock="afterLock"
-            :close="()=>selectedGuess=null"
-        />
-    </div>
 </template>
 <script>
     export default {
@@ -51,7 +42,6 @@
             return {
                 loading: true,
                 guesses: null,
-                selectedGuess: null,
                 state: null
             }
         },
@@ -71,6 +61,7 @@
                 this.loading = false;
             },
             afterLock(){
+                // todo
                 this.guesses['unlocked'] =  this.guesses['unlocked'].filter((g) => {
                     return g.id != this.selectedGuess.id;
                 }); 
@@ -78,9 +69,16 @@
                 this.guesses['locked'].push(this.selectedGuess);  
                 this.selectedGuess = null;      
             },
-            async selectGuess(guess){
+            async selectGuess(guess, match){
                 await this.triggerHapticFeedback();
-                this.selectedGuess = guess;
+                this.$store.dispatch(
+                    'openGuess/update', 
+                    {
+                        newGuess: guess,
+                        newMatch: match,
+                        newPPTournamentType: guess.ppTournamentType
+                    }
+                );
             }
         },
         async mounted(){

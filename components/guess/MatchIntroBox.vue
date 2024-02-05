@@ -2,7 +2,7 @@
     <v-container v-if="guess && match">   
         <v-row
             class="rounded-lg"
-            @click="onClick ? onClick(guess) : null"
+            @click="onClick(guess, match)"
             :style="{
                 height: cardHeight,
                 minWidth: cardHeight,

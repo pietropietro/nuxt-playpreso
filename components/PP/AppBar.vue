@@ -7,26 +7,13 @@
         scroll-threshold="150"
         ref="appBar"
     >
-        <div v-if="$route.path !== '/'"  class="px-2" @click="$router.go(-1)">
-            <h2><</h2>
-        </div>
-        <v-spacer/>
         <transition name="fade">
-            <p-p-navigation-title v-show="!appBarHidden"/>
+            <p-p-navigation-content v-show="!appBarHidden"/>
         </transition>
-        <v-spacer />
-            <!-- <div class="ocrastd" @click="()=> computedMenu = !computedMenu ">
-                <h1>{{menu ? 'X' : '>'}}</h1>
-            </div> -->
     </v-app-bar>
 </template>
 <script>
 export default {
-    props:{
-        collapse: {type: Boolean},
-        menu: {type: Boolean},
-        setMenu: {type: Function},
-    },
     data(){
         return{
             currentSection: "PLAYPRESO",
@@ -48,7 +35,6 @@ export default {
         },
     },
     watch: {
-        //there was an issue
         //when going to previous page from a scrolled page the app bar would not show.
         $route(to, from) {
             if (from.path !== '/' && to.path === '/') {
@@ -91,6 +77,8 @@ export default {
 </script>
 
 <style>
+    /* style to mimic vuetify's hide-on-scroll which we changed a bit (threshold, timeout) 
+    and we are trying to reproduce */
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.5s;
     }

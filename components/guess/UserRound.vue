@@ -6,14 +6,21 @@
             :class="index == 1 && !$vuetify.breakpoint.mdAndUp ? 'my-2' : ''"
         >
             <v-row justify="center" >
-                <guess-single-card
+                <guess-match-intro-box
+                    :guess="pprm.guess"
+                    :match="pprm.match"
+                    :rgb="ppTournamentType.rgb"
+                    :onClick="selectGuess"
+                />
+                <!--                     :afterLock="afterLock" -->
+                <!-- <guess-single-card
                     :guess="pprm.guess"
                     :match="pprm.match"
                     :rgb="rgb"
                     :selectedGuessId="selectedGuessId"
                     :setSelectedGuessId="(val)=>selectedGuessId = val"
                     extended
-                />
+                /> -->
             </v-row>
         </v-col>
     </v-row>
@@ -21,12 +28,25 @@
 <script>
 export default {
     props:{
-        rgb: {tyep: String},
+        ppTournamentType: {tyep: Object},
         ppRMs: {type: Array}
     },
     data(){
         return {
             selectedGuessId: null
+        }
+    },
+    methods:{
+        async selectGuess(guess, match){
+            await this.triggerHapticFeedback();
+            this.$store.dispatch(
+                'openGuess/update', 
+                {
+                    newGuess: guess,
+                    newMatch: match,
+                    newPPTournamentType: this.ppTournamentType
+                }
+            );
         }
     }
 }

@@ -15,13 +15,16 @@
                     >
                         <p-p-menu-brain />
                     </v-overlay> -->
-
                     <!-- APP -->
+                    <!-- TODO MAYBE DELETE MENU && POS FIXED.. -->
                     <v-main class="pt-sm-16" 
                         :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
-                    >
+                    >   
                         <!-- <p-p-share-marquee /> -->
-                        <nuxt />
+                        <guess-unlocked-full 
+                            v-if="openGuess"
+                        />
+                        <nuxt v-else/>
                     </v-main>
                 </template>
             </v-app>
