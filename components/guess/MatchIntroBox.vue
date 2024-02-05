@@ -5,17 +5,17 @@
             @click="onClick ? onClick(guess) : null"
             :style="{
                 height: cardHeight,
-                overflow: 'hidden',
+                overflow: 'hidden'
             }"
         >   
             <!--  ALARM IF LESS THAN 1 day not motd -->
-            <guess-single-alarm-col
+            <!-- <guess-single-alarm-col
                 :big="big"
                 :guess="guess" 
                 :match="match"
                 :rgb="rgb"
                 :height="cardHeight"
-            />
+            /> -->
             <!-- END ALARM -->
             <v-col>
                 <match-graphic-preview 
@@ -38,7 +38,7 @@ export default {
     },
     data(){
         return{
-            cardHeight: '90px',
+            cardHeight: '98px',
             shades:{
                 unlocked:  this.ppRGBA(this.rgb, 0.6) 
             },

@@ -3,7 +3,7 @@
         <v-row v-for="i in 2" :key="i"
             align="center" 
             :style="{
-                height: '45px',
+                height: '49px',
                 borderRadius: rounded? (i == 1 ? `${borderRadiusValue} ${borderRadiusValue} 0 0` : `0 0 ${borderRadiusValue} ${borderRadiusValue}`) : '', // Apply rounded corners to the first and last elements
                 background: i== 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
             }"
@@ -11,11 +11,11 @@
             <v-col cols="auto" class="ml-2">
                 <team-logo 
                     :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
-                    :size="24"  
+                    :size="30"  
                 />
             </v-col>
             <v-col v-if="!logoOnly">
-                <div class=" ocrastd text-uppercase ml-n2 "
+                <div class=" ocrastd text-uppercase "
                     :style="{
                         fontWeight:'bold', 
                         fontSize:'1.2rem !important', 
