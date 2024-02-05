@@ -205,20 +205,20 @@ export default {
             if(!this.match.league?.standings)return;
             return this.match.league.standings.filter((e)=>e.id == this.match.awayTeam.id)[0];
         },
-        isWithinNext24Hours() {
-            if(!this.guess || !this.match)return false;
-            // Get the current timestamp
-            let currentTime = new Date().getTime();
+        // isWithinNext24Hours() {
+        //     if(!this.guess || !this.match)return false;
+        //     // Get the current timestamp
+        //     let currentTime = new Date().getTime();
 
-            // Calculate the timestamp for the current time plus 24 hours
-            let next24Hours = currentTime + (24 * 60 * 60 * 1000);
+        //     // Calculate the timestamp for the current time plus 24 hours
+        //     let next24Hours = currentTime + (24 * 60 * 60 * 1000);
 
-            // Parse the given match's start date
-            let matchDate = new Date(this.match?.date_start).getTime();
+        //     // Parse the given match's start date
+        //     let matchDate = new Date(this.match?.date_start).getTime();
 
-            // Compare the match's start date with the current time plus 24 hours
-            return matchDate <= next24Hours;
-        }
+        //     // Compare the match's start date with the current time plus 24 hours
+        //     return matchDate <= next24Hours;
+        // }
     },
     methods:{
         async select(){

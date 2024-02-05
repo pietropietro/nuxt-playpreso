@@ -39,7 +39,7 @@
         <guess-open-boxed
             :guess="selectedGuess"
             :match="selectedGuess.match"
-            :rgb="selectedGuess.ppTournamentType.rgb"
+            :ppTournamentType="selectedGuess.ppTournamentType"
             :afterLock="afterLock"
             :close="()=>selectedGuess=null"
         />

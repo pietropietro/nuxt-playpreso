@@ -10,7 +10,7 @@
             }"
         >   
             <!--  ALARM IF LESS THAN 1 day not motd -->
-            <v-col  v-if="isWithinNext24Hours && !guess.guessed_at">
+            <v-col  v-if="isWithinNext24Hours(match?.date_start) && !guess.guessed_at">
                 <guess-single-alarm-col
                     :rgb="rgb"
                     :height="cardHeight"
@@ -42,22 +42,6 @@ export default {
             shades:{
                 unlocked:  this.ppRGBA(this.rgb, 0.6) 
             },
-        }
-    },
-    computed:{
-        isWithinNext24Hours() {
-            if(!this.guess || !this.match)return false;
-            // Get the current timestamp
-            let currentTime = new Date().getTime();
-
-            // Calculate the timestamp for the current time plus 24 hours
-            let next24Hours = currentTime + (24 * 60 * 60 * 1000);
-
-            // Parse the given match's start date
-            let matchDate = new Date(this.match?.date_start).getTime();
-
-            // Compare the match's start date with the current time plus 24 hours
-            return matchDate <= next24Hours;
         }
     },
 }

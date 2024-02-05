@@ -28,10 +28,20 @@ Vue.mixin({
                 return 'YESTERDAY ' + (withTime ? Intl.DateTimeFormat('en-GB', this.timeFormat).format(dateObject) : '');
             }
             if(this.inNextDays(dateObject)){
-                return Intl.DateTimeFormat('en-GB', withTime ? this.weekDateTimeFormat : this.weekDateFormat).format(dateObject).toString().toUpperCase();
+                let formattedDate = Intl.DateTimeFormat(
+                    'en-GB', 
+                    withTime ? this.weekDateTimeFormat : this.weekDateFormat
+                )
+                .format(dateObject)
+                .toString()
+                .toUpperCase();
+
+                return formattedDate;
             }
 
-            return Intl.DateTimeFormat('en-GB', withTime ? this.dateTimeFormat : this.dateFormat).format(dateObject);
+            let formattedDate = Intl.DateTimeFormat('en-GB', withTime ? this.dateTimeFormat : this.dateFormat).format(dateObject);
+            if(withTime) formattedDate = formattedDate.replace(',', ' -');
+            return formattedDate;
         },
         formatMonthYear(dateString){
             return Intl.DateTimeFormat('en-GB', this.monthYearFormat).format(new Date(dateString));
@@ -44,6 +54,20 @@ Vue.mixin({
             return someDate.getDate() == today.getDate() &&
                 someDate.getMonth() == today.getMonth() &&
                 someDate.getFullYear() == today.getFullYear()
+        },
+        isWithinNext24Hours(dateString) {
+            if(!this.guess || !this.match)return false;
+            // Get the current timestamp
+            let currentTime = new Date().getTime();
+
+            // Calculate the timestamp for the current time plus 24 hours
+            let next24Hours = currentTime + (24 * 60 * 60 * 1000);
+
+            // Parse the given match's start date
+            let matchDate = new Date(dateString).getTime();
+
+            // Compare the match's start date with the current time plus 24 hours
+            return matchDate <= next24Hours;
         },
         inNextDays(someDate){
             let inFiveDays = new Date().setDate( new Date().getDate() + 5);
