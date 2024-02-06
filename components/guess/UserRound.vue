@@ -6,7 +6,7 @@
             :class="index == 1 && !$vuetify.breakpoint.mdAndUp ? 'my-2' : ''"
         >
             <v-row justify="center" >
-                <guess-match-intro-box
+                <guess-closed-box
                     :guess="pprm.guess"
                     :match="pprm.match"
                     :rgb="ppTournamentType.rgb"

@@ -11,17 +11,16 @@
         >   
             <!--  ALARM IF LESS THAN 1 day not motd -->
             <v-col  v-if="isWithinNext24Hours(match?.date_start) && !guess.guessed_at">
-                <guess-single-alarm-col
+                <guess-closed-alarm
                     :rgb="rgb"
                     :height="cardHeight"
                 />
             </v-col>
 
             <v-col v-else>
-                <match-graphic-preview 
+                <guess-closed-teams 
                     :rgb="rgb" 
                     :match="match" 
-                    :big="big"
                 />
             </v-col>
         </v-row>

@@ -24,11 +24,10 @@ export default {
 </script>
 
 <style>
-    .marquee {
+    /* .marquee {
         margin: 0 auto;
         white-space: nowrap;
         overflow: hidden;
-        /* position: absolute; */
     }
 
     .marquee span {
@@ -45,6 +44,6 @@ export default {
     100% {
         transform: translate(-100%, 0);
     }
-    }
+    } */
 
 </style>

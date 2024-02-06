@@ -2,7 +2,7 @@
     <v-container>
         <v-row align="center">
             <v-spacer/>
-            <v-col cols="2" class="pa-0">
+            <v-col cols="2" class="pa-0 text-center">
                 <em-emoji
                     :native="openPPTournamentType.emoji" 
                     size="50"
@@ -10,12 +10,14 @@
             </v-col>
             <v-spacer/>
             <v-col cols="9" sm="auto">
-                <match-graphic-preview
-                    rounded
-                    :match="openMatch"
-                    :rgb="openPPTournamentType.rgb"
-                    big
-                />
+                <v-row class="rounded-lg" style="overflow:hidden">
+                    <v-col>
+                        <match-graphic-preview
+                            :match="openMatch"
+                            :rgb="openPPTournamentType.rgb"
+                        />
+                    </v-col>
+                </v-row>
             </v-col>
             <v-spacer />
         </v-row>

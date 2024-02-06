@@ -23,7 +23,7 @@
                 >
                     <!-- width is necessary for slider to work on page landing :( -->
                     <div style="min-width:75px; max-width:130px;">
-                        <guess-match-intro-box
+                        <guess-closed-box
                             :guess="guess"
                             :match="guess.match"
                             :rgb="guess.ppTournamentType.rgb"
