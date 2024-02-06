@@ -66,6 +66,32 @@ export default {
     mounted(){
         this.$nextTick(() => {
             this.checkWrapped();
+            const marquees = document.querySelectorAll('.marquee-team-name span');
+
+            marquees.forEach(marquee => {
+                console.log('foreachh', marquee);
+                let parentWidth = marquee.parentElement.offsetWidth;
+                let contentWidth = marquee.offsetWidth;
+                let travelDistance = contentWidth - parentWidth;
+
+                if (travelDistance > 0) {
+                    let keyframes = `
+                        @keyframes marquee-team-name-${marquee.textContent.trim().replace(/\s+/g, '-')} {
+                            0% { transform: translateX(0); }
+                            50% { transform: translateX(-${travelDistance}px); }
+                            100% { transform: translateX(0); }
+                        }
+                    `;
+
+                    // Inject the keyframes into a style element in the head of the document
+                    let styleSheet = document.createElement("style");
+                    styleSheet.type = "text/css";
+                    styleSheet.innerText = keyframes;
+                    document.head.appendChild(styleSheet);
+
+                    marquee.style.animation = `marquee-team-name-${marquee.textContent.trim().replace(/\s+/g, '-')} 8s linear infinite`;
+                }
+            });
         });
     }
 }
@@ -80,11 +106,6 @@ export default {
 
     .marquee-team-name span {
         display: inline-block;
-        animation: marquee-team-name 4s linear infinite;
     }
 
-    @keyframes marquee-team-name {
-        0%   { transform: translateX(0%); } /* Start outside the right edge */
-        100% { transform: translateX(-100%); }
-    }
 </style>
