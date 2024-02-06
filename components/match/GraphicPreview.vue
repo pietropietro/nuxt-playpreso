@@ -18,7 +18,7 @@
                 <h3 class="ocrastd text-uppercase"
                     :ref="'teamName' + i"
                 >
-                    {{getTeamText(i)}}
+                    {{i == 1 ? match.homeTeam.name :  match.awayTeam.name}}
                 </h3>
             </v-col>
         </v-row>
@@ -30,16 +30,7 @@ export default {
         match: {type: Object},
         rgb: {type: String},
     },
-    data(){
-        return{
-            borderRadiusValue: '8px',
-        }
-    },
     methods:{
-        getTeamText(index){
-            let team =  index == 1 ? this.match.homeTeam :  this.match.awayTeam;
-            return team.name.toUpperCase();
-        },
         checkWrapped() {
             for (let i = 1; i <= 2; i++) { // Assuming you have 2 elements as per your `v-for`
                 let refName = `teamName${i}`;
@@ -52,12 +43,9 @@ export default {
                 }
                 if (!element) continue; // Skip if the element is not found
 
-                console.log(element, refName);
                 const elementHeight = element.offsetHeight;
                 const lineHeight = parseInt(window.getComputedStyle(element).lineHeight, 10);
-                console.log(elementHeight, lineHeight);
                 let isWrapped = elementHeight > lineHeight;
-                console.log(`isWrapped for ${refName}`, isWrapped);
                 // Apply logic here based on isWrapped value, e.g., setting a marquee-team-name
                 if (isWrapped) {
                     this.applyMarquee(element);
@@ -83,20 +71,20 @@ export default {
 }
 </script>
 <style>
-    .marquee-team-name {
+.marquee-team-name {
         white-space: nowrap;
         overflow: hidden;
         box-sizing: border-box;
+        position: relative; /* Set position relative to allow "left" to have an effect */
     }
 
     .marquee-team-name span {
         display: inline-block;
-        animation: marquee-team-name 10s linear infinite;
+        animation: marquee-team-name 4s linear infinite;
     }
 
     @keyframes marquee-team-name {
-        0%   { left: 0%; }
-        50%  { left: -30%; } /* Added to check if the text appears */
-        100% { left: -40%; }
+        0%   { transform: translateX(0%); } /* Start outside the right edge */
+        100% { transform: translateX(-100%); }
     }
 </style>
