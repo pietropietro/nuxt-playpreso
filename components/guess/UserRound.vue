@@ -13,14 +13,6 @@
                     :onClick="selectGuess"
                 />
                 <!--                     :afterLock="afterLock" -->
-                <!-- <guess-single-card
-                    :guess="pprm.guess"
-                    :match="pprm.match"
-                    :rgb="rgb"
-                    :selectedGuessId="selectedGuessId"
-                    :setSelectedGuessId="(val)=>selectedGuessId = val"
-                    extended
-                /> -->
             </v-row>
         </v-col>
     </v-row>

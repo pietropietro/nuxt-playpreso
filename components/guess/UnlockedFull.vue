@@ -35,13 +35,6 @@
 
 <script>
 export default {
-    // props:{
-        // guess: {type: Object},
-        // match: {type: Object, required: true},
-        // ppTournamentType: {type: Object, required: true},
-        // afterLock: {type: Function},
-        // close: {type: Function , required: true}
-    // },
     data(){
         return{
             height: '90px'
@@ -49,9 +42,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    .box-rounded{
-        border-radius: 10px;
-    }
-</style>
