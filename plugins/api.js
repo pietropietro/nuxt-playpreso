@@ -3,6 +3,20 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 	inject('api', {
        
         async call(route, values, method, use_formdata = false){
+            if(!method){
+                method = 'GET';
+            }
+            // Check cache for GET requests before making a new request
+            if (method === 'GET') {
+                const cache = store.state.apiResponses.cache[route];
+                const fiveMinutes = 300000; // 5 minutes in milliseconds
+                if (cache && (Date.now() - cache.timestamp < fiveMinutes)) {
+
+                  return cache.data; // Return cached data if valid
+                }
+
+              }
+
             let resp;
             let myFormData;
             const noBody = ["GET" , "DELETE"];
@@ -29,7 +43,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 mode: 'cors',
                 credentials: 'include'
             };
-            
+
             initOptions.headers = headers;
             
             if(includeBody){
@@ -49,7 +63,12 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                         store.commit('user/updatePoints', { points: decoded.points});  
                     }
 
-                    return response.json()
+                    let jsonResp = response.json();
+                    if (method === 'GET' && response.ok) {
+                        store.commit('apiResponses/setCache', { route: route, data: jsonResp });
+                    }
+                    return jsonResp;
+                    
                 }).then((data) => {
                     if(data && data.status && data.status == "error"){
                         $notifier.showError(data.message);
@@ -58,7 +77,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                     return data;
                 });
             }catch(e){
-                console.log("error: " + e);
+                console.error("error: " + e);
                 $notifier.showError();
             }finally{
                 return resp;
@@ -107,7 +126,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                 return cloneResponse;
 
             } catch (e) {
-                console.log('error: ' + e, fullUrl);
+                console.error('error: ' + e, fullUrl);
                 // $notifier.showError();
             }
         }
