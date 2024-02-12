@@ -9,7 +9,7 @@
                 />
             </v-col>
             <v-spacer/>
-            <v-col cols="9" sm="auto">
+            <v-col :cols="teamNamesCols" sm="auto">
                 <v-row class="rounded-lg" style="overflow:hidden">
                     <v-col>
                         <match-graphic-preview
@@ -40,6 +40,26 @@ export default {
     data(){
         return{
             height: '90px'
+        }
+    },
+    computed:{
+        teamNamesCols(){
+            const longestNameLength = Math.max(
+                this.openMatch.homeTeam.name.length,
+                this.openMatch.awayTeam.name.length
+            );
+
+            // Return the appropriate cols value based on the longest name
+            if (longestNameLength > 14) {
+            return 9; // Use maximum space
+            } else if (longestNameLength > 11) {
+            return 8;
+            } else if (longestNameLength > 7) {
+            return 7;
+            } else if (longestNameLength > 5) {
+            return 6;
+            }
+            return 'auto'; // Use minimum space necessary
         }
     }
 }

@@ -8,13 +8,14 @@
                 background: i== 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
             }"
         >
-            <v-col cols="2" class="pa-0">
+            <v-col cols="3" class="pa-0">
                 <team-logo 
                     :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
                     :size="30"  
+                    class="mx-2"
                 />
             </v-col>
-            <v-col cols="10" class="pa-0">
+            <v-col cols="9" class="pa-0">
                 <h3 class="ocrastd text-uppercase"
                     :ref="'teamName' + i"
                 >
@@ -69,7 +70,6 @@ export default {
             const marquees = document.querySelectorAll('.marquee-team-name span');
 
             marquees.forEach(marquee => {
-                console.log('foreachh', marquee);
                 let parentWidth = marquee.parentElement.offsetWidth;
                 let contentWidth = marquee.offsetWidth;
                 let travelDistance = contentWidth - parentWidth;
