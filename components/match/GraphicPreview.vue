@@ -8,20 +8,11 @@
                 background: i== 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
             }"
         >
-            <v-col cols="3" class="pa-0">
-                <team-logo 
-                    :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
-                    :size="30"  
-                    class="mx-2"
-                />
-            </v-col>
-            <v-col cols="9" class="pa-0">
-                <h3 class="ocrastd text-uppercase"
-                    :ref="'teamName' + i"
-                >
-                    {{i == 1 ? match.homeTeam.name :  match.awayTeam.name}}
-                </h3>
-            </v-col>
+            <h3 class="ocrastd text-uppercase text-center px-2"
+                :ref="'teamName' + i"
+            >
+                {{i == 1 ? match.homeTeam.name :  match.awayTeam.name}}
+            </h3>
         </v-row>
     </div>
 </template>
