@@ -1,6 +1,5 @@
 <template>
-    <loading-page v-if="loading"/>
-    <v-container v-else>
+    <v-container>
         <v-tabs
             v-model="selectedTab"
             fixed-tabs
@@ -16,11 +15,11 @@
                 need data
             </v-tab>
             <v-tab-item key="table">
-                <admin-league-table :leagues="leagues" :refresh="getLeagues" />
+                <admin-league-table />
             </v-tab-item>
              <v-tab-item key="create">
                 <h1>CREATE LEAGUE</h1>
-                <admin-league-edit :leagues="leagues" :onSuccess="onCreate"/>
+                <admin-league-edit />
             </v-tab-item>
             <v-tab-item key="need-data">
                 <admin-league-need-data />      
@@ -33,27 +32,8 @@ export default {
     layout: "admin",
     data(){
         return{
-            loading: true,
             selectedTab: 'table',
-            leagues: null
         }
-    },
-    methods:{
-        async getLeagues(){
-            this.loading=true;
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET);
-            if(response && response.status === "success"){
-                this.leagues = response.message;
-            }
-            this.loading = false;
-        },
-        async onCreate(){
-            this.selectedTab='table';
-            await this.getLeagues();
-        }
-    },
-    async mounted(){
-        await this.getLeagues();
     },
 }
 </script>

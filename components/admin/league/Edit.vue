@@ -17,7 +17,8 @@
         </v-col>
         <v-col cols="3"><v-select label="c-lvl" v-model="levelModel" :items="[1,2,3,4]"/></v-col>
         <v-col cols="12" class="text-center">
-            <v-btn text 
+            <v-btn 
+                outlined 
                 :disabled="!nameModel" 
                 :loading="loading" 
                 @click="create"
@@ -30,7 +31,7 @@
 <script>
 export default {
     props: {
-        onSuccess: {type: Function},
+        onSuccess: {type: Function, required: false},
         league: {type: Object}
     },
     computed:{

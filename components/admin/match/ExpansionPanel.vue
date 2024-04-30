@@ -9,12 +9,12 @@
                             <v-col class="ocrastd" cols="auto">#{{match.id}}-{{match.ls_id}}</v-col>
                         </v-row>
                         <v-row class="mb-2" v-if="!match.verified_at" justify="center">
-                            <v-btn x-small text @click="setMotd">SET MOTD</v-btn>
+                            <v-btn x-small outlined @click="setMotd">SET MOTD</v-btn>
                         </v-row>
                     </template>
                     <v-row no-gutters align="center">
                         <league-detail :league="match.league"/>
-                        <admin-league-fetch-button v-if="open" 
+                        <admin-league-fetch-button v-if="open && match.league.ls_suffix" 
                             :onSuccess="onChange"
                             :id="match.league.id"
                             :ls_suffix="match.league.ls_suffix" 
@@ -54,16 +54,21 @@
                     <select-integer  @click.stop.native :model="awayModel" :setModel="(val)=>awayModel=val" :max="6"/>
                 </v-row>
                 <v-row justify="center" class="pb-10">
-                    <h3 class="pointer" @click="verify">VERIFY</h3>
+                    <v-btn outlined @click="verify">VERIFY</v-btn>
                 </v-row>
                 <span class="text-caption"><b>created:</b> {{formatDate(match.created_at, true)}}</span>
                 <span  v-if="match.verified_at" class="text-caption"><b>verified:</b> {{formatDate(match.verified_at, true)}}</span>
             </v-container>
-            <h3 class="red--text pointer mt-5 text-center"  v-if="!match.aggregateGuesses && !match.verified_at && !!onChange"
-                @click="deleteMatch"
-            >
-                DELETE
-            </h3>
+            <v-row no-gutters justify="center">
+                <v-btn
+                    color="error"
+                    block
+                    v-if="!match.aggregateGuesses && !match.verified_at && !!onChange"
+                    @click="deleteMatch"
+                >
+                    DELETE
+                </v-btn>
+            </v-row>
         </v-expansion-panel-content>     
         <!-- style="var(background-color:--v-primary-lighten1);" -->
         <div v-if="match.aggregateGuesses">

@@ -1,37 +1,48 @@
 <template>
-    <div v-if="leagues">
-        <v-row class="mt-2 ml-2">
-            <h1>LEAGUES</h1>
-            <h4>({{leaguesFiltered.length}})</h4>
-        </v-row>
-        <v-row align="center" class="overline">
-            <v-col class="pt-0">
-                <v-chip-group
-                    column
-                    v-model="countryModel"
-                    value="id"
-                    active-class="opacity-100"
-                >
-                    <v-row no-gutters align="center">
-                        <div class="lh-1 mr-2">COUNTRY</div>                    
-                        <div v-for="c in countriesFiltered" :key="c">
-                            <v-chip
-                                v-if="c"
-                                x-small
-                                :value="c"
-                            >
-                                {{c}}
-                                <emoji-flag  :model="c"/>
-                            </v-chip>
+    <div>
+    <template v-if="!leaguesProps && !countryModel">
+            <v-chip-group
+                column
+                v-model="countryModel"
+            >
+                <v-row no-gutters align="center">
+                    <div v-for="c in countries" :key="c">
+                        <v-chip
+                            v-if="c"
+                            :outlined="countryModel != c"
+                            :value="c"
+                        >
+                            <h4>{{c}}</h4>
+                            <emoji-flag class="pl-2" :model="c" size="1.5rem"/>
+                        </v-chip>
+                    </div>
+                </v-row>
+            </v-chip-group>
+        </template>
+        <v-row class="my-2 ml-2 text-uppercase" justify="space-between" align="center" v-if="leagues">
+            <v-col>
+                <v-row no-gutters>
+                    <h1>{{countryModel }} LEAGUES</h1>
+                    <h4>({{leagues.length}})</h4>
+                </v-row>
+            </v-col>
+            <v-col v-if="countryModel" cols="auto">
+                <v-row align="center">
+                    <v-col>
+                        <emoji-flag :model="countryModel" size="2.5rem"/>
+                    </v-col>
+                    <v-col>
+                        <div class="pointer" @click="()=>countryModel=null">
+                            <h1>X</h1>
                         </div>
-                    </v-row>
-                </v-chip-group>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
         <v-data-table
             class="primary l-t"
             item-text="value"
-            :items-per-page="-1" :items="leaguesFiltered"
+            :items-per-page="-1" :items="leagues"
             :headers="headers"
             :expanded.sync="expanded"
             group-by="parent_id"
@@ -90,16 +101,16 @@
             </template>
         </v-data-table>
     </div>
-    <error-wall v-else/>
 </template>
 <script>
 export default {
+    // THIS COMPONENT CAN BE GIVEN LEAGUES OR CAN FETCH ON ITS OWN
     props:{
-        leagues: {type: Array},
-        refresh: {type: Function}
+        leaguesProps: {type: Array, required: false},
+        refresh: {type: Function, required: false}
     },
     data:()=>({
-        countryModel: null,
+        loading: false,
         expanded: [],
         headers: [
             { value: 'id' }, 
@@ -108,30 +119,14 @@ export default {
             { value: 'name' },
             { value: 'nextWeeks' },
             { value: 'updated_at' },
-        ]
+        ],
+        leaguesFetched: [],
+        countries: null,
+        countryModel: null
     }),
     computed:{
-        leaguesFiltered(){
-            if(!this.countryModel) return this.leagues;
-            let areaFiltered = this.leagues.filter(l =>{
-                return l;
-            });
-            return areaFiltered.filter(l =>{
-                if(!this.countryModel) return l;
-                return l.country === this.countryModel;
-            });
-        },
-        countriesFiltered(){ 
-            let uniques = [];
-            let areaFiltered = this.leagues.filter(l => {
-                return l;
-            });
-            areaFiltered.map(l => {
-                if(!uniques.includes(l.country)){
-                    uniques.push(l.country);
-                }
-            });
-            return uniques;
+        leagues(){
+            return this.leaguesProps ?? this.leaguesFetched;
         }
     },
     methods:{
@@ -142,8 +137,37 @@ export default {
             } 
             this.expanded = [];
             setTimeout(()=>{this.expanded.push(item);});
-        }
-    }
+        },
+        async getLeagues(){
+            this.loading=true;
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel);
+            if(response && response.status === "success"){
+                this.leaguesFetched = response.message;
+            }
+            this.loading = false;
+        },
+        async getLeagueCountries(){
+            this.loading=true;
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET_COUNTRY);
+            if(response && response.status === "success"){
+                this.countries = response.message;
+                if (!this.countries.includes('ALL')) {
+                    this.countries.unshift('ALL');
+                }
+            }
+            this.loading = false;
+        },
+    },
+    watch: {
+        async countryModel (newId, oldId) {
+            if(!!newId){
+                await this.getLeagues();
+            }
+        },
+    },
+    async mounted(){
+        await this.getLeagueCountries();
+    },
 }
 </script>
 <style scoped>

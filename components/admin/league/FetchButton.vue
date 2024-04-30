@@ -1,7 +1,7 @@
 <template>
     <v-btn @click="fetch" 
         :disabled="!ls_suffix" 
-        text 
+        outlined 
         :loading="loading"
         @click.stop.native
     >

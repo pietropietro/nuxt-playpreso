@@ -7,18 +7,26 @@
                 <v-expansion-panels>
                     <v-row>
                         <v-col>
-                            <h3>LAST MATCH</h3>
-                            <template v-if="league.last_next_matches[0]">
-                                <span>{{formatDate(league.last_next_matches[0].date_start)}}</span>
-                                <admin-match-expansion-panel :match="league.last_next_matches[0]"/>
+                            <h3>LAST MATCHES</h3>
+                            <template v-if="league.last_matches?.length">
+                                <admin-match-expansion-panel 
+                                    v-for="index in (displayMoreMatchesFlag ? league.last_matches.length : 1)"
+                                    :key="league.last_matches[index - 1].id"
+                                    :match="league.last_matches[index - 1]"
+                                    class="my-1"
+                                />
                             </template>
                             <div v-else>no data</div>
                         </v-col>
                         <v-col>
-                            <h3>NEXT MATCH</h3>
-                            <template v-if="league.last_next_matches[1]">
-                                <span>{{formatDate(league.last_next_matches[1].date_start)}}</span>
-                                <admin-match-expansion-panel :match="league.last_next_matches[1]"/>
+                            <h3>NEXT MATCHES</h3>
+                            <template v-if="league.next_matches?.length">
+                                <admin-match-expansion-panel 
+                                    v-for="index in (displayMoreMatchesFlag ? league.next_matches.length : 1)"
+                                    :key="league.next_matches[index - 1].id"
+                                    :match="league.next_matches[index - 1]"
+                                    class="my-1"
+                                />
                             </template>
                             <div v-else>no data</div>
                         </v-col>
@@ -26,7 +34,14 @@
                 </v-expansion-panels>
             </v-row>
             <v-row class="my-5 text-center" align="center" justify="center">
-                <admin-league-fetch-button :id="id" :ls_suffix="league.ls_suffix" :onSuccess="getLeague"/>
+                <v-col>
+                    <v-btn outlined small @click="()=> displayMoreMatchesFlag = !displayMoreMatchesFlag">
+                        {{displayMoreMatchesFlag ? 'SEE LESS' : 'SEE MORE'}}
+                    </v-btn>
+                </v-col>
+                <v-col>
+                    <admin-league-fetch-button  :id="id" :ls_suffix="league.ls_suffix" :onSuccess="getLeague"/>
+                </v-col>
             </v-row>
         </template>
         <error-wall v-else/>
@@ -38,7 +53,12 @@ export default {
         id: {type: Number},
         onEdit: {type: Function}
     },
-    data:()=>({loading: true, league: null, matchSuffixModel: null}),
+    data:()=>({
+        loading: true, 
+        league: null, 
+        matchSuffixModel: null,
+        displayMoreMatchesFlag: false
+    }),
     async mounted(){
         await this.getLeague();
     },

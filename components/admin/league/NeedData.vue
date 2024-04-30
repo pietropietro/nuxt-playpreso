@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container v-if="leagues">
         <v-row no-gutters justify="center">
             <v-switch inset
                 v-model="futureModel"
@@ -16,7 +16,7 @@
             />
         </v-row>
         <loading-page v-if="loading" />
-        <admin-league-table :leagues="leagues" :refresh="refresh"/>
+        <admin-league-table v-else-if="leagues" :leaguesProps="leagues" :refresh="refresh"/>
     </v-container>
 </template>
 <script>
