@@ -150,6 +150,8 @@ export default {
         },
         async getLeagues(){
             this.loading=true;
+            this.leaguesFetched = [];
+
             let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel + '&page=' + this.page);
             if(response && response.status === "success"){
                 this.total = response.message.total
@@ -172,6 +174,7 @@ export default {
     watch: {
         async countryModel (newId, oldId) {
             if(!!newId){
+                this.page=1;
                 await this.getLeagues();
             }
         },
