@@ -23,7 +23,7 @@
             <v-col>
                 <v-row no-gutters>
                     <h1>{{countryModel }} LEAGUES</h1>
-                    <h4>({{leagues.length}})</h4>
+                    <h4>({{total}})</h4>
                 </v-row>
             </v-col>
             <v-col v-if="countryModel" cols="auto">
@@ -40,9 +40,11 @@
             </v-col>
         </v-row>
         <v-data-table
+            :loading="loading"
+            :items-per-page="limit"
             class="primary l-t"
             item-text="value"
-            :items-per-page="-1" :items="leagues"
+            :items="leagues"
             :headers="headers"
             :expanded.sync="expanded"
             group-by="parent_id"
@@ -100,6 +102,11 @@
                 </td>
             </template>
         </v-data-table>
+        <v-pagination
+            v-if="leagues?.length > 0 && total > 49"
+            v-model="page"
+            :length="Math.ceil(total / 50)"
+        />
     </div>
 </template>
 <script>
@@ -121,6 +128,9 @@ export default {
             { value: 'updated_at' },
         ],
         leaguesFetched: [],
+        total: 0,
+        limit: 50,
+        page: 1,
         countries: null,
         countryModel: null
     }),
@@ -140,9 +150,10 @@ export default {
         },
         async getLeagues(){
             this.loading=true;
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel);
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel + '&page=' + this.page);
             if(response && response.status === "success"){
-                this.leaguesFetched = response.message;
+                this.total = response.message.total
+                this.leaguesFetched = response.message.leagues;
             }
             this.loading = false;
         },
@@ -164,6 +175,10 @@ export default {
                 await this.getLeagues();
             }
         },
+        async page() {
+            // Call getLeagues method to fetch data for the new page
+            await this.getLeagues();
+        }
     },
     async mounted(){
         await this.getLeagueCountries();
