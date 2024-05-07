@@ -1,8 +1,8 @@
 <template>
     <loading-page v-if="loading"/>
-    <v-container v-else-if="users">
+    <v-container v-else-if="users?.length > 0">
         <div>
-            <h1>USERS ({{users.length}})</h1>
+            <h1>USERS ({{total}})</h1>
             <v-data-table
                 class="primary"
                 item-text="value"
@@ -10,7 +10,6 @@
                 :headers="headers"
                 :expanded.sync="expanded"
                 singleExpand
-                hide-default-footer
                 @click:row="(item)=>expandRow(item)"
             >
                 <template v-slot:item.id="{ item }">
@@ -77,6 +76,18 @@
                         </v-row>
                     </td>
                 </template>
+
+                <template v-slot:footer
+                v-if="users?.length > 0 && total > limit"
+                >
+                    <v-pagination
+                        @input="getUsers"
+                        class="pt-5 pb-3"
+                        total-visible="5"
+                        v-model="page"
+                        :length="Math.ceil(total / limit)"
+                    />
+                </template>
             </v-data-table>
         </div>
     </v-container>
@@ -97,16 +108,22 @@ export default {
             { value: 'lastLock'},
             { value: 'activeUserParticipations'},
             { value: 'lastVerifiedGuesses'},
-        ]
+        ],
+        total: 0,
+        limit: 10,
+        page: 1,
     }),
     async mounted(){
         await this.getUsers();
     },
     methods:{
         async getUsers(){
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.USER.GET);
+            this.loading=true;
+            this.users= [];
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.USER.GET + '?page=' + this.page + '&limit=' + this.limit);
             if(response && response.status === "success"){
-                this.users = response.message;
+                this.total = response.message.total
+                this.users = response.message.users;
             }
             this.loading = false;
         },

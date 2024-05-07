@@ -42,7 +42,7 @@
         <v-data-table
             :loading="loading"
             :items-per-page="limit"
-            class="primary l-t"
+            class="primary l-t mb-5"
             item-text="value"
             :items="leagues"
             :headers="headers"
@@ -106,6 +106,8 @@
             >
                 <v-pagination
                     @input="getLeagues"
+                    class="pt-5 pb-3"
+                    total-visible="5"
                     v-model="page"
                     :length="Math.ceil(total / limit)"
                 />
