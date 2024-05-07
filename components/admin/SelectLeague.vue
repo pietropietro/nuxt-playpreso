@@ -37,9 +37,9 @@ export default {
     methods:{
         async getLeagues(){
             this.loading=true;
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET);
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?parentOnly=true');
             if(response && response.status === "success"){
-                this.leagues = response.message;
+                this.leagues = response.message.leagues;
             }
             this.loading = false;
         },

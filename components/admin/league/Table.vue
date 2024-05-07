@@ -101,12 +101,17 @@
                     <admin-league-detail  :id="item.id" :onEdit="refresh"/>
                 </td>
             </template>
+            <template v-slot:footer
+                v-if="leagues?.length > 0 && total > limit"
+            >
+                <v-pagination
+                    @input="getLeagues"
+                    v-model="page"
+                    :length="Math.ceil(total / limit)"
+                />
+            </template>
         </v-data-table>
-        <v-pagination
-            v-if="leagues?.length > 0 && total > 49"
-            v-model="page"
-            :length="Math.ceil(total / 50)"
-        />
+     
     </div>
 </template>
 <script>
@@ -129,7 +134,7 @@ export default {
         ],
         leaguesFetched: [],
         total: 0,
-        limit: 50,
+        limit: 10,
         page: 1,
         countries: null,
         countryModel: null
@@ -152,7 +157,7 @@ export default {
             this.loading=true;
             this.leaguesFetched = [];
 
-            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel + '&page=' + this.page);
+            let response = await this.$api.call(this.ADMIN_API_ROUTES.LEAGUE.GET + '?country=' + this.countryModel + '&page=' + this.page + '&limit=' + this.limit);
             if(response && response.status === "success"){
                 this.total = response.message.total
                 this.leaguesFetched = response.message.leagues;
@@ -178,10 +183,6 @@ export default {
                 await this.getLeagues();
             }
         },
-        async page() {
-            // Call getLeagues method to fetch data for the new page
-            await this.getLeagues();
-        }
     },
     async mounted(){
         await this.getLeagueCountries();

@@ -55,6 +55,13 @@ body {
 	padding: 0px;
 	margin: 0;
 }
+
+.v-pagination__navigation{
+	box-shadow: none !important;
+	background-color: transparent !important;
+	
+}
+
 .no-arrows .v-pagination__navigation{
 	display: none !important;
 }
