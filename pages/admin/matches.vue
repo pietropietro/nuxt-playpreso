@@ -9,6 +9,7 @@
                 </v-col>
             </v-row>
         </v-container>
+        <admin-match-month v-if="selected==='month'" />
         <admin-match-week v-if="selected==='week'" />
         <admin-match-picker  v-if="selected==='picker'" />
     </v-container>
@@ -16,6 +17,6 @@
 <script>
 export default {
     layout: "admin",
-    data:()=>({selected:'week', functions:['week', 'picker']})
+    data:()=>({selected:'month', functions:['month','week', 'picker']})
 }
 </script>
