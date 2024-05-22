@@ -38,23 +38,30 @@
 
           <!-- SELECTED LIST -->
           <v-col  cols="auto" v-if="selectedCountry">
-            <div v-if="selectedCountry">
-              <v-chip outlined @click="selectedCountry = null" :value="selectedCountry">
-                <h4>{{ selectedCountry }}</h4>
-                <emoji-flag class="pl-2" :model="selectedCountry" size="1.5rem" />
-              </v-chip>
-            </div>
-
-            <div v-if="selectedLeague && subLeagues.length > 0">
-              <v-chip outlined @click="selectedLeague = null" :value="selectedLeague">
-                <h4>{{ selectedLeague }}</h4>
-              </v-chip>
-            </div>
-
+            <v-card color="primary" rounded="lg" class="pa-2">
+              <v-row align="center">
+                <v-col v-if="selectedCountry">
+                  <v-chip x-large outlined @click="selectedCountry = null" :value="selectedCountry">
+                    <!-- <h4>{{ selectedCountry }}</h4> -->
+                    <emoji-flag class="pl-2 pt-4" :model="selectedCountry" size="4rem" />
+                  </v-chip>
+                </v-col>
+                <v-col v-if="selectedLeagueObj" class="py-2">
+                  <v-chip outlined @click="selectedLeague = null" :value="selectedLeague">
+                    <h4>{{ selectedLeagueObj.name }}</h4>
+                  </v-chip>
+                </v-col>
+                <v-col v-if="selectedSubLeagueObj">
+                  <v-chip outlined @click="selectedSubLeague = null" :value="selectedSubLeague">
+                    <h4>{{ selectedSubLeagueObj.name }}</h4>
+                  </v-chip>
+                </v-col>
+              </v-row>
+            </v-card>
           </v-col>
 
           <!-- SELECTION -->
-          <v-col>
+          <v-col v-if="!selectedCountry || !selectedLeague || (!selectedSubLeague && subLeagues.length > 0)">
             <v-card flat color="primary" rounded="lg" class="pa-2">
               <v-chip-group v-model="selectedCountry" column v-if="!selectedCountry">
                 <v-row no-gutters>
@@ -67,7 +74,7 @@
                 </v-row>
               </v-chip-group>
 
-              <v-chip-group v-model="selectedLeague" column v-else-if="selectedCountry && (!selectedLeague || selectedLeague && subLeagues.length == 0)">
+              <v-chip-group v-model="selectedLeague" column v-else-if="selectedCountry && !selectedLeague">
                   <div class="ml-2" v-for="league in sortedUniqueLeagues" :key="league.id">
                     <v-sheet :color="getChipColor(league.id)" class="text-center"><b>LVL {{ league.level }}</b></v-sheet>
                     <v-chip
@@ -83,7 +90,7 @@
                 </v-chip-group>
 
 
-                <v-chip-group v-else-if="selectedLeague && subLeagues.length > 0"
+                <v-chip-group v-else-if="selectedLeague && subLeagues.length > 0 && !selectedSubLeague"
                  v-model="selectedSubLeague" column>
                   <v-chip
                     :color="getChipColor(subLeague.id)"
@@ -98,12 +105,8 @@
                   </v-chip>
               </v-chip-group>
 
-              {{ subLeagues }}
-
             </v-card>
           </v-col>
-
-          
 
         </v-row>
       </v-col>
@@ -163,6 +166,14 @@ export default {
     },
     sortedUniqueLeagues() {
       return this.uniqueLeagues.sort((a, b) => a.level - b.level);
+    },
+    selectedLeagueObj() {
+      if (!this.selectedLeague) return null;
+      return this.uniqueLeagues.find((league) => league.id === this.selectedLeague);
+    },
+    selectedSubLeagueObj() {
+      if (!this.selectedSubLeague || !this.selectedLeagueObj) return null;
+      return this.subLeagues.find((league) => league.id === this.selectedSubLeague);
     },
     filteredMatches() {
       if (!this.selectedCountry && !this.selectedLeague && !this.selectedSubLeague) {
