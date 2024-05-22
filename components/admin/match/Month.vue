@@ -27,7 +27,6 @@
               :events="filteredMatches"
               :event-color="getEventColor"
               @click:date="viewDay"
-              @change="updateRange"
               v-model="calendarValue"
             />
           </v-sheet>
@@ -129,16 +128,6 @@ export default {
       selectedSubLeagueId: null,
       subLeagues: [],
       eventColors: {},
-      colors: [
-        'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green',
-        'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'blue-grey', 'grey', 'red darken-1', 'pink darken-1',
-        'purple darken-1', 'deep-purple darken-1', 'indigo darken-1', 'blue darken-1', 'light-blue darken-1', 'cyan darken-1',
-        'teal darken-1', 'green darken-1', 'light-green darken-1', 'lime darken-1', 'yellow darken-1', 'amber darken-1',
-        'orange darken-1', 'deep-orange darken-1', 'brown darken-1', 'blue-grey darken-1', 'grey darken-1', 'red lighten-1',
-        'pink lighten-1', 'purple lighten-1', 'deep-purple lighten-1', 'indigo lighten-1', 'blue lighten-1', 'light-blue lighten-1',
-        'cyan lighten-1', 'teal lighten-1', 'green lighten-1', 'light-green lighten-1', 'lime lighten-1', 'yellow lighten-1',
-        'amber lighten-1', 'orange lighten-1', 'deep-orange lighten-1', 'brown lighten-1', 'blue-grey lighten-1', 'grey lighten-1'
-      ],
     };
   },
   computed: {
@@ -421,15 +410,6 @@ export default {
       this.monthModel++;
       this.$refs.calendar.next();
       await this.getMatchSummary();
-    },
-    async updateRange({ start, end }) {
-      console.log('updaterange called');
-      // Ensure your matches API call aligns with the visible range
-      const startDate = new Date(`${start.date}T00:00:00`);
-      const endDate = new Date(`${end.date}T23:59:59`);
-
-      const startMonth = startDate.getMonth();
-      const endMonth = endDate.getMonth();
     },
   },
   async mounted() {
