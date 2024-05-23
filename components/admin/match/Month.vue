@@ -200,9 +200,6 @@ export default {
 			}
 			return Array.from(leagues.values());
 		},
-		sortedUniqueLeagues() {
-			return this.uniqueLeagues.sort((a, b) => a.level - b.level);
-		},
 		sortedAvailableLeagues() {
 			return this.availableLeagues.sort((a, b) => a.level - b.level);
 		},
@@ -244,7 +241,7 @@ export default {
 				return true;
 			});
 
-			return this.formatEvents(filteredSummary, this.selectedCountry, this.selectedLeagueId, this.selectedSubLeagueId);
+			return this.formatEvents(filteredSummary);
 		},
 	},
 	watch: {
@@ -270,6 +267,7 @@ export default {
 		}
 	},
 	methods: {
+		
 		getChipColor(id) {
 			if (!this.eventColors[this.selectedCountry]) {
 				this.eventColors[this.selectedCountry] = {};
@@ -296,6 +294,7 @@ export default {
 
 			return this.eventColors[this.selectedCountry][id];
 		},
+
 		async getMatchSummary() {
 			if (this.loading) return;
 			this.loading = true;
@@ -313,88 +312,69 @@ export default {
 			}
 			this.loading = false;
 		},
-		formatEvents(summary, selectedCountry = null, selectedLeagueId = null, selectedSubLeagueId = null) {
+
+		getEventFromSummary(summary, league){
+			if(league){
+				return {
+					name: league.name,
+					start: summary.match_day,
+					end: summary.match_day,
+					match_count: summary.match_count,
+					color: this.getChipColor(league.id),
+					level: league.level, 
+				}
+			}
+			return	{
+				name: `${summary.match_count}`,
+				start: summary.match_day,
+				end: summary.match_day,
+				match_count: summary.match_count,
+			}
+		},
+
+		formatEvents(summary) {
 			const events = [];
 			summary.forEach((daySummary) => {
-				if (selectedCountry && selectedLeagueId && selectedSubLeagueId) {
-					const matchCountry = daySummary.matches_from[selectedCountry];
-					const matchLeague = matchCountry.find((league) => league.id === selectedLeagueId);
-					const matchSubLeague = matchLeague.subLeagues?.find((subLeague) => subLeague.id === selectedSubLeagueId);
+				if (this.selectedCountry && this.selectedLeagueId && this.selectedSubLeagueId) {
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
+					const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+					const matchSubLeague = matchLeague.subLeagues?.find((subLeague) => subLeague.id === this.selectedSubLeagueId);
 
 					if (matchSubLeague) {
-						events.push({
-							name: matchSubLeague.name,
-							start: daySummary.match_day,
-							end: daySummary.match_day,
-							match_count: daySummary.match_count,
-							color: this.getChipColor(matchSubLeague.id),
-							level: matchSubLeague.level, // Add level here if available
-						});
+						events.push(this.getEventFromSummary(daySummary, matchSubLeague));
 					}
-				} else if (selectedCountry && selectedLeagueId) {
-					const matchCountry = daySummary.matches_from[selectedCountry];
-					const matchLeague = matchCountry.find((league) => league.id === selectedLeagueId);
+				} else if (this.selectedCountry && this.selectedLeagueId) {
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
+					const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
 
 					if (matchLeague && matchLeague.subLeagues?.length > 0) {
 						matchLeague.subLeagues.forEach((subLeague) => {
-							events.push({
-								name: subLeague.name,
-								start: daySummary.match_day,
-								end: daySummary.match_day,
-								match_count: daySummary.match_count,
-								color: this.getChipColor(subLeague.id),
-								level: subLeague.level, // Add level here if available
-							});
+							events.push(this.getEventFromSummary(daySummary, subLeague));
 						});
 					} else {
-						events.push({
-							name: matchLeague.name,
-							start: daySummary.match_day,
-							end: daySummary.match_day,
-							match_count: daySummary.match_count,
-							color: this.getChipColor(matchLeague.id),
-							level: matchLeague.level, // Add level here
-						});
+						events.push(this.getEventFromSummary(daySummary, matchLeague));
 					}
-				} else if (selectedCountry) {
-					const matchCountry = daySummary.matches_from[selectedCountry];
+				} else if (this.selectedCountry) {
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
 					matchCountry.forEach((league) => {
-						events.push({
-							name: league.name,
-							start: daySummary.match_day,
-							end: daySummary.match_day,
-							match_count: daySummary.match_count,
-							color: this.getChipColor(league.id),
-							level: league.level, // Add level here
-						});
+						events.push(this.getEventFromSummary(daySummary, league));
 					});
 				} else if (this.calendarType == 'day') {
 					const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
 					if (matchDay) {
 						Object.keys(matchDay.matches_from).forEach((country) => {
 							matchDay.matches_from[country].forEach((league) => {
-								events.push({
-									name: league.name,
-									start: matchDay.match_day,
-									end: matchDay.match_day,
-									match_count: matchDay.match_count,
-									color: this.getChipColor(league.id),
-									level: league.level, // Add level here
-								});
+								events.push(this.getEventFromSummary(matchDay, league));
 							});
 						});
 					}
 				} else {
-					events.push({
-						name: `${daySummary.match_count}`,
-						start: daySummary.match_day,
-						end: daySummary.match_day,
-						match_count: daySummary.match_count,
-					});
+					events.push(this.getEventFromSummary(daySummary));
 				}
 			});
 			return events;
 		},
+
 		getSubLeaguesForLeague(leagueId) {
 			const subLeagues = new Map();
 			this.matchSummary.forEach((daySummary) => {
