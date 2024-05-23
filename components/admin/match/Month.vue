@@ -5,8 +5,11 @@
 			<v-col cols="6">
 				<v-row>
 					<v-col cols="auto">
-						<v-btn @click="prevMonth">
-							< </v-btn>
+						<v-btn 
+							@click="$refs.calendar.prev()"
+						>
+							< 
+						</v-btn>
 					</v-col>
 					<v-col>
 						<h2 class="text-center">
@@ -14,7 +17,9 @@
 						</h2>
 					</v-col>
 					<v-col cols="auto">
-						<v-btn @click="nextMonth">
+						<v-btn 
+							@click="$refs.calendar.next()"
+						>
 							>
 						</v-btn>
 					</v-col>
@@ -141,7 +146,7 @@ export default {
 	data() {
 		return {
 			calendarType: 'month',
-			calendarValue: '',
+			calendarValue: new Date().toISOString().split('T')[0], // Set to today's date in 'YYYY-MM-DD' format
 			matchSummary: [],
 			loading: false,
 			selectedCountry: null,
@@ -152,7 +157,6 @@ export default {
 		};
 	},
 	computed: {
-		
 		uniqueCountries() {
 			const countries = new Set();
 			this.matchSummary.forEach((daySummary) => {
@@ -253,6 +257,17 @@ export default {
 			this.selectedSubLeagueId = null;
 			this.subLeagues = this.getSubLeaguesForLeague(this.selectedLeagueId);
 		},
+		async calendarValue(newVal, oldVal){
+			const newDate = new Date(newVal);
+			const oldDate = new Date(oldVal);
+
+			const newYearMonth = `${newDate.getFullYear()}-${newDate.getMonth() + 1}`;
+			const oldYearMonth = `${oldDate.getFullYear()}-${oldDate.getMonth() + 1}`;
+
+			if (newYearMonth !== oldYearMonth) {
+				await this.getMatchSummary();
+			}
+		}
 	},
 	methods: {
 		getChipColor(id) {
@@ -395,17 +410,8 @@ export default {
 			});
 			return Array.from(subLeagues.values());
 		},
-		async prevMonth() {
-			this.$refs.calendar.prev();
-			await this.getMatchSummary();
-		},
-		async nextMonth() {
-			this.$refs.calendar.next();
-			await this.getMatchSummary();
-		},
 	},
 	async mounted() {
-		this.calendarValue = new Date().toISOString().split('T')[0]; // Set to today's date in 'YYYY-MM-DD' format
 		await this.getMatchSummary();
 	},
 };
