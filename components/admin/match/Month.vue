@@ -26,15 +26,15 @@
 				</v-row>
 				<v-row>
 					<v-sheet height="700" width="100%">
-						<v-calendar 
-							color="primary" 
-							ref="calendar" 
-							:weekdays="[1, 2, 3, 4, 5, 6, 0]" 
+						<v-calendar
+							color="primary"
+							ref="calendar"
+							:weekdays="[1, 2, 3, 4, 5, 6, 0]"
 							:type="calendarType"
-							:events="filteredMatches" 
-							:event-color="(event)=>event.color || 'primary'" 
+							:events="filteredMatches"
+							:event-color="(event) => event.color || 'primary'"
 							@click:date="calendarType='day'"
-							v-model="calendarValue" 
+							v-model="calendarValue"
 						/>
 					</v-sheet>
 				</v-row>
@@ -89,6 +89,7 @@
 											:value="country">
 											<h4>{{ country }}</h4>
 											<emoji-flag class="pl-2" :model="country" size="1.5rem" />
+											<span class="ml-1 caption">({{ countMatchesFor('country',country) }})</span>
 										</v-chip>
 									</v-col>
 								</v-row>
@@ -112,6 +113,7 @@
 										class="ma-2"
 									>
 										{{ league.name }}
+										<span class="caption ml-1">({{ countMatchesFor('league', league.id) }})</span>
 									</v-chip>
 								</div>
 							</v-chip-group>
@@ -131,6 +133,7 @@
 									class="ma-2"
 								>
 									{{ subLeague.name }}
+									<span class="caption ml-1">({{ countMatchesFor('subLeague', subLeague.id) }})</span>
 								</v-chip>
 							</v-chip-group>
 						</v-card>
@@ -140,6 +143,7 @@
 		</v-row>
 	</v-container>
 </template>
+
 
 <script>
 export default {
@@ -254,7 +258,7 @@ export default {
 			this.selectedSubLeagueId = null;
 			this.subLeagues = this.getSubLeaguesForLeague(this.selectedLeagueId);
 		},
-		async calendarValue(newVal, oldVal){
+		async calendarValue(newVal, oldVal) {
 			const newDate = new Date(newVal);
 			const oldDate = new Date(oldVal);
 
@@ -264,10 +268,9 @@ export default {
 			if (newYearMonth !== oldYearMonth) {
 				await this.getMatchSummary();
 			}
-		}
+		},
 	},
 	methods: {
-		
 		getChipColor(id) {
 			if (!this.eventColors[this.selectedCountry]) {
 				this.eventColors[this.selectedCountry] = {};
@@ -303,7 +306,7 @@ export default {
 				const year = date.getFullYear();
 				const month = date.getMonth() + 1; // Note: JavaScript months are 0-based
 
-				const response = await this.$api.call(this.ADMIN_API_ROUTES.MATCH.GET_MONTH+ `?year=${year}&month=${month}`);
+				const response = await this.$api.call(this.ADMIN_API_ROUTES.MATCH.GET_MONTH + `?year=${year}&month=${month}`);
 				if (response && response.status === 'success') {
 					this.matchSummary = response.message;
 				}
@@ -313,23 +316,23 @@ export default {
 			this.loading = false;
 		},
 
-		getEventFromSummary(summary, league){
-			if(league){
+		getEventFromSummary(summary, league) {
+			if (league) {
 				return {
-					name: league.name,
+					name: this.calendarType == 'day' ? `${league.name} (${league.league_day_count})` : league.league_day_count, // Include the count in the label
 					start: summary.match_day,
 					end: summary.match_day,
 					match_count: summary.match_count,
 					color: this.getChipColor(league.id),
-					level: league.level, 
-				}
+					level: league.level,
+				};
 			}
-			return	{
+			return {
 				name: `${summary.match_count}`,
 				start: summary.match_day,
 				end: summary.match_day,
 				match_count: summary.match_count,
-			}
+			};
 		},
 
 		formatEvents(summary) {
@@ -338,51 +341,50 @@ export default {
 
 			summary.forEach((daySummary) => {
 				if (this.selectedCountry && this.selectedLeagueId && this.selectedSubLeagueId) {
-				const matchCountry = daySummary.matches_from[this.selectedCountry];
-				const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
-				const matchSubLeague = matchLeague.subLeagues?.find((subLeague) => subLeague.id === this.selectedSubLeagueId);
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
+					const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+					const matchSubLeague = matchLeague.subLeagues?.find((subLeague) => subLeague.id === this.selectedSubLeagueId);
 
-				if (matchSubLeague) {
-					events.push(this.getEventFromSummary(daySummary, matchSubLeague));
-				}
+					if (matchSubLeague) {
+						events.push(this.getEventFromSummary(daySummary, matchSubLeague));
+					}
 				} else if (this.selectedCountry && this.selectedLeagueId) {
-				const matchCountry = daySummary.matches_from[this.selectedCountry];
-				const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
+					const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
 
-				if (matchLeague && matchLeague.subLeagues?.length > 0) {
-					matchLeague.subLeagues.forEach((subLeague) => {
-					events.push(this.getEventFromSummary(daySummary, subLeague));
-					});
-				} else {
-					events.push(this.getEventFromSummary(daySummary, matchLeague));
-				}
+					if (matchLeague && matchLeague.subLeagues?.length > 0) {
+						matchLeague.subLeagues.forEach((subLeague) => {
+							events.push(this.getEventFromSummary(daySummary, subLeague));
+						});
+					} else {
+						events.push(this.getEventFromSummary(daySummary, matchLeague));
+					}
 				} else if (this.selectedCountry) {
-				const matchCountry = daySummary.matches_from[this.selectedCountry];
-				matchCountry.forEach((league) => {
-					events.push(this.getEventFromSummary(daySummary, league));
-				});
+					const matchCountry = daySummary.matches_from[this.selectedCountry];
+					matchCountry.forEach((league) => {
+						events.push(this.getEventFromSummary(daySummary, league));
+					});
 				} else if (this.calendarType == 'day') {
-				const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
-				if (matchDay) {
-					Object.keys(matchDay.matches_from).forEach((country) => {
-					matchDay.matches_from[country].forEach((league) => {
-						const leagueIdentifier = `${league.id}-${country}`; // Unique identifier for each league-country pair
+					const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
+					if (matchDay) {
+						Object.keys(matchDay.matches_from).forEach((country) => {
+							matchDay.matches_from[country].forEach((league) => {
+								const leagueIdentifier = `${league.id}-${country}`; // Unique identifier for each league-country pair
 
-						if (!addedLeagues.has(leagueIdentifier)) { // Check if this league has already been added
-						events.push(this.getEventFromSummary(matchDay, league));
-						addedLeagues.add(leagueIdentifier); // Mark this league as added
-						}
-					});
-					});
-				}
+								if (!addedLeagues.has(leagueIdentifier)) { // Check if this league has already been added
+									events.push(this.getEventFromSummary(matchDay, league));
+									addedLeagues.add(leagueIdentifier); // Mark this league as added
+								}
+							});
+						});
+					}
 				} else {
-				events.push(this.getEventFromSummary(daySummary));
+					events.push(this.getEventFromSummary(daySummary));
 				}
 			});
 
 			return events;
 		},
-
 
 		getSubLeaguesForLeague(leagueId) {
 			const subLeagues = new Map();
@@ -399,9 +401,46 @@ export default {
 			});
 			return Array.from(subLeagues.values());
 		},
+
+		// The type of entity (country, league, or subLeague).
+		countMatchesFor(type, id) {
+			let total = 0;
+
+			const addMatches = (daySummary) => {
+				Object.keys(daySummary.matches_from).forEach((country) => {
+					daySummary.matches_from[country].forEach((league) => {
+						if (type === 'country' && id === country) {
+							total += league.league_day_count;
+						} else if (type === 'league' && league.id === id) {
+							total += league.league_day_count;
+						} else if (type === 'subLeague' && league.subLeagues) {
+							league.subLeagues.forEach((subLeague) => {
+								if (subLeague.id === id) {
+									total += subLeague.league_day_count;
+								}
+							});
+						}
+					});
+				});
+			};
+
+			if (this.calendarType === 'day') {
+				const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
+				if (matchDay) {
+					addMatches(matchDay);
+				}
+			} else {
+				this.matchSummary.forEach(addMatches);
+			}
+
+			return total;
+		}
+
+
 	},
 	async mounted() {
 		await this.getMatchSummary();
 	},
 };
 </script>
+
