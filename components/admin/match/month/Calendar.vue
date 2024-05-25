@@ -125,30 +125,33 @@ export default {
             const addedLeagues = new Set(); // Set to track added leagues and prevent duplicates
 
             summary.forEach((daySummary) => {
-                if (this.selectedCountry && this.selectedLeagueId && this.selectedSubLeagueId) {
-                    const matchCountry = daySummary.matches_from[this.selectedCountry];
-                    const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
-                    const matchSubLeague = matchLeague.subLeagues?.find((subLeague) => subLeague.id === this.selectedSubLeagueId);
+                const matchCountry = this.selectedCountry ? daySummary.matches_from[this.selectedCountry] : null;
 
-                    if (matchSubLeague) {
-                        events.push(this.getEventFromSummary(daySummary, matchSubLeague));
-                    }
-                } else if (this.selectedCountry && this.selectedLeagueId) {
-                    const matchCountry = daySummary.matches_from[this.selectedCountry];
-                    const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+                if (this.selectedCountry && matchCountry) {
+                    if (this.selectedLeagueId && this.selectedSubLeagueId) {
+                        const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+                        const matchSubLeague = matchLeague?.subLeagues?.find((subLeague) => subLeague.id === this.selectedSubLeagueId);
 
-                    if (matchLeague && matchLeague.subLeagues?.length > 0) {
-                        matchLeague.subLeagues.forEach((subLeague) => {
-                            events.push(this.getEventFromSummary(daySummary, subLeague));
-                        });
+                        if (matchSubLeague) {
+                            events.push(this.getEventFromSummary(daySummary, matchSubLeague));
+                        }
+                    } else if (this.selectedLeagueId) {
+                        const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
+
+                        if (matchLeague) {
+                            if (matchLeague.subLeagues?.length > 0) {
+                                matchLeague.subLeagues.forEach((subLeague) => {
+                                    events.push(this.getEventFromSummary(daySummary, subLeague));
+                                });
+                            } else {
+                                events.push(this.getEventFromSummary(daySummary, matchLeague));
+                            }
+                        }
                     } else {
-                        events.push(this.getEventFromSummary(daySummary, matchLeague));
+                        matchCountry.forEach((league) => {
+                            events.push(this.getEventFromSummary(daySummary, league));
+                        });
                     }
-                } else if (this.selectedCountry) {
-                    const matchCountry = daySummary.matches_from[this.selectedCountry];
-                    matchCountry.forEach((league) => {
-                        events.push(this.getEventFromSummary(daySummary, league));
-                    });
                 } else if (this.calendarType === 'day') {
                     const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarComp);
                     if (matchDay) {
@@ -170,6 +173,7 @@ export default {
 
             return events;
         }
+
 
     }
 }
