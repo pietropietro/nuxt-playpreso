@@ -1,11 +1,17 @@
 import jwt_decode from "jwt-decode";
 export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
 	inject('api', {
-       
+
         async call(route, values, method, use_formdata = false){
             if(!method){
                 method = 'GET';
             }
+
+            if(method !== 'GET'){
+                store.commit('apiResponses/clearCache');
+            }
+
+
             // Check cache for GET requests before making a new request
             if (method === 'GET') {
                 const cache = store.state.apiResponses.cache[route];
@@ -15,7 +21,9 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                   return cache.data; // Return cached data if valid
                 }
 
-              }
+                console.log('caching')
+
+            }
 
             let resp;
             let myFormData;
@@ -82,6 +90,16 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             }finally{
                 return resp;
             }
+        },
+
+        // Clear cache method
+        clearAPICache(route) {
+            const cachedRoutes = Object.keys(store.state.apiResponses.cache);
+            cachedRoutes.forEach(cachedRoute => {
+                if (cachedRoute.startsWith(route)) {
+                    store.commit('removeApiResponseCache', cachedRoute);
+                }
+            });
         },
 
         async getImage(route) {
