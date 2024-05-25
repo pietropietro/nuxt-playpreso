@@ -1,5 +1,5 @@
 <template>
-    <v-row class="px-5">
+    <v-row>
         <!-- SELECTED LIST -->
         <v-col cols="auto" v-if="selectedCountry || calendarType == 'day'">
             <v-card color="primary" rounded="lg" class="pa-2">
@@ -7,6 +7,7 @@
                     <v-col v-if="calendarType == 'day'">
                         <v-chip outlined @click="setCalendarType('month')">
                             <span class="overline">{{ calendarValue }}</span>
+                            <v-btn small icon >x</v-btn>
                         </v-chip>
                     </v-col>
                     <v-col v-if="selectedCountry">
@@ -16,6 +17,7 @@
                             @click="setSelectedCountry(null)" 
                         >
                             <emoji-flag class="pl-2 pt-4" :model="selectedCountry" size="4rem" />
+                            <v-btn small icon>x</v-btn>
                         </v-chip>
                     </v-col>
                     <v-col v-if="selectedLeagueObj" class="py-2">
@@ -24,6 +26,7 @@
                             @click="setSelectedLeagueId(null)" 
                         >
                             <h4>{{ selectedLeagueObj.name }}</h4>
+                            <v-btn small icon>x</v-btn>
                         </v-chip>
                     </v-col>
                     <v-col v-if="selectedSubLeagueObj">
@@ -32,6 +35,7 @@
                             @click="setSelectedSubLeagueId(null)" 
                         >
                             <h4>{{ selectedSubLeagueObj.name }}</h4>
+                            <v-btn small icon>x</v-btn>
                         </v-chip>
                     </v-col>
                 </v-row>

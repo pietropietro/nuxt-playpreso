@@ -28,6 +28,16 @@
 					:setSelectedSubLeagueId="(val)=>selectedSubLeagueId=val"
 					:getChipColor="getChipColor"
 					:matchSummary="matchSummary"
+					class="px-5"
+				/>
+				<admin-match-month-list 
+					:calendarType="calendarType"
+					:calendarValue="calendarValue"
+					:country="selectedCountry"
+					:leagueId="selectedLeagueId"
+					:subLeagueId="selectedSubLeagueId"
+					:getChipColor="getChipColor"
+					class="px-5 pt-5"
 				/>
 			</v-col>
 		</v-row>
@@ -63,7 +73,6 @@ export default {
 	},
 	methods:{
 		async getMatchSummary() {
-			if (this.loadingSummary) return;
 			this.loadingSummary = true;
 			try {
 				const date = this.calendarValue ? new Date(this.calendarValue) : new Date();

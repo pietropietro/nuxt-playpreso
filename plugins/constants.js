@@ -133,6 +133,7 @@ Vue.mixin({
                 },
                 MATCH: {
                     GET: '/admin/match',
+                    GET_MONTH: '/admin/match/month',
                     DELETE: '/admin/match/',
                     VERIFY: '/admin/match/',
                     PICK: '/admin/match/pick/'

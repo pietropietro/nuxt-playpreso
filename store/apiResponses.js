@@ -12,6 +12,9 @@ export const state = () => ({
         data: data,
         timestamp: Date.now()
       };
-    }
+    },
+    clearCache(state) {
+      state.cache = {};
+    } 
   };
   
