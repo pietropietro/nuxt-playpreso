@@ -1,9 +1,8 @@
 <template>
-
     <v-row v-if="openMatch" no-gutters align="center">
-        <h3 class="ocrastd ml-4">
-            {{formatDate(openMatch.date_start,true)}}
-        </h3>
+        <h4 class="ml-4">
+            {{formatDate(openMatch?.date_start,true)}}
+        </h4>
         <v-spacer />
         <div class="ocrastd mr-4" @click="closeGuess">
             <h2>X</h2>

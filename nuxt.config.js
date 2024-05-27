@@ -125,7 +125,7 @@ export default {
 				},
 				dark: {
                     primary: '#000066',
-					background: '#00001a',
+					background: '#00000f',
 					anchor: '#ffffff',
 					oppositeText: '#000000',
 					contrastOnDark: '#ffffff',

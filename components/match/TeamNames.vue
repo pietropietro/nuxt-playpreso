@@ -4,8 +4,8 @@
             align="center" 
             justify="center"
             :style="{
-                height: '49px',
-                background: i== 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
+                height: '38px',
+                background: i== 1 ? backgroundHome : backgroundAway
             }"
         >
             <h3 class="ocrastd text-uppercase text-center px-2"
@@ -21,6 +21,17 @@ export default {
     props:{
         match: {type: Object},
         rgb: {type: String},
+        selectedTeamId: {default:null}
+    },
+    computed:{
+        backgroundHome(){
+            if(!this.selectedTeamId || this.selectedTeamId == this.match.homeTeam.id) return this.ppRGBA(this.rgb);
+            return 'transparent'
+        },
+        backgroundAway(){
+            if(!this.selectedTeamId || this.selectedTeamId == this.match.awayTeam.id) return this.ppRGBA(this.rgb, 0.6);
+            return 'transparent'
+        }
     },
     methods:{
         checkWrapped() {

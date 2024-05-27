@@ -12,7 +12,7 @@
             <v-col cols="4" class="pa-0">
                 <team-logo 
                     :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
-                    :size="30"  
+                    size="30"  
                 />
             </v-col>
             <v-col cols="6" class="pa-0">
