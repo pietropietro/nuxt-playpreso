@@ -11,16 +11,10 @@ $material-dark: (
   navigation-drawer:var(--v-primary-base),
 );
 
-$material-light: (
-  // 'background': var(--v-background-base),
-  // cards:var(--v-primary-base),
-  navigation-drawer:var(--v-primary-base),
-  icons:(active: black)
-);
+
 
 $calendar-line-width:3px;
-
-$calendar-event-font-size: 20px;
+$calendar-event-font-size: 16px;
 
 
 $toolbar-content-padding-x: 0;
