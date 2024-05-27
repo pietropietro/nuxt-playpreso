@@ -14,6 +14,11 @@
 					:selectedSubLeagueId="selectedSubLeagueId"
 					:getChipColor="getChipColor"   
 				/>
+				<!-- <admin-motd
+					class="mt-5"
+					:calendarValue="calendarValue"
+					v-if="calendarType=='day' && selectedCountry==null"
+				/> -->
 			</v-col>
 			<v-col cols="6">
 				<admin-match-month-filter 
@@ -28,7 +33,7 @@
 					:setSelectedSubLeagueId="(val)=>selectedSubLeagueId=val"
 					:getChipColor="getChipColor"
 					:matchSummary="matchSummary"
-					class="px-5"
+					class="mx-5"
 				/>
 				<admin-match-month-list 
 					:calendarType="calendarType"
@@ -37,7 +42,7 @@
 					:leagueId="selectedLeagueId"
 					:subLeagueId="selectedSubLeagueId"
 					:getChipColor="getChipColor"
-					class="px-5 pt-5"
+					class="mx-5 mt-5"
 				/>
 			</v-col>
 		</v-row>

@@ -37,6 +37,7 @@
         </v-row>
     </div>
 </template>
+
 <script>
 export default {
     props:{
@@ -98,29 +99,28 @@ export default {
 
             return this.formatEvents(filteredSummary);
         }
-
     },
     methods:{
         getEventFromSummary(summary, league) {
-			if (league) {
-				return {
-					name: this.calendarType == 'day' ? `${league.name} (${league.league_day_count})` : league.league_day_count, // Include the count in the label
-					start: summary.match_day,
-					end: summary.match_day,
-					match_count: summary.match_count,
-					color: this.getChipColor(league.id),
-					level: league.level,
-				};
-			}
-			return {
-				name: `${summary.match_count}`,
-				start: summary.match_day,
-				end: summary.match_day,
-				match_count: summary.match_count,
-			};
-		},
+            if (league) {
+                return {
+                    name: this.calendarType == 'day' ? `${league.name} (${league.league_day_count})` : league.league_day_count, // Include the count in the label
+                    start: summary.match_day,
+                    end: summary.match_day,
+                    match_count: summary.match_count,
+                    color: this.getChipColor(league.id),
+                    level: league.level,
+                };
+            }
+            return {
+                name: `${summary.match_count}`,
+                start: summary.match_day,
+                end: summary.match_day,
+                match_count: summary.match_count,
+            };
+        },
 
-		formatEvents(summary) {
+        formatEvents(summary) {
             const events = [];
             const addedLeagues = new Set(); // Set to track added leagues and prevent duplicates
 
@@ -169,12 +169,24 @@ export default {
                 } else {
                     events.push(this.getEventFromSummary(daySummary));
                 }
+
+                if(this.calendarType === 'month' && this.selectedCountry == null){
+                    // Add yellow event if all_matches_verified is false and the date is in the past
+                    const today = new Date();
+                    const matchDayDate = new Date(daySummary.match_day);
+                    if (!daySummary.all_matches_verified && matchDayDate < today) {
+                        events.push({
+                            name: '!',
+                            start: daySummary.match_day,
+                            end: daySummary.match_day,
+                            color: 'light orange',
+                        });
+                    }
+                }
             });
 
             return events;
         }
-
-
     }
 }
 </script>
