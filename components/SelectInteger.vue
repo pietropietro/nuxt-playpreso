@@ -1,6 +1,9 @@
 <template>
     <v-row no-gutters :justify="justify" class="no-selection">
-        <h1 :class="disabled ? '' : 'pointer'"  @click="onClick">
+        <h1 :class="disabled ? '' : 'pointer'"  
+            @click="onClick"
+            :style="big ? 'font-size:4em;' : ''"
+        >
             {{computedModel}}
         </h1>
         <h4 v-if="!max && computedModel === 3">+</h4>
@@ -14,7 +17,8 @@ export default {
         setModel: {type: Function},
         justify: {type: String},
         limit: {type:Boolean, default:true},
-        max:{type: Number}
+        max:{type: Number},
+        big: {type:Boolean, default: false}
     },
     computed: {
         computedModel:{

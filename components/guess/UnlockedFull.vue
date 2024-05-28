@@ -1,42 +1,33 @@
 <template>
-    <v-container>
-        <match-team-selection 
+    <v-container style="height: 100%;" >
+        <match-team-selection
             v-if="openMatch"
             :match="openMatch"
             :selectedTeamId="selectedTeamId"
             :setSelectedTeamId="(val)=>selectedTeamId=val"
         />
-        
-        
-        <!-- ROW 2 -->
-        <!-- <v-row class="py-5 text-center" justify="center" align="center">
-            <v-col>
-                <div class="overline lh-1 font-weight-bold">
-                    <span v-if="openMatch.league.parent">
-                        <b>{{openMatch.league.parent.name}}</b>
-                    </span>
-                    {{openMatch.league.name}}
-                </div>
-            </v-col>
-            <v-col v-if="openMatch.league.country">
-                <v-row align="end" justify="center">
-                        <emoji-flag  
-                            size="30"
-                            :model="openMatch.league.country"
-                        />
-                        <h3>{{openMatch.league.level}}</h3>
-                </v-row>
-            </v-col>
-            <v-col>
-                <div class="overline lh-1 font-weight-bold">
-                    <span v-if="openMatch.round">
-                        round {{openMatch.round}}
-                    </span>
-                </div>
-            </v-col>
+        <!-- <v-row style="font-size:5em; line-height: 1em;" class="font-weight-bold">
+            {{openMatch.homeTeam.name}}
+        </v-row>
+        <v-row style="font-size:5em; line-height: 1em;" class="font-weight-bold">
+            {{openMatch.awayTeam.name}}
         </v-row> -->
         
-        
+        <v-footer
+            app
+            color="var(--v-background-base)"
+            class="d-flex flex-column align-center py-5"
+        >
+            <div class="d-flex flex-column align-center" style="width:100%">
+                <guess-score-picker
+                    :guess="openGuess"
+                    :setGuess="setGuess"
+                    class="pb-5"
+                    big
+                />
+                <guess-lock-action />
+            </div>
+        </v-footer>
     </v-container>
 </template>
 
@@ -45,6 +36,11 @@ export default {
     data(){
         return{
             selectedTeamId: null,
+        }
+    },
+    methods:{
+        setGuess(val){
+            this.$store.commit('openGuess/setGuess', val);
         }
     },
     mounted(){

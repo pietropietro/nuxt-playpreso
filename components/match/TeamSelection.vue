@@ -6,7 +6,7 @@
                 <team-logo
                     :id="match.homeTeam.id"
                     :country="showCountry ? match.homeTeam.country : null"
-                    size="54"
+                    :size="logoSize"
                 />
             </div>
             <v-card 
@@ -33,7 +33,7 @@
                 <team-logo
                     :id="match.awayTeam.id"
                     :country="showCountry ? match.awayTeam.country : null"
-                    size="54"
+                    :size="logoSize"
                 />
             </div>
             <v-card 
@@ -54,7 +54,7 @@ export default {
     },
     data(){
         return{
-            logoSize: '54'
+            logoSize: '48'
         }
     },
     computed:{

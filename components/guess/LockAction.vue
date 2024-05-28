@@ -13,8 +13,10 @@
         <template v-slot:thumb-label="{ value }">
           <div class="slider-thumb-container">
             <div class="slider-thumb">
-                {{ sliderValue }}
-              <em-emoji native='🔓' size="3.5rem"/>
+                <em-emoji 
+                    :native="sliderValue < lockThreshold ? '🔓' : '🔒'" 
+                    size="3.5rem"
+                />
             </div>
           </div>
         </template>
@@ -27,17 +29,20 @@
   export default {
     data() {
       return {
+        lockThreshold: 90,
         sliderValue: 0
       };
     },
     methods: {
       onSlideEnd(value) {
-        if (value === 100) {
-          this.onUnlock();
+        if (value > this.lockThreshold) {
+          this.lock();
+          return;
         }
+        this.sliderValue=0;
       },
-      onUnlock() {
-        console.log('Unlocked!');
+      lock() {
+        console.log('do the lock thingy!');
       }
     }
   };
@@ -49,8 +54,9 @@
   .lock-slider {
     width: 95%;
     height: 50px; /* Adjust the height to make it bold */
-    background-color: #ccc;
-    border-radius:25px; /* Make the track background invisible */
+    /* background-color: var(--v-primary-darken1); */
+    background-color: 'transparent';
+    border-radius:12px; /* Make the track background invisible */
   }
 
   .lock-slider > .v-input__control {
@@ -67,12 +73,14 @@
     display: flex !important;
     align-items: center;
     justify-content: center;
+    transition: none !important; /* Disable the transition effect */
   }
 
   /* position thumb label where the actual slider should be */
   .v-slider__thumb-label {
     position: relative !important;
     margin-top:10px;
+    transition: none !important; /* Disable the transition effect */
   }
   
   .slider-thumb {

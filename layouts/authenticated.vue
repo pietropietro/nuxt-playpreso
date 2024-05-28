@@ -104,7 +104,7 @@ export default {
         z-index: 6 !important;
         position: fixed !important;
 
-        @media (min-width: 600px) {
+        @media (min-width: $pp-mobile-height) {
             width: $pp-mobile-width;
             left: calc(50% - #{$pp-mobile-width / 2}) !important;
         }
@@ -121,7 +121,7 @@ export default {
     }
 
     .menu-overlay {
-        @media (min-width: 600px) {
+        @media (min-width: $pp-mobile-height) {
             top: calc(50% - #{$pp-mobile-height / 2}); // Center vertically in the viewport
             left: calc(50% - #{$pp-mobile-width / 2}); // Center horizontally in the viewport
             z-index: 2; // Ensure it's above other content but below the app bar
@@ -135,10 +135,18 @@ export default {
 
     .app-desktop-body {
         width: 100%;
-         @media (min-width: 600px) {
+         @media (min-width: $pp-mobile-width) {
             position: fixed;
             width: $pp-mobile-width;
             height: 100%;
+        }
+    }
+
+    .v-footer {
+        width: 100%;
+        @media (min-width: $pp-mobile-width) {
+            width: $pp-mobile-width;
+            justify-self: center;
         }
     }
 

@@ -1,18 +1,38 @@
 <template>
-    <v-row v-if="id && !!imageSrc" :align="align" justify="center">
-    	<v-img :src="imageSrc" :width="size" :height="size" contain />
-    </v-row>
-	<v-row v-else justify="center" class="text-center ocrastd font-weight-bold">
-		<h2>P</h2>
-	</v-row>
+    <div>
+		<div>
+			<v-row v-if="id && !!imageSrc" :align="align" justify="center">
+				<v-img :src="imageSrc" :width="size" :height="size" contain />
+			</v-row>
+				<v-row v-else justify="center" class="text-center ocrastd font-weight-bold">
+					<h2>P</h2>
+				</v-row>
+		</div>
+		<div v-if="country"
+			class="text-center"
+		>
+			<emoji-flag 
+				:size="Math.round(size / 2).toString()"
+				:style="{
+					position: 'absolute',
+					marginTop: '-' + size / 4 + 'px'
+				}"
+				:model="country" 
+			/>
+		</div>
+	</div>
 </template>
 <script>
 
 export default {
 	props: {
 		id: { type: Number },
-		size: {type: Number, default: 55},
-		align: {type: String, default: 'start'}
+		size: {type: String, default: '55'},
+		align: {type: String, default: 'start'},
+		country: {
+			type: String
+		},
+		onClick: {type:Function}
 	},
 	data() {
 		return {
