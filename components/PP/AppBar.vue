@@ -8,7 +8,9 @@
         ref="appBar"
     >
         <transition name="fade">
-            <p-p-navigation-content v-show="!appBarHidden"/>
+            <p-p-navigation-content 
+                v-show="!appBarHidden"
+            />
         </transition>
     </v-app-bar>
 </template>

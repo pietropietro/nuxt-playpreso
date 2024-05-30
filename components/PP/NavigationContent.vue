@@ -1,16 +1,5 @@
 <template>
-    <v-row v-if="openMatch" no-gutters align="center">
-        <h4 class="ml-4">
-            {{formatDate(openMatch?.date_start,true)}}
-        </h4>
-        <v-spacer />
-        <div class="ocrastd mr-4" @click="closeGuess">
-            <h2>X</h2>
-        </div>
-    </v-row>
-    
-
-    <v-row v-else-if="$route.path !== '/' && navigationTitle && navigationOverline"
+    <v-row v-if="$route.path !== '/' && navigationTitle && navigationOverline"
         no-gutters align="center"
     >
         <div class="mx-4" @click="$router.go(-1)">
@@ -48,19 +37,6 @@
         <v-spacer/>
     </v-row>
 </template>
-
-<script>
-export default {
-   methods:{
-        async closeGuess(){
-            this.$store.dispatch(
-                'openGuess/update', 
-                {}
-            );
-        }
-   }
-}
-</script>
 
 <style scoped>
     .tilted-span {

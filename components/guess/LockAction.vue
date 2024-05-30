@@ -9,6 +9,9 @@
         class="lock-slider"
         @change="onSlideEnd"
         thumb-label
+        @click.stop="preventClick"
+        @mousedown.stop="preventClick"
+        :disabled="disabled"
       >
         <template v-slot:thumb-label="{ value }">
           <div class="slider-thumb-container">
@@ -30,7 +33,8 @@
     data() {
       return {
         lockThreshold: 90,
-        sliderValue: 0
+        sliderValue: 0,
+        disabled: false
       };
     },
     methods: {
@@ -42,8 +46,14 @@
         this.sliderValue=0;
       },
       lock() {
-        console.log('do the lock thingy!');
-      }
+        setTimeout(()=>{
+          // lock function here
+          //i.e. if actual slide action has occurred
+        }, 100)
+      },
+      preventClick(event) {
+        this.sliderValue=0;
+      },
     }
   };
   </script>

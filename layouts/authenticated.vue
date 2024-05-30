@@ -6,7 +6,10 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar class="safe-area"/>
-                    <p-p-app-bar class="pp-app-bar safe-area" :menu="menu" :setMenu="(val)=>menu=val"/>
+                    <p-p-app-bar class="pp-app-bar safe-area" 
+                        :menu="menu" :setMenu="(val)=>menu=val"
+                        v-if="!openMatch"
+                    />
                     
                     <!-- MENU -->
                     <!-- <v-overlay class="menu-overlay app-desktop-body" 

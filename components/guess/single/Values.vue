@@ -1,15 +1,15 @@
 <template>
-    <v-row justify="center" align="center" class="mx-4 text-center">
-        <v-col>
-            <h5>{{computed1X2}}</h5>
-        </v-col>
-        <v-col>
-            <h5>{{computedUO25}}</h5>
-        </v-col>
-        <v-col>
-            <h5>{{computedGGNG}}</h5>
-        </v-col>
-    </v-row>
+    <div class="overline lh-1">
+        <div>
+            {{computed1X2}}
+        </div>
+        <div>
+            {{computedUO25}}
+        </div>
+        <div>
+            {{computedGGNG}}
+        </div>
+    </div>
 </template>
 <script>
 export default {
