@@ -5,7 +5,13 @@
 				<v-img :src="imageSrc" :width="size" :height="size" contain />
 			</v-row>
 				<v-row v-else justify="center" class="text-center ocrastd font-weight-bold">
-					<h2>P</h2>
+					<span 
+						:style="{
+							fontSize: Math.round((size / 3) * 2).toString() + 'px'
+						}
+					">
+						P
+					</span>
 				</v-row>
 		</div>
 		<div v-if="country"

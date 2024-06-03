@@ -2,7 +2,7 @@
     <v-row>
         <v-spacer />
         <v-col cols="auto">
-            <div @click="setSelectedTeamId(match.homeTeam.id)">
+            <div @click="canSelect ? setSelectedTeamId(match.homeTeam.id) : null">
                 <team-logo
                     :id="match.homeTeam.id"
                     :country="showCountry ? match.homeTeam.country : null"
@@ -10,26 +10,26 @@
                 />
             </div>
             <v-card 
-                :color="selectedTeamId==match.homeTeam.id ? ppRGBA(openPPTournamentType.rgb) : 'transparent'"
+                :color="colorHome"
                 height="12px"
                 class="mt-6"
             />
         </v-col>
-        <v-spacer />
-        <v-col cols="6" sm="auto">
+        <!-- <v-spacer /> -->
+        <v-col cols="8" sm="auto">
             <v-row class="rounded-lg" style="overflow:hidden">
                 <v-col>
                     <match-team-names
                         :match="match"
-                        :rgb="openPPTournamentType.rgb"
+                        :rgb="openGuess.ppTournamentType.rgb"
                         :selectedTeamId="selectedTeamId"
                     />
                 </v-col>
             </v-row>
         </v-col>
-        <v-spacer />
+        <!-- <v-spacer /> -->
         <v-col cols="auto">
-            <div @click="setSelectedTeamId(match.awayTeam.id)">
+            <div @click="canSelect ? setSelectedTeamId(match.awayTeam.id) : null">
                 <team-logo
                     :id="match.awayTeam.id"
                     :country="showCountry ? match.awayTeam.country : null"
@@ -37,7 +37,7 @@
                 />
             </div>
             <v-card 
-                :color="selectedTeamId==match.awayTeam.id ? ppRGBA(openPPTournamentType.rgb, 0.6) : 'transparent'"
+                :color="colorAway"
                 height="12px"
                 class="mt-6"
             />
@@ -49,6 +49,7 @@
 export default {
     props:{
         match: {type: Object},
+        canSelect: {type: Boolean},
         selectedTeamId: {default: null},
         setSelectedTeamId: {type:Function}
     },
@@ -60,6 +61,16 @@ export default {
     computed:{
         showCountry(){
             return this.match.league.country != this.match.homeTeam.country;
+        },
+        colorHome(){
+            let color =  this.ppRGBA(this.openGuess.ppTournamentType.rgb);
+            if(!this.canSelect) return color;
+            return this.selectedTeamId==this.match.homeTeam.id ? color : 'transparent' ;
+        },
+        colorAway(){
+            let color =  this.ppRGBA(this.openGuess.ppTournamentType.rgb, 0.6);
+            if(!this.canSelect) return color;
+            return this.selectedTeamId==this.match.awayTeam.id ? color : 'transparent' ;
         }
     }
 }

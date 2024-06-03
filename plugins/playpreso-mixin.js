@@ -11,12 +11,6 @@ Vue.mixin({
         openGuess(){
             return  this.$store.state.openGuess.guess ?? null;;
         },
-        openMatch(){
-            return  this.$store.state.openGuess.match ?? null;;
-        },
-        openPPTournamentType(){
-            return  this.$store.state.openGuess.ppTournamentType ?? null;;
-        },
         navigationTitle(){
             return  this.$store.state.navigation.title ?? null;;
         },

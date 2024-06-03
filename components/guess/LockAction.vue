@@ -27,12 +27,11 @@
   </template>
   
   
-
   <script>
   export default {
     data() {
       return {
-        lockThreshold: 90,
+        lockThreshold: 75,
         sliderValue: 0,
         disabled: false
       };
@@ -63,14 +62,14 @@
 
   .lock-slider {
     width: 95%;
-    height: 50px; /* Adjust the height to make it bold */
+    height: 58px; /* Adjust the height to make it bold */
     /* background-color: var(--v-primary-darken1); */
     background-color: 'transparent';
     border-radius:12px; /* Make the track background invisible */
   }
 
   .lock-slider > .v-input__control {
-    padding-left: 30px;
+    padding-left: 10px;
     padding-right: 30px;
   }
   

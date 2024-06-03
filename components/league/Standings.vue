@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container fluid class="py-0">
         <v-row
           v-for="team in standings"
           :key="team.id"

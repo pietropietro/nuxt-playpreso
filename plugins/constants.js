@@ -41,6 +41,7 @@ Vue.mixin({
                     LOCK: '/guess/lock/',
                     USER_CURRENT: '/guess',
                     GET_FOR_TEAM: '/guess/team/',
+                    GET_EXTRA_DATA: '/guess/extra-data/',
                     GET_FOR_LEAGUE: '/guess/league/'
                 },
                 USER_PARTICIPATION: {

@@ -11,7 +11,9 @@ $material-dark: (
   navigation-drawer:var(--v-primary-base),
 );
 
-
+$chip-outlined-active-opacity: 0;
+$chip-selected-opacity: 0;
+$chip-transition-duration: 0s !default;
 
 $calendar-line-width:3px;
 $calendar-event-font-size: 16px;

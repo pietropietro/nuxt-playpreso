@@ -5,9 +5,9 @@
             justify="center"
             :style="{
                 height: '38px',
-                background: i== 1 ? backgroundHome : backgroundAway
             }"
         >
+        <!--                 background: i== 1 ? backgroundHome : backgroundAway -->
             <h3 class="ocrastd text-uppercase text-center px-2"
                 :ref="'teamName' + i"
             >

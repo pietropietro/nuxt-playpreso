@@ -90,6 +90,10 @@ body {
 	color: black
 }
 
+.theme--dark.v-chip {
+  border-color: white !important;
+}
+
 .blink {
 	animation: blinking 2s infinite;
 	// animation: blinking 3s linear ;

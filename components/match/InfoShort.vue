@@ -4,8 +4,8 @@
             <v-col>
                 <league-detail :league="match.league" />
             </v-col>
-            <v-col class="px-0" v-if="match.round" cols="auto">
-                <v-chip class="mx-2" x-small outlined label>R{{match.round}}</v-chip>            
+            <v-col class="px-0 overline lh-1" v-if="match.round" cols="auto">
+                R{{match.round}}          
             </v-col>
         </v-row>
         <v-row no-gutters>
