@@ -1,6 +1,6 @@
 <template>
     <v-chip-group 
-        class="text-center"
+        class="text-center chip-selection-pp"
         v-model="viewModel" 
         column 
         mandatory
@@ -69,3 +69,10 @@ export default {
     }
 }
 </script>
+
+<style>
+ .chip-selection-pp  .v-slide-group__content{
+  padding-bottom: 0 !important;
+}
+
+</style>

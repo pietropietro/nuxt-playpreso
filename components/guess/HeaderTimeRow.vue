@@ -1,59 +1,58 @@
 <template>
-    <div>
+    <div class="my-2">
         <v-row align="center">
             <span class="overline lh-1 ml-4">
                 {{formatDate(currentGuess?.match.date_start,true)}}
             </span>
-            <v-spacer/>
-            <div class="ocrastd font-weight-bold"
-                @click="setExtraRow(!extraRow)"
-            >
-               {{extraRow ? '-' : '+'}}
-            </div>
-            <v-spacer />
+             <v-spacer/>
             <em-emoji
                 :native="currentGuess.ppTournamentType.emoji"
                 size="5rem"
-                class="lh-1"
+                class="lh-1 mt-n4"
+                @click="setExtraRow(!extraRow)"
                 :style="{
                     rotate: extraRow ? '-8deg' : '-21deg'
                 }"
             />
             <v-spacer/>
         </v-row>
-        <v-row 
-            v-if="extraRow" style="background-color:var(--v-primary-darken3);"
-            class="my-4 py-2"
-        >
-            <v-slide-group
-                prev-icon="<"
-                next-icon=">"
-                id="slider"
+        <transition name="fade">
+            <v-row
+                v-if="extraRow"
+                style="background-color:var(--v-primary-darken3);"
+                class="my-4 py-2"
             >
-                <v-slide-item style="width:70px;">
-                    <div class="ocrastd text-center mt-3" @click="closeGuess">
-                        <h2>X</h2>
-                    </div> 
-                </v-slide-item>
-                <v-slide-item
-                    v-for="(guess,i) in currentGuessList"
-                    :key="guess.id"
-                    class="mx-2"
+                <v-slide-group
+                    prev-icon="<"
+                    next-icon=">"
+                    id="slider"
                 >
-                    <!-- width is necessary for slider to work on page landing :( -->
-                    <div style="min-width:50px; ">
-                        <guess-closed-box
-                            :guess="guess"
-                            :match="guess.match"
-                            :rgb="guess.ppTournamentType.rgb"
-                            :afterLock="()=>null"
-                            :onClick="()=>selectIndex(i)"
-                            size="50px"
-                        />
-                    </div>
-                </v-slide-item>
-            </v-slide-group>
-        </v-row>
+                    <v-slide-item style="width:70px;">
+                        <div class="ocrastd text-center mt-3" @click="closeGuess">
+                            <h2>X</h2>
+                        </div>
+                    </v-slide-item>
+                    <v-slide-item
+                        v-for="(guess,i) in currentGuessList"
+                        :key="guess.id"
+                        class="mx-2"
+                    >
+                        <!-- width is necessary for slider to work on page landing :( -->
+                        <div style="min-width:50px; ">
+                            <guess-closed-box
+                                :guess="guess"
+                                :match="guess.match"
+                                :rgb="guess.ppTournamentType.rgb"
+                                :afterLock="()=>null"
+                                :onClick="()=>selectIndex(i)"
+                                size="50px"
+                                :withLogo="false"
+                            />
+                        </div>
+                    </v-slide-item>
+                </v-slide-group>
+            </v-row>
+        </transition>
     </div>
 </template>
 
@@ -76,3 +75,16 @@ export default {
     }
 }
 </script>
+
+<style>
+/* Custom transition styles if needed */
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-leave-active {
+  transition: opacity 0s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

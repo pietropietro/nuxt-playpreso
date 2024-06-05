@@ -5,7 +5,7 @@
             color="var(--v-background-base)"
             flat 
             app
-            :height="extraRow ? '265px' : '180px'"
+            :height="extraRow ? '240px' : '160px'"
         >
             <v-container fluid class="pb-0">
                 <guess-header-time-row :extraRow="extraRow" :setExtraRow="(val)=>extraRow=val" />
@@ -43,7 +43,7 @@
         <v-footer
             app
             color="var(--v-background-base)"
-            class="d-flex flex-column align-center pt-5 pb-4 px-0"
+            class="d-flex flex-column align-center pt-4 pb-4 px-0"
         >
                 <v-row  
                     style="width:100%"

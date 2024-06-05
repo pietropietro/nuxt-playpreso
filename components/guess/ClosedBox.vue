@@ -21,6 +21,8 @@
                 <guess-closed-teams 
                     :rgb="rgb" 
                     :match="match" 
+                    :size="parseFloat(size)/2"
+                    :withLogo="withLogo"
                 />
             </v-col>
         </v-row>
@@ -33,7 +35,8 @@ export default {
         match: {type: Object, required: true},
         rgb: {type: String},
         onClick: {type: Function},
-        size: {type: String, default: '98px'}
+        size: {type: String, default: '98px'},
+        withLogo: {type:Boolean, default: true}
     },
     data(){
         return{
