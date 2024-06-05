@@ -29,16 +29,13 @@ export default {
         }
     },
     methods:{
-        async selectGuess(guess, match){
+        async selectGuess(guess){
+            let guessList = this.ppRMs.map(item => item.guess);
             await this.triggerHapticFeedback();
-            this.$store.dispatch(
-                'openGuess/update', 
-                {
-                    newGuess: guess,
-                    newMatch: match,
-                    newPPTournamentType: this.ppTournamentType
-                }
-            );
+            this.$store.dispatch('openGuesses/update', {
+                newGuess: guess,
+                newList: guessList, 
+            });
         }
     }
 }

@@ -16,24 +16,25 @@
         </v-row>
     </div>
 </template>
+
 <script>
 export default {
-    props:{
-        match: {type: Object},
-        rgb: {type: String},
-        selectedTeamId: {default:null}
+    props: {
+        match: { type: Object },
+        rgb: { type: String },
+        selectedTeamId: { default: null }
     },
-    computed:{
-        backgroundHome(){
-            if(!this.selectedTeamId || this.selectedTeamId == this.match.homeTeam.id) return this.ppRGBA(this.rgb);
-            return 'transparent'
+    computed: {
+        backgroundHome() {
+            if (!this.selectedTeamId || this.selectedTeamId == this.match.homeTeam.id) return this.ppRGBA(this.rgb);
+            return 'transparent';
         },
-        backgroundAway(){
-            if(!this.selectedTeamId || this.selectedTeamId == this.match.awayTeam.id) return this.ppRGBA(this.rgb, 0.6);
-            return 'transparent'
+        backgroundAway() {
+            if (!this.selectedTeamId || this.selectedTeamId == this.match.awayTeam.id) return this.ppRGBA(this.rgb, 0.6);
+            return 'transparent';
         }
     },
-    methods:{
+    methods: {
         checkWrapped() {
             for (let i = 1; i <= 2; i++) { // Assuming you have 2 elements as per your `v-for`
                 let refName = `teamName${i}`;
@@ -45,6 +46,12 @@ export default {
                     element = element[0];
                 }
                 if (!element) continue; // Skip if the element is not found
+
+                // Reset any previous marquee span and class
+                if (element.querySelector('span')) {
+                    element.textContent = element.querySelector('span').textContent;
+                }
+                element.classList.remove('marquee-team-name');
 
                 const elementHeight = element.offsetHeight;
                 const lineHeight = parseInt(window.getComputedStyle(element).lineHeight, 10);
@@ -64,21 +71,19 @@ export default {
                 element.textContent = ''; // Clear the element's text
                 element.appendChild(span); // Append the span with the text
             }
-        }
-    },
-    mounted(){
-        this.$nextTick(() => {
-            this.checkWrapped();
+        },
+        applyMarqueeAnimation() {
             const marquees = document.querySelectorAll('.marquee-team-name span');
 
             marquees.forEach(marquee => {
                 let parentWidth = marquee.parentElement.offsetWidth;
                 let contentWidth = marquee.offsetWidth;
-                let travelDistance = contentWidth - parentWidth;
+                let travelDistance = contentWidth - parentWidth + 10;
 
                 if (travelDistance > 0) {
+                    let keyframesName = `marquee-team-name-${marquee.textContent.trim().replace(/\s+/g, '-')}`;
                     let keyframes = `
-                        @keyframes marquee-team-name-${marquee.textContent.trim().replace(/\s+/g, '-')} {
+                        @keyframes ${keyframesName} {
                             0% { transform: translateX(0); }
                             50% { transform: translateX(-${travelDistance}px); }
                             100% { transform: translateX(0); }
@@ -91,13 +96,56 @@ export default {
                     styleSheet.innerText = keyframes;
                     document.head.appendChild(styleSheet);
 
-                    marquee.style.animation = `marquee-team-name-${marquee.textContent.trim().replace(/\s+/g, '-')} 8s linear infinite`;
+                    // Remove and re-add the animation class to restart the animation
+                    marquee.style.animation = 'none';
+                    marquee.offsetHeight; // Trigger a reflow
+                    marquee.style.animation = `${keyframesName} 8s linear infinite`;
                 }
+            });
+        },
+        updateTeamNames() {
+            for (let i = 1; i <= 2; i++) {
+                let refName = `teamName${i}`;
+                if (this.$refs[refName]) {
+                    let element = this.$refs[refName];
+                    if (Array.isArray(element)) {
+                        element = element[0];
+                    }
+                    if (element) {
+                        element.textContent = (i === 1) ? this.match.homeTeam.name : this.match.awayTeam.name;
+                    }
+                }
+            }
+        }
+    },
+    watch: {
+        match: {
+            deep: true,
+            handler() {
+                this.$nextTick(() => {
+                    this.updateTeamNames();
+                    this.$nextTick(() => {
+                        this.checkWrapped();
+                        this.$nextTick(() => {
+                            this.applyMarqueeAnimation();
+                        });
+                    });
+                });
+            }
+        }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.checkWrapped();
+            this.$nextTick(() => {
+                this.applyMarqueeAnimation();
             });
         });
     }
 }
 </script>
+
+
 <style>
 .marquee-team-name {
         white-space: nowrap;

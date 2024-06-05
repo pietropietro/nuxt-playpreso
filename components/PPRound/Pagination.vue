@@ -54,12 +54,7 @@ export default {
 </script>
 
 <style>
-    .pagination-arrows-only .v-pagination__item{
-        display: none !important;
-    }
-    .pagination-arrows-only .v-pagination__more{
-        display: none;
-    }
+
     .v-pagination__navigation{
         box-shadow: none !important;
     }

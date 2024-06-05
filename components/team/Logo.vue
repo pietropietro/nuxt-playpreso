@@ -60,7 +60,8 @@ export default {
 	//needed when used in slot (i.e. wrapped slide team/league)
 	watch: {
         async id (newId, oldId) {
-           await this.getLogo();
+			this.imageSrc = null;
+           	await this.getLogo();
         },
     },
 };

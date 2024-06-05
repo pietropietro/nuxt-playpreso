@@ -18,17 +18,17 @@
 <script>
 export default {
     props: {
-        guess: {type: Object},
+        score: {type: Array},
     },
     computed:{
         computed1X2(){
-            return this.guess.home === this.guess.away ? 'X' : this.guess.home > this.guess.away ? '1' : '2';
+            return this.score[0] === this.score[1] ? 'X' : this.score[0] > this.score[1] ? '1' : '2';
         },
         computedUO25(){
-            return this.guess.home + this.guess.away > 2 ? 'OVER' : 'UNDER'
+            return this.score[0] + this.score[1] > 2 ? 'OVER' : 'UNDER'
         },
         computedGGNG(){
-            return this.guess.home > 0 && this.guess.away > 0 ? 'GOL' : 'NO GOL';
+            return this.score[0] > 0 && this.score[1] > 0 ? 'GOL' : 'NO GOL';
         }
 
     }

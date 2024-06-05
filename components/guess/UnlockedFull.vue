@@ -5,14 +5,14 @@
             color="var(--v-background-base)"
             flat 
             app
-            height="180px"
+            :height="extraRow ? '265px' : '180px'"
         >
             <v-container fluid class="pb-0">
-                <guess-header-time-row />
+                <guess-header-time-row :extraRow="extraRow" :setExtraRow="(val)=>extraRow=val" />
                 <match-team-selection
-                    v-if="openGuess"
+                    v-if="currentGuess"
                     class="pt-2"
-                    :match="openGuess.match"
+                    :match="currentGuess.match"
                     :canSelect="canSelectTeam"
                     :selectedTeamId="selectedTeamId"
                     :setSelectedTeamId="(val)=>selectedTeamId=val"
@@ -25,17 +25,20 @@
             </v-container>
         </v-app-bar>
         
+        <loading-page v-if="loadingExtraData" />
         
-        <league-standings 
-            v-if="selectedView == 'league'" 
-            :standings="leagueStandings"
-            :highlightTeamIds="[openGuess.match.homeTeam.id,openGuess.match.awayTeam.id]"
-        />
-        <team-last-matches
-            v-else-if="selectedView == 'last-5'" 
-            :lastMatches="lastMatches"
-            :selectedTeamId="selectedTeamId"
-        />
+        <template v-else>
+            <league-standings
+                v-if="selectedView == 'league'"
+                :standings="leagueStandings"
+                :highlightTeamIds="[currentGuess.match.homeTeam.id,currentGuess.match.awayTeam.id]"
+            />
+            <team-last-matches
+                v-else-if="selectedView == 'last-5'"
+                :lastMatches="lastMatches"
+                :selectedTeamId="selectedTeamId"
+            />
+        </template>
 
         <v-footer
             app
@@ -48,15 +51,22 @@
                 >
                     <v-col cols="6">
                         <guess-score-picker
-                            :guess="openGuess"
-                            :setGuess="setGuess"
+                            :score="score"
+                            :setScore="(val)=>score=val"
+                            :disabled="viewDisabled"
                             big
                         />
                     </v-col>
                     <v-spacer />
                     <v-col cols="5">
-                        <v-row>
-                            <guess-lock-action />
+                        <v-row justify="center">
+                            <guess-lock-action 
+                                :score="score"
+                                :guess_id="currentGuess.id"
+                                :afterLock="afterLock"
+                                :disabled="viewDisabled"
+                                :setDisabled="(val)=>viewDisabled = val"
+                            />
                         </v-row>
                     </v-col>
                 </v-row>
@@ -67,14 +77,11 @@
                 >
                     <v-col cols="6" class="px-0">
                         <guess-single-values 
-                            :guess="openGuess"
+                            :score="score"
                         />
                     </v-col>
                     <v-spacer />
                     <v-col cols="5" class="px-0">
-                        <v-row no-gutters>
-                            <v-col class="caption  text-center font-italic">slide to lock</v-col>
-                        </v-row>
                     </v-col>
                 </v-row>
         </v-footer>
@@ -85,30 +92,44 @@
 export default {
     data(){
         return{
+            extraRow: false,
             selectedTeamId: null,
             selectedView: 'league',
-            loading: false,
+            loadingExtraData: false,
             leagueStandings: [],
-            lastMatches: null
+            lastMatches: null,
+            viewDisabled: false,
+            score: [0,0]
         }
     },
     computed:{
         canSelectTeam(){
             if(this.selectedView == 'last-5'){
-                this.selectedTeamId = this.openGuess.match.homeTeam.id;
+                this.selectedTeamId = this.currentGuess.match.homeTeam.id;
                 return true;
             }
             return false;
         }
     },
+    watch: {
+        currentGuess: {
+            deep: true,
+            async handler() {
+                this.score = [0,0];
+                await this.getExtraData();
+            }
+        }
+    },
     methods:{
         setGuess(val){
-            this.$store.commit('openGuess/setGuess', val);
+            this.$store.dispatch('openGuesses/updateCurrentGuess', {
+                    guess: val
+                });
         },
         async getExtraData(){
-            this.loading = true;
+            this.loadingExtraData = true;
 			try {
-				const response = await this.$api.call(this.API_ROUTES.GUESS.GET_EXTRA_DATA + this.openGuess.id);
+				const response = await this.$api.call(this.API_ROUTES.GUESS.GET_EXTRA_DATA + this.currentGuess.id);
 				if (response && response.status === 'success') {
 					let extraData = response.message;
                     this.leagueStandings = extraData.leagueStandings;
@@ -117,11 +138,13 @@ export default {
 			} catch (error) {
 				console.error('Error fetching extra data:', error);
 			}
-			this.loading = false;
+			this.loadingExtraData = false;
+        },
+        afterLock(){
+            this.removeGuessFromCurrentList(this.currentGuess.id);
         }
     },
     async mounted(){
-        // this.selectedTeamId = this.openGuess.match.homeTeam.id;
         await this.getExtraData();
     }
 }

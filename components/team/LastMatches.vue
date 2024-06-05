@@ -59,7 +59,7 @@ export default {
                 [match.score_away, match.score_home];
 
             if(scoreArr[0] > scoreArr[1]) return 'W';
-            if(scoreArr[0] == scoreArr[2]) return 'D';
+            if(scoreArr[0] == scoreArr[1]) return 'D';
             return 'L'
         }
     }

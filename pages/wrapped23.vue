@@ -36,7 +36,7 @@
                 :locks="wrappedData.high_team_tot_locks"
                 :guesses="highTeamGuesses"
             >
-                <team-logo :id="wrappedData.high_team_id" :size="40" slot="icon"/>
+                <team-logo :id="wrappedData.high_team_id" size="40" slot="icon"/>
             </wrapped-slide-team-league>
         </template>
         <template #lowTeam>
@@ -48,7 +48,7 @@
                 :locks="wrappedData.low_team_tot_locks"
                 :guesses="lowTeamGuesses"
             >
-                <team-logo :id="wrappedData.low_team_id" :size="40" slot="icon"/>
+                <team-logo :id="wrappedData.low_team_id" size="40" slot="icon"/>
             </wrapped-slide-team-league>
         </template>
         <template #highLeague>

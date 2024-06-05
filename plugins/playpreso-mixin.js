@@ -8,8 +8,20 @@ init({ data })
 
 Vue.mixin({
     computed: {
-        openGuess(){
-            return  this.$store.state.openGuess.guess ?? null;;
+        currentGuess() {
+            return this.$store.getters['openGuesses/currentGuess'];
+        },
+        currentGuessList() {
+            return this.$store.state.openGuesses.list;
+        },
+        currentGuessIndex() {
+            return this.$store.state.openGuesses.currentIndex;
+        },
+        canIncreaseOpenGuessIndex() {
+            return this.currentGuessIndex !== null && this.currentGuessIndex < this.currentGuessList.length - 1;
+        },
+        canDecreaseOpenGuessIndex() {
+            return this.currentGuessIndex !== null && this.currentGuessIndex > 0;
         },
         navigationTitle(){
             return  this.$store.state.navigation.title ?? null;;
@@ -22,6 +34,14 @@ Vue.mixin({
         }
     },
     methods:{
+        removeGuessFromCurrentList(guessId) {
+            const newList = this.currentGuessList.filter(guess => guess.id !== guessId);
+            this.$store.dispatch('openGuesses/updateList', { newList });
+        },
+        changeSelectedGuessIndex(direction){
+            if(!['increase','decrease'].includes(direction))return;
+            this.$store.dispatch('openGuesses/changeIndex', direction);
+        },
         isMissed(guess){
             return guess.verified_at && !guess.guessed_at;
         },

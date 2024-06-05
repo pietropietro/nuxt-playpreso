@@ -8,7 +8,7 @@
                     <snackbar class="safe-area"/>
                     <p-p-app-bar class="pp-app-bar safe-area" 
                         :menu="menu" :setMenu="(val)=>menu=val"
-                        v-if="!openMatch"
+                        v-if="!currentGuess"
                     />
                     
                     <!-- MENU -->
@@ -21,12 +21,13 @@
                     
                     <!-- APP -->
                     <!-- TODO MAYBE DELETE MENU && POS FIXED.. -->
-                    <v-main class="pt-sm-16" 
+                    <!--                         class="pt-sm-16"  -->
+                    <v-main 
                         :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
                     >   
                         <!-- <p-p-share-marquee /> -->
                         <guess-unlocked-full 
-                            v-if="openGuess"
+                            v-if="currentGuess"
                         />
                         <nuxt v-else/>
                     </v-main>

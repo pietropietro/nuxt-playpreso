@@ -1,7 +1,7 @@
 <template>
     <v-container fill-height>
         <v-row justify="center" align="center">
-            <half-circle-spinner :color="'var(--v-' + color + '-base)'" :size="80"/>
+            <half-circle-spinner :color="'var(--v-' + color + '-base)'" :size="size"/>
         </v-row>
     </v-container>
 </template>
@@ -11,7 +11,8 @@ import {HalfCircleSpinner} from 'epic-spinners/dist/lib/epic-spinners.min.js'
 export default {
     name: "LoadingPage",
     props:{
-        color: {type: String}
+        color: {type: String},
+        size: {type: Number, default: 80}
     },
     components:{
         HalfCircleSpinner

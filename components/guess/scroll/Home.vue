@@ -69,16 +69,12 @@
                 this.guesses['locked'].push(this.selectedGuess);  
                 this.selectedGuess = null;      
             },
-            async selectGuess(guess, match){
+            async selectGuess(guess) {
                 await this.triggerHapticFeedback();
-                this.$store.dispatch(
-                    'openGuess/update', 
-                    {
-                        newGuess: guess,
-                        newMatch: match,
-                        newPPTournamentType: guess.ppTournamentType
-                    }
-                );
+                this.$store.dispatch('openGuesses/update', {
+                    newGuess: guess,
+                    newList: this.guesses['unlocked'], 
+                });
             }
         },
         async mounted(){
