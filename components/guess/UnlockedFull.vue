@@ -5,22 +5,40 @@
             color="var(--v-background-base)"
             flat 
             app
-            :height="extraRow ? '240px' : '160px'"
+            :height="!!extraRow ? '250px' : '150px'"
         >
-            <v-container fluid class="pb-0">
-                <guess-header-time-row :extraRow="extraRow" :setExtraRow="(val)=>extraRow=val" />
+            <v-container fluid class="pa-0" style="height: 100%;">
+                <guess-header-row 
+                    :extraRow="extraRow" 
+                    :setExtraRow="(val)=>extraRow=val"
+                    class=""
+                />
+                <!-- <transition name="fade"> -->
+                    <guess-current-scroll
+                        v-if="extraRow == 'guessScroll'"
+                        :onSelect="selectIndex"
+                        class="my-4 py-2"
+                    />
+                    <user-participation-summary-row 
+                        v-else-if="extraRow == 'userParticipation'"
+                        :userParticipation="userParticipation" 
+                        class="my-4 py-2 pl-4"
+                    />
+                <!-- </transition> -->
                 <match-team-selection
                     v-if="currentGuess"
-                    class="pt-2"
+                    class="mt-0"
                     :match="currentGuess.match"
                     :canSelect="canSelectTeam"
                     :selectedTeamId="selectedTeamId"
                     :setSelectedTeamId="(val)=>selectedTeamId=val"
+                    :onTeamNamesClick="()=> extraRow = (extraRow=='guessScroll' ? null : 'guessScroll')"
                 />
                 <guess-view-selection
-                    class="pt-2"
+                    class="pt-4"
                     :selectedView="selectedView"
                     :setSelectedView="(val)=>selectedView=val"
+                    :selectableViews="selectableViews"
                 />
             </v-container>
         </v-app-bar>
@@ -29,12 +47,13 @@
         
         <template v-else>
             <league-standings
-                v-if="selectedView == 'league'"
+                v-if="selectedView == 'standings'"
                 :standings="leagueStandings"
+                :rgb="currentGuess.ppTournamentType?.rgb"
                 :highlightTeamIds="[currentGuess.match.homeTeam.id,currentGuess.match.awayTeam.id]"
             />
             <team-last-matches
-                v-else-if="selectedView == 'last-5'"
+                v-else-if="selectedView == 'lastMatches'"
                 :lastMatches="lastMatches"
                 :selectedTeamId="selectedTeamId"
             />
@@ -92,12 +111,13 @@
 export default {
     data(){
         return{
-            extraRow: false,
+            extraRow: null,
             selectedTeamId: null,
-            selectedView: 'league',
+            selectedView: 'standings',
             loadingExtraData: false,
             leagueStandings: [],
             lastMatches: null,
+            userParticipation: null,
             viewDisabled: false,
             score: [0,0]
         }
@@ -109,6 +129,17 @@ export default {
                 return true;
             }
             return false;
+        },
+        selectableViews(){
+            let views = {date:0, standings:1, lastMatches:1};
+
+            if(!this.leagueStandings){
+                views.standings = 0;
+            }
+            if(!this.lastMatches){
+                views.lastMatches = 0;
+            }
+            return views;
         }
     },
     watch: {
@@ -117,6 +148,7 @@ export default {
             async handler() {
                 this.score = [0,0];
                 await this.getExtraData();
+                console.log(this.currentGuess);
             }
         }
     },
@@ -134,6 +166,7 @@ export default {
 					let extraData = response.message;
                     this.leagueStandings = extraData.leagueStandings;
                     this.lastMatches = extraData.lastMatches;
+                    this.userParticipation = extraData.userParticipation;
 				}
 			} catch (error) {
 				console.error('Error fetching extra data:', error);
@@ -142,6 +175,12 @@ export default {
         },
         afterLock(){
             this.removeGuessFromCurrentList(this.currentGuess.id);
+        },
+        selectIndex(i){
+            this.$store.dispatch(
+                'openGuesses/updateCurrentIndex', {newIndex: i,}
+            );
+            this.extraRow = null;
         }
     },
     async mounted(){
@@ -149,3 +188,16 @@ export default {
     }
 }
 </script>
+
+<style>
+/* Custom transition styles if needed */
+.fade-enter-active {
+  transition: opacity 0.3s;
+}
+.fade-leave-active {
+  transition: opacity 0s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

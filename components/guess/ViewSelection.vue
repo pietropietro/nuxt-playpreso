@@ -1,65 +1,81 @@
 <template>
-    <v-chip-group 
-        class="text-center chip-selection-pp"
-        v-model="viewModel" 
-        column 
-        mandatory
+    <v-slide-group
+        prev-icon="<"
+        next-icon=">"
+        id="slider"
     >
-    <!-- :cols=" selectedView==tab ? '' :  'auto'" -->
+        <v-slide-item
+            v-for="tab in Object.keys(selectableViews)" 
+            :key="tab"
+            class="mx-2"
+        >
+            <v-chip v-if="tab=='date'"
+                class="overline lh-1"
+                style="min-width:50px; opacity: 1 !important"
+                small
+                color="transparent"
+                disabled
+            > 
+                <em-emoji
+                    v-if="isWithinNext24Hours(currentGuess.match?.date_start)"
+                    native="alarm_clock"
+                    size="1.5em"
+                    class="mr-2"
+                />
+                {{formatDate(currentGuess?.match.date_start,true)}}
+            </v-chip>
 
-        <v-row no-gutters>
-            <v-col 
-                v-for="tab in ['league', 'last-5', ]" 
-                :key="tab"
-                cols="auto"
+            <v-chip 
+                v-else
+                small
+                :outlined="selectedView==tab"
+                :color="selectedView==tab ? '' : 'transparent'" 
+                :value="tab"
+                @click="setSelectedView(tab)"
+                style="min-width:50px; opacity: 1 !important"
+                :disabled="selectableViews[tab]==0"
             >
-                <v-chip 
-                    small
-                    :outlined="selectedView==tab"
-                    :color="selectedView==tab ? '' : 'transparent'" 
-                    :value="tab"
-                >
-                    <template  v-if="tab=='league'">
-                        <emoji-flag 
-                            :model="currentGuess.match.league.country" 
-                            size="1.5em"
-                            class="mr-2"
-                        />
-                        <span
-                            class="overline lh-1"
-                            v-if="currentGuess.match.league.parent"
-                        >
-                            {{ currentGuess.match.league.parent.name }}&nbsp;&ndash;&nbsp;
-                        
-                        </span>
-                        <span
-                            class="overline lh-1"
-                        >
-                            {{ currentGuess.match.league.name }}
-                        
-                        </span>
-                    </template>
-                    <template  v-else-if="tab=='last-5'">
-                        <span class="overline lh-1">last 5</span>
-                    </template>
-                    <template  v-else-if="tab=='pptt'">
-                        <em-emoji 
-                            :native="currentGuess.ppTournamentType.emoji"
-                            size="3em"
-                        />
-                    </template>
+                <template  v-if="tab=='standings'">
+                    <emoji-flag 
+                        :model="currentGuess.match.league.country" 
+                        size="1.5em"
+                        class="mr-2"
+                    />
+                    <span
+                        class="overline lh-1"
+                        v-if="currentGuess.match.league.parent"
+                    >
+                        {{ currentGuess.match.league.parent.name }}&nbsp;&ndash;&nbsp;
                     
-                    <span class="overline lh-1" v-else>{{ tab }}</span>
-                </v-chip>
-            </v-col>
-        </v-row>
-    </v-chip-group>
+                    </span>
+                    <span
+                        class="overline lh-1"
+                    >
+                        {{ currentGuess.match.league.name }}
+                    
+                    </span>
+                </template>
+                <template  v-else-if="tab=='lastMatches'">
+                    <span class="overline lh-1">last 5</span>
+                </template>
+                <template  v-else-if="tab=='pptt'">
+                    <em-emoji 
+                        :native="currentGuess.ppTournamentType.emoji"
+                        size="3em"
+                    />
+                </template>
+                
+                <span class="overline lh-1" v-else>{{ tab }}</span>
+            </v-chip>
+        </v-slide-item>
+    </v-slide-group>
 </template>
 <script>
 export default {
     props:{
         selectedView: {type: String},
-        setSelectedView: {type: Function}
+        setSelectedView: {type: Function},
+        selectableViews: {type: Object}
     },
     computed:{
         viewModel:{

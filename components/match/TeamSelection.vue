@@ -18,7 +18,9 @@
         <v-spacer  v-if="$vuetify.breakpoint.smAndUp"/>
         <v-col cols="8" sm="auto">
             <v-row class="rounded-lg" style="overflow:hidden">
-                <v-col>
+                <v-col
+                    @click="onTeamNamesClick"
+                >
                     <match-team-names
                         :match="match"
                         :rgb="currentGuess.ppTournamentType.rgb"
@@ -51,7 +53,8 @@ export default {
         match: {type: Object},
         canSelect: {type: Boolean},
         selectedTeamId: {default: null},
-        setSelectedTeamId: {type:Function}
+        setSelectedTeamId: {type:Function},
+        onTeamNamesClick: {type: Function}
     },
     data(){
         return{
@@ -72,6 +75,6 @@ export default {
             if(!this.canSelect) return color;
             return this.selectedTeamId==this.match.awayTeam.id ? color : 'transparent' ;
         }
-    }
+    },
 }
 </script>

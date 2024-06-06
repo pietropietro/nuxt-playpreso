@@ -56,7 +56,6 @@ Vue.mixin({
                 someDate.getFullYear() == today.getFullYear()
         },
         isWithinNext24Hours(dateString) {
-            if(!this.guess || !this.match)return false;
             // Get the current timestamp
             let currentTime = new Date().getTime();
 

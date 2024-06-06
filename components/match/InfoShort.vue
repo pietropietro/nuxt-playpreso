@@ -10,7 +10,8 @@
         </v-row>
         <v-row no-gutters>
             <v-col>
-                <div v-html="nameToCompactHtml(this.match.homeTeam?.name)" />
+               <div v-html="nameToCompactHtml(this.match.homeTeam?.name)" >
+               </div>
                 <div v-html="nameToCompactHtml(this.match.awayTeam?.name)" />
             </v-col>
             <v-col cols="auto" class="pl-0" v-if="match.verified_at" >
