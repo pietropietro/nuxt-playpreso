@@ -3,14 +3,14 @@
         <v-row justify="center" align="center">
             <v-spacer/>
             <v-col cols="auto">
-                    <guess-single-card
+                    <!-- <guess-single-card
                         :match="motd.match"
                         :guess="motd.guess"
                         :afterLock="afterLock"
                         :rgb="motdPPTT.rgb"
                         :selectedGuessId="selectedGuessId"
                         :setSelectedGuessId="(val)=>selectedGuessId = val"
-                    />
+                    /> -->
             </v-col>
             <v-spacer/>
             <v-col class="text-center px-0">

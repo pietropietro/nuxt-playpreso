@@ -10,8 +10,8 @@
             <v-container fluid class="pa-0" style="height: 100%;">
                 <guess-header-row 
                     :extraRow="extraRow" 
-                    :setExtraRow="(val)=>extraRow=val"
-                    class=""
+                    :setExtraRow="setExtraRow"
+                    :userParticipation="userParticipation"
                 />
                 <!-- <transition name="fade"> -->
                     <guess-current-scroll
@@ -32,7 +32,7 @@
                     :canSelect="canSelectTeam"
                     :selectedTeamId="selectedTeamId"
                     :setSelectedTeamId="(val)=>selectedTeamId=val"
-                    :onTeamNamesClick="()=> extraRow = (extraRow=='guessScroll' ? null : 'guessScroll')"
+                    :onTeamNamesClick="()=> setExtraRow(extraRow=='guessScroll' ? null : 'guessScroll')"
                 />
                 <guess-view-selection
                     class="pt-4"
@@ -113,7 +113,7 @@ export default {
         return{
             extraRow: null,
             selectedTeamId: null,
-            selectedView: 'standings',
+            selectedView: null,
             loadingExtraData: false,
             leagueStandings: [],
             lastMatches: null,
@@ -124,20 +124,20 @@ export default {
     },
     computed:{
         canSelectTeam(){
-            if(this.selectedView == 'last-5'){
+            if(this.selectedView == 'lastMatches'){
                 this.selectedTeamId = this.currentGuess.match.homeTeam.id;
                 return true;
             }
             return false;
         },
         selectableViews(){
-            let views = {date:0, standings:1, lastMatches:1};
+            let views = {date:0, standings:1};
 
             if(!this.leagueStandings){
                 views.standings = 0;
             }
-            if(!this.lastMatches){
-                views.lastMatches = 0;
+            if(this.lastMatches?.home.length || this.lastMatches?.away.length ){
+                views.lastMatches = 1;
             }
             return views;
         }
@@ -148,7 +148,7 @@ export default {
             async handler() {
                 this.score = [0,0];
                 await this.getExtraData();
-                console.log(this.currentGuess);
+                this.setDefaultView();                
             }
         }
     },
@@ -181,10 +181,24 @@ export default {
                 'openGuesses/updateCurrentIndex', {newIndex: i,}
             );
             this.extraRow = null;
+        },
+        setDefaultView(){
+            this.selectedView = null;
+            for (let menuKey in this.selectableViews) {
+                if (this.selectableViews[menuKey] === 1) {
+                    this.selectedView = menuKey;
+                    break;
+                }
+            }
+        },
+        setExtraRow(val){
+            if(this.loading) return;
+            this.extraRow=val;
         }
     },
     async mounted(){
         await this.getExtraData();
+        this.setDefaultView();
     }
 }
 </script>
@@ -192,10 +206,10 @@ export default {
 <style>
 /* Custom transition styles if needed */
 .fade-enter-active {
-  transition: opacity 0.3s;
+  transition: opacity 1.5s;
 }
 .fade-leave-active {
-  transition: opacity 0s;
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;

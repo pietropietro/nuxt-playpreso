@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="py-0 pr-0">
+    <v-container fluid class="py-0 pr-0" v-if="selectedMatches?.length">
         <v-row
             v-for="match in selectedMatches"
             :key="match.id"
@@ -23,8 +23,10 @@
                 </h1>
             </v-col>
         </v-row>
-        
     </v-container>
+    <v-row v-else style="height:100%" align="center" justify="center">
+        <em-emoji id="man-shrugging" size="5em" style="rotate:-18deg"/>
+    </v-row>
 </template>
 <script>
 export default {
@@ -39,17 +41,12 @@ export default {
             const awayMatches = this.lastMatches.away;
             
             const homeCount = homeMatches.filter(match => match.home_id === this.selectedTeamId).length;
-            const awayCount = awayMatches.filter(match => match.away_id === this.selectedTeamId).length;
+            const awayCount = homeMatches.filter(match => match.away_id === this.selectedTeamId).length;
 
-            // Determine if the selected team is home or away in the majority of the matches
-            if (homeCount === homeMatches.length) {
+            if(homeCount + awayCount == homeMatches.length){
                 return homeMatches;
-            } else if (awayCount === awayMatches.length) {
-                return awayMatches;
-            } else {
-                // Fallback logic: decide based on the majority or return an empty array if it's ambiguous
-                return homeCount > awayCount ? homeMatches : awayMatches;
             }
+            if(awayMatches.length) return awayMatches;
         }
     },
     methods:{

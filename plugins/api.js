@@ -21,8 +21,6 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
                   return cache.data; // Return cached data if valid
                 }
 
-                console.log('caching')
-
             }
 
             let resp;

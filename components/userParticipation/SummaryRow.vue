@@ -1,11 +1,13 @@
 <template>
     <v-row
+        no-gutters
         style="background-color:var(--v-primary-darken3);"
     >      
-        <v-col style="height: 50px;" >
+        <v-col  >
             <div 
                 class="overline lh-1 font-weight-bold"
                 @click="goToTournament"
+                style="height: 50px;"
             >
                 {{userParticipation.ppTournamentType.name}}
                 <span v-if="userParticipation.ppTournamentType.level"><br>{{userParticipation.ppTournamentType.level}}</span>

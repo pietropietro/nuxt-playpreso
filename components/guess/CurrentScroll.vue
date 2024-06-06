@@ -1,5 +1,6 @@
 <template>
     <v-row
+        no-gutters
         style="background-color:var(--v-primary-darken3);"
     >
         <v-slide-group

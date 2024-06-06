@@ -10,10 +10,10 @@
                 :native="currentGuess.ppTournamentType.emoji"
                 size="5rem"
                 class="lh-1 mt-n1"
-                @click="setExtraUp"
                 :style="{
                     rotate: !!extraRow ? '-8deg' : '-21deg'
                 }"
+                @click="goToTournament" 
             />
             <v-spacer/>
         </v-row>
@@ -23,7 +23,8 @@
 export default {
     props:{
         extraRow: {type: String},
-        setExtraRow: {type: Function}
+        setExtraRow: {type: Function},
+        userParticipation: {type: Object}
     },
     methods:{
         setExtraUp(){
@@ -34,6 +35,12 @@ export default {
             this.setExtraRow('userParticipation');
         },
         closeGuess(){
+            this.$store.dispatch('openGuesses/clear');
+        },
+        goToTournament(){
+            let route = this.userParticipation.ppLeague_id ? this.ROUTES.PPLEAGUE.DETAIL + this.userParticipation.ppLeague_id
+                    : this.ROUTES.PPCUP.DETAIL + this.userParticipation.ppCup_id + '/' + this.userParticipation.ppCupGroup_id;
+            this.$router.push(route);
             this.$store.dispatch('openGuesses/clear');
         }
     }

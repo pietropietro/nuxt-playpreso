@@ -26,9 +26,9 @@
                         :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
                     >   
                         <!-- <p-p-share-marquee /> -->
-                        <guess-unlocked-full 
+                            <guess-unlocked-full
                             v-if="currentGuess"
-                        />
+                            />
                         <nuxt v-else/>
                     </v-main>
                 </template>
