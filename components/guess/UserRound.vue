@@ -1,19 +1,22 @@
 <template>
-    <v-row>
+    <v-row 
+        align="center" 
+        justify="center" 
+        class="text-center" 
+        no-gutters
+    >  
         <v-col 
-            v-for="pprm, index in ppRMs" :key="index"
-            cols="12"
-            :class="index == 1 && !$vuetify.breakpoint.mdAndUp ? 'my-2' : ''"
+            cols="4"
+            v-for="pprm, index in ppRMs" 
+            :key="index"
         >
-            <v-row justify="center" >
-                <guess-closed-box
-                    :guess="pprm.guess"
-                    :match="pprm.match"
-                    :rgb="ppTournamentType.rgb"
-                    :onClick="selectGuess"
-                />
-                <!--                     :afterLock="afterLock" -->
-            </v-row>
+            <guess-closed-box
+                style="min-width:100px; max-width:100px;"
+                :guess="pprm.guess"
+                :match="pprm.match"
+                :rgb="ppTournamentType.rgb"
+                :onClick="selectGuess"
+            />
         </v-col>
     </v-row>
 </template>
@@ -30,6 +33,7 @@ export default {
     },
     methods:{
         async selectGuess(guess){
+            if(guess.guessed_at || guess.verified_at)return;
             let guessList = this.ppRMs.map(item => item.guess);
             await this.triggerHapticFeedback();
             this.$store.dispatch('openGuesses/update', {

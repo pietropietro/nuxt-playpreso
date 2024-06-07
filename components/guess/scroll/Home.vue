@@ -22,7 +22,7 @@
                     class="mx-2"
                 >
                     <!-- width is necessary for slider to work on page landing :( -->
-                    <div style="min-width:75px; max-width:130px;">
+                    <div style="min-width:100px; max-width:100px;">
                         <guess-closed-box
                             :guess="guess"
                             :match="guess.match"

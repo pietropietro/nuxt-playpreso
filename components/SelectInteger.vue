@@ -6,7 +6,7 @@
         >
             {{computedModel}}
         </h1>
-        <h4 v-if="!max && computedModel === 3">+</h4>
+        <h4 v-if="maxNumber && computedModel === maxNumber">+</h4>
     </v-row>
 </template>
 <script>
@@ -16,8 +16,7 @@ export default {
         model: {type: Number},
         setModel: {type: Function},
         justify: {type: String},
-        limit: {type:Boolean, default:true},
-        max:{type: Number},
+        maxNumber:{type: Number, default: 3},
         big: {type:Boolean, default: false}
     },
     computed: {
@@ -25,15 +24,12 @@ export default {
             get(){return this.model ?? 0},
             set(val){this.setModel(val)}
         },
-        computedMax:{
-            get(){return this.max ?? 3}
-        }
     },
     methods: {
         async onClick(){
             if(this.disabled) return;
             await this.triggerHapticFeedback();
-            this.computedModel === this.computedMax ? this.computedModel = 0 : this.computedModel++;
+            this.computedModel === this.maxNumber ? this.computedModel = 0 : this.computedModel++;
         }
     }
 }

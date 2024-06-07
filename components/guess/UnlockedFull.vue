@@ -55,6 +55,7 @@
             <team-last-matches
                 v-else-if="selectedView == 'lastMatches'"
                 :lastMatches="lastMatches"
+                :side="currentGuess.match.homeTeam.id == selectedTeamId ? 'home' : 'away'"
                 :selectedTeamId="selectedTeamId"
             />
         </template>
@@ -136,7 +137,7 @@ export default {
             if(!this.leagueStandings){
                 views.standings = 0;
             }
-            if(this.lastMatches?.home.length || this.lastMatches?.away.length ){
+            if(this.lastMatches?.home.length > 0 || this.lastMatches?.away.length > 0 ){
                 views.lastMatches = 1;
             }
             return views;

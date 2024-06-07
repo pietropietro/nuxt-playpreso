@@ -1,6 +1,6 @@
 <template>
     <v-container class="pt-0" >
-        <guess-scroll-home class="pt-2" title="unlocked"/>        
+        <guess-scroll-home class="pt-4" title="unlocked"/>        
         <v-row class="mt-10 pt-5 " >
             <v-col cols="12" >
                 <motd-home />

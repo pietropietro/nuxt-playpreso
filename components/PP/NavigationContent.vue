@@ -6,9 +6,9 @@
             <h2><</h2>
         </div>
         <v-spacer/>
-        <v-toolbar-title>
-            <div class="overline lh-1">{{ navigationOverline }}</div>
-            <h1 class="mt-n4 mb-n2">{{ navigationTitle }}</h1>
+        <v-toolbar-title class="ml-n4">
+            <!-- <div class="overline lh-1">{{ navigationOverline }}</div> -->
+            <h1>{{ navigationTitle }}</h1>
         </v-toolbar-title>
         <v-spacer/>
     </v-row>

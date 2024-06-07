@@ -10,21 +10,43 @@
             }"
         >   
             <!--  ALARM IF LESS THAN 1 day not motd -->
-            <v-col  v-if="isWithinNext24Hours(match?.date_start) && !guess.guessed_at">
-                <guess-closed-alarm
+            <v-col v-if="guess.verified_at">
+                <guess-closed-verified
                     :rgb="rgb"
-                    :height="size"
-                />
-            </v-col>
-
-            <v-col v-else>
-                <guess-closed-teams 
-                    :rgb="rgb" 
-                    :match="match" 
+                    :match="match"
                     :size="parseFloat(size)/2"
-                    :withLogo="withLogo"
+                    :guess="guess"
                 />
             </v-col>
+            
+            <v-col v-else-if="!guess.guessed_at">
+                    <guess-closed-alarm
+                        v-if="isWithinNext24Hours(match?.date_start)"
+                        :rgb="rgb"
+                        :height="size"
+                    />
+
+                    <guess-closed-teams
+                        v-else
+                        :rgb="rgb"
+                        :match="match"
+                        :size="parseFloat(size)/2"
+                        :withLogo="withLogo"
+                        :withTag="!guess.guessed_at"
+                        :guess="guess"
+                    />
+            </v-col>
+            <template v-else-if="guess.guessed_at">
+                <v-col>
+                    <guess-closed-locked
+                        :rgb="rgb"
+                        :match="match"
+                        :size="parseFloat(size)/2"
+                        :withLogo="withLogo"
+                        :guess="guess"
+                    />
+                </v-col>
+            </template>
         </v-row>
     </v-container>
 </template>

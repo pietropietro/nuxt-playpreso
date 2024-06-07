@@ -5,6 +5,7 @@ Vue.mixin({
         timeFormat : { hour: 'numeric', minute: 'numeric'},
         dateTimeFormat : {day:'2-digit', month: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric'},
         dateFormat : {day:'2-digit', month: '2-digit', year: '2-digit'},
+        dayMonthFormat: {day: 'numeric', month: 'short'},
         weekDateTimeFormat  : {weekday:'long', hour: 'numeric', minute: 'numeric'} ,
         weekDateFormat  : {weekday:'long'} ,
         monthYearFormat  : {month:'long', year:'2-digit'} ,
@@ -12,6 +13,30 @@ Vue.mixin({
     methods:{
         formatTime(dateString){
             return Intl.DateTimeFormat('en-GB', this.timeFormat).format(new Date(dateString));
+        },
+        formatDay(dateString){
+            let dateObject = new Date(dateString.replace(/-/g, "/"));
+
+            let formattedDate = Intl.DateTimeFormat(
+                'en-GB', 
+                {day:'numeric'}
+            )
+            .format(dateObject)
+            .toString()
+            .toUpperCase();
+            return formattedDate;
+        },
+        formatMonth(dateString){
+            let dateObject = new Date(dateString.replace(/-/g, "/"));
+
+            let formattedDate = Intl.DateTimeFormat(
+                'en-GB', 
+                {month: 'short'}
+            )
+            .format(dateObject)
+            .toString()
+            .toUpperCase();
+            return formattedDate;
         },
         formatDate(dateString, withTime=false){
             if(!dateString)return null;
@@ -72,6 +97,34 @@ Vue.mixin({
             let inFiveDays = new Date().setDate( new Date().getDate() + 5);
             if(someDate < inFiveDays && someDate > new Date()){
                 return true;
+            }
+        },
+        isMoreThanHoursAgo(date_start, hours=3) {
+            const now = new Date();
+            const hoursAgo = new Date(now.getTime() - hours * 60 * 60 * 1000); // hours in milliseconds
+            const matchTime = new Date(date_start);
+            return matchTime < hoursAgo;
+        },
+        breakDayIntoLines(word) {
+            switch (word.toLowerCase().trim()) {
+              case 'sunday':
+                return 'sun<br>day';
+              case 'monday':
+                return 'mon<br>day';
+              case 'tuesday':
+                return 'tues<br>day';
+              case 'wednesday':
+                return 'wed<br>nes<br>day';
+              case 'thursday':
+                return 'thurs<br>day';
+              case 'friday':
+                return 'fri<br>day';
+              case 'saturday':
+                return 'sat<br>ur<br>day';
+              case 'tomorrow':
+                return 'to<br>mor<br>row';
+              default:
+                return word;
             }
         }
     }
