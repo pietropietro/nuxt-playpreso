@@ -32,7 +32,7 @@
                             <div v-else-if="inNextDays(new Date(match.date_start.replace(/-/g, '/')))"
                                 style="line-height: 0.6;"
                             >
-                                <span class="overline"
+                                <span class="overline font-weight-bold"
                                     style="line-height: 1;"
                                     v-html="breakDayIntoLines(formatDate(match.date_start))"
                                 />
@@ -66,8 +66,28 @@
                         <v-col cols="12">
                             <em-emoji id="lock" v-if="i==2" size="1em"/>
                         </v-col>
-                        <v-col>
-                            <h4>{{ guess.home  }} - {{ guess.away }}</h4>
+                        <v-col class="pt-1">
+                            <v-row no-gutters justify="center" align="center">
+                                <select-integer
+                                    @click.native.stop
+                                    justify="end"
+                                    :disabled="true"
+                                    :model="guess.home"
+                                    :setModel="null"
+                                    small
+                                />
+                                <v-col cols="auto">
+                                    <h4 class="text-center" style="user-select: none;">-</h4>
+                                </v-col>
+                                <select-integer
+                                    @click.native.stop
+                                    justify="start"
+                                    :disabled="true"
+                                    :model="guess.away"
+                                    :setModel="null"
+                                    small
+                                />
+                            </v-row>
                         </v-col>
                     </v-row>
                 </v-col>

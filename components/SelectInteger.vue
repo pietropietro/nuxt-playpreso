@@ -2,11 +2,22 @@
     <v-row no-gutters :justify="justify" class="no-selection">
         <h1 :class="disabled ? '' : 'pointer'"  
             @click="onClick"
+            v-if="!small"
             :style="big ? 'font-size:4em;' : ''"
         >
             {{computedModel}}
         </h1>
-        <h4 v-if="maxNumber && computedModel === maxNumber">+</h4>
+        <h4 v-else
+            :class="disabled ? '' : 'pointer'"  
+            @click="onClick"
+        >
+            {{computedModel}}
+        </h4>
+        <h4 v-if="maxNumber && computedModel === maxNumber"
+            :style="small ? 'font-size:8px; margin-top: -4px;' : ''"
+        >
+            +
+        </h4>
     </v-row>
 </template>
 <script>
@@ -17,7 +28,8 @@ export default {
         setModel: {type: Function},
         justify: {type: String},
         maxNumber:{type: Number, default: 3},
-        big: {type:Boolean, default: false}
+        big: {type:Boolean, default: false},
+        small: {type:Boolean, default: false}
     },
     computed: {
         computedModel:{

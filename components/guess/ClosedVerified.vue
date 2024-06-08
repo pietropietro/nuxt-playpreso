@@ -38,24 +38,55 @@
                         size="30"
                     />
                     <div class="text-center" v-else>
+                        <!-- MISSED -->
                         <template v-if="!guess.guessed_at">
                             <v-row no-gutters class="lh-1">
                                 <v-col cols="12">
                                     <em-emoji id="checkered_flag"/>
                                 </v-col>
-                                <v-col no-gutters justify="center" class="lh-1">
+                                <v-col no-gutters justify="center" class="lh-1 pt-1">
                                     <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
                                 </v-col>
                             </v-row>
                         </template>
+                        <!-- NOT MISSED -->
                         <template v-else>
-                            <v-row no-gutters justify="center" class="lh-1" v-if="guess.guessed_at">
-                                <em-emoji id="lock"  size="0.6em" class="mr-1"/>
-                                <h4>{{ guess.home  }}-{{ guess.away }}</h4>
-                            </v-row>
-                            <v-row no-gutters justify="center" class="lh-1">
-                                <em-emoji id="checkered_flag" size="0.6em" class="mr-1"/>
-                                <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
+                            <v-row no-gutters justify="center" align="center" class="ml-1 lh-1" v-if="guess.guessed_at">
+                                <v-col cols="auto">
+                                    <em-emoji id="lock"  size="0.6em"/>
+                                </v-col>
+                                <v-col class="pt-1">
+                                    <v-row no-gutters justify="center" align="center">
+                                        <select-integer
+                                            @click.native.stop
+                                            justify="end"
+                                            :disabled="true"
+                                            :model="guess.home"
+                                            :setModel="null"
+                                            small
+                                        />
+                                        <v-col cols="auto" 
+                                            :style="guess.home==3 ? 'margin-left:-2px' : '' "
+                                        >
+                                            <h4 class="text-center" style="user-select: none;">-</h4>
+                                        </v-col>
+                                        <select-integer
+                                            @click.native.stop
+                                            justify="start"
+                                            :disabled="true"
+                                            :model="guess.away"
+                                            :setModel="null"
+                                            small
+                                        />
+                                    </v-row>
+                                </v-col>                            </v-row>
+                            <v-row no-gutters justify="center" class="lh-1 ml-1" align="center">
+                                <v-col cols="auto">
+                                    <em-emoji id="checkered_flag" size="0.6em"/>
+                                </v-col>
+                                <v-col>
+                                    <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
+                                </v-col>
                             </v-row>
                         </template>
                     </div>
