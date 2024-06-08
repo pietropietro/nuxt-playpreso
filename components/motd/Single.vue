@@ -68,6 +68,7 @@ export default {
             this.motd.aggr_count ++;
         },
         async onSelect(){
+            if(this.motd.guess.guessed_at || this.motd.match.verified_at) return;
             await this.triggerHapticFeedback();
             console.log('passing', this.motd);
             this.motd.guess.match = this.motd.match;

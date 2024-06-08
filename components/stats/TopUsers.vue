@@ -1,11 +1,11 @@
 <template>
     <div v-if="stats && stats.bestAverage">
-        <v-row no-gutters>
+        <!-- <v-row no-gutters>
             <h1>
                 BEST USERS
             </h1>
             <h4>*</h4>
-        </v-row>
+        </v-row> -->
         <stats-best-list :stats="stats[selectedStat]" :headers="headers">
             <template slot="headers">
                 <th style="vertical-align:middle;" class="text-left lh-1">

@@ -1,7 +1,7 @@
 <template>
     <v-container class="pt-0" >
-        <guess-scroll-home class="pt-4" title="unlocked"/>        
-        <v-row class="mt-10 pt-5 " >
+        <guess-scroll-home class="py-5" title="unlocked"/>        
+        <v-row class="py-10" >
             <v-col cols="12" >
                 <motd-home />
             </v-col>
@@ -10,7 +10,7 @@
         <stats-top-users class="py-10"/>
         <!-- <stats-last-preso class="mt-8 pb-5"/> -->
         <v-row
-            class="" 
+            class="py-10" 
         >
             <p-p-league-available-list class="px-2 mb-5"/>
             <user-participation-enrolled-list />
