@@ -3,14 +3,13 @@
         <v-row justify="center" align="center">
             <v-spacer/>
             <v-col cols="auto">
-                    <!-- <guess-single-card
-                        :match="motd.match"
-                        :guess="motd.guess"
-                        :afterLock="afterLock"
-                        :rgb="motdPPTT.rgb"
-                        :selectedGuessId="selectedGuessId"
-                        :setSelectedGuessId="(val)=>selectedGuessId = val"
-                    /> -->
+                <guess-closed-box
+                    :match="motd.match"
+                    :guess="motd.guess"
+                    :rgb="motdPPTT.rgb"
+                    :afterLock="()=>null"
+                    :onClick="onSelect"
+                />
             </v-col>
             <v-spacer/>
             <v-col class="text-center px-0">
@@ -37,7 +36,7 @@
 
             </v-col>
         </v-row>
-        <div v-else class="my-6 mb-md-0">
+        <!-- <div v-else class="my-6 mb-md-0">
                 <v-sparkline
                     class="ocrastd"
                     padding="12"
@@ -48,18 +47,7 @@
                     stroke-linecap="round"
                     smooth
                 />
-            <!-- <v-row no-gutters>
-                <v-col cols="2" v-for="(e,i) in userLast.teams" :key="i">
-                    <div v-html="e" 
-                        class="text-center text-uppercase ocrastd"
-                        :style="{
-                            lineHeight:1,
-                            fontSize:'10px'
-                        }"
-                    />
-                </v-col>
-            </v-row> -->
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -78,6 +66,15 @@ export default {
         afterLock(lockedGuess){
             this.motd.guess=lockedGuess;
             this.motd.aggr_count ++;
+        },
+        async onSelect(){
+            await this.triggerHapticFeedback();
+            console.log('passing', this.motd);
+            this.motd.guess.match = this.motd.match;
+            this.$store.dispatch('openGuesses/update', {
+                newGuess: this.motd.guess,
+                newList: [this.motd.guess], 
+            });
         }
     },
 }

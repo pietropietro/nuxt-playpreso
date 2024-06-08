@@ -24,7 +24,7 @@
                     size="1.5em"
                     class="mr-2"
                 />
-                {{formatDate(currentGuess?.match.date_start,true)}}
+                {{formatDate(currentGuess.match?.date_start,true)}}
             </v-chip>
 
             <v-chip 
@@ -60,12 +60,12 @@
                 <template  v-else-if="tab=='lastMatches'">
                     <span class="overline lh-1">last 5</span>
                 </template>
-                <template  v-else-if="tab=='pptt'">
+                <!-- <template  v-else-if="tab=='pptt'">
                     <em-emoji 
                         :native="currentGuess.ppTournamentType.emoji"
                         size="3em"
                     />
-                </template>
+                </template> -->
                 
                 <span class="overline lh-1" v-else>{{ tab }}</span>
             </v-chip>
@@ -75,6 +75,7 @@
 <script>
 export default {
     props: {
+        match: {type: Object},
         selectedView: { type: String },
         setSelectedView: { type: Function },
         selectableViews: { type: Object }

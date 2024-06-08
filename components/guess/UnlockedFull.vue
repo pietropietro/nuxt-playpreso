@@ -162,7 +162,9 @@ export default {
         async getExtraData(){
             this.loadingExtraData = true;
 			try {
-				const response = await this.$api.call(this.API_ROUTES.GUESS.GET_EXTRA_DATA + this.currentGuess.id);
+				const response = await this.$api.call(
+                    this.API_ROUTES.GUESS.GET_EXTRA_DATA + (this.currentGuess.id ?? 'motd')
+                );
 				if (response && response.status === 'success') {
 					let extraData = response.message;
                     this.leagueStandings = extraData.leagueStandings;

@@ -6,14 +6,15 @@
                 <motd-home />
             </v-col>
         </v-row>
+        
+        <stats-top-users class="py-10"/>
+        <!-- <stats-last-preso class="mt-8 pb-5"/> -->
         <v-row
             class="" 
         >
             <p-p-league-available-list class="px-2 mb-5"/>
             <user-participation-enrolled-list />
         </v-row>
-        <stats-top-users class="mt-5"/>
-        <stats-last-preso class="mt-8 pb-5"/>
     </v-container>
 </template>
 <script>
