@@ -1,7 +1,16 @@
 <template>
     <v-container class="pt-0" >
-        <guess-scroll-home class="py-5" title="unlocked"/>        
-        <v-row class="py-10" >
+        <guess-scroll-home class="py-5" title="unlocked"/>   
+        <nuxt-link to="/p-cup/euro-24" class="no-decoration">
+            <v-row justify="center" class="py-10">
+                <h1>
+                    EURO
+                    <em-emoji id="sparkles" />
+                    CUP
+                </h1>
+            </v-row>
+        </nuxt-link>
+        <v-row class="pt-0 pb-10" >
             <v-col cols="12" >
                 <motd-home />
             </v-col>
