@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row><h1>P-CUPS</h1></v-row>
-        <v-row align="center">
+        <v-row align="center" v-if="!selectedPPCupId">
             <admin-select-p-p-tournament-type cupsOnly :model="ppTTselected" :setPPtt="(val)=>ppTTselected=val"/>
             <v-col>
                 <v-text-field label="slug" v-model="slugModel"/>
@@ -10,21 +10,28 @@
                 <v-btn text @click="create" :disabled="!ppTTselected || !slugModel">create</v-btn>
             </v-col>
         </v-row>
-        <v-row v-if="ppCups">
+        <v-row v-if="ppCups && !selectedPPCupId">
             <v-col cols="6" v-for="(cup,index) in ppCups" :key="index">
-                <v-card>
+                <v-card color="primary" 
+                    @click="selectCup(cup.id)"
+                >
                     <v-card-title>
-                        <h2>{{cup.ppTournamentType.name}}</h2>
+                        <h2> #{{ cup.id }} {{cup.ppTournamentType.name}}</h2>
                     </v-card-title>
                     <v-card-text class="mx-2">
                         <v-row>slug: {{cup.slug}}</v-row>
                         <v-row>created_at: {{cup.created_at}}</v-row>
-                        <v-row>started: {{!!cup.started_at}}</v-row>
-                        <v-row>finished: {{!!cup.finished_at}}</v-row>
+                        <v-row><b>started:</b> <em-emoji :id="!!cup.started_at ? 'white_check_mark' :'x'"/></v-row>
+                        <v-row><b>finished:</b> <em-emoji :id="!!cup.finished_at ? 'white_check_mark' :'x'"/></v-row>
                     </v-card-text>
                 </v-card>
             </v-col>
         </v-row>
+        <admin-p-p-cup-detail 
+            v-if="selectedPPCupId" 
+            :id="selectedPPCupId"
+            :close="()=>selectedPPCupId=null"
+        />
     </v-container>
 </template>
 <script>
@@ -35,8 +42,14 @@ export default {
         createLoading:false,
         ppCups: [],
         ppTTselected: null,
-        slugModel: null
+        slugModel: null,
+        selectedPPCupId: null
     }),
+    watch:{
+        async ppTTselected(){
+            await this.getCups();
+        }
+    },
     methods:{
         async create(){
             this.createLoading = true;
@@ -49,7 +62,8 @@ export default {
             );
 
             if(response && response.status === "success"){
-                console.log("created");
+                this.$notifier.showSuccess('created');
+                await this.getCups();
             }
             this.createLoading = false;
         },
@@ -61,6 +75,13 @@ export default {
                 this.ppCups = response.message;
             }
             this.loading = false;
+        },
+        selectCup(id){
+            if(id == this.selectedPPCupId){
+                this.selectedPPCupId = null;
+                return;
+            }
+            this.selectedPPCupId=id;
         }
     },
     async mounted(){

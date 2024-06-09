@@ -1,105 +1,23 @@
 <template>
-    <v-container v-if="ppLeague" >
-        <v-row class="py-4"><h1>P-LEAGUE <span class="ocrastd">#{{ppLeague.id}}</span></h1></v-row>
-        <v-card color="pleague">
-            <v-container>
-                <v-row align="center">
-                    <v-col>
-                        <h1>{{ppTournamentTypeTitle(ppLeague.ppTournamentType)}}</h1>
-                    </v-col>
-                </v-row>
-                <v-expansion-panels class="py-10">
-                    <v-expansion-panel>
-                        <v-expansion-panel-header>
-                            ROUNDS
-                        </v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                            <loading-page v-if="loading" />
-                            <template v-else>
-                                <v-row>
-                                    <v-spacer />
-                                        <v-col>
-                                            <v-btn @click="createPPR">CREATE PPRound</v-btn>
-                                        </v-col>
-                                    <v-spacer />
-                                </v-row>
-                                <template v-if="lastPPRound">
-                                    <v-row>
-                                        <h2>ROUND {{lastPPRound.round}} <span class="ocrastd">#{{lastPPRound.id}}</span></h2>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col v-for="(pprm, index) in lastPPRound.ppRoundMatches" :key="pprm.id">
-                                            <v-card>
-                                                <v-container>
-                                                    <v-row class="ocrastd"><v-col>PPRM #{{pprm.id}}</v-col></v-row>
-                                                    <v-container>
-                                                        <v-expansion-panels>
-                                                            <admin-match-expansion-panel :match="pprm.match"/>
-                                                        </v-expansion-panels>
-                                                    </v-container>
-                                                    <template v-if="!pprm.match.verified_at">
-                                                        <v-row>
-                                                            <v-col>
-                                                                <v-text-field
-                                                                    placeholder="new match id"
-                                                                    v-model="swapIds[index]"
-                                                                />
-                                                            </v-col>
-                                                        </v-row>
-                                                        <v-row>
-                                                            <v-spacer />
-                                                                <v-col>
-                                                                    <v-btn :disabled="!swapIds[index]" @click="change(index)">SWAP</v-btn>
-                                                                </v-col>
-                                                            <v-spacer />
-                                                            <v-col>
-                                                                <v-btn :disabled="swapIds[index] != '123'" @click="deletePPRM(pprm.id)">DELETE</v-btn>
-                                                            </v-col>
-                                                        </v-row>
-                                                    </template>
-                                                </v-container>
-                                            </v-card>
-                                        </v-col>
-                                        <v-col cols="auto">
-                                            <v-card>
-                                                <v-row>
-                                                    <v-col>
-                                                        <v-text-field
-                                                            placeholder="new match id"
-                                                            v-model="newId"
-                                                        />
-                                                    </v-col>
-                                                </v-row>
-                                                <v-row>
-                                                    <v-spacer />
-                                                        <v-col>
-                                                            <v-btn :disabled="!newId" @click="createPPRM">CREATE PPRM</v-btn>
-                                                        </v-col>
-                                                    <v-spacer />
-                                                </v-row>
-                                            </v-card>
-                                        </v-col>
-                                    </v-row>
-                                </template>
-                            </template>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                    <v-expansion-panel>
-                        <v-expansion-panel-header>
-                            UPS
-                        </v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                            <v-row>
-                                <v-col v-for="up in ppLeague.userParticipations" :key="up.id">
-                                    #{{up.position}} {{up.username}}: {{up.points}}
-                                </v-col>
-                            </v-row>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                </v-expansion-panels>
-            </v-container>
-        </v-card>
-        
+    <loading-page v-if="loading" />
+    <v-container v-else>
+            <v-row class="py-4"><h1>P-LEAGUE <span class="ocrastd">#{{ppLeague.id}}</span></h1></v-row>
+            <v-card color="pleague">
+                <v-container>
+                    <v-row align="center">
+                        <v-col>
+                            <h1>{{ppTournamentTypeTitle(ppLeague.ppTournamentType)}}</h1>
+                        </v-col>
+                    </v-row>
+                    <admin-p-p-tournament-expansion-panels 
+                        tournamentColumn="ppLeague"
+                        :tournamentId="ppLeagueId"
+                        :userParticipations="ppLeague.userParticipations"
+                        :lastPPRound="lastPPRound"
+                        :onChange="getPPLeague"
+                    />
+                </v-container>
+            </v-card>
         </v-container>
 </template>
 <script>
@@ -109,10 +27,8 @@ export default {
         return{
             loading: true,
             ppLeague: null,
-            ppLeagueId: this.$route.params.ppLeagueId,
+            ppLeagueId: parseInt(this.$route.params.ppLeagueId),
             lastPPRound: null,
-            swapIds: [],
-            newId: null
         }
     },
     methods:{
@@ -124,58 +40,6 @@ export default {
             }
             this.loading = false;
         },
-        async change(index){
-            this.loading = true;
-            let values = { 
-                "newMatchId": this.swapIds[index],
-            }
-            
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPROUNDMATCH.SWAP + this.lastPPRound.ppRoundMatches[index].id, values, 'POST'
-            );
-
-            if(response && response.status === "success"){
-                await this.getPPLeague();
-            }
-        },
-        async createPPRM(){
-            this.loading = true;
-            let values = { 
-                "newMatchId": this.newId,
-            }
-            
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPROUNDMATCH.CREATE + this.lastPPRound.id, values, 'POST'
-            );
-
-            if(response && response.status === "success"){
-                await this.getPPLeague();
-            }
-        },
-        async createPPR(){
-            this.loading = true;
-            let values = { 
-                "tournament": 'ppLeague',
-            }
-            
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPROUND.CREATE + this.ppLeagueId, values, 'POST'
-            );
-            if(response && response.status === "success"){
-                await this.getPPLeague();
-            }
-                        this.loading = false;
-
-        },
-        async deletePPRM(ppRoundMatchId){
-            this.loading = true;
-            let response = await this.$api.call(
-                this.ADMIN_API_ROUTES.PPROUNDMATCH.DELETE + ppRoundMatchId, null, 'DELETE'
-            );
-            if(response && response.status === "success"){
-                await this.getPPLeague();
-            }
-        }
     },
     async mounted(){
        await this.getPPLeague();

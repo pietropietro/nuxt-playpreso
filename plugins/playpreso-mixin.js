@@ -55,6 +55,7 @@ Vue.mixin({
             return ppTournamentType.name + " " + (ppTournamentType.level ?? '');
         },
         cupGroupStageString(ppCupGroup, cupFormat){
+            if(!ppCupGroup || !ppCupGroup.level || !cupFormat)return 'error'
             if(ppCupGroup.level==1 && cupFormat[0].name=='GROUP STAGE'){
                 return 'GROUP ' + ppCupGroup.tag;
             }

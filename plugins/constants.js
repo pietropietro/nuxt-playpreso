@@ -132,6 +132,9 @@ Vue.mixin({
                     GET: '/admin/p-cup',
                     CREATE: '/admin/p-cup/'
                 },
+                PPCUPGROUP:{
+                    GET: '/admin/p-cup-group',
+                },
                 MATCH: {
                     GET: '/admin/match',
                     GET_MONTH: '/admin/match/month',
