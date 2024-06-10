@@ -2,8 +2,9 @@
     <div>
         <p-p-cup-group-standings-headers 
             :totalCupLabel="!!group.userParticipations[0]?.tot_cup_points"
-            :showDetailedStats="showDetailedStats"
+            :showUpVerticalLabels="showUpVerticalLabels"
             :group="group" :cupFormat="cupFormat"
+            :isDetailPage="isDetailPage"
         />
         <div v-for="position in group.participants" :key="position"
             :class="
@@ -18,7 +19,7 @@
                     && group.userParticipations.length >= position
                 "
                 :up="group.userParticipations[position-1]"
-                :showDetails="showDetailedStats"
+                :showDetails="showUpVerticalLabels"
             />
             <user-participation-standing-item 
                 v-else-if="
@@ -27,7 +28,7 @@
                     group.userParticipations.length >= position-1
                 "
                 :up="group.userParticipations[position-2]"
-                :showDetails="showDetailedStats"
+                :showDetails="showUpVerticalLabels"
             />
             <p-p-cup-group-standings-placeholder
                 v-else
@@ -53,7 +54,7 @@ export default {
             if(this.group.tag.substr(0,this.group.tag.length/2) === fromtag) return false;
             return true;
         },
-        showDetailedStats(){
+        showUpVerticalLabels(){
             return this.isDetailPage && 
                 this.group.started_at && 
                 this.group.ppRounds[0]?.ppRoundMatches.filter((e)=>e.match.verified_at).length > 0;

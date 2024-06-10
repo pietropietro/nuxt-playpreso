@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="showDetailedStats" justify="end" align="end" style="width:100%">
+    <v-row v-if="showUpVerticalLabels" justify="end" align="end" style="width:100%">
         <v-col cols="auto" class="ml-2">
             <v-avatar
                 color="pcup"
@@ -19,7 +19,7 @@
         </v-col>
     </v-row>
     <v-row no-gutters v-else :class="'mx-2 font-weight-bold caption'">
-        <v-col>{{cupGroupStageString(group, cupFormat)}}</v-col>
+        <v-col v-if="!isDetailPage">{{cupGroupStageString(group, cupFormat)}}</v-col>
         <match-live-blink v-if="group.isLive"/>
     </v-row>
 </template>
@@ -27,7 +27,8 @@
 export default {
     props:{
         totalCupLabel: {type: Boolean},
-        showDetailedStats: {type: Boolean},
+        showUpVerticalLabels: {type: Boolean},
+        isDetailPage: {type: Boolean, default: false},
         group: {type: Object},
         cupFormat: {type: Array},
     }

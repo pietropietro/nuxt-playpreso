@@ -1,18 +1,20 @@
 <template>
     <div>
+        <!-- INTRO -->
         <v-container class="pb-4"
             v-if="!isCupGroup"
         >
-            <!-- <p-p-cup-group-intro
-                v-if="isCupGroup"
-                :ppCupGroup="tournamentObj"
-            /> -->
+           
             <p-p-league-intro
             
                 :ppTournamentType="tournamentObj.ppTournamentType"
                 :ppLeagueId="tournamentObj.id"
             />
         </v-container>
+        <p-p-cup-group-intro
+            v-else
+            :ppCupGroup="tournamentObj"
+        />
         <!-- STANDINGS -->
         <v-container class="py-4">
             <template v-if="!isCupGroup">

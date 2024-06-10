@@ -52,6 +52,7 @@
                         :size="parseFloat(size)/2"
                         :withLogo="withLogo"
                         :guess="guess"
+                        :thirdCell="thirdCellLocked"
                     />
                 </v-col>
             </template>
@@ -66,7 +67,8 @@ export default {
         rgb: {type: String},
         onClick: {type: Function},
         size: {type: String, default: '98px'},
-        withLogo: {type:Boolean, default: true}
+        withLogo: {type:Boolean, default: true},
+        thirdCellLocked: {type: String, default: 'emoji'}
     },
     data(){
         return{

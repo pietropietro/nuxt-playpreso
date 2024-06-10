@@ -17,7 +17,7 @@
                     />
                     <template v-if="i==2" >
                         <em-emoji  
-                            v-if="guess.ppTournamentType"
+                            v-if="thirdCell == 'emoji'"
                             :native="guess.ppTournamentType?.emoji" 
                             size="2em"
                         />
@@ -104,6 +104,7 @@ export default {
         rgb: {type: String},
         size: {type: Number, default: 49},
         withLogo: {type:Boolean, default: true},
+        thirdCell: {type: String, default: 'emoji'}
     },
 }
 </script>

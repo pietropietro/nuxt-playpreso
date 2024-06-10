@@ -16,6 +16,7 @@
                 :match="pprm.match"
                 :rgb="ppTournamentType.rgb"
                 :onClick="selectGuess"
+                thirdCellLocked="time"
             />
         </v-col>
     </v-row>
