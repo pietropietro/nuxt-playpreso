@@ -7,7 +7,7 @@
             </v-col>
             <v-spacer/>
             <em-emoji
-                :native="currentGuess.ppTournamentType.emoji"
+                :native="currentGuess.ppTournamentType?.emoji"
                 size="5rem"
                 class="lh-1 mt-n1"
                 :style="{

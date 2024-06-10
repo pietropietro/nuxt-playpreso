@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <v-row v-if="match">
         <v-spacer />
         <v-col cols="auto">
             <div @click="canSelect ? setSelectedTeamId(match.homeTeam.id) : null">
@@ -12,6 +12,7 @@
             <v-card 
                 :color="colorHome"
                 height="12px"
+                width="25px"
                 class="mt-6"
             />
         </v-col>
@@ -41,6 +42,7 @@
             <v-card 
                 :color="colorAway"
                 height="12px"
+                width="25px"
                 class="mt-6"
             />
         </v-col>
@@ -63,17 +65,17 @@ export default {
     },
     computed:{
         showCountry(){
-            return this.match.league.country != this.match.homeTeam.country;
+            return this.match.league.country != this.match?.homeTeam.country;
         },
         colorHome(){
             let color =  this.ppRGBA(this.currentGuess.ppTournamentType.rgb);
             if(!this.canSelect) return color;
-            return this.selectedTeamId==this.match.homeTeam.id ? color : 'transparent' ;
+            return this.selectedTeamId==this.match?.homeTeam.id ? color : 'transparent' ;
         },
         colorAway(){
             let color =  this.ppRGBA(this.currentGuess.ppTournamentType.rgb, 0.6);
             if(!this.canSelect) return color;
-            return this.selectedTeamId==this.match.awayTeam.id ? color : 'transparent' ;
+            return this.selectedTeamId==this.match?.awayTeam.id ? color : 'transparent' ;
         }
     },
 }

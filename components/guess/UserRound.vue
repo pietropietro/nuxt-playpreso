@@ -34,8 +34,11 @@ export default {
     methods:{
         async selectGuess(guess){
             if(guess.guessed_at || guess.verified_at)return;
-            let guessList = this.ppRMs.map(item => item.guess);
+            let guessList = this.ppRMs
+                .filter(item => !item.guess.verified_at && !item.guess.guessed_at)
+                .map(item => item.guess);
             await this.triggerHapticFeedback();
+
             this.$store.dispatch('openGuesses/update', {
                 newGuess: guess,
                 newList: guessList, 

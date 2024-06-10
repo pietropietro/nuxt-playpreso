@@ -31,7 +31,10 @@
         <template  v-if="tournamentObj.ppRounds.length > 0">
             <v-container v-if="userCurrentRound" class="py-4">
                 <p-p-section-title text="YOUR LOCKS" />
-                <guess-user-round :ppRMs="userCurrentRound" :ppTournamentType="tournamentObj.ppTournamentType" />
+                <guess-user-round 
+                    :ppRMs="userCurrentRound" 
+                    :ppTournamentType="tournamentObj.ppTournamentType" 
+                />
             </v-container>
             <v-container class="py-4 pr-0 pr-md-3 ">
                 <p-p-section-title text="ROUNDS" />
@@ -67,9 +70,12 @@ export default {
         userCurrentRound(){
             if(!this.userInTournament || !this.tournamentObj.ppRounds) return null;
             return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length-1].ppRoundMatches.map((pprm) => {
+                let guess = pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0];
+                guess.ppTournamentType = this.tournamentObj.ppTournamentType;
+                guess.match = pprm.match;
                 return {
                     match: pprm.match,
-                    guess: pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0]
+                    guess: guess
                 };
             });
         },

@@ -22,7 +22,7 @@
             <v-col v-else-if="!guess.guessed_at">
 
                     <guess-closed-unlocked-motd 
-                        v-if="guess.ppTournamentType.name == 'MOTD'"
+                        v-if="guess.ppTournamentType?.name == 'MOTD'"
                         :rgb="rgb"
                         :emoji="guess.ppTournamentType.emoji"
                     />
