@@ -1,18 +1,19 @@
 <template>
     <loading-page v-if="loading"/>
-    <v-container v-else-if="ppCup && ppCup.levels">
+    <v-container v-else-if="ppCup && ppCup.levels" class="px-0">
         <p-p-cup-intro :ppCup="ppCup"/>
-        <p-p-simple-pagination 
-            :length="Object.keys(ppCup.levels).length" 
-            :value="selectedLevel" 
-            :setValue="(newLev)=>selectedLevel = newLev"
-        >
-            <h1 slot="selected-page" class="text-center">{{ppCup.ppTournamentType.cup_format[selectedLevel - 1].name}}</h1>
-        </p-p-simple-pagination>
-        <p-p-cup-level-groups class="mb-10" 
-            :levelGroups="ppCup.levels[selectedLevel]" 
+        <p-p-cup-level-selection 
+            :selectedLevel="selectedLevel" 
+            :setSelectedLevel="(newLev)=>selectedLevel = newLev"
             :cupFormat="ppCup.ppTournamentType.cup_format"
+            class="py-3"
         />
+        <v-container>
+            <p-p-cup-level-groups class="mb-10"
+                :levelGroups="ppCup.levels[selectedLevel]"
+                :cupFormat="ppCup.ppTournamentType.cup_format"
+            />
+        </v-container>
     </v-container>
     <error-wall v-else />
 </template>

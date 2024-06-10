@@ -8,7 +8,7 @@
         <v-spacer/>
         <v-toolbar-title class="ml-n4">
             <!-- <div class="overline lh-1">{{ navigationOverline }}</div> -->
-            <h1>{{ navigationTitle }}</h1>
+            <h2 class="ocrastd">{{ navigationTitle }}</h2>
         </v-toolbar-title>
         <v-spacer/>
     </v-row>

@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <v-row >
         <v-col>
             <nuxt-link :to="ROUTES.PPCUP.DETAIL + ppCupGroup.ppCup_id" class="no-decoration">
                 <p-p-info 
