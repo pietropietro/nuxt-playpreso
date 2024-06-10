@@ -5,14 +5,14 @@
             justify="center"
             class="text-center"
             :style="{
-                height: '49px',
-                background: i== 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
+                height: size + 'px',
+                background: i == 2 ? ppRGBA(rgb) : ppRGBA(rgb, 0.6) 
             }"
         >
-            <v-col class="pa-0 mt-2" v-if="i===1">
+            <v-col :class="colClassList" v-if="i===1">
                 <em-emoji
                     native="alarm_clock"
-                    size="55"
+                    :size="size + 10"
                 />
             </v-col>
         </v-row>
@@ -23,9 +23,14 @@
 export default {
     props:{
         rgb: {type: String},
-        height: {type: String}
+        size: {type: Number, default: 49}
+    },
+    computed:{
+        colClassList(){
+            if(this.size >40) return 'pa-0 mt-2';
+            return 'pa-0 mt-1'
+        }
     }
-
 }
 </script>
 

@@ -25,12 +25,13 @@
                         v-if="guess.ppTournamentType?.name == 'MOTD'"
                         :rgb="rgb"
                         :emoji="guess.ppTournamentType.emoji"
+                        :size="parseFloat(size)/2"
                     />
 
                     <guess-closed-alarm
                         v-if="isWithinNext24Hours(match?.date_start)"
                         :rgb="rgb"
-                        :height="size"
+                        :size="parseFloat(size)/2"
                     />
 
                     <guess-closed-teams

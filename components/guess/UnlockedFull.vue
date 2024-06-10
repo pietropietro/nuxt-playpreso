@@ -5,19 +5,21 @@
             color="var(--v-background-base)"
             flat 
             app
-            :height="!!extraRow ? '250px' : '150px'"
+            :height="!!extraRow ? '210px' : '150px'"
         >
             <v-container fluid class="pa-0" style="height: 100%;">
                 <guess-header-row 
                     :extraRow="extraRow" 
                     :setExtraRow="setExtraRow"
                     :userParticipation="userParticipation"
+                    v-if="!extraRow"
                 />
                 <!-- <transition name="fade"> -->
                     <guess-current-scroll
                         v-if="extraRow == 'guessScroll'"
                         :onSelect="selectIndex"
-                        class="my-4 py-2"
+                        class="mb-4 py-2"
+                        size="60px"
                     />
                     <user-participation-summary-row 
                         v-else-if="extraRow == 'userParticipation'"
@@ -180,9 +182,7 @@ export default {
             this.removeGuessFromCurrentList(this.currentGuess.id);
         },
         selectIndex(i){
-            this.$store.dispatch(
-                'openGuesses/updateCurrentIndex', {newIndex: i,}
-            );
+            this.changeSelectedGuessIndex(i);
             this.extraRow = null;
         },
         setDefaultView(){
@@ -196,6 +196,7 @@ export default {
         },
         setExtraRow(val){
             if(this.loading) return;
+            if(val == 'guessScroll' && !this.currentGuessList.length) return;
             this.extraRow=val;
         }
     },

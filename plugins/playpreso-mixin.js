@@ -12,7 +12,7 @@ Vue.mixin({
             return this.$store.getters['openGuesses/currentGuess'];
         },
         currentGuessList() {
-            return this.$store.state.openGuesses.list;
+            return this.$store.state.openGuesses.list.filter((e)=>e.id != this.currentGuess.id);
         },
         currentGuessIndex() {
             return this.$store.state.openGuesses.currentIndex;
@@ -38,9 +38,19 @@ Vue.mixin({
             const newList = this.currentGuessList.filter(guess => guess.id !== guessId);
             this.$store.dispatch('openGuesses/updateList', { newList });
         },
-        changeSelectedGuessIndex(direction){
-            if(!['increase','decrease'].includes(direction))return;
-            this.$store.dispatch('openGuesses/changeIndex', direction);
+        changeSelectedGuessIndex(filteredIndex){
+            const originalList = this.$store.state.openGuesses.list;
+        
+            if (filteredIndex < 0 || filteredIndex >= this.currentGuessList.length) {
+                return -1; // Invalid index
+            }
+        
+            const itemId = this.currentGuessList[filteredIndex].id;
+            let originalIndex = originalList.findIndex(item => item.id === itemId);
+
+            this.$store.dispatch(
+                'openGuesses/updateCurrentIndex', {newIndex: originalIndex}
+            );
         },
         isMissed(guess){
             return guess.verified_at && !guess.guessed_at;

@@ -14,14 +14,14 @@
                 class="mx-2"
             >
                 <!-- width is necessary for slider to work on page landing :( -->
-                <div style="min-width:50px; ">
+                <div :style="'min-width:' + size + ';' ">
                     <guess-closed-box
                         :guess="guess"
                         :match="guess.match"
                         :rgb="guess.ppTournamentType.rgb"
                         :afterLock="()=>null"
                         :onClick="()=>onSelect(i)"
-                        size="50px"
+                        :size="size"
                         :withLogo="false"
                     />
                 </div>
@@ -32,7 +32,8 @@
 <script>
 export default {
     props:{
-        onSelect: {type: Function}
+        onSelect: {type: Function},
+        size: {type: String, default: '50px'}
     }
 }
 </script>

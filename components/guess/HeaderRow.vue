@@ -6,6 +6,9 @@
                 </div>
             </v-col>
             <v-spacer/>
+            <v-spacer/>
+            <v-spacer/>
+
             <em-emoji
                 :native="currentGuess.ppTournamentType?.emoji"
                 size="5rem"
