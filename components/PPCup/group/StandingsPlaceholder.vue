@@ -4,7 +4,14 @@
 
         
         <h3 v-else-if="level===2">
-            {{position}}{{tag.slice(position-1, position)}}
+            <!-- for best 3rds (like euro cup) -->
+            <template v-if="tag.slice(position-1, position) == '3'">
+                best 3°
+            </template>
+            <template v-else>
+                {{ displayPosition }}°
+                {{ currentLetter }}
+            </template>
         </h3>
 
         <h3 v-else class="text-lowercase">
@@ -25,6 +32,22 @@ export default {
         level: {type: Number},
         position: {type: Number},
         cupFormat: {type: Array}
+    },
+    computed: {
+        displayPosition() {
+        // Check if the current tag has the special character '+'
+        if (this.tag.startsWith('+') && this.position === 1) {
+            // Adjust the position by adding 1 for the first position if '+' is present
+            return this.position + 1;
+        }
+        return this.position;
+        },
+        currentLetter() {
+        // Remove '+' if it is present to get the correct letter
+        const cleanTag = this.tag.replace('+', '');
+        // Return the correct letter based on the position (1-based index)
+        return cleanTag.slice(this.position - 1, this.position);
+        }
     }
 }
 </script>

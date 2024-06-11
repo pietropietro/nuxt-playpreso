@@ -47,11 +47,22 @@ export default {
     },
     computed: {
         placeholderFirst(){
-            if(!this.cupFormat[this.group.level - 1].random_draw) return false;
+            if(this.cupFormat[this.group.level - 1].random_draw) return false;
             if(this.group.userParticipations.length === this.group.participants)return false;
             let fromtag = this.group.userParticipations[0]?.from_tag;
             if(!fromtag) return false;
-            if(this.group.tag.substr(0,this.group.tag.length/2) === fromtag) return false;
+            
+            let cleanTag = this.group.tag.replace('+', '');
+
+            if(this.group.level == 2 && this.group.tag.startsWith('+')){
+                //ex: grouptag, clean, fromtag, subst, returnval 
+                //+DE DE E E true
+                let subst= cleanTag.substr(1,1) ;
+                let returnval = subst === fromtag;
+                return returnval
+            }
+
+            if(cleanTag.substr(0,cleanTag.length/2) === fromtag) return false;
             return true;
         },
         showUpVerticalLabels(){
