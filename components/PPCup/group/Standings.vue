@@ -83,6 +83,9 @@ export default {
             ){
                 classes += " primary pcup"
             }
+            if(position == 3 && this.group.best_third_up){
+                classes += " primary lighten-2 pcup"
+            }
             return classes;
         }
     }
