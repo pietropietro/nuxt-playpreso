@@ -6,10 +6,10 @@
                 (ROUTES.PPLEAGUE.DETAIL + trophy.ppLeague_id)
             "
         >
-            <em-emoji v-if="trophy.ppTournamentType?.emoji"
-                size="1.5rem"
-                class="ml-1 pointer"
-                :native="trophy.ppTournamentType.emoji"
+            <em-emoji v-if="trophy.ppTournamentType?.emoji || trophy.pptt_emoji"
+                :size="size"
+                class="pointer"
+                :native="trophy.ppTournamentType?.emoji ?? trophy.pptt_emoji"
             />
         </nuxt-link>
 </template>
@@ -17,6 +17,7 @@
 export default {
     props:{
         trophy: {type: Object},
+        size: {type: String, default: '1.5rem'}
     }
 }
 </script>

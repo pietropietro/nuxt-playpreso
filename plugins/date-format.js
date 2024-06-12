@@ -8,7 +8,6 @@ Vue.mixin({
         dayMonthFormat: {day: 'numeric', month: 'short'},
         weekDateTimeFormat  : {weekday:'long', hour: 'numeric', minute: 'numeric'} ,
         weekDateFormat  : {weekday:'long'} ,
-        monthYearFormat  : {month:'long', year:'2-digit'} ,
     }),
     methods:{
         formatTime(dateString){
@@ -68,8 +67,12 @@ Vue.mixin({
             if(withTime) formattedDate = formattedDate.replace(',', ' -');
             return formattedDate;
         },
-        formatMonthYear(dateString){
-            return Intl.DateTimeFormat('en-GB', this.monthYearFormat).format(new Date(dateString));
+        formatMonthYear(dateString, type='long'){
+
+            let monthYearFormat = {
+                month:type, year:'2-digit'
+            };
+            return Intl.DateTimeFormat('en-GB', monthYearFormat).format(new Date(dateString));
         },
         isToday(someDate, changeTime) {
             const today = new Date();

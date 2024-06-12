@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="$route.path !== '/' && navigationTitle && navigationOverline"
+    <v-row v-if="$route.path !== '/' && navigationTitle"
         no-gutters align="center"
     >
         <div class="mx-4" @click="$router.go(-1)">
