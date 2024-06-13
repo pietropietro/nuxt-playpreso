@@ -7,14 +7,22 @@
                 </v-col>
                 <v-col class="text-center">
                     <v-row align="center" class="ml-2">
-                        <v-col cols="3" v-for="level in pptUp" :key="level.ppTournamentType?.id">
+                        <v-col v-for="level in pptUp" :key="level.ppTournamentType?.id"
+                            :cols="level.ppTournamentType.is_cup ? '6' : '3'"
+                        >
                             <!-- NO PARTICIPATION -->
                             <div class="overline lh-1 font-weight-bold" v-if="!level.userParticipation.updated_at">
                                 –
                             </div>
+                            <!-- PARTICIPATION -->
                             <div v-else-if="level.userParticipation.is_live" 
                                 class="pa-1 blink red rounded-circle d-inline-block"
                             />           
+                            <div v-else-if="level.userParticipation.reached_level_string && level.userParticipation.position != 1"
+                                class="overline lh-1"
+                            >
+                                {{ level.userParticipation.reached_level_string }}
+                            </div>
                             <div
                                 @click="!level.userParticipation.position ? null : selectId(level.ppTournamentType?.id)"
                                 v-else-if="level.ppTournamentType?.id != selectedPPTTId"
@@ -35,7 +43,7 @@
                             >
                                 {{ formatMonthYear(level.userParticipation?.updated_at, 'short') }}
                             </div>
-                            <nuxt-link class="no-decoration" :to="linkTo(level)"  v-else>
+                            <nuxt-link  :to="linkTo(level)"  v-else>
                                 <h4 class="">
                                     GO
                                 </h4>
