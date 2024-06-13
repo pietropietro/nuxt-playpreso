@@ -22,6 +22,7 @@ export default {
     },
     computed:{
         computed1X2(){
+            if(this.score[0] == 3 && this.score[1] == 3)return '1X2';
             return this.score[0] === this.score[1] ? 'X' : this.score[0] > this.score[1] ? '1' : '2';
         },
         computedUO25(){
