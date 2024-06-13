@@ -69,6 +69,7 @@ Vue.mixin({
         },
         formatMonthYear(dateString, type='long'){
 
+            if(!dateString)return;
             let monthYearFormat = {
                 month:type, year:'2-digit'
             };

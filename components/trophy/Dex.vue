@@ -1,35 +1,50 @@
 <template>
     <v-container>
-        <v-row v-for="(type,k) in ppDex" :key="k" align="center">
-            <v-col cols="2">
-                <div class="overline lh-1">{{ k }}</div>
-            </v-col>
-            <v-col class="text-center">
-                <v-row align="center" class="ml-2">
-                    <v-col cols="3" v-for="level in type" :key="level.pptt_id"
-                       
-                    >
-                        <div  
-                            @click="!level.up_best_position ? null : selectId(level.pptt_id)" 
-                            v-if="level.pptt_id != selectedSlot"
-                        >
-                            <div class="overline lh-1 font-weight-bold" v-if="!level.up_best_position">–</div>
-                            <div class="overline lh-1 font-weight-bold" v-else-if="level.up_best_position != 1">
-                                {{ level.up_best_position }}°
+        <div v-for="section, tournamentType in ppDex" :key="tournamentType" class="mt-4">
+            <v-row v-for="(pptUp, ppttName) in section" :key="ppttName" align="center">
+                <v-col cols="2">
+                    <div class="overline lh-1">{{ ppttName }}</div>
+                </v-col>
+                <v-col class="text-center">
+                    <v-row align="center" class="ml-2">
+                        <v-col cols="3" v-for="level in pptUp" :key="level.ppTournamentType?.id">
+                            <!-- NO PARTICIPATION -->
+                            <div class="overline lh-1 font-weight-bold" v-if="!level.userParticipation.updated_at">
+                                –
                             </div>
-                            <em-emoji v-else
-                                size="2em"
-                                class="pointer"
-                                :native="level.pptt_emoji"
-                            />
-                        </div>
-                        <div class="overline lh-1" v-else-if="level.pptt_id == selectedSlot" @click="selectId(level.pptt_id)">
-                            {{ formatMonthYear(level.up_updated_at, 'short') }}
-                        </div>
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
+                            <div v-else-if="level.userParticipation.is_live" 
+                                class="pa-1 blink red rounded-circle d-inline-block"
+                            />           
+                            <div
+                                @click="!level.userParticipation.position ? null : selectId(level.ppTournamentType?.id)"
+                                v-else-if="level.ppTournamentType?.id != selectedPPTTId"
+                            >
+                                
+                                <div class="overline lh-1 font-weight-bold" v-if="level.userParticipation.position != 1">
+                                    {{ level.userParticipation.position }}°
+                                </div>
+                                <em-emoji v-else
+                                    size="2em"
+                                    class="pointer"
+                                    :native="level.ppTournamentType.emoji"
+                                />
+                            </div>
+                            <div class="overline lh-1"
+                                v-else-if="!clickGo && level.ppTournamentType?.id == selectedPPTTId"
+                                @click="selectId(level.ppTournamentType?.id)"
+                            >
+                                {{ formatMonthYear(level.userParticipation?.updated_at, 'short') }}
+                            </div>
+                            <nuxt-link class="no-decoration" :to="linkTo(level)"  v-else>
+                                <h4 class="">
+                                    GO
+                                </h4>
+                            </nuxt-link>
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
+        </div>
     </v-container>
 </template>
 <script>
@@ -40,16 +55,34 @@ export default {
     data(){
         return{
             loading: true,
-            selectedSlot: null
+            selectedPPTTId: null,
+            clickGo: false
         }
     },
     methods:{
         selectId(id){
-            if(this.selectedSlot == id){
-                this.selectedSlot = null;
+            if(this.clickGo){
+                this.clickGo = false;
+                this.selectedPPTTId = null;
                 return;
             }
-            this.selectedSlot=id;
+            if(this.selectedPPTTId != id){
+                this.selectedPPTTId=id;
+                return;
+            }
+            if(this.selectedPPTTId == id){
+                this.clickGo = true;
+                // this.selectedPPTTId = null;
+                return;
+            }
+        },
+        linkTo(level){
+            return '/'
+            // check is cup
+            // let route = level.ppCup_id ? 
+            //     (ROUTES.PPCUP.DETAIL + trophy.ppCup_id) : 
+            //     (ROUTES.PPLEAGUE.DETAIL + trophy.ppLeague_id)
+            // return route
         }
     }
 }
