@@ -15,39 +15,46 @@
                                 –
                             </div>
                             <!-- PARTICIPATION -->
-                            <div v-else-if="level.userParticipation.is_live" 
-                                class="pa-1 blink red rounded-circle d-inline-block"
-                            />           
-                            <div v-else-if="level.userParticipation.reached_level_string && level.userParticipation.position != 1"
-                                class="overline lh-1"
-                            >
-                                {{ level.userParticipation.reached_level_string }}
-                            </div>
-                            <div
-                                @click="!level.userParticipation.position ? null : selectId(level.ppTournamentType?.id)"
-                                v-else-if="level.ppTournamentType?.id != selectedPPTTId"
-                            >
-                                
-                                <div class="overline lh-1 font-weight-bold" v-if="level.userParticipation.position != 1">
-                                    {{ level.userParticipation.position }}°
-                                </div>
-                                <em-emoji v-else
-                                    size="2em"
-                                    class="pointer"
-                                    :native="level.ppTournamentType.emoji"
-                                />
-                            </div>
-                            <div class="overline lh-1"
-                                v-else-if="!clickGo && level.ppTournamentType?.id == selectedPPTTId"
+                            <div v-else
                                 @click="selectId(level.ppTournamentType?.id)"
                             >
-                                {{ formatMonthYear(level.userParticipation?.updated_at, 'short') }}
+                                <!-- SELECTED PARTICIPATION -->
+                                <template v-if="level.ppTournamentType?.id == selectedPPTTId">
+                                    <div class="overline lh-1" v-if="!clickGo">
+                                        {{ formatMonthYear(level.userParticipation?.updated_at, 'short') }}
+                                    </div>
+                                    <nuxt-link :to="linkTo(level)"  v-else>
+                                            <h4 class="">
+                                                GO
+                                            </h4>
+                                        </nuxt-link>
+                                </template>
+                                <!-- NOT SELECTED -->
+                                <template v-else>
+                                    <div v-if="level.userParticipation.is_live"
+                                        class="pa-1 blink red rounded-circle d-inline-block"
+                                    />
+                                    <div v-else-if="level.userParticipation.reached_level_string && level.userParticipation.position != 1"
+                                        class="overline lh-1"
+                                    >
+                                        {{ level.userParticipation.reached_level_string }}
+                                    </div>
+                                    <div
+                                        v-else-if="level.ppTournamentType?.id != selectedPPTTId"
+                                    >
+                                    
+                                        <div class="overline lh-1 font-weight-bold" v-if="level.userParticipation.position != 1">
+                                            {{ level.userParticipation.position }}°
+                                        </div>
+                                        <em-emoji v-else
+                                            size="2em"
+                                            class="pointer"
+                                            :native="level.ppTournamentType.emoji"
+                                        />
+                                    </div>
+                                </template>
                             </div>
-                            <nuxt-link  :to="linkTo(level)"  v-else>
-                                <h4 class="">
-                                    GO
-                                </h4>
-                            </nuxt-link>
+                           
                         </v-col>
                     </v-row>
                 </v-col>
@@ -85,12 +92,11 @@ export default {
             }
         },
         linkTo(level){
-            return '/'
             // check is cup
-            // let route = level.ppCup_id ? 
-            //     (ROUTES.PPCUP.DETAIL + trophy.ppCup_id) : 
-            //     (ROUTES.PPLEAGUE.DETAIL + trophy.ppLeague_id)
-            // return route
+            let route = level.ppTournamentType.is_cup ? 
+                (this.ROUTES.PPCUP.DETAIL + level.userParticipation.ppCup_id + '/' + level.userParticipation.ppCupGroup_id) : 
+                (this.ROUTES.PPLEAGUE.DETAIL + level.userParticipation.ppLeague_id)
+            return route
         }
     }
 }
