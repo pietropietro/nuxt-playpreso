@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <div v-for="section, tournamentType in ppDex" :key="tournamentType" class="mt-4">
+        <div v-for="section, tournamentType in ppDex" :key="tournamentType">
             <v-row v-for="(pptUp, ppttName) in section" :key="ppttName" align="center">
                 <v-col cols="2">
                     <div class="overline lh-1">{{ ppttName }}</div>
@@ -8,7 +8,7 @@
                 <v-col class="text-center">
                     <v-row align="center" class="ml-2">
                         <v-col v-for="level in pptUp" :key="level.ppTournamentType?.id"
-                            :cols="level.ppTournamentType.is_cup ? '6' : '3'"
+                            :cols="level.ppTournamentType.is_cup ? '8' : '3'"
                         >
                             <!-- NO PARTICIPATION -->
                             <div class="overline lh-1 font-weight-bold" v-if="!level.userParticipation.updated_at">

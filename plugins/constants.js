@@ -42,7 +42,8 @@ Vue.mixin({
                     USER_CURRENT: '/guess',
                     GET_FOR_TEAM: '/guess/team/',
                     GET_EXTRA_DATA: '/guess/extra-data/',
-                    GET_FOR_LEAGUE: '/guess/league/'
+                    GET_FOR_LEAGUE: '/guess/league/',
+                    GET_FOR_USER: '/guess/user/'
                 },
                 USER_PARTICIPATION: {
                     GET:  '/user-participation',

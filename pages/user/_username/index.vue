@@ -2,8 +2,36 @@
     <loading-page v-if="loading" />
     <error-wall v-else-if="!loading && !user" />
     <div v-else>
+        <v-row class="mt-4">
+            <v-col>
+                <p-p-info 
+                    label="member since" 
+                    :value="formatMonthYear(user.created_at, 'short')" 
+                    small
+                />
+            </v-col>
+            <v-col>
+                <p-p-info
+                    label="trophies"
+                    :value="trophyDisplay"
+                    small
+                />
+            </v-col>
+        </v-row>
+        <user-view-selection 
+            :selectedView="selectedView"
+            :setSelectedView="(val)=>selectedView=val"
+            class="my-2"
+        />
         <trophy-dex
+            v-if="selectedView=='ppdex'"
             :ppDex="user.ppDex"
+        />
+        <user-last-verified 
+            v-else-if="selectedView=='locks'"
+            :guesses="user.verified_guesses"
+            :userId="user.id"
+            :setGuesses="(val)=>user.verified_guesses=val"
         />
         <!-- <v-container class="px-0"> -->
             <!-- <trophy-scroll v-if="user.trophies && user.trophies.length > 0" :ups="user.trophies"/> -->
@@ -20,8 +48,21 @@ export default {
         return{
             loading: true,
             username: this.$route.params.username,
-            user: null
+            user: null,
+            selectedView: 'locks'
         }
+    },
+    computed: {
+        trophyDisplay() {
+      const starCount = Math.floor(this.user.trophies.length / 10);
+      const remainder = this.user.trophies.length % 10;
+      let display = '⭐'.repeat(starCount);
+      if (remainder > 0) {
+        display += `${remainder}`;
+      }
+     
+      return display;
+    }
     },
     methods:{
         async getUser(){
