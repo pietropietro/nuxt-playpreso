@@ -52,7 +52,7 @@ export default {
             let fromtag = this.group.userParticipations[0]?.from_tag;
             if(!fromtag) return false;
             
-            let cleanTag = this.group.tag.replace('+', '');
+            let cleanTag = this.group.tag.replace(/[+-]/g, '');
 
             if(this.group.level == 2 && this.group.tag.startsWith('+')){
                 //ex: grouptag, clean, fromtag, subst, returnval 
@@ -77,13 +77,13 @@ export default {
     methods:{
         colorForPosition(position){
             let classes = "px-4" ;
+            let indexNoPromotion = this.cupFormat[this.group.level - 1].promotions;
             if(position === this.group.participants){classes += " pb-1"}
-            if((!this.group.started_at || this.group.userParticipations[0]?.tot_points==null) 
-                || position-1 < (this.group.participants / 2)
-            ){
-                classes += " primary pcup"
-            }
-            if(position == 3 && this.group.best_third_up){
+            if(!this.group.started_at) classes += " primary pcup";
+            else if(this.group.userParticipations[0]?.tot_points==null) classes += " primary pcup";
+            else if(position < indexNoPromotion)classes += " primary pcup";
+            else if(position-1 < indexNoPromotion && !this.group.less_promotion)classes += " primary pcup";
+            else if(this.group.extra_promotion && position == indexNoPromotion+1){
                 classes += " primary lighten-2 pcup"
             }
             return classes;
