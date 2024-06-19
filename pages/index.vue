@@ -16,7 +16,8 @@
             </v-col>
         </v-row>
         
-        <stats-top-users class="py-10"/>
+        <!-- <stats-top-users class="py-10"/> -->
+        <p-p-ranking-view class="py-10"/>
         <!-- <stats-last-preso class="mt-8 pb-5"/> -->
         <v-row
             class="py-10" 

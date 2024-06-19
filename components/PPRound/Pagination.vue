@@ -1,13 +1,13 @@
 <template>
     <div>
-        <v-row no-gutters class="my-4 pr-3 pr-md-0">    
+        <v-row no-gutters class="my-4 px-4">    
             <v-col v-for="i in rounds" :key="i" 
                 :cols="rounds.length === 1 ? '4' : ''"
             >
                 
                 <h4 v-if="i<=ppRounds.length"
                     :class="'pointer text-center rounded ' + (selectedRound===i ? ' white--text' : '')" 
-                    :style="selectedRound===i ? 'background-color:' + ppRGBA(rgb) : ''" 
+                    :style="selectedRound===i ? 'background-color:' + ppRGBA(ppTournamentType.rgb) : ''" 
                     @click="()=>selectedRound = i" 
                 > 
                     {{i}}
@@ -15,13 +15,18 @@
                 <div class=" text-center" v-else>{{i}}</div>
             </v-col>
         </v-row>
+        <guess-user-round 
+            v-if="userInTournament"
+            :ppRMs="userCurrentRound" 
+            :rgb="ppTournamentType.rgb" 
+            class="my-10"
+        />
         <p-p-round-display
-            class="ma-0"
+            class="ma-0 pl-4"
             v-for="(ppRM, i) in ppRounds[selectedRound - 1].ppRoundMatches" 
             :ppRM="ppRM" :key="i"
-            :color="ppRGBA(rgb)"
+            :color="ppRGBA(ppTournamentType.rgb)"
         />
-        <!--  :onLastLock="selectedRound == ppRounds.length ? fetchRound : null" -->
     </div>
 </template>
 <script>
@@ -29,27 +34,28 @@ export default {
     props:{
         ppRounds: {type: Array, required: true},
         rounds: {type: Number, required: true},
-        setPPRounds: {type: Function},
-        rgb: {type: String}
+        ppTournamentType: {type: Object},
+        userInTournament: {type: Boolean}
     },
     data(){
         return{
             selectedRound: this.ppRounds.length
         }
     },
-    methods: {
-        async fetchRound(ppRoundId){           
-            let response = await this.$api.call(this.API_ROUTES.PPROUND.GET + ppRoundId);
-            if(response && response.status === "success"){
-                this.ppTournamentTypes = response.message;
-            }
-            let copy = this.ppRounds.map((r) => {
-                if(r.id === ppRoundId) return response.message;
-                return r;
+    computed:{
+        userCurrentRound(){
+            if(!this.ppRounds) return null;
+            return this.ppRounds[this.selectedRound - 1].ppRoundMatches.map((pprm) => {
+                let guess = pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0];
+                guess.ppTournamentType = this.ppTournamentType;
+                guess.match = pprm.match;
+                return {
+                    match: pprm.match,
+                    guess: guess
+                };
             });
-            this.setPPRounds(copy);
-        }
-    }
+        },
+    },
 }
 </script>
 

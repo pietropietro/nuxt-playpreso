@@ -14,7 +14,7 @@
                 style="min-width:100px; max-width:100px;"
                 :guess="pprm.guess"
                 :match="pprm.match"
-                :rgb="ppTournamentType.rgb"
+                :rgb="rgb"
                 :onClick="selectGuess"
                 thirdCellLocked="time"
             />
@@ -24,7 +24,7 @@
 <script>
 export default {
     props:{
-        ppTournamentType: {tyep: Object},
+        rgb: {tyep: String},
         ppRMs: {type: Array}
     },
     data(){

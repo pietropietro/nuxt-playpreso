@@ -31,21 +31,15 @@
                 isDetailPage
             />
         </v-container>
-        <!-- USER GUESSES -->
+        <!-- GUESSES -->
         <template  v-if="tournamentObj.ppRounds.length > 0">
-            <v-container v-if="userCurrentRound" class="py-4">
-                <p-p-section-title text="YOUR LOCKS" />
-                <guess-user-round 
-                    :ppRMs="userCurrentRound" 
-                    :ppTournamentType="tournamentObj.ppTournamentType" 
-                />
-            </v-container>
-            <v-container class="py-4 pr-0 pr-md-3 ">
-                <p-p-section-title text="ROUNDS" />
+            <v-container class="py-4 px-0">
+                <p-p-section-title text="ROUNDS" class="px-4" />
                 <p-p-round-pagination
-                    :ppRounds="tournamentObj.ppRounds" :setPPRounds="(val)=>tournamentObj.ppRounds = val"
+                    :ppRounds="tournamentObj.ppRounds" 
                     :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
-                    :rgb="tournamentObj.ppTournamentType.rgb"
+                    :ppTournamentType="tournamentObj.ppTournamentType"
+                    :userInTournament="userInTournament"
                 />
             </v-container>
         </template>
@@ -70,18 +64,6 @@ export default {
         },
         userInTournament(){
             return this.tournamentObj.userParticipations.filter(up => up.user_id === this.currentUser.id).length > 0;
-        },
-        userCurrentRound(){
-            if(!this.userInTournament || !this.tournamentObj.ppRounds) return null;
-            return this.tournamentObj.ppRounds[this.tournamentObj.ppRounds.length-1].ppRoundMatches.map((pprm) => {
-                let guess = pprm.guesses.filter(g => g.user_id === this.currentUser.id)[0];
-                guess.ppTournamentType = this.tournamentObj.ppTournamentType;
-                guess.match = pprm.match;
-                return {
-                    match: pprm.match,
-                    guess: guess
-                };
-            });
         },
         missingUsers(){
             return (this.isCupGroup ? this.tournamentObj.participants : this.tournamentObj.ppTournamentType.participants)

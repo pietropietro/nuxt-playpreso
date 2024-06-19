@@ -61,6 +61,9 @@ Vue.mixin({
                         GET: '/p-cup-group/'
                     }
                 },
+                PPRANKING:{
+                    GET: '/p-ranking'
+                },
                 PPROUND: {
                     GET: '/p-round/',
                 },
