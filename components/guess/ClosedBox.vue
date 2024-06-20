@@ -21,15 +21,16 @@
             
             <v-col v-else-if="!guess.guessed_at">
 
-                    <guess-closed-unlocked-motd 
+                    <!-- <guess-closed-unlocked-motd 
                         v-if="guess.ppTournamentType?.name == 'MOTD'"
                         :rgb="rgb"
                         :emoji="guess.ppTournamentType.emoji"
                         :size="parseFloat(size)/2"
-                    />
+                    /> -->
 
                     <guess-closed-alarm
-                        v-if="isWithinNext24Hours(match?.date_start)"
+                        v-if="isWithinNext24Hours(match?.date_start)
+                            && guess.ppTournamentType?.name != 'MOTD'"
                         :rgb="rgb"
                         :size="parseFloat(size)/2"
                     />

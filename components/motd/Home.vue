@@ -1,81 +1,75 @@
 <template>
-    <v-container v-if="motds">
-        <motd-single 
-            :motd="motds[selectedIndex]" 
-            :motdPPTT="motdPPTT"
-            :userLast="userLast"
-            v-if="matchView" 
-            class="mt-4"
-        />
-        <div v-else class="py-8">
-            <v-row align="center" class="text-center" >
-                <v-col cols="4" 
-                    v-for="(st, i) in standings.best" :key="st.user_id"
+    <div v-if="motd">
+       
+        <v-row no-gutters class="ml-n3">
+            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">MATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>
+            <em-emoji class="mt-n3" style="position: absolute; left:10%" id="pill" size="5em" /> 
+        </v-row>
+        <v-row no-gutters class="ml-n1">
+            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">OFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>
+        </v-row>
+              
+        <v-row justify="center" align="center" class="pt-8">
+            <v-spacer/>
+            <v-col cols="auto">
+                <guess-closed-box
+                    :match="motd.match"
+                    :guess="motd.guess"
+                    :rgb="motdPPTT.rgb"
+                    :onClick="onSelect"
+                    :afterLock="()=>null"
+                />
+            </v-col>
+            <v-spacer/>
+            <v-col cols="auto" class="text-center px-0">
+                <h1>{{motd.aggr_count ?? 0}} </h1>
+                <div class="overline lh-1">locks</div>
+            </v-col>
+            <v-spacer/>
+        </v-row>
+
+
+        <v-row justify="center" class="mt-10">
+            <nuxt-link to="/motd" class="no-decoration">
+                <div
+                    class="text-center lh-1 overline font-weight-bold"
                 >
-                    <!-- <div class="overline lh-1">{{st.username}}</div> -->
-                    <h2>{{st.tot_points}}</h2>
-                    <h4 class="mt-n2">{{st.username}}</h4>
-                </v-col>
-                <template v-if="standings.currentUserStat">
-                    <v-col cols="4" class="mt-n6">
-                        ...
-                        <h2>{{standings.currentUserStat.tot_points}}</h2>
-                        <h4 class="mt-n2">{{standings.currentUserStat.username}}</h4>
-                    </v-col>
-                </template>
-            </v-row>
-            <v-row justify="end">
-                <div class="caption text-end">*last 7 MOTDs</div>
-            </v-row>
-        </div>
-    </v-container>
+                    show more
+                </div>
+            </nuxt-link>
+        </v-row>
+    </div>
 </template>
 <script>
 export default {
     data(){
         return {
-            selectedIndex: 0,
             loading: true,
-            motds: null,
+            motd: null,
             motdPPTT: null,
-            standings: null,
-            matchView: true
-        }
-    },
-    computed:{
-        userLast(){
-            let teams = this.motds.map(
-                    pprm => pprm.match?.homeTeam.name.substr(0,3) 
-                    + '<br>' + 
-                    pprm.match?.awayTeam.name.substr(0,3)
-            ).reverse();
-            let points = this.motds.map(pprm => pprm.guess?.points ?? 0).reverse();
-            points.pop();
-            teams.pop();
-            return {teams: teams, points: points}
+            motdLeader: null
         }
     },
     methods:{
         async getMotd(){
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
-                this.motds = response.message?.motds;
-                this.standings = response.message?.standings;
+                this.motd = response.message?.motd;
                 this.motdPPTT = response.message?.ppTournamentType;
-                this.motds.map((m)=>{
-                    m.guess = m.guess ?? 
-                        {
-                            home: null, 
-                            away: null, 
-                            verified_at: !m.can_lock,
-                        };
-                    m.guess.ppTournamentType= this.motdPPTT;
-                });
+                this.motdLeader = response.message?.motdLeader;
             }
             this.loading = false;
         },
-        next(){
-            this.selectedIndex = this.selectedIndex == (this.motds.length -1) ? 0 : this.selectedIndex + 1;
+        async onSelect(){
+            console.log('a');
+            if(this.motd.guess.guessed_at || this.motd.match.verified_at) return;
+            console.log('b');
+            await this.triggerHapticFeedback();
+            this.motd.guess.match = this.motd.match;
+            this.$store.dispatch('openGuesses/update', {
+                newGuess: this.motd.guess,
+                newList: [this.motd.guess], 
+            });
         }
     },
     async mounted(){

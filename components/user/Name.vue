@@ -7,8 +7,15 @@
     >
             <v-col cols="auto" :class="current ? 'currentuser': ''">
                 <nuxt-link :to="ROUTES.USER.DETAIL + user.username" class="no-decoration">
-                    <h1 v-if="!small">
-                        {{user.username}}
+                    <h1 v-if="!small" style="display:flex">
+                        <template v-if="user.ppRanking.position == 1">
+                            <span class="gold--text" >{{user.username}}</span>
+                        </template>
+                        <template v-else-if="user.motdLeader">
+                            <span class="red--text" >{{user.username.substring(0, user.username.length / 2)}}</span>
+                            <span class="yellow--text" >{{user.username.substring(user.username.length / 2)}}</span>
+                        </template>
+                        <template v-else>{{ user.username }}</template>
                     </h1>
                     <h3 v-else>{{user.username}}</h3>
                 </nuxt-link>
@@ -27,6 +34,9 @@
                     <template v-if="user.ppRanking.position == 3">
                         <em-emoji id="third_place_medal" class="ml-1 mt-1"/>
                     </template>
+                    <template v-if="user.motdLeader">
+                        <em-emoji id="pill" class="ml-1 mt-1"/>
+                    </template>
                 </v-row>
             </v-col>
     </v-row>
@@ -42,3 +52,33 @@ export default {
     },
 }
 </script>
+<style>
+.gold--text {
+    color: #FFD700;
+    background-size: 200% 200%;
+    animation: shine 3s linear infinite;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+
+  @keyframes shine {
+    0% {
+        color: #FFD700;
+
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    30% {
+        color: #b7a644;
+
+        text-shadow: 0 0 10px rgba(124, 110, 27, 0.5);
+    }
+    60% {
+        text-shadow: 0 0 10px rgba(252, 246, 213, 0.5);
+    }
+    100% {
+        color: #FFD700;
+
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+  }
+</style>

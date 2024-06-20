@@ -1,18 +1,16 @@
 <template>
     <div v-if="ppRankings">
-        <v-row align="center">
-            <v-col cols="auto">
-                <em-emoji id="first_place_medal" size="5em" /> 
-            </v-col>
-            <v-col>
-                <v-row no-gutters style="font-size: 40px; font-weight: bold;">P-RANKING</v-row>
-                <v-row no-gutters class="caption font-italic">calculated daily. based on trophies and points from last 6 months</v-row>
-            </v-col>
+        <v-row no-gutters class="ml-n3">
+            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">PRANKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKING</span>
+            <em-emoji class="mt-n3" style="position: absolute; left:10%" id="first_place_medal" size="5em" /> 
+        </v-row>
+        <v-row no-gutters class="ml-n1">
+            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">NKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKING</span>
         </v-row>
         
-        <p-p-ranking-table :ppRankings="ppRankings" />
+        <p-p-ranking-table class="mt-10" :ppRankings="ppRankings" />
         
-        <v-row justify="center" class="mt-4">
+        <v-row justify="center" class="mt-10">
             <nuxt-link to="/p-ranking" class="no-decoration">
                 <div
                     class="text-center lh-1 overline font-weight-bold"

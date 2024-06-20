@@ -2,7 +2,9 @@
     <v-container>
         <v-row >
             <v-spacer/>
-            <em-emoji v-if="ppCupGroup.ppTournamentType.emoji" :native="ppCupGroup.ppTournamentType.emoji" size="5em"/>
+            <nuxt-link class="no-decoration" :to="ROUTES.PPCUP.DETAIL + ppCupGroup.ppCup_id">
+                <em-emoji v-if="ppCupGroup.ppTournamentType.emoji" :native="ppCupGroup.ppTournamentType.emoji" size="5em"/>
+            </nuxt-link>
             <v-spacer/>
         </v-row>
         <v-row justify="center">

@@ -11,6 +11,7 @@
             >
                 <v-slide-item style="width:100px;">
                     <guess-scroll-switch 
+                        class="ml-4"
                         :state="state" 
                         :setState="(val)=>state=val"
                         :availableStates="availableStates"

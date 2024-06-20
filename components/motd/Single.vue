@@ -17,7 +17,7 @@
                 <div class="overline lh-1">locks</div>
             </v-col>
         </v-row>
-        <v-row v-if="motd.stats" class="py-5 text-center">
+        <v-row v-if="motd.stats && showStats" class="py-5 text-center">
             <v-col cols="4">
                 <v-row no-gutters justify="center">
                     <h3>{{motd.stats.most_lock_combination}}</h3>
@@ -55,7 +55,8 @@ export default {
     props:{
         motd: {type: Object},
         motdPPTT: {type: Object},
-        userLast: {type: Object}
+        userLast: {type: Object},
+        showStats: {type: Boolean, default: false}
     },
     data(){
         return{
