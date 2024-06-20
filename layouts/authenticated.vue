@@ -12,12 +12,12 @@
                     />
                     
                     <!-- MENU -->
-                    <!-- <v-overlay class="menu-overlay app-desktop-body" 
+                    <v-overlay class="menu-overlay app-desktop-body" 
                         :value="menu"  opacity="1" 
                         color="var(--v-background-base)"
                     >
                         <p-p-menu-brain />
-                    </v-overlay> -->
+                    </v-overlay>
                     
                     <!-- APP -->
                     <!-- TODO MAYBE DELETE MENU && POS FIXED.. -->

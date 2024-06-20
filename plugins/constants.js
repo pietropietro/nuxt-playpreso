@@ -77,6 +77,7 @@ Vue.mixin({
                 },
                 MOTD: {
                     GET: '/motd',
+                    GET_CHART: '/motd/chart',
                     GET_MONTH: '/motd/month',
                     LOCK: '/motd/lock'
                 },

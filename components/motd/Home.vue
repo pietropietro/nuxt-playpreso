@@ -3,7 +3,7 @@
        
         <v-row no-gutters class="ml-n3">
             <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">MATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>
-            <em-emoji class="mt-n3" style="position: absolute; left:10%" id="pill" size="5em" /> 
+            <em-emoji class="mt-n3" style="position: absolute; left:10%" :id="motdPPTT.emoji" size="5em" /> 
         </v-row>
         <v-row no-gutters class="ml-n1">
             <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">OFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>

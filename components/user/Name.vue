@@ -12,8 +12,8 @@
                             <span class="gold--text" >{{user.username}}</span>
                         </template>
                         <template v-else-if="user.motdLeader">
-                            <span class="red--text" >{{user.username.substring(0, user.username.length / 2)}}</span>
-                            <span class="yellow--text" >{{user.username.substring(user.username.length / 2)}}</span>
+                            <span class="green--text" >{{user.username.substring(0, user.username.length / 2)}}</span>
+                            <span class="white--text" >{{user.username.substring(user.username.length / 2)}}</span>
                         </template>
                         <template v-else>{{ user.username }}</template>
                     </h1>
@@ -34,8 +34,9 @@
                     <template v-if="user.ppRanking.position == 3">
                         <em-emoji id="third_place_medal" class="ml-1 mt-1"/>
                     </template>
+                    <!-- TODO add ptt here fro dynamic emoji -->
                     <template v-if="user.motdLeader">
-                        <em-emoji id="pill" class="ml-1 mt-1"/>
+                        <em-emoji id="jigsaw" class="ml-1 mt-1"/>
                     </template>
                 </v-row>
             </v-col>
