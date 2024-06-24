@@ -1,10 +1,12 @@
 <template>
     <v-row align="center" justify="center" no-gutters @click="trySet" style="flex: 0 0 auto;">
         <v-col cols="auto">
-            <!-- <v-row justify="center">
-                <em-emoji :native="state == 'unlocked' ? '🔓' : '🔒'" size="1.6em"/>
-            </v-row> -->
-            <v-row justify="center" class="">
+            <v-row justify="center">
+                <!-- <v-btn x-large outlined icon> -->
+                    <em-emoji :native="state == 'unlocked' ? '🔓' : '🔒'" size="3em"/>
+                <!-- </v-btn> -->
+            </v-row>
+            <!-- <v-row justify="center" class="">
                 <div class="overline lh-1">
                     <b>{{state == 'unlocked' ? 'unlocked' : 'locked'}}</b>
                 </div>
@@ -13,7 +15,7 @@
                 <div class="overline lh-1">
                     <b>matches</b>
                 </div>
-            </v-row>
+            </v-row> -->
         </v-col>
     </v-row>
 </template>

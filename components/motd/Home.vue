@@ -22,7 +22,7 @@
             </v-col>
             <v-spacer/>
             <v-col cols="auto" class="text-center px-0">
-                <h1>{{motd.aggr_count ?? 0}} </h1>
+                <h1>{{motd.tot_locks ?? 0}} </h1>
                 <div class="overline lh-1">locks</div>
             </v-col>
             <v-spacer/>
