@@ -26,13 +26,7 @@
                         <em-emoji id="star" class="ml-1 mt-1"/>
                     </template>
                     <template v-if="user.ppRanking.position == 1">
-                        <em-emoji id="first_place_medal" class="ml-1 mt-1"/>
-                    </template>
-                    <template v-if="user.ppRanking.position == 2">
-                        <em-emoji id="second_place_medal" class="ml-1 mt-1"/>
-                    </template>
-                    <template v-if="user.ppRanking.position == 3">
-                        <em-emoji id="third_place_medal" class="ml-1 mt-1"/>
+                        <em-emoji id="crown" class="ml-1 mt-1"/>
                     </template>
                     <!-- TODO add ptt here fro dynamic emoji -->
                     <template v-if="user.motdLeader">

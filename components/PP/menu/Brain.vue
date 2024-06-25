@@ -1,16 +1,28 @@
 <template>
-    <v-container fill-height class="pa-5">
-        <v-container style='align-self:start' v-if="!selectedMenu">
-            <v-row justify="center">
-                <h2>{{currentUser.username}}</h2>
-            </v-row>
-            <v-row justify="center">
-                <div class="overline lh-1">
-                    <div>member since </div>
-                    <div>{{formatMonthYear(currentUser.created_at).toLowerCase()}}</div>
-                </div>
-            </v-row>
-        </v-container>
+    <v-container fill-height  class="pa-5">
+        <v-app-bar 
+            color="var(--v-background-base)"
+            flat 
+            app
+            :hide-on-scroll="shouldHideOnScroll"
+            scroll-threshold="150"
+            ref="appBar"
+            class="pp-app-bar"
+        >
+            <transition name="fade">
+                <v-row justify="center" class="ocrastd">
+                    <v-col cols="2"> </v-col>
+                    <v-col class="text-center">
+                        <h1>MENU</h1>
+                    </v-col>
+                    <v-col cols="2">
+                        <h1 @click="$store.dispatch('menu/updateMenu', { newVal: false });">
+                            X
+                        </h1>
+                    </v-col>
+                </v-row>
+            </transition>
+        </v-app-bar>
         <v-container>
             <v-row justify="center" 
                 v-for="(m,i) in computedMenus" :key="i" 
@@ -39,7 +51,7 @@
             <v-row v-if="selectedMenu==='contact'" justify="center" class="overline lh-1">
                 pietro(at)playpreso.com
             </v-row>
-            <p-p-menu-3plus v-if="selectedMenu==='3+'" />
+            <p-p-menu-three-plus v-if="selectedMenu==='3+'" />
             <p-p-menu-email-preferences v-if="selectedMenu==='email_reminders'" />
         </v-container>
         <v-container style='align-self:end'>
@@ -94,5 +106,15 @@ export default {
             ],
         }
     },
+    mounted(){
+        this.$store.dispatch(
+            'navigation/updateTitle', 
+            {
+                newTitle: 'MENU',
+                newEmoji: null,
+                newOverline: null
+            }        
+        );
+    }
 }
 </script>

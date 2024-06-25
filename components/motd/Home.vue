@@ -1,15 +1,26 @@
 <template>
     <div v-if="motd">
        
-        <v-row no-gutters class="ml-n3">
-            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">MATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>
-            <em-emoji class="mt-n3" style="position: absolute; left:10%" :id="motdPPTT.emoji" size="5em" /> 
+        <v-row  class="ocrastd text-center mx-4" 
+            style="font-size:30px; font-weight: bold;
+                background:linear-gradient(#00695c, transparent); border-radius: 10px;"  
+            align="center"
+        >
+            <!-- <v-col cols="auto">
+                <em-emoji  :id="motdPPTT.emoji" size="3em" /> 
+            </v-col> -->
+                <!-- <div class="ocrastd"  -->
+                    <!-- style="font-size: 60px; font-weight: bold;"> -->
+                        <v-col cols="auto">MOTD</v-col>
+                        <em-emoji style="position:absolute; left:66%" id="jigsaw" size="3em"/>
+
+                <!-- </div> -->
         </v-row>
-        <v-row no-gutters class="ml-n1">
+        <!-- <v-row no-gutters class="ml-n1">
             <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">OFTHEDAYMATCHOFTHEDAYMATCHOFTHEDAY</span>
-        </v-row>
+        </v-row> -->
               
-        <v-row justify="center" align="center" class="pt-8">
+        <v-row justify="center" align="center" class="pt-4">
             <v-spacer/>
             <v-col cols="auto">
                 <guess-closed-box
@@ -18,6 +29,7 @@
                     :rgb="motdPPTT.rgb"
                     :onClick="onSelect"
                     :afterLock="()=>null"
+                    thirdCellLocked="time"
                 />
             </v-col>
             <v-spacer/>

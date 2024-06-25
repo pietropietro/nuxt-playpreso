@@ -1,14 +1,18 @@
 <template>
     <div v-if="ppRankings">
-        <v-row no-gutters class="ml-n3">
-            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">PRANKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKING</span>
-            <em-emoji class="mt-n3" style="position: absolute; left:10%" id="first_place_medal" size="5em" /> 
-        </v-row>
-        <v-row no-gutters class="ml-n1">
-            <span style="font-size: 60px; font-weight: bold; line-height: 0.7em;">NKINGPRANKINGPRANKINGPRANKINGPRANKINGPRANKING</span>
+        <v-row  class="mx-4 ocrastd" 
+            style="font-size:30px; font-weight: bold; background:linear-gradient(#FFD700, transparent); border-radius: 10px;"  
+            align="center"
+        >
+            <!-- <v-col cols="auto">
+                <em-emoji id="first_place_medal" size="3em" /> 
+            </v-col> -->
+            <v-col>P-RAN-KING</v-col>
+            <!-- <v-col></v-col> -->
+            <em-emoji style="position:absolute; left:66%" id="crown" size="3em"/>
         </v-row>
         
-        <p-p-ranking-table class="mt-10" :ppRankings="ppRankings" />
+        <p-p-ranking-table class="mt-2 px-5" :ppRankings="ppRankings" />
         
         <v-row justify="center" class="mt-10">
             <nuxt-link to="/p-ranking" class="no-decoration">

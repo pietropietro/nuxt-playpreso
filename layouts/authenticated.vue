@@ -6,28 +6,16 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar class="safe-area"/>
-                    <p-p-app-bar class="pp-app-bar safe-area" 
-                        :menu="menu" :setMenu="(val)=>menu=val"
-                        v-if="!currentGuess"
-                    />
-                    
-                    <!-- MENU -->
-                    <v-overlay class="menu-overlay app-desktop-body" 
-                        :value="menu"  opacity="1" 
-                        color="var(--v-background-base)"
-                    >
-                        <p-p-menu-brain />
-                    </v-overlay>
-                    
+                    <p-p-app-bar class="pp-app-bar safe-area" v-if="!currentGuess && !this.$store.getters['menu/currentMenuFlag']"/>
+
                     <!-- APP -->
-                    <!-- TODO MAYBE DELETE MENU && POS FIXED.. -->
-                    <!--                         class="pt-sm-16"  -->
-                    <v-main 
-                        :style="(!$vuetify.breakpoint.smAndUp && menu) ? {position: 'fixed'} : {}"
-                    >   
+                    <v-main>   
                         <!-- <p-p-share-marquee /> -->
                             <guess-unlocked-full
-                            v-if="currentGuess"
+                                v-if="currentGuess"
+                            />
+                            <p-p-menu-brain
+                                v-if="this.$store.getters['menu/currentMenuFlag']"
                             />
                         <nuxt v-else/>
                     </v-main>
@@ -57,11 +45,6 @@ export default {
         }
 
     },
-	data(){
-		return{
-			menu: false
-		}
-	},
     methods: {
         handleSwipeRight() {
             if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path

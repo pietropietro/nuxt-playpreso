@@ -7,13 +7,29 @@
         <motd-home class="py-10 my-5"/>
         
         <p-p-ranking-view class="py-10"/>
-        <!-- <v-row class="py-10">
-            <div class="pointer">
-                <em-emoji id="building_construction" size="5em"/>
-                <span class="overline lh-1">MENU</span>
-            </div>
-        </v-row> -->
-        <user-participation-enrolled-list />
+        
+        <!-- <user-participation-enrolled-list /> -->
+
+        <v-row class="py-10 text-center ">
+            <v-col>
+                <nuxt-link :to="ROUTES.USER.DETAIL + currentUser.username" class="no-decoration">
+                    <div class="pointer">
+                        <em-emoji id="pig" size="3em"/>
+                    </div>
+                    <div class="mt-n2">
+                        <span class="overline lh-1">PROFILE</span>
+                    </div>
+                </nuxt-link>
+            </v-col>
+            <v-col>
+                <div class="pointer" @click="$store.dispatch('menu/updateMenu', { newVal: true });">
+                    <em-emoji id="control_knobs" size="3em"/>
+                </div>
+                <div class="mt-n2">                    
+                    <span class="overline lh-1">MENU</span>
+                </div>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 <script>
