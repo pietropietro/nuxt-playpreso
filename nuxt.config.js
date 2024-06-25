@@ -55,43 +55,21 @@ export default {
 	components: true,
 
 	modules: [
-        [
-            'nuxt-i18n', {
-                locales: [
-                    {
-                        name: 'English',
-                        code: 'en',
-                        iso: 'en-EN',
-                        file: 'en-EN.js'
-                    },
-                ],
-                langDir: 'assets/lang/',
-                defaultLocale: 'en',
-                lazy: true,
-                strategy: 'no_prefix',
-            },
-        ],
 		'@nuxtjs/sitemap',
 		'vue-social-sharing/nuxt'
     ],
 
-    i18n: {
-        vueI18n: {
-            fallbackLocale: 'en',
-            silentTranslationWarn: true
-        }
-    },
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		loaders: {
 			vue: {
 			  compiler: require('vue-template-babel-compiler')
-			}
+			},
 		},
-		// so that admin.playpreso.com looks in playpreso.com/_nuxt
-		// publicPath: process.env.DEBUG ? '/_nuxt/' : 'https://playpreso.com/_nuxt/',
+		transpile: [/emoji-mart/] // Transpile emoji-mart to ensure compatibility
 	},
+	
 
 	// Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [
