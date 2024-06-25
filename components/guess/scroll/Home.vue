@@ -50,6 +50,14 @@
             availableStates(){
                 return Object.keys(this.guesses);
             },
+            refreshFlag() {
+                return this.$store.getters['refreshFlag/refreshFlag'];
+            }
+        },
+        watch: {
+            async refreshFlag() {
+                await this.getGuesses();
+            }
         },
         methods:{
             async getGuesses(){

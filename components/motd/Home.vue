@@ -62,6 +62,16 @@ export default {
             motdLeader: null
         }
     },
+    computed: {
+        refreshFlag() {
+            return this.$store.getters['refreshFlag/refreshFlag'];
+        }
+    },
+    watch: {
+        async refreshFlag() {
+            await this.getMotd();
+        }
+    },
     methods:{
         async getMotd(){
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
