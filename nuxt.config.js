@@ -62,12 +62,7 @@ export default {
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
-		loaders: {
-			vue: {
-			  compiler: require('vue-template-babel-compiler')
-			},
-		},
-		transpile: [/emoji-mart/] // Transpile emoji-mart to ensure compatibility
+		transpile: [/emoji-mart/, 'vue-demi'] // Transpile emoji-mart to ensure compatibility
 	},
 	
 

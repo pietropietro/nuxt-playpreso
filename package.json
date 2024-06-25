@@ -15,7 +15,6 @@
     "@emoji-mart/data": "^1.2.1",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/vuetify": "^1.12.3",
-    "@vue/composition-api": "^1.7.2",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.9.1",
     "country-list": "^2.3.0",
@@ -26,9 +25,8 @@
     "pp-capacitor-haptics": "file:./capacitor-plugins/pp-capacitor-haptics",
     "pp-capacitor-nuxt-swipe": "file:./capacitor-plugins/pp-capacitor-nuxt-swipe",
     "vue-digital-clock": "^2.0.0",
-    "vue-insta-stories": "^0.9.8",
+    "vue-insta-stories": "github:pietropietro/vue-insta-stories#built-version",
     "vue-social-sharing": "^3.0.9",
-    "vue-template-babel-compiler": "^2.0.0",
     "vuetify": "^2.4.0",
     "vuex-persist": "^3.1.3"
   },
