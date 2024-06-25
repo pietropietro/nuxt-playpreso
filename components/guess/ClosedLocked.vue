@@ -22,9 +22,15 @@
                             size="2em"
                         />
                         <template v-else>
-                            <em-emoji v-if="isMoreThanHoursAgo(match.date_start, 3)"
+                            <em-emoji v-if="isMoreThanHoursAgo(match.date_start, 2)"
                                 id="exclamation" size="2em"
                             />
+                            <template v-else-if="isLive(match.date_start)">
+                                <div 
+                                    class="pa-1 blink red rounded-circle d-inline-block"
+                                />
+                                <div class="text-center font-weight-bold overline blink lh-1 red--text mt-n1">LIVE</div>
+                            </template>
                             <div v-else-if="isToday(new Date(match.date_start.replace(/-/g, '/')))" class="lh-1">
                                 <em-emoji id="alarm_clock" />  <br/>
                                 <span class="overline lh-1">{{formatTime(match.date_start)}}</span>

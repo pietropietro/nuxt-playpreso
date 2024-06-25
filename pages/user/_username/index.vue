@@ -5,8 +5,15 @@
         <v-row class="mt-4">
             <v-col>
                 <p-p-info 
-                    label="member since" 
+                    label="joined" 
                     :value="formatMonthYear(user.created_at, 'short')" 
+                    small
+                />
+            </v-col>
+            <v-col>
+                <p-p-info
+                    label="p-ranking"
+                    :value="ppRankingDisplay"
                     small
                 />
             </v-col>
@@ -61,6 +68,10 @@ export default {
                 display += `${remainder}`;
             }
             return display;
+        },
+        ppRankingDisplay() {
+            if(this.user.ppRanking.position == 1) return  '👑';
+            return this.user.ppRanking.position + '°';
         },
     },
     methods:{

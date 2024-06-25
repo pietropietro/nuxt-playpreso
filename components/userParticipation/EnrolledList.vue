@@ -1,8 +1,8 @@
 <template>
     <loading-page v-if="loading.leagues || loading.cups"/>
     <v-container  v-else-if="selectedStatus">
-        <v-row class="text-center" align="center">
-            <v-col v-for="status in availableStatus" :key="status">
+        <v-row justify="center" align="center" class="pb-4">
+            <v-col v-for="status in availableStatus" :key="status" class="text-center">
                 <div @click="selectedStatus = status">
                     <em-emoji
                         :size="status == selectedStatus ? '4em' : '2em'"
@@ -12,16 +12,28 @@
                 </div>
             </v-col>
         </v-row>
-        <user-participation-card
-            v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id"
-            :up="up" :status="selectedStatus"
-        />
+        <v-row>
+            <v-col :cols="$vuetify.breakpoint.smAndUp ? '6' : '12'"
+                v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id" :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
+            >
+                <nuxt-link class="no-decoration" v-if="up"
+                    :to="up.ppLeague_id ? 
+                            ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
+                            : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
+                    "
+                >
+                    <user-participation-card
+                        :up="up" :status="selectedStatus"
+                    />
+                </nuxt-link>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 <script>
 export default {
     props:{
-        userId: {type: String}
+        userId: {type: Number}
     },
     data(){
         return {

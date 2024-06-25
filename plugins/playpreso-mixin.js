@@ -38,6 +38,15 @@ Vue.mixin({
             const newList = this.currentGuessList.filter(guess => guess.id !== guessId);
             this.$store.dispatch('openGuesses/updateList', { newList });
         },
+        
+        isLive(date_start){
+            const start = new Date(date_start);
+            const startRange = new Date(start.getTime() - 10 * 60000); // 10 minutes before
+            const endRange = new Date(start.getTime() + 120 * 60000); // 120 minutes after
+            const now = new Date();
+            return now >= startRange && now <= endRange;
+        },
+
         changeSelectedGuessIndex(filteredIndex){
             const originalList = this.$store.state.openGuesses.list;
         

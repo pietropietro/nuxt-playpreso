@@ -1,7 +1,7 @@
 <template>
     <v-row  
         no-gutters
-        class="rounded-lg my-10"
+        class="rounded-lg"
         align="center"
         :style="{
             maxHeight: '130px',
