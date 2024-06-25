@@ -47,8 +47,8 @@ Vue.mixin({
                 },
                 USER_PARTICIPATION: {
                     GET:  '/user-participation',
-                    PPLEAGUES:  '/user-participation/p-leagues',
-                    PPCUPGROUPS:  '/user-participation/p-cup-groups'
+                    PPLEAGUES:  '/user-participation/p-leagues/',
+                    PPCUPGROUPS:  '/user-participation/p-cup-groups/'
                 },
                 PPLEAGUE: {
                     GET: '/p-league/',

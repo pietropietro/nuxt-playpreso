@@ -47,7 +47,7 @@
                                             {{ level.userParticipation.position }}°
                                         </div>
                                         <em-emoji v-else
-                                            size="2em"
+                                            size="2.5em"
                                             class="pointer"
                                             :native="level.ppTournamentType.emoji"
                                         />

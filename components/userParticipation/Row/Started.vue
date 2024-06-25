@@ -1,7 +1,7 @@
 <template>
     <v-row align="center">
         <v-col v-if="participation.position">
-            <p-p-info small :label="$t('app.position')" 
+            <p-p-info small label="position" 
                 :value="participation.position" 
                 :value2="participation.user_count"
             />

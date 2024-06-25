@@ -31,7 +31,7 @@ Vue.mixin({
             }
             let response = await this.$api.call(this.API_ROUTES.USER.SIGNUP, values, 'POST');
             if(response.status === "success"){
-                this.$notifier.showSuccess(this.$t('user.created'));
+                this.$notifier.showSuccess('User created!\nYou can now log-in and start playing.');
                 this.$router.push(this.ROUTES.LOGIN);          
             }
         },

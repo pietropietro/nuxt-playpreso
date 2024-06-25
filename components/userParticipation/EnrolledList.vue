@@ -1,45 +1,38 @@
 <template>
-    <v-container 
-        v-if="(!loading.leagues || !loading.cups) && 
-            (Object.keys(pplUpsByStatus)?.length > 0 || Object.keys(ppcUpsByStatus)?.length > 0)
-        "
-    >
-        <v-row no-gutters align="end">
-            <v-col cols="auto">
-                <h1 v-if="!leagueCupFlag && Object.keys(pplUpsByStatus)?.length > 0">P-LEAGUES</h1>
-                <div v-else class="overline font-weight-bold" @click="changeFlag">P-LEAGUES</div>
-            </v-col>
-            <v-spacer/>
-            <v-col cols="auto" v-if="!loading.cups && Object.keys(ppcUpsByStatus)?.length > 0">
-                <div v-if="!leagueCupFlag" class="overline font-weight-bold" @click="changeFlag">P-CUPS</div>
-                <h1 v-else>P-CUPS</h1>
+    <loading-page v-if="loading.leagues || loading.cups"/>
+    <v-container  v-else-if="selectedStatus">
+        <v-row class="text-center" align="center">
+            <v-col v-for="status in availableStatus" :key="status">
+                <div @click="selectedStatus = status">
+                    <em-emoji
+                        :size="status == selectedStatus ? '4em' : '2em'"
+                        :id="status== 'active' ? 'firecracker' : status == 'waiting' ? 'zzz' : 'checkered_flag'"
+                    />
+                    <div class="overline lh-1">{{ status }}</div>
+                </div>
             </v-col>
         </v-row>
-        <user-participation-selection 
-           :statusUserParticipations="leagueCupFlag ? ppcUpsByStatus : pplUpsByStatus"
-           :selected="selectedUp" :setSelected="(val)=>selectedUp = val"
-           :inverted="leagueCupFlag"
+        <user-participation-card
+            v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id"
+            :up="up" :status="selectedStatus"
         />
-        <nuxt-link class="no-decoration" v-if="selectedUp"
-            :to="selectedUp.ppLeague_id ? 
-                    ROUTES.PPLEAGUE.DETAIL + selectedUp.ppLeague_id
-                    : ROUTES.PPCUP.DETAIL + selectedUp.ppCup_id + '/' + selectedUp.ppCupGroup_id
-            "
-        >
-            <user-participation-card 
-                :class="!selectedUp.started ? 'mb-4' : ''"
-                :participation="selectedUp"
-            />
-        </nuxt-link>
     </v-container>
 </template>
 <script>
 export default {
+    props:{
+        userId: {type: String}
+    },
     data(){
         return {
-            leagueCupFlag:false,
             pplUpsByStatus: null,
             ppcUpsByStatus: null,
+            selectedStatus: null,
+            combinedUpsByStatus: {
+                active: [],
+                waiting: [],
+                finished: []
+            },  
             selectedUp: null,
             loading: {
                 leagues: true,
@@ -47,29 +40,51 @@ export default {
             },
         }
     },
+    computed:{
+        availableStatus(){
+            return Object.keys(this.combinedUpsByStatus).filter(key => this.combinedUpsByStatus[key].length > 0);
+        }    
+    },
     methods:{
         async getPPLeaguesParticipations(){
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES);
+            this.loading.leagues = true;
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES + this.userId);
             if(response && response.status === "success"){
                 this.pplUpsByStatus = response.message;
             }
             this.loading.leagues = false;
         },
         async getPPCupsParticipations(){
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS);
+            this.loading.cups = true;
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS + this.userId);
             if(response && response.status === "success"){
                 this.ppcUpsByStatus = response.message;
             }
             this.loading.cups = false;
         },
-        async changeFlag(){
-            await this.triggerHapticFeedback();
-            this.leagueCupFlag = !this.leagueCupFlag;
+        combineUpsByStatus() {
+            const combineArrays = (arr1, arr2) => [...(arr1 || []), ...(arr2 || [])];
+
+            this.combinedUpsByStatus.active = combineArrays(
+                this.ppcUpsByStatus?.active,
+                this.pplUpsByStatus?.active
+
+            );
+            this.combinedUpsByStatus.waiting = combineArrays(
+                this.ppcUpsByStatus?.waiting,
+                this.pplUpsByStatus?.waiting
+            );
+            this.combinedUpsByStatus.finished = combineArrays(
+                this.ppcUpsByStatus?.finished,
+                this.pplUpsByStatus?.finished
+            );
         }
     },
     async mounted(){
         await this.getPPLeaguesParticipations();
         await this.getPPCupsParticipations();
+        this.combineUpsByStatus();
+        this.selectedStatus = this.availableStatus[0];
     },
 }
 </script>

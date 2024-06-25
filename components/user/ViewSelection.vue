@@ -7,7 +7,7 @@
                 ref="slider"
             >
                 <v-slide-item
-                    v-for="str in ['locks','ppdex']"
+                    v-for="str in availableViews"
                     :key="str"
                     class="mx-2"
                     ref="slideItem"
@@ -32,6 +32,7 @@
 <script>
 export default {
     props:{
+        availableViews: {type: Array},
         selectedView: {type: String, required: true},
         setSelectedView: {type: Function, required: true},
     },

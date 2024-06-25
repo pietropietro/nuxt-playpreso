@@ -22,23 +22,22 @@
             :selectedView="selectedView"
             :setSelectedView="(val)=>selectedView=val"
             class="my-2"
+            :availableViews="['matches', 'p-tournaments','p-dex']"
         />
         <trophy-dex
-            v-if="selectedView=='ppdex'"
+            v-if="selectedView=='p-dex'"
             :ppDex="user.ppDex"
         />
         <user-last-verified 
-            v-else-if="selectedView=='locks'"
+            v-else-if="selectedView=='matches'"
             :guesses="user.verified_guesses"
             :userId="user.id"
             :setGuesses="(val)=>user.verified_guesses=val"
         />
-        <!-- <v-container class="px-0"> -->
-            <!-- <trophy-scroll v-if="user.trophies && user.trophies.length > 0" :ups="user.trophies"/> -->
-            <!-- <chart-guesses :guesses="user.guesses"/> -->
-            <!-- <user-main-data :guesses="user.guesses" :username="user.username" />
-            <user-last-guesses :guesses="user.guesses"/> -->
-        <!-- </v-container> -->
+        <user-participation-enrolled-list 
+            v-else-if="selectedView=='p-tournaments'"
+            :userId="user.id"
+        />
     </div>
 </template>
 <script>
@@ -49,20 +48,20 @@ export default {
             loading: true,
             username: this.$route.params.username,
             user: null,
-            selectedView: 'locks'
+            selectedView: 'matches'
         }
     },
     computed: {
         trophyDisplay() {
-      const starCount = Math.floor(this.user.trophies.length / 10);
-      const remainder = this.user.trophies.length % 10;
-      let display = '⭐'.repeat(starCount);
-      if (remainder > 0) {
-        display += `${remainder}`;
-      }
-     
-      return display;
-    }
+            if(this.user.trophies.length == 0) return  '-';
+            const starCount = Math.floor(this.user.trophies.length / 10);
+            const remainder = this.user.trophies.length % 10;
+            let display = '⭐'.repeat(starCount);
+            if (remainder > 0) {
+                display += `${remainder}`;
+            }
+            return display;
+        },
     },
     methods:{
         async getUser(){

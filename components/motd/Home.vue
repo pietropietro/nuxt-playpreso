@@ -85,6 +85,7 @@ export default {
         }
     },
     async mounted(){
+        console.log('mounted motd');
         await this.getMotd(); 
     }
 }

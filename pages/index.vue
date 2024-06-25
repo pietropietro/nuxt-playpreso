@@ -8,13 +8,11 @@
         
         <p-p-ranking-view class="py-10"/>
         
-        <!-- <user-participation-enrolled-list /> -->
-
         <v-row class="py-10 text-center ">
             <v-col>
                 <nuxt-link :to="ROUTES.USER.DETAIL + currentUser.username" class="no-decoration">
                     <div class="pointer">
-                        <em-emoji id="pig" size="3em"/>
+                        <em-emoji id="speaking_head_in_silhouette" size="3em"/>
                     </div>
                     <div class="mt-n2">
                         <span class="overline lh-1">PROFILE</span>
