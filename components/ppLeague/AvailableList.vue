@@ -1,13 +1,15 @@
 <template>
-    <div v-if="ppTournamentTypes.length > 0">      
-        <v-row class="mx-2 mb-2">
-            <!-- <div class="overline lh-1">
-                {{ppTournamentTypes.length > 0 ? 'AVAILABLE P-LEAGUES' : 'NO P-LEAGUES AVAILABLE'}}
-            </div> -->
-            <h1>AVAILABLE</h1>
-        </v-row>   
+    <div v-if="ppTournamentTypes.length > 0">  
+        <v-row  class="ocrastd text-center mx-4" 
+            style="font-size:30px; font-weight: bold;
+                background:linear-gradient(#eb34bd, transparent); border-radius: 10px;"  
+            align="center"
+        >
+            <v-col cols="auto">P-TOURNAMENTS</v-col>
+        </v-row>
+
         <v-data-table
-            class="transparent no-select"
+            class="transparent no-select px-5 pt-4"
             mobile-breakpoint="0"
             item-text="value"
             :items-per-page="-1" 
@@ -39,7 +41,7 @@
             </template>
         </v-data-table>
         <div v-if="ppTournamentTypes.length > 3" 
-            class="text-center lh-1 overline font-weight-bold" 
+            class="text-center lh-1 overline font-weight-bold mt-10" 
             @click="showAllFlag = !showAllFlag"
         >
             {{showAllFlag ? 'show less' : 'show more'}}

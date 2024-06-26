@@ -8,7 +8,7 @@
                         :size="status == selectedStatus ? '4em' : '2em'"
                         :id="status== 'active' ? 'firecracker' : status == 'waiting' ? 'zzz' : 'checkered_flag'"
                     />
-                    <div class="overline lh-1">{{ status }}</div>
+                    <div v-if="status == selectedStatus" class="overline lh-1">{{ status }}</div>
                 </div>
             </v-col>
         </v-row>

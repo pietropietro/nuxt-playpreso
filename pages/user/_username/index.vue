@@ -2,24 +2,41 @@
     <loading-page v-if="loading" />
     <error-wall v-else-if="!loading && !user" />
     <div v-else>
-        <v-row class="mt-4">
+        <!-- <v-row class="text-center">
             <v-col>
+                <h1 class="font-weight-bold">
+                    {{user.points}} <em-emoji id="parking"/>
+                </h1>
+            </v-col>
+            <v-col>
+
+            </v-col>
+        </v-row> -->
+        <v-row class="mt-4 text-center" align="center">
+            <v-col cols="6">
                 <p-p-info 
                     label="joined" 
                     :value="formatMonthYear(user.created_at, 'short')" 
                     small
                 />
             </v-col>
-            <v-col>
+            <v-col cols="6">
+                
                 <p-p-info
                     label="p-ranking"
                     :value="ppRankingDisplay"
                     small
                 />
             </v-col>
-            <v-col>
+            <v-col cols="6">
+                
+                <h2 class="font-weight-bold">
+                    {{user.points}} <em-emoji id="parking"/>
+                </h2>
+            </v-col>
+            <v-col cols="6">
                 <p-p-info
-                    label="trophies"
+                    :label="user.trophies.length == 1 ? 'trophy' : 'trophies'"
                     :value="trophyDisplay"
                     small
                 />
@@ -43,6 +60,10 @@
         />
         <user-participation-enrolled-list 
             v-else-if="selectedView=='p-tournaments'"
+            :userId="user.id"
+        />
+        <user-stats 
+            v-else-if="selectedView=='stats'"
             :userId="user.id"
         />
     </div>
@@ -70,8 +91,9 @@ export default {
             return display;
         },
         ppRankingDisplay() {
-            if(this.user.ppRanking.position == 1) return  '👑';
-            return this.user.ppRanking.position + '°';
+            if(!this.user.ppRanking) return  '-';
+            if(this.user.ppRanking?.position == 1) return  '👑';
+            return this.user.ppRanking?.position + '°';
         },
     },
     methods:{

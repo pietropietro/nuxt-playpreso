@@ -8,7 +8,7 @@
             <v-col cols="auto" :class="current ? 'currentuser': ''">
                 <nuxt-link :to="ROUTES.USER.DETAIL + user.username" class="no-decoration">
                     <h1 v-if="!small" style="display:flex">
-                        <template v-if="user.ppRanking.position == 1">
+                        <template v-if="user.ppRanking?.position == 1">
                             <span class="gold--text" >{{user.username}}</span>
                         </template>
                         <template v-else-if="user.motdLeader">
@@ -25,7 +25,7 @@
                     <template v-if="user.trophies_count > 9">
                         <em-emoji id="star" class="ml-1 mt-1"/>
                     </template>
-                    <template v-if="user.ppRanking.position == 1">
+                    <template v-if="user.ppRanking?.position == 1">
                         <em-emoji id="crown" class="ml-1 mt-1"/>
                     </template>
                     <!-- TODO add ptt here fro dynamic emoji -->

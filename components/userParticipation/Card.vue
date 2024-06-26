@@ -33,8 +33,7 @@
                             :style="{background:ppRGBA(up.ppTournamentType.rgb,0.6)}"
                         >
                             <div class="overline">
-                                POS. {{up.position ? up.position + '°' : '?'}}/
-                                {{up.ppTournamentType.participants ??
+                                POS. {{up.position ? up.position + '°' : '?'}}/{{up.ppTournamentType.participants ??
                                     up.levelFormat.group_participants
                                 }}
                             </div>
@@ -74,8 +73,7 @@
                             <div class="overline">
                                 <template v-if="up.position==1">winner</template>
                                 <template v-else>
-                                    POS. {{up.position}}°/
-                                    {{up.ppTournamentType.participants ??
+                                    POS. {{up.position}}°/{{up.ppTournamentType.participants ??
                                         up.levelFormat.group_participants
                                     }}
                                 </template>

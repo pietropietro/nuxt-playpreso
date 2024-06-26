@@ -2,8 +2,12 @@
     <loading-page v-if="loading" />
     <div v-else-if="motd">
         <v-row  class="ocrastd text-center mx-4" 
-            style="font-size:30px; font-weight: bold;
-                background:linear-gradient(#00695c, transparent); border-radius: 10px;"  
+            style="
+                font-size:30px; 
+                font-weight: bold;
+                background:linear-gradient(#00695c, transparent); 
+                border-radius: 10px;
+            "  
             align="center"
         >
             <v-col cols="auto">MOTD</v-col>

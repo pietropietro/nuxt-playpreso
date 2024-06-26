@@ -2,7 +2,7 @@
     <v-container class="pt-0 px-0" >
         <guess-scroll-home class="py-10" title="unlocked"/>   
         
-        <p-p-league-available-list class="px-4 py-10 mb-5"/>
+        <p-p-league-available-list class="py-10 mb-5"/>
         
         <motd-home class="py-10 my-5"/>
         

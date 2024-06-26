@@ -1,7 +1,10 @@
 <template>
     <v-container class="pa-0">
         <v-row no-gutters
-            style="height:160px; width:100%" 
+            :style="{
+                height: height, 
+                width:'100%'
+            }" 
             justify="center" align="center"
         >
             <span class="text-h2 font-weight-bold">
@@ -15,7 +18,8 @@ export default {
     props:{
         points:{
             type: Number
-        }
+        },
+        height: {type: String, default: '160px'}
     }
 }
 </script>
