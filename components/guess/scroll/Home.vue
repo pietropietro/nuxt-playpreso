@@ -51,7 +51,7 @@
                 return Object.keys(this.guesses);
             },
             refreshFlag() {
-                return this.$store.getters['refreshFlag/refreshFlag'];
+                return this.$store.getters['refreshFlag/guesses'];
             }
         },
         watch: {

@@ -9,7 +9,7 @@
                     <v-col><user-name :user="ranking.user" /></v-col>
                 </v-row>
             </v-col>
-            <v-col cols="auto"><h3>{{ ranking.points }}</h3></v-col>
+            <v-col class="pr-2" cols="auto"><h3>{{ ranking.points }}</h3></v-col>
         </v-row>
     </v-container>
 </template>

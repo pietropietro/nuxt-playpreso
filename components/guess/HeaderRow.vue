@@ -38,8 +38,8 @@ export default {
             this.setExtraRow('userParticipation');
         },
         closeGuess(){
-                this.$store.dispatch('refreshFlag/triggerDataRefresh');
-                this.$store.dispatch('openGuesses/clear');
+            this.$store.dispatch('refreshFlag/triggerGuesses');
+            this.$store.dispatch('openGuesses/clear');
         },
         goToTournament(){
             if(!this.userParticipation)return;

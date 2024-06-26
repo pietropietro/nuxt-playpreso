@@ -5,8 +5,17 @@
             justify="center" align="center"
         >
             <span class="text-h2 font-weight-bold">
-                {{currentPoints}} <em-emoji id="parking"/>
+                {{points}} <em-emoji id="parking"/>
             </span>
         </v-row>
     </v-container>    
 </template>
+<script>
+export default {
+    props:{
+        points:{
+            type: Number
+        }
+    }
+}
+</script>

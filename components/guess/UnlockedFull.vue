@@ -156,11 +156,6 @@ export default {
         }
     },
     methods:{
-        setGuess(val){
-            this.$store.dispatch('openGuesses/updateCurrentGuess', {
-                    guess: val
-                });
-        },
         async getExtraData(){
             this.loadingExtraData = true;
 			try {
@@ -179,6 +174,11 @@ export default {
 			this.loadingExtraData = false;
         },
         afterLock(){
+            console.log(this.currentGuess.ppTournamentType.name);
+            if(this.currentGuess.ppTournamentType.name=='MOTD'){
+                console.log('hihi');
+                this.$store.dispatch('refreshFlag/triggerMotd');
+            }
             this.removeGuessFromCurrentList(this.currentGuess.id);
         },
         selectIndex(i){
