@@ -80,11 +80,23 @@ export default {
             } else if (this.calendarType === 'month') {
                 const date = new Date(this.calendarValue);
                 const year = date.getFullYear();
-                const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                const startOfMonth = `${year}-${month}-01T00:00:00`;
-                const endOfMonth = new Date(year, month, 0).toISOString().replace(/T.*$/, 'T23:59:59');
+                const month = date.getMonth() + 1; // month is 1-based for display, 0-based for Date
+
+                const startOfMonth = `${year}-${String(month).padStart(2, '0')}-01T00:00:00`;
+
+                // Corrected: get the last day of the current month without UTC conversion
+                const endOfMonthDate = new Date(year, month, 0);
+                endOfMonthDate.setHours(23, 59, 59, 999); // Set the time to the end of the day
+
+                // Manually format the end of the month date
+                const endOfMonthYear = endOfMonthDate.getFullYear();
+                const endOfMonthMonth = String(endOfMonthDate.getMonth() + 1).padStart(2, '0');
+                const endOfMonthDay = String(endOfMonthDate.getDate()).padStart(2, '0');
+                const endOfMonth = `${endOfMonthYear}-${endOfMonthMonth}-${endOfMonthDay}T23:59:59`;
+
                 params.from = startOfMonth;
                 params.to = endOfMonth;
+
             }
 
             try {

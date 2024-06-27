@@ -49,7 +49,6 @@
             :expanded.sync="expanded"
             group-by="parent_id"
             singleExpand
-            hide-default-footer
             @click:row="(item)=>expandRow(item)"
         >
             <template v-slot:group.header="{ items, toggle }" >

@@ -11,12 +11,12 @@
                     <!-- APP -->
                     <v-main>   
                         <!-- <p-p-share-marquee /> -->
-                            <guess-unlocked-full
-                                v-if="currentGuess"
-                            />
-                            <p-p-menu-brain
-                                v-if="this.$store.getters['menu/currentMenuFlag']"
-                            />
+                        <guess-unlocked-full
+                            v-if="currentGuess"
+                        />
+                        <p-p-menu-brain
+                            v-else-if="this.$store.getters['menu/currentMenuFlag']"
+                        />
                         <nuxt v-else/>
                     </v-main>
                 </template>
