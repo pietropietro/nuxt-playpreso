@@ -1,33 +1,52 @@
 <template>
     <loading-page v-if="loading.leagues || loading.cups"/>
-    <v-container  v-else-if="selectedStatus">
-        <v-row justify="center" align="center" class="pb-4">
-            <v-col v-for="status in availableStatus" :key="status" class="text-center">
-                <div @click="selectedStatus = status">
-                    <em-emoji
-                        :size="status == selectedStatus ? '4em' : '2em'"
-                        :id="status== 'active' ? 'firecracker' : status == 'waiting' ? 'zzz' : 'checkered_flag'"
-                    />
-                    <div v-if="status == selectedStatus" class="overline lh-1">{{ status }}</div>
-                </div>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col :cols="$vuetify.breakpoint.smAndUp ? '6' : '12'"
-                v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id" :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
-            >
-                <nuxt-link class="no-decoration" v-if="up"
-                    :to="up.ppLeague_id ? 
-                            ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
-                            : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
-                    "
+    <v-container  v-else-if="selectedStatus" class="pt-0 px-0">
+        <v-row no-gutters>
+            <v-col>
+                <v-slide-group
+                    prev-icon="<"
+                    next-icon=">"
+                    ref="slider"
                 >
-                    <user-participation-card
-                        :up="up" :status="selectedStatus"
-                    />
-                </nuxt-link>
+                    <v-slide-item
+                        v-for="status in availableStatus"
+                        :key="status"
+                        class="mx-2"
+                        ref="slideItem"
+                    >
+                        <v-chip
+                            class="overline lh-1"
+                            small
+                            :outlined="selectedStatus==status"
+                            :color="selectedStatus==status ? '' : 'transparent'"
+                            :value="status"
+                            @click="() => selectedStatus=status"
+                            style="min-width:50px; opacity: 1 !important"
+                        >
+                            {{status}}
+                        </v-chip>
+                    </v-slide-item>
+                </v-slide-group>
             </v-col>
         </v-row>
+        <v-container>
+            <v-row>
+                <v-col :cols="$vuetify.breakpoint.smAndUp ? '6' : '12'"
+                    v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id" :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
+                >
+                    <nuxt-link class="no-decoration" v-if="up"
+                        :to="up.ppLeague_id ?
+                                ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
+                                : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
+                        "
+                    >
+                        <user-participation-card
+                            :up="up" :status="selectedStatus"
+                        />
+                    </nuxt-link>
+                </v-col>
+            </v-row>
+        </v-container>
     </v-container>
 </template>
 <script>

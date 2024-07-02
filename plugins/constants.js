@@ -72,6 +72,7 @@ Vue.mixin({
                 },
                 STATS:{
                     BEST_USERS: '/stats/best-users',
+                    USER: '/stats/user/',
                     LAST_PRESO: '/stats/last-preso',
                     WRAPPED: '/stats/wrapped'
                 },

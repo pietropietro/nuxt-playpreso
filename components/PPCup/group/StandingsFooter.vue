@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="group.finished_at || group.started_at" :class="'overline' + (isDetailPage ? '' : ' mb-n5')">
+    <v-row v-if="group.finished_at || group.started_at" :class="'overline lh-1' + (isDetailPage ? '' : ' mb-n5')">
         <v-col class="pb-0" v-if="group.finished_at">FINISHED</v-col>
         <template v-else-if="group.started_at">
             <v-col class="pb-0">

@@ -1,8 +1,10 @@
 <template>
     <div>
         <v-row justify="center">
+            <slot name="valuezero" />
             <h1 v-if="!small">{{value}}</h1>
             <h3 v-else>{{value}}</h3>
+            <slot name="value2" />
             <template v-if="!!value2">
                 <div class="ml-2">
                     <h4 v-if="!small"

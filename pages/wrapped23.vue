@@ -155,19 +155,19 @@ export default {
         await this.getWrappedData();
         this.highTeamGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.high_team_id
-                + '?before=2023-12-31&after=2023-01-01'
+                + '?to=2023-12-31&from=2023-01-01'
         );
         this.lowTeamGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.low_team_id
-                + '?before=2023-12-31&after=2023-01-01'
+                + '?to=2023-12-31&from=2023-01-01'
         );
         this.highLeagueGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.high_league_id
-                + '?before=2023-12-31&after=2023-01-01'
+                + '?to=2023-12-31&from=2023-01-01'
         );
         this.lowLeagueGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.low_league_id
-                + '?before=2023-12-31&after=2023-01-01'
+                + '?to=2023-12-31&from=2023-01-01'
         );
     }
 }

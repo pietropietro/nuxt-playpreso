@@ -15,13 +15,8 @@
         </h3>
 
         <h3 v-else class="text-lowercase">
-            winner {{cupFormat[level - 2].name}} -
-            {{cupFormat[level - 2].group_tags.
-                indexOf(
-                    position === 1 ? tag.slice(0, tag.length/2) 
-                        : tag.slice(tag.length/2, tag.length)
-                ) +1
-            }} 
+            winner {{cupFormat[level - 2].name}}
+            {{ indexOfTag }}
         </h3>
     </v-row>
 </template>
@@ -45,6 +40,15 @@ export default {
                 return this.position - 1;
             }
             return this.position;
+        },
+        indexOfTag(){
+            let index = this.cupFormat[this.level - 2].group_tags.
+                indexOf(
+                    this.position === 1 ? this.tag.slice(0, this.tag.length/2) 
+                        : this.tag.slice(this.tag.length/2, this.tag.length)
+                ) +1;
+            console.log(index);
+            return index > 0 ? '- ' + index : null;
         },
         currentLetter() {
             // Remove '+'  '-' if it is present to get the correct letter

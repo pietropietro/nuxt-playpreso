@@ -30,7 +30,8 @@ export default {
             this.flagEmoji = results[0];
         },
         async searchFlag() {
-            await this.search('flag-' + this.model);
+            let correctedModel = this.model == 'Turkiye' ? 'turkey' : this.model;
+            await this.search('flag-' + correctedModel);
             if(this.flagEmoji) return;
             await this.search(this.model);
         }

@@ -2,16 +2,6 @@
     <loading-page v-if="loading" />
     <error-wall v-else-if="!loading && !user" />
     <div v-else>
-        <!-- <v-row class="text-center">
-            <v-col>
-                <h1 class="font-weight-bold">
-                    {{user.points}} <em-emoji id="parking"/>
-                </h1>
-            </v-col>
-            <v-col>
-
-            </v-col>
-        </v-row> -->
         <v-row class="mt-4 text-center" align="center">
             <v-col cols="6">
                 <p-p-info 
@@ -46,7 +36,7 @@
             :selectedView="selectedView"
             :setSelectedView="(val)=>selectedView=val"
             class="my-2"
-            :availableViews="['matches', 'p-tournaments','p-dex']"
+            :availableViews="['stats', 'matches', 'p-tournaments','p-dex']"
         />
         <trophy-dex
             v-if="selectedView=='p-dex'"
@@ -76,7 +66,7 @@ export default {
             loading: true,
             username: this.$route.params.username,
             user: null,
-            selectedView: 'matches'
+            selectedView: 'stats'
         }
     },
     computed: {

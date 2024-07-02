@@ -51,9 +51,6 @@ export default {
             this.loading = false;
         }
     },
-    mounted() {
-        console.log('mountedd');
-    },
 }
 
 </script>
