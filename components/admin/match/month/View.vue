@@ -29,6 +29,8 @@
 					:setSelectedCountry="(val)=>selectedCountry=val"
 					:selectedLeagueId="selectedLeagueId"
 					:setSelectedLeagueId="(val)=>selectedLeagueId=val"
+					:selectedLevel="selectedLevel"
+					:setSelectedLevel="(val)=>selectedLevel=val"
 					:selectedSubLeagueId="selectedSubLeagueId"
 					:setSelectedSubLeagueId="(val)=>selectedSubLeagueId=val"
 					:getChipColor="getChipColor"
@@ -39,6 +41,7 @@
 					:calendarType="calendarType"
 					:calendarValue="calendarValue"
 					:country="selectedCountry"
+					:level="selectedLevel"
 					:leagueId="selectedLeagueId"
 					:subLeagueId="selectedSubLeagueId"
 					:getChipColor="getChipColor"
@@ -60,6 +63,7 @@ export default {
 			selectedCountry: null,
 			selectedLeagueId: null,
 			selectedSubLeagueId: null,
+			selectedLevel: null,
 			eventColors: {},
 		};
 	},

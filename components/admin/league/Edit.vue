@@ -12,10 +12,14 @@
         <v-col cols="3">
             <admin-select-league label="parent" :modelId="parentModel" :setModelId="(val)=>parentModel = val" />
         </v-col>
-        <v-col cols="3">
+        <v-col cols="3" v-if="!parentModel || parentModel == league?.id">
             <admin-select-country :model="countryModel" :setModel="(val)=>countryModel=val" />
         </v-col>
-        <v-col cols="3"><v-select label="c-lvl" v-model="levelModel" :items="[1,2,3,4]"/></v-col>
+        <v-col cols="3">
+            <v-select  v-if="!parentModel || parentModel == league?.id"
+                label="c-lvl" v-model="levelModel" :items="[1,2,3,4]"
+            />
+        </v-col>
         <v-col cols="12" class="text-center">
             <v-btn 
                 outlined 
