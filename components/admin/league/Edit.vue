@@ -9,7 +9,8 @@
         <v-col cols="3">
             <p-p-input-text placeholder="ls-suffix" :value="lsSuffixModel" :setValue="(val)=>lsSuffixModel=val"/>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="3" v-if="league?.id"><v-switch label="parent" v-model="isParent"/></v-col>
+        <v-col cols="3" v-if="!isParent">
             <admin-select-league label="parent" :modelId="parentModel" :setModelId="(val)=>parentModel = val" />
         </v-col>
         <v-col cols="3" v-if="!parentModel || parentModel == league?.id">
@@ -36,7 +37,7 @@
 export default {
     props: {
         onSuccess: {type: Function, required: false},
-        league: {type: Object}
+        league: {type: Object},
     },
     computed:{
         nameModel:{
@@ -119,11 +120,14 @@ export default {
         parent_id:null, 
         country: null,
         level: null,
-        loading:false
+        loading:false,
+        isParent: false
     }),
     methods:{
         async create(){
             this.loading = true;
+            let parentValue = this.isParent ? this.league.id : this.parentModel;
+
             let values = {
                 "name" : this.nameModel,
                 "tag" : this.tagModel,
@@ -131,7 +135,7 @@ export default {
                 "ls_410" : false,
                 "country" : this.countryModel,
                 "level" : this.levelModel,
-                "parent_id" : this.parentModel,
+                "parent_id" : parentValue
             };
             let route = !!this.league ? (this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.league.id) : this.ADMIN_API_ROUTES.LEAGUE.CREATE;
             let response = await this.$api.call(
