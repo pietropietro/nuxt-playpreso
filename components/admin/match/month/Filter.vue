@@ -59,7 +59,6 @@
                 rounded="lg" 
                 class="pa-2"
             >
-
                 <v-chip-group 
                         v-model="selectedLevelModel" 
                         column 
@@ -175,7 +174,7 @@ export default {
         selectedLevel: {default: null},
         setSelectedLevel: {type: Function},
         getChipColor: {default: null},
-        matchSummary: {default: null}
+        matchSummary: {default: null},
     },
     data(){
         return {
@@ -195,6 +194,10 @@ export default {
 		}
     },
     computed:{
+        daySummary(){
+            if(this.calendarType == 'month')return null;
+            return this.matchSummary.find((day) => day.match_day === this.calendarValue);
+        },
         selectedCountryModel:{
             get(){
                 return this.selectedCountry;
@@ -229,11 +232,11 @@ export default {
         },
         uniqueCountries() {
 			const countries = new Set();
-			this.matchSummary.forEach((daySummary) => {
-				Object.keys(daySummary.matches_from).forEach((country) => {
+			this.matchSummary.forEach((daySumm) => {
+				Object.keys(daySumm.matches_from).forEach((country) => {
                     if(!this.selectedLevel)countries.add(country);
                     else{
-                        if(daySummary.matches_from[country].filter(l=>l.level == this.selectedLevel).length > 0){
+                        if(daySumm.matches_from[country].filter(l=>l.level == this.selectedLevel).length > 0){
                             countries.add(country);
                         }
                     }
@@ -245,16 +248,21 @@ export default {
 			if (this.calendarType == 'month'){
                return this.uniqueCountries;
             } 
-			const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
-			if (!matchDay) return this.uniqueCountries;
-			return Object.keys(matchDay.matches_from);
-		},
+			if (!this.daySummary) return [];
+            if(!this.selectedLevel) return Object.keys(this.daySummary.matches_from);
+            let countries = new Set();
+            return Object.keys(this.daySummary.matches_from).filter(country => 
+               this.daySummary.matches_from[country].filter(l => l.level == this.selectedLevel).length > 0
+            );
+
+            return this.uniqueCountries;
+        },
 		uniqueLeagues() {
 			if (!this.selectedCountry) return [];
 			const leagues = new Map();
-			this.matchSummary.forEach((daySummary) => {
-				if (daySummary.matches_from[this.selectedCountry]) {
-					daySummary.matches_from[this.selectedCountry].forEach((league) => {
+			this.matchSummary.forEach((daySumm) => {
+				if (daySumm.matches_from[this.selectedCountry]) {
+					daySumm.matches_from[this.selectedCountry].forEach((league) => {
 						if (league && typeof league === 'object') {
 							leagues.set(league.id, league);
 						}
@@ -267,11 +275,10 @@ export default {
 			if (this.calendarType == 'month'){
                 return this.uniqueLeagues;
             }
-			const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
-			if (!matchDay) return this.uniqueLeagues;
+			if (!this.daySummary) return this.uniqueLeagues;
 			const leagues = new Map();
-			if (matchDay.matches_from[this.selectedCountry]) {
-				matchDay.matches_from[this.selectedCountry].forEach((league) => {
+			if (this.daySummary.matches_from[this.selectedCountry]) {
+				this.daySummary.matches_from[this.selectedCountry].forEach((league) => {
 					if (league && typeof league === 'object') {
 						leagues.set(league.id, league);
 					}
@@ -284,8 +291,8 @@ export default {
 		},
         uniqueLevels() {
             const levels = new Set();
-            this.matchSummary.forEach(daySummary => {
-                Object.values(daySummary.matches_from).forEach(leagues => {
+            this.matchSummary.forEach(daySumm => {
+                Object.values(daySumm.matches_from).forEach(leagues => {
                     leagues.forEach(league => {
                         levels.add(league.level);
                     });
@@ -295,20 +302,21 @@ export default {
         },
 
         availableLevels() {
-            const levels = new Set();
             if (this.calendarType == 'month') {
                 // Fetch levels from all countries and all days
                 return this.uniqueLevels;
             } else {
                 // Fetch levels for a specific day
-                const daySummary = this.matchSummary.find(day => day.match_day === this.calendarValue);
-                Object.values(daySummary.matches_from).forEach(leagues => {
+                const levels = new Set();
+                if(!this.daySummary)return [];
+                Object.values(this.daySummary.matches_from).forEach(leagues => {
                     leagues.forEach(league => {
                         levels.add(league.level);
                     });
                 });
+
+                return Array.from(levels).sort((a, b) => a - b);
             }
-            return Array.from(levels).sort((a, b) => a - b);
         },
         selectedLeagueObj() {
 			if (!this.selectedLeagueId) return null;
@@ -324,10 +332,11 @@ export default {
 		countMatchesFor(type, id) {
 			let total = 0;
 
-			const addMatches = (daySummary) => {
-				Object.keys(daySummary.matches_from).forEach((country) => {
-					daySummary.matches_from[country].forEach((league) => {
-						if (type === 'country' && id === country) {
+			const addMatches = (daySumm) => {
+				Object.keys(daySumm.matches_from).forEach((country) => {
+					daySumm.matches_from[country].forEach((league) => {
+                        if(this.selectedLevel && this.selectedLevel != league.level)total=total
+						else if (type === 'country' && id === country) {
 							total += league.league_day_count;
 						} else if (type === 'league' && league.id === id) {
 							total += league.league_day_count;
@@ -343,9 +352,8 @@ export default {
 			};
 
 			if (this.calendarType === 'day') {
-				const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarValue);
-				if (matchDay) {
-					addMatches(matchDay);
+				if (this.daySummary) {
+					addMatches(this.daySummary);
 				}
 			} else {
 				this.matchSummary.forEach(addMatches);
@@ -355,9 +363,9 @@ export default {
 		},
         getSubLeaguesForLeague(leagueId) {
 			const subLeagues = new Map();
-			this.matchSummary.forEach((daySummary) => {
-				if (daySummary.matches_from[this.selectedCountry]) {
-					daySummary.matches_from[this.selectedCountry].forEach((league) => {
+			this.matchSummary.forEach((daySumm) => {
+				if (daySumm.matches_from[this.selectedCountry]) {
+					daySumm.matches_from[this.selectedCountry].forEach((league) => {
 						if (league.id === leagueId && league.subLeagues) {
 							league.subLeagues.forEach((subLeague) => {
 								subLeagues.set(subLeague.id, subLeague);

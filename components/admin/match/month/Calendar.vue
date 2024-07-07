@@ -10,7 +10,7 @@
             </v-col>
             <v-col>
                 <h2 class="text-center">
-                    {{ new Date(calendarComp).toLocaleDateString(undefined, { year: 'numeric', month: 'long' }) }}
+                    {{ new Date(calendarComputedModel).toLocaleDateString(undefined, { year: 'numeric', month: 'long' }) }}
                 </h2>
             </v-col>
             <v-col cols="auto">
@@ -31,7 +31,7 @@
                     :events="filteredMatches"
                     :event-color="(event) => event.color || 'primary'"
                     @click:date="setCalendarType('day')"
-                    v-model="calendarComp" 
+                    v-model="calendarComputedModel" 
                 />
             </v-sheet>
         </v-row>
@@ -43,6 +43,7 @@ export default {
     props:{
         matchSummary: {type: Array},
         selectedCountry: {default: null},
+        selectedLevel: {type: Number, default: null},
         selectedLeagueId: {default: null},
         selectedSubLeagueId: {default: null},
         calendarType: {type: String},
@@ -52,12 +53,12 @@ export default {
         getChipColor: {type: Function}
     },
     computed:{
-        calendarComp:{
+        calendarComputedModel:{
             get(){
                 return this.calendarModel;
             },
-            set(val){
-                this.setCalendarModel(val);
+            async set(val){
+                await this.setCalendarModel(val);
             }
         },
         filteredMatches() {
@@ -66,38 +67,12 @@ export default {
             }
 
             if (this.calendarType === 'day') {
-                const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarComp);
-                if (matchDay) {
-                    return this.formatEvents([matchDay]);
-                }
+                let matchDay = this.matchSummary.find((day) => day.match_day === this.calendarComputedModel);
+
+                return this.formatEvents([matchDay]);
             }
+            return [];
 
-            const filteredSummary = this.matchSummary.filter((daySummary) => {
-                if (this.selectedCountry) {
-                    const matchCountry = daySummary.matches_from[this.selectedCountry];
-                    if (!matchCountry) return false;
-
-                    if (this.selectedLeagueId) {
-                        const matchLeague = matchCountry.find((league) => league.id === this.selectedLeagueId);
-                        if (!matchLeague) return false;
-
-                        if (this.selectedSubLeagueId) {
-                            const matchSubLeague = matchLeague.subLeagues?.find(
-                                (subLeague) => subLeague.id === this.selectedSubLeagueId
-                            );
-                            return !!matchSubLeague;
-                        }
-
-                        return true;
-                    }
-
-                    return true;
-                }
-
-                return true;
-            });
-
-            return this.formatEvents(filteredSummary);
         }
     },
     methods:{
@@ -153,19 +128,16 @@ export default {
                         });
                     }
                 } else if (this.calendarType === 'day') {
-                    const matchDay = this.matchSummary.find((day) => day.match_day === this.calendarComp);
-                    if (matchDay) {
-                        Object.keys(matchDay.matches_from).forEach((country) => {
-                            matchDay.matches_from[country].forEach((league) => {
-                                const leagueIdentifier = `${league.id}-${country}`; // Unique identifier for each league-country pair
+                    Object.keys(summary[0].matches_from).forEach((country) => {
+                        summary[0].matches_from[country].forEach((league) => {
+                            const leagueIdentifier = `${league.id}-${country}`; // Unique identifier for each league-country pair
 
-                                if (!addedLeagues.has(leagueIdentifier)) { // Check if this league has already been added
-                                    events.push(this.getEventFromSummary(matchDay, league));
-                                    addedLeagues.add(leagueIdentifier); // Mark this league as added
-                                }
-                            });
+                            if (!addedLeagues.has(leagueIdentifier) && (!this.selectedLevel || this.selectedLevel == league.level)) { // Check if this league has already been added
+                                events.push(this.getEventFromSummary(summary[0], league));
+                                addedLeagues.add(leagueIdentifier); // Mark this league as added
+                            }
                         });
-                    }
+                    });
                 } else {
                     events.push(this.getEventFromSummary(daySummary));
                 }

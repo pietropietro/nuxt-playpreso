@@ -12,6 +12,7 @@
 					:selectedCountry="selectedCountry"
 					:selectedLeagueId="selectedLeagueId"
 					:selectedSubLeagueId="selectedSubLeagueId"
+					:selectedLevel="selectedLevel"
 					:getChipColor="getChipColor"   
 				/>
 				<!-- <admin-motd
