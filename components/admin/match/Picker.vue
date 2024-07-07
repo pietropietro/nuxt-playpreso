@@ -5,6 +5,9 @@
         </v-row>
         <loading-page v-if="loading"/>
         <template v-else>
+            <v-row justify="center" v-if="!loading && ppTTselected">
+                <v-btn text @click="testPick">RELOAD</v-btn>
+            </v-row>
             <v-row>
                 <v-col v-for="league in leagues" :key="league.id">
                     <league-detail :league="league" class="text-h3"></league-detail>
@@ -44,7 +47,11 @@
 </template>
 <script>
 export default {
-    data:()=>({ppTTselected:null, loading:false, picked:[], leagues: [], all:[], called: false}),
+    data(){
+        return{
+            ppTTselected:null, loading:false, picked:[], leagues: [], all:[], called: false
+        }
+    },
     watch: {
         ppTTselected: async function () {
             await this.testPick();
@@ -53,6 +60,13 @@ export default {
     methods:{
         async testPick(){
             if(!this.ppTTselected)return;
+            this.picked = null;
+            this.all = null;
+            this.leagues = null;
+            this.called=false;
+            this.$api.clearAPICache(this.ADMIN_API_ROUTES.MATCH.PICK + this.ppTTselected);
+
+
             this.loading=true;
             let response = await this.$api.call(this.ADMIN_API_ROUTES.MATCH.PICK + this.ppTTselected);
             if(response && response.status === "success"){

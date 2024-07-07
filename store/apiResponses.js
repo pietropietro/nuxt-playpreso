@@ -15,6 +15,9 @@ export const state = () => ({
     },
     clearCache(state) {
       state.cache = {};
-    } 
+    },
+    removeResponseCache(state, route) {
+      state.cache[route] = null;
+    }
   };
   

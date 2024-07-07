@@ -95,7 +95,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             const cachedRoutes = Object.keys(store.state.apiResponses.cache);
             cachedRoutes.forEach(cachedRoute => {
                 if (cachedRoute.startsWith(route)) {
-                    store.commit('removeApiResponseCache', cachedRoute);
+                    store.commit('apiResponses/removeResponseCache', cachedRoute);
                 }
             });
         },
