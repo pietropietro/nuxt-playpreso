@@ -44,8 +44,7 @@
                         >
                             <div class="overline">
                                 R {{up.currentRound}}/{{up.rounds ?? up.levelFormat.rounds}}
-                                P {{up.playedInCurrentRound[0]}}/{{up.playedInCurrentRound[1]}}
-                            </div>
+                                <template v-if="up.playedInCurrentRound">P {{up.playedInCurrentRound[0]}}/{{up.playedInCurrentRound[1]}}</template> </div>
                         </v-col>
                     </v-row>
                 </v-col>
