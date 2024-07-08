@@ -8,7 +8,7 @@
                     :guess="motd.guess"
                     :rgb="motdPPTT.rgb"
                     :afterLock="()=>null"
-                    :onClick="onSelect"
+                    :onUnlockedClick="onSelect"
                 />
             </v-col>
             <v-spacer/>

@@ -29,7 +29,7 @@
                             :match="guess.match"
                             :rgb="guess.ppTournamentType.rgb"
                             :afterLock="afterLock"
-                            :onClick="selectGuess"
+                            :onUnlockedClick="selectGuess"
                         />
                     </div>
                 </v-slide-item>

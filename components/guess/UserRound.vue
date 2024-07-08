@@ -15,7 +15,7 @@
                 :guess="pprm.guess"
                 :match="pprm.match"
                 :rgb="rgb"
-                :onClick="selectGuess"
+                :onUnlockedClick="selectGuess"
                 thirdCellLocked="time"
             />
         </v-col>

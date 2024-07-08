@@ -20,7 +20,7 @@
                         :match="guess.match"
                         :rgb="guess.ppTournamentType.rgb"
                         :afterLock="()=>null"
-                        :onClick="()=>onSelect(i)"
+                        :onUnlockedClick="()=>onSelect(i)"
                         :size="size"
                         :withLogo="false"
                     />

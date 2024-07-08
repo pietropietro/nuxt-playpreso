@@ -20,7 +20,7 @@
                     :match="motd.match"
                     :guess="motd.guess"
                     :rgb="motdPPTT.rgb"
-                    :onClick="onSelect"
+                    :onUnlockedClick="onSelect"
                     thirdCellLocked="time"
                 />
             </v-col>
