@@ -28,8 +28,9 @@
                         small
                     />
                 </v-row>
-            </v-col>                            </v-row>
-        <v-row no-gutters justify="center" class="lh-1 ml-1" align="center">
+            </v-col>                            
+        </v-row>
+        <v-row no-gutters justify="center" class="lh-1 ml-1" align="center" v-if="match.verified_at">
             <v-col cols="auto" class="mr-1">
                 <em-emoji id="checkered_flag" size="0.6em"/>
             </v-col>

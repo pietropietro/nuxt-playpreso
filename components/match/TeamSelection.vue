@@ -5,6 +5,7 @@
             <div @click="canSelect ? setSelectedTeamId(match.homeTeam.id) : null">
                 <team-logo
                     :id="match.homeTeam.id"
+                    :name="match.homeTeam.name"
                     :country="showCountry ? match.homeTeam.country : null"
                     :size="logoSize"
                 />
@@ -35,6 +36,7 @@
             <div @click="canSelect ? setSelectedTeamId(match.awayTeam.id) : null">
                 <team-logo
                     :id="match.awayTeam.id"
+                    :name="match.awayTeam.name"
                     :country="showCountry ? match.awayTeam.country : null"
                     :size="logoSize"
                 />

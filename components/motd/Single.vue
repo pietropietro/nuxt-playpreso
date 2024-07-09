@@ -3,7 +3,7 @@
         <v-row justify="center" align="center">
             <v-spacer/>
             <v-col cols="auto">
-                <guess-closed-box
+                <guess-box
                     :match="motd.match"
                     :guess="motd.guess"
                     :rgb="motdPPTT.rgb"

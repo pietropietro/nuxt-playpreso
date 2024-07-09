@@ -10,13 +10,12 @@
             v-for="pprm, index in ppRMs" 
             :key="index"
         >
-            <guess-closed-box
+            <guess-box
                 style="min-width:100px; max-width:100px;"
                 :guess="pprm.guess"
                 :match="pprm.match"
                 :rgb="rgb"
                 :onUnlockedClick="selectGuess"
-                thirdCellLocked="time"
             />
         </v-col>
     </v-row>

@@ -13,6 +13,7 @@
                 <v-col class="pa-0">
                     <team-logo v-if="i==1"
                         :id="match.homeTeam.id"
+                        :name="match.homeTeam.name"
                         size="30"
                     />
                     <template v-if="i==2" >
@@ -38,25 +39,11 @@
                 <v-col class="pa-0">
                     <team-logo v-if="i==1"
                         :id="match.awayTeam.id"
+                        :name="match.awayTeam.name"
                         size="30"
                     />
                     <div class="text-center" v-else>
-                        <!-- MISSED -->
-                        <template v-if="!guess.guessed_at">
-                            <v-row no-gutters class="lh-1">
-                                <v-col cols="12">
-                                    <em-emoji id="checkered_flag"/>
-                                </v-col>
-                                <v-col no-gutters justify="center" class="lh-1 pt-1">
-                                    <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
-                                </v-col>
-                            </v-row>
-                        </template>
-                        <!-- NOT MISSED -->
-                        <template v-else>
-                            <guess-single-view-points :guess="guess" />
-                            <!-- <guess-match-result :guess="guess" :match="match" /> -->
-                        </template>
+                        <guess-single-view-points :guess="guess" />
                     </div>
                 </v-col>
             </v-row>

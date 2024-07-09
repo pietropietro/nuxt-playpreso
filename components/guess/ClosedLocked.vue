@@ -13,17 +13,14 @@
                 <v-col class="pa-0">
                     <team-logo v-if="i==1"
                         :id="match.homeTeam.id"
+                        :name="match.homeTeam.name"
                         size="30"
                     />
                     <template v-if="i==2" >
                         <em-emoji  
-                            v-if="thirdCell == 'emoji'"
                             :native="guess.ppTournamentType?.emoji" 
                             size="2em"
                         />
-                        <template v-else>
-                            <guess-box-time :match="match"/>
-                        </template>
                     </template>
                 </v-col>
             </v-row>
@@ -41,6 +38,7 @@
             
                 <v-col class="pa-0">
                     <team-logo v-if="i==1"
+                        :name="match.awayTeam.name"
                         :id="match.awayTeam.id"
                         size="30"
                     />
@@ -86,7 +84,6 @@ export default {
         rgb: {type: String},
         size: {type: Number, default: 49},
         withLogo: {type:Boolean, default: true},
-        thirdCell: {type: String, default: 'emoji'}
     },
 }
 </script>

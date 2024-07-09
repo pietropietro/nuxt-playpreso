@@ -10,19 +10,20 @@
         >   
             <v-col>
                 <v-row>
-                    <v-col cols="2">
+                    <v-col cols="auto">
                         <v-row v-for="i in 2" :key="i"
                             align="center"
                             justify="center"
                             class="text-center"
                             :style="{
                                 height: size +'px',
-                                background: i== 2 ? ppRGBA(rgb, 0.4) : ppRGBA(rgb, 0.2)
+                                background: i== 2 ? ppRGBA(rgb, shade1) : ppRGBA(rgb, shade2)
                             }"
                         >
-                            <v-col class="pa-0">
+                            <v-col class="pa-0" style="min-width:49px;">
                                 <team-logo v-if="i==1"
                                     :id="match.homeTeam.id"
+                                    :name="match.homeTeam.name"
                                     size="30"
                                 />
                                 <template v-if="i==2" >
@@ -47,9 +48,9 @@
                                         justify="center"
                                         align="center"
                                         no-gutters
-                                        :style="{height:'50%', background: j== 2 ? ppRGBA(rgb, 0.4) : ppRGBA(rgb, 0.2)}"
+                                        :style="{height:'50%', background: j== 2 ? ppRGBA(rgb, shade1) : ppRGBA(rgb, shade2)}"
                                     >
-                                        <div class="overline lh-1">
+                                        <div class="ocrastd lh-1 font-weight-bold" style="font-size:14px">
                                             {{ j==1 ? match.homeTeam.name : match.awayTeam.name }}
                                         </div>
                                     </v-row>
@@ -57,18 +58,17 @@
                                 <template v-if="i==2" >
                                     <v-row align="center" no-gutters style="height:100%">  
                                         <v-col class="pa-0" 
-                                            :style="{background: ppRGBA(rgb, 0.2), height: '100%'}"
+                                            :style="{background: ppRGBA(rgb, shade2), height: '100%'}"
                                         >
                                             <v-row no-gutters align="center" justify="center" 
                                                 style="height:100%; line-height: 0.8em;" class="ml-2 mr-1"
                                             >
-                                                <div>
+                                                <div style="word-break: break-all;">
                                                     <span>
                                                         <emoji-flag
                                                             :model="match.league.country"
                                                             size="1em"
-                                                            class="mr-1"
-                                                            style="line-height: 0.3em !important;"
+                                                            style="line-height: 0.3em !important; margin-right:2px"
                                                         />
                                                     </span>
                                                     <span
@@ -90,14 +90,15 @@
 
                                         </v-col>
                                         <v-col cols="auto"
-                                            :style="{background: ppRGBA(rgb, 0.4), height: '100%'}"
+                                            :style="{background: ppRGBA(rgb, shade1), height: '100%'}"
                                         >
                                             <v-row no-gutters align="center" style="height:100%">
-                                                <v-col cols="auto" class="pl-2"
+                                                <v-col cols="auto" class="px-2"
+                                                    v-if="!guess.verified_at && match.verified_at"
                                                 >
-                                                    <guess-box-time :match="match"/>
+                                                    <guess-box-time :match="match" :guess="guess"/>
                                                 </v-col>
-                                                <v-col cols="auto" class="px-2">
+                                                <v-col cols="auto" class="pr-2">
                                                     <guess-match-result :guess="guess" :match="match" />
                                                 </v-col>
                                             </v-row>
@@ -107,40 +108,33 @@
                             </v-col>
                         </v-row>
                     </v-col>
-                    <v-col cols="2">
+                    <v-col cols="auto">
                         <v-row v-for="i in 2" :key="i"
                             align="center"
                             justify="center"
                             class="text-center"
                             :style="{
                                 height: size +'px',
-                                background: i== 1 ? ppRGBA(rgb, 0.4) : ppRGBA(rgb, 0.2)
+                                background: i== 1 ? ppRGBA(rgb, shade1) : ppRGBA(rgb, shade2)
                             }"
                         >
-                            <v-col class="pa-0">
-                                <team-logo v-if="i==1"
+                            <v-col class="pa-0" style="min-width:49px;">
+                                <team-logo 
+                                    v-if="i==1"
                                     :id="match.awayTeam.id"
+                                    :name="match.awayTeam.name"
                                     size="30"
                                 />
-                                <div class="text-center" v-else>
-                                    <!-- MISSED -->
-                                    <template v-if="!guess.guessed_at">
-                                        <v-row no-gutters class="lh-1">
-                                            <v-col cols="12">
-                                                <em-emoji id="checkered_flag"/>
-                                            </v-col>
-                                            <v-col no-gutters justify="center" class="lh-1 pt-1">
-                                                <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
-                                            </v-col>
-                                        </v-row>
-                                    </template>
-                                    <!-- NOT MISSED -->
-                                    <template v-else>
+                                <template v-else>
+                                    <div v-if="!guess.verified_at">
+                                        <guess-box-time :match="match" :guess="guess"/>
+                                    </div>
+                                    <div class="text-center" v-else>
                                         <guess-single-view-points :guess="guess" />
-                                        <!-- <guess-match-result :guess="guess" :match="match" /> -->
-                                    </template>
-                                </div>
+                                    </div>
+                                </template>
                             </v-col>
+                               
                         </v-row>
                     </v-col>
                 </v-row>
@@ -161,6 +155,14 @@ export default {
         handleClick(){
             console.log('set open null');
             this.setOpen(null);
+        }
+    },
+    computed:{
+        shade1(){
+            return this.match.verified_at ? 0.4 : 0.6;
+        },
+        shade2(){
+            return this.match.verified_at ? 0.2 : 0.4;
         }
     }
 }

@@ -11,6 +11,7 @@
         >
             <v-col v-if="withLogo" :cols="withTag ? 4 : ''" class="pa-0">
                 <team-logo 
+                    :name="i==1 ?  match.homeTeam.name : match.awayTeam.name"
                     :id="i==1 ? match.homeTeam.id : match.awayTeam.id" 
                     size="30"  
                 />

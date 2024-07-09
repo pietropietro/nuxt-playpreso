@@ -4,7 +4,7 @@
             <template v-for="guess in chunk" >
                 <v-col v-if="!chunk.map((g)=>g.id).includes(openId)  || openId == guess.id" :key="guess.id"
                     :cols="openId == guess.id ? '12' : '4'">
-                    <guess-closed-box
+                    <guess-box
                         :style="openId != guess.id ? {
                             minWidth:'100px',
                             maxWidth:'100px'
@@ -72,7 +72,6 @@ export default {
             this.loading = false;
         },
         setOpen(guess_id){
-            console.log(guess_id, 'setttt')
             this.openId = guess_id;
         }
     },

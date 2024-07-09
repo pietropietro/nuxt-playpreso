@@ -8,10 +8,9 @@
         />
         <div class="text-center font-weight-bold overline blink lh-1 red--text mt-n1">LIVE</div>
     </div>
-    <div v-else-if="!match.verified_at && isToday(new Date(match.date_start.replace(/-/g, '/')))" class="lh-1">
-        <template v-if="!match.verified_at">
-            <em-emoji id="alarm_clock" />  <br/>
-            <span class="overline lh-1">{{formatTime(match.date_start)}}</span>
+    <div v-else-if="!match.verified_at && isToday(new Date(match.date_start.replace(/-/g, '/')))" class="text-center lh-1">
+        <template>
+            <span class="caption font-weight-bold lh-1 text-uppercase">{{formatTime(match.date_start)}}</span>
         </template>
     </div>
     
@@ -31,7 +30,8 @@
 <script>
 export default {
     props:{
-        match: {type: Object}
+        match: {type: Object},
+        guess: {type: Object}
     }
 }
 </script>

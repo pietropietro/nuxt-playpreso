@@ -13,23 +13,35 @@
             <v-col cols="auto">MOTD</v-col>
             <em-emoji style="position:absolute; left:66%" id="jigsaw" size="3em"/>
         </v-row>
-        <v-row justify="center" align="center" class="pt-4">
+        <v-row justify="center" align="center" class="pt-4 mx-2">
             <v-spacer/>
-            <v-col cols="auto">
-                <guess-closed-box
+            <v-col>
+                <guess-box
+                    :style="openId != motd.guess.id ? {
+                            minWidth:'100px',
+                            maxWidth:'100px'
+                        }: {
+                            minWidth:'320px',
+                            maxWidth:'320px'
+                        }"
                     :match="motd.match"
                     :guess="motd.guess"
                     :rgb="motdPPTT.rgb"
                     :onUnlockedClick="onSelect"
-                    thirdCellLocked="time"
+                    :open="openId == motd.guess.id"
+                    :setOpen="(val)=>openId=val"
+
                 />
             </v-col>
             <v-spacer/>
-            <v-col cols="auto" class="text-center px-0">
-                <h1>{{motd.tot_locks ?? 0}} </h1>
-                <div class="overline lh-1">locks</div>
-            </v-col>
-            <v-spacer/>
+            <v-template v-if="!openId">
+                <v-spacer/>
+                <v-col cols="auto" class="text-center px-0">
+                    <h1>{{motd.tot_locks ?? 0}} </h1>
+                    <div class="overline lh-1">locks</div>
+                </v-col>
+            </v-template>
+            <v-spacer v-if="!openId"/>
         </v-row>
 
         <v-container class="mt-5 px-5">
@@ -64,7 +76,8 @@ export default {
             loading: true,
             motd: null,
             motdPPTT: null,
-            motdChart: null
+            motdChart: null,
+            openId: null
         }
     },
     computed: {

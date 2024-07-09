@@ -10,7 +10,7 @@
 							fontSize: Math.round((size / 3) * 2).toString() + 'px'
 						}
 					">
-						P
+						{{ name.charAt(0) }}
 					</span>
 				</v-row>
 		</div>
@@ -33,6 +33,7 @@
 export default {
 	props: {
 		id: { type: Number },
+		name: {type: String},
 		size: {type: String, default: '55'},
 		align: {type: String, default: 'start'},
 		country: {

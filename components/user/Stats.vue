@@ -123,7 +123,7 @@
                                     >
                                         <!-- width is necessary for slider to work on page landing :( -->
                                         <div style="min-width:100px; max-width:100px;">
-                                            <guess-closed-box
+                                            <guess-box
                                                 :guess="guess"
                                                 :match="guess.match"
                                                 :rgb="guess.ppTournamentType.rgb"
@@ -184,7 +184,7 @@
                                     >
                                         <!-- width is necessary for slider to work on page landing :( -->
                                         <div style="min-width:100px; max-width:100px;">
-                                            <guess-closed-box
+                                            <guess-box
                                                 :guess="guess"
                                                 :match="guess.match"
                                                 :rgb="guess.ppTournamentType.rgb"
