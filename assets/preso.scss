@@ -132,3 +132,15 @@ body {
 	line-height: 0.2rem !important;
 }
 
+
+//for the composable usemarquee.js
+.marquee-content-active {
+	white-space: nowrap;
+	overflow: hidden;
+	box-sizing: border-box;
+	position: relative; /* Set position relative to allow "left" to have an effect */
+}
+
+.marquee-content-active span {
+	display: inline-block ;
+}
