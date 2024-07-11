@@ -6,17 +6,19 @@
         no-gutters
     >  
         <v-col 
-            cols="4"
-            v-for="pprm, index in ppRMs" 
+            :cols="openId == pprm.guess.id ? '12' : '4'"
+            v-for="pprm, index in computedPPRMs" 
             :key="index"
         >
-            <v-row justify="center" no-gutters>
+            <v-row justify="center" no-gutters >
                 <v-col cols="auto">
                     <guess-box-view
                         :guess="pprm.guess"
                         :match="pprm.match"
                         :rgb="rgb"
                         :onUnlockedClick="selectGuess"
+                        :open="openId == pprm.guess.id"
+                        :setOpen="(val)=>openId=val"
                     />
                 </v-col>
             </v-row>
@@ -31,7 +33,23 @@ export default {
     },
     data(){
         return {
-            selectedGuessId: null
+            selectedGuessId: null,
+            openId:null
+        }
+    },
+    // maybe find a less expensive way (needed on round button change)
+    watch: {
+        ppRMs: {
+            deep: true,
+            handler() {
+                this.openId=null
+            }
+        }
+    },
+    computed:{
+        computedPPRMs(){
+            if(!this.openId)return this.ppRMs;
+            return this.ppRMs.filter((i)=> i.guess.id == this.openId);
         }
     },
     methods:{

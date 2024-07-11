@@ -128,6 +128,8 @@
                                                 :rgb="guess.ppTournamentType.rgb"
                                                 :afterLock="null"
                                                 :onClick="null"
+                                                :open="openId == guess.id"
+                                                :setOpen="(val)=>openId=val"
                                             />
                                         </div>
                                     </v-slide-item>
@@ -181,16 +183,15 @@
                                         :key="guess.id"
                                         class="mx-2"
                                     >
-                                        <!-- width is necessary for slider to work on page landing :( -->
-                                        <div style="min-width:100px; max-width:100px;">
-                                            <guess-box-view
-                                                :guess="guess"
-                                                :match="guess.match"
-                                                :rgb="guess.ppTournamentType.rgb"
-                                                :afterLock="null"
-                                                :onClick="null"
-                                            />
-                                        </div>
+                                        <guess-box-view
+                                            :guess="guess"
+                                            :match="guess.match"
+                                            :rgb="guess.ppTournamentType.rgb"
+                                            :afterLock="null"
+                                            :onUnlockedClick="null"
+                                            :open="openId == guess.id"
+                                            :setOpen="(val)=>openId=val"
+                                        />
                                     </v-slide-item>
                                 </v-slide-group>
                             </v-container>
@@ -211,6 +212,7 @@ export default {
         return{
             selectedTimeFrame: 'allTime',
             loading: true,
+            openId: null
         }
     },
     methods:{

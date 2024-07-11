@@ -7,7 +7,7 @@
         :style="{
             height:'50%', 
             background: j== 2 ? shades[0] : shades[1],
-            fontSize: '16px !important'
+            fontSize: '14px !important'
         }"
     >
         <div :ref="'team'+ (j==1 ? match.homeTeam.id : match.awayTeam.id)" style="width:100%">

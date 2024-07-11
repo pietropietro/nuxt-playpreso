@@ -1,9 +1,10 @@
-<template >
+<template>
     <div>
         <v-row  v-for="i in 2" :key="i"
             align="center"
             :style="{
                 height: size +'px',
+                maxWidth: maxWidth + 'px'
             }"
         >
             <v-col class="pa-0" style="height:100%;">
@@ -46,7 +47,6 @@
                             </v-row>
                             <!-- I need style width only when there is no extra col -->
                             <league-row 
-                                class="ciccio"
                                 :style="guess.verified_at ? '' : ('maxWidth:' + maxWidth + 'px;' )" 
                                 :league="match.league"
                             />
@@ -67,7 +67,7 @@ export default {
     props:{
         guess: {type: Object, required: true},
         match: {type: Object, required: true},
-        maxWidth: {type: String},
+        maxWidth: {type: Number},
         shades: {type: Array},
         size: {type: Number, default: 49},
     },
