@@ -1,8 +1,15 @@
 <template>
-    <v-row no-gutters align="center" justify="center" style="height: 50%">
+    <v-row no-gutters 
+		align="center" 
+		justify="center" 
+		class="text-center overline lh-1 font-weight-bold"
+		:style="{
+			height: '50%',
+		}"
+	>
         <div  
             :ref="'league' + league.id" 
-            class="overline lh-1 px-2"
+            class="px-2"
         >
             <template v-if="league.parent">
                 {{ league.parent.name }} –

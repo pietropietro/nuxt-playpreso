@@ -22,26 +22,15 @@
                     :key="guess.id"
                     class="mx-2"
                 >
-                    <!-- width is necessary for slider to work on page landing :( -->
-                    <div
-                        :style="openId != guess.id ? {
-                                minWidth:'100px',
-                                maxWidth:'100px'
-                            }: {
-                                minWidth:'320px',
-                                maxWidth:'320px'
-                            }"
-                    >
-                        <guess-box
-                            :guess="guess"
-                            :match="guess.match"
-                            :rgb="guess.ppTournamentType.rgb"
-                            :afterLock="afterLock"
-                            :onUnlockedClick="selectGuess"
-                            :open="openId == guess.id"
-                            :setOpen="(val)=>openId=val"
-                        />
-                    </div>
+                    <guess-box-view
+                        :guess="guess"
+                        :match="guess.match"
+                        :rgb="guess.ppTournamentType.rgb"
+                        :afterLock="afterLock"
+                        :onUnlockedClick="selectGuess"
+                        :open="openId == guess.id"
+                        :setOpen="(val)=>openId=val"
+                    />
                 </v-slide-item>
             </v-slide-group>
         </v-container>

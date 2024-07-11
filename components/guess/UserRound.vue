@@ -10,13 +10,16 @@
             v-for="pprm, index in ppRMs" 
             :key="index"
         >
-            <guess-box
-                style="min-width:100px; max-width:100px;"
-                :guess="pprm.guess"
-                :match="pprm.match"
-                :rgb="rgb"
-                :onUnlockedClick="selectGuess"
-            />
+            <v-row justify="center" no-gutters>
+                <v-col cols="auto">
+                    <guess-box-view
+                        :guess="pprm.guess"
+                        :match="pprm.match"
+                        :rgb="rgb"
+                        :onUnlockedClick="selectGuess"
+                    />
+                </v-col>
+            </v-row>
         </v-col>
     </v-row>
 </template>

@@ -4,21 +4,18 @@
             <template v-for="guess in chunk" >
                 <v-col v-if="!chunk.map((g)=>g.id).includes(openId)  || openId == guess.id" :key="guess.id"
                     :cols="openId == guess.id ? '12' : '4'">
-                    <guess-box
-                        :style="openId != guess.id ? {
-                            minWidth:'100px',
-                            maxWidth:'100px'
-                        }: {
-                            minWidth:'350px',
-                            maxWidth:'350px'
-                        }"
-                        :guess="guess"
-                        :match="guess.match"
-                        :rgb="guess.ppTournamentType?.rgb"
-                        :afterLock="()=>null"
-                        :open="openId == guess.id"
-                        :setOpen="setOpen"
-                    />
+                    <v-row justify="center">
+                        <v-col cols="auto">
+                            <guess-box-view
+                                :guess="guess"
+                                :match="guess.match"
+                                :rgb="guess.ppTournamentType?.rgb"
+                                :afterLock="()=>null"
+                                :open="openId == guess.id"
+                                :setOpen="setOpen"
+                            />
+                        </v-col>
+                    </v-row>
                 </v-col>
             </template>
             <v-col v-if="i === chunkedGuesses.length - 1" class="text-center">

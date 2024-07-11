@@ -38,7 +38,7 @@ export default {
         match: {type: Object},
         guess: {type: Object},
         rgb: {type: String},
-        size: {type: Number, default: 49},
+        size: {type: Number, default: 69},
         withLogo: {type:Boolean, default: true},
         withTag: {type:Boolean, default: true},
     },

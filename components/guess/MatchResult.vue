@@ -1,9 +1,21 @@
 <template>
     <v-row no-gutters align="center" justify="center" style="height:100%">
+        <!-- GUESS -->
         <v-col cols="auto">
-            <v-row no-gutters justify="center" align="center" class=" lh-1" v-if="guess.guessed_at">
-                <v-col cols="auto" class="mr-1">
-                    <em-emoji id="lock"  size="0.6em"/>
+            <v-row no-gutters 
+                v-if="guess.guessed_at"
+                justify="center" 
+                align="center" 
+                class="lh-1" 
+            >
+                <v-col 
+                    :cols="match.verified_at ? 'auto' : '12'" 
+                    :class="match.verified_at ? 'mr-1' : ''"
+                >
+                    <em-emoji 
+                        id="lock"  
+                        :size="match.verified_at ? '0.6em' : '1em'"
+                    />
                 </v-col>
                 <v-col class="pt-1">
                     <v-row no-gutters justify="center" align="center">
@@ -31,6 +43,8 @@
                     </v-row>
                 </v-col>
             </v-row>
+
+            <!-- RESULT -->
             <v-row no-gutters justify="center" class="lh-1 " align="center" v-if="match.verified_at">
                 <v-col cols="auto" class="mr-1">
                     <em-emoji id="checkered_flag" size="0.6em"/>

@@ -30,9 +30,18 @@ export default {
             this.flagEmoji = results[0];
         },
         async searchFlag() {
+            if(!this.model)return;
             let correctedModel = this.model == 'Turkiye' ? 'turkey' : this.model;
             await this.search('flag-' + correctedModel);
             if(this.flagEmoji) return;
+
+            const words = this.model.trim().split(/\s+/);
+            // Check if the array has more than one word
+            if (words.length > 1) {
+                await this.search('flag-' + words[0]);
+            }
+            if(this.flagEmoji) return;
+            
             await this.search(this.model);
         }
     },

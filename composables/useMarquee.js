@@ -4,7 +4,6 @@ import { nextTick } from 'vue';
 
 export default function useMarquee() {
     const checkWrapped = (element) => {
-		console.log('checkwrapped element', element);
         if (!element) return; // Skip if element does not exist
 
         const container = element.parentElement;
@@ -23,7 +22,6 @@ export default function useMarquee() {
 		const lineHeight = parseInt(window.getComputedStyle(element).lineHeight, 10);
 
         let isWrapped = contentWidth > containerWidth || elementHeight > lineHeight;;
-        console.log('iswrapped',  isWrapped);
 
         // Apply logic here based on isWrapped value, e.g., setting a marquee-team-name
         if (isWrapped) {
