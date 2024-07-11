@@ -35,7 +35,7 @@
                                 </v-col>
                                 <v-col>
                                     <v-row no-gutters align="center">
-                                        <v-col cols="3">
+                                        <v-col cols="3" v-if="match.round">
                                             <span class="overline lh-1">R{{ match.round }}</span>
                                         </v-col>
                                         <v-col>

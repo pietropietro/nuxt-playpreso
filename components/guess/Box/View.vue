@@ -5,7 +5,7 @@
             @click="handleClick"
             :style="{
                 height: boxheight,
-                minWidth: boxwidth,
+                width: boxwidth,
                 overflow: 'hidden'
             }"
         >   
@@ -88,7 +88,7 @@ export default {
     },
     methods:{
         handleClick(){
-            if(!this.guess.guessed_at && !!this.onUnlockedClick){
+            if(!this.guess.guessed_at && !this.guess.verified_at && !!this.onUnlockedClick){
                 this.onUnlockedClick(this.guess, this.match);
                 return;
             }

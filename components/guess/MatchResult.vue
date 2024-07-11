@@ -45,11 +45,19 @@
             </v-row>
 
             <!-- RESULT -->
-            <v-row no-gutters justify="center" class="lh-1 " align="center" v-if="match.verified_at">
-                <v-col cols="auto" class="mr-1">
-                    <em-emoji id="checkered_flag" size="0.6em"/>
+            <v-row no-gutters justify="center" class="lh-1 text-center" align="center" v-if="match.verified_at">
+                <v-col 
+                    :cols="guess.guessed_at ? 'auto' : '12'" 
+                    :class="guess.guessed_at ? 'mr-1' : ''"
+                >
+                    <em-emoji 
+                        id="checkered_flag" 
+                        :size="guess.guessed_at ? '0.6em' : '1em'"
+                    />
                 </v-col>
-                <v-col>
+                <v-col
+                    :class="guess.guessed_at ? '' : 'pt-1'"
+                >
                     <h4>{{ match.score_home  }}-{{ match.score_away }}</h4>
                 </v-col>
             </v-row>
