@@ -12,7 +12,7 @@
             <em-emoji style="position:absolute; left:66%" id="crown" size="3em"/>
         </v-row>
         
-        <p-p-ranking-table class="mt-2 px-5" :ppRankings="ppRankings" />
+        <p-p-ranking-table class="mt-6 px-5" :ppRankings="ppRankings" />
         
         <v-row justify="center" class="mt-10">
             <nuxt-link to="/p-ranking" class="no-decoration">

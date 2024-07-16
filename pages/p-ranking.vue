@@ -1,9 +1,14 @@
 <template>
     <v-container class="pt-0" >
-        <v-row class="flex-nowrap my-2">
+        <v-row class="flex-nowrap mt-2">
             <v-spacer/>
             <em-emoji id="first_place_medal" size="5em"/>
             <v-spacer/>
+        </v-row>
+        <v-row class="px-4 my-4" justify="center">
+            <div class="caption lh-1 text-center">
+                *based on last 3 months 
+            </div>
         </v-row>
         <loading-page v-if="loading"/>
         <p-p-ranking-table v-else-if="ppRankings" :ppRankings="ppRankings"/>
