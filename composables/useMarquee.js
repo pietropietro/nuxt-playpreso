@@ -46,10 +46,11 @@ export default function useMarquee() {
         marquees.forEach(marquee => {
             const parentWidth = marquee.parentElement.offsetWidth;
             const contentWidth = marquee.offsetWidth;
-            const travelDistance = contentWidth - parentWidth + 10;
+            let travelDistance = contentWidth - parentWidth + 10;
 
             if (travelDistance > 0) {
-                const keyframesName = `marquee-content-active-${marquee.textContent.trim().replace(/\s+/g, '-')}`;
+                if(travelDistance < 15) travelDistance = 15;
+                const keyframesName = `marquee-content-active-${marquee.textContent.trim().replace(/[\s\W]+/g, '-')}`;
                 let keyframes = `
                     @keyframes ${keyframesName} {
                         0% { transform: translateX(0); }

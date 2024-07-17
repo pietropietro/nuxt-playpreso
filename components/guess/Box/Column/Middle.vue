@@ -20,7 +20,7 @@
                 <template v-if="i==2" >
                     <v-row align="center" no-gutters style="height:100%">
                         <v-col class="pa-0"
-                            :cols="guess.verified_at ? '9' : ''"
+                            :cols="guess.verified_at ? '9' : '12'"
                             :style="{background: shades[1], height: '100%'}"
                         >
                             <v-row no-gutters style="height:50%" align="center" justify="center" class="text-center">
@@ -34,13 +34,13 @@
                                         {{ match.league.level }}
                                     </span>
                                 </v-col>
-                                <v-col>
+                                <v-col cols="9">
                                     <v-row no-gutters align="center">
                                         <v-col cols="3" v-if="match.round">
-                                            <span class="overline lh-1">R{{ match.round }}</span>
+                                            <div class="overline lh-1">R{{ match.round }}</div>
                                         </v-col>
-                                        <v-col>
-                                            <span class="overline  lh-1">{{ formatDate(match.date_start) }}</span>
+                                        <v-col cols="9">
+                                            <guess-row-date-time :match="match" />
                                         </v-col>
                                     </v-row>
                                 </v-col>
@@ -63,6 +63,7 @@
     </div>
 </template>
 <script>
+
 export default {
     props:{
         guess: {type: Object, required: true},

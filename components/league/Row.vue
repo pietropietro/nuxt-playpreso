@@ -8,7 +8,7 @@
 		}"
 	>
         <div  
-            :ref="'league' + league.id" 
+            :ref="refstring" 
             class="px-2"
         >
             <template v-if="league.parent">

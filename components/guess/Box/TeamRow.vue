@@ -10,11 +10,9 @@
             fontSize: '14px !important'
         }"
     >
-        <div :ref="'team'+ (j==1 ? match.homeTeam.id : match.awayTeam.id)" style="width:100%">
+        <div :ref="refstring" style="width:100%">
             <div>
-                <!-- <emoji-flag v-if="j==1 && showCountry" :model="match.homeTeam.country" class="mr-1"/> -->
                 {{ j==1 ? match.homeTeam.name : match.awayTeam.name }}
-                <!-- <emoji-flag  v-if="j==2 && showCountry" :model="match.awayTeam.country" class="ml-1" /> -->
             </div>
         </div>
     </v-row>
@@ -39,7 +37,6 @@ export default {
 		}
 	},
 	mounted(){	
-        console.log('mounted')
 		nextTick(() => {
 			refreshMarquee(this.$refs[this.refstring]);
 		});
