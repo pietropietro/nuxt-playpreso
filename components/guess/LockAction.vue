@@ -86,7 +86,7 @@ export default {
 				"away": away
 			}
 
-			let route = this.guess_id ? this.API_ROUTES.GUESS.LOCK + this.guess_id : this.API_ROUTES.MOTD.LOCK;
+			let route = (this.guess_id && this.guess_id != 'dummy') ? this.API_ROUTES.GUESS.LOCK + this.guess_id : this.API_ROUTES.MOTD.LOCK;
 			let response = await this.$api.call(
 				route, values, 'POST'
 			);
