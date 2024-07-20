@@ -54,9 +54,8 @@
                 <v-container style="height: 170px;" class="px-0 pb-0">
                     <div class="px-2" v-if="selectedView=='graph'">
                         <v-sparkline
-                            padding="12"
                             :value="Object.values(item.sparkline_data.cumulative)"
-                            height="120"
+                            :height="$vuetify.breakpoint.smAndUp ? '70' : '120'"
                             stroke-linecap="round"
                             smooth
                             :color="'rgba('+rgb+')'"
