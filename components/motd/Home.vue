@@ -38,17 +38,7 @@
         </v-row>
 
         <v-container class="mt-5 px-5">
-            <v-row no-gutters v-for="(standing, i) in motdChart.chart" :key="standing.id" align="center">
-                <v-col>
-                    <v-row align="center">
-                        <v-col cols="auto">
-                            <v-chip x-small color="transparent" ># {{ i + 1 }}</v-chip>
-                        </v-col>
-                        <v-col><user-name :user="standing.user" /></v-col>
-                    </v-row>
-                </v-col>
-                <v-col class="pr-2" cols="auto"><h3>{{ standing.tot_points }}</h3></v-col>
-            </v-row>
+            <motd-table :chart="motdChart.chart" :page="1" :rgb="motdPPTT.rgb"/>
         </v-container>
 
         <v-row justify="center" class="mt-10">

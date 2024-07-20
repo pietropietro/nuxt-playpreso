@@ -4,7 +4,6 @@
             :class="selectedId == ranking.user_id ? 'pa-0 my-4' : 'pa-0'" 
             :style="selectedId == ranking.user_id ?
                 {
-                    background: 'var(--v-primary-darken2)',
                     borderRadius: '10px'
                 }
                 : {}"
@@ -33,7 +32,7 @@
 
                             <v-slide-item style="width:275px; height:70px" class="ml-2">
                                 <v-container fill-height class="rounded-lg"
-                                    style="background: var(--v-background-base)"
+                                    style="background: var(--v-primary-darken2)"
                                 >
                                     <v-row style="width:125px;" align="end" no-gutters>
                                         <v-col cols="auto">
@@ -56,7 +55,7 @@
                             >
                                 <v-container class="rounded-lg" :style="{
                                     overflow: 'hidden',
-                                    background: 'var(--v-background-base)',
+                                    background: 'var(--v-primary-darken2)',
                                 }">
                                     <v-row align="center">
                                         <v-col cols="auto">
@@ -91,7 +90,7 @@
                                 <v-container class="rounded-lg" :style="{
                                     height: '70px',
                                     overflow: 'hidden',
-                                    background: 'var(--v-background-base)'
+                                    background: 'var(--v-primary-darken2)'
                                 }">
                                     <v-row align="center">
                                         <v-col cols="auto">

@@ -92,10 +92,12 @@ export default {
                 this.onUnlockedClick(this.guess, this.match);
                 return;
             }
+
             if(this.open){
                 this.setOpen(null);
                 return;
             }
+
             this.setOpen(this.guess.id);
         }
     }

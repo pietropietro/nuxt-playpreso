@@ -40,7 +40,6 @@ export default {
         //when going to previous page from a scrolled page the app bar would not show.
         $route(to, from) {
             if (from.path !== '/' && to.path === '/') {
-                console.log('just navigating baack')
                 this.justNavigatedBack = true;
                 setTimeout(() => {
                     this.justNavigatedBack = false;
