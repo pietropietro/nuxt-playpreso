@@ -4,11 +4,7 @@
             style="font-size:30px; font-weight: bold; background:linear-gradient(#FFD700, transparent); border-radius: 10px;"  
             align="center"
         >
-            <!-- <v-col cols="auto">
-                <em-emoji id="first_place_medal" size="3em" /> 
-            </v-col> -->
             <v-col>P-RAN-KING</v-col>
-            <!-- <v-col></v-col> -->
             <em-emoji style="position:absolute; left:66%" id="crown" size="3em"/>
         </v-row>
         
