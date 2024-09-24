@@ -5,7 +5,7 @@
             color="var(--v-background-base)"
             flat 
             app
-            :height="!!extraRow ? '210px' : '150px'"
+            :height="!!extraRow ? '210px' : '200px'"
         >
             <v-container fluid class="pa-0" style="height: 100%;">
                 <guess-header-row 
@@ -13,6 +13,9 @@
                     :setExtraRow="setExtraRow"
                     :userParticipation="userParticipation"
                     v-if="!extraRow"
+                    style="height:50px;"
+                    class="mt-2 mb-3"
+                    :onArrowClick="()=>setExtraRow(extraRow=='guessScroll' ? null : 'guessScroll')"
                 />
                 <!-- <transition name="fade"> -->
                     <guess-current-scroll
@@ -34,7 +37,7 @@
                     :canSelect="canSelectTeam"
                     :selectedTeamId="selectedTeamId"
                     :setSelectedTeamId="(val)=>selectedTeamId=val"
-                    :onTeamNamesClick="()=> setExtraRow(extraRow=='guessScroll' ? null : 'guessScroll')"
+                    :onTeamNamesClick="()=>{}"
                 />
                 <guess-view-selection
                     class="pt-4"
