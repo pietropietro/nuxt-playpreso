@@ -66,6 +66,7 @@ Vue.mixin({
                 },
                 PPROUND: {
                     GET: '/p-round/',
+                    GET_FOR_UP: '/p-round/user-participation/',
                 },
                 PPTOURNAMENTTYPE: {
                     JOIN: '/p-tournament-type/join/'

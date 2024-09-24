@@ -30,7 +30,7 @@
             </v-col>
         </v-row>
 
-        <v-row no-gutters class="my-4" align="end" justify="center">
+        <v-row no-gutters class="mt-2" align="end" justify="center">
             <v-col
                 v-for="(up, index) in combinedUpsByStatus[selectedStatus]" :key="index"
                 class="text-center"
@@ -62,6 +62,15 @@
                     </nuxt-link>
                 </v-col>
             </v-row>
+            <v-row v-if="selectedStatus != 'waiting'">
+                <loading-page v-if="loading.round == true" />
+                <guess-user-round 
+                    v-else-if="pptLastRound"
+                    :ppRMs="pptLastRound" 
+                    :rgb="combinedUpsByStatus[selectedStatus][selectedIndex].ppTournamentType.rgb" 
+                    class="mx-2"
+                />
+            </v-row>
         </v-container>
     </v-container>
 </template>
@@ -75,6 +84,7 @@ export default {
             pplUpsByStatus: null,
             ppcUpsByStatus: null,
             selectedStatus: null,
+            pptLastRound: null,
             combinedUpsByStatus: {
                 active: [],
                 waiting: [],
@@ -82,7 +92,8 @@ export default {
             },  
             loading: {
                 leagues: true,
-                cups: true
+                cups: true,
+                round: false
             },
             selectedIndex: 0
         }
@@ -90,7 +101,11 @@ export default {
     computed:{
         availableStatus(){
             return Object.keys(this.combinedUpsByStatus).filter(key => this.combinedUpsByStatus[key].length > 0);
-        }    
+        },
+        selectedUp(){
+            if(!this.combinedUpsByStatus[this.selectedStatus] || this.combinedUpsByStatus[this.selectedStatus].length <= 0 )return null;
+            return this.combinedUpsByStatus[this.selectedStatus][this.selectedIndex];
+        }
     },
     methods:{
         async getPPLeaguesParticipations(){
@@ -109,6 +124,29 @@ export default {
             }
             this.loading.cups = false;
         },
+        async getLastRoundForSelectedUp(){
+            if(this.selectedStatus == 'waiting') return;
+            if(!this.selectedUp) return ;
+            this.loading.round = true;
+
+            let upId =  this.selectedUp.id;
+
+            let response = await this.$api.call(
+                this.API_ROUTES.PPROUND.GET_FOR_UP + upId
+            );
+
+            if(response && response.status === "success"){
+                this.pptLastRound = response.message;
+                //if currentuser is owner
+                //got to add pptt + match to each guess 
+                //in order to make the open guess + logo in box work
+                this.pptLastRound.forEach(element => {
+                    element.guess.ppTournamentType = this.selectedUp.ppTournamentType;
+                    element.guess.match = element.match;
+                });
+            }
+            this.loading.round = false;
+        },  
         combineUpsByStatus() {
             const combineArrays = (arr1, arr2) => [...(arr1 || []), ...(arr2 || [])];
 
@@ -129,10 +167,12 @@ export default {
         async selectUp(index){
             if(index!=this.selectedIndex)await this.triggerHapticFeedback();
             this.selectedIndex=index;
+            this.getLastRoundForSelectedUp();
         },
-        changeStatus(status){
+        async changeStatus(status){
             this.selectedIndex=0;
             this.selectedStatus=status;
+            await this.getLastRoundForSelectedUp();con
         }
     },
     async mounted(){
@@ -140,6 +180,7 @@ export default {
         await this.getPPCupsParticipations();
         this.combineUpsByStatus();
         this.selectedStatus = this.availableStatus[0];
+        await this.getLastRoundForSelectedUp();
     },
 }
 </script>

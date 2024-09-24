@@ -33,7 +33,8 @@ export default {
     },
     computed: {
         computedModel:{
-            get(){return this.model ?? 0},
+            //? for other users boxes where guessed_at is true but lock has to be hidden
+            get(){return this.model != null ? this.model : '?'},
             set(val){this.setModel(val)}
         },
     },

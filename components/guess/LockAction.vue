@@ -44,7 +44,6 @@ export default {
 	},
 	watch: {
         guess_id(newval,oldval) {
-			console.log('guess_idd',newval,oldval);
 			this.error = this.loading = false;
 			this.setDisabled(false);
 			this.sliderValue=0;
