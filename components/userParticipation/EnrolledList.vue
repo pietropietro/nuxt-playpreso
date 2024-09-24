@@ -20,7 +20,7 @@
                             :outlined="selectedStatus==status"
                             :color="selectedStatus==status ? '' : 'transparent'"
                             :value="status"
-                            @click="() => selectedStatus=status"
+                            @click="()=>changeStatus(status)"
                             style="min-width:50px; opacity: 1 !important"
                         >
                             {{status}}
@@ -29,19 +29,35 @@
                 </v-slide-group>
             </v-col>
         </v-row>
+
+        <v-row no-gutters class="my-4" align="end" justify="center">
+            <v-col
+                v-for="(up, index) in combinedUpsByStatus[selectedStatus]" :key="index"
+                class="text-center"
+            >
+                <div @click="selectUp(index)" :class="selectedIndex == index ? 'mx-4' : 'mx-2'">
+                    <em-emoji
+                        :native="up.ppTournamentType.emoji"
+                        :size="selectedIndex == index ? '2.5em' : '1.5em'"
+                    />
+                </div>
+            </v-col>
+        </v-row>
+
         <v-container>
             <v-row>
                 <v-col :cols="$vuetify.breakpoint.smAndUp ? '6' : '12'"
-                    v-for="up in combinedUpsByStatus[selectedStatus]" :key="up.id" :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
+                    :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
                 >
-                    <nuxt-link class="no-decoration" v-if="up"
-                        :to="up.ppLeague_id ?
-                                ROUTES.PPLEAGUE.DETAIL + up.ppLeague_id
-                                : ROUTES.PPCUP.DETAIL + up.ppCup_id + '/' + up.ppCupGroup_id
+                    <nuxt-link class="no-decoration" 
+                        :to="combinedUpsByStatus[selectedStatus][selectedIndex].ppLeague_id ?
+                                ROUTES.PPLEAGUE.DETAIL + combinedUpsByStatus[selectedStatus][selectedIndex].ppLeague_id
+                                : ROUTES.PPCUP.DETAIL + combinedUpsByStatus[selectedStatus][selectedIndex].ppCup_id 
+                                + '/' + combinedUpsByStatus[selectedStatus][selectedIndex].ppCupGroup_id
                         "
                     >
                         <user-participation-card
-                            :up="up" :status="selectedStatus"
+                            :up="combinedUpsByStatus[selectedStatus][selectedIndex]" :status="selectedStatus"
                         />
                     </nuxt-link>
                 </v-col>
@@ -64,11 +80,11 @@ export default {
                 waiting: [],
                 finished: []
             },  
-            selectedUp: null,
             loading: {
                 leagues: true,
                 cups: true
             },
+            selectedIndex: 0
         }
     },
     computed:{
@@ -79,7 +95,7 @@ export default {
     methods:{
         async getPPLeaguesParticipations(){
             this.loading.leagues = true;
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES + this.userId);
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES + (this.userId ?? this.currentUser.id));
             if(response && response.status === "success"){
                 this.pplUpsByStatus = response.message;
             }
@@ -87,7 +103,7 @@ export default {
         },
         async getPPCupsParticipations(){
             this.loading.cups = true;
-            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS + this.userId);
+            let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS + (this.userId ?? this.currentUser.id));
             if(response && response.status === "success"){
                 this.ppcUpsByStatus = response.message;
             }
@@ -109,6 +125,14 @@ export default {
                 this.ppcUpsByStatus?.finished,
                 this.pplUpsByStatus?.finished
             );
+        },
+        async selectUp(index){
+            if(index!=this.selectedIndex)await this.triggerHapticFeedback();
+            this.selectedIndex=index;
+        },
+        changeStatus(status){
+            this.selectedIndex=0;
+            this.selectedStatus=status;
         }
     },
     async mounted(){

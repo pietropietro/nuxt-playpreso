@@ -51,6 +51,7 @@
         <user-participation-enrolled-list 
             v-else-if="selectedView=='p-tournaments'"
             :userId="user.id"
+            class="px-2"
         />
         <user-stats 
             v-else-if="selectedView=='stats'"

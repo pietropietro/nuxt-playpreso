@@ -93,7 +93,7 @@
             >
                 <em-emoji
                     :style="{fontSize:'20px', position: 'absolute'}"
-                    :native="up.ppTournamentType.emoji" size="4em"
+                    :native="up.ppTournamentType.emoji" size="3.5em"
                 />
             </v-row>
         </v-col>
