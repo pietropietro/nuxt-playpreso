@@ -46,7 +46,7 @@
 
         <v-container>
             <v-row>
-                <v-col :cols="$vuetify.breakpoint.smAndUp ? '6' : '12'"
+                <v-col :cols="$vuetify.breakpoint.smAndUp ? '12' : '12'"
                     :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
                 >
                     <nuxt-link class="no-decoration" 
@@ -172,7 +172,7 @@ export default {
         async changeStatus(status){
             this.selectedIndex=0;
             this.selectedStatus=status;
-            await this.getLastRoundForSelectedUp();con
+            await this.getLastRoundForSelectedUp();
         }
     },
     async mounted(){
