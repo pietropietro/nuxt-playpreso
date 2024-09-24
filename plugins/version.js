@@ -1,7 +1,7 @@
 //Version plugin
 import Vue from 'vue'
 
-const V = '1.35c'
+const V = '1.35d'
 
 Vue.mixin({ data() { return { VERSION: V } } });
 
