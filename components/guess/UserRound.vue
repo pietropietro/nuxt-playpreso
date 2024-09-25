@@ -14,7 +14,7 @@
                 <v-col cols="auto">
                     <guess-box-view
                         :guess="pprm.guess"
-                        :match="pprm.match"
+                        :match="pprm.match || pprm.guess.match"
                         :rgb="rgb"
                         :onUnlockedClick="selectGuess"
                         :open="openId == pprm.guess.id"
@@ -67,6 +67,6 @@ export default {
                 newList: guessList, 
             });
         }
-    }
+    },
 }
 </script>

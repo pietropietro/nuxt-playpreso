@@ -9,7 +9,7 @@
         </v-row>
 
         <v-container class="mt-2">
-            <v-row no-gutters>
+            <v-row no-gutters class="px-4">
                 <v-col>
                     <v-slide-group
                         prev-icon="<"
@@ -31,20 +31,21 @@
                                 @click="()=>selectedType=type"
                                 style="min-width:50px; opacity: 1 !important"
                             >
-                                {{type}}
+                                <template v-if="type == 'fullPresoRounds'">full round</template>
+                                <template v-else>{{type}}</template>
                             </v-chip>
                         </v-slide-item>
                     </v-slide-group>
                 </v-col>
             </v-row>
             <div v-if="selectedType=='preso'">
-                <highlights-preso :presos="highlights.preso"  class="pa-4"/>
+                <highlights-preso :presos="highlights.preso"  class="px-4 pt-6"/>
             </div>
             <div v-else-if="selectedType=='trophies'">
-                <highlights-trophies :trophies="highlights.trophies" class="pa-4"/>
+                <highlights-trophies :trophies="highlights.trophies" class="px-4 pt-6"/>
             </div>
             <div v-else-if="selectedType=='fullPresoRounds'">
-                fullPresoRounds
+                <highlights-full-round :ppRounds="highlights.fullPresoRounds" class="px-4 pt-6"/>
             </div>
         </v-container>
         
