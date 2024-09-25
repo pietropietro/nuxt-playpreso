@@ -41,7 +41,7 @@
                 <highlights-preso :presos="highlights.preso"  class="pa-4"/>
             </div>
             <div v-else-if="selectedType=='trophies'">
-                trophies
+                <highlights-trophies :trophies="highlights.trophies" class="pa-4"/>
             </div>
             <div v-else-if="selectedType=='fullPresoRounds'">
                 fullPresoRounds
