@@ -83,6 +83,9 @@ Vue.mixin({
                     GET_MONTH: '/motd/month',
                     LOCK: '/motd/lock'
                 },
+                HIGHLIGHTS: {
+                    GET: '/highlights'
+                }
             },
             ADMIN_FEATURES: {
                 USERS: {

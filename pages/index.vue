@@ -15,6 +15,9 @@
         
         <p-p-ranking-view class="py-10"/>
 
+        <highlights-view class="py-10"/>
+
+
         <div class="py-10">
             <v-row  class="mx-4 mb-5 ocrastd"
                 style="font-size:30px; font-weight: bold; background:linear-gradient(#1a00e3, transparent); border-radius: 10px;"
