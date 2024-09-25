@@ -23,7 +23,7 @@
                             @click="()=>changeStatus(status)"
                             style="min-width:50px; opacity: 1 !important"
                         >
-                            {{status}}
+                            {{status}} ({{ combinedUpsByStatus[status].length }})
                         </v-chip>
                     </v-slide-item>
                 </v-slide-group>
@@ -31,16 +31,25 @@
         </v-row>
 
         <v-row no-gutters class="mt-2" align="end" justify="center">
-            <v-col
-                v-for="(up, index) in combinedUpsByStatus[selectedStatus]" :key="index"
-                class="text-center"
-            >
-                <div @click="selectUp(index)" :class="selectedIndex == index ? 'mx-4' : 'mx-2'">
-                    <em-emoji
-                        :native="up.ppTournamentType.emoji"
-                        :size="selectedIndex == index ? '2.5em' : '1.5em'"
-                    />
-                </div>
+            <v-col>
+                <v-slide-group
+                    prev-icon="<"
+                    next-icon=">"
+                    ref="slider"
+                >
+                    <v-slide-item
+                        v-for="(up, index) in combinedUpsByStatus[selectedStatus]" :key="index"
+                        class="mx-2"
+                        ref="slideItem"
+                    >
+                        <div @click="selectUp(index)" :class="selectedIndex == index ? 'mx-4' : 'mx-2'">
+                            <em-emoji
+                                :native="up.ppTournamentType.emoji"
+                                :size="selectedIndex == index ? '2.5em' : '1.5em'"
+                            />
+                        </div>
+                    </v-slide-item>
+                </v-slide-group>
             </v-col>
         </v-row>
 
