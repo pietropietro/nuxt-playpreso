@@ -53,5 +53,8 @@ export const state = () => ({
   export const getters = {
     currentGuess: (state) => {
       return state.list[state.currentIndex] || null;
+    },
+    currentGuessList: (state) => {
+      return state.list || null;
     }
   };

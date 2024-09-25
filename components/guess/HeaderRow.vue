@@ -14,7 +14,7 @@
                     @click="goToTournament"
                 />
             </v-col>
-            <v-col cols="12" class="mt-n2">
+            <v-col cols="12" class="mt-n2" v-if="currentGuessList.length > 1">
                 <v-col>
                     <h1 class="ocrastd" style="line-height: 0;"
                         @click="onArrowClick"
