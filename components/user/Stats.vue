@@ -79,6 +79,31 @@
                 </v-row>
             </div>
 
+            <div v-if="stats[selectedTimeFrame].fullPresoRounds.length" 
+                class="mx-4"
+                style="background:linear-gradient(#000024, transparent); border-radius: 10px; margin-top:80px; margin-bottom:80px;"
+            >
+                <v-row  class="ocrastd font-weight-bold text-center mx-4" 
+                    align="center"
+                >
+                    <v-col cols="auto">
+                        <span class=""
+                        style="
+                        font-size:30px; 
+                    "  
+                        >
+                            FULL ROUND
+                        </span>
+                        <span>({{stats[selectedTimeFrame].fullPresoRounds.length}})</span>
+                    </v-col>
+                    <!-- <em-emoji style="position:absolute; left:66%" id="jigsaw" size="3em"/> -->
+                </v-row>
+                <div v-for="ppr in stats[selectedTimeFrame].fullPresoRounds" :key="ppr.id">
+                    <guess-user-round class="pt-4" :ppRMs="ppr.ppRoundMatches" :rgb="ppr.ppRoundMatches[0].guess['ppTournamentType'].rgb"/>
+                   
+                </div>
+            </div>
+
             <div class="mx-4"
                 style="background:linear-gradient(#000024, transparent); border-radius: 10px; margin-top:80px; margin-bottom:80px;"
             >

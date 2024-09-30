@@ -18,10 +18,9 @@
                     :country="match.league.country != match.homeTeam.country ? match.homeTeam.country : ''"
                 />
                 <template v-if="i==2" >
-                    <em-emoji
-                        :native="guess.ppTournamentType?.emoji"
-                        size="2em"
-                    />
+                    <div style="font-size:2em;">
+                        {{ guess.ppTournamentType.emoji }}
+                    </div>
                 </template>
             </v-col>
         </v-row>
