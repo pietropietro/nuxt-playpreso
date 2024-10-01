@@ -43,13 +43,15 @@
                 </v-row>
                 <v-row class="mx-2">
                     <v-col cols="3">
-                        <p-p-info small  label="locks" :value="stats[selectedTimeFrame].mainStats.tot_locks"/>
+                        <p-p-info small  label="matches" :value="stats[selectedTimeFrame].mainStats.tot_locks"/>
                     </v-col>
                     <v-col cols="3">
                         <p-p-info small  label="AVG" :value="stats[selectedTimeFrame].mainStats.avg_points"/>
                     </v-col>
                     <v-col cols="3">
-                        <p-p-info small label="preso" :value="stats[selectedTimeFrame].mainStats.tot_preso"/>
+                        <p-p-info small label="preso" 
+                            :value="stats[selectedTimeFrame].mainStats.tot_preso ?? '-'"
+                        />
                     </v-col>
                     <v-col cols="3">
                         <p-p-info small label="missed" :value="stats[selectedTimeFrame].mainStats.tot_missed"/>
@@ -57,13 +59,25 @@
                 </v-row>
                 <v-row class="py-2 mx-2">
                     <v-col cols="4">
-                        <p-p-info small label="1X2" :value="formatPercentage(stats[selectedTimeFrame].mainStats.perc_unox2) + '%'"/>
+                        <p-p-info small label="1X2" 
+                            :value="stats[selectedTimeFrame].mainStats.perc_unox2 ?
+                                (formatPercentage(stats[selectedTimeFrame].mainStats.perc_unox2) + '%')
+                                : '-'"
+                        />
                     </v-col>
                     <v-col cols="4">
-                        <p-p-info small label="Gol-Nogol" :value="formatPercentage(stats[selectedTimeFrame].mainStats.perc_ggng) + '%'"/>
+                        <p-p-info small label="Gol-Nogol" 
+                            :value="stats[selectedTimeFrame].mainStats.perc_ggng ?
+                                (formatPercentage(stats[selectedTimeFrame].mainStats.perc_ggng) + '%')
+                                : '-'"
+                        />
                     </v-col>
                     <v-col cols="4">
-                        <p-p-info small label="Under-over" :value="formatPercentage(stats[selectedTimeFrame].mainStats.perc_uo25) + '%'"/>
+                        <p-p-info small label="Under-over" 
+                            :value="stats[selectedTimeFrame].mainStats.perc_uo25 ? 
+                                (formatPercentage(stats[selectedTimeFrame].mainStats.perc_uo25) + '%')
+                                : '-'"
+                        />
                     </v-col>
                 </v-row>
                 <v-row class="mx-2">
