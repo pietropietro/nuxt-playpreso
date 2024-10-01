@@ -1,14 +1,6 @@
 <template>
     <v-container class="pt-0 px-0" >
         <guess-scroll-home class="py-10" title="unlocked"/>   
-
-        <v-row justify="center" class="py-4 text-center">
-            <nuxt-link class="no-decoration" to="/p-cup/champions-24-25">
-                <h1>CHAMPIONS CUP</h1> 
-                <h1>💫</h1>
-            </nuxt-link>
-        </v-row>
-        
         <p-p-league-available-list class="py-10 mb-5"/>
         
         <motd-home class="py-10 my-5"/>

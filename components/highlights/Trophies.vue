@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col v-for="up in trophies" :key="up.id" cols="12" sm="6">
+        <v-col v-for="up in trophies" :key="up.id" cols="12" sm="12">
             <v-row align="center">
                 <v-col cols="auto">
                     <nuxt-link
@@ -17,11 +17,11 @@
                         />
                     </nuxt-link>
                 </v-col>
-                <v-col cols="auto">
+                <v-col >
                     <h2>{{ppTournamentTypeTitle(up.ppTournamentType)}}</h2>
                     <user-name small :user="up.user" />
                 </v-col>
-                <v-col >
+                <v-col  cols="auto">
                     <h4>{{ up.tot_points }} P</h4>
                     <div class="overline lh-1">{{ up.tot_locked }}-{{ up.tot_preso }}-{{ up.tot_unox2 }}</div>
                 </v-col>
