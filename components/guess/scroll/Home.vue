@@ -10,27 +10,31 @@
                 id="slider"
             >
                 <v-slide-item style="width:100px;">
-                    <guess-scroll-switch 
-                        class="ml-4"
-                        :state="state" 
-                        :setState="(val)=>state=val"
-                        :availableStates="availableStates"
-                    />
+                    <div class="ml-4" style="height:100%">
+                        <guess-scroll-switch
+                            style="height:100%"
+                            :state="state"
+                            :setState="(val)=>state=val"
+                            :availableStates="availableStates"
+                        />
+                    </div>
                 </v-slide-item>
                 <v-slide-item
                     v-for="guess in guesses[state]"
                     :key="guess.id"
                     class="mx-2"
                 >
-                    <guess-box-view
-                        :guess="guess"
-                        :match="guess.match"
-                        :rgb="guess.ppTournamentType.rgb"
-                        :afterLock="afterLock"
-                        :onUnlockedClick="selectGuess"
-                        :open="openId == guess.id"
-                        :setOpen="(val)=>openId=val"
-                    />
+                    <div>
+                        <guess-box-view
+                            :guess="guess"
+                            :match="guess.match"
+                            :rgb="guess.ppTournamentType.rgb"
+                            :afterLock="afterLock"
+                            :onUnlockedClick="selectGuess"
+                            :open="openId == guess.id"
+                            :setOpen="(val)=>openId=val"
+                        />
+                    </div>
                 </v-slide-item>
             </v-slide-group>
         </v-container>
