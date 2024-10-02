@@ -154,7 +154,7 @@ export default {
 .lock-slider::before {
 	content: '>>';
 	position: absolute;
-	top: 50%;
+	top: 42%;
 	transform: translateY(-50%);
 	font-family: 'OCR_A_Std';
 	font-size: 1.5rem;

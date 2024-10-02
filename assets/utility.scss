@@ -3,6 +3,10 @@
     cursor: pointer
 }
 
+:root {
+    --safe-area-top: env(safe-area-inset-top);
+}
+
 .hidden {
     display: none
 }

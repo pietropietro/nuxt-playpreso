@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="py-0" style="height:100%">
+    <v-container fluid style="height:100%">
         <template v-if="standings">
           <v-row
             v-for="(team,i) in standings"

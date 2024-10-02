@@ -1,11 +1,11 @@
 <template>
     <v-container style="height: 100%;" fluid>
         <v-app-bar
-            class="pp-app-bar"
+            class="pp-app-bar safe-area"
             color="var(--v-background-base)"
             flat 
             app
-            :height="!!extraRow ? '210px' : '200px'"
+            :height="barHeight"
         >
             <v-container fluid class="pa-0" style="height: 100%;">
                 <guess-header-row 
@@ -52,6 +52,8 @@
         
         <template v-else>
             <league-standings
+                class="py-0"
+                :style="{marginTop: negativeMarginTopInset}"
                 v-if="selectedView == 'standings'"
                 :standings="leagueStandings"
                 :rgb="currentGuess.ppTournamentType?.rgb"
@@ -68,7 +70,7 @@
         <v-footer
             app
             color="var(--v-background-base)"
-            class="d-flex flex-column align-center pt-4 pb-4 px-0"
+            class="d-flex flex-column align-center pt-4 pb-6 px-0"
         >
                 <v-row  
                     style="width:100%"
@@ -146,6 +148,17 @@ export default {
                 views.lastMatches = 1;
             }
             return views;
+        },
+        //for mobile safe-area adjustments
+        barHeight() {
+            const rootStyle = getComputedStyle(document.documentElement);
+            const safeAreaInsetTop = parseFloat(rootStyle.getPropertyValue('--safe-area-top')) || 0;
+            return !!this.extraRow ? `${210 + safeAreaInsetTop}px` : `${200 + safeAreaInsetTop}px`;
+        },
+        negativeMarginTopInset(){
+            const rootStyle = getComputedStyle(document.documentElement);
+            const safeAreaInsetTop = parseFloat(rootStyle.getPropertyValue('--safe-area-top')) || 0;
+            return `-${safeAreaInsetTop}px`
         }
     },
     watch: {
