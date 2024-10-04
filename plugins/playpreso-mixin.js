@@ -121,9 +121,13 @@ Vue.mixin({
                     console.error('Error triggering haptic feedback on iOS', e);
                 }
             } else if (Capacitor.getPlatform() === 'android' && 'vibrate' in navigator) {
-                // Use Vibration API for Android
-                navigator.vibrate(50); // Vibrate for 50 milliseconds
-                console.log('Haptic feedback triggered on Android');
+                // Use the Capacitor plugin for Android instead of the Vibration API
+                try {
+                    await Capacitor.Plugins.PPHapticsPlugin.triggerHapticFeedback();
+                    console.log('Haptic feedback triggered on Android');
+                } catch (e) {
+                    console.error('Error triggering haptic feedback on Android', e);
+                }
             } else {
                 console.log('Haptic feedback not supported on this platform');
             }

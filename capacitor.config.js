@@ -20,6 +20,3 @@ module.exports = {
     hostname: isDev ? '0.0.0.0'  : 'localhost', // Serve the app from your local IP during development
   },
 };
-
-
-

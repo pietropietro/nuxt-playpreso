@@ -1,5 +1,7 @@
 package com.playpreso.plugin.haptics;
 
+import android.content.Context;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.getcapacitor.JSObject;
@@ -17,6 +19,23 @@ public class PPHapticsPlugin extends Plugin {
 		return value;         // Return the value as a String
 	}
 
+	// Haptic feedback method
+	@PluginMethod
+	public void triggerHapticFeedback(PluginCall call) {
+		Context context = getContext(); // Get the app context
+		Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE); // Get Vibrator service
+
+		if (vibrator != null && vibrator.hasVibrator()) {
+			vibrator.vibrate(100); // Vibrate for 100 milliseconds
+			JSObject ret = new JSObject();
+			ret.put("result", "Haptic feedback triggered");
+			call.resolve(ret); // Send success response
+		} else {
+			call.reject("Device does not support vibration");
+		}
+	}
+
+	// Echo method to send data back
 	@PluginMethod
 	public void echo(PluginCall call) {
 		String value = call.getString("value");  // Get the value from PluginCall
