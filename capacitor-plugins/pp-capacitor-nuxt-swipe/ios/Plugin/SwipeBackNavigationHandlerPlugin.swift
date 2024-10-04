@@ -41,11 +41,15 @@ public class SwipeBackNavigationHandlerPlugin: CAPPlugin {
         }
     }
     
-    func isHomepage() -> Bool {
-        guard let url = self.bridge?.webView?.url else { return false }
-        // Check if the URL path is "/" which usually represents the homepage
-        return url.path == "/"
+    private boolean isHomepage() {
+        String url = getBridge().getWebView().getUrl();
+        if (url != null) {
+            // Check if the path is exactly "/"
+            return url.equals(getBridge().getServerUrl() + "/");
+        }
+        return false;
     }
+
 
     @objc func respondToSwipeGesture(gesture: UIPanGestureRecognizer) {
         

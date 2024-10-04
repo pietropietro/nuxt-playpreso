@@ -7346,7 +7346,7 @@ postcss@^8.2.1, postcss@^8.2.15, postcss@^8.4.14, postcss@^8.4.38:
     source-map-js "^1.2.1"
 
 "pp-capacitor-haptics@file:./capacitor-plugins/pp-capacitor-haptics":
-  version "0.0.1"
+  version "0.0.3"
 
 "pp-capacitor-nuxt-swipe@file:./capacitor-plugins/pp-capacitor-nuxt-swipe":
   version "0.0.2"
