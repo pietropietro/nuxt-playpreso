@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt",
+    "dev": "./set_api_endpoint.sh localhost && nuxt",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "dev:host": "API_ENDPOINT='http://0.0.0.0:8080' nuxt --hostname ''0.0.0.0''",
-    "build-ios-dev": "./set_api_endpoint.sh yarn generate && npx cap copy && npx cap update ios && npx cap open ios"
+    "dev:host": "./set_api_endpoint.sh nuxt --hostname ''0.0.0.0''",
+    "build-ios-dev": "./set_api_endpoint.sh && yarn generate && npx cap copy && npx cap update ios && npx cap open ios",
+    "build-android-dev": "./set_api_endpoint.sh && yarn generate && npx cap copy android && npx cap update android && npx cap open android"
   },
   "dependencies": {
-    "@capacitor/push-notifications": "^5.1.0",
+    "@capacitor/push-notifications": "^6.0.2",
     "@emoji-mart/data": "^1.2.1",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/vuetify": "^1.12.3",
@@ -31,8 +32,9 @@
     "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
-    "@capacitor/cli": "^5.6.0",
-    "@capacitor/core": "^5.6.0",
-    "@capacitor/ios": "^5.6.0"
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2"
   }
 }

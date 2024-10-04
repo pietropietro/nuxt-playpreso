@@ -1,10 +1,10 @@
 PODS:
-  - Capacitor (5.7.6):
+  - Capacitor (6.1.2):
     - CapacitorCordova
-  - CapacitorCordova (5.7.6)
-  - CapacitorPushNotifications (5.1.2):
+  - CapacitorCordova (6.1.2)
+  - CapacitorPushNotifications (6.0.2):
     - Capacitor
-  - PpCapacitorHaptics (0.0.1):
+  - PpCapacitorHaptics (0.0.3):
     - Capacitor
   - PpCapacitorNuxtSwipe (0.0.2):
     - Capacitor
@@ -29,10 +29,10 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/pp-capacitor-nuxt-swipe"
 
 SPEC CHECKSUMS:
-  Capacitor: 6e86d6f68a9348c76b6da7349ab3ee4a9edd3b9a
-  CapacitorCordova: 46df0372f7768ff20aa659ba1658b5d7315ea42a
-  CapacitorPushNotifications: 18108623c4f6a2629e7560c07c157820a511bcdd
-  PpCapacitorHaptics: a70308b0a0d7670fe0cbc3186fe4440cd5d5b9e5
+  Capacitor: 679f9673fdf30597493a6362a5d5bf233d46abc2
+  CapacitorCordova: f48c89f96c319101cd2f0ce8a2b7449b5fb8b3dd
+  CapacitorPushNotifications: ccd797926c030acad3d5498ef452c735c90a2c89
+  PpCapacitorHaptics: e7d5f2f3ad5bc3534ad74edd3e2fa62561e062ab
   PpCapacitorNuxtSwipe: a88aabc2333c129d2a101df7cf474a044d18a66e
 
 PODFILE CHECKSUM: 975b64abd797663d9fdf8f38d94fa91521147d96
