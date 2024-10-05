@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "244403340805",
+    "project_id": "playpreso-fcm",
+    "storage_bucket": "playpreso-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244403340805:android:0eddfb5a8c90ba345e3e6c",
+        "android_client_info": {
+          "package_name": "com.playpreso.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqpW8U_uapKZ-AjMEvoqh3Csdv-4bkQkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
