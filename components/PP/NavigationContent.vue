@@ -38,10 +38,3 @@
     </v-row>
 </template>
 
-<style scoped>
-    .tilted-span {
-      display: inline-block;
-      transform: rotate(10deg);
-    }
-</style>>
-

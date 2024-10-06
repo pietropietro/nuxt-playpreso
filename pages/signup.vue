@@ -2,27 +2,26 @@
 	<guest-screen v-if="!currentUser">
 		<template slot="content">
 			<div class="ocrastd">
-				<v-row>
-					<v-col col="12">
+				<v-row no-gutters>
+					<v-col cols="12">
 						<v-text-field
+							color="white"
 							label="email"
 							v-model="emailAdd"
 						/>
 					</v-col>
-				</v-row>
-				<v-row>
-					<v-col col="12">
+					<v-col cols="12">
 						<v-text-field
+							color="white"
 							label="username"
 							v-model="username"
 							@keypress="blockSpace"
 							maxlength="10"
 						/>
 					</v-col>
-				</v-row>
-				<v-row>
-					<v-col col="12">
+					<v-col cols="12">
 						<v-text-field
+							color="white"
 							type="password"
 							label="password"
 							v-model="password"
@@ -38,12 +37,12 @@
 			<v-row justify="space-between">
 				<nuxt-link :to="ROUTES.LOGIN" class="no-decoration">
 					<v-btn block text>
-						<h4 class="text-center primary--text">LOGIN</h4>
+						<h4 class="text-center white--text">LOGIN</h4>
 					</v-btn>
 				</nuxt-link>
 				<nuxt-link :to="ROUTES.RECOVER" class="no-decoration">
 					<v-btn block text>
-						<h4 class="text-center primary--text">RECOVER</h4>
+						<h4 class="text-center white--text">RECOVER</h4>
 					</v-btn>
 				</nuxt-link>
 			</v-row>

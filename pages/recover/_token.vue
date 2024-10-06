@@ -14,6 +14,7 @@
                 <v-row class="ocrastd">
                     <v-col col="12">
                         <v-text-field
+                            color="white"
                             type="password"
                             label="new password"
                             v-model="password"

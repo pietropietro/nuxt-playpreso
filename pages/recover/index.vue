@@ -1,9 +1,10 @@
 <template>
 	<guest-screen v-if="!currentUser">
 		<template slot="content" v-if="!byebye">
-			<v-row class="ocrastd">
+			<v-row class="ocrastd" no-gutters>
 				<v-col col="12">
 					<v-text-field
+						color="white"
 						label="username"
 						v-model="username"
 					/>
@@ -17,12 +18,12 @@
 			<v-row  justify="space-between">
 				<nuxt-link :to="ROUTES.LOGIN" class="no-decoration">
 					<v-btn block text>
-						<h4 class="text-center primary--text">LOGIN</h4>
+						<h4 class="text-center white--text">LOGIN</h4>
 					</v-btn>
 				</nuxt-link>
 				<nuxt-link :to="ROUTES.SIGNUP" class="no-decoration">
 					<v-btn block text>
-						<h4 class="text-center primary--text">SIGN UP</h4>
+						<h4 class="text-center white--text">SIGN UP</h4>
 					</v-btn>
 				</nuxt-link>
 			</v-row>
@@ -50,7 +51,11 @@ export default {
             let response = await this.$api.call(
                 this.API_ROUTES.USER.RECOVER + this.username, null,  'POST'
             );
-			this.byebye = true;
+			if(response.status=='success'){
+				this.byebye = true;
+			}else{
+				this.username=null;
+			}
 			this.loading = false;
 		},
 	},

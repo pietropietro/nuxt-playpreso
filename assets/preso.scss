@@ -111,7 +111,7 @@ body {
 
 .background-cover {
 	background-image: url("assets/img/background.jpg");
-	background-size: cover; 
+	background-size: cover;
 }
 
 .h-100{
@@ -144,3 +144,8 @@ body {
 .marquee-content-active span {
 	display: inline-block ;
 }
+
+.tilted-span {
+	display: inline-block;
+	transform: rotate(10deg);
+  }

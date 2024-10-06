@@ -4,10 +4,9 @@
             color="var(--v-background-base)"
             flat 
             app
-            :hide-on-scroll="shouldHideOnScroll"
             scroll-threshold="150"
             ref="appBar"
-            class="pp-app-bar"
+            class="pp-app-bar safe-area"
         >
             <transition name="fade">
                 <v-row justify="center" class="ocrastd">
@@ -45,7 +44,7 @@
             <p-p-menu-email-preferences v-if="selectedMenu==='email_reminders'" />
         </v-container>
         <v-container style='align-self:end'>
-            <v-row justify="center" @click="$logout.logout()">
+            <v-row justify="center" @click="doLogout">
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
             <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
@@ -96,6 +95,12 @@ export default {
             ],
         }
     },
+    methods:{
+        doLogout(){
+            this.$logout.logout();
+            this.$store.dispatch('menu/updateMenu', { newVal: false });
+        }
+    }, 
     mounted(){
         this.$store.dispatch(
             'navigation/updateTitle', 

@@ -9,8 +9,8 @@
 </template>
 <script>
 export default {
-    mounted () {
-        this.$vuetify.theme.dark = false
-    }
+    // mounted () {
+    //     this.$vuetify.theme.dark = false
+    // }
 }
 </script>
