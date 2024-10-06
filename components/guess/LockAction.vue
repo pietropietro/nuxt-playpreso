@@ -74,8 +74,13 @@ export default {
 		async doLockHttpRequest() {
 			await this.triggerHapticFeedback();
 
-			//TEST NOTIFICATION REQUEST
-			await this.requestPushNotifications();
+			//NOTIFICATION REQUEST
+			let notificationToken = this.$store.state.user.notificationToken;
+            console.log('notification token from store is ', notificationToken);
+            if (!notificationToken){
+				console.log('let s set it up');
+				await this.$pushNotificationsPlugin.requestPushNotifications();
+			}
 
 			let home = this.score[0];
 			let away = this.score[1];

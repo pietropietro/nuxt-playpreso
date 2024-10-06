@@ -7,6 +7,9 @@ Vue.mixin({
         },
         currentPoints(){
             return  this.$store.state.user.points ?? null;;
+        },
+        currentNotificationToken(){
+            return  this.$store.state.user.notificationToken ?? null;;
         }
     },
     methods:{

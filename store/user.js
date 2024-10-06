@@ -2,7 +2,8 @@ export const state = () => ({
 	currentUser: null,
 	token: null,
 	points: null,
-	darkMode: false
+	darkMode: false,
+	notificationToken: null
 })
 
 export const mutations = {
@@ -21,4 +22,8 @@ export const mutations = {
 	updateDarkMode (state, payload) {
 		state.darkMode = payload.darkMode
 	},
+
+	updateNotificationToken(state, payload){
+		state.notificationToken = payload.notificationToken
+	}
 }

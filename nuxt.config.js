@@ -43,7 +43,7 @@ export default {
 		{ src: '@/plugins/logout.js' },
         { src: '@/plugins/api.js', ssr: false },
 		{ src: '@/plugins/vuex-persist.js', ssr: false },
-		{ src: '@/plugins/push-notifications.client.js', ssr: false},
+		{ src: '@/plugins/push-notifications.js', ssr: false},
 
 	],
 
@@ -81,6 +81,7 @@ export default {
         customVariables: ['~/assets/variables.scss'],
 		treeShake: true,
 		theme: {
+			dark: true,
 			options: {
 				customProperties: true,
 			},

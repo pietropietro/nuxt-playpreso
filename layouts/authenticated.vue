@@ -6,7 +6,9 @@
                 <guard-logged-in v-if="!currentUser"/>
                 <template v-else>
                     <snackbar class="safe-area"/>
-                    <p-p-app-bar class="pp-app-bar safe-area" v-if="!currentGuess && !this.$store.getters['menu/currentMenuFlag']"/>
+                    <p-p-app-bar  v-if="!currentGuess && !this.$store.getters['menu/currentMenuFlag']"
+                        class="pp-app-bar safe-area"
+                    />
 
                     <!-- APP -->
                     <v-main>   
@@ -28,24 +30,27 @@
 import { Capacitor } from '@capacitor/core';
 
 export default {
-    mounted () {
-        setTimeout(()=>this.$vuetify.theme.dark =  true );
-        
-        if (Capacitor.isNativePlatform()) {
-            // Dynamically import the plugin
-            import('~/capacitor-plugins/pp-capacitor-nuxt-swipe').then((module) => {
-                const SwipeBackNavigationHandler = module.SwipeBackNavigationHandler;
-
-                // Use the plugin here
-                SwipeBackNavigationHandler.addSwipeGesture();
-                SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
-            }).catch(error => {
-                console.error('Error loading the SwipeBackNavigationHandler plugin', error);
-            });
-        }
-
+    mounted () {    
+        this.setUpSwipeBack();    
     },
     methods: {
+        setUpSwipeBack(){
+            if (Capacitor.isNativePlatform()) {
+                // Dynamically import the plugin
+                const listenersSetUp = sessionStorage.getItem('swipeListenersAdded');
+                if (listenersSetUp)return;
+                import('~/capacitor-plugins/pp-capacitor-nuxt-swipe').then((module) => {
+                    const SwipeBackNavigationHandler = module.SwipeBackNavigationHandler;
+
+                    // Use the plugin here
+                    SwipeBackNavigationHandler.addSwipeGesture();
+                    SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
+                    sessionStorage.setItem('swipeListenersAdded', 'true');
+                }).catch(error => {
+                    console.error('Error loading the SwipeBackNavigationHandler plugin', error);
+                });
+            }
+        },
         handleSwipeRight() {
             if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path
                 this.$router.go(-1);
