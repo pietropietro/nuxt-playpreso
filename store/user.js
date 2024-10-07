@@ -3,7 +3,8 @@ export const state = () => ({
 	token: null,
 	points: null,
 	darkMode: false,
-	notificationToken: null
+	notificationToken: null,
+	notificationCount: 0
 })
 
 export const mutations = {
@@ -25,5 +26,10 @@ export const mutations = {
 
 	updateNotificationToken(state, payload){
 		state.notificationToken = payload.notificationToken
+	},
+
+	updateNotificationCount(state, payload){
+		state.notificationCount = payload.notificationCount
 	}
+
 }

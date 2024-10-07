@@ -91,6 +91,13 @@ export default ({ app, store }, inject) => {
                 } catch (error) {
                     console.error('Error handling registration error listener:', error);
                 }
+
+                PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
+                    let route = notification.notification.data.route || '/';
+                    console.log('Navigating to:', route);
+                    app.router.push(route);  // Navigate to the specific page based on the notification data
+                });
+                
         
                 // Handle notification received
                 try {
@@ -128,7 +135,6 @@ export default ({ app, store }, inject) => {
 
     
     setTimeout(()=>{
-        console.log('try set up the shiiit');
         app.$pushNotificationsPlugin.setupPushNotificationListeners();
     },300);
 

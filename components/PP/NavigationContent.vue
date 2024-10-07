@@ -38,8 +38,8 @@
         </v-col>
         <v-col class="mt-n1">
             <nuxt-link :to="ROUTES.NOTIFICATION">
-                <v-avatar color="red" size="19" v-if="unreadNotifications && unreadNotifications.length > 0">
-                    <span class="overline lh-1 font-weight-bold">{{ unreadNotifications.length }}</span>
+                <v-avatar color="red" size="19" v-if="$store.state.user.notificationCount">
+                    <span class="overline lh-1 font-weight-bold">{{ $store.state.user.notificationCount }}</span>
                 </v-avatar>
             </nuxt-link>
         </v-col>
@@ -47,17 +47,12 @@
 </template>
 <script>
 export default {
-    data(){
-        return{
-            unreadNotifications: []
-        }
-    },
     methods:{
         async getUserNotifications(){
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
             console.log(response,'resss');
             if(response && response.status === "success"){
-                this.unreadNotifications = response.message;
+                this.$store.commit('user/updateNotificationCount', { notificationCount: response.message.length }); 
             }
             this.loading = false;
         },

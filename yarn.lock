@@ -1058,6 +1058,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/push-notifications/-/push-notifications-6.0.2.tgz#1ad4a6eddfed4615f29d4b9d877cb99d489b3b09"
   integrity sha512-VYo8h+Dfw7B/JtsQCCnSKi34jr3oN9LacwmgCqwi3KPIE/sKID75lTEACZBQQ6c4rPct0yRQ0ihHdK/OPXl3Tw==
 
+"@capawesome/capacitor-badge@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@capawesome/capacitor-badge/-/capacitor-badge-6.0.0.tgz#8a9468862612a565f27082979d572b29420a76d5"
+  integrity sha512-HaRmS1apdlP51SKXKWr0bwhCJy9gSfP+e8UZuhrIxv6EtRujxkYPTTqDv883uwl4gidzedeUHI7YrGNJkKbdbw==
+
 "@csstools/cascade-layer-name-parser@^1.0.13":
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/@csstools/cascade-layer-name-parser/-/cascade-layer-name-parser-1.0.13.tgz#6900157489bc53da1f6a66eaccd432025f6cd6fb"

@@ -4,6 +4,8 @@ PODS:
   - CapacitorCordova (6.1.2)
   - CapacitorPushNotifications (6.0.2):
     - Capacitor
+  - CapawesomeCapacitorBadge (6.0.0):
+    - Capacitor
   - PpCapacitorHaptics (0.0.3):
     - Capacitor
   - PpCapacitorNuxtSwipe (0.0.2):
@@ -13,6 +15,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
+  - "CapawesomeCapacitorBadge (from `../../node_modules/@capawesome/capacitor-badge`)"
   - PpCapacitorHaptics (from `../../node_modules/pp-capacitor-haptics`)
   - PpCapacitorNuxtSwipe (from `../../node_modules/pp-capacitor-nuxt-swipe`)
 
@@ -23,6 +26,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorPushNotifications:
     :path: "../../node_modules/@capacitor/push-notifications"
+  CapawesomeCapacitorBadge:
+    :path: "../../node_modules/@capawesome/capacitor-badge"
   PpCapacitorHaptics:
     :path: "../../node_modules/pp-capacitor-haptics"
   PpCapacitorNuxtSwipe:
@@ -32,9 +37,10 @@ SPEC CHECKSUMS:
   Capacitor: 679f9673fdf30597493a6362a5d5bf233d46abc2
   CapacitorCordova: f48c89f96c319101cd2f0ce8a2b7449b5fb8b3dd
   CapacitorPushNotifications: ccd797926c030acad3d5498ef452c735c90a2c89
+  CapawesomeCapacitorBadge: 3d0f281ad8e4a4f8db8c3d88b7622a7f4c413342
   PpCapacitorHaptics: e7d5f2f3ad5bc3534ad74edd3e2fa62561e062ab
   PpCapacitorNuxtSwipe: a88aabc2333c129d2a101df7cf474a044d18a66e
 
-PODFILE CHECKSUM: 975b64abd797663d9fdf8f38d94fa91521147d96
+PODFILE CHECKSUM: b7277324aa89a82935e8ced42fd09921208dabbc
 
 COCOAPODS: 1.15.2

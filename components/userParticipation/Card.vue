@@ -33,9 +33,10 @@
                             :style="{background:ppRGBA(up.ppTournamentType.rgb,0.6)}"
                         >
                             <div class="overline">
-                                POS. {{up.position ? up.position + '°' : '?'}}/{{up.ppTournamentType.participants ??
-                                    up.levelFormat.group_participants
-                                }}
+                                POS. {{up.position ? up.position + '°' : '?'}}
+                                    <template v-if="participants">
+                                        /{{participants}}
+                                    </template>
                             </div>
                         </v-col>
                         <v-col
@@ -105,5 +106,12 @@ export default {
     props:{
         up: {type: Object, required: true},
     },
+    computed:{
+        participants:{
+            get(){
+                return this.up.ppTournamentType.participants ?? this.up.levelFormat.group_participants
+            }
+        }
+    }
 }
 </script>

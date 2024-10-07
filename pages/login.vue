@@ -19,7 +19,7 @@
 				</v-col>
 			</v-row>
 			<v-row justify="center" class="mb-4">
-				<v-btn color="primary" @click="doLogin" block flat :loading="loading" :disabled="!username || !password">
+				<v-btn color="primary" @click="doLogin" block :loading="loading" :disabled="!username || !password">
 					<h1>LOGIN</h1>
 				</v-btn>
 			</v-row>

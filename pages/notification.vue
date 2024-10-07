@@ -38,6 +38,8 @@
     </v-container>
 </template>
 <script>
+import { Badge } from '@capawesome/capacitor-badge';
+
 export default {
     layout: "authenticated",
     data(){
@@ -53,8 +55,10 @@ export default {
     },
     methods:{
         async getUserNotifications(){
+            this.loading=true;
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD + '?enriched=1', null, 'GET');
             if(response && response.status === "success"){
+                if(!response.message) this.$router.push('/');
                 this.userNotifications = response.message;
             }
             this.loading = false;
@@ -70,6 +74,13 @@ export default {
             }        
         );
         await this.getUserNotifications();
+
+        this.$store.commit('user/updateNotificationCount', { notificationCount: 0 }); 
+        if (Capacitor.isNativePlatform()) {
+            // Reset badge count 
+            await Badge.clear();
+        }
     }
+
 }
 </script>

@@ -19,4 +19,10 @@ module.exports = {
     androidScheme: isDev ? 'http' : 'https',
     hostname: isDev ? '0.0.0.0'  : 'localhost', // Serve the app from your local IP during development
   },
+  plugins: {
+    Badge: {
+      persist: true,  
+      autoClear: false
+    }
+  }
 };
