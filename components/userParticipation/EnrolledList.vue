@@ -66,7 +66,7 @@
                         "
                     >
                         <user-participation-card
-                            :up="combinedUpsByStatus[selectedStatus][selectedIndex]" :status="selectedStatus"
+                            :up="combinedUpsByStatus[selectedStatus][selectedIndex]"
                         />
                     </nuxt-link>
                 </v-col>

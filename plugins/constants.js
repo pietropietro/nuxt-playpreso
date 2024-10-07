@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
 export const API_ROUTES = {
-    NOTIFICATIONS: {
-        GET: '/notification',
-        READ: '/notification/read'
+    USER_NOTIFICATION: {
+        GET_UNREAD: '/user-notification',
+        READ: '/user-notification/read'
     },
     EMAIL_PREFERENCES:{
         UPDATE: '/email-preferences'
@@ -79,6 +79,7 @@ Vue.mixin({
                 LOGIN: '/login',
                 SIGNUP: '/signup',
                 RECOVER: '/recover',
+                NOTIFICATION: '/notification',
                 PPCUP: {
                     DETAIL: '/p-cup/'
                 },

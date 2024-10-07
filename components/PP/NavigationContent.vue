@@ -17,8 +17,9 @@
     <v-row v-else-if="$route.path !== '/'"></v-row>
     
     <!-- if no vuex title -->
-    <v-row v-else >
-        <v-spacer/>
+    <v-row v-else align="center">
+        <v-col></v-col>
+        <v-col>
             <v-toolbar-title>
                 <nuxt-link class="no-decoration" to="/">
                     <h1 class="ocrastd" style="line-height:1em; font-size:2 em">
@@ -34,7 +35,36 @@
                     </h1>
                 </nuxt-link>
             </v-toolbar-title>
-        <v-spacer/>
+        </v-col>
+        <v-col class="mt-n1">
+            <nuxt-link :to="ROUTES.NOTIFICATION">
+                <v-avatar color="red" size="19" v-if="unreadNotifications && unreadNotifications.length > 0">
+                    <span class="overline lh-1 font-weight-bold">{{ unreadNotifications.length }}</span>
+                </v-avatar>
+            </nuxt-link>
+        </v-col>
     </v-row>
 </template>
+<script>
+export default {
+    data(){
+        return{
+            unreadNotifications: []
+        }
+    },
+    methods:{
+        async getUserNotifications(){
+            let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
+            console.log(response,'resss');
+            if(response && response.status === "success"){
+                this.unreadNotifications = response.message;
+            }
+            this.loading = false;
+        },
+    },
+    async mounted(){
+        await this.getUserNotifications();
+    }
+}
+</script>
 

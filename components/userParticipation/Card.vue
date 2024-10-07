@@ -27,7 +27,7 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col cols="12" class="text-center" v-if="status== 'active'">
+                <v-col cols="12" class="text-center" v-if="up.started && !up.finished && !up.paused">
                     <v-row no-gutters align="center">
                         <v-col
                             :style="{background:ppRGBA(up.ppTournamentType.rgb,0.6)}"
@@ -48,7 +48,7 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col cols="12" class="text-center" v-else-if="status== 'waiting'">
+                <v-col cols="12" class="text-center" v-else-if="(!up.started && !up.finished) || up.paused">
                     <v-row no-gutters align="center">
                         <v-col
                             :style="{background:ppRGBA(up.ppTournamentType.rgb,0.6)}"
@@ -64,7 +64,7 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col cols="12" class="text-center" v-else-if="status == 'finished'">
+                <v-col cols="12" class="text-center" v-else-if="up.started && up.finished">
                     <v-row no-gutters align="center">
                         <v-col
                             :style="{background:ppRGBA(up.ppTournamentType.rgb,0.6)}"
@@ -90,6 +90,7 @@
                     background: 'linear-gradient(rgb(' + up.ppTournamentType.rgb + '), transparent)',  
                     minHeight: '92px'
                 }"
+                class="px-6"
             >
                 <em-emoji
                     :style="{fontSize:'20px', position: 'absolute'}"
@@ -103,7 +104,6 @@
 export default {
     props:{
         up: {type: Object, required: true},
-        status: {type: String, required: true},
     },
 }
 </script>
