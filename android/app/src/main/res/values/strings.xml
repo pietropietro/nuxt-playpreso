@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">playpreso</string>
-    <string name="title_activity_main">playpreso</string>
+    <string name="app_name">PlayPreso</string>
+    <string name="title_activity_main">PlayPreso</string>
     <string name="package_name">com.playpreso.app</string>
     <string name="custom_url_scheme">com.playpreso.app</string>
 </resources>
