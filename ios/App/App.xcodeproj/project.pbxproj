@@ -16,6 +16,7 @@
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 		D51A1C2A2B58486000201E17 /* OCR_A_Std.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D51A1C292B58486000201E17 /* OCR_A_Std.ttf */; };
+		D5E41D172CB44BE60013606D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D5E41D162CB44BE60013606D /* splash.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		D51A1C292B58486000201E17 /* OCR_A_Std.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCR_A_Std.ttf; sourceTree = "<group>"; };
 		D52E180A2B62E16500021FC1 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		D5E41D162CB44BE60013606D /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 		D51A1C282B58467800201E17 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5E41D162CB44BE60013606D /* splash.png */,
 				D51A1C292B58486000201E17 /* OCR_A_Std.ttf */,
 			);
 			path = Resources;
@@ -168,6 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E41D172CB44BE60013606D /* splash.png in Resources */,
 				D51A1C2A2B58486000201E17 /* OCR_A_Std.ttf in Resources */,
 				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
