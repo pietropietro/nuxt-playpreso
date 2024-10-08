@@ -2,7 +2,7 @@
     <v-app-bar
         flat dense app
         class="no-selection" 
-        color="primary"
+        :color="$config.DEBUG ? 'orange': 'primary'"
     >
         <div @click.stop="()=>setDrawer(!drawer)" class="ocrastd"><h1>ADMIN</h1></div>
         <h4 v-if="$config.DEBUG" class="red--text">DEBUG</h4>

@@ -22,7 +22,7 @@
         <v-col>
             <v-toolbar-title>
                 <nuxt-link class="no-decoration" to="/">
-                    <h1 class="ocrastd" style="line-height:1em; font-size:2 em">
+                    <h1 :class="'ocrastd ' + ($config.DEBUG ? ' orange--text' : '')" style="line-height:1em; font-size:2 em">
                         <span class="tilted-span">P</span><!--
                         --><span class="tilted-span">L</span><!--
                         --><span class="tilted-span">A</span><!--

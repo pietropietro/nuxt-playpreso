@@ -4,7 +4,7 @@
         <guard-logged-in v-if="!currentUser"/>
         <guard-admin v-else-if="!currentUser.admin"/>
         <template v-else>
-            <admin-header :drawer="drawer" :setDrawer="(val)=>drawer=val"/> 
+            <admin-header :drawer="drawer" :setDrawer="(val)=>drawer=val" /> 
             <snackbar />
             <v-main>
                 <admin-navigation-drawer :drawer="drawer" :setDrawer="(val)=>drawer=val"/>
