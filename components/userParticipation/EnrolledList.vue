@@ -39,13 +39,13 @@
                 >
                     <v-slide-item
                         v-for="(up, index) in combinedUpsByStatus[selectedStatus]" :key="index"
-                        class="mx-2"
+                        class="mx-4"
                         ref="slideItem"
                     >
                         <div @click="selectUp(index)" :class="selectedIndex == index ? 'mx-4' : 'mx-2'">
                             <em-emoji
                                 :native="up.ppTournamentType.emoji"
-                                :size="selectedIndex == index ? '2.5em' : '1.5em'"
+                                :size="selectedIndex == index ? '2.8em' : '1.8em'"
                             />
                         </div>
                     </v-slide-item>
