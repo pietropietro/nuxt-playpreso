@@ -57,7 +57,6 @@ export default {
     computed:{
         computedMenus(){
             if(!this.selectedMenu) return this.menus;
-            // console.log("selected",m.description, this.selectedMenu);
             return this.menus.filter((m)=>m.key === this.selectedMenu);
         }
     },

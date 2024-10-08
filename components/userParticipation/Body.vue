@@ -57,12 +57,6 @@ export default {
     props:{
         participation: {type: Object, required: true}
     },
-    mounted(){
-        if(this.participation.levelFormat){
-            console.log(this.participation.ppTournamentType.participants,"1");
-            console.log(this.participation.levelFormat,"2");
-        }
-    }
 }
 </script>
 

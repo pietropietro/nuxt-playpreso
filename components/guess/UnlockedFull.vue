@@ -190,9 +190,7 @@ export default {
 			this.loadingExtraData = false;
         },
         afterLock(){
-            console.log(this.currentGuess.ppTournamentType.name);
             if(this.currentGuess.ppTournamentType.name=='MOTD'){
-                console.log('hihi');
                 this.$store.dispatch('refreshFlag/triggerMotd');
             }
             this.removeGuessFromCurrentList(this.currentGuess.id);
