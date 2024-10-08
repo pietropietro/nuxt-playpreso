@@ -103,6 +103,11 @@ export default ({ app, store }, inject) => {
                 try {
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {
                         try {
+                            let count = store.state.user.notificationCount;
+                            count ++;
+                            store.commit('user/updateNotificationCount', {
+                                notificationCount: count
+                            }); 
                             console.log('Push received:', notification);
                         } catch (error) {
                             console.error('Error handling push notification received:', error);
