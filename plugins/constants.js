@@ -8,6 +8,10 @@ export const API_ROUTES = {
     EMAIL_PREFERENCES:{
         UPDATE: '/email-preferences'
     },
+    PUSH_PREFERENCES:{
+        TOGGLE: '/push-notification-preferences/toggle',
+        GET: '/push-notification-preferences'
+    },
     PUSH_NOTIFICATIONS:{
         SAVE: '/device-token/save',
         REMOVE: '/device-token/remove'

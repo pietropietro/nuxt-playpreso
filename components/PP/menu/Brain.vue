@@ -42,6 +42,7 @@
             </v-row>
             <p-p-menu-three-plus v-if="selectedMenu==='3+'" />
             <p-p-menu-email-preferences v-if="selectedMenu==='email_reminders'" />
+            <p-p-menu-notification-preferences v-if="selectedMenu==='notification_settings'" />
         </v-container>
         <v-container style='align-self:end'>
             <v-row justify="center" @click="doLogout">
@@ -65,7 +66,8 @@ export default {
             selectedMenu: null,
             menus:[
                 // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
-                {title: '<h3 class="ocrastd">REMINDERS</h3>', key:'email_reminders'},
+                {title: '<h3 class="ocrastd">NOTIFICATIONS 🔔</h3>', key:'notification_settings'},
+                {title: '<h3 class="ocrastd">EMAIL 🔔</h3>', key:'email_reminders'},
                 {title: '<h3 class="ocrastd">3+</h3>', key:'3+'},
                 {title: '<h3 class="ocrastd">POINTS</h3><em-emoji id="parking"/>', key:'points'},
                 {title: '<h3 class="ocrastd">CONTACT</h3>', key:'contact'},
