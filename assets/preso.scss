@@ -149,3 +149,11 @@ body {
 	display: inline-block;
 	transform: rotate(10deg);
   }
+
+
+  .terms-text {
+	white-space: pre-wrap; /* Preserve line breaks and whitespace */
+	padding: 1rem;
+	background-color: var(--v-primary-darken2);
+	border-radius: 8px;
+  }

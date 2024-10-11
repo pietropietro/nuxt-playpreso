@@ -1,0 +1,54 @@
+1. Introduction
+
+Welcome to PlayPreso! PlayPreso is a no-money-involved football score prediction game where users can compete in various types of tournaments, earning points (pp) to join additional tournaments. By creating an account and using PlayPreso, you agree to comply with and be bound by these Terms and Conditions.
+These Terms govern your use of the PlayPreso app and its associated services, regardless of whether you access them through a web browser or mobile application (collectively referred to as “the App”). Please read these Terms carefully. If you do not agree to these Terms, you should not use the App.
+
+2. Football Score Data Disclaimer
+
+PlayPreso does not own or control the football score data provided within the app. The data is sourced from external services, and while we strive for accuracy, we cannot guarantee that the scores or related information will always be 100% reliable or up to date. Users acknowledge that PlayPreso is not responsible for any inaccuracies in the football scores, and they agree to use the app understanding this limitation.
+
+3. No Involvement of Money or Betting
+
+PlayPreso is a free game and does not involve any financial transactions or real-money betting. Users can participate in various football score prediction tournaments, earning points (pp) within the game, which are used solely for entering new tournaments or other in-game activities. Under no circumstances does PlayPreso require or involve the exchange of money or any form of gambling. The points earned or used in the game have no monetary value and cannot be exchanged for cash or any other goods or services outside the app.
+
+4. Account Creation and User Responsibilities
+
+To participate in PlayPreso, users must create an account by providing a username, email address, and password. The password is securely stored in a hashed format, and as such, we do not have access to the original password. It is the user’s responsibility to ensure that their account information remains confidential and to notify us immediately if they suspect any unauthorized access or breach of security.
+Users agree to provide accurate and complete information during the account creation process. PlayPreso reserves the right to suspend or terminate any account that violates these Terms or engages in fraudulent or abusive activities.
+
+5. Privacy Policy
+
+PlayPreso respects your privacy and is committed to protecting your personal information. When you create an account, we collect basic data such as your username, email address, and password (which is securely hashed). This information is used solely for account management and to enable your participation in tournaments.
+We do not collect sensitive personal information, and we will not share your data with third parties without your consent, except as required by law or necessary to operate the app.
+PlayPreso may also use cookies to enhance your experience by storing preferences or session information. You may adjust your cookie settings in your browser, but this may affect certain features of the app.
+
+6. User Conduct
+By using PlayPreso, you agree to adhere to the following rules of conduct. You must not:
+Engage in any unlawful, fraudulent, or harmful activities while using the app.
+Use the app to distribute or post any offensive, inappropriate, or misleading content.
+Attempt to interfere with the app’s functionality, security, or other users’ experience.
+Create multiple accounts or impersonate others to gain unfair advantages in the tournaments.
+PlayPreso reserves the right to suspend or terminate accounts that violate these terms or engage in activities that undermine the integrity of the game. Users are responsible for any actions taken under their account and must notify us if they suspect any unauthorized access.
+
+7. Intellectual Property
+
+PlayPreso, its design, logo, and all related materials are the intellectual property of PlayPreso or its licensors, and are protected by applicable copyright, trademark, and other intellectual property laws. You are granted a limited, non-exclusive, and non-transferable license to use the app for personal, non-commercial purposes only.
+You agree not to:
+Copy, distribute, modify, or create derivative works based on any part of the app without our prior written permission.
+Reverse engineer, decompile, or attempt to extract the source code of any part of the app.
+Use any content or data from the app for commercial purposes without express authorization.
+The football score data and any related statistics are sourced from third-party providers and are not owned by PlayPreso. As such, you acknowledge that we do not have intellectual property rights over that data, and it is provided to you as-is for use within the app.
+
+8. Limitations of Liability
+
+PlayPreso is provided on an "as-is" and "as-available" basis, without any warranties, either express or implied. While we strive to maintain the app’s functionality and ensure data accuracy, we do not guarantee that the app will always be available, error-free, or that the data (including football scores) will always be accurate or reliable.
+To the fullest extent permitted by law, PlayPreso and its affiliates, officers, directors, employees, or agents shall not be liable for any indirect, incidental, special, or consequential damages, including but not limited to loss of profits, data, or other intangible losses arising from:
+Your use or inability to use the app.
+Any errors or inaccuracies in the football score data or other content.
+Unauthorized access to or use of your account or data.
+You agree that your use of the app is at your own risk, and you acknowledge that PlayPreso is not responsible for any damages that arise from your participation in tournaments or your reliance on any data provided within the app.
+
+9. Modifications to the Terms
+
+PlayPreso reserves the right to modify or update these Terms and Conditions at any time. Any changes will be effective immediately upon posting within the app or on the PlayPreso website. It is your responsibility to review the Terms periodically for any updates.
+By continuing to use PlayPreso after any changes are made, you agree to be bound by the revised Terms. If you do not agree with the updated Terms, you must discontinue using the app.
