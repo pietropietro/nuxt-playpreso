@@ -14,6 +14,7 @@
                     <v-main>   
                         <!-- <p-p-share-marquee /> -->
                         <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
+                        <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
                         <guess-unlocked-full
                             v-else-if="currentGuess"
                         />

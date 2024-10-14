@@ -3,7 +3,8 @@
 export const state = () => ({
     // Cache for different endpoints
     cache: {},
-    versionUpdateNeeded: false, // New state to track version update
+    versionUpdateNeeded: false, 
+    maintenanceMode: false, 
   });
   
   export const mutations = {
@@ -23,6 +24,10 @@ export const state = () => ({
     setVersionUpdate(state, status) {
       // Set version update status (true or false)
       state.versionUpdateNeeded = status;
+    },
+    setMaintenanceMode(state, status) {
+      // Set version update status (true or false)
+      state.maintenanceMode= status;
     },
   };
   

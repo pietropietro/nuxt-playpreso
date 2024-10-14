@@ -79,6 +79,11 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
                             // Handle 426 status code - Force app update
                             store.commit('apiResponses/setVersionUpdate', true);
                         }
+
+                        if (response.status === 503) {
+                            // Handle 503 status code - maintenancemode
+                            store.commit('apiResponses/setMaintenanceMode', true);
+                        }
                         
                         if(response.headers.has('Authorization')){
                             store.commit('user/updateToken', { token: response.headers.get('Authorization')});  
@@ -94,14 +99,15 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
                         
                     }).then((data) => {
                         if(data && data.status && data.status == "error"){
+                            console.error('error:', data.message);
                             $notifier.showError(data.message);
                         }
                         resp = data;
                         return data;
                     });
             }catch (e) {              
-                  console.error('Unknown error:', e);
-                  $notifier.showError();
+                console.error('error:', e);
+                $notifier.showError();
             }finally{
                 return resp;
             }
