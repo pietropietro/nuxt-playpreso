@@ -56,7 +56,7 @@
         <v-container>
             <v-row>
                 <v-col :cols="$vuetify.breakpoint.smAndUp ? '12' : '12'"
-                    :class="$vuetify.breakpoint.smAndUp ? '' : 'my-2'"
+                    class="mt-n1"
                 >
                     <nuxt-link class="no-decoration" 
                         :to="combinedUpsByStatus[selectedStatus][selectedIndex].ppLeague_id ?
