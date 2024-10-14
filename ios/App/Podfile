@@ -15,7 +15,6 @@ def capacitor_pods
   pod 'CapacitorNetwork', :path => '../../node_modules/@capacitor/network'
   pod 'CapacitorPushNotifications', :path => '../../node_modules/@capacitor/push-notifications'
   pod 'CapawesomeCapacitorBadge', :path => '../../node_modules/@capawesome/capacitor-badge'
-  pod 'CapacitorNativePullToRefresh', :path => '../../node_modules/capacitor-native-pull-to-refresh'
   pod 'PpCapacitorHaptics', :path => '../../node_modules/pp-capacitor-haptics'
   pod 'PpCapacitorNuxtSwipe', :path => '../../node_modules/pp-capacitor-nuxt-swipe'
 end

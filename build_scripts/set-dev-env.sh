@@ -4,6 +4,7 @@
 update_env_file() {
   local api_endpoint=$1
   sed -i '' "s|API_ENDPOINT=.*|API_ENDPOINT=\"$api_endpoint\"|g" ../nuxt-playpreso/.env
+  sed -i '' "s|DEBUG=.*|DEBUG=true|g" ../nuxt-playpreso/.env
 }
 
 if [[ "$1" == "localhost" ]]; then
