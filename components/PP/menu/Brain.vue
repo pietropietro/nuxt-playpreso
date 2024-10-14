@@ -72,7 +72,9 @@
 
     </v-container>
 </template>
+
 <script>
+import { Capacitor } from '@capacitor/core';
 export default {
     computed:{
         computedMenus(){
@@ -85,7 +87,9 @@ export default {
             selectedMenu: null,
             menus:[
                 // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
-                {title: 'NOTIFICATIONS 🔔', key:'notification_settings'},
+                ...(Capacitor.isNativePlatform() 
+                ? [{ title: 'NOTIFICATIONS 🔔', key: 'notification_settings' }] 
+                : []), // Conditionally include the notifications menu
                 {title: 'EMAIL 🔔', key:'email_reminders'},
                 {title: '3+', key:'3+'},
                 {title: 'POINTS 🅿️', key:'points'},
