@@ -1,6 +1,6 @@
 <template >
     <v-row 
-        v-if="!loading && guesses[state]?.length > 0"
+        v-if="!loading && guesses && guesses[state]?.length > 0"
         class="mt-0"
     >
         <v-container class="pa-0">

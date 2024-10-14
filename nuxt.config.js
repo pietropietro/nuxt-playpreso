@@ -6,6 +6,7 @@ export default {
 
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
+		VERSION: '1.35.0',
 		DEBUG: process.env.DEBUG ?? false
 	},
 
@@ -37,14 +38,12 @@ export default {
 		{ src: '@/plugins/notifier.js' },
 		{ src: '@/plugins/user-mixin.js' },
 		{ src: '@/plugins/playpreso-mixin.js' },
-        { src: '@/plugins/version.js'},
         { src: '@/plugins/constants.js'},
         { src: '@/plugins/date-format.js', ssr:false},
 		{ src: '@/plugins/logout.js' },
         { src: '@/plugins/api.js', ssr: false },
 		{ src: '@/plugins/vuex-persist.js', ssr: false },
-		{ src: '@/plugins/push-notifications.js', ssr: false},
-
+		{ src: '@/plugins/push-notifications.js', ssr: false}
 	],
 
 	router: {

@@ -13,8 +13,9 @@
                     <!-- APP -->
                     <v-main>   
                         <!-- <p-p-share-marquee /> -->
+                        <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
                         <guess-unlocked-full
-                            v-if="currentGuess"
+                            v-else-if="currentGuess"
                         />
                         <p-p-menu-brain
                             v-else-if="this.$store.getters['menu/currentMenuFlag']"

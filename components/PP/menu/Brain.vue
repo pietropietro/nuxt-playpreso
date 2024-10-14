@@ -60,7 +60,7 @@
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
             <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
-            <v-row justify="center"><div class="overline lh-1">v{{VERSION}}</div></v-row>
+            <v-row justify="center"><div class="overline lh-1">{{$config.VERSION}}</div></v-row>
             <!-- <v-row class="caption" justify="center">
                 <label>
                     <span @click="()=>selectedMenu='terms'">

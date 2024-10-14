@@ -3,7 +3,8 @@
         <!-- <p-p-header />     -->
         <snackbar />
         <v-main>
-            <nuxt />
+            <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
+            <nuxt v-else />
         </v-main>
     </v-app>
 </template>

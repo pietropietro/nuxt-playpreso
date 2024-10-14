@@ -12,6 +12,7 @@
     "build-android-dev": "./set_api_endpoint.sh && yarn generate && npx cap copy android && npx cap update android && npx cap open android"
   },
   "dependencies": {
+    "@capacitor/app": "^6.0.1",
     "@capacitor/push-notifications": "^6.0.2",
     "@capawesome/capacitor-badge": "^6.0.0",
     "@emoji-mart/data": "^1.2.1",

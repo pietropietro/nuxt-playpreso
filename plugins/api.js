@@ -1,5 +1,7 @@
+import { App } from '@capacitor/app';
 import jwt_decode from "jwt-decode";
-export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) => {
+
+export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},inject) => {
 	inject('api', {
 
         async call(route, values, method, use_formdata = false){
@@ -39,10 +41,20 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
 
             
             let includeAuth = store.state.user && store.state.user.token ? true : false;
-            let headers = includeAuth ? new Headers({
-                'Content-Type': "application/json",
-                'Authorization': store.state.user.token,
-            }) : new Headers({'Content-Type': "application/json"});
+
+            // Check app version for web vs mobile
+            let version = VERSION; // Default to web version from Nuxt config
+            if (Capacitor.isNativePlatform()) {
+                const appInfo = await App.getInfo();
+                version = appInfo.version; // Get mobile app version
+            }
+
+            let headers = new Headers({
+                'Content-Type': 'application/json',
+                'X-Frontend-Version': version,
+                ...(includeAuth && { 'Authorization': store.state.user.token })
+              });
+            
             
             let initOptions = {
                 method: method,
@@ -57,34 +69,39 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT }},inject) =
             }
 
             try {
-                await fetch(API_ENDPOINT + route, initOptions
-                ).then(response => {
-                    if(response.status === 401){
-                        $logout.logout();
-                    }
-                    
-                    if(response.headers.has('Authorization')){
-                        store.commit('user/updateToken', { token: response.headers.get('Authorization')});  
-                        let decoded = jwt_decode(response.headers.get('Authorization'));
-                        store.commit('user/updatePoints', { points: decoded.points});  
-                    }
+                await fetch(API_ENDPOINT + route, initOptions)
+                    .then(response => {
+                        if(response.status === 401){
+                            $logout.logout();
+                        }
 
-                    let jsonResp = response.json();
-                    if (method === 'GET' && response.ok) {
-                        store.commit('apiResponses/setCache', { route: route, data: jsonResp });
-                    }
-                    return jsonResp;
-                    
-                }).then((data) => {
-                    if(data && data.status && data.status == "error"){
-                        $notifier.showError(data.message);
-                    }
-                    resp = data;
-                    return data;
-                });
-            }catch(e){
-                console.error("error: " + e);
-                $notifier.showError();
+                        if (response.status === 426) {
+                            // Handle 426 status code - Force app update
+                            store.commit('apiResponses/setVersionUpdate', true);
+                        }
+                        
+                        if(response.headers.has('Authorization')){
+                            store.commit('user/updateToken', { token: response.headers.get('Authorization')});  
+                            let decoded = jwt_decode(response.headers.get('Authorization'));
+                            store.commit('user/updatePoints', { points: decoded.points});  
+                        }
+
+                        let jsonResp = response.json();
+                        if (method === 'GET' && response.ok) {
+                            store.commit('apiResponses/setCache', { route: route, data: jsonResp });
+                        }
+                        return jsonResp;
+                        
+                    }).then((data) => {
+                        if(data && data.status && data.status == "error"){
+                            $notifier.showError(data.message);
+                        }
+                        resp = data;
+                        return data;
+                    });
+            }catch (e) {              
+                  console.error('Unknown error:', e);
+                  $notifier.showError();
             }finally{
                 return resp;
             }

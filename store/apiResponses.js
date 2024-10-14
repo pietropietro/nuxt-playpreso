@@ -2,7 +2,8 @@
 
 export const state = () => ({
     // Cache for different endpoints
-    cache: {}
+    cache: {},
+    versionUpdateNeeded: false, // New state to track version update
   });
   
   export const mutations = {
@@ -18,6 +19,10 @@ export const state = () => ({
     },
     removeResponseCache(state, route) {
       state.cache[route] = null;
-    }
+    },
+    setVersionUpdate(state, status) {
+      // Set version update status (true or false)
+      state.versionUpdateNeeded = status;
+    },
   };
   

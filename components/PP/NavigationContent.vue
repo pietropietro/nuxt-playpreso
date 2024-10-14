@@ -50,7 +50,6 @@ export default {
     methods:{
         async getUserNotifications(){
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
-            console.log(response,'resss');
             if(response && response.status === "success"){
                 this.$store.commit('user/updateNotificationCount', { notificationCount: response.message.length }); 
             }
