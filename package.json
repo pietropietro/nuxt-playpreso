@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate": "nuxt genlerate",
+    "generate": "nuxt generate",
     "build": "nuxt build",
     "start": "nuxt start",
     "dev": "./build_scripts/set-dev-env.sh localhost && nuxt",
