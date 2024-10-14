@@ -1,5 +1,5 @@
 <template>
-    <v-container class="text-center" fill-height>
+    <v-container class="safe-area py-10 text-center" fill-height>
       <v-row class="align-center justify-center">
         <v-col>
           <h1>You are offline</h1>

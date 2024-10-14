@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "./set_api_endpoint.sh localhost && nuxt",
+    "dev": "./build_scripts/set_api_endpoint.sh localhost && nuxt",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "dev:host": "./set_api_endpoint.sh nuxt --hostname ''0.0.0.0''",
-    "build-ios-dev": "./set_api_endpoint.sh && yarn generate && npx cap copy && npx cap update ios && npx cap open ios",
-    "build-android-dev": "./set_api_endpoint.sh && yarn generate && npx cap copy android && npx cap update android && npx cap open android"
+    "dev:host": "./build_scripts/set_api_endpoint.sh nuxt --hostname ''0.0.0.0''",
+    "build-ios-dev": "./build_scripts/set_api_endpoint.sh && ./build_scripts/update-ios-version.sh && yarn generate && npx cap copy && npx cap update ios && npx cap open ios",
+    "build-android-dev": "./build_scripts/set_api_endpoint.sh && ./build_scripts/update-android-version.sh && yarn generate && npx cap copy android && npx cap update android && npx cap open android"
   },
   "dependencies": {
     "@capacitor/app": "^6.0.1",

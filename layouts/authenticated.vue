@@ -40,8 +40,10 @@ export default {
         }
     },
     mounted () {    
-        this.setUpSwipeBack();   
-        this.setUpNetworkCheck();
+        if (Capacitor.isNativePlatform()) {
+            this.setUpSwipeBack();   
+            this.setUpNetworkCheck();
+        }
     },
     methods: {
 
@@ -59,21 +61,20 @@ export default {
         },
 
         setUpSwipeBack(){
-            if (Capacitor.isNativePlatform()) {
-                // Dynamically import the plugin
-                const listenersSetUp = sessionStorage.getItem('swipeListenersAdded');
-                if (listenersSetUp)return;
-                import('~/capacitor-plugins/pp-capacitor-nuxt-swipe').then((module) => {
-                    const SwipeBackNavigationHandler = module.SwipeBackNavigationHandler;
+            // Dynamically import the plugin
+            const listenersSetUp = sessionStorage.getItem('swipeListenersAdded');
+            if (listenersSetUp)return;
+            import('~/capacitor-plugins/pp-capacitor-nuxt-swipe').then((module) => {
+                const SwipeBackNavigationHandler = module.SwipeBackNavigationHandler;
 
-                    // Use the plugin here
-                    SwipeBackNavigationHandler.addSwipeGesture();
-                    SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
-                    sessionStorage.setItem('swipeListenersAdded', 'true');
-                }).catch(error => {
-                    console.error('Error loading the SwipeBackNavigationHandler plugin', error);
-                });
-            }
+                // Use the plugin here
+                SwipeBackNavigationHandler.addSwipeGesture();
+                SwipeBackNavigationHandler.addListener('onSwipeRight', this.handleSwipeRight);
+                sessionStorage.setItem('swipeListenersAdded', 'true');
+            }).catch(error => {
+                console.error('Error loading the SwipeBackNavigationHandler plugin', error);
+            });
+            
         },
         handleSwipeRight() {
             if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path
