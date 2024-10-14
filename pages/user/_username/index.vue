@@ -36,7 +36,7 @@
             :selectedView="selectedView"
             :setSelectedView="(val)=>selectedView=val"
             class="my-2"
-            :availableViews="['stats', 'matches', 'p-tournaments','p-dex']"
+            :availableViews="['matches', 'stats', 'p-tournaments','p-dex']"
         />
         <trophy-dex
             v-if="selectedView=='p-dex'"
@@ -67,7 +67,7 @@ export default {
             loading: true,
             username: this.$route.params.username,
             user: null,
-            selectedView: 'stats'
+            selectedView: 'matches'
         }
     },
     computed: {
