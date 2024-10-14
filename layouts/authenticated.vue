@@ -15,6 +15,7 @@
                         <!-- <p-p-share-marquee /> -->
                         <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
                         <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
+                        <guard-offline v-else-if="!isOnline" />
                         <guess-unlocked-full
                             v-else-if="currentGuess"
                         />
@@ -30,12 +31,35 @@
 </template>
 <script>
 import { Capacitor } from '@capacitor/core';
+import { Network } from '@capacitor/network';
 
 export default {
+    data(){
+        return {
+            isOnline: true // Assume the app starts online
+        }
+    },
     mounted () {    
-        this.setUpSwipeBack();    
+        this.setUpSwipeBack();   
+        this.setUpNetworkCheck();
     },
     methods: {
+
+        setUpNetworkCheck(){
+            // Check initial network status
+            this.checkNetworkStatus();
+            // Listen for network status changes
+            Network.addListener('networkStatusChange', (status) => {
+            console.log('Network status changed:', status);
+            this.isOnline = status.connected;
+            });
+        },
+        async checkNetworkStatus() {
+            const status = await Network.getStatus();
+            console.log('Initial network status:', status);
+            this.isOnline = status.connected;
+        },
+
         setUpSwipeBack(){
             if (Capacitor.isNativePlatform()) {
                 // Dynamically import the plugin
