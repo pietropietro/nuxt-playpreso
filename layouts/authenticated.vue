@@ -50,13 +50,11 @@ export default {
             this.checkNetworkStatus();
             // Listen for network status changes
             Network.addListener('networkStatusChange', (status) => {
-            console.log('Network status changed:', status);
             this.isOnline = status.connected;
             });
         },
         async checkNetworkStatus() {
             const status = await Network.getStatus();
-            console.log('Initial network status:', status);
             this.isOnline = status.connected;
         },
 
