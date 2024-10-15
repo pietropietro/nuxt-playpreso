@@ -12,9 +12,9 @@
       <div v-if="step === 2">
         <loading-page v-if="loading" />
         <template v-else>
-            <div class="py-5" style="font-size:3rem">👼👼👼👼</div>
-            <v-btn color="red" @click="finalizeDeletion">Confirm Deletion</v-btn>
+            <div class="py-10" style="font-size:3rem">👼👼👼👼</div>
             <v-btn color="grey" @click="cancel">Cancel</v-btn>
+            <v-btn color="red" @click="finalizeDeletion">DELETE</v-btn>
         </template>
       </div>
   

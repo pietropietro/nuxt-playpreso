@@ -1,6 +1,6 @@
 <template>
     <v-container  
-        style="display: flex; flex-direction:column;  height:100%; overflow-y: hidden;" 
+        style="display: flex; flex-direction:column;  height:100%; width:100%; overflow: hidden;" 
         class="safe-area pa-5"
     >
         <v-row justify="center" class="ocrastd" style="flex-grow: 0;">
@@ -56,12 +56,12 @@
     </div>
 
 
-        <div style="flex-grow: 0;">
+        <div style="flex-grow: 0;" class="mb-5">
             <v-row justify="center" @click="doLogout">
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
             <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
-            <v-row justify="center"><div class="overline lh-1">{{$config.VERSION}}</div></v-row>
+            <v-row justify="center"><div class="overline lh-1">v{{$config.VERSION}}</div></v-row>
         </div>
 
     </v-container>

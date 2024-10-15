@@ -86,7 +86,8 @@
 <script>
 export default {
     props:{
-        userId: {type: Number}
+        userId: {type: Number},
+        setEmptyFlag: {type: Function, required: false}
     },
     data(){
         return {
@@ -188,6 +189,12 @@ export default {
         await this.getPPLeaguesParticipations();
         await this.getPPCupsParticipations();
         this.combineUpsByStatus();
+        if(this.availableStatus.length == 0){
+            if(this.setEmptyFlag){
+                this.setEmptyFlag();
+            }
+            return;
+        }
         this.selectedStatus = this.availableStatus[0];
         await this.getLastRoundForSelectedUp();
     },

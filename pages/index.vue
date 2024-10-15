@@ -21,7 +21,7 @@
         <highlights-view class="py-10"/>
 
 
-        <div class="py-10">
+        <div class="py-10" v-if="!emptyEnrolled">
             <v-row  class="mx-4 mb-5 ocrastd"
                 style="font-size:30px; font-weight: bold; background:linear-gradient(#1a00e3, transparent); border-radius: 10px;"
                 align="center"
@@ -29,7 +29,7 @@
                 <v-col>ENROLLED</v-col>
                 <em-emoji style="position:absolute; left:66%" id="roller_coaster" size="3em"/>
             </v-row>
-            <user-participation-enrolled-list class="px-5" />
+            <user-participation-enrolled-list class="px-5" :setEmptyFlag="()=>emptyEnrolled=true"/>
         </div>
         
         <v-row class="py-10 text-center ">
@@ -62,6 +62,11 @@ export default {
         'navigation/updateTitle', 
         null        
         );
+    },
+    data(){
+        return{
+            emptyEnrolled: false
+        }
     }
 }
 </script>
