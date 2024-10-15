@@ -3,17 +3,20 @@
 # Load the version from nuxt.config.js
 VERSION=$(grep "VERSION" ../nuxt-playpreso/nuxt.config.js | cut -d "'" -f 2)
 
-# Define the path to the AndroidManifest.xml file
-MANIFEST_PATH="../nuxt-playpreso/android/app/src/main/AndroidManifest.xml"
+# Define the path to the build.gradle file
+GRADLE_FILE="../nuxt-playpreso/android/app/build.gradle"
 
-# Check if AndroidManifest.xml exists
-if [ ! -f "$MANIFEST_PATH" ]; then
-  echo "Error: AndroidManifest.xml file does not exist at $MANIFEST_PATH"
+# Check if build.gradle exists
+if [ ! -f "$GRADLE_FILE" ]; then
+  echo "Error: build.gradle file does not exist at $GRADLE_FILE"
   exit 1
 fi
 
-# Use sed to replace the versionCode and versionName
-sed -i '' "s/versionCode [0-9]*/versionCode ${VERSION//./}/" "$MANIFEST_PATH"
-sed -i '' "s/versionName \"[^\"]*\"/versionName \"$VERSION\"/" "$MANIFEST_PATH"
+# Convert the version from nuxt.config.js (e.g., "1.35.0") into a versionCode-compatible format (e.g., "13500")
+VERSION_CODE=$(echo "$VERSION" | sed 's/\.//g')
 
-echo "Updated Android version to $VERSION in AndroidManifest.xml"
+# Use sed to replace the versionCode and versionName in build.gradle
+sed -i '' "s/versionCode [0-9]*/versionCode $VERSION_CODE/" "$GRADLE_FILE"
+sed -i '' "s/versionName \".*\"/versionName \"$VERSION\"/" "$GRADLE_FILE"
+
+echo "Updated Android version to $VERSION and versionCode to $VERSION_CODE in build.gradle"

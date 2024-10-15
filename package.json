@@ -11,7 +11,8 @@
     "build-ios-dev": "./build_scripts/build-ios.sh dev",
     "build-ios-prod": "./build_scripts/build-ios.sh prod",
     "build-android-dev": "./build_scripts/build-android.sh dev",
-    "build-android-prod": "./build_scripts/build-android.sh prod"  
+    "build-android-prod": "./build_scripts/build-android.sh prod",
+    "build-android-aab": "./build_scripts/build-android-aab.sh"
   },
   "dependencies": {
     "@capacitor/app": "^6.0.1",
