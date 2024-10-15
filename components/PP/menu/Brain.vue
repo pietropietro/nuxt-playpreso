@@ -49,6 +49,7 @@
                     >
                         <div >{{ termsContent }}</div>
                     </div>
+                    <p-p-menu-delete-account v-if="selectedMenu==='account_deletion'" :cancel="()=>selectedMenu=null"/>
                 </div>
 
         <v-spacer/>
@@ -61,13 +62,6 @@
             </v-row>
             <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
             <v-row justify="center"><div class="overline lh-1">{{$config.VERSION}}</div></v-row>
-            <!-- <v-row class="caption" justify="center">
-                <label>
-                    <span @click="()=>selectedMenu='terms'">
-                        Terms and Conditions
-                    </span>
-                </label>
-            </v-row> -->
         </div>
 
     </v-container>
@@ -95,6 +89,7 @@ export default {
                 {title: 'POINTS 🅿️', key:'points'},
                 {title: 'CONTACT', key:'contact'},
                 {title: 'TERMS', key:'terms'},
+                {title: 'DELETE ACCOUNT', key:'account_deletion'},
             ],
             pointsList:[
                 {

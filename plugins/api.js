@@ -91,6 +91,10 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
                             store.commit('user/updatePoints', { points: decoded.points});  
                         }
 
+                        if (response.status === 204) {
+                            return response;
+                        }
+
                         let jsonResp = response.json();
                         if (method === 'GET' && response.ok) {
                             store.commit('apiResponses/setCache', { route: route, data: jsonResp });

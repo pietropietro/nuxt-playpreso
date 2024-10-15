@@ -20,6 +20,7 @@ export const API_ROUTES = {
         LOGIN: '/user/login',
         SIGNUP: '/user/signup',    
         GET: '/user/',
+        DELETE: '/user',
         RECOVER: '/user/recover/',
         VALIDATE_TOKEN: '/user/validate-token/',
         PASSWORD_RESET: '/user/reset'
