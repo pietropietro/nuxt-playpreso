@@ -22,8 +22,10 @@ fi
 # Extract build number from the project.pbxproj (increment if it's already set)
 CURRENT_BUILD=$(grep "CURRENT_PROJECT_VERSION" "$PBXPROJ_PATH" | grep -o '[0-9]*')
 if [ -z "$CURRENT_BUILD" ]; then
+  # Set initial build number to 1 if none exists
   NEW_BUILD=1
 else
+  # Increment the build number
   NEW_BUILD=$((CURRENT_BUILD + 1))
 fi
 
@@ -31,8 +33,19 @@ fi
 /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$PLIST_PATH"
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD" "$PLIST_PATH"
 
-# Update the MARKETING_VERSION and CURRENT_PROJECT_VERSION in project.pbxproj
-sed -i '' "s/MARKETING_VERSION = \".*\";/MARKETING_VERSION = \"$VERSION\";/g" "$PBXPROJ_PATH"
-sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*/CURRENT_PROJECT_VERSION = $NEW_BUILD/g" "$PBXPROJ_PATH"
+# Ensure MARKETING_VERSION and CURRENT_PROJECT_VERSION are correctly updated in project.pbxproj
+if grep -q "MARKETING_VERSION" "$PBXPROJ_PATH"; then
+  sed -i '' "s/MARKETING_VERSION = \".*\";/MARKETING_VERSION = \"$VERSION\";/g" "$PBXPROJ_PATH"
+else
+  echo "MARKETING_VERSION not found, adding it..."
+  echo "MARKETING_VERSION = \"$VERSION\";" >> "$PBXPROJ_PATH"
+fi
+
+if grep -q "CURRENT_PROJECT_VERSION" "$PBXPROJ_PATH"; then
+  sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*/CURRENT_PROJECT_VERSION = $NEW_BUILD/g" "$PBXPROJ_PATH"
+else
+  echo "CURRENT_PROJECT_VERSION not found, adding it..."
+  echo "CURRENT_PROJECT_VERSION = $NEW_BUILD;" >> "$PBXPROJ_PATH"
+fi
 
 echo "Updated iOS version to $VERSION and build number to $NEW_BUILD in project.pbxproj and Info.plist"
