@@ -21,12 +21,27 @@ fi
 
 # Extract build number from the project.pbxproj (increment if it's already set)
 CURRENT_BUILD=$(grep "CURRENT_PROJECT_VERSION" "$PBXPROJ_PATH" | grep -o '[0-9]*')
+
+# If CURRENT_BUILD is empty, set initial build number to 1
 if [ -z "$CURRENT_BUILD" ]; then
-  # Set initial build number to 1 if none exists
   NEW_BUILD=1
+  echo "No current build number found. Setting initial build number to 1."
+  echo "CURRENT_PROJECT_VERSION = $NEW_BUILD;" >> "$PBXPROJ_PATH"
 else
   # Increment the build number
   NEW_BUILD=$((CURRENT_BUILD + 1))
+fi
+
+# Ensure that VERSION is not empty
+if [ -z "$VERSION" ]; then
+  echo "Error: Version number is empty. Check your nuxt.config.js."
+  exit 1
+fi
+
+# Ensure that NEW_BUILD is not empty or zero
+if [ -z "$NEW_BUILD" ] || [ "$NEW_BUILD" -le 0 ]; then
+  echo "Error: Invalid build number. Check the project.pbxproj file."
+  exit 1
 fi
 
 # Update the CFBundleShortVersionString and CFBundleVersion in Info.plist
@@ -41,6 +56,7 @@ else
   echo "MARKETING_VERSION = \"$VERSION\";" >> "$PBXPROJ_PATH"
 fi
 
+# Ensure CURRENT_PROJECT_VERSION is correctly updated in project.pbxproj
 if grep -q "CURRENT_PROJECT_VERSION" "$PBXPROJ_PATH"; then
   sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*/CURRENT_PROJECT_VERSION = $NEW_BUILD/g" "$PBXPROJ_PATH"
 else

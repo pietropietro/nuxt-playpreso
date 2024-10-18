@@ -15,4 +15,5 @@ else
 fi
 
 # Generate Nuxt assets, copy them to iOS, update Capacitor, and open Xcode
-yarn generate && npx cap copy ios && npx cap update ios && npx cap open ios
+yarn generate
+npx cap copy ios && npx cap update ios && npx cap open ios
