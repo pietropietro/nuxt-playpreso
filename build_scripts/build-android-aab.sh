@@ -1,4 +1,9 @@
 #!/bin/bash
+echo "Setting production environment..."
+./build_scripts/set-prod-env.sh
+./build_scripts/update-android-version.sh
+
+yarn generate && npx cap copy android && npx cap update android
 
 # Define variables for keystore, alias, and passwords
 PROJECT_DIR="/Users/pietromini/dev/playpreso/nuxt-playpreso/android"  # Update with your actual Android project path

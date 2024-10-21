@@ -12,8 +12,9 @@ if [ ! -f "$GRADLE_FILE" ]; then
   exit 1
 fi
 
-# Convert the version from nuxt.config.js (e.g., "1.35.0") into a versionCode-compatible format (e.g., "13500")
-VERSION_CODE=$(echo "$VERSION" | sed 's/\.//g')
+# Convert the version into a versionCode-compatible format (e.g., "13521")
+# This removes dots and pads segments to ensure consistent length.
+VERSION_CODE=$(echo "$VERSION" | awk -F. '{ printf "%d%02d%02d", $1, $2, $3 }')
 
 # Use sed to replace the versionCode and versionName in build.gradle
 sed -i '' "s/versionCode [0-9]*/versionCode $VERSION_CODE/" "$GRADLE_FILE"
