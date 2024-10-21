@@ -70,9 +70,9 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
 
             try {
                 await fetch(API_ENDPOINT + route, initOptions)
-                    .then(response => {
+                    .then( async response => {
                         if(response.status === 401){
-                            $logout.logout();
+                            await $logout.logout();
                         }
 
                         if (response.status === 426) {
@@ -155,7 +155,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
                 const response = await fetch(fullUrl, initOptions);
                 const cloneResponse = response.clone();
                 if (response.status === 401) {
-                    $logout.logout();
+                    await $logout.logout();
                 }
                 if (response.status === 404) {
                     return;
