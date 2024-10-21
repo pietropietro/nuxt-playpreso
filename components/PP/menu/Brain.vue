@@ -57,7 +57,8 @@
 
 
         <div style="flex-grow: 0;" class="mb-5">
-            <v-row justify="center" @click="doLogout">
+            <loading-page v-if="loadingLogout" :size="20" />
+            <v-row v-else justify="center" @click="doLogout">
                 <h1 class="ocrastd">LOGOUT</h1>
             </v-row>
             <!-- <v-row justify="center" class="overline lh-1">barona, milano</v-row> -->
@@ -78,6 +79,7 @@ export default {
     },
     data(){
         return{
+            loadingLogout: false,
             selectedMenu: null,
             menus:[
                 // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
@@ -117,9 +119,11 @@ export default {
     },
     methods:{
         data:()=>({termsContent:null}),
-        doLogout(){
-            this.$logout.logout();
+        async doLogout(){
+            this.loadingLogout=true;
+            await this.$logout.logout();
             this.$store.dispatch('menu/updateMenu', { newVal: false });
+            this.loadingLogout=false;
         },
         async loadTerms() {
 			try {
