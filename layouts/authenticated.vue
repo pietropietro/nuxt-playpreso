@@ -39,17 +39,20 @@ export default {
             isOnline: true // Assume the app starts online
         }
     },
-    mounted () {    
-        if (Capacitor.isNativePlatform()) {
+    async mounted () {    
+        //added current user null check since the login guard could take a second
+        if (Capacitor.isNativePlatform() && this.currentUser) {
             this.setUpSwipeBack();   
-            this.setUpNetworkCheck();
+            await this.setUpNetworkCheck();
+            //push listeners need to be set up when user has logged in since android proceeds 
+            //to register wihtout user interaction in some api versions
+            await this.$pushNotificationsPlugin.setupPushNotificationListeners();
         }
     },
     methods: {
-
-        setUpNetworkCheck(){
+        async setUpNetworkCheck(){
             // Check initial network status
-            this.checkNetworkStatus();
+            await this.checkNetworkStatus();
             // Listen for network status changes
             Network.addListener('networkStatusChange', (status) => {
             this.isOnline = status.connected;

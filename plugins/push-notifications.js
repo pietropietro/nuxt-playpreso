@@ -7,7 +7,6 @@ export default ({ app, store }, inject) => {
     inject('pushNotificationsPlugin', {
 
         async requestPushNotifications() {
-
             if (!Capacitor.isNativePlatform()) {
                 return;
             }
@@ -57,7 +56,8 @@ export default ({ app, store }, inject) => {
             }
         },
 
-        setupPushNotificationListeners() {
+        async setupPushNotificationListeners() {
+            
             if (!Capacitor.isNativePlatform()) return;
 
             try {
@@ -71,9 +71,9 @@ export default ({ app, store }, inject) => {
         
                 // Register push notification listeners
                 try {
-                    PushNotifications.addListener('registration', (token) => {
+                        PushNotifications.addListener('registration', async (token) => {
                         try {
-                            this.sendTokenToServer(token.value, Capacitor.getPlatform());
+                            await this.sendTokenToServer(token.value, Capacitor.getPlatform());
                             store.commit('user/updateNotificationToken', { notificationToken: token.value }); // Store the token in Vuex
                         } catch (error) {
                             console.error('Error handling registration success:', error);
@@ -137,10 +137,5 @@ export default ({ app, store }, inject) => {
         }
         
     });
-
-    
-    setTimeout(()=>{
-        app.$pushNotificationsPlugin.setupPushNotificationListeners();
-    },300);
 
 };
