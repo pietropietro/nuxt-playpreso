@@ -3,7 +3,7 @@
         no-gutters align="center"
     >
         <div class="mx-4" @click="$router.go(-1)">
-            <h2><</h2>
+            <h2 class="ocrastd"><</h2>
         </div>
         <v-spacer/>
         <v-toolbar-title class="ml-n4">
