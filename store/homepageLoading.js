@@ -4,7 +4,6 @@ export const state = () => ({
   
   export const mutations = {
     set(state, { key, isLoading }) {
-      console.log('calling set loading for', key, isLoading);
       state.loadingDict = {
         ...state.loadingDict,
         [key]: isLoading,
