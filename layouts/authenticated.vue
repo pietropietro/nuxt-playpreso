@@ -3,8 +3,7 @@
         <div class="background-container"></div>
         <div class="app-rectangle-wrapper app-desktop-body">
             <v-app class="no-selection">
-                <guard-logged-in v-if="!currentUser"/>
-                <template v-else>
+                
                     <snackbar class="safe-area"/>
                     <p-p-app-bar  v-if="!currentGuess && !this.$store.getters['menu/currentMenuFlag']"
                         class="pp-app-bar safe-area"
@@ -12,19 +11,21 @@
 
                     <!-- APP -->
                     <v-main>   
-                        <!-- <p-p-share-marquee /> -->
-                        <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
-                        <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
-                        <guard-offline v-else-if="!isOnline" />
-                        <guess-unlocked-full
-                            v-else-if="currentGuess"
-                        />
-                        <p-p-menu-brain
-                            v-else-if="this.$store.getters['menu/currentMenuFlag']"
-                        />
-                        <nuxt v-else/>
+                        <guard-logged-in v-if="!currentUser"/>
+                        <template v-else>
+                            <!-- <p-p-share-marquee /> -->
+                            <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
+                            <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
+                            <guard-offline v-else-if="!isOnline" />
+                            <guess-unlocked-full
+                                v-else-if="currentGuess"
+                            />
+                            <p-p-menu-brain
+                                v-else-if="this.$store.getters['menu/currentMenuFlag']"
+                            />
+                            <nuxt v-else/>
+                        </template>
                     </v-main>
-                </template>
             </v-app>
         </div>
     </div>

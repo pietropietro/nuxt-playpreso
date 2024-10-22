@@ -52,7 +52,6 @@
 export default {
     data(){
         return {
-            loading: true,
             ppTournamentTypes: [],
             showAllFlag: false,
             headers: [
@@ -70,12 +69,16 @@ export default {
                 this.ppTournamentTypes = response.message;
                 this.ppTournamentTypes.map((e)=>{e.isSelectable=false})
             }
-            this.loading = false;
         },
 
     },
     async mounted(){
-        await this.getAvailable(); 
+        this.$store.commit('homepageLoading/set', { key: 'availableTournaments', isLoading: true });
+        try {
+            await this.getAvailable(); 
+        } finally {
+            this.$store.commit('homepageLoading/set', { key: 'availableTournaments', isLoading: false });
+        }
     }
 }
 </script>

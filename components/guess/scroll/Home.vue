@@ -1,6 +1,6 @@
 <template >
     <v-row 
-        v-if="!loading && guesses && guesses[state]?.length > 0"
+        v-if="guesses && guesses[state]?.length > 0"
         class="mt-0"
     >
         <v-container class="pa-0">
@@ -44,7 +44,6 @@
     export default {
         data(){
             return {
-                loading: true,
                 guesses: null,
                 state: null,
                 openId: null
@@ -65,13 +64,11 @@
         },
         methods:{
             async getGuesses(){
-                this.loading =  true;
                 let response = await this.$api.call(this.API_ROUTES.GUESS.USER_CURRENT);
                 if(response && response.status === "success" && response.message != null){
                     this.guesses = response.message;
                     this.state = Object.keys(this.guesses)[0]
                 }
-                this.loading = false;
             },
             afterLock(){
                 // todo
@@ -91,7 +88,12 @@
             }
         },
         async mounted(){
-            await this.getGuesses();
+            this.$store.commit('homepageLoading/set', { key: 'guessScroll', isLoading: true });
+            try {
+                await this.getGuesses();
+            } finally {
+                this.$store.commit('homepageLoading/set', { key: 'guessScroll', isLoading: false });
+            }
         },
     }
 </script>

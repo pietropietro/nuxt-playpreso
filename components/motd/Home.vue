@@ -1,6 +1,5 @@
 <template>
-    <loading-page v-if="loading" />
-    <div v-else-if="motd">
+    <div v-if="motd">
         <v-row  class="ocrastd text-center mx-4" 
             style="
                 font-size:30px; 
@@ -56,7 +55,6 @@
 export default {
     data(){
         return {
-            loading: true,
             motd: null,
             motdPPTT: null,
             motdChart: null,
@@ -95,7 +93,12 @@ export default {
         },
     },
     async mounted(){
-        await this.getMotd(); 
-    }
+        this.$store.commit('homepageLoading/set', { key: 'motd', isLoading: true });
+        try {
+            await this.getMotd();
+        } finally {
+            this.$store.commit('homepageLoading/set', { key: 'motd', isLoading: false });
+        }
+    },
 }
 </script>

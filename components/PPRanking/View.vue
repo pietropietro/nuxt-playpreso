@@ -25,7 +25,6 @@
 export default {
     data(){
         return {
-            loading: true,
             ppRankings: null,
         }
     },
@@ -36,11 +35,15 @@ export default {
                 this.ppRankings = response.message.ppRankings;
                 // this.userStat = response.message?.currentUserStat;
             }
-            this.loading = false;
         },
     },
     async mounted(){
-        await this.getPPRankings();
+        this.$store.commit('homepageLoading/set', { key: 'ppranking', isLoading: true });
+        try {
+            await this.getPPRankings();
+        } finally {
+            this.$store.commit('homepageLoading/set', { key: 'ppranking', isLoading: false });
+        }
     }
 }
 </script>

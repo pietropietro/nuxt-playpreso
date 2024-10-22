@@ -20,21 +20,7 @@
     <v-row v-else align="center">
         <v-col></v-col>
         <v-col>
-            <v-toolbar-title>
-                <nuxt-link class="no-decoration" to="/">
-                    <h1 :class="'ocrastd ' + ($config.DEBUG ? ' orange--text' : '')" style="line-height:1em; font-size:2 em">
-                        <span class="tilted-span">P</span><!--
-                        --><span class="tilted-span">L</span><!--
-                        --><span class="tilted-span">A</span><!--
-                        --><span class="tilted-span">Y</span><!--
-                        --><span class="tilted-span">P</span><!--
-                        --><span class="tilted-span">R</span><!--
-                        --><span class="tilted-span">E</span><!--
-                        --><span class="tilted-span">S</span><!--
-                        --><span class="tilted-span">O</span>
-                    </h1>
-                </nuxt-link>
-            </v-toolbar-title>
+            <p-p-logo-toolbar />
         </v-col>
         <v-col class="mt-n1">
             <nuxt-link :to="ROUTES.NOTIFICATION">
@@ -47,18 +33,21 @@
 </template>
 <script>
 export default {
+    watch: {
+        async currentUser(newVal) {
+            if (newVal) {
+                await this.getUserNotifications();
+            }
+        }
+    },
     methods:{
         async getUserNotifications(){
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
             if(response && response.status === "success"){
                 this.$store.commit('user/updateNotificationCount', { notificationCount: response.message.length }); 
             }
-            this.loading = false;
         },
     },
-    async mounted(){
-        await this.getUserNotifications();
-    }
+   
 }
 </script>
-

@@ -1,6 +1,5 @@
 <template>
-    <loading-page v-if="loading.leagues || loading.cups"/>
-    <v-container  v-else-if="selectedStatus" class="pt-0 px-0">
+    <v-container  v-if="selectedStatus" class="pt-0 px-0">
         <v-row no-gutters>
             <v-col>
                 <v-slide-group
@@ -101,8 +100,6 @@ export default {
                 finished: []
             },  
             loading: {
-                leagues: true,
-                cups: true,
                 round: false
             },
             selectedIndex: 0
@@ -173,7 +170,17 @@ export default {
                 this.ppcUpsByStatus?.finished,
                 this.pplUpsByStatus?.finished
             );
+
+            if(this.availableStatus.length == 0){
+                if(this.setEmptyFlag){
+                    this.setEmptyFlag();
+                }
+                return;
+            }
+            this.selectedStatus = this.availableStatus[0];
+
         },
+
         async selectUp(index){
             if(index!=this.selectedIndex)await this.triggerHapticFeedback();
             this.selectedIndex=index;
@@ -185,18 +192,19 @@ export default {
             await this.getLastRoundForSelectedUp();
         }
     },
+
     async mounted(){
-        await this.getPPLeaguesParticipations();
-        await this.getPPCupsParticipations();
-        this.combineUpsByStatus();
-        if(this.availableStatus.length == 0){
-            if(this.setEmptyFlag){
-                this.setEmptyFlag();
-            }
-            return;
+        this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: true });
+        try {
+            await this.getPPLeaguesParticipations();
+            await this.getPPCupsParticipations();
+            this.combineUpsByStatus();
+        } finally {
+            this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: false });
         }
-        this.selectedStatus = this.availableStatus[0];
+
         await this.getLastRoundForSelectedUp();
+       
     },
 }
 </script>

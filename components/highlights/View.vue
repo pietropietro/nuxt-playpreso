@@ -55,7 +55,6 @@
 export default {
     data(){
         return {
-            loading: true,
             highlights: null,
             highlightTypes: ['preso', 'trophies', 'fullPresoRounds'],
             selectedType: 'preso'
@@ -68,11 +67,15 @@ export default {
                 this.highlights = response.message;
                 // this.userStat = response.message?.currentUserStat;
             }
-            this.loading = false;
         },
     },
     async mounted(){
-        await this.getHighlights();
+        this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: true });
+        try {
+            await this.getHighlights();
+        } finally {
+            this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: false });
+        }
     }
 }
 </script>
