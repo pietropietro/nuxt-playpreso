@@ -39,14 +39,15 @@ export default {
             isOnline: true // Assume the app starts online
         }
     },
-    async mounted () {    
-        //added current user null check since the login guard could take a second
-        if (Capacitor.isNativePlatform() && this.currentUser) {
-            this.setUpSwipeBack();   
-            await this.setUpNetworkCheck();
-            //push listeners need to be set up when user has logged in since android proceeds 
-            //to register wihtout user interaction in some api versions
-            await this.$pushNotificationsPlugin.setupPushNotificationListeners();
+    async mounted(){
+        this.setUpSwipeBack();
+        await this.setUpNetworkCheck();
+    },
+    watch: {
+        currentUser(newVal) {
+            if (newVal && Capacitor.isNativePlatform()) {
+                this.$pushNotificationsPlugin.setupPushNotificationListeners();
+            }
         }
     },
     methods: {

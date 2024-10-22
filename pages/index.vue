@@ -1,6 +1,6 @@
 <template>
     <v-container class="pt-0 px-0" >
-
+        
         <v-row  justify="center" class="pt-5">
             <a href="https://chat.whatsapp.com/IW3eSFNNa7UItIJA4iEaS0" target="blank" class="no-decoration">
                 <div class="overline lh-1">whatsapp
@@ -59,8 +59,8 @@ export default {
     layout: "authenticated",
     mounted(){
         this.$store.dispatch(
-        'navigation/updateTitle', 
-        null        
+            'navigation/updateTitle', 
+            null        
         );
     },
     data(){

@@ -1,17 +1,21 @@
 <template>
-    <v-row justify="center" v-show="loading">
-        <v-btn icon loading color="primary" v-show="loading"/>
-    </v-row>
+    <loading-page />
 </template>
 
 <script>
 export default {
-    computed: { 
-        loading: { 
-            get() { 
-                return setTimeout(() => !this.currentUser ? this.$router.push(this.ROUTES.LOGIN) : "", 200);
-            }
-        } 
-    },
+    async beforeMount() {
+        const maxRetries = 20; // Maximum attempts (e.g., 20 * 100ms = 2 seconds)
+        let attempts = 0;
+
+        while (!this.currentUser && attempts < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, 100)); // Check every 100ms
+            attempts++;
+        }
+        if (!this.currentUser) {
+            this.$router.push(this.ROUTES.LOGIN);
+        }
+    }
+
 }
 </script>
