@@ -41,6 +41,7 @@
     </v-row>
 </template>
 <script>
+    import useHomepageApi from '~/composables/useHomepageApi';
     export default {
         data(){
             return {
@@ -87,13 +88,11 @@
                 });
             }
         },
+
         async mounted(){
-            this.$store.commit('homepageLoading/set', { key: 'guessScroll', isLoading: true });
-            try {
-                await this.getGuesses();
-            } finally {
-                this.$store.commit('homepageLoading/set', { key: 'guessScroll', isLoading: false });
-            }
+            const { fetchData } = useHomepageApi(this.$store, 'guessScroll', this.getGuesses);
+            await fetchData();
         },
+        
     }
 </script>

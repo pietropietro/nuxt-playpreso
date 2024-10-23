@@ -17,13 +17,18 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
             // Check cache for GET requests before making a new request
             if (method === 'GET') {
                 const cache = store.state.apiResponses.cache[route];
-                const fiveMinutes = 300000; // 5 minutes in milliseconds
-                if (cache && (Date.now() - cache.timestamp < fiveMinutes)) {
+                const cacheDuration = 1 * 60 * 1000; // 1 minutes in milliseconds (120,000 milliseconds)
 
-                  return cache.data; // Return cached data if valid
+                if(cache){
+                    console.log((Date.now() - cache.timestamp), cacheDuration, route);
+                }
+
+                if (cache && (Date.now() - cache.timestamp < cacheDuration)) {
+                    return cache.data; // Return cached data if valid
                 }
 
             }
+
 
             let resp;
             let myFormData;

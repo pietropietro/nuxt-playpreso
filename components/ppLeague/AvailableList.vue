@@ -49,6 +49,8 @@
     </div>
 </template>
 <script>
+import useHomepageApi from '~/composables/useHomepageApi';
+
 export default {
     data(){
         return {
@@ -73,15 +75,13 @@ export default {
 
     },
     async mounted(){
-        this.$store.commit('homepageLoading/set', { key: 'availableTournaments', isLoading: true });
-        try {
-            await this.getAvailable(); 
-        } finally {
-            this.$store.commit('homepageLoading/set', { key: 'availableTournaments', isLoading: false });
-        }
-    }
+        const { fetchData } = useHomepageApi(this.$store, 'available-tournaments', this.getAvailable);
+        await fetchData();
+    },  
 }
+
 </script>
+
 <style lang="scss">
     .no-select tbody {
         tr:hover {

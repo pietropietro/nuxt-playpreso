@@ -51,7 +51,9 @@
         </v-row>
     </div>
 </template>
+
 <script>
+import useHomepageApi from '~/composables/useHomepageApi';
 export default {
     data(){
         return {
@@ -92,13 +94,11 @@ export default {
             });
         },
     },
+
     async mounted(){
-        this.$store.commit('homepageLoading/set', { key: 'motd', isLoading: true });
-        try {
-            await this.getMotd();
-        } finally {
-            this.$store.commit('homepageLoading/set', { key: 'motd', isLoading: false });
-        }
+        const { fetchData } = useHomepageApi(this.$store, 'motd', this.getMotd);
+        await fetchData();
     },
+
 }
 </script>

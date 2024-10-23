@@ -52,6 +52,7 @@
     </div>
 </template>
 <script>
+import useHomepageApi from '~/composables/useHomepageApi';
 export default {
     data(){
         return {
@@ -70,12 +71,9 @@ export default {
         },
     },
     async mounted(){
-        this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: true });
-        try {
-            await this.getHighlights();
-        } finally {
-            this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: false });
-        }
-    }
+        const { fetchData } = useHomepageApi(this.$store, 'highlights', this.getHighlights);
+        await fetchData();
+    },
+
 }
 </script>

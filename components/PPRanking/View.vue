@@ -22,6 +22,8 @@
     </div>
 </template>
 <script>
+import useHomepageApi from '~/composables/useHomepageApi';
+
 export default {
     data(){
         return {
@@ -38,12 +40,8 @@ export default {
         },
     },
     async mounted(){
-        this.$store.commit('homepageLoading/set', { key: 'ppranking', isLoading: true });
-        try {
-            await this.getPPRankings();
-        } finally {
-            this.$store.commit('homepageLoading/set', { key: 'ppranking', isLoading: false });
-        }
-    }
+        const { fetchData } = useHomepageApi(this.$store, 'ppranking', this.getPPRankings);
+        await fetchData();
+    },  
 }
 </script>

@@ -6,9 +6,9 @@
             type="table-heading, list-item-two-line, table-tfoot,  card-heading, list-item-avatar-three-line, 
                 card-heading, table-tfoot, table-heading, list-item-two-line, table-tfoot,  card-heading, 
                 list-item-avatar-three-line, card-heading, table-tfoot"
-                v-show="this.$store.getters['homepageLoading/isLoading']" 
+                v-show="this.$store.getters['homepageApi/isLoading']" 
         />
-        <div v-show="!this.$store.getters['homepageLoading/isLoading']">
+        <div v-show="!this.$store.getters['homepageApi/isLoading']">
             <v-row  justify="center" class="pt-5">
                 <a href="https://chat.whatsapp.com/IW3eSFNNa7UItIJA4iEaS0" target="blank" class="no-decoration">
                     <div class="overline lh-1">whatsapp
@@ -60,6 +60,7 @@
                     </div>
                 </v-col>
             </v-row>
+            
         </div>
     </v-container>
 </template>

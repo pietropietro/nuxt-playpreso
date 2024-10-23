@@ -33,6 +33,7 @@
 <script>
 import { Capacitor } from '@capacitor/core';
 import { Network } from '@capacitor/network';
+import { App } from '@capacitor/app';
 
 export default {
     data(){
@@ -43,6 +44,7 @@ export default {
     async mounted(){
         this.setUpSwipeBack();
         await this.setUpNetworkCheck();
+        this.setUpStateChange();
     },
     watch: {
         currentUser(newVal) {
@@ -85,6 +87,14 @@ export default {
             if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path
                 this.$router.go(-1);
             }        
+        },
+        setUpStateChange(){
+            App.addListener('appStateChange', (state) => {
+                if (state.isActive) {
+                    // The app has come to the foreground, so refresh the homepage.
+                    this.$store.commit('homepageApi/setAllLoadingKeys', true);
+                }
+            });
         }
     }
 }

@@ -27,7 +27,7 @@
 export default {
     computed:{
         loading(){
-            return this.$store.getters['homepageLoading/isLoading'] || !this.currentUser;
+            return this.$store.getters['homepageApi/isLoading'] || !this.currentUser;
         }
     },
 }

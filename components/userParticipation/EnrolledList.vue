@@ -83,6 +83,8 @@
     </v-container>
 </template>
 <script>
+import useHomepageApi from '~/composables/useHomepageApi';
+
 export default {
     props:{
         userId: {type: Number},
@@ -131,6 +133,7 @@ export default {
             }
             this.loading.cups = false;
         },
+
         async getLastRoundForSelectedUp(){
             if(this.selectedStatus == 'waiting') return;
             if(!this.selectedUp) return ;
@@ -144,16 +147,18 @@ export default {
 
             if(response && response.status === "success"){
                 this.pptLastRound = response.message;
+                
                 //if currentuser is owner
                 //got to add pptt + match to each guess 
                 //in order to make the open guess + logo in box work
                 this.pptLastRound.forEach(element => {
                     element.guess.ppTournamentType = this.selectedUp.ppTournamentType;
                     element.guess.match = element.match;
-                });
+                }); 
             }
             this.loading.round = false;
         },  
+
         combineUpsByStatus() {
             const combineArrays = (arr1, arr2) => [...(arr1 || []), ...(arr2 || [])];
 
@@ -194,17 +199,16 @@ export default {
     },
 
     async mounted(){
-        this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: true });
-        try {
+        // Combine API calls into a single function.
+        const fetchAllEnrolled = async () => {
             await this.getPPLeaguesParticipations();
             await this.getPPCupsParticipations();
             this.combineUpsByStatus();
-        } finally {
-            this.$store.commit('homepageLoading/set', { key: 'highlights', isLoading: false });
-        }
-
+        };
+        const { fetchData } = useHomepageApi(this.$store, 'enrolled-tournaments', fetchAllEnrolled);
+        await fetchData();
         await this.getLastRoundForSelectedUp();
-       
     },
+
 }
 </script>
