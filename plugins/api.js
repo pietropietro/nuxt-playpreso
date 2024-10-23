@@ -18,11 +18,6 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
             if (method === 'GET') {
                 const cache = store.state.apiResponses.cache[route];
                 const cacheDuration = 1 * 60 * 1000; // 1 minutes in milliseconds (120,000 milliseconds)
-
-                if(cache){
-                    console.log((Date.now() - cache.timestamp), cacheDuration, route);
-                }
-
                 if (cache && (Date.now() - cache.timestamp < cacheDuration)) {
                     return cache.data; // Return cached data if valid
                 }
