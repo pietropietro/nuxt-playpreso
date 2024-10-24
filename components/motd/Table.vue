@@ -9,32 +9,38 @@
                 }
                 : {}"
         >
-        <!-- background: 'var(--v-primary-darken2)', -->
-
-            <v-row no-gutters align="center" @click="() => select(item.user.id)" class="px-4">
-                <v-col>
-                    <v-row align="center" no-gutters>
-                        <v-col cols="auto" v-if="selectedId != item.user.id ">
-                            <v-chip x-small color="transparent">
-                                # {{ i + 1 + ((page - 1) * 10) }}
-                            </v-chip>
-                        </v-col>
-                        <v-col><user-name :user="item.user" /></v-col>
-                    </v-row>
+            <v-row no-gutters align="center" @click="() => select(item.user.id)" class="px-2">
+                <v-col cols="auto" class="ocrastd mr-4">
+                    <div class="text-center" v-if="selectedId != item.user.id">
+                        <v-chip x-small color="transparent">
+                            # {{ i + 1 + ((page - 1) * 10) }}
+                        </v-chip>
+                    </div>
                 </v-col>
-                <!-- <v-col cols="auto" class="pr-2" v-if="selectedId == item.user.id">
-                    <span class="overline lh-1">{{ item.tot_locked }}-{{ item.tot_preso }}-{{ item.tot_unox2 }}</span>
-                </v-col> -->
-                <v-col cols="auto"><h3>{{ item.tot_points }}</h3></v-col>
+                <v-col><user-name :user="item.user" /></v-col>
+                <v-col cols="auto" class="text-center">
+                    <div>
+                        <h3>{{ item.tot_points }}</h3>
+                    </div>
+                </v-col>
+                <v-col cols="1">
+                    <div 
+                        class="text-center font-weight-bold pointer"
+                        style="font-size:10px;"
+                    >
+                        {{ selectedId == item.user.id ? '^' : 'v' }}
+                    </div>
+                </v-col>
             </v-row>
             <template v-if="selectedId == item.user.id && item.sparkline_data">
 
                 <v-row justify="center">
                     <v-chip
                         v-for="g in 
-                            ['graph', 
-                               'matches'
-                    ]
+                            [ 
+                               'matches',
+                               'graph',
+                            ]
                         "
                         :key="g"
                         class="overline lh-1"
@@ -112,7 +118,7 @@ export default {
     data() {
         return {
             selectedId: null,
-            selectedView: 'graph',
+            selectedView: 'matches',
             openId: null
         }
     },
@@ -125,8 +131,8 @@ export default {
             this.selectedId = userId;
         }
     },
-    mounted() {
-        this.selectedId = this.chart[0]?.user.id;
-    }
+    // mounted() {
+        // this.selectedId = this.chart[0]?.user.id;
+    // }
 }
 </script>

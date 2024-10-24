@@ -1,25 +1,17 @@
 <template>
-    <div v-if="ppRankings">
-        <v-row  class="mx-4 ocrastd" 
-            style="font-size:30px; font-weight: bold; background:linear-gradient(#FFD700, transparent); border-radius: 10px;"  
-            align="center"
-        >
-            <v-col>P-RAN-KING</v-col>
-            <em-emoji style="position:absolute; left:66%" id="crown" size="3em"/>
-        </v-row>
-        
-        <p-p-ranking-table class="mt-6 px-5" :ppRankings="ppRankings" />
-        
-        <v-row justify="center" class="mt-10">
-            <nuxt-link to="/p-ranking" class="no-decoration">
-                <div
-                    class="text-center lh-1 overline font-weight-bold"
-                >
-                    show more
-                </div>
-            </nuxt-link>
-        </v-row>
-    </div>
+    <p-p-section-card title="RAN-KING" emojiId="crown" subtitle="pp reputation system" v-if="ppRankings" >
+        <template slot="content">
+            <p-p-ranking-table class="mt-6 px-5" :ppRankings="ppRankings" />
+            
+            <v-row justify="end" class="mt-1 mr-6">
+                <nuxt-link to="/p-ranking" class="no-decoration">
+                    <v-btn outlined x-small icon>
+                        <h3>+</h3>
+                    </v-btn>
+                </nuxt-link>
+            </v-row>
+        </template>
+    </p-p-section-card>
 </template>
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';

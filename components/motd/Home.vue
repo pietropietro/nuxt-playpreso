@@ -1,55 +1,42 @@
 <template>
-    <div v-if="motd">
-        <v-row  class="ocrastd text-center mx-4" 
-            style="
-                font-size:30px; 
-                font-weight: bold;
-                background:linear-gradient(#00695c, transparent); 
-                border-radius: 10px;
-            "  
-            align="center"
-        >
-            <v-col cols="auto">MOTD</v-col>
-            <em-emoji style="position:absolute; left:66%" id="jigsaw" size="3em"/>
-        </v-row>
-
-        <v-row justify="center" align="center" class="pt-4 mx-2">
-            <v-spacer/>
-            <v-col>
-                <guess-box-view
-                    :match="motd.match"
-                    :guess="motd.guess"
-                    :rgb="motdPPTT.rgb"
-                    :onUnlockedClick="onSelect"
-                    :open="openId && openId == motd.guess.id"
-                    :setOpen="(val)=>openId=val"
-                />
-            </v-col>
-            <v-spacer/>
-            <template v-if="!openId">
+    <p-p-section-card title="MOTD" emojiId="jigsaw" subtitle="match of the day" v-if="motd" >
+        <template slot="content">
+            <v-row no-gutters justify="center" align="center" class="mx-2">
                 <v-spacer/>
-                <v-col cols="auto" class="text-center px-0">
-                    <h1>{{motd.tot_locks ?? 0}} </h1>
-                    <div class="overline lh-1">locks</div>
+                <v-col>
+                    <guess-box-view
+                        :match="motd.match"
+                        :guess="motd.guess"
+                        :rgb="motdPPTT.rgb"
+                        :onUnlockedClick="onSelect"
+                        :open="openId && openId == motd.guess.id"
+                        :setOpen="(val)=>openId=val"
+                    />
                 </v-col>
-            </template>
-            <v-spacer v-if="!openId"/>
-        </v-row>
+                <v-spacer/>
+                <template v-if="!openId">
+                    <v-spacer/>
+                    <v-col cols="auto" class="text-center px-0">
+                        <h1>{{motd.tot_locks ?? 0}} </h1>
+                        <div class="overline lh-1">locks</div>
+                    </v-col>
+                </template>
+                <v-spacer v-if="!openId"/>
+            </v-row>
 
-        <v-container class="mt-5 px-5">
-            <motd-table :chart="motdChart.chart" :page="1" :rgb="motdPPTT.rgb"/>
-        </v-container>
+            <v-container class="mt-5 px-5">
+                <motd-table :chart="motdChart.chart" :page="1" :rgb="motdPPTT.rgb"/>
+            </v-container>
 
-        <v-row justify="center" class="mt-10">
-            <nuxt-link to="/motd" class="no-decoration">
-                <div
-                    class="text-center lh-1 overline font-weight-bold"
-                >
-                    show more
-                </div>
-            </nuxt-link>
-        </v-row>
-    </div>
+            <v-row justify="end" class="mt-1 mr-6">
+                <nuxt-link to="/motd" class="no-decoration">
+                    <v-btn outlined x-small icon>
+                        <h3>+</h3>
+                    </v-btn>
+                </nuxt-link>
+            </v-row>
+        </template>
+    </p-p-section-card>
 </template>
 
 <script>

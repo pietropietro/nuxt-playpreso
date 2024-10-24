@@ -1,55 +1,48 @@
 <template>
-    <div v-if="highlights">
-        <v-row  class="mx-4 ocrastd" 
-            style="font-size:30px; font-weight: bold; background:linear-gradient(#e30b0b, transparent); border-radius: 10px;"  
-            align="center"
-        >
-            <v-col>HIGHLIGHTS</v-col>
-            <em-emoji style="position:absolute; left:66%" id="champagne" size="3em"/>
-        </v-row>
-
-        <v-container class="mt-2">
-            <v-row no-gutters class="px-4">
-                <v-col>
-                    <v-slide-group
-                        prev-icon="<"
-                        next-icon=">"
-                        ref="slider"
-                    >
-                        <v-slide-item
-                            v-for="type in highlightTypes"
-                            :key="type"
-                            class="mx-2"
-                            ref="slideItem"
+    <p-p-section-card title="HIGHLIGHTS" emojiId="champagne" subtitle="latest flex" v-if="highlights" >
+        <template slot="content">
+            <v-container class="py-0">
+                <v-row no-gutters>
+                    <v-col>
+                        <v-slide-group
+                            prev-icon="<"
+                            next-icon=">"
+                            ref="slider"
                         >
-                            <v-chip
-                                class="overline lh-1"
-                                small
-                                :outlined="selectedType==type"
-                                :color="selectedType==type ? '' : 'transparent'"
-                                :value="type"
-                                @click="()=>selectedType=type"
-                                style="min-width:50px; opacity: 1 !important"
+                            <v-slide-item
+                                v-for="type in highlightTypes"
+                                :key="type"
+                                class="mx-2"
+                                ref="slideItem"
                             >
-                                <template v-if="type == 'fullPresoRounds'">full round</template>
-                                <template v-else>{{type}}</template>
-                            </v-chip>
-                        </v-slide-item>
-                    </v-slide-group>
-                </v-col>
-            </v-row>
-            <div v-if="selectedType=='preso'">
-                <highlights-preso :presos="highlights.preso"  class="px-4 pt-6"/>
-            </div>
-            <div v-else-if="selectedType=='trophies'">
-                <highlights-trophies :trophies="highlights.trophies" class="px-4 pt-6"/>
-            </div>
-            <div v-else-if="selectedType=='fullPresoRounds'">
-                <highlights-full-round :ppRounds="highlights.fullPresoRounds" class="px-4 pt-6"/>
-            </div>
-        </v-container>
-        
-    </div>
+                                <v-chip
+                                    class="overline lh-1"
+                                    small
+                                    :outlined="selectedType==type"
+                                    :color="selectedType==type ? '' : 'transparent'"
+                                    :value="type"
+                                    @click="()=>selectedType=type"
+                                    style="min-width:50px; opacity: 1 !important"
+                                >
+                                    <template v-if="type == 'fullPresoRounds'">full round</template>
+                                    <template v-else>{{type}}</template>
+                                </v-chip>
+                            </v-slide-item>
+                        </v-slide-group>
+                    </v-col>
+                </v-row>
+                <div v-if="selectedType=='preso'">
+                    <highlights-preso :presos="highlights.preso"  class="pt-6"/>
+                </div>
+                <div v-else-if="selectedType=='trophies'">
+                    <highlights-trophies :trophies="highlights.trophies" class="pt-6"/>
+                </div>
+                <div v-else-if="selectedType=='fullPresoRounds'">
+                    <highlights-full-round :ppRounds="highlights.fullPresoRounds" class="pt-6"/>
+                </div>
+            </v-container>
+        </template>
+    </p-p-section-card>
 </template>
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
