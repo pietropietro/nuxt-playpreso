@@ -21,8 +21,16 @@
                         <v-col><user-name :user="ranking.user" /></v-col>
                     </v-row>
                 </v-col>
-                <v-col class="pr-2" cols="auto">
+                <v-col cols="auto">
                     <h3>{{ ranking.tot_points }}</h3>
+                </v-col>
+                <v-col cols="1">
+                    <div 
+                        class="text-center font-weight-bold pointer"
+                        style="font-size:10px;"
+                    >
+                        <h3>{{ selectedId == ranking.user.id ? '^' : 'v' }}</h3>
+                    </div>
                 </v-col>
             </v-row>
             <template v-if="selectedId == ranking.user_id">
@@ -32,7 +40,7 @@
 
                             <v-slide-item style="width:275px; height:70px" class="ml-2">
                                 <v-container fill-height class="rounded-lg"
-                                    style="background: var(--v-primary-darken2)"
+                                    style="background: var(--v-primary-darken1)"
                                 >
                                     <v-row style="width:125px;" align="end" no-gutters>
                                         <v-col cols="auto">
@@ -55,7 +63,7 @@
                             >
                                 <v-container class="rounded-lg" :style="{
                                     overflow: 'hidden',
-                                    background: 'var(--v-primary-darken2)',
+                                    background: 'var(--v-primary-darken1)',
                                 }">
                                     <v-row align="center">
                                         <v-col cols="auto">
@@ -90,7 +98,7 @@
                                 <v-container class="rounded-lg" :style="{
                                     height: '70px',
                                     overflow: 'hidden',
-                                    background: 'var(--v-primary-darken2)'
+                                    background: 'var(--v-primary-darken1)'
                                 }">
                                     <v-row align="center">
                                         <v-col cols="auto">

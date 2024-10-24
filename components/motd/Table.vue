@@ -9,7 +9,7 @@
                 }
                 : {}"
         >
-            <v-row no-gutters align="center" @click="() => select(item.user.id)" class="px-2">
+            <v-row no-gutters align="center" @click="() => select(item.user.id)">
                 <v-col cols="auto" class="ocrastd mr-4">
                     <div class="text-center" v-if="selectedId != item.user.id">
                         <v-chip x-small color="transparent">
@@ -28,7 +28,7 @@
                         class="text-center font-weight-bold pointer"
                         style="font-size:10px;"
                     >
-                        {{ selectedId == item.user.id ? '^' : 'v' }}
+                        <h3>{{ selectedId == item.user.id ? '^' : 'v' }}</h3>
                     </div>
                 </v-col>
             </v-row>

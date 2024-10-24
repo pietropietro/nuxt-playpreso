@@ -24,17 +24,19 @@
             <p-p-league-available-list class="my-10 mx-4"/>
             
             <motd-home class="my-10 mx-4"/>
-            
-            <p-p-ranking-view class="my-10 mx-4"/>
-
-            <highlights-view class="my-10 mx-4"/>
-
 
             <p-p-section-card title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-if="!emptyEnrolled" >
                 <template slot="content">
                     <user-participation-enrolled-list class="px-2" :setEmptyFlag="()=>emptyEnrolled=true"/>
                 </template>
             </p-p-section-card>
+            
+            <p-p-ranking-view class="my-10 mx-4"/>
+
+            <highlights-view class="my-10 mx-4"/>
+
+
+            
             
             <v-row class="py-10 text-center ">
                 <v-col>
