@@ -2,7 +2,7 @@
     <v-row v-if="$route.path !== '/' && navigationTitle"
         no-gutters align="center"
     >
-        <div class="mx-4" @click="$router.go(-1)">
+        <div class="mx-4" @click="handleGoBack">
             <h2 class="ocrastd"><</h2>
         </div>
         <v-spacer/>
@@ -47,6 +47,16 @@ export default {
                 this.$store.commit('user/updateNotificationCount', { notificationCount: response.message.length }); 
             }
         },
+        handleGoBack() {
+            const referer = document.referrer;
+            const isInternal = referer.includes(window.location.origin);
+
+            if (isInternal) {
+                this.$router.go(-1); // Go back if the referer was internal
+            } else {
+                this.$router.push('/'); // Go to homepage if there's no internal history
+            }
+        }
     },
    
 }
