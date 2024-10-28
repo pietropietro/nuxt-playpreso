@@ -26,6 +26,11 @@
                     </v-col>
                </template>
                <template v-else-if="notification.event_type == 'ppleague_finished'">
+                    <v-col cols="12" class="pt-1 pb-0 mb-n1">
+                        <span class="overline lh-1">
+                            P-LEAGUE FINISHED
+                        </span>
+                    </v-col>
                     <v-col cols="auto">
                         <user-participation-card
                             :up="notification.userParticipation"
