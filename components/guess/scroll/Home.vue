@@ -7,7 +7,7 @@
             <v-slide-group
                 prev-icon="<"
                 next-icon=">"
-                id="slider"
+                ref="slider"
             >
                 <v-slide-item style="width:100px;">
                     <div class="ml-4" style="height:100%">
@@ -70,6 +70,7 @@
                     this.guesses = response.message;
                     this.state = Object.keys(this.guesses)[0]
                 }
+                this.resetSlider();
             },
             afterLock(){
                 // todo
@@ -86,7 +87,16 @@
                     newGuess: guess,
                     newList: this.guesses['unlocked'], 
                 });
-            }
+            },
+            resetSlider() {
+                this.$nextTick(() => {
+                    const slideGroupEl = this.$refs.slider.$el.querySelector('.v-slide-group__content');
+                    if (slideGroupEl) {
+                    // Reset the transform property to bring it back to the first item
+                    slideGroupEl.style.transform = 'translateX(0px)';
+                    }
+                });
+            },
         },
 
         async mounted(){
