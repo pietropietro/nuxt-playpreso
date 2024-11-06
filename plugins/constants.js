@@ -53,7 +53,6 @@ export const API_ROUTES = {
         GET: '/p-ranking'
     },
     PPROUND: {
-        GET: '/p-round/',
         GET_FOR_UP: '/p-round/user-participation/',
     },
     PPTOURNAMENTTYPE: {
