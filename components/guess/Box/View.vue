@@ -1,5 +1,11 @@
 <template>
-    <v-container v-if="guess && match">   
+    <v-container v-if="guess && match"
+            :style="{
+                height: boxheight,
+                width: boxwidth,
+                overflow: 'hidden'
+            }"
+    >   
         <v-row
             class="rounded-lg"
             @click="handleClick"

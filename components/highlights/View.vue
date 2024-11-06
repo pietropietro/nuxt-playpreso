@@ -32,7 +32,7 @@
                     </v-col>
                 </v-row>
                 <div v-if="selectedType=='preso'">
-                    <highlights-preso :presos="highlights.preso"  class="pt-6"/>
+                    <highlights-preso :presoMatches="highlights.preso"  class="pt-6"/>
                 </div>
                 <div v-else-if="selectedType=='trophies'">
                     <highlights-trophies :trophies="highlights.trophies" class="pt-6"/>
