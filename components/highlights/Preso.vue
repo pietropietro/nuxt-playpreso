@@ -100,7 +100,8 @@
                         align-self="center"
                         :key="i+x"
                     >
-                            <h1 class="ocrastd mt-0">+</h1>
+                        <loading-page v-if="loading" :size="20" />
+                        <h1 v-else class="ocrastd mt-0" @click="onMore">+</h1>
                     </v-col>
                 
                 </template>
@@ -112,7 +113,9 @@
 <script>
 export default {
     props:{
-        presoMatches: {type: Array}
+        presoMatches: {type: Array},
+        onMore: {type: Function},
+        loading: {type: Boolean}
     },
     data() {
         return{

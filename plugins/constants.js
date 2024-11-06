@@ -71,7 +71,8 @@ export const API_ROUTES = {
         LOCK: '/motd/lock'
     },
     HIGHLIGHTS: {
-        GET: '/highlights'
+        GET: '/highlights',
+        PRESO: '/highlights/preso'
     }
 };
 
@@ -84,6 +85,9 @@ Vue.mixin({
                 SIGNUP: '/signup',
                 RECOVER: '/recover',
                 NOTIFICATION: '/notification',
+                HIGHLIGHTS:{
+                    PRESO: '/highlights/last-preso'
+                },
                 PPCUP: {
                     DETAIL: '/p-cup/'
                 },
