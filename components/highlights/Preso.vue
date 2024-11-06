@@ -4,52 +4,60 @@
             v-for="(chunk,i) in chunkedSummaries" 
             :key="i" 
         >
-                <v-col cols="12"  align-self="center"
-                    v-if="selectedSummary 
-                        && chunk.map((ms)=>ms.match.id).includes(selectedMatchId) 
-                        && selectedSummary.guesses.length > 1
-                    "
-                >
-                    <v-row>
-                        <v-slide-group
-                            prev-icon="<"
-                            next-icon=">"
-                            id="slider"
-                        >
-                            <v-slide-item>
-                                <h2 class="ocrastd mx-5" 
-                                    @click="()=>selectedMatchId = null"
-                                    style="align-self:center"
-                                >
-                                    X
-                                </h2>
-                            </v-slide-item>
-                            <v-slide-item
-                                v-for="(guess) in selectedSummary.guesses"
-                                :key="guess.id"
-                                class="mx-2"
-                            >
-                                <div>
-                                    <guess-box-view
-                                        :guess="guess"
-                                        :match="selectedSummary.match"
-                                        :rgb="guess.ppTournamentType.rgb"
-                                        :open="secondLevelGuessId == guess.id"
-                                        :setOpen="()=>selectSecondLevelGuessId(guess.id)"
-                                    />
-                                    <div>
-                                        <user-name :user="guess.user" small center/>
-                                    </div>
-                                </div>
-                            </v-slide-item>
-                        </v-slide-group>
-                    </v-row>
-                </v-col>
+                
 
-            <template v-else>
-                <template v-for="matchSummary in chunk" >
+                <template v-for="(matchSummary, x) in chunk" >
+
+                    <!-- slider for multiple guesses of same match -->
+                    <v-col cols="12"  align-self="center"
+                        v-if="selectedSummary 
+                            && selectedSummary.guesses.length > 1
+                            && matchSummary.match.id == selectedMatchId
+                        "
+                        :key="matchSummary.match.id"
+                        class="py-5"
+                    >
+                        <v-row>
+                            <v-slide-group
+                                prev-icon="<"
+                                next-icon=">"
+                                id="slider"
+                            >
+                                <v-slide-item>
+                                    <h1 class="ocrastd px-10" 
+                                        @click="()=>selectedMatchId = null"
+                                        style="align-self:center"
+                                    >
+                                        x
+                                    </h1>
+                                </v-slide-item>
+                                
+                                <v-slide-item
+                                    v-for="(guess) in selectedSummary.guesses"
+                                    :key="guess.id"
+                                    class="mx-2"
+                                >
+                                    <div>
+                                        <guess-box-view
+                                            :guess="guess"
+                                            :match="selectedSummary.match"
+                                            :rgb="guess.ppTournamentType.rgb"
+                                            :open="secondLevelGuessId == guess.id"
+                                            :setOpen="()=>selectSecondLevelGuessId(guess.id)"
+                                        />
+                                        <div>
+                                            <user-name :user="guess.user" small center/>
+                                        </div>
+                                    </div>
+                                </v-slide-item>
+                            </v-slide-group>
+                        </v-row>
+                    </v-col>
+
+
+
                     <v-col
-                        v-if=" !selectedSummary
+                        v-else-if=" !selectedSummary
                             || matchSummary.match.id == selectedMatchId 
                             || !chunk.map((ms)=>ms.match.id).includes(selectedMatchId) 
                         "
@@ -82,10 +90,22 @@
                             </template>
                         </v-row>
                     </v-col>
+                    
+                    <v-col v-if="
+                                !chunk.map((ms)=>ms.match.id).includes(selectedMatchId) 
+                                && i == chunkedSummaries.length -1  
+                                && x == chunk.length -1
+                            " 
+                        class="text-center"
+                        align-self="center"
+                        :key="i+x"
+                    >
+                            <h1 class="ocrastd mt-0">+</h1>
+                    </v-col>
                 
                 </template>
-            </template>
 
+            
         </v-row>
     </div>
 </template>
@@ -139,9 +159,7 @@ export default {
 
 <style>
 .card-wrapper {
-    z-index:1;
     box-shadow: -7px 18px 0 rgba(0, 0, 255, 0.3);
     border-radius: 8px; /* Match the card's border radius */
 }
-
 </style>
