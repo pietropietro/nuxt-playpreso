@@ -1,7 +1,7 @@
 import { App } from '@capacitor/app';
 import jwt_decode from "jwt-decode";
 
-export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},inject) => {
+export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DEBUG }},inject) => {
 	inject('api', {
 
         async call(route, values, method, use_formdata = false){
@@ -15,7 +15,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION }},
 
 
             // Check cache for GET requests before making a new request
-            if (method === 'GET') {
+            if (method === 'GET' && DEBUG != true) {
                 const cache = store.state.apiResponses.cache[route];
                 const cacheDuration = 1 * 60 * 1000; // 1 minutes in milliseconds (120,000 milliseconds)
                 if (cache && (Date.now() - cache.timestamp < cacheDuration)) {
