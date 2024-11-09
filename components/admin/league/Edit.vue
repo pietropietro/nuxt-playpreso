@@ -21,12 +21,19 @@
                 label="c-lvl" v-model="levelModel" :items="[1,2,3,4]"
             />
         </v-col>
+        <v-col cols="3" align-self="end">
+            <v-select 
+                label="weight_offset" v-model="weightOffsetModel" :items="[-2,-1,0,1,2,3]"
+            />
+            <span class="caption">positive values give less relevance, negative values more relevance</span>
+
+        </v-col>
         <v-col cols="12" class="text-center">
             <v-btn 
                 outlined 
                 :disabled="!nameModel" 
                 :loading="loading" 
-                @click="create"
+                @click="createOrUpdate"
             >
                 {{!!league ? 'UPDATE' : 'CREATE'}}
             </v-btn>
@@ -112,6 +119,20 @@ export default {
                 this.level = val;
             }
         },
+        weightOffsetModel:{
+            get(){
+                let ret= !!this.league ? this.league.weight_offset : this.weight_offset; 
+                console.log('ret',ret);
+                return ret;
+            },
+            set(val){
+                if(!!this.league){
+                    this.league.weight_offset = val;
+                    return;
+                }
+                this.weight_offset = val;
+            }
+        },
     },
     data:()=>({
         name: null, 
@@ -121,10 +142,11 @@ export default {
         country: null,
         level: null,
         loading:false,
-        isParent: false
+        isParent: false,
+        weight_offset: 0
     }),
     methods:{
-        async create(){
+        async createOrUpdate(){
             this.loading = true;
             let parentValue = this.isParent ? this.league.id : this.parentModel;
 
@@ -135,6 +157,7 @@ export default {
                 "ls_410" : false,
                 "country" : this.countryModel,
                 "level" : this.levelModel,
+                "weight_offset" : this.weightOffsetModel,
                 "parent_id" : parentValue
             };
             let route = !!this.league ? (this.ADMIN_API_ROUTES.LEAGUE.UPDATE + this.league.id) : this.ADMIN_API_ROUTES.LEAGUE.CREATE;

@@ -95,6 +95,13 @@
                     {{ formatDate(item.updated_at, true) }}
                 </div>
             </template>
+            <template v-slot:item.weight_offset="{ item }">
+                <div v-if="item.weight_offset" >
+                    {{ item.weight_offset > 0 ? '🔽' : '🔼' }}
+                    <b>{{ item.weight_offset }}</b>
+                </div>
+            </template>
+            
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
                     <admin-league-detail  :id="item.id" :onEdit="refresh"/>
@@ -130,6 +137,7 @@ export default {
             { value: 'country' }, 
             { value: 'tag' },
             { value: 'name' },
+            { value: 'weight_offset' },
             { value: 'nextWeeks' },
             { value: 'updated_at' },
         ],
