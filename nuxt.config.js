@@ -6,7 +6,7 @@ export default {
 
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
-		VERSION: '1.35.23',
+		VERSION: '1.35.30',
 		DEBUG: process.env.DEBUG ?? false
 	},
 

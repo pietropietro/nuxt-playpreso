@@ -2,6 +2,7 @@
     <v-container class="safe-area text-center py-10">
       <h1>Update Required</h1>
       <p>A new version of the app is available. Please update the app to continue.</p>
+      <p>While the update gets released in the store, you may use the web version.</p>
       <v-btn color="primary" @click="handleUpdate">Update Now</v-btn>
     </v-container>
   </template>
