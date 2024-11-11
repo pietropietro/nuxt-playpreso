@@ -147,7 +147,8 @@ export default {
         }
     },
     methods: {
-        select(userId) {
+        async select(userId) {
+            await this.triggerHapticFeedback();
             if (userId == this.selectedId) {
                 this.selectedId = null;
                 return;

@@ -35,7 +35,7 @@
                     <highlights-preso 
                         :presoMatches="highlights.preso" 
                         :onMore="()=>$router.push(ROUTES.HIGHLIGHTS.PRESO)" 
-                        class="pt-6"
+                        class="pt-6 mx-2"
                     />
                 </div>
                 <div v-else-if="selectedType=='trophies'">

@@ -1,7 +1,7 @@
 <template>
     <loading-page v-if="!presoSummaries && loading" />
-    <v-container v-else>
-        <highlights-preso :presoMatches="presoSummaries" 
+    <v-container v-else style="overflow:hidden;">
+        <highlights-preso :presoMatches="presoSummaries"
             :onMore="()=>{page++}"
             :loading="loading"
         />

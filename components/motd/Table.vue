@@ -123,7 +123,8 @@ export default {
         }
     },
     methods: {
-        select(userId) {
+        async select(userId) {
+            await this.triggerHapticFeedback();
             if (userId == this.selectedId) {
                 this.selectedId = null;
                 return;
@@ -131,8 +132,5 @@ export default {
             this.selectedId = userId;
         }
     },
-    // mounted() {
-        // this.selectedId = this.chart[0]?.user.id;
-    // }
 }
 </script>

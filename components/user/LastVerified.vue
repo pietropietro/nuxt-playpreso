@@ -37,7 +37,6 @@ export default {
     },
     data() {
         return{
-            size: '98px',
             loading: false,
             page: 2,
             openId: null
