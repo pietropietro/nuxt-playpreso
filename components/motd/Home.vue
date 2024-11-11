@@ -71,9 +71,8 @@ export default {
             }
             this.loading = false;
         },
-        async onSelect(){
+        onSelect(){
             if(this.motd.guess.guessed_at || this.motd.match.verified_at) return;
-            await this.triggerHapticFeedback();
             this.motd.guess.match = this.motd.match;
             this.$store.dispatch('openGuesses/update', {
                 newGuess: this.motd.guess,

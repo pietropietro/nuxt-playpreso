@@ -53,14 +53,13 @@ export default {
         }
     },
     methods:{
-        async selectGuess(guess){
+        selectGuess(guess){
             if(guess.guessed_at || guess.verified_at)return;
             //if iit'ssomeone elses guess
             if(guess.user_id != this.currentUser.id) return;
             let guessList = this.ppRMs
                 .filter(item => !item.guess.verified_at && !item.guess.guessed_at)
                 .map(item => item.guess);
-            await this.triggerHapticFeedback();
 
             this.$store.dispatch('openGuesses/update', {
                 newGuess: guess,

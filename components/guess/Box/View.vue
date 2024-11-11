@@ -93,7 +93,8 @@ export default {
         }
     },
     methods:{
-        handleClick(){
+        async handleClick(){
+            await this.triggerHapticFeedback();
             if(!this.guess.guessed_at && !this.guess.verified_at && !!this.onUnlockedClick){
                 this.onUnlockedClick(this.guess, this.match);
                 return;

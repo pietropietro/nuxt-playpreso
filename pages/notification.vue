@@ -75,8 +75,7 @@ export default {
             }
             this.loading = false;
         },
-        async clickUnlocked(guess){
-            await this.triggerHapticFeedback();
+        clickUnlocked(guess){
             
             let list = [];
             this.userNotifications.map((un)=>{
