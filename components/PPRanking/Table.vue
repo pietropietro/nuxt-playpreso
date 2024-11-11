@@ -11,20 +11,22 @@
             <v-row no-gutters align="center" @click="() => select(ranking.user_id)">
                 <v-col>
                     <v-row align="center" :class="selectedId == ranking.user_id ? 'px-4' : ''">
-                        <v-col cols="auto" v-if="selectedId != ranking.user_id">
+                        <v-col class="pl-0 pr-1" cols="auto" v-if="selectedId != ranking.user_id">
                             <v-chip 
                                 x-small color="transparent"
                             >
                                 # {{ ranking.position }}
                             </v-chip>
                         </v-col>
-                        <v-col><user-name :user="ranking.user" /></v-col>
+                        <v-col class="px-0">
+                            <user-name :user="ranking.user" />
+                        </v-col>
                     </v-row>
                 </v-col>
                 <v-col cols="auto">
                     <h3>{{ ranking.tot_points }}</h3>
                 </v-col>
-                <v-col cols="1">
+                <v-col cols="1" class="px-0">
                     <div 
                         class="text-center font-weight-bold pointer"
                         style="font-size:10px;"

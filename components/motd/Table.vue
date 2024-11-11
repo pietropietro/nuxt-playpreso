@@ -10,14 +10,14 @@
                 : {}"
         >
             <v-row no-gutters align="center" @click="() => select(item.user.id)">
-                <v-col cols="auto" class="ocrastd mr-4">
+                <v-col cols="auto">
                     <div class="text-center" v-if="selectedId != item.user.id">
                         <v-chip x-small color="transparent">
                             # {{ i + 1 + ((page - 1) * 10) }}
                         </v-chip>
                     </div>
                 </v-col>
-                <v-col><user-name :user="item.user" /></v-col>
+                <v-col class="px-0"><user-name :user="item.user" /></v-col>
                 <v-col cols="auto" class="text-center">
                     <div>
                         <h3>{{ item.tot_points }}</h3>
