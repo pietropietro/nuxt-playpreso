@@ -37,7 +37,7 @@
                 <p-p-section-title text="ROUNDS" class="px-4" />
                 <p-p-round-pagination
                     :ppRounds="tournamentObj.ppRounds" 
-                    :rounds="isCupGroup ? tournamentObj.rounds : tournamentObj.ppTournamentType.rounds"
+                    :rounds="roundCount"
                     :ppTournamentType="tournamentObj.ppTournamentType"
                     :userInTournament="userInTournament"
                 />
@@ -68,6 +68,15 @@ export default {
         missingUsers(){
             return (this.isCupGroup ? this.tournamentObj.participants : this.tournamentObj.ppTournamentType.participants)
                 - this.tournamentObj.userParticipations.length;
+        },
+        roundCount(){
+            //the ppTt rounds value could not be the same of some legacy tournaments
+            let count =  this.isCupGroup ? this.tournamentObj.rounds 
+            :   (this.tournamentObj.finished_at ? 
+                    this.tournamentObj.ppRounds.length 
+                    : this.tournamentObj.ppTournamentType.rounds
+                );
+            return count;
         }
     }
 }
