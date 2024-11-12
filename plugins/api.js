@@ -43,11 +43,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
             let includeAuth = store.state.user && store.state.user.token ? true : false;
 
             // Check app version for web vs mobile
-            let version = VERSION; // Default to web version from Nuxt config
-            if (Capacitor.isNativePlatform()) {
-                const appInfo = await App.getInfo();
-                version = appInfo.version; // Get mobile app version
-            }
+            let version = await this.getAppVersion();
 
             let headers = new Headers({
                 'Content-Type': 'application/json',
@@ -140,9 +136,11 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
                     }
                 }
 
+                let version = await this.getAppVersion();
                 // Otherwise, fetch the image from the server
                 const headers = new Headers({
                     'Content-Type': 'application/json',
+                    'X-Frontend-Version': version,
                     Authorization: store.state.user.token,
                 });
                 const initOptions = {
@@ -172,6 +170,16 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
                 console.error('error: ' + e, fullUrl);
                 // $notifier.showError();
             }
+        },
+
+        async getAppVersion(){
+            // Check app version for web vs mobile
+            let version = VERSION; // Default to web version from Nuxt config
+            if (Capacitor.isNativePlatform()) {
+                const appInfo = await App.getInfo();
+                version = appInfo.version; // Get mobile app version
+            }
+            return version;
         }
     })
 }
