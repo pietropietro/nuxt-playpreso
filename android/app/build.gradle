@@ -9,8 +9,8 @@ android {
 		applicationId "com.playpreso.app"
 		minSdkVersion rootProject.ext.minSdkVersion
 		targetSdkVersion rootProject.ext.targetSdkVersion
-		versionCode 13523
-		versionName "1.35.23"
+		versionCode 13531
+		versionName "1.35.31"
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
 		aaptOptions {
