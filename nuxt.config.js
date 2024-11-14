@@ -1,9 +1,4 @@
 export default {
-	
-	// test for capacitor iOS app
-	// ssr: false,
-	// target: 'static',
-
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
 		VERSION: '1.35.31',
@@ -55,7 +50,7 @@ export default {
 
 	modules: [
 		'@nuxtjs/sitemap',
-		'vue-social-sharing/nuxt'
+		'vue-social-sharing/nuxt',
     ],
 
 
@@ -75,27 +70,19 @@ export default {
 		hostname: 'https://www.playpreso.com',
 	},
 
-	// Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
+	// Vuetify module configuration 
     vuetify: {
         customVariables: ['~/assets/variables.scss'],
 		treeShake: true,
+		defaultAssets: {
+			icons: false // Disable Material Design Icons
+		},
 		theme: {
 			dark: true,
 			options: {
 				customProperties: true,
 			},
             themes: {
-                light: {
-                    primary: '#0000cc',
-					background: '#ffffff',
-					// all links
-					anchor: '#000000',
-					oppositeText: '#ffffff',
-					text: '#000000',
-					contrastOnDark: '#ffffff',
-					// i.e. PRESO!
-					accent: '#9900cc'
-				},
 				dark: {
                     primary: '#000066',
 					background: '#00000f',
