@@ -43,7 +43,7 @@ export default ({ app, store }, inject) => {
         async removeNotificationTokenFromServer() {
             if (!Capacitor.isNativePlatform()) return;
 
-            let notificationToken = store.state.user.notificationToken;
+            let notificationToken = store.state.notification.pushToken;
             console.log('remove token check token in store: ', notificationToken);
             if (!notificationToken) return;
 
@@ -74,7 +74,7 @@ export default ({ app, store }, inject) => {
                         PushNotifications.addListener('registration', async (token) => {
                         try {
                             await this.sendTokenToServer(token.value, Capacitor.getPlatform());
-                            store.commit('user/updateNotificationToken', { notificationToken: token.value }); // Store the token in Vuex
+                            store.commit('token/updatePushToken', { pushToken: token.value }); // Store the token in Vuex
                         } catch (error) {
                             console.error('Error handling registration success:', error);
                         }
@@ -103,10 +103,10 @@ export default ({ app, store }, inject) => {
                 try {
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {
                         try {
-                            let count = store.state.user.notificationCount;
+                            let count = store.state.notification.unreadCount;
                             count ++;
-                            store.commit('user/updateNotificationCount', {
-                                notificationCount: count
+                            store.commit('notification/updateUnreadCount', {
+                                unreadCount: count
                             }); 
                             console.log('Push received:', notification);
                         } catch (error) {

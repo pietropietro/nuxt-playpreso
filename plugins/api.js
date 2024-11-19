@@ -13,7 +13,6 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
                 store.commit('apiResponses/clearCache');
             }
 
-
             // Check cache for GET requests before making a new request
             if (method === 'GET' && DEBUG != true) {
                 const cache = store.state.apiResponses.cache[route];
@@ -21,9 +20,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
                 if (cache && (Date.now() - cache.timestamp < cacheDuration)) {
                     return cache.data; // Return cached data if valid
                 }
-
             }
-
 
             let resp;
             let myFormData;
@@ -40,16 +37,16 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
             }
 
             
-            let includeAuth = store.state.user && store.state.user.token ? true : false;
+            let includeAuth = store.state.user && store.state.user.ppToken ? true : false;
 
             // Check app version for web vs mobile
             let version = await this.getAppVersion();
 
-            let headers = new Headers({
+            let headers ={
                 'Content-Type': 'application/json',
                 'X-Frontend-Version': version,
-                ...(includeAuth && { 'Authorization': store.state.user.token })
-              });
+                ...(includeAuth && { 'Authorization': store.state.user.ppToken })
+              };
             
             
             let initOptions = {
@@ -60,51 +57,55 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
 
             initOptions.headers = headers;
             
-            if(includeBody){
+            if(includeBody && (!!myFormData || !!values)){
                 initOptions.body = use_formdata ? myFormData : JSON.stringify(values);
             }
 
             try {
-                await fetch(API_ENDPOINT + route, initOptions)
-                    .then( async response => {
-                        if(response.status === 401){
-                            await $logout.logout();
-                        }
+                let response = await fetch(API_ENDPOINT + route, initOptions);
+   
+                if(response.status === 401){
+                    await $logout.logout();
+                }
 
-                        if (response.status === 426) {
-                            // Handle 426 status code - Force app update
-                            store.commit('apiResponses/setVersionUpdate', true);
-                        }
+                if (response.status === 426) {
+                    // Handle 426 status code - Force app update
+                    store.commit('apiResponses/setVersionUpdate', true);
+                }
 
-                        if (response.status === 503) {
-                            // Handle 503 status code - maintenancemode
-                            store.commit('apiResponses/setMaintenanceMode', true);
-                        }
-                        
-                        if(response.headers.has('Authorization')){
-                            store.commit('user/updateToken', { token: response.headers.get('Authorization')});  
-                            let decoded = jwt_decode(response.headers.get('Authorization'));
-                            store.commit('user/updatePoints', { points: decoded.points});  
-                        }
+                if (response.status === 503) {
+                    // Handle 503 status code - maintenancemode
+                    store.commit('apiResponses/setMaintenanceMode', true);
+                }
+                
+                if(response.headers.has('Authorization')){
+                    let ppToken = response.headers.get('Authorization')
+                    let decoded = jwt_decode(ppToken);
+                    store.commit('user/updateUser', {
+                        id: decoded.id,
+                        username: decoded.username,
+                        admin:decoded.admin,
+                        created_at: decoded.created_at,
+                        ppToken: decoded.ppToken, 
+                        points: decoded.points
+                    });  
+                }
 
-                        if (response.status === 204) {
-                            return response;
-                        }
+                if (response.status === 204) {
+                    return response;
+                }
 
-                        let jsonResp = response.json();
-                        if (method === 'GET' && response.ok) {
-                            store.commit('apiResponses/setCache', { route: route, data: jsonResp });
-                        }
-                        return jsonResp;
-                        
-                    }).then((data) => {
-                        if(data && data.status && data.status == "error"){
-                            console.error('error:', data.message);
-                            $notifier.showError(data.message);
-                        }
-                        resp = data;
-                        return data;
-                    });
+                let jsonResp = await response.json();
+                if (method === 'GET' && response.ok) {
+                    store.commit('apiResponses/setCache', { route: route, data: jsonResp });
+                }
+                
+                if(jsonResp && jsonResp.status && jsonResp.status == "error"){
+                    console.error('error:', jsonResp.message);
+                    $notifier.showError(jsonResp.message);
+                }
+                return jsonResp;
+                    
             }catch (e) {              
                 console.error('error:', e);
                 $notifier.showError();
@@ -138,11 +139,11 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
 
                 let version = await this.getAppVersion();
                 // Otherwise, fetch the image from the server
-                const headers = new Headers({
+                const headers = {
                     'Content-Type': 'application/json',
                     'X-Frontend-Version': version,
-                    Authorization: store.state.user.token,
-                });
+                    'Authorization': store.state.user.ppToken,
+                };
                 const initOptions = {
                     method: 'GET',
                     headers: headers,
@@ -175,12 +176,13 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
         async getAppVersion(){
             // Check app version for web vs mobile
             let version = VERSION; // Default to web version from Nuxt config
-            if (Capacitor.isNativePlatform()) {
+            if (process.client && Capacitor.isNativePlatform()) {
                 const appInfo = await App.getInfo();
                 version = appInfo.version; // Get mobile app version
             }
             return version;
-        }
+        },
+
     })
 }
 	
