@@ -80,22 +80,23 @@ Vue.mixin({
     data() {
         return {
             ROUTES: {
-                HOME: '/',
+                LANDING: '/',
                 LOGIN: '/login',
                 SIGNUP: '/signup',
                 RECOVER: '/recover',
-                NOTIFICATION: '/notification',
+                APP_HOME: '/app',
+                NOTIFICATION: '/app/notification',
                 HIGHLIGHTS:{
-                    PRESO: '/highlights/last-preso'
+                    PRESO: '/app/highlights/last-preso'
                 },
                 PPCUP: {
-                    DETAIL: '/p-cup/'
+                    DETAIL: '/app/p-cup/'
                 },
                 PPLEAGUE:{
-                    DETAIL: '/p-league/',
+                    DETAIL: '/app/p-league/',
                 },
                 USER: {
-                    DETAIL: '/user/'
+                    DETAIL: '/app/user/'
                 }
             },
             API_ROUTES: API_ROUTES,

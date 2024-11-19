@@ -12,20 +12,21 @@
         </v-toolbar-title>
         <v-spacer/>
     </v-row>
-
-    <!-- if not loaded don't show -->
-    <v-row v-else-if="$route.path !== '/'"></v-row>
     
     <!-- if no vuex title -->
     <v-row v-else align="center">
         <v-col></v-col>
         <v-col>
-            <p-p-logo-toolbar />
+            <v-toolbar-title>
+                <nuxt-link to="/">
+                    <p-p-logo />
+                </nuxt-link>
+            </v-toolbar-title>
         </v-col>
         <v-col class="mt-n1">
-            <nuxt-link :to="ROUTES.NOTIFICATION">
-                <v-avatar color="red" size="19" v-if="$store.state.user.notificationCount">
-                    <span class="overline lh-1 font-weight-bold">{{ $store.state.user.notificationCount }}</span>
+            <nuxt-link :to="ROUTES.NOTIFICATION" v-if="currentUser">
+                <v-avatar color="red" size="19" v-if="$store.state.notification.unreadCount">
+                    <span class="overline lh-1 font-weight-bold">{{ $store.state.notification.unreadCount }}</span>
                 </v-avatar>
             </nuxt-link>
         </v-col>
@@ -44,7 +45,7 @@ export default {
         async getUserNotifications(){
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
             if(response && response.status === "success"){
-                this.$store.commit('user/updateNotificationCount', { notificationCount: response.message.length }); 
+                this.$store.commit('notification/updateUnreadCount', { unreadCount: response.message.length }); 
             }
         },
         handleGoBack() {

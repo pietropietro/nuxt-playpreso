@@ -108,7 +108,7 @@ import { Stories } from "vue-insta-stories";
 // import StoryHeader from "./components/StoryHeader.vue";
 
 export default {
-    layout: "authenticatedSplash",
+    layout: "privateSplash",
     components: { Stories  },
     data: () => ({
         loading:true,

@@ -1,5 +1,5 @@
 <template>
-    <p-p-section-card title="P-LEAGUES" emojiId="military_helmet" subtitle="join available" v-if="ppTournamentTypes.length > 0" >
+    <p-p-section-card title="P-LEAGUES" emojiId="military_helmet" subtitle="join available" v-show="ppTournamentTypes.length > 0" >
         <template slot="content">
             <v-data-table
                 class="transparent no-select"
@@ -62,13 +62,13 @@ export default {
         async getAvailable(){
             let response = await this.$api.call(this.API_ROUTES.PPLEAGUE.AVAILABLE);
             if(response && response.status === "success"){
-                this.ppTournamentTypes = response.message;
+                this.ppTournamentTypes = response.message || [];
                 this.ppTournamentTypes.map((e)=>{e.isSelectable=false})
             }
         },
 
     },
-    async mounted(){
+    async fetch(){
         const { fetchData } = useHomepageApi(this.$store, 'available-tournaments', this.getAvailable);
         await fetchData();
     },  

@@ -75,7 +75,7 @@ export default {
 			await this.triggerHapticFeedback();
 
 			//NOTIFICATION REQUEST
-			let notificationToken = this.$store.state.user.notificationToken;
+			let notificationToken = this.$store.state.notification.pushToken;
             console.log('notification token from store is ', notificationToken);
             if (!notificationToken){
 				console.log('let s set it up');

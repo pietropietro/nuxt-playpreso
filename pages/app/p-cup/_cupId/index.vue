@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-    layout: "authenticated",
+    layout: "private",
     data(){
         return{
             ppCupId: this.$route.params.cupId,

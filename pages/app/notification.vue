@@ -51,7 +51,7 @@
 import { Badge } from '@capawesome/capacitor-badge';
 
 export default {
-    layout: "authenticated",
+    layout: "private",
     data(){
         return {
             loading: false,
@@ -101,7 +101,7 @@ export default {
         );
         await this.getUserNotifications();
 
-        this.$store.commit('user/updateNotificationCount', { notificationCount: 0 }); 
+        this.$store.commit('notification/updateUnreadCount', { unreadCount: 0 }); 
         if (Capacitor.isNativePlatform()) {
             // Reset badge count 
             await Badge.clear();

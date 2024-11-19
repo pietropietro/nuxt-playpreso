@@ -18,7 +18,6 @@
 export default {
     data(){
         return{
-            currentSection: "PLAYPRESO",
             justNavigatedBack: false,
             appBarHidden: false,
         }

@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    layout: "authenticated",
+    layout: "private",
     data(){
         return {
             loading: false,
