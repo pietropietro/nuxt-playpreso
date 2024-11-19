@@ -180,3 +180,72 @@ body {
 	background-color: var(--v-primary-darken2);
 	border-radius: 8px;
   }
+
+
+  .pt-sm-16{
+	padding-top: 60px !important;
+
+	@media (min-width: 600px) {
+		padding-top: 64px;
+	}
+}
+
+.pp-outer-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh; /* Full height of the viewport */
+	position: relative; /* Ensures proper stacking context */
+}
+
+
+.pp-background-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	min-height: 100vh; // Use min-height to ensure it covers at least the full viewport height
+	z-index: -1; /* Ensure it stays behind the content */
+	background-color: #00001a;
+}
+
+.safe-area{
+	padding-top: env(safe-area-inset-top);
+}
+
+.pp-app-bar {
+	z-index: 6 !important;
+	position: fixed !important;
+
+	@media (min-width: $pp-mobile-height) {
+		width: $pp-mobile-width;
+		left: calc(50% - #{$pp-mobile-width / 2}) !important;
+	}
+}
+
+.app-rectangle-wrapper {
+	position: relative; // Ensure this div is positioned relative
+	overflow-x: hidden;
+	overflow-y: auto;
+	
+	.v-main__wrap{
+		padding-top: env(safe-area-inset-top);
+	}
+}
+
+.app-desktop-body {
+	width: 100%;
+	 @media (min-width: $pp-mobile-width) {
+		position: fixed;
+		width: $pp-mobile-width;
+		height: 100%;
+	}
+}
+
+.v-footer {
+	width: 100%;
+	@media (min-width: $pp-mobile-width) {
+		width: $pp-mobile-width;
+		justify-self: center;
+	}
+}
