@@ -1,16 +1,15 @@
 import Vue from 'vue'
 
+
 Vue.mixin({
     computed:{
-        currentUser(){
-            return  this.$store.state.user.currentUser ?? null;;
-        },
-        currentPoints(){
-            return  this.$store.state.user.points ?? null;;
-        },
-        currentNotificationToken(){
-            return  this.$store.state.user.notificationToken ?? null;;
-        }
+        currentUser() {
+            let fromStore =  this.$store.getters['user/getCurrentUser'];
+            if(fromStore.id){
+                return fromStore;
+            }
+            return null;
+        }   
     },
     methods:{
         async userLogin(username, password){
@@ -21,7 +20,6 @@ Vue.mixin({
             
             let response = await this.$api.call(this.API_ROUTES.USER.LOGIN, values, 'POST');
             if(response && response.status === "success"){
-                this.$store.commit('user/updateCurrentUser', { currentUser: response.message.user});
                 this.$router.push(this.ROUTES.HOME);          
             }
         },

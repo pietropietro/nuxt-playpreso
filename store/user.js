@@ -1,35 +1,38 @@
 export const state = () => ({
-	currentUser: null,
-	token: null,
-	points: null,
-	darkMode: false,
-	notificationToken: null,
-	notificationCount: 0
-})
+    id: null,
+    username: null,
+    points: null,
+    admin: null,
+    created_at: null,
+    ppToken: null
+});
 
 export const mutations = {
-	updateCurrentUser (state, payload) {
-		state.currentUser = payload.currentUser;
-	},
+    updateUser(state, payload) {
+        state.id = payload.id;
+        state.username = payload.username;
+        state.points = payload.points;
+        state.admin = payload.admin;
+        state.created_at = payload.created_at;
+        state.ppToken = payload.ppToken;
+    },
+    clearUser(state) {
+        state.id = null;
+        state.username = null;
+        state.points = null;
+        state.admin = null;
+        state.created_at = null;
+        state.ppToken = null
+    },
+};
 
-    updateToken (state, payload) {
-		state.token = payload.token
-	},
-
-	updatePoints (state, payload) {
-		state.points = payload.points
-	},
-
-	updateDarkMode (state, payload) {
-		state.darkMode = payload.darkMode
-	},
-
-	updateNotificationToken(state, payload){
-		state.notificationToken = payload.notificationToken
-	},
-
-	updateNotificationCount(state, payload){
-		state.notificationCount = payload.notificationCount
-	}
-
-}
+export const getters = {
+    getCurrentUser: (state) => ({
+        id: state.id,
+        username: state.username,
+        points: state.points,
+        admin: state.admin,
+        created_at: state.created_at,
+        ppToken: state.ppToken
+    }),
+};
