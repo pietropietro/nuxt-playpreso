@@ -5,7 +5,12 @@ export default {
 		DEBUG: process.env.DEBUG ?? false
 	},
 
-	// Global page headers: https://go.nuxtjs.dev/config-head
+	ssr:true,
+	target: "server",
+
+	// ssr:false,
+	// target: "server",
+
 	head: {
 		title: 'PlayPreso',
 		htmlAttrs: {
@@ -21,23 +26,19 @@ export default {
 		]
 	},
 
-	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [
 		{ src: '@/assets/utility.scss' },
 		{ src: '@/assets/preso.scss' },
 		{ src: '@/assets/font/fonts.css' },
 	],
 
-	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		{ src: '@/plugins/notifier.js' },
 		{ src: '@/plugins/user-mixin.js' },
-		{ src: '@/plugins/playpreso-mixin.js' },
+		{ src: '@/plugins/playpreso-mixin.js'},
         { src: '@/plugins/constants.js'},
-        { src: '@/plugins/date-format.js', ssr:false},
-		{ src: '@/plugins/logout.js' },
-        { src: '@/plugins/api.js', ssr: false },
-		{ src: '@/plugins/vuex-persist.js', ssr: false },
+        { src: '@/plugins/date-format.js',},
+		{ src: '@/plugins/api.js' },
 		{ src: '@/plugins/push-notifications.js', ssr: false}
 	],
 
@@ -45,24 +46,21 @@ export default {
 		base: '/',
 	},
 
-	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
 
 	modules: [
 		'@nuxtjs/sitemap',
 		'vue-social-sharing/nuxt',
+		'cookie-universal-nuxt'
     ],
 
 
-	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		transpile: [/emoji-mart/, 'vue-demi'] // Transpile emoji-mart to ensure compatibility
 	},
 	
 
-	// Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [
-        // https://go.nuxtjs.dev/vuetify
         '@nuxtjs/vuetify',
     ],
 
