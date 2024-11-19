@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "dev": "./build_scripts/set-dev-env.sh localhost && nuxt",
-    "dev:host": "./build_scripts/set-dev-env.sh nuxt --hostname ''0.0.0.0''",
+    "dev:host": "./build_scripts/set-dev-env.sh && nuxt",
     "build-ios-dev": "./build_scripts/build-ios.sh dev",
     "build-ios-prod": "./build_scripts/build-ios.sh prod",
     "build-android-dev": "./build_scripts/build-android.sh dev",
