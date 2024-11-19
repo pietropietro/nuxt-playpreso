@@ -5,11 +5,9 @@ export default {
 		DEBUG: process.env.DEBUG ?? false
 	},
 
+	//index / public pages are ssr, app is SPA
 	ssr:true,
 	target: "server",
-
-	// ssr:false,
-	// target: "server",
 
 	head: {
 		title: 'PlayPreso',
@@ -37,8 +35,10 @@ export default {
 		{ src: '@/plugins/user-mixin.js' },
 		{ src: '@/plugins/playpreso-mixin.js'},
         { src: '@/plugins/constants.js'},
-        { src: '@/plugins/date-format.js',},
-		{ src: '@/plugins/api.js' },
+        { src: '@/plugins/date-format.js', ssr:false},
+		{ src: '@/plugins/logout.js' },
+        { src: '@/plugins/api.js', ssr: false },
+		{ src: '@/plugins/vuex-persist.js', ssr: false },
 		{ src: '@/plugins/push-notifications.js', ssr: false}
 	],
 
@@ -51,7 +51,6 @@ export default {
 	modules: [
 		'@nuxtjs/sitemap',
 		'vue-social-sharing/nuxt',
-		'cookie-universal-nuxt'
     ],
 
 
