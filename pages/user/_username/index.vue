@@ -1,7 +1,7 @@
 <template>
     <div>
-        <loading-page v-show="loading" />
-        <div v-show="user">
+        <loading-page v-if="loading" />
+        <div v-if="user">
             <v-row class="mt-4 text-center" align="center">
                 <v-col cols="6">
                     <p-p-info

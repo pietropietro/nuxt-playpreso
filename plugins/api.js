@@ -86,7 +86,7 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
                         username: decoded.username,
                         admin:decoded.admin,
                         created_at: decoded.created_at,
-                        ppToken: decoded.ppToken, 
+                        ppToken: ppToken, 
                         points: decoded.points
                     });  
                 }
@@ -109,8 +109,6 @@ export default ({store, $notifier, $logout, $config: { API_ENDPOINT, VERSION, DE
             }catch (e) {              
                 console.error('error:', e);
                 $notifier.showError();
-            }finally{
-                return resp;
             }
         },
 

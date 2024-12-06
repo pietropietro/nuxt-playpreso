@@ -7,18 +7,18 @@
                 <p-p-app-bar  v-if="!currentGuess && !this.$store.getters['menu/currentMenuFlag']"
                     class="pp-app-bar safe-area"
                 />
-
-                <v-main>   
-                        <guard-version-update v-if="$store.state.apiResponses.versionUpdateNeeded" />
-                        <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
-                        <guard-offline v-else-if="!isOnline" />
-                        <guess-unlocked-full
-                            v-else-if="currentGuess"
-                        />
-                        <p-p-menu-brain
-                            v-else-if="this.$store.getters['menu/currentMenuFlag']"
-                        />
-                        <nuxt v-else />
+                <v-main>  
+                    <guard-logged-in v-if="!currentUser"/>
+                    <guard-version-update v-else-if="$store.state.apiResponses.versionUpdateNeeded" />
+                    <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
+                    <guard-offline v-else-if="!isOnline" />
+                    <guess-unlocked-full
+                        v-else-if="currentGuess"
+                    />
+                    <p-p-menu-brain
+                        v-else-if="this.$store.getters['menu/currentMenuFlag']"
+                    />
+                    <nuxt v-else />
                 </v-main>
             </v-app>
         </div>
@@ -35,19 +35,18 @@ export default {
             isOnline: true // Assume the app starts online
         }
     },
-    middleware: 'auth',
-    // async mounted(){
-    //     this.setSwipeBack();
-    //     await this.setNetworkCheck();
-    //     this.setStateChange();
-    // },
-    // watch: {
-    //     currentUser(newVal) {
-    //         if (newVal && Capacitor.isNativePlatform()) {
-    //             this.$pushNotificationsPlugin.setupPushNotificationListeners();
-    //         }
-    //     }
-    // },
+    async mounted(){
+        this.setSwipeBack();
+        await this.setNetworkCheck();
+        this.setStateChange();
+    },
+    watch: {
+        currentUser(newVal) {
+            if (newVal && Capacitor.isNativePlatform()) {
+                this.$pushNotificationsPlugin.setupPushNotificationListeners();
+            }
+        }
+    },
     methods: {
         async setNetworkCheck(){
                 // Check initial network status
@@ -79,7 +78,7 @@ export default {
             
         },
         handleSwipeRight() {
-            if (this.$route.path !== this.ROUTES.APP_HOME) { // Replace '/home' with your home route path
+            if (this.$route.path !== this.ROUTES.HOME) { // Replace '/home' with your home route path
                 this.$router.go(-1);
             }        
         },

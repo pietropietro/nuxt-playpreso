@@ -41,6 +41,7 @@
 </template>
 <script>
 export default {
+	layout: 'authProcess',
 	data(){
 		return{
 			username: null,

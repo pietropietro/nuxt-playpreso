@@ -5,9 +5,8 @@ export default {
 		DEBUG: process.env.DEBUG ?? false
 	},
 
-	//index / public pages are ssr, app is SPA
-	ssr:true,
-	target: "server",
+	ssr:false,
+	target: "static",
 
 	head: {
 		title: 'PlayPreso',
