@@ -191,7 +191,7 @@ export default {
         },
         afterLock(){
             if(this.currentGuess.ppTournamentType.name=='MOTD'){
-                this.$store.dispatch('refreshFlag/triggerMotd');
+                this.$store.commit('homepageApi/setLoadingKey', {key: 'motd', isLoading: true});
             }
             this.removeGuessFromCurrentList(this.currentGuess.id);
         },

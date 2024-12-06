@@ -46,7 +46,7 @@ export default {
             this.setExtraRow('userParticipation');
         },
         closeGuess(){
-            this.$store.dispatch('refreshFlag/triggerGuesses');
+            this.$store.commit('homepageApi/setLoadingKey', {key: 'guessScroll', isLoading: true});
             this.$store.dispatch('openGuesses/clear');
         },
         goToTournament(){

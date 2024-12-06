@@ -50,26 +50,14 @@ export default {
             openId: null
         }
     },
-    computed: {
-        refreshFlag() {
-            return this.$store.getters['refreshFlag/motd'];
-        }
-    },
-    watch: {
-        async refreshFlag() {
-            await this.getMotd();
-        }
-    },
     methods:{
         async getMotd(){
-            this.loading= true;
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
                 this.motd = response.message?.motd;
                 this.motdPPTT = response.message?.ppTournamentType;
                 this.motdChart = response.message?.motdChart;
             }
-            this.loading = false;
         },
         onSelect(){
             if(this.motd.guess.guessed_at || this.motd.match.verified_at) return;

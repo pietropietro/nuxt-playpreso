@@ -54,14 +54,6 @@
             availableStates(){
                 return Object.keys(this.guesses);
             },
-            refreshFlag() {
-                return this.$store.getters['refreshFlag/guesses'];
-            }
-        },
-        watch: {
-            async refreshFlag() {
-                await this.getGuesses();
-            }
         },
         methods:{
             async getGuesses(){
@@ -90,7 +82,7 @@
             },
             resetSlider() {
                 this.$nextTick(() => {
-                    const slideGroupEl = this.$refs.slider.$el.querySelector('.v-slide-group__content');
+                    const slideGroupEl = this.$refs.slider?.$el.querySelector('.v-slide-group__content');
                     if (slideGroupEl) {
                     // Reset the transform property to bring it back to the first item
                     slideGroupEl.style.transform = 'translateX(0px)';
