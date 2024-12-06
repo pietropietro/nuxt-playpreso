@@ -22,8 +22,8 @@
             </v-col>
             <v-col cols="auto">
                 <v-row no-gutters align="center">
-                    <template v-if="user.trophies_count > 9">
-                        <em-emoji id="star" class="ml-1 mt-1"/>
+                    <template v-for="n in Math.floor(user.trophies_count / 10)" >
+                        <em-emoji :key="n" id="star" class="ml-1 mt-1"/>
                     </template>
                     <template v-if="user.ppRanking?.position == 1">
                         <em-emoji id="crown" class="ml-1 mt-1"/>
