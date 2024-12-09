@@ -1,18 +1,18 @@
 <template>
-    <v-row justify="center" class="overline lh-1">
-        <table v-if="currentUser.emailPreferences">
+    <loading-page v-if="loading" />
+    <v-row v-else-if="emailPreferences" justify="center" class="overline lh-1">
+        <table>
             <tr v-for="item in emailPreferencesList" :key="item.key">
                 <td class="px-5 caption">{{item.description}}</td>
                 <td>
                     <v-switch inset 
-						v-model="item.model" 
+						v-model="emailPreferences[item.key]" 
 						@change="updateEmailReminder(item.key, $event)"
 						:loading="loading"
 					/>
                 </td>
             </tr>
         </table>
-        <div v-else>please log-out and in again to retrieve your preferences.</div>
     </v-row>
 </template>
 <script>
@@ -20,6 +20,7 @@ export default {
     data(){
         return {
             loading: false,
+            emailPreferences: null,
             emailPreferencesList:[
                 {
                     description: 'daily email in case you have unlocked matches',
@@ -38,23 +39,20 @@ export default {
             let response = await this.$api.call(
                 this.API_ROUTES.EMAIL_PREFERENCES.UPDATE, values, 'POST'
             );
-            if(!response || response.status !== "success"){
-                this.emailPreferencesList.map((e)=>{
-                    e.model = this.currentUser.emailPreferences[e.key];
-                });
-            }else{
-                let copy = JSON.parse(JSON.stringify(this.currentUser));
-                copy.emailPreferences[key] = val;
-                this.$store.commit('user/updateCurrentUser', {currentUser: copy});
-            }
             this.loading = false;
 
         },
+        async getEmailPreferences(){
+            this.loading = true;
+            let response = await this.$api.call(this.API_ROUTES.EMAIL_PREFERENCES.GET);
+            if(response && response.status == "success"){
+                this.emailPreferences = {...response.message};
+            }
+            this.loading = false;
+        }
 	},
-    created(){
-        this.emailPreferencesList.map((e)=>{
-            e.model = this.currentUser.emailPreferences[e.key];
-        });
+    async mounted(){
+        await this.getEmailPreferences();
     }
 }
 </script>

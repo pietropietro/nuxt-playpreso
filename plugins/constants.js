@@ -6,6 +6,7 @@ export const API_ROUTES = {
         READ: '/user-notification/read'
     },
     EMAIL_PREFERENCES:{
+        GET: '/email-preferences',
         UPDATE: '/email-preferences'
     },
     PUSH_PREFERENCES:{
