@@ -86,7 +86,6 @@ export default {
             App.addListener('appStateChange', (state) => {
                 if (state.isActive) {
                     // The app has come to the foreground, so refresh the homepage.
-                    console.log("set all loadingkeys");
                     this.$store.commit('homepageApi/setAllLoadingKeys', true);
                 }
             });
