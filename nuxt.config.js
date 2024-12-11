@@ -34,11 +34,11 @@ export default {
 		{ src: '@/plugins/user-mixin.js' },
 		{ src: '@/plugins/playpreso-mixin.js'},
         { src: '@/plugins/constants.js'},
-        { src: '@/plugins/date-format.js', ssr:false},
+        { src: '@/plugins/date-format.js'},
 		{ src: '@/plugins/logout.js' },
-        { src: '@/plugins/api.js', ssr: false },
-		{ src: '@/plugins/vuex-persist.js', ssr: false },
-		{ src: '@/plugins/push-notifications.js', ssr: false}
+        { src: '@/plugins/api.js'},
+		{ src: '@/plugins/vuex-persist.js'},
+		{ src: '@/plugins/push-notifications.js'}
 	],
 
 	router: {
