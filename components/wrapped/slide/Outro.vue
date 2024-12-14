@@ -5,7 +5,7 @@
 		</v-row>
 		<v-container fluid fill-height  style="overflow:hidden; white-space: nowrap;">
 			<v-row justify="center" class="ocrastd font-weight-bold" style="font-size:30px">
-				SEE YOU <br> IN <br> 2024
+				SEE YOU <br> IN <br> 2025
 			</v-row>
 		</v-container>
 	</div>

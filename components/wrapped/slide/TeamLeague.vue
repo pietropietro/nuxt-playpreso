@@ -6,7 +6,7 @@
         }"  
         class="py-0"
     >
-        <v-row align="center" justify="center" class="mt-10 mx-2">
+        <v-row align="center" justify="center" class="mt-10 pb-5 mx-2">
             <v-col cols="5">
                 <p-p-info
                     small
@@ -26,13 +26,14 @@
             </v-col>
         </v-row>
         <template v-if="guesses">
-            <v-row v-for="guess in guesses" :key="guess.id" justify="center">
+            <v-row v-for="guess in guesses" :key="guess.id" justify="center" no-gutters class="my-1">
                 <v-col cols="auto">
-                    <guess-single-card
+                    <guess-box-view
                         :guess="guess"
                         :match="guess.match"
                         :rgb="guess.ppTournamentType.rgb"
-                        :extended="true"
+                        :open="true"
+                        :setOpen="()=>null"
                     />
                 </v-col>
             </v-row>

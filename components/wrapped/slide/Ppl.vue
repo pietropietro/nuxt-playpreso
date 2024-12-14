@@ -1,6 +1,6 @@
 <template>
     <v-container fluid fill-height
-        :style="{ background: ppRGBA(storyData.ppl_most_kind_ups[0]?.ppTournamentType.rgb, 0.8),
+        :style="{
                 overflow: 'hidden',
                 whiteSpace: 'nowrap'
           }"  
@@ -25,7 +25,8 @@
                 v-for="up in storyData.ppl_most_kind_ups" :key="up.id"
             >
                 <div class="overline mb-1">
-                    {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(up.updated_at))}}
+                    {{Intl.DateTimeFormat('en-GB', {month:'short', year: '2-digit'}).format(new Date(up.joined_at))}}
+                    - {{Intl.DateTimeFormat('en-GB', {month:'short', year: '2-digit'}).format(new Date(up.updated_at))}}
                 </div>
                 <user-participation-body
                     

@@ -10,10 +10,8 @@
             />
         </v-col> -->
         <v-col class="py-1">
-            <v-chip label x-small class="" :color="ppRGBA(participation.ppTournamentType.rgb)">
-                <div class="overline" style="line-height:1rem;">
-                    {{participation.ppLeague_id ? '' : participation.levelFormat.name}}
-                </div>
+            <v-chip label  class="" :color="ppRGBA(participation.ppTournamentType.rgb)">
+                <h1>{{ participation.ppTournamentType.emoji }}</h1>
             </v-chip>
             <h2>
                 {{ppTournamentTypeTitle(participation.ppTournamentType)}}

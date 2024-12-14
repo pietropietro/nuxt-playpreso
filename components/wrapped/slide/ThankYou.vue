@@ -1,7 +1,7 @@
 
 <template>
-    <v-container fluid fill-height style="background: #004d1a; position:relative; overflow:hidden; white-space: nowrap;" class="py-0">
-        <v-row style="background:#004d1a;  overflow:hidden; white-space: nowrap;" >
+    <v-container fluid fill-height style=" position:relative; overflow:hidden; white-space: nowrap;" class="py-0">
+        <v-row style="  overflow:hidden; white-space: nowrap;" >
             <v-row justify="end" no-gutters>
                 <wrapped-pine-tree v-for="n in 5" :key="n" class="pine-tree pt-4"/>
             </v-row>

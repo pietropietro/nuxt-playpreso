@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height style="background: #ffaa00; " >
+  <v-container fluid fill-height>
    
     <v-row no-gutters class="mt-8">
         <v-col cols="12">

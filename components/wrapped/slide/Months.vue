@@ -1,9 +1,9 @@
 <template>
-    <v-container fluid fill-height style="background:   #330066;  overflow:hidden; white-space: nowrap;"  class="py-0">
-        <v-row style="height:20vh; background:   #8000ff;">
+    <v-container fluid fill-height style="  overflow:hidden; white-space: nowrap;"  class="py-0">
+        <v-row style="height:20vh;">
             <wrapped-car :speed="3" :start-delay="0"/>
         </v-row>
-        <v-row align="center">
+            <v-row align="center" style="background:#330066">
             <v-col cols="3" class="pb-5" >
                 <div class="caption">BEST MONTH</div>
             </v-col>
@@ -25,11 +25,11 @@
             </v-col>
         </v-row>
 
-        <v-row style="height:15vh; background:   #8000ff;">
+        <v-row style="height:15vh;">
             <wrapped-car :speed="2" :start-delay="0"/>
         </v-row>
 
-         <v-row align="center">
+         <v-row align="center" style="background:#330066">
             <v-col cols="3" class="pb-5" >
                 <div class="caption">WORST MONTH</div>
             </v-col>
@@ -50,7 +50,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row style="height:20vh; background:   #8000ff;">
+        <v-row style="height:20vh;">
             <wrapped-car :speed="4" :start-delay="0"/>
         </v-row>
     </v-container>

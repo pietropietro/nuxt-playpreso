@@ -5,7 +5,7 @@
 		</v-row>
 		<v-container fluid fill-height  style="overflow:hidden; white-space: nowrap;">
 			<v-row justify="center" class="ocrastd font-weight-bold" style="font-size:30px">
-				PLAYPRESO <br> WRAPPED <br> 2023
+				PLAYPRESO <br> WRAPPED <br> 2024
 			</v-row>
 		</v-container>
 	</div>

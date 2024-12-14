@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid fill-height class="py-0" style="background: #800080;  position: relative; overflow:hidden; white-space: nowrap;" >
+    <v-container fluid fill-height class="py-0" style="position: relative; overflow:hidden; white-space: nowrap;" >
         <v-row  style="background:  #330033; height: 30px; position: relative; overflow:hidden; white-space: nowrap;">
             <div class="snake snake-slow"></div>
         </v-row>

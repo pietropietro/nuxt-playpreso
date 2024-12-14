@@ -31,7 +31,6 @@
             <wrapped-slide-team-league 
                 label="best team"
                 :name="wrappedData.high_team_name"
-                color="#ff471a"
                 :points="wrappedData.high_team_avg_points"
                 :locks="wrappedData.high_team_tot_locks"
                 :guesses="highTeamGuesses"
@@ -44,7 +43,6 @@
             <wrapped-slide-team-league 
                 label="worst team"
                 :name="wrappedData.low_team_name"
-                color="#00994d"
                 :points="wrappedData.low_team_avg_points"
                 :locks="wrappedData.low_team_tot_locks"
                 :guesses="lowTeamGuesses"
@@ -57,7 +55,6 @@
             <wrapped-slide-team-league 
                 label="best league"
                 :name="wrappedData.high_league_name"
-                color="#002db3"
                 :points="wrappedData.high_league_avg_points"
                 :locks="wrappedData.high_league_tot_locks"
                 :guesses="highLeagueGuesses"
@@ -71,7 +68,6 @@
             <wrapped-slide-team-league 
                 label="worst league"
                 :name="wrappedData.low_league_name"
-                color="#ff00bf"
                 :points="wrappedData.low_league_avg_points"
                 :locks="wrappedData.low_league_tot_locks"
                 :guesses="lowLeagueGuesses"
@@ -105,8 +101,6 @@
 
 import { Stories } from "vue-insta-stories";
 
-// import StoryHeader from "./components/StoryHeader.vue";
-
 export default {
     layout: "privateSplash",
     components: { Stories  },
@@ -138,6 +132,8 @@ export default {
             this.$router.push("/");
         },
         async getWrappedData(){
+            console.log('shiit', this.currentUser);
+            
             let response = await this.$api.call(this.API_ROUTES.STATS.WRAPPED);
             if(response && response.status === "success"){
                 this.wrappedData = response.message;
@@ -157,19 +153,19 @@ export default {
         await this.getWrappedData();
         this.highTeamGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.high_team_id
-                + '?to=2023-12-31&from=2023-01-01'
+                + '?to=2024-12-31&from=2024-01-01'
         );
         this.lowTeamGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_TEAM + this.wrappedData.low_team_id
-                + '?to=2023-12-31&from=2023-01-01'
+                + '?to=2024-12-31&from=2024-01-01'
         );
         this.highLeagueGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.high_league_id
-                + '?to=2023-12-31&from=2023-01-01'
+                + '?to=2024-12-31&from=2024-01-01'
         );
         this.lowLeagueGuesses = await this.getGuesses(
             this.API_ROUTES.GUESS.GET_FOR_LEAGUE + this.wrappedData.low_league_id
-                + '?to=2023-12-31&from=2023-01-01'
+                + '?to=2024-12-31&from=2024-01-01'
         );
     }
 }
@@ -179,6 +175,7 @@ export default {
 <style lang="scss">
 
 .custom-story-container {
+  overflow: hidden;
   position: absolute;
   top: 0;
   height: 100%; /* Equivalent to h-fill */

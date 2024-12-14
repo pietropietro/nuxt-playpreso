@@ -4,7 +4,7 @@
             cols="auto"
             class="d-flex justify-center align-center rounded-sm py-0"
         >
-            <em-emoji native="🅿️" size="1.2em" />
+            <em-emoji native="👼" size="1.2em" />
         </v-col>
         <v-col class="font-weight-bold white--text custom-font-class ml-n1 px-0 py-0">
             {{ label }}
@@ -27,7 +27,7 @@ export default {
     props: {
         label: {
             type: String,
-            default: "wrapped23",
+            default: "2024",
         },
         exit: {type: Function}
     },

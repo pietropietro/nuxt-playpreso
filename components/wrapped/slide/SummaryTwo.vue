@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid fill-height style="background:  #4da6ff;  position: relative; overflow:hidden; white-space: nowrap;" >
+    <v-container fluid fill-height style="position: relative; overflow:hidden; white-space: nowrap;" >
         <v-row style="background:  #003366; height: 30px; position: relative; overflow:hidden; white-space: nowrap;">
             <wrapped-rat class="rat-slow"/>
         </v-row>
