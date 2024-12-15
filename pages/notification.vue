@@ -37,6 +37,16 @@
                         />
                     </v-col>
                </template>
+               <template v-else-if="notification.event_type == 'year_wrapped'">
+                    <v-col style="height:100px; overflow: hidden; position: relative;">
+                        <wrapped-snowflake v-for="n in 200" :key="n" :style="getSnowflakeStyle(n)" :size="Math.random() * 15 + 10"/>
+                        <nuxt-link to="/wrapped" class="no-decoration">
+                            <v-row align="center" justify="center" style="height:100px">
+                                <h2 class="ocrastd">2024 <br/>WRAPPED</h2>
+                            </v-row>
+                        </nuxt-link>
+                    </v-col>
+               </template>
                <template v-else>
                     {{ notification }}
                </template>
@@ -49,6 +59,8 @@
 </template>
 <script>
 import { Badge } from '@capawesome/capacitor-badge';
+
+import { useSnowflakeStyle } from '~/composables/useSnowFlakes';
 
 export default {
     layout: "private",
@@ -88,7 +100,11 @@ export default {
                 newGuess: guess,
                 newList:  list
             });
-        }
+        },
+        getSnowflakeStyle(index) {
+            const { getSnowflakeStyle } = useSnowflakeStyle(); // Use the composable
+            return getSnowflakeStyle(index);
+        },
     },
     async mounted(){
         this.$store.dispatch(

@@ -23,6 +23,15 @@ body {
 	user-select: none;
 }
 
+@keyframes snow-fall {
+	0% {
+	  transform: translateY(-100%);
+	}
+	100% {
+	  transform: translateY(100%);
+	}
+  }
+  
 
 .ocrastd{
 	margin-top: 6px;
