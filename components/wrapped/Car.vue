@@ -1,17 +1,29 @@
 <template>
     <div class="police-car-container">
         <div class="police-car"  :style="carAnimationStyle">
-        <div class="lightbar">
-            <div class="light police-red"></div>
-            <div class="light police-blue"></div>
-        </div>
-        <div class="car-body">
-            <div class="car-top"></div>
-        </div>
-        <div class="police-wheels">
-            <div class="police-wheel"></div>
-            <div class="police-wheel"></div>
-        </div>
+          <img :src="require('@/assets/png/pepe-police.png')" class="car-accessory" 
+
+            style="
+                  height: 80px;
+                  width: 80px;
+                  left: 20px;
+                  top: -30px;
+                  position: absolute;
+                  z-index: 100;
+            "
+          />
+
+          <div class="lightbar">
+              <div class="light police-red"></div>
+              <div class="light police-blue"></div>
+          </div>
+          <div class="car-body">
+              <div class="car-top"></div>
+          </div>
+          <div class="police-wheels">
+              <div class="police-wheel"></div>
+              <div class="police-wheel"></div>
+          </div>
         </div>
     </div>
 </template>

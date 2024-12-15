@@ -37,6 +37,7 @@
             >
                 <team-logo :name="wrappedData.high_team_name"
                     :id="wrappedData.high_team_id" size="40" slot="icon"/>
+                        
             </wrapped-slide-team-league>
         </template>
         <template #lowTeam>
@@ -49,6 +50,7 @@
             >
                 <team-logo :name="wrappedData.low_team_name"
                     :id="wrappedData.low_team_id" size="40" slot="icon"/>
+
             </wrapped-slide-team-league>
         </template>
         <template #highLeague>
@@ -133,7 +135,6 @@ export default {
             this.$router.push("/");
         },
         async getWrappedData(){
-            console.log('shiit', this.currentUser);
             
             let response = await this.$api.call(this.API_ROUTES.STATS.WRAPPED);
             if(response && response.status === "success"){

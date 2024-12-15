@@ -1,7 +1,7 @@
 <template>
     <v-container fluid fill-height style="  overflow:hidden; white-space: nowrap;"  class="py-0">
         <v-row style="height:20vh;">
-            <wrapped-car :speed="3" :start-delay="0"/>
+            <wrapped-car :speed="8" :start-delay="0"/>
         </v-row>
             <v-row align="center" style="background:#330066">
             <v-col cols="3" class="pb-5" >
@@ -26,7 +26,7 @@
         </v-row>
 
         <v-row style="height:15vh;">
-            <wrapped-car :speed="2" :start-delay="0"/>
+            <wrapped-car :speed="14" :start-delay="0"/>
         </v-row>
 
          <v-row align="center" style="background:#330066">
@@ -51,7 +51,7 @@
             </v-col>
         </v-row>
         <v-row style="height:20vh;">
-            <wrapped-car :speed="4" :start-delay="0"/>
+            <wrapped-car :speed="10" :start-delay="0"/>
         </v-row>
     </v-container>
 </template>

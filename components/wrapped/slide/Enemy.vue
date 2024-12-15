@@ -20,7 +20,9 @@
                 <v-col><span><b>{{ppTournamentTypeTitle(up.ppTournamentType)}}</b></span></v-col>
                 <v-col cols="auto">
                     <span class="text-right">
-                        {{Intl.DateTimeFormat('en-GB', {month:'short'}).format(new Date(up.updated_at))}}
+                        {{Intl.DateTimeFormat('en-GB', {month:'short', year:'2-digit'}).format(new Date(up.joined_at))}}
+                        -
+                        {{Intl.DateTimeFormat('en-GB', {month:'short', year:'2-digit'}).format(new Date(up.updated_at))}}
                     </span>
                 </v-col>
             </v-row>
