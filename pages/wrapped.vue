@@ -18,13 +18,13 @@
             <wrapped-slide-intro  />
         </template>
         <template #thanks>
-            <wrapped-slide-thank-you :storyData="wrappedData"/>
+            <wrapped-slide-thank-you :storyData="wrappedData" :lastYearData="lastYearWrappedData"/>
         </template>
         <template #summary>
-            <wrapped-slide-summary :storyData="wrappedData"/>
+            <wrapped-slide-summary :storyData="wrappedData" :lastYearData="lastYearWrappedData"/>
         </template>
         <template #summaryTwo>
-            <wrapped-slide-summary-two :storyData="wrappedData"/>
+            <wrapped-slide-summary-two :storyData="wrappedData" :lastYearData="lastYearWrappedData"/>
         </template>
 
         <template #highTeam>
@@ -107,6 +107,7 @@ export default {
     data: () => ({
         loading:true,
         wrappedData: [],
+        lastYearWrappedData: [],
         stories: [ 
             {template: "intro"},
             {template: "thanks"},
@@ -136,7 +137,8 @@ export default {
             
             let response = await this.$api.call(this.API_ROUTES.STATS.WRAPPED);
             if(response && response.status === "success"){
-                this.wrappedData = response.message;
+                this.wrappedData = response.message.current;
+                this.lastYearWrappedData = response.message.last;
             }
             this.loading = false;
         },

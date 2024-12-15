@@ -62,7 +62,6 @@ export default {
     },
     methods:{
         getMonthName(monthNum) {
-            console.log(monthNum);
             const date = new Date(2020, monthNum - 1); // Year is arbitrary
             return date.toLocaleString('en-US', { month: 'long' });
         }
