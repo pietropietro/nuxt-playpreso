@@ -1,12 +1,12 @@
 PODS:
-  - Capacitor (6.1.2):
+  - Capacitor (6.2.0):
     - CapacitorCordova
-  - CapacitorApp (6.0.1):
+  - CapacitorApp (6.0.2):
     - Capacitor
-  - CapacitorCordova (6.1.2)
-  - CapacitorNetwork (6.0.2):
+  - CapacitorCordova (6.2.0)
+  - CapacitorNetwork (6.0.3):
     - Capacitor
-  - CapacitorPushNotifications (6.0.2):
+  - CapacitorPushNotifications (6.0.4):
     - Capacitor
   - CapawesomeCapacitorBadge (6.0.0):
     - Capacitor
@@ -22,8 +22,8 @@ DEPENDENCIES:
   - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
   - "CapawesomeCapacitorBadge (from `../../node_modules/@capawesome/capacitor-badge`)"
-  - PpCapacitorHaptics (from `../../node_modules/pp-capacitor-haptics`)
-  - PpCapacitorNuxtSwipe (from `../../node_modules/pp-capacitor-nuxt-swipe`)
+  - PpCapacitorHaptics (from `../../capacitor-plugins/pp-capacitor-haptics`)
+  - PpCapacitorNuxtSwipe (from `../../capacitor-plugins/pp-capacitor-nuxt-swipe`)
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -39,20 +39,20 @@ EXTERNAL SOURCES:
   CapawesomeCapacitorBadge:
     :path: "../../node_modules/@capawesome/capacitor-badge"
   PpCapacitorHaptics:
-    :path: "../../node_modules/pp-capacitor-haptics"
+    :path: "../../capacitor-plugins/pp-capacitor-haptics"
   PpCapacitorNuxtSwipe:
-    :path: "../../node_modules/pp-capacitor-nuxt-swipe"
+    :path: "../../capacitor-plugins/pp-capacitor-nuxt-swipe"
 
 SPEC CHECKSUMS:
-  Capacitor: 679f9673fdf30597493a6362a5d5bf233d46abc2
-  CapacitorApp: 0bc633b4eae40a1f32cd2834788fad3bc42da6a1
-  CapacitorCordova: f48c89f96c319101cd2f0ce8a2b7449b5fb8b3dd
-  CapacitorNetwork: 8796cf1f1104a00b289957b6150b7c60e1c2a8d3
-  CapacitorPushNotifications: ccd797926c030acad3d5498ef452c735c90a2c89
+  Capacitor: 1f3c7b9802d958cd8c4eb63895fff85dff2e1eea
+  CapacitorApp: 2a8c3a0b0814322e5e6e15fe595f02c3808f0f8b
+  CapacitorCordova: b33e7f4aa4ed105dd43283acdd940964374a87d9
+  CapacitorNetwork: da96b5fff8d05b67f4658503aabb22f65bda2c0f
+  CapacitorPushNotifications: 1fc22ae360214a0ac0625c348d3aea217085163d
   CapawesomeCapacitorBadge: 3d0f281ad8e4a4f8db8c3d88b7622a7f4c413342
   PpCapacitorHaptics: e7d5f2f3ad5bc3534ad74edd3e2fa62561e062ab
   PpCapacitorNuxtSwipe: a88aabc2333c129d2a101df7cf474a044d18a66e
 
-PODFILE CHECKSUM: 5447f8fd5d6451d7f133fa81c98beff9f31902b4
+PODFILE CHECKSUM: 8d969687682c38c2940288fdc2f5e58043cbe1f5
 
 COCOAPODS: 1.15.2
