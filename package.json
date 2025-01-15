@@ -5,6 +5,7 @@
   "scripts": {
     "generate": "nuxt generate",
     "build": "nuxt build",
+    "build:plugins": "yarn workspace pp-capacitor-nuxt-swipe build && yarn workspace pp-capacitor-haptics build",
     "start": "nuxt start",
     "dev": "./build_scripts/set-dev-env.sh localhost && nuxt",
     "dev:host": "./build_scripts/set-dev-env.sh && nuxt",
@@ -14,10 +15,13 @@
     "build-android-prod": "./build_scripts/build-android.sh prod",
     "build-android-aab": "./build_scripts/build-android-aab.sh"
   },
-  "dependencies": {
-    "@capacitor/app": "^6.0.3",
-    "@capacitor/network": "^6.0.3",
-    "@capacitor/push-notifications": "^6.0.3",
+  "workspaces": [
+    "capacitor-plugins/*"
+  ],
+    "dependencies": {
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/network": "^6.0.1",
+    "@capacitor/push-notifications": "^6.0.2",
     "@capawesome/capacitor-badge": "^6.0.0",
     "@emoji-mart/data": "^1.2.1",
     "@nuxtjs/sitemap": "^2.4.0",
@@ -28,17 +32,17 @@
     "epic-spinners": "^1.1.0",
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.17.4",
-    "pp-capacitor-haptics": "file:./capacitor-plugins/pp-capacitor-haptics",
-    "pp-capacitor-nuxt-swipe": "file:./capacitor-plugins/pp-capacitor-nuxt-swipe",
+    "pp-capacitor-haptics": "0.0.3",
+    "pp-capacitor-nuxt-swipe": "0.0.2",
     "vue-insta-stories": "0.9.8",
     "vue-social-sharing": "^3.0.9",
     "vuetify": "^2.4.0",
     "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/cli": "^6.2.0",
-    "@capacitor/core": "^6.2.0",
-    "@capacitor/ios": "^6.2.0"
+    "@capacitor/android": "^6.0.2",
+    "@capacitor/cli": "^6.0.2",
+    "@capacitor/core": "^6.0.2",
+    "@capacitor/ios": "^6.0.2"
   }
 }
