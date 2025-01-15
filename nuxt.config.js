@@ -1,7 +1,9 @@
+import { version } from './package.json';
+
 export default {
 	publicRuntimeConfig: {
 		API_ENDPOINT: process.env.API_ENDPOINT,
-		VERSION: '1.35.31',
+		VERSION: version,
 		DEBUG: process.env.DEBUG ?? false
 	},
 
