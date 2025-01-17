@@ -50,6 +50,13 @@
                         <div >{{ termsContent }}</div>
                     </div>
                     <p-p-menu-delete-account v-if="selectedMenu==='account_deletion'" :cancel="()=>selectedMenu=null"/>
+                    <div v-if="selectedMenu==='whatsapp'" :cancel="()=>selectedMenu=null">
+                        <a href="https://chat.whatsapp.com/IW3eSFNNa7UItIJA4iEaS0" target="blank" class="">
+                                <div class="overline lh-1">
+                                    go to group
+                                </div>
+                            </a>
+                    </div>
                 </div>
 
         <v-spacer/>
@@ -90,6 +97,7 @@ export default {
                 {title: '3+', key:'3+'},
                 {title: 'POINTS 🅿️', key:'points'},
                 {title: 'CONTACT', key:'contact'},
+                {title: 'WHATSAPP 💬', key:'whatsapp'},
                 {title: 'TERMS', key:'terms'},
                 {title: 'DELETE ACCOUNT', key:'account_deletion'},
             ],

@@ -10,19 +10,11 @@
         />
         
         <div v-show="!this.$store.getters['homepageApi/isLoading']">
-            <v-row  justify="center" class="pt-5">
-                <a href="https://chat.whatsapp.com/IW3eSFNNa7UItIJA4iEaS0" target="blank" class="no-decoration">
-                    <div class="overline lh-1">whatsapp
-                        <v-chip small color="green">
-                            <em-emoji id="speech_balloon"/>
-                        </v-chip>
-                        group
-                    </div>
-                </a>
-            </v-row>
-
-            <guess-scroll-home class="pt-10 mb-16" title="unlocked"/>  
+        
+            <guess-scroll-home class="pt-6 mb-4" title="unlocked"/>  
              
+            <p-p-section-card :title="currentUser.points" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" />
+
             <p-p-league-available-list class="my-10 mx-4"/>
             
             <motd-home class="my-10 mx-4"/>
