@@ -13,7 +13,7 @@
         
             <guess-scroll-home class="pt-6 mb-4" title="unlocked"/>  
              
-            <p-p-section-card :title="currentUser.points" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" />
+            <p-p-section-card :title="currentUser.points.toString()" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" />
 
             <p-p-league-available-list class="my-10 mx-4"/>
             

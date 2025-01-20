@@ -32,6 +32,9 @@
 			<v-row class="ocrastd">
 				<h4>please check your inbox (and spam) for the reset link.</h4>
 			</v-row>
+			<v-row class="ocrastd">
+				<nuxt-link to="/login"><-</nuxt-link>
+			</v-row>
 		</template>
 	</guest-screen>
 	<go-home v-else/>

@@ -61,15 +61,17 @@ export default {
 
         },
         async validateToken(){
-            let response = await this.$api.call(this.API_ROUTES.USER.VALIDATE_TOKEN + this.token, null, 'POST');
-            if(response && response.message?.username ){
-                this.user = response.message;
+            try{
+                let response = await this.$api.call(this.API_ROUTES.USER.VALIDATE_TOKEN + this.token, null, 'POST');
+                if(response && response.message?.username ){
+                    this.user = response.message;
+                }
+                this.loading = false;
             }
-            else{
+            catch{
                 this.$notifier.showError('Invalid token');
                 this.$router.push(this.ROUTES.RECOVER);
             }
-            this.loading = false;
         }
     },
     async mounted(){
