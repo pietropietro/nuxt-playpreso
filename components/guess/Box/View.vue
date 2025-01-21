@@ -48,7 +48,7 @@
             <v-col v-else>
                 <guess-closed-alarm
                     v-if="isWithinNext24Hours(match?.date_start)
-                        && guess.ppTournamentType?.name != 'MOTD'"
+                        && !['MOTD', 'Flash'].includes(guess.ppTournamentType?.name)"
                     :rgb="rgb"
                     :size="parseFloat(size)/2"
                 />

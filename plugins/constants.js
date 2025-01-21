@@ -74,7 +74,11 @@ export const API_ROUTES = {
     HIGHLIGHTS: {
         GET: '/highlights',
         PRESO: '/highlights/preso'
-    }
+    },
+    FLASH: {
+        GET: '/flash',
+        LOCK: '/flash/lock'
+    },
 };
 
 Vue.mixin({
