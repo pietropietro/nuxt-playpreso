@@ -20,7 +20,7 @@
                 <template v-if="i==2" >
                     <v-row align="center" no-gutters style="height:100%">
                         <v-col class="pa-0"
-                            :cols="guess.verified_at ? '9' : '12'"
+                            :cols="isValidDatetime(guess.verified_at) ? '9' : '12'"
                             :style="{background: shades[1], height: '100%'}"
                         >
                             <v-row no-gutters style="height:50%" align="center" justify="center" class="text-center">
@@ -51,7 +51,7 @@
                                 :league="match.league"
                             />
                         </v-col>
-                        <v-col cols="3" v-if="guess.verified_at"
+                        <v-col cols="3" v-if="isValidDatetime(guess.verified_at)"
                             :style="{background: shades[0], height: '100%'}"
                         >
                             <guess-match-result :guess="guess" :match="match" />
@@ -72,5 +72,12 @@ export default {
         shades: {type: Array},
         size: {type: Number, default: 49},
     },
+    methods: {
+        isValidDatetime(dateString) {
+            // Check if it's a non-empty string and can be parsed into a valid date
+            //for motd and flash that user do not lock, verified_at holds 'toolate' or 'toopoor'
+            return dateString && !isNaN(Date.parse(dateString));
+        }
+    }
 }
 </script>
