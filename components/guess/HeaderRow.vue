@@ -32,19 +32,10 @@
 <script>
 export default {
     props:{
-        extraRow: {type: String},
-        setExtraRow: {type: Function},
         userParticipation: {type: Object},
         onArrowClick: {type: Function}
     },
     methods:{
-        setExtraUp(){
-            if(this.extraRow=='userParticipation'){
-                this.setExtraRow(null);
-                return;
-            }
-            this.setExtraRow('userParticipation');
-        },
         closeGuess(){
             this.$store.commit('homepageApi/setLoadingKey', {key: 'guessScroll', isLoading: true});
             this.$store.dispatch('openGuesses/clear');

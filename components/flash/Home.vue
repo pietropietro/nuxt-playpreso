@@ -1,7 +1,7 @@
 <template>
     <p-p-section-card title="FLASH" emojiId="zap" subtitle="instant game" v-if="next" >
         <template slot="content">
-            <v-row no-gutters class="mb-4">
+            <v-row no-gutters class="mb-6">
                 <v-col>
                     <v-slide-group
                         prev-icon="<"

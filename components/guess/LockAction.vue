@@ -29,7 +29,9 @@
 export default {
 	props:{
 		score: {type: Array},
-		guess_id: {type: Number},
+		//guess_id can be int most times when guess exists, or string for motd and flash
+		guess_id:{},
+		ppRoundMatch_id:{type:Number},
 		afterLock: {type: Function},
 		disabled: {type: Boolean},
 		setDisabled: {type: Function}
@@ -87,10 +89,15 @@ export default {
 
 			let values = {
 				"home": home,
-				"away": away
+				"away": away,
+				"ppRoundMatchId" : this.ppRoundMatch_id
 			}
 
-			let route = (this.guess_id && this.guess_id != 'dummy') ? this.API_ROUTES.GUESS.LOCK + this.guess_id : this.API_ROUTES.MOTD.LOCK;
+			let route = null;
+			if(this.guess_id == 'motd')route = this.API_ROUTES.MOTD.LOCK;
+			else if(this.guess_id == 'flash')route = this.API_ROUTES.FLASH.LOCK;
+			else route = this.API_ROUTES.GUESS.LOCK + this.guess_id ;
+
 			let response = await this.$api.call(
 				route, values, 'POST'
 			);

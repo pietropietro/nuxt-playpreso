@@ -1,30 +1,52 @@
 <template>
-    <v-row no-gutters justify="center" align="center" class="mx-2">
-        <v-col>
-            <guess-box-view
-                :match="next.match"
-                :guess="next.guess"
-                :rgb="next.guess.ppTournamentType.rgb"
-                :onUnlockedClick="onSelect"
-                :open="openId && openId == next.guess.id"
-                :setOpen="(val)=>openId=val"
-            />
-        </v-col>
-        <v-col>
-            <v-row>
-                <v-col>
-                    <p-p-info label="cost" :value="next.lock_cost" small/>
-                </v-col>
-                <v-col>
-                    <p-p-info label="prize" :value="next.lock_cost * next.guesses.length" small/>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                    <!-- countdown -->
-                    <h3 class="ocrastd">{{ formatTime(timeLeft) }}</h3>
-            </v-row>
-        </v-col>
-    </v-row>
+    <div>
+        <v-row no-gutters justify="center" align="center" class="mx-2">
+            <v-col>
+                <guess-box-view
+                    :match="next.match"
+                    :guess="next.guess"
+                    :rgb="next.guess.ppTournamentType.rgb"
+                    :onUnlockedClick="onSelect"
+                    :open="openId && openId == next.guess.id"
+                    :setOpen="(val)=>openId=val"
+                />
+            </v-col>
+            <v-col v-if=!openId>
+                <v-row>
+                    <v-col>
+                        <p-p-info label="cost" :value="next.lock_cost" small/>
+                    </v-col>
+                    <v-col>
+                        <p-p-info label="prize" :value="next.lock_cost * next.guesses.length" small/>
+                    </v-col>
+                </v-row>
+                <v-row justify="center">
+                        <!-- countdown -->
+                        <h3 class="ocrastd">{{ formatTime(timeLeft) }}</h3>
+                </v-row>
+            </v-col>
+        </v-row>
+        <v-row class="pt-2" justify="center" no-gutters>
+            <v-slide-group
+                    class="px-2"
+                    :show-arrows="!$vuetify.breakpoint.xs"
+                    prev-icon="<"
+                    next-icon=">"
+                    :style="{ height: '80px'}"
+                >
+            <v-slide-item v-for="(guess,index) in next.guesses" :key="index">
+                <div class="h-100 mx-4">
+                    <guess-info
+                        :color="ppRGBA(next.guess.ppTournamentType.rgb)"
+                        :guess="guess"
+                        :flipped="flipped"
+                        :flip="()=>flipped=!flipped"
+                    />
+                </div>
+            </v-slide-item>
+        </v-slide-group>
+        </v-row>
+    </div>
 </template>
 <script>
 export default{
@@ -36,6 +58,7 @@ export default{
             openId: null,
             intervalId: null,      // holds setInterval reference
             timeLeft: 0,           // in seconds, for example
+            flipped: false
         }
     },
     methods:{

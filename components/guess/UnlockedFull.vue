@@ -90,6 +90,7 @@
                             <guess-lock-action 
                                 :score="score"
                                 :guess_id="currentGuess.id"
+                                :ppRoundMatch_id="currentGuess.ppRoundMatch_id"
                                 :afterLock="afterLock"
                                 :disabled="viewDisabled"
                                 :setDisabled="(val)=>viewDisabled = val"
@@ -176,7 +177,7 @@ export default {
             this.loadingExtraData = true;
 			try {
 				const response = await this.$api.call(
-                    this.API_ROUTES.GUESS.GET_EXTRA_DATA + (this.currentGuess.id ?? 'motd')
+                    this.API_ROUTES.MATCH.GET_EXTRA_DATA + (this.currentGuess.match.id)
                 );
 				if (response && response.status === 'success') {
 					let extraData = response.message;
@@ -192,6 +193,9 @@ export default {
         afterLock(){
             if(this.currentGuess.ppTournamentType.name=='MOTD'){
                 this.$store.commit('homepageApi/setLoadingKey', {key: 'motd', isLoading: true});
+            }
+            if(this.currentGuess.ppTournamentType.name=='Flash'){
+                this.$store.commit('homepageApi/setLoadingKey', {key: 'flash', isLoading: true});
             }
             this.removeGuessFromCurrentList(this.currentGuess.id);
         },

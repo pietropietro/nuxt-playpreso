@@ -15,7 +15,6 @@
                     <v-slide-item v-for="(guess,index) in ppRM.guesses" :key="index">
                         <div class="h-100 mx-4">
                             <guess-info
-                                :presoColor="color"
                                 :color="color"
                                 :guess="guess"
                                 :flipped="flipped"
