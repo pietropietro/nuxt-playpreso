@@ -34,6 +34,10 @@
                 :next="next"
             />
 
+            <flash-current v-if="selectedStatus=='current'"
+                :current="current"
+            />
+
         </template>
     </p-p-section-card>
 </template>
