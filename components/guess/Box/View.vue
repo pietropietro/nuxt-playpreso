@@ -5,6 +5,7 @@
                 width: boxwidth,
                 overflow: 'hidden'
             }"
+            :class="{ brilliance: isShiny }"
     >   
         <v-row
             class="rounded-lg"
@@ -78,6 +79,11 @@ export default {
         withLogo: {type:Boolean, default: true},
     },
     computed:{
+        isShiny(){
+            if(this.guess.PRESO)return true;
+            if(this.guess.winner)return true;
+            return false;
+        },
         shades(){
             if(this.guess.verified_at){
                 return [this.ppRGBA(this.rgb, 0.6), this.ppRGBA(this.rgb,0.4)]
@@ -110,3 +116,54 @@ export default {
     }
 }
 </script>
+
+<style>
+.brilliance {
+  position: relative;
+  overflow: hidden;
+}
+
+.brilliance::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Fill entire container so we can slide the diagonal band across it */
+  width: 100%;
+  height: 100%;
+  
+  /* Wider diagonal band:
+     - Transparent until ~40%
+     - White from 40% to 60%
+     - Transparent again after 60% */
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 60%
+  );
+  
+  /* Start well off to the left */
+  transform: translateX(-120%) skewX(-20deg);
+  
+  /* 3.5s total:
+     - 1.5s to cross
+     - 2s pause off the right side */
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  /* Start: off the left edge */
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  /* By ~43%, we've swept fully to the right */
+  50% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+  /* Pause off the right edge until 100% (another 57% of 3.5s => ~2s) */
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+</style>
