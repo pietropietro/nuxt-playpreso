@@ -9,18 +9,21 @@
             >
                <template v-if="['guess_unlocked_starting', 'guess_verified'].includes(notification.event_type)">
                     <v-col cols="12" class="pt-1 pb-0 mb-n1">
-                        <span class="overline lh-1">
+                        <span class="overline lh-1" v-if="notification.ppRoundMatch?.guess?.ppTournamentType?.name=='Flash'">
+                            {{notification.ppRoundMatch.guess.winner ?  'FLASH WIN!' : 'FLASH LOST'}}
+                        </span>
+                        <span class="overline lh-1" v-else>
                             {{notification.event_type == 'guess_unlocked_starting' ? 'lock reminder' : 'match finished'}}
                         </span>
                     </v-col>
                     <v-col cols="auto">
                         <guess-box-view
-                            :guess="notification.guess"
-                            :match="notification.guess.match"
-                            :rgb="notification.guess.ppTournamentType.rgb"
+                            :guess="getNotificationGuess(notification)"
+                            :match="getNotificationGuess(notification).match"
+                            :rgb="getNotificationGuess(notification).ppTournamentType.rgb"
                             :afterLock="null"
                             :onUnlockedClick="clickUnlocked"
-                            :open="(notification.guess.guessed_at || notification.guess.verified_at) ?  true : false"
+                            :open="(getNotificationGuess(notification).guessed_at || getNotificationGuess(notification).verified_at) ?  true : false"
                             :setOpen="()=>null"
                         />
                     </v-col>
@@ -105,6 +108,10 @@ export default {
             const { getSnowflakeStyle } = useSnowflakeStyle(); // Use the composable
             return getSnowflakeStyle(index);
         },
+        getNotificationGuess(userNotification){
+            if(userNotification.guess)return userNotification.guess;
+            return userNotification.ppRoundMatch.guess;
+        }
     },
     async mounted(){
         this.$store.dispatch(

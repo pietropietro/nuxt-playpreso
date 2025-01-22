@@ -38,6 +38,10 @@
                 :current="current"
             />
 
+            <flash-verified v-if="selectedStatus=='last'"
+                :verifiedFlash="last"
+            />
+
         </template>
     </p-p-section-card>
 </template>

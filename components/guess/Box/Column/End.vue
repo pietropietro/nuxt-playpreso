@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            dotState: true,    // toggles true/false every second
+            dotState: false,    // toggles true/false every second
             intervalId: null,
         };
     },

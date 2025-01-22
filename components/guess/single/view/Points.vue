@@ -9,7 +9,7 @@
             <template v-else>
                 <p-p-preso v-if="guess.PRESO"/>
                 <h2 v-else>
-                    {{guess.points > 0 ? '+' : ''}}{{guess.points}}
+                    {{guess.points}}
                 </h2>
             </template>
         </v-row>
