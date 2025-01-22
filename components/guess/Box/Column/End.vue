@@ -19,7 +19,7 @@
                     :country="match.league.country != match.awayTeam.country ? match.awayTeam.country : ''"
                 />
                 <template v-else>
-                    <h1 v-if="showDot" class="ocrastd red--text">∙</h1>
+                    <h1 v-if="showDot" class="ocrastd red--text live-dot">∙</h1>
                     <template v-else>
                         <guess-match-result
                         v-if="!guess.verified_at"
@@ -72,3 +72,19 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.live-dot {
+  display: inline-block;
+  animation: moveLeftRight 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes moveLeftRight {
+  from {
+    transform: translateX(-2px);
+  }
+  to {
+    transform: translateX(2px);
+  }
+}
+</style>
