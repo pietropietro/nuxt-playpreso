@@ -3,7 +3,7 @@
         <v-col> 
             <v-row justify="center">
                 <!-- LOCKED -->
-                <em-emoji v-if="guess.guessed_at && !guess.verified_at" id="lock"/>
+                <em-emoji v-if="guess.guessed_at && !guess.verified_at && !started" id="lock"/>
                 <!-- MISSED -->
                 <em-emoji v-else-if="isMissed(guess)" id="x"/>
                 <!-- UNLOCKED -->
@@ -27,6 +27,7 @@
                     </v-row>
                 </div>
             </v-row>
+
             
             <v-row
                 v-if="!hideUsername"
@@ -47,6 +48,7 @@ export default {
         guess: {type: Object, required: true},
         hideUsername: {type: Boolean},
         flipped: {type: Boolean},
+        started: {type: Boolean},
         flip: {type: Function}
     },
     computed:{

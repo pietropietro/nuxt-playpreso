@@ -19,6 +19,7 @@
                                 :guess="guess"
                                 :flipped="flipped"
                                 :flip="()=>flipped=!flipped"
+                                :started="ppRM.match.live ? true : false"
                             />
                         </div>
                     </v-slide-item>

@@ -41,7 +41,8 @@
                             :color="ppRGBA(flashPPRM.guess.ppTournamentType.rgb)"
                             :guess="guess"
                             :flipped="flipped"
-                            :flip="()=>flipped=!flipped"
+                            :flip="()=>{}"
+                            :started="flashPPRM.match.live ? true : false"
                         />
                     </div>
                 </v-slide-item>
@@ -53,12 +54,12 @@
 export default{
     props:{
         flashPPRM: {type: Object, required:true},
-        onUnlockedClick: {type: Function}
+        onUnlockedClick: {type: Function},
     },
     data(){
         return{
+            flipped:true,
             openId: null,
-            flipped: false
         }
     },
     mounted(){

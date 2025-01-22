@@ -80,7 +80,7 @@
                                         :open="selectedSummary?.match.id == matchSummary.match.id"
                                         :setOpen="()=>selectSummary(matchSummary.match.id)"
                                     />
-                                    <div>
+                                    <div style="position:relative;">
                                         <template v-if="matchSummary.guesses.length == 1">
                                             <user-name :user="matchSummary.guesses[0].user" small center/>
                                         </template>
