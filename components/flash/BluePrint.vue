@@ -6,18 +6,18 @@
                     :match="flashPPRM.match || flashPPRM.guess?.match"
                     :guess="flashPPRM.guess"
                     :rgb="flashPPRM.guess.ppTournamentType.rgb"
-                    :open="openId && openId == flashPPRM.guess.id"
+                    :open="verified || (openId && openId == flashPPRM.guess.id)"
                     :setOpen="(val)=>openId=val"
                     :onUnlockedClick="onUnlockedClick"
                 />
             </v-col>
-            <v-col v-if=!openId>
+            <v-col v-if="!openId && !verified">
                 <v-row>
                     <v-col>
                         <p-p-info label="cost" :value="flashPPRM.lock_cost" small/>
                     </v-col>
                     <v-col>
-                        <p-p-info label="prize" :value="
+                        <p-p-info label="jackpot" :value="
                             flashPPRM.guess.winner_prize ??
                             flashPPRM.lock_cost * flashPPRM.guesses.length" small/>
                     </v-col>
@@ -27,7 +27,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row class="pt-2" justify="center" no-gutters v-if="flashPPRM.guesses">
+        <v-row justify="center" no-gutters v-if="flashPPRM.guesses">
             <v-slide-group
                         class="px-2"
                         :show-arrows="!$vuetify.breakpoint.xs"
@@ -41,7 +41,7 @@
                             :color="ppRGBA(flashPPRM.guess.ppTournamentType.rgb)"
                             :guess="guess"
                             :flipped="flipped"
-                            :flip="()=>{}"
+                            :flip="flip"
                             :started="flashPPRM.match.live ? true : false"
                         />
                     </div>
@@ -55,15 +55,22 @@ export default{
     props:{
         flashPPRM: {type: Object, required:true},
         onUnlockedClick: {type: Function},
+        verified: {type: Boolean}
     },
     data(){
         return{
-            flipped:true,
+            flipped:false,
             openId: null,
         }
     },
+    methods:{
+        flip(){
+            if(!this.flashPPRM.match.verified_at)return;
+            this.flipped = !this.flipped;
+        }
+    },
     mounted(){
-        console.log('mounted blueprint, flash:', this.flashPPRM);
+        if(!this.flashPPRM.match.verified_at) this.flipped = true;
     }
 }
 </script>

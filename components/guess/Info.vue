@@ -1,6 +1,9 @@
 <template>
     <v-row class="h-100" align="end" @click="flip">
         <v-col> 
+            <v-row v-if="guess.winner">
+                <div class="overline lh-1 mb-n3 gold--text">W</div>
+            </v-row>
             <v-row justify="center">
                 <!-- LOCKED -->
                 <em-emoji v-if="guess.guessed_at && !guess.verified_at && !started" id="lock"/>

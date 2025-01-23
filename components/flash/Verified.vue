@@ -1,5 +1,5 @@
 <template>
-    <flash-blue-print :flashPPRM="verifiedFlash">
+    <flash-blue-print :flashPPRM="verifiedFlash" verified>
         <template slot="row2">
             <h3 class="ocrastd" v-if="verifiedFlash.guess.guessed_at">{{verifiedFlash.guess.winner ? 'WIN!' : 'you lost'}}</h3>
         </template>

@@ -19,7 +19,7 @@
                 />
                 <template v-if="i==2" >
                     <template v-if="flashWinToggle">
-                        <div class="overline lh-1">
+                        <div class="overline lh-1 gold--text">
                             win<br>{{guess.winner_prize}}
                         </div>
                     </template>
