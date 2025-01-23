@@ -9,7 +9,7 @@
                         ref="slider"
                     >
                         <v-slide-item
-                            v-for="status in availableStatus"
+                            v-for="status in availableStatuses"
                             :key="status"
                             class="mx-2"
                             ref="slideItem"
@@ -51,12 +51,23 @@ import useHomepageApi from '~/composables/useHomepageApi';
 export default {
     data(){
         return {
-            availableStatus : ['next','current','last'],
+            allStatuses : ['next','current','last'],
             selectedStatus: 'next',
             current: null,
             next: null,
             last: null,
         }
+    },
+    computed:{
+        availableStatuses() {
+            let arr = [];
+            // Loop through allStatuses and check if the corresponding data is available
+            this.allStatuses.forEach(status => {
+                if (this[status]) arr.push(status);
+            });
+            console.log('arr',arr);
+            return arr;
+    },
     },
     methods:{
         async getFlash(){

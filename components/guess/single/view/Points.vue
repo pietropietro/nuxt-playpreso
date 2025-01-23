@@ -4,16 +4,17 @@
             v-if="guess.verified_at"
             justify="center" align="center"
         >
-            <template v-if="toggleState">
-                <div class="overline lh-1">
-                    win<br>{{guess.winner_prize}}
-                </div>
-            </template>
-            <template v-else>
+            
+            <template>
                 <em-emoji v-if="isMissed(guess) && (!guess.id || ['motd','flash'].includes(guess.id))" id="dash" size="2em"/>
                 <em-emoji v-else-if="isMissed(guess)" id="x" size="2em"/>
                 <template v-else>
-                    <p-p-preso v-if="guess.PRESO"/>
+                    <template v-if="guess.PRESO">
+                        <template v-if="toggleState">
+                            <h2>19</h2>
+                        </template>
+                        <p-p-preso v-else/>
+                    </template>
                     <h2 v-else>
                         {{guess.points}}
                     </h2>
@@ -35,7 +36,7 @@ export default {
     },
     mounted() {
         // If match is live, start toggling
-        if (this.guess.winner === 1 && this.guess.ppTournamentType.name=='Flash') {
+        if (this.guess.PRESO === 1) {
             this.intervalId = setInterval(() => {
                 this.toggleState = !this.toggleState;
             }, 2000);

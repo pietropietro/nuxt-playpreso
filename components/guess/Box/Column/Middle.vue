@@ -74,8 +74,6 @@ export default {
     },
     methods: {
         isValidDatetime(dateString) {
-            console.log('isvalidtime', this.match.homeTeam.name, dateString, this.match.verified_at);
-        
             // Check if it's a non-empty string and can be parsed into a valid date
             //for motd and flash that user do not lock, verified_at holds 'toolate' or 'toopoor'
             return dateString && !isNaN(Date.parse(dateString));

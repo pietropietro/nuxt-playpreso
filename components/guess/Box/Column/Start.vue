@@ -18,7 +18,12 @@
                     :country="match.league.country != match.homeTeam.country ? match.homeTeam.country : ''"
                 />
                 <template v-if="i==2" >
-                    <div style="font-size:2em;">
+                    <template v-if="flashWinToggle">
+                        <div class="overline lh-1">
+                            win<br>{{guess.winner_prize}}
+                        </div>
+                    </template>
+                    <div style="font-size:2em;" v-else>
                         {{ guess.ppTournamentType.emoji }}
                     </div>
                 </template>
@@ -33,6 +38,26 @@ export default {
         guess: {type: Object},
         shades: {type: Array},
         size: {type: Number, default: 49},
+    },
+    data() {
+        return {
+            flashWinToggle: false,    // toggles true/false every second
+            intervalId: null,
+        };
+    },
+    mounted() {
+        // If match is live, start toggling
+        if (this.guess.winner === 1 && this.guess.ppTournamentType.name=='Flash') {
+            this.intervalId = setInterval(() => {
+                this.flashWinToggle = !this.flashWinToggle;
+            }, 2000);
+        }
+    },
+    beforeDestroy() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
     },
 }
 </script>

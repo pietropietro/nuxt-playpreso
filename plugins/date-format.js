@@ -98,8 +98,10 @@ Vue.mixin({
             return matchDate <= next24Hours;
         },
         inNextDays(someDate){
-            let inFiveDays = new Date().setDate( new Date().getDate() + 5);
-            if(someDate < inFiveDays && someDate > new Date().setDate((new Date().getDate() - 1))){
+            let inFiveDays = new Date().setDate(new Date().getDate() + 5);
+            let sixHoursAgo = new Date().setHours(new Date().getHours() - 6);
+            
+            if (someDate < inFiveDays && someDate > sixHoursAgo) {
                 return true;
             }
         },
