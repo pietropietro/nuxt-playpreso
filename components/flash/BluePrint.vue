@@ -14,12 +14,12 @@
             <v-col v-if="!openId && !verified">
                 <v-row>
                     <v-col>
-                        <p-p-info label="cost" :value="flashPPRM.lock_cost" small/>
+                        <p-p-info label="cost" :value="flashPPRM.lock_cost" value2="🅿️" small/>
                     </v-col>
                     <v-col>
                         <p-p-info label="jackpot" :value="
-                            flashPPRM.guess.winner_prize ??
-                            flashPPRM.lock_cost * flashPPRM.guesses.length" small/>
+                            flashPPRM.guess.winner_prize  ??
+                            (flashPPRM.lock_cost * flashPPRM.guesses.length)" value2="🅿️" small/>
                     </v-col>
                 </v-row>
                 <v-row justify="center">

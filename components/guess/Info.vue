@@ -2,7 +2,12 @@
     <v-row class="h-100" align="end" @click="flip">
         <v-col> 
             <v-row v-if="guess.winner">
-                <div class="overline lh-1 mb-n3 gold--text">W</div>
+                <v-col class="pa-0">
+                    <div class="overline lh-1 mb-n3 gold--text">W</div>
+                </v-col>
+                <v-col class="pa-0">
+                    <div class="overline lh-1 mb-n3 gold--text text-end">{{guess.winner_prize}}</div>
+                </v-col>
             </v-row>
             <v-row justify="center">
                 <!-- LOCKED -->

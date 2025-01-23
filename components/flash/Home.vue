@@ -41,7 +41,13 @@
             <flash-verified v-if="selectedStatus=='last'"
                 :verifiedFlash="last"
             />
-
+            <v-row justify="end" class="mr-6">
+                <nuxt-link to="/flash" class="no-decoration">
+                    <v-btn outlined x-small icon>
+                        <h3>+</h3>
+                    </v-btn>
+                </nuxt-link>
+            </v-row>
         </template>
     </p-p-section-card>
 </template>
@@ -65,7 +71,6 @@ export default {
             this.allStatuses.forEach(status => {
                 if (this[status]) arr.push(status);
             });
-            console.log('arr',arr);
             return arr;
     },
     },
