@@ -72,12 +72,5 @@ export default {
         shades: {type: Array},
         size: {type: Number, default: 49},
     },
-    methods: {
-        isValidDatetime(dateString) {
-            // Check if it's a non-empty string and can be parsed into a valid date
-            //for motd and flash that user do not lock, verified_at holds 'toolate' or 'toopoor'
-            return dateString && !isNaN(Date.parse(dateString));
-        }
-    }
 }
 </script>

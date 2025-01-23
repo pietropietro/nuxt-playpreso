@@ -105,6 +105,11 @@ Vue.mixin({
                 return true;
             }
         },
+        isValidDatetime(dateString) {
+            // Check if it's a non-empty string and can be parsed into a valid date
+            //for motd and flash that user do not lock, verified_at holds 'toolate' or 'toopoor'
+            return dateString && !isNaN(Date.parse(dateString));
+        },
         isMoreThanHoursAgo(date_start, hours=3) {
             const now = new Date();
             const hoursAgo = new Date(now.getTime() - hours * 60 * 60 * 1000); // hours in milliseconds

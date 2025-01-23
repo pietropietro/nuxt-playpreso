@@ -38,7 +38,23 @@ Vue.mixin({
             const newList = this.currentGuessList.filter(guess => guess.id !== guessId);
             this.$store.dispatch('openGuesses/updateList', { newList });
         },
-        
+
+        get1x2Symbol(home,away){
+            if(home==null || away==null)return null;
+            if(home > away)return '1';
+            if(home == away) return 'x';
+            if(home < away) return '2';
+        },
+        getUo25Symbol(home,away){
+            if(home==null || away==null)return null;
+            if((home + away) > 2)return 'over';
+            return 'under';
+        },
+        getGolNoGolSymbol(home,away){
+            if(home==null || away==null)return null;
+            if(home > 0 && away > 0)return 'gol';
+            return 'nogol';
+        },
         isLive(date_start){
             const start = new Date(date_start);
             const startRange = new Date(start.getTime() - 10 * 60000); // 10 minutes before
