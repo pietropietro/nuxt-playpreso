@@ -16,8 +16,6 @@
                     <v-col v-else cols="12" class="px-2">
                         <v-row no-gutters justify="start"><h2>{{guess.points}}</h2></v-row>
                         <v-row class="mt-n4"  no-gutters  justify="end"><h4>🅿️</h4></v-row>
-                        <!-- <span style="z-index:1; position:relative;">{{guess.points}}</span>
-                        <h6 class="mt-n6 mr-n4" style="z-index:0; position:relative;">🅿️</h6> -->
                     </v-col>
                 </template>
             </template>

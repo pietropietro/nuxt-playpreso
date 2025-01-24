@@ -27,8 +27,13 @@
                     </div>
                 </template>
                     <template v-slot:item.cost="{ item }">
-                    <div class="overline lh-1">{{item.cost}}</div>
-                </template>
+                        <p-p-info
+                            label="cost" 
+                            :value="item.cost + '🅿️'"
+                            small
+                        />
+                    <!-- <div class="overline lh-1">{{item.cost}}🅿️</div> -->
+                    </template>
                 <template v-slot:item.id="{ item }">
                     <p-p-tournament-join-row :ppTournamentTypeId="item.id" />
                 </template>

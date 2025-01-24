@@ -27,7 +27,7 @@
                 </v-row>
             </v-col>
         </v-row>
-        <v-row justify="center" no-gutters v-if="flashPPRM.guesses">
+        <v-row justify="center" no-gutters v-if="flashPPRM.guesses?.length > 0">
             <v-slide-group
                         class="px-2"
                         :show-arrows="!$vuetify.breakpoint.xs"
@@ -47,6 +47,9 @@
                     </div>
                 </v-slide-item>
             </v-slide-group>
+        </v-row> 
+        <v-row v-else justify="center" no-gutters class="py-2">
+            <div class="overline lh-1">no locks for this event</div>
         </v-row>
     </div>
 </template>

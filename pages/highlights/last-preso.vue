@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    layout: "authenticated",
+    layout: "private",
     data(){
         return {
             page: 1,

@@ -79,6 +79,7 @@ export const API_ROUTES = {
     },
     FLASH: {
         GET: '/flash',
+        GET_LIST: '/flash/list',
         LOCK: '/flash/lock'
     },
 };

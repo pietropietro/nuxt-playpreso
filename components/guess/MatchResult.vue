@@ -1,6 +1,6 @@
 <template>
     <v-row no-gutters align="center" justify="center" style="height:100%">
-        <template v-if="togglePointsComposition">
+        <template v-if="toggleMatchInnerValues">
             <guess-points-composition :guess="guess" :match="match"/>
         </template>
         <template v-else>
@@ -77,15 +77,15 @@ export default {
     },
     data() {
         return {
-            togglePointsComposition: false,    
+            toggleMatchInnerValues: false,    
             intervalId: null,
         };
     },
     mounted() {
         // If match is live, start toggling
-        if (this.isValidDatetime(this.guess.verified_at)) {
+        if (this.isValidDatetime(this.match.verified_at)) {
             this.intervalId = setInterval(() => {
-                this.togglePointsComposition = !this.togglePointsComposition;
+                this.toggleMatchInnerValues = !this.toggleMatchInnerValues;
             }, 2000);
         }
     },
