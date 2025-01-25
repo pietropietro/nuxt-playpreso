@@ -12,7 +12,7 @@
                 />
             </v-col>
             <v-col v-if="!openId && !verified">
-                <v-row>
+                <v-row class="pr-2">
                     <v-col>
                         <p-p-info label="cost" :value="flashPPRM.lock_cost" value2="🅿️" small/>
                     </v-col>
@@ -48,7 +48,7 @@
                 </v-slide-item>
             </v-slide-group>
         </v-row> 
-        <v-row v-else justify="center" no-gutters class="py-2">
+        <v-row v-else-if="isValidDatetime(flashPPRM.match.verified_at)" justify="center" no-gutters class="pt-4 pb-8">
             <div class="overline lh-1">no locks for this event</div>
         </v-row>
     </div>

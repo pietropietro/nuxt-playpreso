@@ -1,5 +1,10 @@
 <template>
-    <p-p-section-card title="FLASH" emojiId="zap" subtitle="instant game" v-if="next" >
+    <p-p-section-card 
+        title="FLASH" emojiId="zap" 
+        subtitle="instant game" 
+        v-if="next" 
+        :helpHtml="flashMatchDescription"
+    >
         <template slot="content">
             <v-row no-gutters class="mb-6">
                 <v-col>
@@ -41,7 +46,7 @@
             <flash-verified v-if="selectedStatus=='last'"
                 :verifiedFlash="last"
             />
-            <v-row justify="end" class="mr-6">
+            <v-row justify="end" class="mt-4 mr-6">
                 <nuxt-link to="/flash" class="no-decoration">
                     <v-btn outlined x-small icon>
                         <h3>+</h3>
@@ -54,6 +59,8 @@
 
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
+import en from '~/locales/en.js'
+
 export default {
     data(){
         return {
@@ -62,6 +69,7 @@ export default {
             current: null,
             next: null,
             last: null,
+            flashMatchDescription: en.flashMatchDescription
         }
     },
     computed:{

@@ -13,6 +13,7 @@
             v-if="!flashList.length && loading"
     />
     <v-container class="px-0" v-else-if="flashList.length > 0">
+        <div class="overline lh-1 px-4 py-2" v-html="flashMatchDescription" />
         <div
             v-for="flash,i in flashList"
             :key="flash.id" 
@@ -30,7 +31,7 @@
             </div>
             <flash-verified 
                 :verifiedFlash="flash" 
-                :class="'pt-1 ' + (flash.guesses?.length > 0 ? 'pb-0' : ' pb-5')"
+                :class="'pt-1'"
             />
         </div>
         <v-row justify="center" class=" py-10 ">
@@ -40,6 +41,8 @@
     </v-container>
 </template>
 <script>
+import en from '~/locales/en.js'
+
 export default {
     layout: "private",
     data(){
@@ -49,6 +52,7 @@ export default {
             flashList: [],
             limit:10,
             total: null,
+            flashMatchDescription: en.flashMatchDescription
             // ppTournamentType: null
         }
     },

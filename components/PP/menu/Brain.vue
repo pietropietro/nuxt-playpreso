@@ -90,9 +90,7 @@ export default {
             selectedMenu: null,
             menus:[
                 // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
-                ...(Capacitor.isNativePlatform() 
-                ? [{ title: 'NOTIFICATIONS 🔔', key: 'notification_settings' }] 
-                : []), // Conditionally include the notifications menu
+                { title: 'NOTIFICATIONS 🔔', key: 'notification_settings' },
                 {title: 'EMAIL 🔔', key:'email_reminders'},
                 {title: '3+', key:'3+'},
                 {title: 'POINTS 🅿️', key:'points'},
