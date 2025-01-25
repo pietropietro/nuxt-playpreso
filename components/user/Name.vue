@@ -15,6 +15,10 @@
                             <span class="green--text" >{{user.username.substring(0, user.username.length / 2)}}</span>
                             <span class="white--text" >{{user.username.substring(user.username.length / 2)}}</span>
                         </template>
+                        <template v-else-if="user.flashLeader">
+                            <span class="white--text" >{{user.username.substring(0, user.username.length / 2)}}</span>
+                            <span class="grey--text" >{{user.username.substring(user.username.length / 2)}}</span>
+                        </template>
                         <template v-else>{{ user.username }}</template>
                     </h1>
                     <h3 v-else>{{user.username}}</h3>
@@ -31,6 +35,9 @@
                     <!-- TODO add ptt here fro dynamic emoji -->
                     <template v-if="user.motdLeader">
                         <em-emoji id="jigsaw" class="ml-1 mt-1"/>
+                    </template>
+                    <template v-if="user.flashLeader">
+                        <em-emoji id="zap" class="ml-1 mt-1"/>
                     </template>
                 </v-row>
             </v-col>
