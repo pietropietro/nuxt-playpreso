@@ -262,3 +262,32 @@ body {
 		justify-self: center;
 	}
 }
+
+.gold--text {
+    color: #FFD700;
+    background-size: 200% 200%;
+    animation: shine 3s linear infinite;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+
+  @keyframes shine {
+    0% {
+        color: #FFD700;
+
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    30% {
+        color: #b7a644;
+
+        text-shadow: 0 0 10px rgba(124, 110, 27, 0.5);
+    }
+    60% {
+        text-shadow: 0 0 10px rgba(252, 246, 213, 0.5);
+    }
+    100% {
+        color: #FFD700;
+
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+  }

@@ -15,7 +15,7 @@
     <v-container class="px-0" v-else-if="flashList.length > 0">
         <div class="overline lh-1 px-4 py-2" v-html="flashMatchDescription" />
 
-        <v-row no-gutters class="mb-6">
+        <v-row no-gutters class="my-6">
             <v-col>
                 <v-slide-group
                     prev-icon="<"
@@ -57,11 +57,9 @@
                 "
             >
                 <div
-                    class="pl-8 pt-4 ocrastd"
-                    style="font-size:14px;"
-            
+                    class="pl-8 pt-4 caption"
                 >
-                    event #{{flash.id}}
+                    #{{flash.id}}
                 </div>
                 <flash-verified
                     :verifiedFlash="flash"

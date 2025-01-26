@@ -49,7 +49,7 @@
             </v-slide-group>
         </v-row> 
         <v-row v-else-if="isValidDatetime(flashPPRM.match.verified_at)" justify="center" no-gutters class="pt-4 pb-8">
-            <div class="overline lh-1">no locks for this event</div>
+            <div class="caption">No locks for this event.</div>
         </v-row>
     </div>
 </template>

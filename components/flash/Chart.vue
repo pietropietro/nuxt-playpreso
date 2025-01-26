@@ -1,31 +1,30 @@
 <template>
-    <div>
-        <v-row class="overline lh-1 my-6" justify="center"><div>based on last 30 days</div></v-row>
-        <v-data-table
-          :loading="loading"
-          :headers="headers"
-          :items="chart"
-          :items-per-page="limit"
-          :page.sync="page"
-          @update:page="getFlashChart"
-          hide-default-footer
-          disable-sort
-          class="transparent-table"
-        >
-          <!-- Custom Row Template -->
-          <template v-slot:item="{ item, index }">
-            <tr>
-              <td class="overline lh-1">#{{ index + 1 }}</td> <!-- Position (ordered index) -->
-              <td>
-                <user-name :user="item.user" />
-              </td>
-              <td class="overline lh-1">{{ item.tot_wins }}</td>
-              <td class="overline lh-1">{{ item.net_prize }}</td>
-            </tr>
-          </template>
-        </v-data-table>
-    </div>
-  </template>
+    <v-container>
+        <v-row class="overline lh-1 mb-4" justify="center">
+            <div>based on last 30 days</div>
+        </v-row>
+        <!-- Headers (First Row Only) -->
+        <v-row class="caption">
+            <v-spacer/>
+            <v-col cols="4">Wins / Locks</v-col>
+            <v-col cols="2">Net</v-col>
+        </v-row>
+
+        <!-- Data Rows -->
+        <v-row v-for="(item, index) in chart" :key="item.user_id" class="data-row" align="center">
+            <v-col class="overline lh-1" cols="auto">#{{ index + 1 }}</v-col>
+            <v-col >
+                <user-name small :user="item.user" />
+            </v-col>
+            <v-col class="overline lh-1" cols="2" >{{ item.tot_wins }}/{{item.tot_locked}}</v-col>
+            <v-col class="overline lh-1" cols="2" 
+                :class="item.net_prize < 0 ? 'red--text' : ''"
+            >
+                {{ item.net_prize }}
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
 
 <script>
 export default {
@@ -75,5 +74,17 @@ export default {
 
 .transparent-table >>> .v-data-footer {
   display: none !important;
+}
+
+.transparent-table >>> .table-row:hover {
+  background-color: var(--v-primary-darken2) !important; /* Light blue hover effect */
+}
+
+.transparent-table >>> .text-right {
+  text-align: right;
+}
+
+.transparent-table >>> .text-left {
+  text-align: left;
 }
 </style>
