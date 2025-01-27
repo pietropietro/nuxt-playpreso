@@ -1,9 +1,6 @@
 <template>
-    <flash-blue-print :flashPPRM="current">
-        <template slot="row2">
-            <h3 class="ocrastd red--text" v-if="current.match.live">live</h3>
-        </template>
-    </flash-blue-print>
+    <p-p-r-m-blue-print :pprm="current">
+    </p-p-r-m-blue-print>
 </template>
 <script>
 export default{

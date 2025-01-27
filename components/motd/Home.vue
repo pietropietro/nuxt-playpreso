@@ -1,32 +1,42 @@
 <template>
-    <p-p-section-card title="MOTD" emojiId="jigsaw" subtitle="match of the day" v-if="motd" >
+    <p-p-section-card title="MOTD" emojiId="jigsaw" subtitle="match of the day" v-if="today" >
         <template slot="content">
-            <v-row no-gutters justify="center" align="center" class="mx-2">
-                <v-spacer/>
+            <v-row no-gutters class="mb-6">
                 <v-col>
-                    <guess-box-view
-                        :match="motd.match"
-                        :guess="motd.guess"
-                        :rgb="motdPPTT.rgb"
-                        :onUnlockedClick="onSelect"
-                        :open="openId && openId == motd.guess.id"
-                        :setOpen="(val)=>openId=val"
-                    />
+                    <v-slide-group
+                        prev-icon="<"
+                        next-icon=">"
+                        ref="slider"
+                    >
+                        <v-slide-item
+                            v-for="status in allStatuses"
+                            :key="status"
+                            class="mx-2"
+                            ref="slideItem"
+                        >
+                            <v-chip
+                                class="overline lh-1"
+                                small
+                                :outlined="selectedStatus==status"
+                                :color="selectedStatus==status ? '' : 'transparent'"
+                                :value="status"
+                                @click="selectedStatus = status"
+                                style="min-width:50px; opacity: 1 !important"
+                            >
+                                {{status}}
+                            </v-chip>
+                        </v-slide-item>
+                    </v-slide-group>
                 </v-col>
-                <v-spacer/>
-                <template v-if="!openId">
-                    <v-spacer/>
-                    <v-col cols="auto" class="text-center px-0">
-                        <h1>{{motd.tot_locks ?? 0}} </h1>
-                        <div class="overline lh-1">locks</div>
-                    </v-col>
-                </template>
-                <v-spacer v-if="!openId"/>
             </v-row>
 
-            <v-container class="mt-5 px-5">
-                <motd-table :chart="motdChart.chart" :page="1" :rgb="motdPPTT.rgb"/>
-            </v-container>
+            <p-p-r-m-blue-print v-if="selectedStatus=='today'"
+                :pprm="today" :onUnlockedClick="onSelect" :onCountDownFinished="onCountDownFinished" 
+            />
+
+            <p-p-r-m-blue-print v-if="selectedStatus=='yesterday'"
+                :pprm="yesterday"
+            />
 
             <v-row justify="end" class="mt-1 mr-6">
                 <nuxt-link to="/motd" class="no-decoration">
@@ -41,32 +51,36 @@
 
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
+
 export default {
     data(){
         return {
-            motd: null,
-            motdPPTT: null,
-            motdChart: null,
-            openId: null
+            allStatuses : ['today','yesterday'],
+            selectedStatus: 'today',
+
+            today: null,
+            yesterday: null,
         }
     },
     methods:{
         async getMotd(){
             let response = await this.$api.call(this.API_ROUTES.MOTD.GET);
             if(response && response.status === "success"){
-                this.motd = response.message?.motd;
-                this.motdPPTT = response.message?.ppTournamentType;
-                this.motdChart = response.message?.motdChart;
+                this.today = response.message?.today;
+                this.yesterday = response.message?.yesterday;
             }
         },
         onSelect(){
-            if(this.motd.guess.guessed_at || this.motd.match.verified_at) return;
-            this.motd.guess.match = this.motd.match;
+            if(this.today.guess.guessed_at || this.today.match.verified_at) return;
+            this.today.guess.match = this.today.match;
             this.$store.dispatch('openGuesses/update', {
-                newGuess: this.motd.guess,
-                newList: [this.motd.guess], 
+                newGuess: this.today.guess,
+                newList: [this.today.guess], 
             });
         },
+        onCountDownFinished(){
+            this.$store.commit('homepageApi/setLoadingKey', {key: 'motd', isLoading: true});
+        }
     },
 
     async mounted(){
