@@ -62,6 +62,7 @@ export const API_ROUTES = {
         JOIN: '/p-tournament-type/join/'
     },
     STATS:{
+        MAIN_INFO: '/stats/main-info',
         BEST_USERS: '/stats/best-users',
         USER: '/stats/user/',
         LAST_PRESO: '/stats/last-preso',

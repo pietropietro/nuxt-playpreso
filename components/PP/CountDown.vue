@@ -38,7 +38,7 @@ export default{
             }
         },
 
-        updateTimeLeft(matchTime) {
+        async updateTimeLeft(matchTime) {
             const now = new Date();
             const diffMs = matchTime - now;
             if (diffMs <= 0) {
@@ -46,10 +46,14 @@ export default{
                 this.timeLeft = 0;
                 // call optional callback
                 console.log('CountDown finished. ');
-
-                this.onCountDownFinished();
-                // optionally stop the interval if you don't need to keep counting
                 this.stopCountDown();
+                await this.onCountDownFinished();
+                // Check if a new `until_datetime` exists and is in the future
+                const newMatchTime = new Date(this.until_datetime.replace(' ', 'T'));
+                if (newMatchTime > now) {
+                    console.log('New countdown starting for:', this.until_datetime);
+                    this.startCountDown(); // Restart countdown with the new time
+                }
             } else {
                 // Convert ms -> seconds (you can remain in ms if you prefer)
                 this.timeLeft = Math.floor(diffMs / 1000);
