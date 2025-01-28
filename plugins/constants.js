@@ -70,6 +70,7 @@ export const API_ROUTES = {
     MOTD: {
         GET: '/motd',
         GET_CHART: '/motd/chart',
+        GET_LIST: '/motd/list',
         GET_MONTH: '/motd/month',
         LOCK: '/motd/lock'
     },

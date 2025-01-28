@@ -6,12 +6,12 @@
                     :match="pprm.match || pprm.guess?.match"
                     :guess="pprm.guess"
                     :rgb="pprm.guess.ppTournamentType.rgb"
-                    :open="verified || (openId && openId == pprm.guess.id)"
+                    :open="verified || pprm.match.verified_at || (openId && openId == pprm.guess.id)"
                     :setOpen="(val)=>openId=val"
                     :onUnlockedClick="onUnlockedClick"
                 />
             </v-col>
-            <v-col v-if="!openId && !verified">
+            <v-col v-if="!openId && !verified && !pprm.match.verified_at">
                 <v-row class="pr-2">
                     <v-col>
                         <p-p-info label="cost" :value="pprm.lock_cost ?? 'FREE'" value2="🅿️" small/>

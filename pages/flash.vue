@@ -13,7 +13,7 @@
             v-if="!flashList.length && loading"
     />
     <v-container class="px-0" v-else-if="flashList.length > 0">
-        <div class="overline lh-1 px-4 py-2" v-html="flashMatchDescription" />
+        <div class="overline lh-1 px-6 py-2" v-html="flashMatchDescription" />
 
         <v-row no-gutters class="my-6">
             <v-col>
