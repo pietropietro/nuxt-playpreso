@@ -1,5 +1,7 @@
 <template>
-    <p-p-section-card title="MOTD" emojiId="jigsaw" subtitle="match of the day" v-if="today" >
+    <p-p-section-card title="MOTD" emojiId="jigsaw" subtitle="match of the day" v-if="today"
+        :helpHtml="motdDescription"
+    >
         <template slot="content">
             <v-row no-gutters class="mb-6">
                 <v-col>
@@ -51,13 +53,14 @@
 
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
+import en from '~/locales/en.js'
 
 export default {
     data(){
         return {
             allStatuses : ['today','yesterday'],
             selectedStatus: 'today',
-
+            motdDescription: en.motdDescription,
             today: null,
             yesterday: null,
         }

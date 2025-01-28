@@ -1,136 +1,66 @@
 <template>
-    <div style="width:100%">
-        <v-container 
-            v-for="(item,i) in chart" :key="item.user_id"
-            :class="selectedId == item.user.id ? 'pa-0 my-4' : 'pa-0'" 
-            :style="selectedId == item.user.id ?
-                {
-                    borderRadius: '10px'
-                }
-                : {}"
-        >
-            <v-row no-gutters align="center" @click="() => select(item.user.id)">
-                <v-col cols="auto">
-                    <div class="text-center" v-if="selectedId != item.user.id">
-                        <v-chip x-small color="transparent">
-                            # {{ i + 1 + ((page - 1) * 10) }}
-                        </v-chip>
-                    </div>
-                </v-col>
-                <v-col class="px-0"><user-name :user="item.user" /></v-col>
-                <v-col cols="auto" class="text-center">
-                    <div>
-                        <h3>{{ item.tot_points }}</h3>
-                    </div>
-                </v-col>
-                <v-col cols="1">
-                    <div 
-                        class="text-center font-weight-bold pointer"
-                        style="font-size:10px;"
-                    >
-                        <h3>{{ selectedId == item.user.id ? '^' : 'v' }}</h3>
-                    </div>
-                </v-col>
-            </v-row>
-            <template v-if="selectedId == item.user.id && item.sparkline_data">
+    <v-container>
+        <v-row class="overline lh-1 mb-4" justify="center">
+            <div>based on last 30 days</div>
+        </v-row>
+        <!-- Headers (First Row Only) -->
+        <v-row class="caption">
+            <v-spacer/>
+            <v-col class="text-end" cols="2">Wins</v-col>
+            <v-col class="text-center" cols="2">Jackpot</v-col>
+            <v-col class="text-end" cols="2">Points</v-col>
+        </v-row>
 
-                <v-row justify="center">
-                    <v-chip
-                        v-for="g in 
-                            [ 
-                               'matches',
-                               'graph',
-                            ]
-                        "
-                        :key="g"
-                        class="overline lh-1"
-                        small
-                        :outlined="selectedView==g"
-                        :color="selectedView==g ? '' : 'transparent'"
-                        :value="g"
-                        @click="()=>selectedView=g"
-                        style="min-width:50px; opacity: 1 !important"
-                    >
-                        <template v-if="g=='graph'">{{g}}</template>
-                        <template v-else>
-                         {{item.tot_locked + '-' + item.tot_preso + '-' + item.tot_unox2}}
-                        </template>
-                    </v-chip>
-                </v-row>
-                <v-container style="height: 170px;" class="px-0 pb-0">
-                    <div class="px-2" v-if="selectedView=='graph'">
-                        <v-sparkline
-                            :value="Object.values(item.sparkline_data.cumulative)"
-                            :height="$vuetify.breakpoint.smAndUp ? '70' : '120'"
-                            stroke-linecap="round"
-                            smooth
-                            :color="'rgba('+rgb+')'"
-                        />
-                        <v-row class="text-center overline lh-1 mt-n1" no-gutters>
-                            <v-col cols="3">W1</v-col>
-                            <v-col cols="3">W2</v-col>
-                            <v-col cols="3">W3</v-col>
-                            <v-col cols="3">W4</v-col>
-                        </v-row>
-                        <v-row class="text-center overline lh-1" no-gutters>
-                            <v-col cols="3">{{ Object.values(item.sparkline_data.single).splice(0,7).reduce((a,e)=>a+e) }}</v-col>
-                            <v-col cols="3">{{ Object.values(item.sparkline_data.single).splice(7,7).reduce((a,e)=>a+e) }}</v-col>
-                            <v-col cols="3">{{ Object.values(item.sparkline_data.single).splice(14,7).reduce((a,e)=>a+e) }}</v-col>
-                            <v-col cols="3">{{ Object.values(item.sparkline_data.single).splice(21,7).reduce((a,e)=>a+e) }}</v-col>
-                        </v-row>
-                    </div>
-                    <v-row no-gutters v-else align="center" style="height:100%">
-                        <v-slide-group
-                            prev-icon="<"
-                            next-icon=">"
-                            id="slider"
-                        >
-                            <v-slide-item
-                                v-for="(guess) in item.guesses"
-                                :key="guess.id"
-                                class="mx-2"
-                            >
-                                <guess-box-view
-                                    :guess="guess"
-                                    :match="guess.match"
-                                    :rgb="guess.ppTournamentType.rgb"
-                                    :afterLock="null"
-                                    :onUnlockedClick="null"
-                                    :open="openId == guess.id"
-                                    :setOpen="(val)=>openId=val"
-                                />
-                            </v-slide-item>
-                        </v-slide-group>
-                    </v-row>
-                </v-container>
-                <!-- </v-row> -->
-            </template>
-        </v-container>
-    </div>
+        <!-- Data Rows -->
+        <v-row v-for="(item, index) in chart" :key="item.user_id" 
+            class="data-row" 
+            align="center"
+        >
+            <v-col class="overline lh-1" cols="auto">#{{ index + 1 }}</v-col>
+            <v-col >
+                <user-name small :user="item.user" />
+            </v-col>
+            <v-col class="overline lh-1 text-end" cols="1" >{{ item.tot_wins }}</v-col>
+            <v-col class="overline lh-1 text-end" cols="2" 
+                :class="item.net_prize < 0 ? 'red--text' : ''"
+            >
+                {{ item.tot_prize }}
+            </v-col>
+            <v-col class="overline lh-1 text-end" cols="2" 
+                :class="item.net_prize < 0 ? 'red--text' : ''"
+            >
+                {{ item.tot_points }}
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
 export default {
-    props:{
-        chart: {type: Array},
-        page: {type: Number},
-        rgb: {type: String}
-    },
-    data() {
-        return {
-            selectedId: null,
-            selectedView: 'matches',
-            openId: null
-        }
-    },
-    methods: {
-        async select(userId) {
-            await this.triggerHapticFeedback();
-            if (userId == this.selectedId) {
-                this.selectedId = null;
-                return;
+    data:()=>({
+        loading: false,
+        limit: 10,
+        page: 1,
+        chart: [],
+        headers: [
+            { value: 'user', text:'user' }, 
+            { value: 'tot_wins', text:'tot_wins'},
+            { value: 'tot_prize', text:'tot_prize'}, 
+        ],
+        total: null,
+    }),
+    methods:{
+        async getMotdChart(){
+            this.loading=true;
+            let response = await this.$api.call(this.API_ROUTES.MOTD.GET_CHART + '?limit=' + this.limit + '&page=' + this.page);
+            if(response && response.status === "success"){
+                this.chart = response.message.chart;
+                this.total = response.message.total;
             }
-            this.selectedId = userId;
-        }
+            this.loading = false;
+        },
     },
+    async mounted(){
+        await this.getMotdChart();
+    }
 }
 </script>

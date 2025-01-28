@@ -56,35 +56,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.transparent-table {
-  background: transparent !important;
-}
-
-.transparent-table >>> .v-data-table__wrapper {
-  background: transparent !important;
-}
-
-.transparent-table >>> th,
-.transparent-table >>> td {
-  background: transparent !important;
-  border: none !important;
-}
-
-.transparent-table >>> .v-data-footer {
-  display: none !important;
-}
-
-.transparent-table >>> .table-row:hover {
-  background-color: var(--v-primary-darken2) !important; /* Light blue hover effect */
-}
-
-.transparent-table >>> .text-right {
-  text-align: right;
-}
-
-.transparent-table >>> .text-left {
-  text-align: left;
-}
-</style>
