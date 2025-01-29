@@ -14,6 +14,13 @@ export default{
             timeLeft: 0,           // in seconds, for example
         }
     },
+
+    watch: {
+        until_datetime() {
+            this.startCountDown(); // Restart countdown with the new time
+        }
+    },
+
     methods:{
        
         startCountDown() {
@@ -48,12 +55,6 @@ export default{
                 console.log('CountDown finished. ');
                 this.stopCountDown();
                 await this.onCountDownFinished();
-                // Check if a new `until_datetime` exists and is in the future
-                const newMatchTime = new Date(this.until_datetime.replace(' ', 'T'));
-                if (newMatchTime > now) {
-                    console.log('New countdown starting for:', this.until_datetime);
-                    this.startCountDown(); // Restart countdown with the new time
-                }
             } else {
                 // Convert ms -> seconds (you can remain in ms if you prefer)
                 this.timeLeft = Math.floor(diffMs / 1000);

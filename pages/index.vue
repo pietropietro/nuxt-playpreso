@@ -14,13 +14,12 @@
             <guess-scroll-home class="pt-6 mb-4" title="unlocked"/> 
             
             <p-p-scroll-menu />
+
+            <p-p-league-available-list class="my-10 mx-4"/>
              
             <!-- <p-p-section-card :title="currentUser.points.toString()" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" /> -->
             <flash-home class="my-10 mx-4"/>
 
-            <p-p-league-available-list class="my-10 mx-4"/>
-
-            
             <motd-home class="my-10 mx-4"/>
 
             <p-p-section-card title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-show="!emptyEnrolled" >
@@ -32,9 +31,6 @@
             <p-p-ranking-view class="my-10 mx-4"/>
 
             <highlights-view class="my-10 mx-4"/>
-
-
-            
             
             <v-row class="py-10 text-center ">
                 <v-col>
