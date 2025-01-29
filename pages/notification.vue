@@ -50,7 +50,13 @@
                         </nuxt-link>
                     </v-col>
                </template>
-               <template v-else>
+               <template v-else-if="notification.event_type == 'inactive_user'">
+                    <v-col class="text-center">
+                        <h1>💩</h1>
+                        <div class="caption"><i>You have been inactive lately..</i></div>
+                    </v-col>
+               </template>
+               <template v-else-if="$config.DEBUG">
                     {{ notification }}
                </template>
             </v-row>

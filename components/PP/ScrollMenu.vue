@@ -6,18 +6,17 @@
             >
                 <v-slide-item
                     class="mx-2"
+                    v-if="info.inactive"
                 >
                     <div>
                         <v-chip
                             disabled
-                            :color="'primary'"
-                            :value="'points'"
-                            @click="selected = 'points'"
+                            :color="'transparent'"
                             style="min-width:50px; opacity: 1 !important"
                         >
-                            <h2>{{currentUser.points.toString()}} 🅿️</h2>
+                            <h1 style="font-size:3em;">💩</h1>
                         </v-chip>
-                        <div v-if="showText" class="mt-2 overline lh-1 text-center">points</div>
+                        <div v-if="showText" class="mt-2 overline lh-1 text-center">inactive</div>
                     </div>
                 </v-slide-item>
                 <v-slide-item
@@ -27,8 +26,21 @@
                         <v-chip
                             disabled
                             :color="'primary'"
-                            :value="'points'"
-                            @click="selected = 'points'"
+                            style="min-width:50px; opacity: 1 !important"
+                        >
+                            <h2>{{currentUser.points.toString()}} 🅿️</h2>
+                        </v-chip>
+                        <div v-if="showText" class="mt-2 overline lh-1 text-center">points</div>
+                    </div>
+                </v-slide-item>
+                <v-slide-item
+                    v-if="info.ppRanking"
+                    class="mx-2"
+                >
+                    <div>
+                        <v-chip
+                            disabled
+                            :color="'primary'"
                             style="min-width:50px; opacity: 1 !important"
                         >
                             <h2>{{info.ppRanking}}° 👑</h2>
@@ -44,8 +56,6 @@
                         <v-chip
                             disabled
                             :color="'primary'"
-                            :value="'points'"
-                            @click="selected = 'points'"
                             style="min-width:50px; opacity: 1 !important"
                         >
                             <h2>{{ info.trophies.length }} 🏆</h2>
@@ -56,13 +66,12 @@
                 </v-slide-item>
                 <v-slide-item
                     class="mx-2"
+                    v-if="info.avg"
                 >
                     <div>
                         <v-chip
                             disabled
                             :color="'primary'"
-                            :value="'points'"
-                            @click="selected = 'points'"
                             style="min-width:50px; opacity: 1 !important"
                         >
                             <h2>{{info.avg}} 🎯</h2>
