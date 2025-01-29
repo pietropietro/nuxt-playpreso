@@ -51,6 +51,7 @@
                 </v-slide-item>
                 <v-slide-item
                     class="mx-2"
+                    v-if="info.trophies.length"
                 >
                     <div>
                         <v-chip

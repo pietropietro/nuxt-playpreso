@@ -16,10 +16,10 @@
             <p-p-scroll-menu />
              
             <!-- <p-p-section-card :title="currentUser.points.toString()" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" /> -->
+            <flash-home class="my-10 mx-4"/>
 
             <p-p-league-available-list class="my-10 mx-4"/>
 
-            <flash-home class="my-10 mx-4"/>
             
             <motd-home class="my-10 mx-4"/>
 
