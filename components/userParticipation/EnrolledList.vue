@@ -118,20 +118,16 @@ export default {
     },
     methods:{
         async getPPLeaguesParticipations(){
-            this.loading.leagues = true;
             let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPLEAGUES + (this.userId ?? this.currentUser.id));
             if(response && response.status === "success"){
                 this.pplUpsByStatus = response.message;
             }
-            this.loading.leagues = false;
         },
         async getPPCupsParticipations(){
-            this.loading.cups = true;
             let response = await this.$api.call(this.API_ROUTES.USER_PARTICIPATION.PPCUPGROUPS + (this.userId ?? this.currentUser.id));
             if(response && response.status === "success"){
                 this.ppcUpsByStatus = response.message;
             }
-            this.loading.cups = false;
         },
 
         async getLastRoundForSelectedUp(){

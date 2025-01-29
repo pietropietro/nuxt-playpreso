@@ -5,7 +5,8 @@ export default function useHomepageApi(store, key, apiCall) {
         store.commit('homepageApi/setLoadingKey', { key, isLoading: true });
         try {
             await apiCall();
-        } finally {
+        } 
+        finally {
             store.commit('homepageApi/setLoadingKey', { key, isLoading: false });
         }
     };

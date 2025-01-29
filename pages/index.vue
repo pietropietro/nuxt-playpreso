@@ -23,7 +23,7 @@
             
             <motd-home class="my-10 mx-4"/>
 
-            <p-p-section-card title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-if="!emptyEnrolled" >
+            <p-p-section-card title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-show="!emptyEnrolled" >
                 <template slot="content">
                     <user-participation-enrolled-list class="px-2" :setEmptyFlag="()=>emptyEnrolled=true"/>
                 </template>
