@@ -70,6 +70,9 @@ export default {
           <span class="grey--text">${username.substring(half)}</span>
         `;
       }
+      if(this.user.inactive){
+        return `<span class="brown--text text--lighten-2">${username}</span>`;
+      }
       return username;
     },
     // Generate emojis based on user properties
@@ -90,6 +93,10 @@ export default {
       // Add zap for flashLeader
       if (this.user.flashLeader) {
         emojis.push('zap');
+      }
+      // Add zap for flashLeader
+      if (this.user.inactive) {
+        emojis.push('hankey');
       }
       return emojis;
     },

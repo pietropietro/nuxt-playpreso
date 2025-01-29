@@ -9,6 +9,7 @@
                 >
                     <div>
                         <v-chip
+                            disabled
                             :color="'primary'"
                             :value="'points'"
                             @click="selected = 'points'"
@@ -24,6 +25,7 @@
                 >
                     <div>
                         <v-chip
+                            disabled
                             :color="'primary'"
                             :value="'points'"
                             @click="selected = 'points'"
@@ -40,6 +42,7 @@
                 >
                     <div>
                         <v-chip
+                            disabled
                             :color="'primary'"
                             :value="'points'"
                             @click="selected = 'points'"
@@ -56,6 +59,7 @@
                 >
                     <div>
                         <v-chip
+                            disabled
                             :color="'primary'"
                             :value="'points'"
                             @click="selected = 'points'"
