@@ -1,7 +1,7 @@
 <template>
-    <p-p-section-card title="RAN-KING" emojiId="crown" subtitle="pp reputation system" v-if="ppRankings" >
+    <p-p-section-card  v-if="ppRankings" title="RAN-KING" emojiId="crown" subtitle="pp reputation system" :helpHtml="ppRankingDescription" >
         <template slot="content">
-            <p-p-ranking-table class="mt-6 px-5" :ppRankings="ppRankings" />
+            <p-p-ranking-table class="px-5" :ppRankings="ppRankings" />
             
             <v-row justify="end" class="mt-1 mr-6">
                 <nuxt-link to="/p-ranking" class="no-decoration">
@@ -15,11 +15,13 @@
 </template>
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
+import en from '~/locales/en.js'
 
 export default {
     data(){
         return {
             ppRankings: null,
+            ppRankingDescription: en.ppRankingDescription
         }
     },
     methods:{

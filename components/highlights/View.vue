@@ -1,5 +1,5 @@
 <template>
-    <p-p-section-card title="HIGHLIGHTS" emojiId="champagne" subtitle="latest flex" v-if="highlights" >
+    <p-p-section-card v-if="highlights" title="HIGHLIGHTS" emojiId="champagne" subtitle="latest flex" :helpHtml="highlightsDescription">
         <template slot="content">
             <v-container class="py-0">
                 <v-row no-gutters>
@@ -31,6 +31,7 @@
                         </v-slide-group>
                     </v-col>
                 </v-row>
+
                 <div v-if="selectedType=='preso'">
                     <highlights-preso 
                         :presoMatches="highlights.preso" 
@@ -44,18 +45,21 @@
                 <div v-else-if="selectedType=='fullPresoRounds'">
                     <highlights-full-round :ppRounds="highlights.fullPresoRounds" class="pt-6"/>
                 </div>
+
             </v-container>
         </template>
     </p-p-section-card>
 </template>
 <script>
+import en from '~/locales/en.js'
 import useHomepageApi from '~/composables/useHomepageApi';
 export default {
     data(){
         return {
             highlights: null,
             highlightTypes: ['preso', 'trophies', 'fullPresoRounds'],
-            selectedType: 'preso'
+            selectedType: 'preso',
+            highlightsDescription: en.highlightsDescription,
         }
     },
     methods:{

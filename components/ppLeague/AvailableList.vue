@@ -1,5 +1,8 @@
 <template>
-    <p-p-section-card title="P-LEAGUES" emojiId="military_helmet" subtitle="join available" v-if="ppTournamentTypes.length > 0" >
+    <p-p-section-card v-if="ppTournamentTypes.length > 0"
+        title="P-LEAGUES" emojiId="military_helmet" subtitle="join available"  
+        :helpHtml="availablePLeaguesDescription"
+    >
         <template slot="content">
             <v-data-table
                 class="transparent no-select"
@@ -49,6 +52,7 @@
 </template>
 <script>
 import useHomepageApi from '~/composables/useHomepageApi';
+import en from '~/locales/en.js'
 
 export default {
     data(){
@@ -60,7 +64,8 @@ export default {
                 { value: 'name' , sortable:false}, 
                 { value: 'cost'},
                 { value: 'id' , sortable:false}, 
-            ]
+            ],
+            availablePLeaguesDescription: en.availablePLeaguesDescription
         }
     },
     methods:{

@@ -11,10 +11,10 @@
         
         <div v-show="!this.$store.getters['homepageApi/isLoading']">
         
+            <!-- <p-p-scroll-menu  class="pt-6"/> -->
+
             <guess-scroll-home class="pt-6 mb-4" title="unlocked"/> 
             
-            <p-p-scroll-menu />
-
             <p-p-league-available-list class="my-10 mx-4"/>
              
             <!-- <p-p-section-card :title="currentUser.points.toString()" emojiId="parking" subtitle="preso-points" v-if="!emptyEnrolled" /> -->
@@ -22,7 +22,8 @@
 
             <motd-home class="my-10 mx-4"/>
 
-            <p-p-section-card title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-show="!emptyEnrolled" >
+            <p-p-section-card :helpHtml="enrolledDescription"
+                title="ENROLLED" emojiId="roller_coaster" subtitle="your tournaments" v-show="!emptyEnrolled" >
                 <template slot="content">
                     <user-participation-enrolled-list class="px-2" :setEmptyFlag="()=>emptyEnrolled=true"/>
                 </template>
@@ -57,6 +58,8 @@
     </v-container>
 </template>
 <script>
+
+import en from '~/locales/en.js'
 export default {
     layout: "private",
     mounted(){
@@ -67,7 +70,8 @@ export default {
     },
     data(){
         return{
-            emptyEnrolled: false
+            emptyEnrolled: false,
+            enrolledDescription: en.enrolledDescription,
         }
     }
 }
