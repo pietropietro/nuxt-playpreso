@@ -300,6 +300,38 @@ theme--dark.v-chip:hover::before{
     }
   }
 
+  @keyframes sparkle {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+.brilliance2 {
+    position: relative;
+    overflow: hidden;
+    background-clip: padding-box; /* Prevent the gradient from bleeding into the content */
+}
+
+.brilliance2::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0) 25%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 75%
+    );
+    background-size: 200% 100%;
+    animation: sparkle 2s linear infinite;
+    z-index: -1; /* Ensure the gradient is behind the content */
+}
+
 
   .xx-small {
 	height: 14px !important;
@@ -369,6 +401,11 @@ theme--dark.v-chip:hover::before{
   }
 
   .v-chip.brilliance:before {
+	background-color: transparent;
+	opacity: 100%; /* Disable the .v-chip:before pseudo-element */
+  }
+
+  .v-chip.brilliance2:before {
 	background-color: transparent;
 	opacity: 100%; /* Disable the .v-chip:before pseudo-element */
   }

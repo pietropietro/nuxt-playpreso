@@ -1,7 +1,7 @@
 <template>
     <v-chip
         :color="ppRGBA(guess.ppTournamentType.rgb, 0.4)"
-        :class="['pa-0','o-100',un.guess?.PRESO ? 'brilliance' : '']"
+        :class="['pa-0','o-100', (guess.PRESO && !guess.winner) ? 'brilliance2' : '', guess.winner ? 'gold--text':'']"
     >
         <v-row align="center" no-gutters class="h-100" >
             <template v-if="!active">
@@ -9,11 +9,9 @@
                         backgroundColor: ppRGBA(guess.ppTournamentType.rgb, 0.4)
                     }"   
                 >
-                    <!-- <div class="h-100"> -->
-                        <v-row no-gutters align="center" class="h-100">
-                            <h2>{{guess.ppTournamentType.emoji }}</h2>
-                        </v-row>
-                    <!-- </div class="h-100"> -->
+                    <v-row no-gutters align="center" class="h-100">
+                        <h2>{{guess.ppTournamentType.emoji }}</h2>
+                    </v-row>
                 </v-col>
                 <v-col v-if="guess.winner" class="pl-2">
                     <div class="overline lh-08 text-center gold--text">
@@ -22,9 +20,9 @@
                 </v-col>
                 <v-col class="px-3">
                     <h2 v-if="!guess.guessed_at">❌</h2>
-                    <h2 v-else-if="guess?.PRESO" class="ocrastd">
+                    <h3 v-else-if="guess?.PRESO" class="ocrastd">
                         PRESO!
-                    </h2>
+                    </h3>
                     <h2 v-else>{{ guess.points }}</h2>
                 </v-col>
             </template>
@@ -56,44 +54,50 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col class="mr-n4" v-if="guess.guessed_at" style="font-size:0.8em">
-                    <v-row style="min-width: 40px;" class="mb-n2" no-gutters justify="center" align="center">
-                        🔒
-                    </v-row>
-                    <v-row style="min-width: 40px; " no-gutters justify="center" align="center">
-                        <v-col>
-                            <select-integer
-                                justify="end"
-                                :disabled="true"
-                                :model="guess.home"
-                                :setModel="null"
-                                small
-                            />
-                        </v-col>
-                        <v-col cols="auto"
-                            :style="guess.home==3 ? 'margin-left:-2px' : '' "
-                        >
-                            <h4 class="text-center" style="user-select: none;">-</h4>
-                        </v-col>
-                        <v-col>
-                            <select-integer
-                                justify="start"
-                                :disabled="true"
-                                :model="guess.away"
-                                :setModel="null"
-                                small
-                            />
-                        </v-col>
-                    </v-row>
-                </v-col>
-                <v-col class="pr-1" style="font-size:0.8em">
-                    <v-row style="min-width: 40px;" class="mb-n2" no-gutters justify="center" align="center">
-                        🏁
-                    </v-row>
-                    <v-row style="min-width: 40px; " no-gutters justify="center" align="center">
-                        <h4>{{ guess.match.score_home  }}-{{ guess.match.score_away }}</h4>
-                    </v-row>
-                </v-col>
+                <template >
+                    <v-col class="pl-2" v-if="guess.guessed_at">
+                        <!-- <v-row style="min-width: 40px; font-size:8px" class="mb-n2" no-gutters justify="center" align="center">
+                            🔒
+                        </v-row> -->
+                        <v-row style="min-width: 50px; " no-gutters justify="center" align="center">
+                            <v-col cols="auto"><span >🔒</span></v-col>
+                            <v-col>
+                                <select-integer
+                                    justify="end"
+                                    :disabled="true"
+                                    :model="guess.home"
+                                    :setModel="null"
+                                    small
+                                />
+                            </v-col>
+                            <v-col cols="auto"
+                                :style="guess.home==3 ? 'margin-left:-2px' : '' "
+                            >
+                                <h4 class="text-center" style="user-select: none;">-</h4>
+                            </v-col>
+                            <v-col>
+                                <select-integer
+                                    justify="start"
+                                    :disabled="true"
+                                    :model="guess.away"
+                                    :setModel="null"
+                                    small
+                                />
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col class="px-2">
+                        <!-- <v-row style="min-width: 40px; font-size:8px" class="mb-n2" no-gutters justify="center" align="center">
+                            🏁
+                        </v-row> -->
+                        <v-row style="min-width: 40px; " no-gutters justify="center" align="center">
+                            <v-col cols="auto" class="pr-1"><span > 🏁</span></v-col>
+                            <v-col>
+                                <h4>{{ guess.match.score_home  }}-{{ guess.match.score_away }}</h4>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                </template>
             </template>
         </v-row>
     </v-chip>
