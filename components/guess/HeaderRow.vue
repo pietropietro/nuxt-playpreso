@@ -41,7 +41,6 @@ export default {
             this.$store.dispatch('openGuesses/clear');
         },
         goToTournament(){
-            console.log(this.userParticipation);
             if(!this.userParticipation)return;
             let route = this.userParticipation.ppLeague_id ? this.ROUTES.PPLEAGUE.DETAIL + this.userParticipation.ppLeague_id
                     : this.ROUTES.PPCUP.DETAIL + this.userParticipation.ppCup_id + '/' + this.userParticipation.ppCupGroup_id;

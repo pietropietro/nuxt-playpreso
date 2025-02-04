@@ -23,14 +23,6 @@ export default {
         }
     },
     computed: {
-        computedMenu:{
-            get(){
-                return this.menu
-            },
-            set(val){
-                this.setMenu(val);
-            }
-        },
         shouldHideOnScroll() {
             return this.$route.path === '/' && !this.justNavigatedBack;
         },

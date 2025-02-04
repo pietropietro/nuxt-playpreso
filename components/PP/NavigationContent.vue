@@ -13,41 +13,55 @@
         <v-spacer/>
     </v-row>
     
-    <!-- if no vuex title -->
-    <v-row v-else align="center">
-        <v-col></v-col>
-        <v-col>
-            <v-toolbar-title>
-                <nuxt-link to="/">
-                    <p-p-logo />
-                </nuxt-link>
-            </v-toolbar-title>
-        </v-col>
-        <v-col class="mt-n1">
-            <nuxt-link :to="ROUTES.NOTIFICATION" v-if="currentUser">
-                <v-avatar color="red" size="19" v-if="$store.state.notification.unreadCount">
-                    <span class="overline lh-1 font-weight-bold">{{ $store.state.notification.unreadCount }}</span>
-                </v-avatar>
-            </nuxt-link>
-        </v-col>
+    <!-- homepage -->
+    <v-row v-else align="center" no-gutters style="height:100%; width:100%">
+        <template v-if="$store.getters['homepageApi/isLoading']">
+            <v-col></v-col>
+            <v-col>
+                <v-toolbar-title>
+                    <nuxt-link to="/">
+                        <p-p-logo />
+                    </nuxt-link>
+                </v-toolbar-title>
+            </v-col>
+            <v-col />
+        </template>
+        <template v-else>
+            <template v-if="!$store.getters['toolbarInfo/getDict'].unreadNotificationCount">
+                <v-col cols="2" class="text-center">
+                    <h1 class="ocrastd tilted-span"
+                        @click="$store.dispatch('menu/updateMenu', { newVal: true });"
+                    >
+                        P
+                    </h1>
+                </v-col>
+                <v-col cols="10">
+                    <p-p-toolbar-info />
+                </v-col>
+            </template>
+
+            <template v-else>
+                <v-col cols="2" class="text-center">
+                    <!-- <v-chip
+                            disabled
+                            :color="'red darken-2'"
+                            class="o-100"
+                        > -->
+                        <h2 class="red--text">{{$store.getters['toolbarInfo/getDict'].unreadNotificationCount}}</h2>
+                    <!-- </v-chip> -->
+                </v-col>
+
+                <v-col cols="10">
+                    <p-p-toolbar-notifications />
+                </v-col>
+            </template>
+        </template>
     </v-row>
+
 </template>
 <script>
 export default {
-    watch: {
-        async currentUser(newVal) {
-            if (newVal) {
-                await this.getUserNotifications();
-            }
-        }
-    },
     methods:{
-        async getUserNotifications(){
-            let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD, null, 'GET');
-            if(response && response.status === "success"){
-                this.$store.commit('notification/updateUnreadCount', { unreadCount: response.message.length }); 
-            }
-        },
         handleGoBack() {
             const referer = document.referrer;
             const isInternal = referer.includes(window.location.origin);

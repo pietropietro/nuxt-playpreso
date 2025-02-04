@@ -11,7 +11,7 @@
                     <guard-logged-in v-if="!currentUser"/>
                     <guard-version-update v-else-if="$store.state.apiResponses.versionUpdateNeeded" />
                     <guard-maintenance v-else-if="$store.state.apiResponses.maintenanceMode" />
-                    <guard-offline v-else-if="!isOnline" />
+                    <guard-offline v-else-if="!$config.DEBUG && !isOnline" />
                     <guess-unlocked-full
                         v-else-if="currentGuess"
                     />
@@ -85,6 +85,7 @@ export default {
         setStateChange(){
             App.addListener('appStateChange', (state) => {
                 if (state.isActive) {
+                    console.log('app state change isactive, set all loading keys to true');
                     // The app has come to the foreground, so refresh the homepage.
                     this.$store.commit('homepageApi/setAllLoadingKeys', true);
                 }

@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div
+        :class="[ isShiny ? 'brilliance': '', 'h-100']"
+    >
         <v-row no-gutters class="h-100"
             v-if="guess.verified_at"
             justify="center" align="center"
@@ -26,6 +28,12 @@
 export default {
     props:{
         guess: {type:Object}
+    },
+    computed:{
+        isShiny(){
+            if(this.guess.PRESO)return true;
+            return false;
+        },
     },
     data() {
         return {

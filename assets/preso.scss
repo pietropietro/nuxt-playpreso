@@ -291,3 +291,76 @@ body {
         text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
   }
+
+
+  .xx-small {
+	height: 14px !important;
+	width: 14px !important;
+  }
+
+
+  .w-100 {
+	width: 100%;
+  }
+
+  .o-100 {
+	opacity: 100% !important;
+  }
+ 
+
+
+
+
+  .brilliance {
+	position: relative !important;
+	overflow: hidden;
+  }
+  
+  .brilliance::before {
+	content: "";
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	/* Fill entire container so we can slide the diagonal band across it */
+	width: 100%;
+	height: 100%;
+	
+	/* Wider diagonal band:
+	   - Transparent until ~40%
+	   - White from 40% to 60%
+	   - Transparent again after 60% */
+	background: linear-gradient(
+	  120deg,
+	  transparent 40%,
+	  rgba(255, 255, 255, 0.8) 50%,
+	  transparent 60%
+	);
+	
+	/* Start well off to the left */
+	transform: translateX(-120%) skewX(-20deg);
+	
+	/* 3.5s total:
+	   - 1.5s to cross
+	   - 2s pause off the right side */
+	animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+	/* Start: off the left edge */
+	0% {
+	  transform: translateX(-120%) skewX(-20deg);
+	}
+	/* By ~43%, we've swept fully to the right */
+	50% {
+	  transform: translateX(220%) skewX(-20deg);
+	}
+	/* Pause off the right edge until 100% (another 57% of 3.5s => ~2s) */
+	100% {
+	  transform: translateX(220%) skewX(-20deg);
+	}
+  }
+
+  .v-chip.brilliance:before {
+	background-color: transparent;
+	opacity: 100%; /* Disable the .v-chip:before pseudo-element */
+  }

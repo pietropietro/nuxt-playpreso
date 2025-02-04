@@ -10,7 +10,7 @@
                 background: shades[i%2]
             }"
         >
-            <v-col class="pa-0">
+            <v-col :class="['pa-0', i==2 ? 'h-100': '']">
                 <team-logo 
                     v-if="i==1"
                     :id="match.awayTeam.id"
@@ -27,8 +27,8 @@
                         :match="match"
                         />
                         <guess-single-view-points
-                        v-else
-                        :guess="guess"
+                            v-else
+                            :guess="guess"
                         />
                     </template>
                 </template>

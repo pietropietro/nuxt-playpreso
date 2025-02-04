@@ -94,23 +94,23 @@ export default {
             let response = await this.$api.call(this.API_ROUTES.USER.GET + this.username, null, 'GET');
             if(response && response.status === "success"){
                 this.user = response.message;
-                this.updateAppBarTitle();
+                // to do dispatch page titel with component <user-name
             }
             this.loading = false;
         },
-        updateAppBarTitle(){
-            this.$store.dispatch(
+        
+        
+    }, 
+    async mounted(){
+        this.$store.dispatch(
             'navigation/updateTitle', 
             {
-                newTitle: this.user.username,
+                newTitle: this.username,
                 newEmoji: null,
                 newOverline: null
             }
-        );
-        }
-    }, 
-    fetch(){
-        this.getUser();
+        );        
+        await this.getUser();
     }
 }
 </script>

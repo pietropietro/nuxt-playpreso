@@ -3,10 +3,11 @@
       <v-row class="align-center justify-center">
         <v-col>
           <h1>You are offline</h1>
-          <p>It seems like you don't have an internet connection. Please check your connection and try again.</p>
+          <p>Please check your connection.</p>
           <v-btn color="primary" @click="retryConnection">Retry</v-btn>
         </v-col>
       </v-row>
+      <div>{{ $store.state.homepageApi.loadingDict }}</div>
     </v-container>
   </template>
   

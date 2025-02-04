@@ -4,15 +4,15 @@
         class="safe-area pa-5"
     >
         <v-row justify="center" class="ocrastd" style="flex-grow: 0;">
-            <v-col cols="2"> </v-col>
-            <v-col class="text-center">
-                <h1>MENU</h1>
-            </v-col>
             <v-col cols="2">
-                <h1 @click="$store.dispatch('menu/updateMenu', { newVal: false });">
+                <h1 @click="closeMenu">
                     X
                 </h1>
             </v-col>
+            <v-col class="text-center">
+                <h1>MENU</h1>
+            </v-col>
+            <v-col cols="2"> </v-col>
         </v-row>
         <div 
             style="flex-grow: 1; display: flex; flex-direction: column;"
@@ -22,9 +22,12 @@
                     v-for="(m,i) in computedMenus" :key="i"
                     class="overline py-2"
                     style="flex-grow:0"
-                    @click="()=>selectedMenu=selectedMenu ? null : m.key"
+                    @click="handleClick(m)"
                 >
-                    {{selectedMenu == m.key ? 'x ' : ''}}<h3>{{ m.title }}</h3>
+                    {{selectedMenu == m.key ? 'x ' : ''}}
+                        <h3>
+                            {{ m.title }}
+                        </h3>
                 </div>
 
                 <div class="px-5">
@@ -49,7 +52,9 @@
                     >
                         <div >{{ termsContent }}</div>
                     </div>
+
                     <p-p-menu-delete-account v-if="selectedMenu==='account_deletion'" :cancel="()=>selectedMenu=null"/>
+
                     <div v-if="selectedMenu==='whatsapp'" :cancel="()=>selectedMenu=null">
                         <a href="https://chat.whatsapp.com/IW3eSFNNa7UItIJA4iEaS0" target="blank" class="">
                                 <div class="overline lh-1">
@@ -57,6 +62,7 @@
                                 </div>
                             </a>
                     </div>
+
                 </div>
 
         <v-spacer/>
@@ -90,7 +96,10 @@ export default {
             selectedMenu: null,
             menus:[
                 // {title: '<h3 class="ocrastd">THEME</h3>', key:'theme'},
-                { title: 'NOTIFICATIONS 🔔', key: 'notification_settings' },
+                {title: 'PROFILE', key: 'profile',
+                    click: this.goToProfile
+                },
+                {title: 'NOTIFICATIONS 🔔', key: 'notification_settings' },
                 {title: 'EMAIL 🔔', key:'email_reminders'},
                 {title: '3+', key:'3+'},
                 {title: 'POINTS 🅿️', key:'points'},
@@ -139,17 +148,23 @@ export default {
 				console.error('Error loading terms:', error);
 				this.termsContent = 'Could not load terms at this time.';
 			}
-		}
+		},
+        closeMenu(){
+            this.$store.dispatch('menu/updateMenu', { newVal: false });
+        },
+        goToProfile(){
+            this.$router.push(this.ROUTES.USER.DETAIL + this.currentUser.username);
+            this.closeMenu();
+        },
+        handleClick(m){
+            if(m.click){
+                m.click();
+                return
+            }
+            this.selectedMenu = this.selectedMenu ? null : m.key;
+        }
     }, 
     async mounted(){
-        this.$store.dispatch(
-            'navigation/updateTitle', 
-            {
-                newTitle: 'menu',
-                newEmoji: null,
-                newOverline: null
-            }        
-        );
         await this.loadTerms();
     }
 }

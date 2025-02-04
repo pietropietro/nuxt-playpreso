@@ -2,7 +2,7 @@
             <h1 
                 :class="[
                     'ocrastd',
-                    $config.DEBUG ? 'orange--text' : '',
+                    // $config.DEBUG ? 'orange--text' : '',
                 ]"
                 style="line-height:1em; font-size:2em"                    
             >
@@ -31,7 +31,7 @@ export default {
 
 <style css scoped>
 
-@keyframes shimmer {
+@keyframes loading-shimmer {
   0%, 35% {
     color: rgba(255, 255, 255, 0.12);
     transform: rotate(10deg); /* Brighter phase */
@@ -47,7 +47,7 @@ export default {
 }
 
 .loading{
-  animation: shimmer 1.5s infinite;
+  animation: loading-shimmer 1.5s infinite;
   animation-delay: calc(var(--index) * 0.1667s);
   color: transparent; /* Start with the text fully transparent */
   font-weight: bold; /* Ensure the text remains bold */
