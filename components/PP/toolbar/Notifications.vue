@@ -1,15 +1,22 @@
 <template>
         <v-row no-gutters v-if="!loading">
             <v-slide-group
+                v-model="model"
                 ref="slider"
             >
                 <v-slide-item
                     v-for="un in userNotifications"
                     :key="un.id"
                     class="mx-2"
+                    v-slot="{ toggle, active }"
                 >
-                    <div v-if="un.event_type == 'guess_verified'">
-                        <notification-guess-verified :un="un"/>
+                    <div v-if="un.event_type == 'guess_verified'"
+                        @click="toggle"
+                    >
+                        <notification-guess-verified 
+                            :un="un" 
+                            :active="active"
+                        />
                     </div>
                     <div v-else> {{ un.event_type }}</div>
                 </v-slide-item>
@@ -31,6 +38,7 @@ export default {
         page: 1,
         userNotifications: [],
         total: null,
+        model: null
     }),
     methods:{
         async getUserNotifications(){

@@ -103,6 +103,10 @@ body {
   border-color: white !important;
 }
 
+theme--dark.v-chip:hover::before{
+	opacity:0.5 !important;
+}
+
 .theme--dark.v-skeleton-loader .v-skeleton-loader__actions,
  .theme--dark.v-skeleton-loader .v-skeleton-loader__article,
  .theme--dark.v-skeleton-loader .v-skeleton-loader__card-heading,
@@ -179,6 +183,10 @@ body {
 
 .marquee-content-active span {
 	display: inline-block ;
+}
+
+.br-4{
+	border-radius: 16px;
 }
 
 .tilted-span {
