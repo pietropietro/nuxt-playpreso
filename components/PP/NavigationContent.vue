@@ -27,7 +27,7 @@
             <v-col />
         </template>
         <template v-else>
-            <template v-if="!$store.getters['toolbarInfo/getDict'].unreadNotificationCount">
+            <template v-if="!$store.state.notification.unreadCount">
                 <v-col cols="2" class="text-center">
                     <h1 class="ocrastd tilted-span"
                         @click="$store.dispatch('menu/updateMenu', { newVal: true });"
@@ -42,15 +42,8 @@
 
             <template v-else>
                 <v-col cols="2" class="text-center">
-                    <!-- <v-chip
-                            disabled
-                            :color="'red darken-2'"
-                            class="o-100"
-                        > -->
-                        <h2 class="red--text">{{$store.getters['toolbarInfo/getDict'].unreadNotificationCount}}</h2>
-                    <!-- </v-chip> -->
+                    <h2 class="red--text">{{$store.state.notification.unreadCount}}</h2>
                 </v-col>
-
                 <v-col cols="10">
                     <p-p-toolbar-notifications />
                 </v-col>

@@ -47,7 +47,7 @@ export default {
             null        
         );
 
-        const { fetchData } = useHomepageApi(this.$store, 'toolbar', this.fetchToolbar);
+        const { fetchData } = useHomepageApi(this.$store, 'toolbar', this.getToolbarInfo);
         await fetchData();
     },
     data(){
@@ -65,23 +65,9 @@ export default {
                 this.$store.commit('toolbarInfo/setInfoKey', {key: 'avg', value: response.message.avg});
                 this.$store.commit('toolbarInfo/setInfoKey', {key: 'inactive', value: response.message.inactive});
                 this.$store.commit('toolbarInfo/setInfoKey', {key: 'trophies', value: response.message.trophies});
-                this.$store.commit('toolbarInfo/setInfoKey', {key: 'unreadNotificationCount', value: response.message.unreadNotificationCount});
+                this.$store.commit('notification/updateUnreadCount', {unreadCount: response.message.unreadNotificationCount});
             }
         },
-        // async getNotifications(){
-        //     let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD);
-        //     if(response && response.status === "success"){
-        //         this.$store.commit('toolbarInfo/setInfoKey', {key: 'notifications', value: response.message});
-        //     }
-        // },
-        async fetchToolbar(){
-            await this.getToolbarInfo();
-            if(this.$store.getters['toolbarInfo/getDict'].unreadNotificationCount){
-                console.log('count is ', this.$store.getters['toolbarInfo/getDict'].unreadNotificationCount);
-                // this.$store.commit('toolbarInfo/setInfoKey', {key: 'unreadNotificationPage', value: 1});
-                // await this.getNotifications();
-            }
-        }
     }
 }
 </script>

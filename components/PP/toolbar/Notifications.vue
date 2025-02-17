@@ -1,9 +1,31 @@
 <template>
-        <v-row no-gutters v-if="!loading">
+        <v-row v-if="loading" no-gutters>
+            <v-col>
+                <v-skeleton-loader
+                    type="card-heading"
+                    width="80"
+                />
+            </v-col>
+            <v-col>
+                <v-skeleton-loader
+                    type="card-heading"
+                    width="80"
+                />
+            </v-col>
+            <v-col>
+                <v-skeleton-loader
+                    type="card-heading"
+                    width="80"
+                />
+            </v-col>
+            
+        </v-row>
+        <v-row no-gutters v-else>
             <v-slide-group
                 v-model="model"
                 ref="slider"
             >
+              
                 <v-slide-item
                     v-for="un in userNotifications"
                     :key="un.id"
@@ -28,7 +50,19 @@
                     </div>
                     <div v-else> {{ un.event_type }}</div>
                 </v-slide-item>
-            </v-slide-group>
+                <v-slide-item>
+                    <div 
+                        v-if="$store.state.notification.unreadCount > 10"
+                        class="overline px-2"
+                        @click="()=> page++"
+                    >
+                        next
+                    </div>
+                    <div v-else class="overline px-2" @click="clear">
+                        clear
+                    </div>
+                </v-slide-item>
+        </v-slide-group>
         </v-row>
 </template>
 
@@ -55,7 +89,16 @@ export default {
             this.loading=true;
             let response = await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.GET_UNREAD + '?limit=' + this.limit + '&page=' + this.page);
             if(response && response.status === "success"){
-                this.userNotifications = [...this.userNotifications, ...response.message]; 
+                this.userNotifications = response.message; 
+                if(this.page > 1){
+                    let newCount = (this.$store.state.notification.unreadCount - 10);
+                    console.log('newcount', newCount);
+                    
+                    this.$store.commit(
+                        'notification/updateUnreadCount', 
+                        { unreadCount:  newCount }
+                    ); 
+                }
             }
             this.loading = false;
         },
@@ -71,8 +114,14 @@ export default {
                 newGuess: guess,
                 newList:  list
             });
-        },        
-        
+        },    
+        async clear(){
+            await this.$api.call(this.API_ROUTES.USER_NOTIFICATION.READ, null, 'POST');
+            this.$store.commit(
+                'notification/updateUnreadCount', 
+                { unreadCount:  0 }
+            ); 
+        }    
     },
     async mounted(){
         await this.getUserNotifications();
