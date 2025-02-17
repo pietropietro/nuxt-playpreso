@@ -31,8 +31,8 @@
                     class="br-4 h-100" :style="{
                         overflow: 'hidden',
                         backgroundColor: ppRGBA(guess.ppTournamentType.rgb, 0.4),
-                        border:' solid 3px ' + ppRGBA(guess.ppTournamentType.rgb)
-                        
+                        border:' solid 3px ' + ppRGBA(guess.ppTournamentType.rgb),
+                        minWidth: '40px'
                     }" 
                 >
                     <v-row class="flex-nowrap">

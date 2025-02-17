@@ -18,6 +18,14 @@
                             :active="active"
                         />
                     </div>
+                    <div v-else-if="un.event_type == 'ppleague_finished'"
+                        @click="toggle"
+                    >
+                        <notification-ppleague-finished
+                            :un="un" 
+                            :active="active"
+                        />
+                    </div>
                     <div v-else> {{ un.event_type }}</div>
                 </v-slide-item>
             </v-slide-group>
@@ -25,6 +33,7 @@
 </template>
 
 <script >
+
 export default {
     watch:{
         async page(){
@@ -32,6 +41,7 @@ export default {
             await this.getUserNotifications();
         }
     },
+   
     data:()=>({
         loading: false,
         limit: 10,
