@@ -40,7 +40,8 @@ export default {
 		{ src: '@/plugins/logout.js' },
         { src: '@/plugins/api.js'},
 		{ src: '@/plugins/vuex-persist.js'},
-		{ src: '@/plugins/push-notifications.js'}
+		{ src: '@/plugins/push-notifications.js'},
+		{ src: '@/plugins/deeplink.js'}
 	],
 
 	router: {
