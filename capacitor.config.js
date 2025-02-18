@@ -10,6 +10,22 @@ const apiEndpoint = process.env.API_ENDPOINT || 'http://localhost:8080'; // Use 
 console.log(`DEBUG mode: ${isDev}`);
 console.log(`API Endpoint: ${apiEndpoint}`);
 
+// Extract hostname from API_ENDPOINT
+const getHostname = () => {
+  if(!isDev) return 'localhost';
+
+  //in dev hostname needs to be the public ip
+  const endpoint = process.env.API_ENDPOINT;
+  
+  // Use regex to extract hostname (supports IPv4, IPv6, and domain names)
+  const matches = endpoint.match(/^(?:https?:\/\/)?([^:\/]+)/);
+  return matches ? matches[1] : 'localhost';
+};
+
+const apiHostname = getHostname();
+
+console.log(`Using hostname: ${apiHostname}`);
+
 module.exports = {
 
   appId: 'com.playpreso.app',
@@ -17,7 +33,7 @@ module.exports = {
   webDir: 'dist',
   server: {
     androidScheme: isDev ? 'http' : 'https',
-    hostname: isDev ? '0.0.0.0'  : 'localhost', // Serve the app from your local IP during development
+    hostname: apiHostname, 
   },
   plugins: {
     Badge: {
