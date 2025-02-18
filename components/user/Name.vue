@@ -94,7 +94,7 @@ export default {
       if (this.user.flashLeader) {
         emojis.push('zap');
       }
-      // Add zap for flashLeader
+      // Add shit for inactive
       if (this.user.inactive) {
         emojis.push('hankey');
       }

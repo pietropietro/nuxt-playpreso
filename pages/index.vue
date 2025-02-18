@@ -67,6 +67,12 @@ export default {
                 this.$store.commit('toolbarInfo/setInfoKey', {key: 'trophies', value: response.message.trophies});
                 this.$store.commit('notification/updateUnreadCount', {unreadCount: response.message.unreadNotificationCount});
             }
+            if(!response.message.unreadNotificationCount){
+                if (Capacitor.isNativePlatform()) {
+                    await Badge.clear();
+
+                }
+            }
         },
     }
 }

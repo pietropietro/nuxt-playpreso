@@ -79,11 +79,6 @@ export default {
             userNotifications: []
         }
     },
-    watch:{
-        async page(){
-            await this.getPPRankings();
-        }
-    },
     methods:{
         async getUserNotifications(){
             this.loading=true;

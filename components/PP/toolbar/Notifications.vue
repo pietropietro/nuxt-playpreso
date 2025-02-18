@@ -48,6 +48,14 @@
                             :active="active"
                         />
                     </div>
+                    <div v-else-if="un.event_type == 'inactive_user'"
+                        @click="toggle"
+                    >
+                        <notification-inactive-user
+                            :un="un" 
+                            :active="active"
+                        />
+                    </div>
                     <div v-else> {{ un.event_type }}</div>
                 </v-slide-item>
                 <v-slide-item>
@@ -121,6 +129,10 @@ export default {
                 'notification/updateUnreadCount', 
                 { unreadCount:  0 }
             ); 
+            if (Capacitor.isNativePlatform()) {
+                // Reset badge count 
+                await Badge.clear();
+            }
         }    
     },
     async mounted(){
