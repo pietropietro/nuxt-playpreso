@@ -1,6 +1,6 @@
 {
   "name": "nuxt-playpreso",
-  "version": "1.35.31",
+  "version": "1.36.00",
   "private": true,
   "scripts": {
     "generate": "nuxt generate",

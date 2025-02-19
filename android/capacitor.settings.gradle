@@ -15,7 +15,7 @@ include ':capawesome-capacitor-badge'
 project(':capawesome-capacitor-badge').projectDir = new File('../node_modules/@capawesome/capacitor-badge/android')
 
 include ':pp-capacitor-haptics'
-project(':pp-capacitor-haptics').projectDir = new File('../node_modules/pp-capacitor-haptics/android')
+project(':pp-capacitor-haptics').projectDir = new File('../capacitor-plugins/pp-capacitor-haptics/android')
 
 include ':pp-capacitor-nuxt-swipe'
-project(':pp-capacitor-nuxt-swipe').projectDir = new File('../node_modules/pp-capacitor-nuxt-swipe/android')
+project(':pp-capacitor-nuxt-swipe').projectDir = new File('../capacitor-plugins/pp-capacitor-nuxt-swipe/android')

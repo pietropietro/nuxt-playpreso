@@ -29,6 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- deeplink recover opens in app-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="playpreso.com" android:pathPrefix="/recover" />
+            </intent-filter>
+
         </activity>
 
         <provider
