@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Load the version from nuxt.config.js
-VERSION=$(grep "VERSION" ../nuxt-playpreso/nuxt.config.js | cut -d "'" -f 2)
+VERSION=$(node -p "require('../nuxt-playpreso/package.json').version")
+# 2) Bail if empty
+if [ -z "$VERSION" ]; then
+  echo "Error: Version number is empty. Check your package.json."
+  exit 1
+fi
 
 # Define the path to the build.gradle file
 GRADLE_FILE="../nuxt-playpreso/android/app/build.gradle"
